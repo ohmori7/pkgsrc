@@ -6,6 +6,7 @@ SHA512 (uim-1.8.6.tar.bz2) = 26a95d3b51ef7a99108234b9af30ee7b74141cb3af13d092d4c
 Size (uim-1.8.6.tar.bz2) = 6500739 bytes
 SHA1 (patch-af) = 9f543b90bfefc5f560e1eaac97d60af70ffed5cc
 SHA1 (patch-fep_escseq.c) = 6c25c344e5b694542a3c5bc137ae1a1d36a8c835
+SHA1 (patch-fep_draw.c) = bd995db929987bb4273c89cf093c29706edb3cbf
 SHA1 (patch-scm_Makefile.am) = c3af52e2d9d06736911c0efd9a25e0aee2c62219
 SHA1 (patch-sigscheme_configure) = 2af99374a3af542d25124737bf8cd3b67f191c03
 SHA1 (patch-sigscheme_configure.in) = 9c5c48a477ea03263488e15565e4a568ba55a125
