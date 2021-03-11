@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.3 2016/08/07 09:09:40 markd Exp $
+# $NetBSD: Makefile,v 1.5 2020/01/18 23:34:48 rillig Exp $
 
 DISTNAME=	showlabels
 PKGNAME=	tex-${DISTNAME}-1.8
 TEXLIVE_REV=	41322
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/showlabels
+HOMEPAGE=	https://ctan.org/pkg/showlabels
 COMMENT=	Show label commands in the margin
 LICENSE=	lppl-1.3c
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

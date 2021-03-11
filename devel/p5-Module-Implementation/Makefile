@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:44:17 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:08:23 wiz Exp $
 
 DISTNAME=	Module-Implementation-0.09
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Module/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Module-Implementation/
+HOMEPAGE=	https://metacpan.org/release/Module-Implementation
 COMMENT=	Loads one of several alternate underlying implementations
 LICENSE=	artistic-2.0
 
@@ -19,7 +19,7 @@ BUILD_DEPENDS+=	p5-Test-Fatal>=0.006:../../devel/p5-Test-Fatal
 BUILD_DEPENDS+=	p5-Test-Requires-[0-9]*:../../devel/p5-Test-Requires
 
 USE_LANGUAGES=	# empty
-PERL5_PACKLIST=		auto/Module/Implementation/.packlist
+PERL5_PACKLIST=	auto/Module/Implementation/.packlist
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

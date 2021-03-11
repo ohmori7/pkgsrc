@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.17 2018/08/22 09:44:45 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2020/08/31 18:09:00 wiz Exp $
 
 DISTNAME=	Test-Distribution-2.00
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	11
+PKGREVISION=	13
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Test/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Test-Distribution/
+HOMEPAGE=	https://metacpan.org/release/Test-Distribution
 COMMENT=	Perl5 module testing all modules of a distribution
 
 # In perl

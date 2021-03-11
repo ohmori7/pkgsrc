@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.34 2018/06/13 19:35:51 youri Exp $
+# $NetBSD: Makefile,v 1.36 2020/11/12 16:44:59 nia Exp $
 
-DISTNAME=	gnome-backgrounds-3.28.0
+DISTNAME=	gnome-backgrounds-3.38.0
 CATEGORIES=	graphics gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-backgrounds/3.28/}
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/${PKGBASE}/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -10,9 +10,7 @@ HOMEPAGE=	https://www.gnome.org/
 COMMENT=	Set of background images for the GNOME Desktop
 LICENSE=	gnu-gpl-v2
 
-USE_TOOLS+=		gmake intltool msgfmt
+PYTHON_FOR_BUILD_ONLY=	tool
 
-_TOOLS_USE_PKGSRC.msgfmt=	yes
-
-.include "../../devel/py-meson/build.mk"
+.include "../../devel/meson/build.mk"
 .include "../../mk/bsd.pkg.mk"

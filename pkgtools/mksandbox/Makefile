@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.14 2019/01/25 20:08:21 agc Exp $
+# $NetBSD: Makefile,v 1.17 2021/01/22 11:59:52 jperkin Exp $
 
-PKGNAME=	mksandbox-1.8
+PKGNAME=	mksandbox-1.10
 CATEGORIES=	pkgtools
 
 MAINTAINER=	agc@NetBSD.org
-HOMEPAGE=	http://www.NetBSD.org/docs/pkgsrc/bulk.html#setting-up-a-sandbox
+HOMEPAGE=	https://www.NetBSD.org/docs/pkgsrc/bulk.html#setting-up-a-sandbox
 COMMENT=	Tool for creating sandboxes
 LICENSE=	2-clause-bsd
 

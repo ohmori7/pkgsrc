@@ -1,8 +1,10 @@
-# $NetBSD: Makefile,v 1.15 2019/04/25 07:32:41 maya Exp $
+# $NetBSD: Makefile,v 1.20 2020/12/04 20:45:04 nia Exp $
 
 PKGNAME=		${DISTNAME:S/-gpl//}
-PKGREVISION=		2
+PKGREVISION=		6
 COMMENT=		MySQL Cluster 7.4, a free SQL clustered database
+
+BROKEN=			"Fails to build with OpenSSL 1.1"
 
 CONFLICTS=		mysql*-{client,server}-[0-9]*
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.48 2018/03/12 11:17:04 wiz Exp $
+# $NetBSD: Makefile,v 1.51 2020/08/17 20:19:28 leot Exp $
 
 DISTNAME=	vicsrc-2.8
 PKGNAME=	${DISTNAME:S/src//}
-PKGREVISION=	9
+PKGREVISION=	10
 CATEGORIES=	mbone tk
 MASTER_SITES=	ftp://ftp.ee.lbl.gov/conferencing/vic/
 
@@ -10,7 +10,7 @@ MAKE_JOBS_SAFE=		no
 
 .include "../../mk/bsd.prefs.mk"
 
-.if !empty(MACHINE_PLATFORM:MNetBSD-1.6*) || !empty(MACHINE_PLATFORM:MNetBSD-[2-9]*)
+.if ${OPSYS} == "NetBSD"
 PATCH_SITES=	ftp://tink.ims.ac.jp/pub/NetBSD/vic/
 PATCHFILES=	vic-2.8_ov511p0.diff.gz
 .endif
@@ -22,7 +22,7 @@ COMMENT=	MBONE video conferencing tool
 WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
 GNU_CONFIGURE=	yes
 
-USE_LANGUAGES=	c c++
+USE_LANGUAGES=		c c++
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 
 CONFIGURE_ARGS+=	--with-tcl=${BUILDLINK_PREFIX.tcl}

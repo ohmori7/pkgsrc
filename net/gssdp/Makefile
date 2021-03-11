@@ -1,20 +1,20 @@
-# $NetBSD: Makefile,v 1.78 2019/04/03 00:32:57 ryoon Exp $
+# $NetBSD: Makefile,v 1.90 2020/11/05 09:07:03 ryoon Exp $
 
 DISTNAME=	gssdp-1.0.3
-PKGREVISION=	2
+PKGREVISION=	12
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gssdp/1.0/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gupnp.org/
-COMMENT=	Simple Service Discovery Protocol library and device sniffer
+COMMENT=	Simple Service Discovery Protocol library and device sniffer (1.0 branch)
 LICENSE=	gnu-lgpl-v2
 
-GNU_CONFIGURE=	yes
-CONFIGURE_ARGS+= --without-gtk
-USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config gmake
+GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--without-gtk
+USE_LIBTOOL=		yes
+USE_TOOLS+=		pkg-config gmake
 
 PKGCONFIG_OVERRIDE+=	gssdp-1.0.pc.in
 

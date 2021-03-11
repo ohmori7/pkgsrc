@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.51 2019/04/03 00:32:59 ryoon Exp $
+# $NetBSD: Makefile,v 1.66 2020/11/05 09:07:05 ryoon Exp $
 
-DISTNAME=	libsoup-2.64.2
+DISTNAME=	libsoup-2.70.0
 PKGREVISION=	3
 CATEGORIES=	net gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/libsoup/${PKGVERSION_NOREV:R}/}
@@ -13,46 +13,34 @@ LICENSE=	gnu-lgpl-v2
 
 DEPENDS+=	glib-networking-[0-9]*:../../net/glib-networking
 
-USE_TOOLS+=		pkg-config gmake intltool msgfmt
-USE_LIBTOOL=		yes
-GNU_CONFIGURE=		yes
+USE_LANGUAGES=	c99
+USE_TOOLS+=	pkg-config gmake intltool msgfmt
 
-# XXX work around botched gettext check (ignores libintl)
-CONFIGURE_ENV+=		DATADIRNAME=share
+PKGCONFIG_OVERRIDE+=		output/meson-private/libsoup-2.4.pc
+PKGCONFIG_OVERRIDE+=		output/meson-private/libsoup-gnome-2.4.pc
+PKGCONFIG_OVERRIDE_STAGE=	pre-install
+MAKE_ENV+=			LD_LIBRARY_PATH=${WRKSRC}/output/${PKGBASE}
 
-# XXX: disable Vala bindings otherwise the configure phase fails because is not
-# XXX: able to find vapigen.
-CONFIGURE_ARGS+=	--enable-vala=no
-CONFIGURE_ARGS+=	--disable-tls-check
-CONFIGURE_ARGS+=	--with-apache-httpd=no
+# disable vala detection
+MESON_ARGS+=		-Dvapi=disabled
 
-PKGCONFIG_OVERRIDE+=	libsoup-2.4.pc.in
-PKGCONFIG_OVERRIDE+=	libsoup-gnome-2.4.pc.in
-
-TEST_TARGET=	check
-
-BUILDLINK_TRANSFORM+=	rm:-Werror=missing-include-dirs
-
-# gcc>=4.2 specific -Werror=XXX flags will be added unconditionally.
 .include "../../mk/compiler.mk"
-.if !empty(CC_VERSION:Mgcc-4.[01].*) || !empty(CC_VERSION:Mgcc-[1-3].*)
-CONFIGURE_ARGS+=	--disable-more-warnings
-.endif
-
 .if !empty(PKGSRC_COMPILER:Mclang)
+
 _WRAP_EXTRA_ARGS.CC+=	-Wno-error=format-nonliteral
 CWRAPPERS_APPEND.cc+=	-Wno-error=format-nonliteral
 .endif
 
 .include "options.mk"
 
+.include "../../archivers/brotli/buildlink3.mk"
 .include "../../databases/sqlite3/buildlink3.mk"
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.38.0
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.58.0
 .include "../../devel/glib2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.gobject-introspection+=	gobject-introspection>=0.9.5
-BUILDLINK_DEPMETHOD.gobject-introspection+=	build
+BUILDLINK_DEPMETHOD.gobject-introspection=	build
 .include "../../devel/gobject-introspection/buildlink3.mk"
-CONFIGURE_ARGS+=	--enable-introspection
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../www/libpsl/buildlink3.mk"
+.include "../../devel/meson/build.mk"
 .include "../../mk/bsd.pkg.mk"

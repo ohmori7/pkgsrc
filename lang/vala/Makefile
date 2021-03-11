@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.53 2019/04/17 10:01:05 wiz Exp $
+# $NetBSD: Makefile,v 1.69 2021/01/25 10:35:23 wiz Exp $
 
-DISTNAME=	vala-0.44.3
+DISTNAME=	vala-0.50.3
 CATEGORIES=	lang gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/vala/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -10,16 +10,24 @@ HOMEPAGE=	https://wiki.gnome.org/Projects/Vala
 COMMENT=	Compiler for the GObject type system
 LICENSE=	gnu-lgpl-v2.1
 
-BUILD_DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
+BUILD_DEPENDS+=		libxslt-[0-9]*:../../textproc/libxslt
+BUILD_DEPENDS+=		docbook-xml-[0-9]*:../../textproc/docbook-xml
 
 GNU_CONFIGURE=		yes
 USE_LIBTOOL=		yes
-USE_TOOLS+=		bison flex gmake pkg-config
+USE_TOOLS+=		bash:test bison flex gmake pkg-config
 
 PKGCONFIG_OVERRIDE+=	libvala.pc.in
 PKGCONFIG_OVERRIDE+=	vapigen/vapigen.pc.in
 
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.40.0
+REPLACE_BASH+=		tests/testrunner.sh
+REPLACE_BASH+=		valadoc/tests/testrunner.sh
+
+# as of 0.50.1
+# 44 of 992 tests failed
+TEST_TARGET=		check
+
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.48.0
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libltdl/buildlink3.mk"
 .include "../../graphics/graphviz/buildlink3.mk"

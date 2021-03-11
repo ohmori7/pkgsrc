@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2017/06/22 10:53:02 markd Exp $
+# $NetBSD: Makefile,v 1.5 2021/02/20 11:00:46 markd Exp $
 
 DISTNAME=	thmtools
-PKGNAME=	tex-${DISTNAME}-66
-TEXLIVE_REV=	33624
+PKGNAME=	tex-${DISTNAME}-72
+TEXLIVE_REV=	56070
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/thmtools
+HOMEPAGE=	https://ctan.org/pkg/thmtools
 COMMENT=	Extensions to theorem environments
 LICENSE=	lppl-1.3c
 

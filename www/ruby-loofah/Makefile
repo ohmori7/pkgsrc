@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.5 2018/11/01 16:11:45 taca Exp $
+# $NetBSD: Makefile,v 1.11 2021/01/18 16:02:38 taca Exp $
 
-DISTNAME=	loofah-2.2.3
+DISTNAME=	loofah-2.9.0
 CATEGORIES=	www
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	https://github.com/kieranmasterton/loofah
+HOMEPAGE=	https://github.com/flavorjones/loofah
 COMMENT=	HTML sanitizer for Rails applications
 LICENSE=	mit
 

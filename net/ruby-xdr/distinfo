@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.2 2019/01/20 14:41:10 taca Exp $
+$NetBSD: distinfo,v 1.4 2021/01/13 15:08:19 taca Exp $
 
-SHA1 (xdr-3.0.0.gem) = 089bcd8ec100d3762a7711bbc5da9d169effc295
-RMD160 (xdr-3.0.0.gem) = 3a28511689420e357d65e7ac8142ecf69baa51ca
-SHA512 (xdr-3.0.0.gem) = 8176378330d9060cf8abe0f9ee18f69682674c407934dcc01b76d561acc10a94b573db3b04a17b9940d6a5d1682181ad15147c3e3acce692a3ccb9e275ec0062
-Size (xdr-3.0.0.gem) = 24576 bytes
+SHA1 (xdr-3.0.2.gem) = fa04cb1964488c1284675cb2bfe7d026479b4e99
+RMD160 (xdr-3.0.2.gem) = c3ea9251a0ddbe628b180f8571f4d9748b06ae89
+SHA512 (xdr-3.0.2.gem) = cf5e180f5c2bf3ea97ea0e8547d7112ea4c6644840df0bdd1d7f7b6b6a158d9f0f93c1f2c1a74d2ac49df35e7dd78a38380250da586b790a749bc80a35948b51
+Size (xdr-3.0.2.gem) = 16384 bytes

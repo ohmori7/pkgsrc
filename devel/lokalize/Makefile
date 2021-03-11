@@ -1,31 +1,22 @@
-# $NetBSD: Makefile,v 1.29 2019/04/25 07:32:48 maya Exp $
+# $NetBSD: Makefile,v 1.45 2021/02/07 06:30:19 ryoon Exp $
 
-DISTNAME=	lokalize-${_KDE_VERSION}
-PKGREVISION=	15
+DISTNAME=	lokalize-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	devel
+
+HOMEPAGE=	https://kde.org/applications/development/lokalize/
 COMMENT=	Computer-Aided Translation System
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+.include "../../meta-pkgs/kde/applications.mk"
 
-REPLACE_PYTHON+= \
-	scripts/xliffmerge.py
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
 
-#BUILDLINK_DEPMETHOD.qt4-tools=	full
-.include "../../meta-pkgs/kde4/kde4.mk"
+USE_TOOLS+=	msgmerge pkg-config
 
-#.include "../../devel/gettext-tools/buildlink3.mk"
-#.include "../../devel/libltdl/buildlink3.mk"
-#.include "../../devel/subversion-base/buildlink3.mk"
+.include "../../devel/kross/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../lang/python/application.mk"
-#.include "../../lang/ruby/replace.mk"
-#.include "../../misc/kdepimlibs4/buildlink3.mk"
-#.include "../../security/qca2/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/hunspell/buildlink3.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-#.include "../../x11/kde-baseapps4/buildlink3.mk"
-#.include "../../x11/kde-runtime4/buildlink3.mk"
-#.include "../../x11/kde-workspace4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

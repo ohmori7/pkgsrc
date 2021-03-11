@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.17 2021/02/26 10:17:18 adam Exp $
+
+SHA1 (uvicorn-0.13.4.tar.gz) = b75a22ee72dff96c17b9c5631311e5020764583c
+RMD160 (uvicorn-0.13.4.tar.gz) = ef23978f34c4ca4d981c597bf0fa30151b9e5fd8
+SHA512 (uvicorn-0.13.4.tar.gz) = 2a0c4edac285409571f9890145123d6063d10e4bbf4833385d9c10c62066cbb1a0fdfae8c424f7411e0aa81d117367360996a7f4bf41599e549339d0869b7db0
+Size (uvicorn-0.13.4.tar.gz) = 32426 bytes

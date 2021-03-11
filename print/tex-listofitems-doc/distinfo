@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.2 2019/05/11 22:35:14 markd Exp $
+$NetBSD: distinfo,v 1.4 2020/05/03 11:57:32 markd Exp $
 
-SHA1 (tex-listofitems-50216/listofitems.doc.tar.xz) = 769e567e3a4738f81909099e848ec4c16d5ce328
-RMD160 (tex-listofitems-50216/listofitems.doc.tar.xz) = 9c34902ba25eace4f3142cba39708ac209edddb3
-SHA512 (tex-listofitems-50216/listofitems.doc.tar.xz) = b6e4982d744fc11f34cded7da5cc78070809cfb7978b01412917ec6ef18b1fc224528f06a9634d317a2ac25ad192d7242d6b7a0e6093ed62442102b16f67c9b0
-Size (tex-listofitems-50216/listofitems.doc.tar.xz) = 799052 bytes
+SHA1 (listofitems.doc.r51923.tar.xz) = 65152c9f44fbf343cc9bb07e191944dd109d602a
+RMD160 (listofitems.doc.r51923.tar.xz) = f1e1c1462f0d7f72caa5c365e3f01e5e885b7a7c
+SHA512 (listofitems.doc.r51923.tar.xz) = e7c3df40b9657dab386eaf54f08018e3d390a1de96a47c5c4f63759c11aa38b243301287940131297ad107e4a63fddad5bd9ca5982b211febda7bf5a6a8d40de
+Size (listofitems.doc.r51923.tar.xz) = 802140 bytes

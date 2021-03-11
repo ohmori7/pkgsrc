@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2019/04/26 13:13:48 maya Exp $
+# $NetBSD: Makefile,v 1.24 2020/12/04 20:45:07 nia Exp $
 
 DISTNAME=	bzr-explorer-${VER}
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	devel
 MASTER_SITES=	https://launchpad.net/bzr-explorer/${VER:R}/${VER}/+download/
 VER=		1.2.2
@@ -16,7 +16,7 @@ DEPENDS+=	${PYPKGPREFIX}-qt4>=4.4:../../x11/py-qt4
 
 USE_TOOLS+=	msgfmt
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # qbzr
+PYTHON_VERSIONS_ACCEPTED=	27 # qbzr
 
 EGG_NAME=	${DISTNAME:S/bzr-//}
 

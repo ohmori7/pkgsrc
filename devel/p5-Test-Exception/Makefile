@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.30 2018/08/22 09:44:45 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2020/08/31 18:09:01 wiz Exp $
 
 DISTNAME=		Test-Exception-0.43
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		3
+PKGREVISION=		5
 CATEGORIES=		devel perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Test/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Test-Exception/
+HOMEPAGE=		https://metacpan.org/release/Test-Exception
 COMMENT=		Test exception based code
 LICENSE=		${PERL5_LICENSE}
 

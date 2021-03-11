@@ -1,19 +1,18 @@
-# $NetBSD: Makefile,v 1.17 2018/08/22 09:47:00 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2020/08/31 18:12:02 wiz Exp $
 #
 
-DISTNAME=		Text-Markdown-Discount-0.11
+DISTNAME=		Text-Markdown-Discount-0.12
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		6
+PKGREVISION=		1
 CATEGORIES=		textproc perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Text/}
 
 MAINTAINER=		schmonz@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Text-Markdown-Discount/
+HOMEPAGE=		https://metacpan.org/release/Text-Markdown-Discount
 COMMENT=		Convert Markdown to (X)HTML
 LICENSE=		${PERL5_LICENSE}
 
 PERL5_PACKLIST=		auto/Text/Markdown/Discount/.packlist
-USE_LANGUAGES=		c
 
 SUBST_CLASSES+=		paths
 SUBST_FILES.paths=	Makefile.PL

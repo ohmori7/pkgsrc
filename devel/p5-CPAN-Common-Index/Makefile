@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.2 2018/08/22 09:43:39 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2020/08/31 18:07:32 wiz Exp $
 
 DISTNAME=	CPAN-Common-Index-0.010
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=CPAN/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/CPAN-Common-Index/
+HOMEPAGE=	https://metacpan.org/release/CPAN-Common-Index
 COMMENT=	Library for searching CPAN modules, authors and distributions
 LICENSE=	apache-2.0
 

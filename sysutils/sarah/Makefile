@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.24 2018/08/22 09:46:40 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2020/08/31 18:11:35 wiz Exp $
 
 DISTNAME=	sarah-0.9.1b
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=sarah/}
 
@@ -15,7 +15,7 @@ NO_BUILD=	YES
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 share/doc/sarah \
 			share/examples/sarah
-CONF_FILES+=	${PREFIX}/share/examples/sarah/sarah.conf.sample \
+CONF_FILES+=		${PREFIX}/share/examples/sarah/sarah.conf.sample \
 			${PKG_SYSCONFDIR}/sarah.conf
 
 post-patch:

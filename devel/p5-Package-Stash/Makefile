@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.23 2019/01/03 12:41:12 wen Exp $
+# $NetBSD: Makefile,v 1.27 2020/08/31 18:08:38 wiz Exp $
 
 DISTNAME=	Package-Stash-0.38
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Package/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Package-Stash/
+HOMEPAGE=	https://metacpan.org/release/Package-Stash
 COMMENT=	Perl 5 module providing routines for manipulating stashes
 LICENSE=	${PERL5_LICENSE}
 
@@ -16,9 +17,9 @@ DEPENDS+=	p5-Dist-CheckConflicts>=0.02:../../devel/p5-Dist-CheckConflicts
 DEPENDS+=	p5-Module-Implementation>=0.06:../../devel/p5-Module-Implementation
 DEPENDS+=	p5-Package-Stash-XS>=0.26:../../devel/p5-Package-Stash-XS
 
-BUILD_DEPENDS+=	p5-Test-Fatal-[0-9]*:../../devel/p5-Test-Fatal
-BUILD_DEPENDS+=	p5-Test-Requires-[0-9]*:../../devel/p5-Test-Requires
-BUILD_DEPENDS+=	p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
+BUILD_DEPENDS+=		p5-Test-Fatal-[0-9]*:../../devel/p5-Test-Fatal
+BUILD_DEPENDS+=		p5-Test-Requires-[0-9]*:../../devel/p5-Test-Requires
+BUILD_DEPENDS+=		p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
 #BUILD_DEPENDS+=	{perl>=5.10.1,p5-Test-Simple>=0.88}:../../devel/p5-Test-Simple
 
 USE_LANGUAGES=	# empty

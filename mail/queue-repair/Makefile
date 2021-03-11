@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2019/04/25 07:33:04 maya Exp $
+# $NetBSD: Makefile,v 1.15 2020/12/04 20:45:28 nia Exp $
 #
 
 DISTNAME=		queue-repair-0.9.0
-PKGREVISION=		8
+PKGREVISION=		9
 CATEGORIES=		mail
 MASTER_SITES=		${HOMEPAGE}
 
@@ -13,7 +13,7 @@ LICENSE=		gnu-gpl-v2
 
 SYMLINK3_PATCH=		queue-repair-0.9.0-symlink3-20180724.patch
 PATCHFILES+=		${SYMLINK3_PATCH}
-SITES.${SYMLINK3_PATCH}=https://schmonz.com/qmail/queuerepairsymlink3/
+SITES.${SYMLINK3_PATCH}= https://schmonz.com/qmail/queuerepairsymlink3/
 
 REPLACE_PYTHON=		queue_repair.py
 
@@ -32,12 +32,14 @@ SUBST_SED.users+=	-e "s|'qmailp'|'${QMAIL_PASSWD_USER}'|g"
 SUBST_SED.users+=	-e "s|'qmailq'|'${QMAIL_QUEUE_USER}'|g"
 SUBST_SED.users+=	-e "s|'qmailr'|'${QMAIL_REMOTE_USER}'|g"
 SUBST_SED.users+=	-e "s|'qmails'|'${QMAIL_SEND_USER}'|g"
+SUBST_NOOP_OK.users=	yes
 
 SUBST_CLASSES+=		groups
 SUBST_STAGE.groups=	do-configure
 SUBST_FILES.groups=	queue_repair.py
 SUBST_SED.groups=	-e "s|'qmail'|'${QMAIL_QMAIL_GROUP}'|g"
 SUBST_SED.groups+=	-e "s|'nofiles'|'${QMAIL_NOFILES_GROUP}'|g"
+SUBST_NOOP_OK.groups=	yes
 
 BUILD_DEFS+=		QMAILDIR QMAIL_ALIAS_USER QMAIL_DAEMON_USER
 BUILD_DEFS+=		QMAIL_LOG_USER QMAIL_PASSWD_USER QMAIL_QUEUE_USER

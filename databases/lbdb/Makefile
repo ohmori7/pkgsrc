@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.34 2019/02/08 22:25:32 tonio Exp $
+# $NetBSD: Makefile,v 1.38 2020/08/31 18:06:55 wiz Exp $
 
 DISTNAME=		lbdb_0.48.1
 PKGNAME=		${DISTNAME:S/_/-/}
+PKGREVISION=		2
 CATEGORIES=		databases
 MASTER_SITES=		http://www.spinnaker.de/lbdb/download/
 
 MAINTAINER=		tonio@NetBSD.org
-HOMEPAGE=		http://www.spinnaker.de/lbdb/
+HOMEPAGE=		https://www.spinnaker.de/lbdb/
 COMMENT=		The little brother's database
 LICENSE=		gnu-gpl-v2
 
@@ -15,13 +16,13 @@ DEPENDS+=		p5-perl-ldap>=0.20:../../databases/p5-perl-ldap
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake perl:run
 
-GNU_CONFIGURE_LIBSUBDIR=../libexec/lbdb
-CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
-CONFIGURE_ARGS+=	--enable-lbdb_dotlock
-CONFIGURE_ARGS+=	--without-getent
-CONFIGURE_ARGS+=	--without-evolution-addressbook-export
-CONFIGURE_ARGS+=	--without-pgp
-CONFIGURE_ARGS+=	--without-pgpk
+GNU_CONFIGURE_LIBSUBDIR=	../libexec/lbdb
+CONFIGURE_ARGS+=		--sysconfdir=${PKG_SYSCONFDIR}
+CONFIGURE_ARGS+=		--enable-lbdb_dotlock
+CONFIGURE_ARGS+=		--without-getent
+CONFIGURE_ARGS+=		--without-evolution-addressbook-export
+CONFIGURE_ARGS+=		--without-pgp
+CONFIGURE_ARGS+=		--without-pgpk
 
 CONFIGURE_ENV+=		SH=${TOOLS_SH}
 CONFIGURE_ENV+=		AWK=${TOOLS_AWK}

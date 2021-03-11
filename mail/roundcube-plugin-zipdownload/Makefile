@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2019/04/30 03:58:45 taca Exp $
+# $NetBSD: Makefile,v 1.7 2020/12/28 08:58:10 taca Exp $
 
 PLUGIN=		zipdownload
 
@@ -7,10 +7,6 @@ COMMENT=	Roundcube Webmail ZipDownload plugin
 LICENSE=	gnu-gpl-v3
 
 DEPENDS+=	${PHP_PKG_PREFIX}-zip>=5.4.0:../../archivers/php-zip
-
-PLUGIN=		zipdownload
-
-do-install: plugin-install
 
 .include "../../mail/roundcube/plugins.mk"
 .include "../../lang/python/application.mk"

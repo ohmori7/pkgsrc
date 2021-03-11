@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.8 2016/01/10 11:49:10 szptvlfn Exp $
+# $NetBSD: Makefile,v 1.10 2020/01/11 11:17:49 pho Exp $
 
-DISTNAME=	blaze-html-0.7.0.3
-PKGREVISION=	5
+DISTNAME=	blaze-html-0.9.1.2
 CATEGORIES=	textproc
 
 MAINTAINER=	pho@cielonegro.org
@@ -11,5 +10,4 @@ LICENSE=	modified-bsd
 .include "../../mk/haskell.mk"
 .include "../../devel/hs-blaze-builder/buildlink3.mk"
 .include "../../textproc/hs-blaze-markup/buildlink3.mk"
-.include "../../devel/hs-text/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

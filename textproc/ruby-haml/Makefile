@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.20 2018/03/14 15:41:36 taca Exp $
+# $NetBSD: Makefile,v 1.22 2021/01/14 14:44:47 taca Exp $
 
-DISTNAME=	haml-5.0.4
+DISTNAME=	haml-5.2.1
 CATEGORIES=	textproc
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -10,6 +10,8 @@ LICENSE=	mit
 
 DEPENDS+=	${RUBY_PKGPREFIX}-temple>=0.8.0:../../textproc/ruby-temple
 DEPENDS+=	${RUBY_PKGPREFIX}-tilt>=0:../../textproc/ruby-tilt
+
+USE_LANGUAGES=	# none
 
 RUBYGEM_OPTIONS+=	--format-executable
 

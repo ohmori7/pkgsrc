@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.33 2019/05/23 19:23:21 rillig Exp $
+# $NetBSD: Makefile,v 1.38 2020/12/04 20:45:49 nia Exp $
 
-DISTNAME=	viewvc-1.1.26
+DISTNAME=	viewvc-1.2.0
 PKGREVISION=	1
 CATEGORIES=	devel www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=viewvc/}
@@ -12,7 +12,7 @@ LICENSE=	2-clause-bsd
 
 REPLACE_PYTHON=	viewvc-install bin/* bin/cgi/*.cgi lib/*.py
 # https://github.com/viewvc/viewvc/issues/138
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 1.1.26
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 1.1.27
 
 .if !exists(/usr/bin/rlog)
 DEPENDS+=	rcs-[0-9]*:../../devel/rcs
@@ -36,12 +36,7 @@ SUBST_CLASSES+=		conf
 SUBST_STAGE.conf=	pre-configure
 SUBST_MESSAGE.conf=	Fixing configuration files.
 SUBST_FILES.conf=	conf/viewvc.conf.dist
-SUBST_FILES.conf+=	conf/cvsgraph.conf.dist
-SUBST_VARS.conf=	VIEWVCDIR
-SUBST_VARS.conf+=	PREFIX
-SUBST_VARS.conf+=	PHP_OPT
-SUBST_VARS.conf+=	CVSGRAPH_OPT
-
+SUBST_VARS.conf=	VIEWVCDIR PREFIX PHP_OPT CVSGRAPH_OPT
 .if defined(RCS_PKG) && ${RCS_PKG} == "YES"
 SUBST_SED.conf+=	-e "s|@RCS_PREFIX@|${PREFIX}|g"
 .else

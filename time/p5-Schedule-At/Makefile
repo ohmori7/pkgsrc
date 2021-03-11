@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.14 2018/08/22 09:47:18 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:12:25 wiz Exp $
 
 DISTNAME=	Schedule-At-1.15
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	time perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Schedule/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Schedule-At/
+HOMEPAGE=	https://metacpan.org/release/Schedule-At
 COMMENT=	OS independent interface to the Unix 'at' command
 LICENSE=	${PERL5_LICENSE}
 

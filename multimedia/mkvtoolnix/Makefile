@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.130 2019/05/19 07:54:27 adam Exp $
+# $NetBSD: Makefile,v 1.169 2021/03/07 07:30:09 adam Exp $
 
-DISTNAME=	mkvtoolnix-34.0.0
+DISTNAME=	mkvtoolnix-55.0.0
 CATEGORIES=	multimedia
 MASTER_SITES=	https://mkvtoolnix.download/sources/
 EXTRACT_SUFX=	.tar.xz
@@ -10,11 +10,11 @@ HOMEPAGE=	https://mkvtoolnix.download/
 COMMENT=	Set of tools to create, alter and inspect Matroska files
 LICENSE=	gnu-gpl-v2
 
-BUILD_DEPENDS+=	docbook-xsl-[0-9]*:../../textproc/docbook-xsl
+BUILD_DEPENDS+=	docbook-xsl>=1.79.1nb5:../../textproc/docbook-xsl
 BUILD_DEPENDS+=	po4a-[0-9]*:../../textproc/po4a
 BUILD_DEPENDS+=	${RUBY_BASE}>=${RUBY_VERSION}:${RUBY_SRCDIR}
 
-USE_LANGUAGES=		c c++11
+USE_LANGUAGES=		c c++17
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake msgfmt pkg-config
 GNU_CONFIGURE=		yes
@@ -24,7 +24,6 @@ CONFIGURE_ARGS+=	--disable-update-check
 CONFIGURE_ARGS+=	--with-boost-libdir=${BUILDLINK_PREFIX.boost-libs}/lib
 CONFIGURE_ARGS+=	--with-boost-date-time=boost_date_time
 CONFIGURE_ARGS+=	--with-boost-filesystem=boost_filesystem
-CONFIGURE_ARGS+=	--with-boost_regex=boost_regex
 CONFIGURE_ARGS+=	--with-boost-system=boost_system
 CONFIGURE_ARGS+=	--with-docbook-xsl-root=${PREFIX}/share/xsl/docbook
 
@@ -52,9 +51,11 @@ do-install:
 .include "../../devel/boost-headers/buildlink3.mk"
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
-BUILDLINK_ABI_DEPENDS.libebml+= libebml>=1.3.5
+BUILDLINK_API_DEPENDS.libebml+= libebml>=1.4.2
 .include "../../devel/libebml/buildlink3.mk"
+.include "../../devel/pcre2/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
+BUILDLINK_API_DEPENDS.libmatroska+= libmatroska>=1.6.3
 .include "../../multimedia/libmatroska/buildlink3.mk"
 .include "../../multimedia/libogg/buildlink3.mk"
 .include "../../sysutils/file/buildlink3.mk"

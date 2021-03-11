@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.18 2017/08/21 22:57:45 tez Exp $
+# $NetBSD: Makefile,v 1.20 2020/01/18 23:30:41 rillig Exp $
 
 DISTNAME=	cvs-1.12.13
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	devel scm
 MASTER_SITES=	http://ftp.gnu.org/non-gnu/cvs/source/feature/${PKGVERSION_NOREV}/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://cvs.nongnu.org/
+HOMEPAGE=	https://cvs.nongnu.org/
 COMMENT=	Concurrent Versions System
 LICENSE=	gnu-gpl-v2
 
@@ -15,7 +15,8 @@ USE_TOOLS+=		makeinfo autoconf
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-external-zlib
 CONFIGURE_ARGS+=	--with-rsh=ssh
-CONFIGURE_ENV+=		PERL=${TOOLS_PERL5} gl_cv_func_getcwd_null=yes
+CONFIGURE_ENV+=		PERL=${TOOLS_PERL5}
+CONFIGURE_ENV+=		gl_cv_func_getcwd_null=yes
 
 CHECK_INTERPRETER_SKIP=	share/cvs/contrib/*
 INFO_FILES=		yes

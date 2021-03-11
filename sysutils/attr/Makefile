@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2016/08/21 21:09:27 markd Exp $
+# $NetBSD: Makefile,v 1.6 2020/01/18 23:35:14 rillig Exp $
 
 ATTR_VERS=	2.4.47
 PKGNAME=	attr-${ATTR_VERS}
@@ -8,16 +8,16 @@ CATEGORIES=	sysutils
 MASTER_SITES=	http://download.savannah.gnu.org/releases/attr/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://savannah.nongnu.org/projects/attr
+HOMEPAGE=	https://savannah.nongnu.org/projects/attr
 COMMENT=	Commands for Manipulating Filesystem Extended Attributes
 LICENSE=	gnu-gpl-v2
 
-WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
-GNU_CONFIGURE=	yes
-USE_TOOLS+=	gmake msgfmt
-USE_LIBTOOL=	yes
-BUILD_TARGET=	default
-INSTALL_SH_OVERRIDE=no
+WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
+GNU_CONFIGURE=		yes
+USE_TOOLS+=		gmake msgfmt
+USE_LIBTOOL=		yes
+BUILD_TARGET=		default
+INSTALL_SH_OVERRIDE=	no
 
 LDFLAGS.Darwin+=	-lintl
 LDFLAGS.NetBSD+=	-lintl

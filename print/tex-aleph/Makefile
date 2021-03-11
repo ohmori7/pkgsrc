@@ -1,14 +1,18 @@
-# $NetBSD: Makefile,v 1.4 2017/09/06 16:49:29 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2020/05/10 04:31:57 markd Exp $
 
 DISTNAME=	aleph
-PKGNAME=	tex-${DISTNAME}-0.2.40768
-TEXLIVE_REV=	40768
+PKGNAME=	tex-${DISTNAME}-0.2.54276
+PKGREVISION=	1
+TEXLIVE_REV=	54276
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/aleph
 COMMENT=	Extended TeX
 LICENSE=	gnu-gpl-v2
 
+DEPENDS+=	tex-l3kernel-[0-9]*:../../devel/tex-l3kernel
 DEPENDS+=	tex-latex>=2010:../../print/tex-latex
+DEPENDS+=	tex-omega-[0-9]*:../../print/tex-omega
 DEPENDS+=	tex-plain>=3.141592653nb2:../../print/tex-plain
 DEPENDS+=	tex-lambda>=2014:../../print/tex-lambda
 DEPENDS+=	web2c>=2014:../../print/web2c

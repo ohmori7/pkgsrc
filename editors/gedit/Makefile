@@ -1,39 +1,55 @@
-# $NetBSD: Makefile,v 1.144 2018/11/14 21:17:22 bsiegert Exp $
-#
+# $NetBSD: Makefile,v 1.157 2020/12/04 20:45:15 nia Exp $
 
-DISTNAME=		gedit-2.30.4
-PKGREVISION=		32
-CATEGORIES=		editors gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gedit/2.30/}
-EXTRACT_SUFX=		.tar.bz2
+DISTNAME=	gedit-3.36.2
+PKGREVISION=	4
+CATEGORIES=	editors gnome
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gedit/${PKGVERSION_NOREV:R}/}
+EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		https://www.gnome.org/projects/gedit/
-COMMENT=		Lightweight GNOME2 text editor
-LICENSE=		gnu-gpl-v2
+MAINTAINER=	prlw1@cam.ac.uk
+HOMEPAGE=	https://wiki.gnome.org/Apps/Gedit
+COMMENT=	Lightweight GNOME UTF-8 text editor
+LICENSE=	gnu-gpl-v2
 
-CONFLICTS+=		gedit>=3
-USE_PKGLOCALEDIR=	YES
-USE_TOOLS+=		gmake gzip intltool msgfmt perl pkg-config
-USE_LIBTOOL=		YES
-GNU_CONFIGURE=		YES
+PREV_PKGPATH=	editors/gedit3
 
-PKGCONFIG_OVERRIDE+=	data/gedit.pc.in
+USE_TOOLS+=			gmake gettext msgfmt perl pkg-config
+_TOOLS_USE_PKGSRC.msgfmt=	yes
 
-GCONF_SCHEMAS=		gedit.schemas gedit-file-browser.schemas
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+PY_PATCHPLIST=			yes
+REPLACE_PYTHON+=		plugins/externaltools/data/send-to-fpaste.tool.in
+REPLACE_PYTHON+=		build-aux/meson/post_install.py
 
-.include "options.mk"
+MESON_ARGS+=	-Dvapi=false
+MAKE_ENV+=	LD_LIBRARY_PATH=${WRKSRC}/output/gedit
 
-.include "../../devel/GConf/schemas.mk"
-.include "../../devel/gettext-lib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.glib2+=		glib2>=2.16.0
-.include "../../devel/glib2/buildlink3.mk"
+DEPENDS+=	adwaita-icon-theme-[0-9]*:../../graphics/adwaita-icon-theme
+DEPENDS+=	${PYPKGPREFIX}-gobject3-[0-9]*:../../devel/py-gobject3
+BUILD_DEPENDS+=	itstool-[0-9]*:../../textproc/itstool
+
+pre-configure:
+	${FIND} ${WRKSRC}/help -type f -exec ${CHMOD} 644 {} \;
+
+
+.include "../../devel/gobject-introspection/buildlink3.mk"
+BUILDLINK_API_DEPENDS.libpeas+=	libpeas>=1.14.1
+.include "../../devel/libpeas/buildlink3.mk"
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.52
+.include "../../devel/glib2/schemas.mk"
+.include "../../devel/meson/build.mk"
+.include "../../editors/tepl4/buildlink3.mk"
+.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../textproc/gnome-doc-utils/buildlink3.mk"
-.include "../../mk/omf-scrollkeeper.mk"
-BUILDLINK_API_DEPENDS.gtk2+=		gtk2+>=2.13.0
-.include "../../x11/gtk2/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gtksourceview2+=	gtksourceview2>=2.2.0
-.include "../../x11/gtksourceview2/buildlink3.mk"
+.include "../../sysutils/gsettings-desktop-schemas/buildlink3.mk"
+.include "../../textproc/gspell/buildlink3.mk"
+BUILDLINK_API_DEPENDS.gtk3+=	gtk3+>=3.22
+.include "../../x11/gtk3/buildlink3.mk"
+BUILDLINK_API_DEPENDS.gtksourceview4+=	gtksourceview4>=4.0.2
+.include "../../x11/gtksourceview4/buildlink3.mk"
+.include "../../x11/libICE/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
+
+.include "../../lang/python/application.mk"
+.include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"

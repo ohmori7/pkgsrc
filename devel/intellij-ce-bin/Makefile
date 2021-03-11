@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2019/05/13 17:30:12 ryoon Exp $
+# $NetBSD: Makefile,v 1.6 2020/12/04 20:45:10 nia Exp $
 #
 # TODO Import intellij-fsnotifier with inotify support from FreeBSD.
 
 VERSION=	2019.1.2
 DISTNAME=	ideaIC-${VERSION:S/.0.0//}-no-jbr
 PKGNAME=	intellij-ce-bin-${VERSION}
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://download.jetbrains.com/idea/
 
@@ -23,7 +24,7 @@ USE_TOOLS+=	bash pax sed
 
 REPLACE_PYTHON=	bin/printenv.py \
 		bin/restart.py  \
-
+		
 REPLACE_BASH=	plugins/Kotlin/kotlinc/bin/kotlin	\
 		plugins/Kotlin/kotlinc/bin/kotlin-dce-js\
 		plugins/Kotlin/kotlinc/bin/kotlinc	\

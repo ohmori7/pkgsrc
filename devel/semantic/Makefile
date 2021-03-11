@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.32 2018/02/06 16:42:22 jperkin Exp $
+# $NetBSD: Makefile,v 1.35 2020/03/20 11:57:33 nia Exp $
 
 DISTNAME=	semantic-1.4.4
 PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME}
@@ -37,7 +37,7 @@ AUXFILES+=	c.bnf make.bnf java.bnf scheme.bnf
 
 INSTALLATION_DIRS=	${EMACS_INFOPREFIX}
 
-EMACS_BUILDLINK=# defined
+EMACS_BUILDLINK=	# defined
 
 do-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${EMACS_LISPPREFIX}/semantic

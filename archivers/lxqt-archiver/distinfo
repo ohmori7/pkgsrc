@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2020/12/07 11:59:16 pin Exp $
+
+SHA1 (lxqt-archiver-0.3.0.tar.xz) = c3be4f0ec53da9edfa2bb026b235ab80906e0e9a
+RMD160 (lxqt-archiver-0.3.0.tar.xz) = f9de8e1125c384548060e85115f81dd6a6ed2573
+SHA512 (lxqt-archiver-0.3.0.tar.xz) = 840fae890611b081a1355ceb58ca65276784e6825822859ff2d6506190212268f1c67733dc94c65c9c5758f8d6a25c286c2b339356a50f29474b0c7ce2569d2c
+Size (lxqt-archiver-0.3.0.tar.xz) = 157492 bytes

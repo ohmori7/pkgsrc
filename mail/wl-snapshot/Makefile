@@ -1,18 +1,19 @@
-# $NetBSD: Makefile,v 1.8 2016/03/05 11:28:52 jperkin Exp $
+# $NetBSD: Makefile,v 1.12 2020/01/18 21:49:55 jperkin Exp $
 
-DISTNAME=	wl-beta_2.15.9+0.20110420.orig
-PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME:S/beta_//:S/+0//:S/.orig//}
-PKGREVISION=	4
+DISTNAME=	wl-beta_2.15.9+0.20190919
+PKGNAME=	${EMACS_PKGNAME_PREFIX}${DISTNAME:S/beta_//:S/+0//}
+PKGREVISION=	1
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_DEBIAN:=pool/main/w/wl-beta/}
+EXTRACT_SUFX=	.orig.tar.gz
 
-MAINTAINER=	tech-pkg-ja@jp.NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gohome.org/wl/
 COMMENT=	Mail/news management system with IMAP4rev1 support for Emacs
 LICENSE=	gnu-gpl-v2
 
 USE_TOOLS+=	patch
-WRKSRC=		${WRKDIR}/wanderlust
+WRKSRC=		${WRKDIR}/wanderlust-wanderlust-7a919e4
 
 BUILD_TARGET=	all info
 INSTALL_TARGET=	install install-info
@@ -46,8 +47,12 @@ EMACS_BUILDLINK=	# empty
 
 post-install:
 	set -e; \
-	for f in BUGS NEWS README; do \
-		${INSTALL_DATA} ${WRKSRC}/"$$f" ${DESTDIR}${DOCDIR}/en; \
+	for f in BUGS NEWS; do \
+		${INSTALL_DATA} ${WRKSRC}/"$$f"    ${DESTDIR}${DOCDIR}/en; \
+		${INSTALL_DATA} ${WRKSRC}/"$$f".ja ${DESTDIR}${DOCDIR}/ja; \
+	done
+	for f in README; do \
+		${INSTALL_DATA} ${WRKSRC}/"$$f".md ${DESTDIR}${DOCDIR}/en; \
 		${INSTALL_DATA} ${WRKSRC}/"$$f".ja ${DESTDIR}${DOCDIR}/ja; \
 	done
 	${INSTALL_DATA} ${WRKSRC}/samples/en/dot.* ${DESTDIR}${EXAMPLESDIR}/en

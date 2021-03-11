@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.66 2018/12/13 19:52:13 adam Exp $
+# $NetBSD: Makefile,v 1.84 2021/02/07 06:30:33 ryoon Exp $
 
 DISTNAME=	gnome-mplayer-1.0.9
-PKGREVISION=	24
+PKGREVISION=	42
 CATEGORIES=	multimedia
 MASTER_SITES=	http://gnome-mplayer.googlecode.com/svn/packages/
 
@@ -18,6 +18,7 @@ USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake pkg-config msgfmt
 
 CONFIGURE_ARGS+=	--disable-gtk3
+CONFIGURE_ARGS+=	--disable-nautilus
 
 GCONF_SCHEMAS+=	gnome-mplayer.schemas
 

@@ -1,4 +1,4 @@
-# $NetBSD: plist.mk,v 1.52 2019/01/16 04:43:42 gutteridge Exp $
+# $NetBSD: plist.mk,v 1.55 2020/06/10 16:06:09 leot Exp $
 #
 # This Makefile fragment handles the creation of PLISTs for use by
 # pkg_create(8).
@@ -33,9 +33,9 @@
 #	PLIST
 #	PLIST.common_end
 #
-#    GENERATE_PLIST is a sequence of commands, terminating in a semicolon,
-#	that outputs contents for a PLIST to stdout and is appended to
-#	the contents of ${PLIST_SRC}.
+#    GENERATE_PLIST is a sequence of commands, each terminated with a
+#	semicolon. These commands output contents for a PLIST to stdout,
+#	which is appended to the contents of ${PLIST_SRC}.
 #
 #    IGNORE_INFO_DIRS is a list of ${PREFIX}-relative paths that do
 #	*not* contain info files.
@@ -56,27 +56,18 @@ PLIST_TYPE?=	static
 
 ######################################################################
 
-.if exists(${PKGDIR}/PLIST.common)
-PLIST_SRC_DFLT+=	${PKGDIR}/PLIST.common
-.endif
-.if exists(${PKGDIR}/PLIST.${OPSYS})
-PLIST_SRC_DFLT+=	${PKGDIR}/PLIST.${OPSYS}
-.endif
-.if exists(${PKGDIR}/PLIST.${MACHINE_ARCH:C/i[3-6]86/i386/g})
-PLIST_SRC_DFLT+=	${PKGDIR}/PLIST.${MACHINE_ARCH:C/i[3-6]86/i386/g}
-.endif
-.if exists(${PKGDIR}/PLIST.${OPSYS}-${MACHINE_ARCH:C/i[3-6]86/i386/g})
-PLIST_SRC_DFLT+=	${PKGDIR}/PLIST.${OPSYS}-${MACHINE_ARCH:C/i[3-6]86/i386/g}
-.endif
-.if defined(EMUL_PLATFORM) && exists(${PKGDIR}/PLIST.${EMUL_PLATFORM})
-PLIST_SRC_DFLT+=	${PKGDIR}/PLIST.${EMUL_PLATFORM}
-.endif
-.if exists(${PKGDIR}/PLIST)
-PLIST_SRC_DFLT+=	${PKGDIR}/PLIST
-.endif
-.if exists(${PKGDIR}/PLIST.common_end)
-PLIST_SRC_DFLT+=	${PKGDIR}/PLIST.common_end
-.endif
+.for f in \
+	PLIST.common \
+	PLIST.${OPSYS} \
+	PLIST.${MACHINE_ARCH:C/i[3-6]86/i386/g} \
+	PLIST.${OPSYS}-${MACHINE_ARCH:C/i[3-6]86/i386/g} \
+	${defined(EMUL_PLATFORM):?PLIST.${EMUL_PLATFORM}:} \
+	PLIST \
+	PLIST.common_end
+.  if exists(${PKGDIR}/${f})
+PLIST_SRC_DFLT+=	${PKGDIR}/${f}
+.  endif
+.endfor
 
 #
 # If the following 3 conditions hold, then fail the package build:
@@ -145,8 +136,20 @@ _PLIST_AWK_ENV+=	PREFIX=${DESTDIR:Q}${PREFIX:Q}
 _PLIST_AWK_ENV+=	TEST=${TOOLS_TEST:Q}
 _PLIST_AWK_ENV+=	${PLIST_AWK_ENV}
 
-# PLIST_SUBST contains package-settable "${variable}" to "value"
-# substitutions for PLISTs
+# PLIST_SUBST contains package-settable VAR=value substitutions that are
+# used when generating the actual file list for the package from the
+# package's PLIST files, as listed in PLIST_SRC. These files may contain
+# placeholders of the form ${VAR}, which are then substituted by their
+# corresponding value from PLIST_SUBST.
+#
+# Example: PLIST_SUBST+= PKGNAME=${PKGNAME_NOREV} means that the package's
+# PLIST file may contain the placeholder ${PKGNAME}, which will be replaced
+# with the package version excluding the "nb13" extension.
+#
+# The other direction of generating the package's PLIST file from the list
+# of actually installed files is covered by EARLY_PRINT_PLIST_AWK and
+# PRINT_PLIST_AWK. This is only needed when developing the package itself,
+# for example after an update.
 #
 PLIST_SUBST+=	OPSYS=${OPSYS:Q}					\
 		OS_VERSION=${OS_VERSION:Q}				\

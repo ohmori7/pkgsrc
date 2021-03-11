@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.7 2019/04/12 13:23:57 hauke Exp $
+# $NetBSD: Makefile,v 1.14 2021/03/07 13:37:28 taca Exp $
 
 DISTNAME=	glpi-${GLPI_VERSION}
-GLPI_VERSION=	9.4.2
+GLPI_VERSION=	9.4.6
+#PKGREVISION=	1
 CATEGORIES=	www
 
 MASTER_SITES=	https://github.com/glpi-project/glpi/releases/download/${GLPI_VERSION}/
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	hauke@NetBSD.org
-HOMEPAGE=	http://glpi-project.org/
+HOMEPAGE=	https://glpi-project.org/
 COMMENT=	IT inventory management software
 LICENSE=	gnu-gpl-v2
 
@@ -30,12 +31,13 @@ USE_LANGUAGES=	# none
 
 USE_TOOLS+=	chmod find pax
 
-BUILD_DEFS+=    APACHE_USER APACHE_GROUP VARBASE
+BUILD_DEFS+=	APACHE_USER APACHE_GROUP VARBASE
+
+MESSAGE_SUBST+=	APACHE_USER="${APACHE_USER}"
+
+PHP_VERSIONS_ACCEPTED=	56 73 74
 
 .include "../../mk/bsd.prefs.mk"
-
-APACHE_USER?=   www
-APACHE_GROUP?=  www
 
 WRKSRC=		${WRKDIR}/glpi
 
@@ -49,6 +51,7 @@ GLPI_DIR=	share/glpi
 .for ddd in local_define.php
 CONF_FILES+=	${EGDIR}/${ddd} ${PKG_SYSCONFDIR}/${ddd}
 .endfor
+CONF_FILES+=	${EGDIR}/var_glpi.htaccess ${VARBASE}/glpi/.htaccess
 
 MAKE_DIRS_PERMS+=	${VARBASE}/glpi ${APACHE_USER} ${APACHE_GROUP} 0700
 .for ddd in _cache _cron _dumps _graphs _lock _log _pictures _plugins \
@@ -75,7 +78,7 @@ REPLACE_FILES.php=	vendor/tecnickcom/tcpdf/tools/tcpdf_addfont.php
 REPLACE_FILES.php+=	bin/console
 .for ddd in  bench.php fetch_windows_zones.php generate_vcards \
 	     generateicalendardata.php vobject
-REPLACE_FILES.php+=      vendor/sabre/vobject/bin/${ddd}
+REPLACE_FILES.php+=	vendor/sabre/vobject/bin/${ddd}
 .endfor
 
 INSTALLATION_DIRS+=	${GLPI_DIR} ${EGDIR}
@@ -101,6 +104,10 @@ post-extract:
 
 do-install:
 	cd ${WRKSRC}/config && ${PAX} -rw * ${DESTDIR}${PREFIX}/${EGDIR}
+	cd ${WRKSRC}/files && cp .htaccess \
+		${DESTDIR}${PREFIX}/${EGDIR}/var_glpi.htaccess
+	# Sub-tree will be re-created in VARBASE/glpi
+	cd ${WRKSRC} && rm -r files
 	cd ${WRKSRC} && ${PAX} -rw . ${DESTDIR}${PREFIX}/${GLPI_DIR}
 
 .include "../../mk/apache.mk"

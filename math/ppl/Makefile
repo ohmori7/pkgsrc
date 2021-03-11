@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2019/02/09 13:05:16 wen Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:10:18 wiz Exp $
 
 DISTNAME=	ppl-1.2
+PKGREVISION=	2
 CATEGORIES=	math
 MASTER_SITES=	ftp://ftp.cs.unipr.it/pub/ppl/releases/1.2/
 
@@ -16,8 +17,7 @@ DEPENDS+=	gsed-[0-9]*:../../textproc/gsed
 USE_LANGUAGES=	c gnu++03
 GNU_CONFIGURE=	yes
 
-MAKE_ENV+=	lt_cv_path_SED=${PREFIX}/bin/gsed
-CONFIGURE_ARGS+=	--with-gmp-prefix=${PREFIX}
+MAKE_ENV+=		lt_cv_path_SED=${PREFIX}/bin/gsed
 #CONFIGURE_ARGS+=	--enable-interfaces=c,cxx
 
 do-build:

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.2 2019/05/11 22:51:58 markd Exp $
+# $NetBSD: Makefile,v 1.6 2021/02/20 10:12:14 markd Exp $
 
 DISTNAME=	etoc
-PKGNAME=	tex-${DISTNAME}-1.09
-TEXLIVE_REV=	50317
+PKGNAME=	tex-${DISTNAME}-1.09c
+TEXLIVE_REV=	55156
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/etoc
+HOMEPAGE=	https://ctan.org/pkg/etoc
 COMMENT=	Completely customisable TOCs
 LICENSE=	lppl-1.3c
 

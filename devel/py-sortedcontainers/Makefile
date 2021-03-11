@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.5 2018/11/28 14:40:49 adam Exp $
+# $NetBSD: Makefile,v 1.7 2020/12/14 14:02:47 adam Exp $
 
-DISTNAME=	sortedcontainers-2.1.0
+DISTNAME=	sortedcontainers-2.3.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=s/sortedcontainers/}

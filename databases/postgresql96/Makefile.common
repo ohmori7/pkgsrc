@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.18 2019/05/13 20:38:12 adam Exp $
+# $NetBSD: Makefile.common,v 1.29 2021/02/15 18:58:41 adam Exp $
 #
 # This Makefile fragment is included by all PostgreSQL packages built from
 # the main sources of the PostgreSQL distribution except jdbc-postgresql.
@@ -16,7 +16,7 @@
 # used by databases/postgresql96-pltcl/Makefile
 # used by databases/postgresql96-server/Makefile
 
-DISTNAME=	postgresql-9.6.13
+DISTNAME=	postgresql-9.6.21
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_PGSQL:=source/v${PKGVERSION_NOREV}/}
 EXTRACT_SUFX=	.tar.bz2
@@ -48,6 +48,7 @@ PKG_SYSCONFSUBDIR=	postgresql
 PG_TEMPLATE.SunOS=	solaris
 PG_TEMPLATE.IRIX=	irix5
 PG_TEMPLATE.MirBSD=	openbsd
+PG_TEMPLATE.DragonFly=  freebsd
 .if !defined(PG_TEMPLATE.${OPSYS})
 PG_TEMPLATE.${OPSYS}=	${LOWER_OPSYS}
 .endif
@@ -84,14 +85,14 @@ CONFIGURE_ENV+=		pgac_cv_prog_cc_ldflags__Wl___as_needed=no
 .endif
 
 # configure fails on OpenBSD and MirBSD if thread safety is enabled.
-CONFIGURE_ARGS.MirBSD+=	--disable-thread-safety
-CONFIGURE_ARGS.OpenBSD+=--disable-thread-safety
+CONFIGURE_ARGS.MirBSD+=		--disable-thread-safety
+CONFIGURE_ARGS.OpenBSD+=	--disable-thread-safety
 
 # PGSQL_BLCKSZ is the size in bytes of a PostgreSQL disk page or block.
 # This also limits the size of a tuple.  The valid values are powers
 # of 2 up to 32768, and the default size is 8196.  Please don't change
 # this value unless you know what you are doing.
-BUILD_DEFS+=	PGSQL_BLCKSZ
+BUILD_DEFS+=		PGSQL_BLCKSZ
 .if defined(PGSQL_BLCKSZ)
 CONFIGURE_ARGS+=	--with-blocksize=${PGSQL_BLCKSZ}
 .endif
@@ -119,19 +120,19 @@ CONFIGURE_ARGS+=	--with-libedit-preferred
 .if !defined(META_PACKAGE)
 post-extract:
 .  if !empty(USE_LIBLTDL:M[yY][eE][sS])
-	cp -f ${COMMON_FILESDIR}/dynloader-ltdl.h \
+	${CP} -f ${COMMON_FILESDIR}/dynloader-ltdl.h \
 		${WRKSRC}/src/backend/port/dynloader/${PG_TEMPLATE.${OPSYS}:Q}.h
 	${ECHO} "static int dummy = 0;" \
 		> ${WRKSRC}/src/backend/port/dynloader/${PG_TEMPLATE.${OPSYS}:Q}.c
 .  endif
-	touch ${WRKSRC}/src/template/dragonfly
-	cp ${WRKSRC}/src/backend/port/dynloader/freebsd.c \
+	${TOUCH} ${WRKSRC}/src/template/dragonfly
+	${CP} ${WRKSRC}/src/backend/port/dynloader/freebsd.c \
 		${WRKSRC}/src/backend/port/dynloader/dragonfly.c
-	cp ${WRKSRC}/src/backend/port/dynloader/freebsd.h \
+	${CP} ${WRKSRC}/src/backend/port/dynloader/freebsd.h \
 		${WRKSRC}/src/backend/port/dynloader/dragonfly.h
-	cp ${WRKSRC}/src/include/port/freebsd.h \
+	${CP} ${WRKSRC}/src/include/port/freebsd.h \
 		${WRKSRC}/src/include/port/dragonfly.h
-	cp ${WRKSRC}/src/makefiles/Makefile.freebsd \
+	${CP} ${WRKSRC}/src/makefiles/Makefile.freebsd \
 		${WRKSRC}/src/makefiles/Makefile.dragonfly
 .endif
 

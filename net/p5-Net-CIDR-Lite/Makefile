@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.24 2018/08/22 09:45:58 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2020/08/31 18:10:41 wiz Exp $
 #
 
 DISTNAME=		Net-CIDR-Lite-0.21
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		7
+PKGREVISION=		9
 CATEGORIES=		net perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Net-CIDR-Lite/
+HOMEPAGE=		https://metacpan.org/release/Net-CIDR-Lite
 COMMENT=		Perl extension for merging IPv4/v6 CIDR addresses
 LICENSE=		${PERL5_LICENSE}
 

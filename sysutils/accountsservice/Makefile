@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.3 2018/07/04 13:40:36 jperkin Exp $
+# $NetBSD: Makefile,v 1.6 2020/12/04 04:56:13 riastradh Exp $
 
 DISTNAME=	accountsservice-0.6.42
+PKGREVISION=	2
 CATEGORIES=	sysutils
 MASTER_SITES=	http://www.freedesktop.org/software/accountsservice/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	youri@NetBSD.org
-HOMEPAGE=	http://www.freedesktop.org/software/accountsservice/
+HOMEPAGE=	https://www.freedesktop.org/software/accountsservice/
 COMMENT=	Set of D-Bus interfaces for accessing account information
 LICENSE=	gnu-gpl-v3
 

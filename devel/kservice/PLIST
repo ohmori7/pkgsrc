@@ -1,5 +1,6 @@
-@comment $NetBSD: PLIST,v 1.5 2019/04/25 20:50:24 markd Exp $
+@comment $NetBSD: PLIST,v 1.8 2020/06/07 11:23:30 markd Exp $
 bin/kbuildsycoca5
+include/KF5/KService/KApplicationTrader
 include/KF5/KService/KAutostart
 include/KF5/KService/KDBusServiceStarter
 include/KF5/KService/KMimeTypeTrader
@@ -15,6 +16,7 @@ include/KF5/KService/KSycoca
 include/KF5/KService/KSycocaEntry
 include/KF5/KService/KSycocaType
 include/KF5/KService/KToolInvocation
+include/KF5/KService/kapplicationtrader.h
 include/KF5/KService/kautostart.h
 include/KF5/KService/kdbusservicestarter.h
 include/KF5/KService/kmimetypetrader.h
@@ -46,6 +48,7 @@ man/de/man8/desktoptojson.8
 man/de/man8/kbuildsycoca5.8
 man/es/man8/desktoptojson.8
 man/es/man8/kbuildsycoca5.8
+man/id/man8/desktoptojson.8
 man/it/man8/desktoptojson.8
 man/it/man8/kbuildsycoca5.8
 man/man8/desktoptojson.8
@@ -61,7 +64,6 @@ man/sv/man8/kbuildsycoca5.8
 man/uk/man8/desktoptojson.8
 man/uk/man8/kbuildsycoca5.8
 qt5/mkspecs/modules/qt_KService.pri
-share/examples/kde-xdg/kservice.categories
 share/examples/kservice/applications.menu
 share/kservicetypes5/application.desktop
 share/kservicetypes5/kplugininfo.desktop
@@ -164,3 +166,4 @@ share/locale/xh/LC_MESSAGES/kservice5.mo
 share/locale/zh_CN/LC_MESSAGES/kservice5.mo
 share/locale/zh_HK/LC_MESSAGES/kservice5.mo
 share/locale/zh_TW/LC_MESSAGES/kservice5.mo
+share/qlogging-categories5/kservice.categories

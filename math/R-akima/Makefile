@@ -1,16 +1,13 @@
-# $NetBSD: Makefile,v 1.13 2018/07/28 14:40:47 brook Exp $
-
-CATEGORIES=	math
-
-MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	${R_HOMEPAGE_BASE}/akima/
-COMMENT=	Linear or cubic spline interpolation for irregular gridded data
-LICENSE=	acm-license
-
-DEPENDS+=	R-sp>=0:../../math/R-sp
+# $NetBSD: Makefile,v 1.16 2021/01/03 11:23:32 mef Exp $
 
 R_PKGNAME=	akima
-R_PKGVER=	0.6-2
+R_PKGVER=	0.6-2.1
+
+MAINTAINER=	pkgsrc-users@NetBSD.org
+COMMENT=	Interpolation of irregularly and regularly spaced data
+LICENSE=	acm-license
+
+DEPENDS+=	R-sp>=1.3.1:../../math/R-sp
 
 # Note: the ACM license requires notification prior to distribution of
 # modified versions of this package.  If patches are required, then to
@@ -18,8 +15,9 @@ R_PKGVER=	0.6-2
 
 # Note: the ACM license requires prior arrangements to distribute the
 # software as part of a commercial product.
-NO_BIN_ON_CDROM=	# defined
-NO_SRC_ON_CDROM=	# defined
+RESTRICTED=		Prior arrangements required to distribute commercially
+NO_BIN_ON_CDROM=	${RESTRICTED}
+NO_SRC_ON_CDROM=	${RESTRICTED}
 
 USE_LANGUAGES=	fortran c
 

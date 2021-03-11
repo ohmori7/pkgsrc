@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.8 2019/05/07 12:12:10 markd Exp $
+# $NetBSD: Makefile,v 1.12 2020/05/10 04:31:56 markd Exp $
 
 DISTNAME=	mptopdf
-PKGNAME=	tex-${DISTNAME}-2018
-TEXLIVE_REV=	50112
+PKGNAME=	tex-${DISTNAME}-2020
+PKGREVISION=	1
+TEXLIVE_REV=	54276
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/pdf-mps-supp
+HOMEPAGE=	https://ctan.org/pkg/pdf-mps-supp
 COMMENT=	Script to convert mpost to PDF
 
 CONFLICTS+=	tex-supp-pdf<2010

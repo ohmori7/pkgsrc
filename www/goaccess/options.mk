@@ -1,19 +1,21 @@
-# $NetBSD: options.mk,v 1.1 2014/01/27 21:40:38 wiedi Exp $
+# $NetBSD: options.mk,v 1.7 2021/01/27 08:17:31 schmonz Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.goaccess
-PKG_SUPPORTED_OPTIONS=	geoip wide-curses
-PKG_SUGGESTED_OPTIONS=	wide-curses
+PKG_SUPPORTED_OPTIONS=	geoip ssl wide-curses
+PKG_SUGGESTED_OPTIONS=	ssl wide-curses
 
 .include "../../mk/bsd.options.mk"
 
 .if !empty(PKG_OPTIONS:Mgeoip)
-.	include "../../net/GeoIP/buildlink3.mk"
-CONFIGURE_ARGS+=	--enable-geoip
-.endif # option geoip
+.  include "../../geography/libmaxminddb/buildlink3.mk"
+CONFIGURE_ARGS+=	--enable-geoip=mmdb
+.endif # geoip
+
+.if !empty(PKG_OPTIONS:Mssl)
+.  include "../../security/openssl/buildlink3.mk"
+CONFIGURE_ARGS+=	--with-openssl
+.endif # ssl
 
 .if !empty(PKG_OPTIONS:Mwide-curses)
-.	include "../../devel/ncursesw/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-utf8
-.else
-.	include "../../devel/ncurses/buildlink3.mk"
-.endif # option wide-curses
+.endif #wide-curses

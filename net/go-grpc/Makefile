@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2019/05/27 15:18:28 bsiegert Exp $
+# $NetBSD: Makefile,v 1.36 2021/01/23 14:23:07 bsiegert Exp $
 
 DISTNAME=		go-grpc-1.15.0
-PKGREVISION=		8
+PKGREVISION=		25
 CATEGORIES=		net
 MASTER_SITES=		${MASTER_SITE_GITHUB:=grpc/}
 GITHUB_PROJECT=		grpc-go
@@ -22,6 +22,7 @@ GO_BUILD_PATTERN+=	${GO_SRCPATH}/${godir}/...
 .endfor
 
 CHECK_PORTABILITY_SKIP+=	benchmark/run_bench.sh
+CHECK_PORTABILITY_SKIP+=	vet.sh
 
 REPLACE_SH+=	balancer/grpclb/regenerate.sh
 REPLACE_SH+=	benchmark/run_bench.sh
@@ -31,6 +32,10 @@ REPLACE_SH+=	credentials/alts/internal/regenerate.sh
 REPLACE_SH+=	health/regenerate.sh
 REPLACE_SH+=	install_gae.sh
 REPLACE_SH+=	vet.sh
+
+pre-patch:
+	find ${WRKSRC} -type d -name server | xargs ${RM} -rf
+	find ${WRKSRC} -type d -name client | xargs ${RM} -rf
 
 .include "../../devel/go-glog/buildlink3.mk"
 .include "../../devel/go-protobuf/buildlink3.mk"

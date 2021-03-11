@@ -1,20 +1,23 @@
-$NetBSD: patch-lib_Makefile,v 1.8 2018/10/22 15:28:03 adam Exp $
+$NetBSD: patch-lib_Makefile,v 1.11 2021/01/03 14:55:50 adam Exp $
 
 Detect and use third-party libraries (taken from programs/Makefile).
 -fvisibility=hidden makes error when linking.
 Enable the "install" target on all OS.
 Fix pkgconfig installation path.
 
---- lib/Makefile.orig	2018-10-17 03:58:52.000000000 +0000
+--- lib/Makefile.orig	2020-12-19 00:39:42.000000000 +0000
 +++ lib/Makefile
-@@ -82,6 +82,40 @@ CPPFLAGS  += -DZSTD_LEGACY_SUPPORT=$(ZST
+@@ -193,6 +193,43 @@ endif
+ endif # BUILD_DIR
  
- ZSTD_OBJ   := $(patsubst %.c,%.o,$(ZSTD_FILES))
  
 +VOID = /dev/null
 +
++# Make 4.3 doesn't support '\#' anymore (https://lwn.net/Articles/810071/)
++NUM_SYMBOL := \#
++
 +# thread detection
-+HAVE_PTHREAD := $(shell printf '\#include <pthread.h>\nint main(void) { return 0; }' | $(CC) $(FLAGS) -o have_pthread$(EXT) -x c - -pthread 2> $(VOID) && rm have_pthread$(EXT) && echo 1 || echo 0)
++HAVE_PTHREAD := $(shell printf '$(NUM_SYMBOL)include <pthread.h>\nint main(void) { return 0; }' | $(CC) $(FLAGS) -o have_pthread$(EXT) -x c - -pthread 2> $(VOID) && rm have_pthread$(EXT) && echo 1 || echo 0)
 +HAVE_THREAD := $(shell [ "$(HAVE_PTHREAD)" -eq "1" -o -n "$(filter Windows%,$(OS))" ] && echo 1 || echo 0)
 +ifeq ($(HAVE_THREAD), 1)
 +THREAD_MSG := ==> building with threading support
@@ -23,7 +26,7 @@ Fix pkgconfig installation path.
 +endif
 +
 +# zlib detection
-+HAVE_ZLIB := $(shell printf '\#include <zlib.h>\nint main(void) { return 0; }' | $(CC) $(FLAGS) -o have_zlib$(EXT) -x c - -lz 2> $(VOID) && rm have_zlib$(EXT) && echo 1 || echo 0)
++HAVE_ZLIB := $(shell printf '$(NUM_SYMBOL)include <zlib.h>\nint main(void) { return 0; }' | $(CC) $(FLAGS) -o have_zlib$(EXT) -x c - -lz 2> $(VOID) && rm have_zlib$(EXT) && echo 1 || echo 0)
 +ifeq ($(HAVE_ZLIB), 1)
 +ZLIB_MSG := ==> building zstd with .gz compression support
 +ZLIBCPP = -DZSTD_GZCOMPRESS -DZSTD_GZDECOMPRESS
@@ -31,14 +34,14 @@ Fix pkgconfig installation path.
 +endif
 +
 +# lzma detection
-+HAVE_LZMA := $(shell printf '\#include <lzma.h>\nint main(void) { return 0; }' | $(CC) $(FLAGS) -o have_lzma$(EXT) -x c - -llzma 2> $(VOID) && rm have_lzma$(EXT) && echo 1 || echo 0)
++HAVE_LZMA := $(shell printf '$(NUM_SYMBOL)include <lzma.h>\nint main(void) { return 0; }' | $(CC) $(FLAGS) -o have_lzma$(EXT) -x c - -llzma 2> $(VOID) && rm have_lzma$(EXT) && echo 1 || echo 0)
 +ifeq ($(HAVE_LZMA), 1)
 +LZMACPP = -DZSTD_LZMACOMPRESS -DZSTD_LZMADECOMPRESS
 +LZMALD = -llzma
 +endif
 +
 +# lz4 detection
-+HAVE_LZ4 := $(shell printf '\#include <lz4frame.h>\n\#include <lz4.h>\nint main(void) { return 0; }' | $(CC) $(FLAGS) -o have_lz4$(EXT) -x c - -llz4 2> $(VOID) && rm have_lz4$(EXT) && echo 1 || echo 0)
++HAVE_LZ4 := $(shell printf '$(NUM_SYMBOL)include <lz4frame.h>\n$(NUM_SYMBOL)include <lz4.h>\nint main(void) { return 0; }' | $(CC) $(FLAGS) -o have_lz4$(EXT) -x c - -llz4 2> $(VOID) && rm have_lz4$(EXT) && echo 1 || echo 0)
 +ifeq ($(HAVE_LZ4), 1)
 +LZ4CPP = -DZSTD_LZ4COMPRESS -DZSTD_LZ4DECOMPRESS
 +LZ4LD = -llz4
@@ -47,39 +50,39 @@ Fix pkgconfig installation path.
 +
  # macOS linker doesn't support -soname, and use different extension
  # see : https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/DynamicLibraryDesignGuidelines.html
- ifeq ($(shell uname), Darwin)
-@@ -122,7 +156,8 @@ $(LIBZSTD): $(ZSTD_FILES)
- else
- 
+ ifeq ($(UNAME), Darwin)
+@@ -259,7 +296,8 @@ else  # not Windows
  LIBZSTD = libzstd.$(SHARED_EXT_VER)
--$(LIBZSTD): LDFLAGS += -shared -fPIC -fvisibility=hidden
+ .PHONY: $(LIBZSTD)  # must be run every time
+ $(LIBZSTD): CFLAGS += -fPIC
+-$(LIBZSTD): LDFLAGS += -shared -fvisibility=hidden
 +$(LIBZSTD): CPPFLAGS += $(THREAD_CPP) $(ZLIBCPP) $(LZMACPP) $(LZ4CPP)
-+$(LIBZSTD): LDFLAGS += -shared -fPIC $(THREAD_LD) $(ZLIBLD) $(LZMALD) $(LZ4LD)
- $(LIBZSTD): $(ZSTD_FILES)
- 	@echo compiling dynamic library $(LIBVER)
- 	@$(CC) $(FLAGS) $^ $(LDFLAGS) $(SONAME_FLAGS) -o $@
-@@ -166,7 +201,6 @@ clean:
- #-----------------------------------------------------------------------------
- # make install is validated only for Linux, macOS, BSD, Hurd and Solaris targets
- #-----------------------------------------------------------------------------
--ifneq (,$(filter $(shell uname),Linux Darwin GNU/kFreeBSD GNU OpenBSD FreeBSD NetBSD DragonFly SunOS Haiku))
++$(LIBZSTD): LDFLAGS += -shared $(THREAD_LD) $(ZLIBLD) $(LZMALD) $(LZ4LD)
  
- DESTDIR     ?=
- # directory variables : GNU conventions prefer lowercase
-@@ -180,11 +214,7 @@ LIBDIR      ?= $(libdir)
- includedir  ?= $(PREFIX)/include
- INCLUDEDIR  ?= $(includedir)
+ ifndef BUILD_DIR
+ # determine BUILD_DIR from compilation flags
+@@ -349,7 +387,6 @@ clean:
+ #-----------------------------------------------------------------------------
+ # make install is validated only for below listed environments
+ #-----------------------------------------------------------------------------
+-ifneq (,$(filter $(UNAME),Linux Darwin GNU/kFreeBSD GNU OpenBSD FreeBSD NetBSD DragonFly SunOS Haiku))
  
--ifneq (,$(filter $(shell uname),FreeBSD NetBSD DragonFly))
--PKGCONFIGDIR ?= $(PREFIX)/libdata/pkgconfig
+ all: libzstd.pc
+ 
+@@ -380,11 +417,7 @@ PCLIBPREFIX := $(if $(findstring $(LIBDI
+ # to PREFIX, rather than as a resolved value.
+ PCEXEC_PREFIX := $(if $(HAS_EXPLICIT_EXEC_PREFIX),$(EXEC_PREFIX),$${prefix})
+ 
+-ifneq (,$(filter $(UNAME),FreeBSD NetBSD DragonFly))
+-  PKGCONFIGDIR ?= $(PREFIX)/libdata/pkgconfig
 -else
- PKGCONFIGDIR ?= $(LIBDIR)/pkgconfig
+   PKGCONFIGDIR ?= $(LIBDIR)/pkgconfig
 -endif
  
- ifneq (,$(filter $(shell uname),SunOS))
- INSTALL ?= ginstall
-@@ -244,4 +274,3 @@ uninstall:
- 	@$(RM) $(DESTDIR)$(INCLUDEDIR)/zdict.h
+ ifneq (,$(filter $(UNAME),SunOS))
+   INSTALL ?= ginstall
+@@ -448,4 +481,3 @@ uninstall:
+ 	$(RM) $(DESTDIR)$(INCLUDEDIR)/zdict.h
  	@echo zstd libraries successfully uninstalled
  
 -endif

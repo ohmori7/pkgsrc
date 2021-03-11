@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2014/08/13 10:56:35 adam Exp $
+# $NetBSD: Makefile,v 1.14 2021/01/01 08:19:01 ryoon Exp $
 
 BOOST_PACKAGE=		jam
 BOOST_COMMENT=		(Boost.Jam utility)
@@ -8,22 +8,27 @@ CONFLICTS+=		boost-build<=1.33.1
 
 .include "../../meta-pkgs/boost/Makefile.common"
 
-SUBST_CLASSES+=		bb
-SUBST_MESSAGE.bb=	Fixing path to Boost.Build files.
-SUBST_STAGE.bb=		pre-build
-SUBST_FILES.bb=		tools/build/src/engine/Jambase
-SUBST_SED.bb=		-e 's,/usr/share/boost-build,${PREFIX}/share/boost-build,g'
+SUBST_CLASSES+=		opt
+SUBST_MESSAGE.opt=	Removing -O3 flag.
+SUBST_STAGE.opt=	pre-build
+SUBST_FILES.opt=	tools/build/src/engine/build.sh
+SUBST_SED.opt=		-e 's,-O3,,g'
 
 .include "../../devel/boost-build/toolset.mk"
 
 INSTALLATION_DIRS=	bin
+
+# Fix RELRO build
+CXXFLAGS+=	${LDFLAGS}
 
 do-build:
 	cd ${WRKSRC}/tools/build/src/engine && \
 		${SETENV} ${MAKE_ENV} ${SH} ./build.sh ${BOOST_TOOLSET}
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/tools/build/src/engine/bin.*/bjam \
+	${INSTALL_PROGRAM} ${WRKSRC}/tools/build/src/engine/b2 \
+		${DESTDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/tools/build/src/engine/bjam \
 		${DESTDIR}${PREFIX}/bin
 
 .include "../../mk/bsd.pkg.mk"

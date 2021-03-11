@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.10 2014/01/01 11:52:11 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2020/11/05 09:07:52 ryoon Exp $
 #
 
 PKGVER=		0.8.8
 DISTNAME=	compiz-bcop-${PKGVER}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel wm x11
 MASTER_SITES=	http://releases.compiz.org/${PKGVER}/
 
@@ -18,10 +18,10 @@ USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
 
 PKGCONFIG_OVERRIDE+=	bcop.pc.in
-DEPENDS+=	getopt-[0-9]*:../../misc/getopt
-REPLACE_BASH+=	src/bcop.in
+DEPENDS+=		getopt-[0-9]*:../../misc/getopt
+REPLACE_BASH+=		src/bcop.in
 
-SUBST_CLASSES+=	getopt
+SUBST_CLASSES+=		getopt
 SUBST_STAGE.getopt=	pre-configure
 SUBST_FILES.getopt=	src/bcop.in
 SUBST_SED.getopt=	-e "s|getopt|${PREFIX}/bin/getopt|"

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.46 2019/06/13 09:07:08 adam Exp $
+# $NetBSD: Makefile,v 1.73 2021/03/09 11:24:05 adam Exp $
 
-DISTNAME=	haproxy-1.8.20
+DISTNAME=	haproxy-2.3.6
 CATEGORIES=	net www
-MASTER_SITES=	http://www.haproxy.org/download/${PKGVERSION_NOREV:R}/src/
+MASTER_SITES=	https://www.haproxy.org/download/${PKGVERSION_NOREV:R}/src/
 
 MAINTAINER=	morr@NetBSD.org
-HOMEPAGE=	http://www.haproxy.org/
+HOMEPAGE=	https://www.haproxy.org/
 COMMENT=	Reliable, high performance TCP/HTTP load balancer
 LICENSE=	gnu-gpl-v2
 
@@ -42,17 +42,7 @@ TARGET=	osx
 .elif ${OPSYS} == "SunOS"
 TARGET=	solaris
 .elif ${OPSYS} == "Linux"
-.  if !empty(OS_VERSION:M2.6.*)
-TARGET=	linux26
-.  elif !empty(OS_VERSION:M2.4.*)
-.    if exists(/usr/include/linux/eventpoll.h)
-TARGET=	linux24e
-.    else
-TARGET=	linux24
-.    endif
-.  else
-TARGET=	linux2628
-.  endif
+TARGET=	linux-glibc
 .else
 TARGET=	generic
 .endif
@@ -65,4 +55,5 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/examples/*.cfg ${DESTDIR}${EGDIR}/
 
 .include "../../devel/zlib/buildlink3.mk"
+.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

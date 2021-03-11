@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.14 2019/05/27 15:18:23 bsiegert Exp $
+# $NetBSD: Makefile,v 1.31 2021/01/23 14:23:01 bsiegert Exp $
 
 DISTNAME=	purell-1.1.0
 PKGNAME=	go-${DISTNAME}
-PKGREVISION=	6
+PKGREVISION=	22
 MASTER_SITES=	${MASTER_SITE_GITHUB:=PuerkitoBio/}
 CATEGORIES=	devel
 GITHUB_TAG=	v${PKGVERSION_NOREV}
-GITHUB_PROJECT= ${PKGBASE:S/^go-//}
+GITHUB_PROJECT=	${PKGBASE:S/^go-//}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/PuerkitoBio/purell

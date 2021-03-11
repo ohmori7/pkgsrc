@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.5 2018/08/22 09:46:21 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2020/08/31 18:11:12 wiz Exp $
 
 DISTNAME=	Crypt-DH-GMP-0.00012
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Crypt/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~dmaki/Crypt-DH-GMP/
+HOMEPAGE=	https://metacpan.org/release/Crypt-DH-GMP
 COMMENT=	Crypt::DH Using GMP Directly
 LICENSE=	${PERL5_LICENSE}
 

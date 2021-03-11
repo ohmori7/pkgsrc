@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.74 2019/04/03 00:33:02 ryoon Exp $
+# $NetBSD: Makefile,v 1.80 2020/11/05 09:07:05 ryoon Exp $
 #
 
 DISTNAME=	yaz-4.1.6
 DISTNAME=	yaz-5.16.0
-PKGREVISION=	8
+PKGREVISION=	12
 CATEGORIES=	net
 MASTER_SITES=	http://ftp.indexdata.dk/pub/yaz/
 
@@ -17,11 +17,10 @@ LICENSE=	modified-bsd
 #../include/yaz/z-opac.h:37:2: error: unknown type name 'Z_External'
 MAKE_JOBS_SAFE=	no
 
-GNU_CONFIGURE=	YES
-USE_LIBTOOL=	YES
-USE_TOOLS+=	pkg-config tclsh
+GNU_CONFIGURE=		YES
+USE_LIBTOOL=		YES
+USE_TOOLS+=		pkg-config tclsh
 CONFIGURE_ARGS+=	--with-iconv=${BUILDLINK_PREFIX.libiconv}
-CONFIGURE_ARGS+=	--with-openssl=${BUILDLINK_PREFIX.openssl}
 CONFIGURE_ARGS+=	--with-xml2=${BUILDLINK_PREFIX.libxml2}
 
 # backtrace and backtrace_symbols

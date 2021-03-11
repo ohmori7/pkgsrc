@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.31 2019/05/07 05:17:20 adam Exp $
+# $NetBSD: Makefile,v 1.45 2020/12/18 09:03:43 adam Exp $
 
-DISTNAME=	pip-19.1.1
+DISTNAME=	pip-20.3.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=p/pip/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.pip-installer.org/
+HOMEPAGE=	https://pip.pypa.io/
 COMMENT=	Installs Python packages as an easy_install replacement
 LICENSE=	mit
 
@@ -15,6 +15,9 @@ USE_LANGUAGES=	# none
 REPLACE_PYTHON+=	src/pip/_vendor/appdirs.py
 REPLACE_PYTHON+=	src/pip/_vendor/chardet/cli/chardetect.py
 REPLACE_PYTHON+=	src/pip/_vendor/requests/certs.py
+
+.include "../../lang/python/pyversion.mk"
+FILES_SUBST+=  PYMAJORVERSION=${_PYTHON_VERSION:C/^([0-9]).*/\1/}
 
 post-install:
 	cd ${DESTDIR}${PREFIX}/bin && ${RM} -f pip pip[2-3]

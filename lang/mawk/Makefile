@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.32 2019/02/15 19:51:43 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2021/03/02 02:53:40 gutteridge Exp $
 
-DISTNAME=	mawk-1.3.4-20171017
+DISTNAME=	mawk-1.3.4-20200120
 PKGNAME=	${DISTNAME:S/-20/.20/}
 CATEGORIES=	lang
 MASTER_SITES=	ftp://ftp.invisible-island.net/mawk/
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	cheusov@NetBSD.org
-HOMEPAGE=	http://www.invisible-island.net/mawk/
+HOMEPAGE=	https://www.invisible-island.net/mawk/
 COMMENT=	AWK clone by Mike Brennan
 LICENSE=	gnu-gpl-v2
 

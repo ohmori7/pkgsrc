@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.45 2019/05/28 07:46:08 adam Exp $
+# $NetBSD: Makefile,v 1.50 2021/02/18 19:18:50 adam Exp $
 
-DISTNAME=	libebml-1.3.9
+DISTNAME=	libebml-1.4.2
 CATEGORIES=	devel
 MASTER_SITES=	http://dl.matroska.org/downloads/libebml/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	salo@NetBSD.org
-HOMEPAGE=	http://matroska-org.github.io/libebml/
+HOMEPAGE=	https://matroska-org.github.io/libebml/
 COMMENT=	Extensible Binary Meta Language support library
 LICENSE=	gnu-lgpl-v2.1
 

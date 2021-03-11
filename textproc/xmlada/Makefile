@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2019/04/26 14:12:47 maya Exp $
+# $NetBSD: Makefile,v 1.25 2019/11/04 21:43:48 rillig Exp $
 
 DISTNAME=	xmlada-${XMLADA_VERS}
 PKGREVISION=	5
@@ -23,7 +23,7 @@ MAKE_JOBS_SAFE=		no
 #      it doesn't support the concept of DESTDIR.
 # "-Wl,-R" adds a second rpath string.
 # -Wl,-rpath is a better choice, but synonym -Wl,-R works on all BSD and SunOS
-SUBST_CLASSES+= 	rpath docs
+SUBST_CLASSES+=		rpath docs
 SUBST_STAGE.rpath=	pre-configure
 SUBST_MESSAGE.rpath=	Adjust rpaths of shared libraries
 SUBST_FILES.rpath=	sax/sax.gpr
@@ -37,11 +37,11 @@ SUBST_MESSAGE.docs=	Set build xmlada documentation option
 SUBST_FILES.docs=	Makefile.in
 SUBST_SED.docs=		-e 's/^all: \(.*\)/all: \1 docs/g'
 
-MAKE_ENV+=	SPHINXBUILD=${PREFIX}/bin/sphinx-build${PYVERSSUFFIX}
+MAKE_ENV+=	SPHINXBUILD=${PREFIX}/bin/sphinx-build-${PYVERSSUFFIX}
 
 DESTSTATIC=	${DESTDIR}${PREFIX}/lib/xmlada/static
-DEPENDS+=	${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 4.4.0.0
+DEPENDS+=	${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx1
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 4.4.0.0
 
 post-install:
 	# There is no reason to install sphinx source files
@@ -53,5 +53,5 @@ post-install:
 		     ${DESTSTATIC}/libxmlada_schema.a \
 		     ${DESTSTATIC}/libxmlada_unicode.a
 
-.include "../../lang/python/application.mk"
+.include "../../lang/python/pyversion.mk"
 .include "../../mk/bsd.pkg.mk"

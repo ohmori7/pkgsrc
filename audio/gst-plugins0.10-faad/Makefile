@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.10 2012/09/15 10:03:37 obache Exp $
+# $NetBSD: Makefile,v 1.13 2020/11/05 09:07:25 ryoon Exp $
 #
 
 GST_PLUGINS0.10_NAME=	faad
 GST_PLUGINS0.10_DIRS=	ext/faad
-PKGREVISION=		2
+PKGREVISION=		5
 
 .include "../../multimedia/gst-plugins0.10-bad/Makefile.common"
 

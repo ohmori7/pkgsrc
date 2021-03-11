@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.92 2019/03/16 14:01:45 wiz Exp $
+# $NetBSD: Makefile,v 1.99 2020/12/25 21:47:47 ryoon Exp $
 
-DISTNAME=	zsh-5.7.1
-PKGREVISION=	1
+DISTNAME=	zsh-5.8
+PKGREVISION=	2
 CATEGORIES=	shells
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=zsh/}
 EXTRACT_SUFX=	.tar.xz
@@ -17,11 +17,13 @@ GNU_CONFIGURE=		yes
 INFO_FILES=		yes
 TEXINFO_REQD=		4.0
 
+CHECK_PORTABILITY_SKIP=	Misc/c2z # not used
+
 CONFIGURE_ARGS+=	--disable-gdbm
 CONFIGURE_ARGS+=	--enable-etcdir=${PKG_SYSCONFDIR:Q}
 
 # Ensure we can find initscr(3) otherwise the curses module will not be built.
-CONFIGURE_ARGS+=        --with-term-lib="${BUILDLINK_LIBNAME.curses} ${BUILDLINK_LIBNAME.terminfo}"
+CONFIGURE_ARGS+=	--with-term-lib="${BUILDLINK_LIBNAME.curses} ${BUILDLINK_LIBNAME.terminfo}"
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -43,11 +45,11 @@ CONFIGURE_ENV.NetBSD+=	zsh_cv_sys_dynamic_execsyms=yes
 
 INSTALLATION_DIRS+=	share/doc/zsh
 
-PLIST_VARS+=	xattr
+PLIST_VARS+=		xattr
 .if exists(/usr/include/sys/xattr.h) || \
     exists(/usr/include/${NATIVE_MACHINE_GNU_ARCH}-${LOWER_OPSYS}-gnu/sys/xattr.h) || \
     defined(OSX_SDK_PATH) && exists(${OSX_SDK_PATH}/usr/include/sys/xattr.h)
-PLIST.xattr=	yes
+PLIST.xattr=		yes
 .endif
 PRINT_PLIST_AWK+=	{if ($$0 ~ /attr.so/) {$$0 = "$${PLIST.xattr}" $$0;}}
 
@@ -66,9 +68,16 @@ REPLACE_FILES.zsh+=	Misc/globtests*
 REPLACE_FILES.zsh+=	Test/runtests.zsh Test/ztst.zsh
 REPLACE_FILES.zsh+=	Util/check-tmux-state Util/reporter
 
+SUBST_CLASSES+=		pkgdb
+SUBST_STAGE.pkgdb=	pre-configure
+SUBST_MESSAGE.pkgdb=	Set PKGDB_DIR
+SUBST_FILES.pkgdb=	Completion/BSD/Command/_bsd_pkg
+SUBST_VARS.pkgdb=	PKG_DBDIR
+
 .include "options.mk"
 
 pre-configure:
+	${RM} ${WRKSRC}/Completion/BSD/Command/_bsd_pkg.orig
 	cd ${WRKSRC};  autoreconf -fiv
 
 post-install:

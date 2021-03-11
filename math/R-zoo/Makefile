@@ -1,15 +1,14 @@
-# $NetBSD: Makefile,v 1.13 2018/08/30 12:19:26 wen Exp $
+# $NetBSD: Makefile,v 1.15 2019/08/08 19:53:55 brook Exp $
 
+R_PKGNAME=	zoo
+R_PKGVER=	1.8-6
 CATEGORIES=	math
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	${R_HOMEPAGE_BASE}/zoo/
-COMMENT=	S3 Infrastructure for Regular and Irregular Time Series
+COMMENT=	S3 infrastructure for regular and irregular time series
 LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3
 
-R_PKGNAME=	zoo
-R_PKGVER=	1.8-3
+USE_LANGUAGES=	c
 
-BUILDLINK_API_DEPENDS.R+=	R>=3.1.0
 .include "../../math/R/Makefile.extension"
 .include "../../mk/bsd.pkg.mk"

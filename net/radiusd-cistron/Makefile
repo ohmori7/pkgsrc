@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.33 2018/08/22 09:46:06 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2020/08/31 18:10:52 wiz Exp $
 
 DISTNAME=	radiusd-cistron-1.6.8
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.cistron.nl/pub/people/miquels/radius/
 
@@ -15,9 +15,9 @@ USE_TOOLS+=	perl:run
 
 REPLACE_PERL=	src/checkrad.pl
 
-MAKE_FILE=	Makefile.BSD
-BUILD_DIRS=	src
-INSTALL_DIRS=	src
+MAKE_FILE=		Makefile.BSD
+BUILD_DIRS=		src
+INSTALL_DIRS=		src
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 ${PKGMANDIR}/man5 \
 			${PKGMANDIR}/man8 sbin share/examples/raddb \
 			share/doc/radiusd-cistron
@@ -27,7 +27,7 @@ RCD_SCRIPTS=	radiusd
 OWN_DIRS_PERMS=	/var/log/radacct ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 700
 
 PKG_SYSCONFSUBDIR=	raddb
-EGDIR=		${PREFIX}/share/examples/raddb
+EGDIR=			${PREFIX}/share/examples/raddb
 CONF_FILES=
 .for cfile in	clients.sample dictionary dictionary.ascend dictionary.bay \
 		dictionary.cisco dictionary.cistron dictionary.compat \
@@ -35,7 +35,7 @@ CONF_FILES=
 		dictionary.shiva dictionary.tunnel dictionary.usr \
 		dictionary.versanet hints.sample huntgroups.sample \
 		naslist.sample naspasswd.sample realms.sample users.sample
-CONF_FILES+=	${EGDIR}/${cfile} ${PKG_SYSCONFDIR}/${cfile:S/.sample//}
+CONF_FILES+=		${EGDIR}/${cfile} ${PKG_SYSCONFDIR}/${cfile:S/.sample//}
 .endfor
 
 post-install:

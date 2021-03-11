@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2018/08/22 09:45:44 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2020/08/31 18:10:21 wiz Exp $
 #
 
 DISTNAME=	loco-0.32
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	misc
 #MASTER_SITES=	http://zjuul.net/~jules/loco/
 

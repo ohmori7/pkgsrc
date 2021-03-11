@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.39 2018/11/14 22:22:51 kleink Exp $
+# $NetBSD: Makefile,v 1.46 2020/08/17 20:18:02 leot Exp $
 
 .include "../../x11/wxGTK28/Makefile.common"
 
 PKGNAME=	${DISTNAME:S/wxGTK/wxGTK28-contrib/}
-PKGREVISION=	12
+PKGREVISION=	17
 COMMENT=	Contrib libraries for wxWidgets GTK
 
 USE_TOOLS+=		gmake
@@ -11,9 +11,19 @@ USE_TOOLS+=		gmake
 BUILD_DIRS=		build-non-unicode/contrib/src \
 			build-unicode/contrib/src
 
+# We patch configure
+CHECK_PORTABILITY_SKIP+=	configure.in
+
 INSTALL_TARGET=		install
 
 BUILDLINK_DEPMETHOD.libXt?=	build
+
+# ../../../../contrib/src/stc/scintilla/src/Editor.cxx: In member function 'void Editor::LayoutLine(int, Surface*, ViewStyle&, LineLayout*, int)':
+# ../../../../contrib/src/stc/scintilla/src/Editor.cxx:2048:47: error: array subscript has type 'char' [-Werror=char-subscripts]
+#         if (ctrlCharWidth[ll->chars[charInLine]] == 0) {
+#                                                ^
+# Maybe fix this later.
+BUILDLINK_TRANSFORM+=	rm:-Werror=char-subscripts
 
 .include "../../x11/wxGTK28/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"

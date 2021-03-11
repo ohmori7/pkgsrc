@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.13 2018/12/13 19:52:17 adam Exp $
+# $NetBSD: Makefile,v 1.22 2020/05/22 10:56:30 adam Exp $
 #
 
-DISTNAME=	podcastdl-0.3.0
-PKGREVISION=	12
+DISTNAME=	podcastdl-0.3.3
+PKGREVISION=	5
 CATEGORIES=	net
-MASTER_SITES=	http://files.bebik.net/podcastdl/
-EXTRACT_SUFX=	.tgz
+MASTER_SITES=	http://files.bebik.net/podcastdl/ \
+		http://rodrigo.osorio.free.fr/freebsd/distfiles/
 
 MAINTAINER=	ryoon@NetBSD.org
 HOMEPAGE=	http://www.bebik.net/doku.php?id=software:podcastdl
-COMMENT=	Podcastdl is a CLI podcast client
+COMMENT=	CLI podcast client
 LICENSE=	isc
 
 USE_CMAKE=	yes

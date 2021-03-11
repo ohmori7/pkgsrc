@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.55 2019/04/03 00:33:14 ryoon Exp $
+# $NetBSD: Makefile,v 1.61 2020/11/05 09:09:24 ryoon Exp $
 
 DISTNAME=	Preferences-1.2.0
 PKGNAME=	gnustep-${DISTNAME:S/P/p/}
-PKGREVISION=	36
+PKGREVISION=	39
 CATEGORIES=	x11 gnustep
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=prefsapp/}
 EXTRACT_SUFX=	.tar.bz2
@@ -20,7 +20,7 @@ MAKE_FILE=	GNUmakefile
 MAKE_JOBS_SAFE=	NO
 MAKE_FLAGS+=	GNUSTEP_USER_DIR=${WRKDIR}/fake_home/GNUstep
 
-FIX_GNUSTEP_INSTALLATION_DIR= yes
+FIX_GNUSTEP_INSTALLATION_DIR=		yes
 SUBST_FILES.gnustep_installation_dir+=	GNUmakefile.preamble
 SUBST_FILES.gnustep_installation_dir+=	PrefsModule/GNUmakefile.preamble
 SUBST_FILES.gnustep_installation_dir+=	Modules/Keyboard/GNUmakefile

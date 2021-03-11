@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.91 2019/01/04 03:29:34 tnn Exp $
+# $NetBSD: Makefile,v 1.98 2020/08/17 20:20:18 leot Exp $
 
 DISTNAME=		sawfish_1.12.0
 PKGNAME=		${DISTNAME:S/_/-/}
-CATEGORIES=		x11 wm
+PKGREVISION=		5
+CATEGORIES=		wm x11
 MASTER_SITES=		http://download.tuxfamily.org/sawfish/
 EXTRACT_SUFX=		.tar.xz
 
@@ -26,7 +27,8 @@ MAKE_ENV+=		REP_ENV_PKGSRC=${REP_ENV_PKGSRC:Q}
 
 SUBST_CLASSES+=		env
 SUBST_STAGE.env=	pre-configure
-SUBST_FILES.env=	lisp/sawfish/ui/main.jl.in po/sawfish-xgettext
+SUBST_FILES.env=	lisp/sawfish/cfg/main.jl.in
+SUBST_FILES.env+=	po/sawfish-xgettext
 SUBST_FILES.env+=	scripts/sawfish-*.jl*
 SUBST_SED.env=		-e 's,exec rep,exec env ${REP_ENV_PKGSRC} rep,g'
 
@@ -41,7 +43,6 @@ REP_ENV_PKGSRC=
 .include "../../graphics/gdk-pixbuf2-xlib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
-.include "../../devel/pangox-compat/buildlink3.mk"
 .include "../../lang/librep/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/gtk2/buildlink3.mk"

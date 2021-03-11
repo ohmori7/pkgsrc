@@ -1,4 +1,8 @@
-@comment $NetBSD: PLIST,v 1.2 2015/04/22 10:51:05 markd Exp $
-share/texmf-dist/doc/latex/draftwatermark/README
+@comment $NetBSD: PLIST,v 1.4 2021/02/20 10:08:29 markd Exp $
+share/texmf-dist/doc/latex/draftwatermark/README.md
 share/texmf-dist/doc/latex/draftwatermark/draftwatermark.pdf
-share/texmf-dist/doc/latex/draftwatermark/test_draftwatermark.tex
+share/texmf-dist/doc/latex/draftwatermark/test_draftwatermark-1.tex
+share/texmf-dist/doc/latex/draftwatermark/test_draftwatermark-2.tex
+share/texmf-dist/doc/latex/draftwatermark/test_draftwatermark-3.tex
+share/texmf-dist/doc/latex/draftwatermark/test_draftwatermark-4.tex
+share/texmf-dist/doc/latex/draftwatermark/test_draftwatermark-5.tex

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.58 2018/12/13 19:51:41 adam Exp $
+# $NetBSD: Makefile,v 1.73 2021/01/01 08:24:33 ryoon Exp $
 
-DISTNAME=	MP3Diags-1.2.02
-PKGNAME=	${DISTNAME:S/MP3D/mp3d/}
+DISTNAME=	MP3Diags-unstable-1.5.01
+PKGNAME=	${DISTNAME:S/MP3D/mp3d/:C/-unsable//}
 PKGREVISION=	10
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mp3diags/}
@@ -16,13 +16,13 @@ INSTALLATION_DIRS=	bin
 USE_LANGUAGES=	c++
 
 do-configure:
-	(cd ${WRKSRC} && ${QTDIR}/bin/qmake)
+	${RUN} cd ${WRKSRC} && ${QTDIR}/bin/qmake
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/bin/MP3Diags ${DESTDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/bin/MP3Diags-unstable \
+		${DESTDIR}${PREFIX}/bin/MP3Diags
 
 .include "../../devel/boost-headers/buildlink3.mk"
 .include "../../devel/boost-libs/buildlink3.mk"
-.include "../../x11/qt4-libs/buildlink3.mk"
-.include "../../x11/qt4-tools/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

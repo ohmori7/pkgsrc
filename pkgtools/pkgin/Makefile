@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.90 2019/06/13 13:06:40 jperkin Exp $
+# $NetBSD: Makefile,v 1.112 2020/12/30 09:21:22 jperkin Exp $
 
-DISTNAME=		pkgin-0.12.0
+DISTNAME=		pkgin-20.12.1
 CATEGORIES=		pkgtools
 MASTER_SITES=		${MASTER_SITE_GITHUB:=NetBSDfr/}
 GITHUB_TAG=		v${PKGVERSION_NOREV}
@@ -15,26 +15,25 @@ CONF_FILES=		${EGDIR}/repositories.conf.example		\
 			${PKG_SYSCONFDIR}/${PKGBASE}/repositories.conf
 
 OWN_DIRS+=		${PKG_SYSCONFDIR}/${PKGBASE}
-INSTALLATION_DIRS+=	bin ${PKGMANDIR}/cat1 ${PKGMANDIR}/man1 ${EGDIR}
+OWN_DIRS+=		${VARBASE}/db/pkgin
+
+INSTALLATION_DIRS+=	bin ${PKGMANDIR}/man1 ${EGDIR}
 
 BUILD_DEFS+=		PKGIN_REPOSITORY_URL
 BUILD_DEFS+=		VARBASE
 
-OWN_DIRS+=		${VARBASE}/db/pkgin
-
-SUBST_CLASSES+=		path
-SUBST_STAGE.path=	pre-configure
-SUBST_MESSAGE.path=	Adjusting path.
-SUBST_FILES.path=	Makefile.in actions.c pkgin.1
-SUBST_SED.path=		-e "s|/usr/pkg/etc|${PKG_SYSCONFDIR}|g"
-SUBST_SED.path+=	-e "s|/usr/sbin|${PKG_TOOLS_BIN}|g"
-SUBST_SED.path+=	-e "s|/var|${VARBASE}|g"
-SUBST_SED.path+=	-e "s|/usr/pkg|${PREFIX}|g"
-SUBST_SED.path+=	-e "s|!=.*uname -p|=	${MACHINE_ARCH}|g"
-
 GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--disable-maintainer-mode
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
+CONFIGURE_ARGS+=	--with-dbdir=${VARBASE}/db/pkgin
+CONFIGURE_ARGS+=	--with-machine-arch=${MACHINE_ARCH}
+CONFIGURE_ARGS+=	--with-pkg-install=${PKG_TOOLS_BIN}
+CONFIGURE_ARGS+=	--with-libarchive=${BUILDLINK_PREFIX.libarchive}
+CONFIGURE_ARGS+=	--with-libfetch=${BUILDLINK_PREFIX.libfetch}
+CONFIGURE_ARGS+=	--with-openssl=${BUILDLINK_PREFIX.openssl}
+CONFIGURE_ARGS+=	--with-sqlite3=${BUILDLINK_PREFIX.sqlite3}
+
 USE_FEATURES=		nbcompat
-USE_TOOLS+=		nroff
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -46,9 +45,7 @@ SUBST_SED.osrel=	-e "s|@OSREL@|${OS_VERSION:C/_.*//}|"
 
 CFLAGS.SunOS+=		-D_FILE_OFFSET_BITS=64
 
-MAKE_ENV+=		MACHINE_ARCH=${MACHINE_ARCH}
-
-DEPENDS+=		pkg_install>=20130901:../../pkgtools/pkg_install
+DEPENDS+=		pkg_install>=20200701:../../pkgtools/pkg_install
 
 # those have official repositories
 .if !empty(PKGIN_REPOSITORY_URL)
@@ -60,19 +57,7 @@ pre-install:
 		${WRKSRC}/repositories.conf
 .endif
 
-do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/pkgin ${DESTDIR}${PREFIX}/bin
-	${INSTALL_MAN} ${WRKSRC}/pkgin.1				\
-		${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
-.if !empty(MANINSTALL:Mcatinstall)
-.  if defined(CATMAN_SECTION_SUFFIX) && !empty(CATMAN_SECTION_SUFFIX:M[Yy][Ee][Ss])
-	${INSTALL_MAN} ${WRKSRC}/pkgin.cat1				\
-		${DESTDIR}${PREFIX}/${PKGMANDIR}/cat1/pkgin.1
-.  else
-	${INSTALL_MAN} ${WRKSRC}/pkgin.cat1				\
-		${DESTDIR}${PREFIX}/${PKGMANDIR}/cat1/pkgin.0
-.  endif
-.endif
+post-install:
 	${INSTALL_DATA} ${WRKSRC}/repositories.conf			\
 		${DESTDIR}${EGDIR}/repositories.conf.example
 	${INSTALL_DATA} ${WRKSRC}/preferred.conf			\

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.29 2019/06/09 22:10:45 nia Exp $
+# $NetBSD: Makefile.common,v 1.43 2021/03/07 08:26:24 taca Exp $
 #
 # when updating to a new release, update ABI depends in
 # the buildlink3.mk file as well, since the plugins' version
@@ -11,9 +11,9 @@
 # used by mail/dovecot2-pgsql/Makefile
 # used by mail/dovecot2-sqlite/Makefile
 
-DISTNAME=	dovecot-2.3.6
+DISTNAME=	dovecot-2.3.14
 CATEGORIES=	mail
-MASTER_SITES=	https://www.dovecot.org/releases/${PKGVERSION_NOREV:R}/
+MASTER_SITES=	https://dovecot.org/releases/${PKGVERSION_NOREV:R}/
 
 MAINTAINER=	adam@NetBSD.org
 HOMEPAGE=	https://www.dovecot.org/
@@ -24,8 +24,10 @@ DISTINFO_FILE=	${.CURDIR}/../../mail/dovecot2/distinfo
 PATCHDIR=	${.CURDIR}/../../mail/dovecot2/patches
 
 USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake pkg-config rpcgen
+USE_TOOLS+=		gmake pkg-config rpcgen bash:run
 GNU_CONFIGURE=		yes
+
+BUILD_DEFS+=		VARBASE
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -51,10 +53,6 @@ TEST_TARGET=	check
 # implementation details.
 CONFIGURE_ARGS.SunOS+=	--with-ioloop=poll
 CONFIGURE_ARGS.SunOS+=	--with-notify=none
-
-# Sharing sources between binary and lib triggers libtool bugs
-# mv: rename .deps/auth-stats.Tpo to .deps/auth-stats.Po: No such file or directory
-#MAKE_JOBS_SAFE=	no
 
 .include "options.mk"
 

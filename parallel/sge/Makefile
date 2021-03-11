@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.67 2018/08/22 09:46:10 wiz Exp $
+# $NetBSD: Makefile,v 1.71 2020/08/31 18:10:57 wiz Exp $
 
 DISTNAME=		sge-8.1.6
-PKGREVISION=		6
+PKGREVISION=		9
 CATEGORIES=		parallel sysutils
 MASTER_SITES=		http://arc.liv.ac.uk/downloads/SGE/releases/8.1.6/
 
@@ -34,9 +34,9 @@ PKG_USERS_VARS+=	SGE_USER
 AIMK=	${SETENV} ${MAKE_ENV} ${CSH} -fb ${WRKSRC}/source/aimk
 
 CONFIG_GUESS_OVERRIDE=	source/3rdparty/qmake/config.guess \
-		source/3rdparty/qtcsh/config.guess
+			source/3rdparty/qtcsh/config.guess
 CONFIG_SUB_OVERRIDE=	source/3rdparty/qmake/config.sub \
-		source/3rdparty/qtcsh/config.sub
+			source/3rdparty/qtcsh/config.sub
 
 REPLACE_INTERPRETER+=	tclsh
 REPLACE.tclsh.old=	.*tclsh

@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.4 2021/02/08 12:05:40 mef Exp $
+
+SHA1 (R/withr_2.4.1.tar.gz) = c59018a3592fa67434c01a4b5fd37e67727dc07c
+RMD160 (R/withr_2.4.1.tar.gz) = e221a7ae692d174114b652ae87273769765d31bc
+SHA512 (R/withr_2.4.1.tar.gz) = e115675b7cc2eaae9148bc5bdf4e711c4bca3c34c78c4bdef2f520ba06240a217c831ca590c5b2479bd799b2c4e32ccb956632ed0b961117d3e26465d7b54f1a
+Size (R/withr_2.4.1.tar.gz) = 91901 bytes

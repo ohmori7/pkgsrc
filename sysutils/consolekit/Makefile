@@ -1,23 +1,21 @@
-# $NetBSD: Makefile,v 1.42 2018/08/22 09:46:33 wiz Exp $
+# $NetBSD: Makefile,v 1.49 2021/01/30 10:23:16 jperkin Exp $
 
-CONSOLEKIT_VER=	1.2.1
-PKGREVISION=	2
+CONSOLEKIT_VER=	1.2.2
 DISTNAME=	ConsoleKit2-${CONSOLEKIT_VER}
 PKGNAME=	consolekit-${CONSOLEKIT_VER}
 CATEGORIES=	sysutils
-GITHUB_RELEASE=	${CONSOLEKIT_VER}
+GITHUB_TAG=	${CONSOLEKIT_VER}
 GITHUB_PROJECT=	ConsoleKit2
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ConsoleKit2/}
-EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	youri@NetBSD.org
-HOMEPAGE=	https://github.com/ConsoleKit2/ConsoleKit2/
+HOMEPAGE=	https://github.com/ConsoleKit2/ConsoleKit2
 COMMENT=	Framework for defining and tracking users, login sessions, and seats
 LICENSE=	gnu-gpl-v2
 
 MESSAGE_SUBST+=	PREFIX=${PREFIX}
 
-BUILD_DEFS+=	VARBASE 	\
+BUILD_DEFS+=	VARBASE \
 		PKG_SYSCONFBASE
 
 EGDIR=			${PREFIX}/share/examples/consolekit
@@ -42,14 +40,15 @@ CONF_FILES+=	${EGDIR}/ConsoleKit/seats.d/00-primary.seat		\
 		${PKG_SYSCONFBASE}/X11/xinit/xinitrc.d/90-consolekit
 
 GNU_CONFIGURE=	YES
-USE_TOOLS+=	gmake intltool msgfmt perl pkg-config automake
+USE_TOOLS+=	gmake intltool msgfmt perl pkg-config
+USE_TOOLS+=	autoconf automake autoreconf autopoint
 USE_LIBTOOL=	YES
 
-CONFIGURE_ARGS+=--sysconfdir=${PKG_SYSCONFBASE}			\
-		--localstatedir=${VARBASE}			\
-		--disable-pam-module
-		#--enable-pam-module				\
-		#--with-pam-module-dir=${PREFIX}/lib/security	\
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFBASE}			\
+			--localstatedir=${VARBASE}			\
+			--disable-pam-module
+		#--enable-pam-module
+		#--with-pam-module-dir=${PREFIX}/lib/security
 
 CONFIGURE_ARGS.SunOS+=	--enable-rbac-shutdown=solaris.system.shutdown
 
@@ -64,10 +63,14 @@ post-install:
 
 TOOL_DEPENDS+=		gdbus-codegen-[0-9]*:../../devel/gdbus-codegen
 
+pre-configure:
+	cd ${WRKSRC} && NOCONFIGURE=1 ${SH} autogen.sh
+
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../security/polkit/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
+.include "../../textproc/gtk-doc/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../mk/pam.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

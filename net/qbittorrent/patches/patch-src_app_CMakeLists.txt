@@ -1,0 +1,15 @@
+$NetBSD: patch-src_app_CMakeLists.txt,v 1.2 2020/11/21 22:17:56 adam Exp $
+
+Disable app bundle on Darwin.
+
+--- src/app/CMakeLists.txt.orig	2020-10-18 19:41:04.000000000 +0000
++++ src/app/CMakeLists.txt
+@@ -83,7 +83,7 @@ set_source_files_properties(
+             MACOSX_PACKAGE_LOCATION Resources
+ )
+ 
+-if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
++if (FALSE)
+     # substitute @EXECUTABLE@ in dist/mac/Info.plist
+     get_target_property(EXECUTABLE qbt_app OUTPUT_NAME)
+     configure_file(${qBittorrent_SOURCE_DIR}/dist/mac/Info.plist

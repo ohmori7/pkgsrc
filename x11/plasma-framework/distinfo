@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.7 2019/04/25 21:17:15 markd Exp $
+$NetBSD: distinfo,v 1.12 2020/06/09 06:49:17 markd Exp $
 
-SHA1 (plasma-framework-5.57.0.tar.xz) = 17d6a4535335cf4dcf7898ca5cabe74e3688387e
-RMD160 (plasma-framework-5.57.0.tar.xz) = 322ddc211bab10d311bb4a50eba8717c75dbabc2
-SHA512 (plasma-framework-5.57.0.tar.xz) = 42016dd7dc9c20c643adb4fae2987d7aded327ff52de6802ef808f1c3adfda4390eccdea56998071422347d3971f94fa21ea6604dbb2555fbbdc6d0f41a45ef9
-Size (plasma-framework-5.57.0.tar.xz) = 4636968 bytes
+SHA1 (plasma-framework-5.70.1.tar.xz) = 0327b96dd9d37e32c92242ba475dbc64f2679d24
+RMD160 (plasma-framework-5.70.1.tar.xz) = 1fecbf417f64a6fe9eede8b89dc8263561a4ae62
+SHA512 (plasma-framework-5.70.1.tar.xz) = 2b022f0e1e6abec8b7cf0ff77dd862a78f17692d17a78ad5a42a1a784c98a57070a5a721b44e808e299f374248769b90449201ae3c6dba17a292726e3b646930
+Size (plasma-framework-5.70.1.tar.xz) = 3132736 bytes

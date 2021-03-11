@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.27 2018/08/22 09:45:56 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2020/08/31 18:10:38 wiz Exp $
 
 DISTNAME=	oinkmaster-2.0
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=oinkmaster/}
 
@@ -39,9 +39,9 @@ INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 \
 			share/snort/rules
 
 do-install:
-.	for f in ${DOCS}
-		${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${DOCDIR}/${f}
-.	endfor
+.for f in ${DOCS}
+	${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${DOCDIR}/${f}
+.endfor
 
 	${INSTALL_DATA} ${WRKSRC}/oinkmaster.conf ${DESTDIR}${EGDIR}
 	${INSTALL_DATA} ${WRKSRC}/template-examples.conf ${DESTDIR}${EGDIR}

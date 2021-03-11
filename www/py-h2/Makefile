@@ -1,19 +1,24 @@
-# $NetBSD: Makefile,v 1.5 2017/06/21 09:57:57 adam Exp $
+# $NetBSD: Makefile,v 1.9 2020/10/03 18:11:14 adam Exp $
 
-DISTNAME=	h2-3.0.1
+DISTNAME=	h2-4.0.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-CATEGORIES=	www
+CATEGORIES=	www python
 MASTER_SITES=	${MASTER_SITE_PYPI:=h/h2/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://hyper.rtfd.org/
+HOMEPAGE=	https://github.com/python-hyper/hyper-h2
 COMMENT=	HTTP/2 State-Machine based protocol implementation
 LICENSE=	mit
 
+DEPENDS+=	${PYPKGPREFIX}-hyperframe>=6.0.0:../../www/py-hyperframe
+DEPENDS+=	${PYPKGPREFIX}-hpack>=4.0:../../net/py-hpack
+TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
+
 USE_LANGUAGES=	# none
 
-DEPENDS+=	${PYPKGPREFIX}-hyperframe>=3.1:../../www/py-hyperframe
-DEPENDS+=	${PYPKGPREFIX}-hpack>=2.2:../../net/py-hpack
+PYSETUPTESTTARGET=	pytest
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

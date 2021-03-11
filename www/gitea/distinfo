@@ -1,14 +1,11 @@
-$NetBSD: distinfo,v 1.3 2019/05/13 10:48:58 nia Exp $
+$NetBSD: distinfo,v 1.24 2020/11/18 11:29:27 jperkin Exp $
 
-SHA1 (gitea-1.8.1.tar.gz) = 7de5fddb3bf65c90f8de3b8b65b47391a7112671
-RMD160 (gitea-1.8.1.tar.gz) = efee8cfb61fca861c76fe7304ea3c725940383ca
-SHA512 (gitea-1.8.1.tar.gz) = b583ba21ae9c896d527d299d5a14f7b99e40b474da7ca40521487f0459c877da9c21825b40dc0f981af7813bcabca11f62d8076cc1e401adda57d0e0505b96ce
-Size (gitea-1.8.1.tar.gz) = 24304805 bytes
-SHA1 (patch-vendor_github.com_edsrzf_mmap-go_mmap.go) = fb6036fca52ad3ecf779080849a015fee640aba5
-SHA1 (patch-vendor_github.com_edsrzf_mmap-go_mmap__solaris.go) = f4341dfab2b452f926353350ce861aa75e3e47f9
-SHA1 (patch-vendor_github.com_edsrzf_mmap-go_mmap__sys.go) = 4e6121157bbd4072feaca297c081efa49379a57c
-SHA1 (patch-vendor_github.com_edsrzf_mmap-go_mmap__syscall.go) = 0f5df532a4a2210539af6b260ac556d864b3179d
-SHA1 (patch-vendor_github.com_edsrzf_mmap-go_mmap__unix.go) = 390a451fa1ed45755f5a4036c45ec3a2e4507c3b
-SHA1 (patch-vendor_github.com_edsrzf_mmap-go_msync__netbsd.go) = 13ac5d3f76a330f874002b18698ce5583c875239
-SHA1 (patch-vendor_github.com_edsrzf_mmap-go_msync__unix.go) = 3c3f67d09928abc49ed4b6386edd5cf579e045bf
-SHA1 (patch-vendor_gopkg.in_src-d_go-billy.v4_osfs_os__posix.go) = d8f2684acc2aeadd02761bff7506cb5789d92a72
+SHA1 (gitea-1.12.6-frontend.tar.gz) = 8f5d260af8dcbaddf6b74461fbfae9c1cc68a9c9
+RMD160 (gitea-1.12.6-frontend.tar.gz) = cf31729d71777fe02aa3611a6394c77442d0077b
+SHA512 (gitea-1.12.6-frontend.tar.gz) = 2e2b3d6013c0b6489e9a18e6835800fe703bc68faae9c26d88f29f2b328eec12ef27ba804797ea2af83ba3748f0a8ff9420837171e83178ec7ffb13c9f8e4687
+Size (gitea-1.12.6-frontend.tar.gz) = 21443322 bytes
+SHA1 (gitea-1.12.6.tar.gz) = 8ad3160ebaf8148e44586700e6471686db2babf1
+RMD160 (gitea-1.12.6.tar.gz) = 60fa8f0cab440f022546c9f98a4eea3e2b0e9df1
+SHA512 (gitea-1.12.6.tar.gz) = 4e3853674779cef7f198df6c4b317d093a891f84cd4f174dde781949cf180225e5111c5eee5c3ce4c8c19370bd92128eade08cf493afe54ad43b741e2d5ea670
+Size (gitea-1.12.6.tar.gz) = 32162658 bytes
+SHA1 (patch-Makefile) = 394eb7b8d5c706cd4d2070c4d544d52cf6db5f0b

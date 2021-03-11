@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.21 2019/04/26 14:12:46 maya Exp $
+# $NetBSD: Makefile,v 1.27 2020/12/04 20:45:45 nia Exp $
 
 DISTNAME=	libplist-1.12
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	textproc
 MASTER_SITES=	http://www.libimobiledevice.org/downloads/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.libimobiledevice.org/
+HOMEPAGE=	https://www.libimobiledevice.org/
 COMMENT=	Handle Apple Binary and XML Property Lists
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1
 
@@ -17,10 +17,10 @@ USE_TOOLS+=	bash gmake pkg-config
 USE_LIBTOOL=	yes
 USE_LANGUAGES=	c c++
 
-PKGCONFIG_OVERRIDE+=	libplist++.pc.in
-PKGCONFIG_OVERRIDE+=	libplist.pc.in
-PY_PATCHPLIST=		yes
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 1.8
+PKGCONFIG_OVERRIDE+=		libplist++.pc.in
+PKGCONFIG_OVERRIDE+=		libplist.pc.in
+PY_PATCHPLIST=			yes
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 1.8
 
 .include "../../devel/py-cython/buildlink3.mk"
 .include "../../devel/py-cython/tool.mk"

@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.2 2016/01/27 10:53:21 markd Exp $
-# TeX Live Revision 17197
+# $NetBSD: Makefile,v 1.4 2020/05/01 02:30:47 markd Exp $
 
 DISTNAME=	endnotes
-PKGNAME=	tex-${DISTNAME}-2009
+PKGNAME=	tex-${DISTNAME}-2020
+TEXLIVE_REV=	53319
 
 MAINTAINER=	minskim@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/endnotes
 COMMENT=	LaTeX package to place footnotes at the end
 LICENSE=	lppl-1.2
 

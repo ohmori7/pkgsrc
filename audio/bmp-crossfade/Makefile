@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.17 2018/11/14 22:21:00 kleink Exp $
+# $NetBSD: Makefile,v 1.24 2020/08/18 17:57:34 leot Exp $
 
 PKGNAME=		bmp-crossfade-0.3.11
 DISTNAME=		xmms-crossfade-0.3.11
-PKGREVISION=		11
+PKGREVISION=		16
 CATEGORIES=		audio
 MASTER_SITES=		https://www.eisenlohr.org/xmms-crossfade/
 
@@ -20,10 +20,12 @@ LDFLAGS+=		${LIBOSSAUDIO}
 OSS_DEFS+=		-DDEFAULT_OSS_ALT_AUDIO_DEVICE='"${DEVOSSSOUND}"'
 MAKE_ENV+=		OSS_DEFS=${OSS_DEFS:Q}
 
+CHECK_PORTABILITY_SKIP+=	configure.in
+
 .include "../../audio/bmp/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"
 
-CONFIGURE_ARGS+=	--enable-player=bmp
+CONFIGURE_ARGS+=		--enable-player=bmp
 GNU_CONFIGURE_LIBSUBDIR=	bmp/Output
 
 .if ${OSS_TYPE} == "none"

@@ -1,4 +1,4 @@
-# $NetBSD: module.mk,v 1.73 2018/01/07 11:40:57 rillig Exp $
+# $NetBSD: module.mk,v 1.75 2020/08/31 18:00:37 wiz Exp $
 #
 # This Makefile fragment is intended to be included by packages that build
 # and install perl5 modules.
@@ -63,7 +63,7 @@ TEST_TARGET?=		test
     ${PERL5_MODULE_TYPE} == "Module::Build::Bundled" || \
     ${PERL5_MODULE_TYPE} == "Module::Build::Tiny"
 PERL5_MODTYPE=		modbuild
-PERL5_MODBUILD_DESTDIR_OPTION=--destdir ${DESTDIR:Q}
+PERL5_MODBUILD_DESTDIR_OPTION= --destdir ${DESTDIR:Q}
 .elif ${PERL5_MODULE_TYPE} == "Module::Install" || \
       ${PERL5_MODULE_TYPE} == "Module::Install::Bundled"
 PERL5_MODTYPE=		modinst
@@ -81,17 +81,17 @@ PERL5_MODTYPE=		makemaker
 BUILDLINK_DEPMETHOD.perl+=	full
 .include "../../lang/perl5/buildlink3.mk"
 
-.if empty(PKGPATH:Mdevel/p5-Module-Build) && \
+.if ${PKGPATH} != devel/p5-Module-Build && \
     (${PERL5_MODULE_TYPE} == "Module::Build")
 BUILD_DEPENDS+=		p5-Module-Build>=0.42050:../../devel/p5-Module-Build
 .endif
 
-.if empty(PKGPATH:Mdevel/p5-Module-Build-Tiny) && \
+.if ${PKGPATH} != devel/p5-Module-Build-Tiny && \
     (${PERL5_MODULE_TYPE} == "Module::Build::Tiny")
 BUILD_DEPENDS+=		p5-Module-Build-Tiny>=0.23:../../devel/p5-Module-Build-Tiny
 .endif
 
-.if empty(PKGPATH:Mdevel/p5-Module-Install) && \
+.if ${PKGPATH} != devel/p5-Module-Install && \
     (${PERL5_MODULE_TYPE} == "Module::Install")
 BUILD_DEPENDS+=		p5-Module-Install>=0.91:../../devel/p5-Module-Install
 .endif

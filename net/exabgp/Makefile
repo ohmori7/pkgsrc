@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.28 2019/04/26 14:12:42 maya Exp $
+# $NetBSD: Makefile,v 1.35 2020/12/04 20:45:33 nia Exp $
 
 VERSION=	3.4.23
 DISTNAME=	${VERSION}
 PKGNAME=	exabgp-${VERSION}
-PKGREVISION=	2
+PKGREVISION=	5
 EGG_NAME=	exabgp-${VERSION}
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GITHUB:=Exa-Networks/exabgp/archive/}
@@ -19,7 +19,8 @@ WRKSRC=		${WRKDIR}/exabgp-${VERSION}
 USE_TOOLS+=	perl:run
 
 DEPENDS+=	${PYPKGPREFIX}-ipaddr>=0:../../devel/py-ipaddr
-DEPENDS+=	${PYPKGPREFIX}-setuptools-[0-9]*:../../devel/py-setuptools
+
+PYTHON_VERSIONED_DEPENDENCIES+=	setuptools
 
 REPLACE_PERL+=		etc/exabgp/processes/dynamic-1.pl
 REPLACE_PERL+=		etc/exabgp/processes/watchdog-1.pl
@@ -56,9 +57,11 @@ REPLACE_PYTHON+=	qa/conf/api-vpnv4.run
 REPLACE_PYTHON+=	qa/conf/manual-eor.run
 REPLACE_PYTHON+=	qa/conf/watchdog.run
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 3.2.19
+CHECK_PORTABILITY_SKIP+=	dev/release/google
 
-USE_LANGUAGES=  # none
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 3.2.19
+
+USE_LANGUAGES=	# none
 
 INSTALLATION_DIRS+=	share/exabgp bin
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1 ${PKGMANDIR}/man5
@@ -75,4 +78,5 @@ post-install:
 .include "../../lang/python/distutils.mk"
 .include "../../lang/python/application.mk"
 .include "../../lang/python/pyversion.mk"
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

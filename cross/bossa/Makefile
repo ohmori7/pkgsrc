@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2019/06/08 10:53:27 rillig Exp $
+# $NetBSD: Makefile,v 1.23 2020/08/17 20:18:20 leot Exp $
 
 PKGNAME=	bossa-20140109
 DISTNAME=	b-o-s-s-a-code-05bfcc39bc0453c3028b1161175b95a81af7a901
-PKGREVISION=	9
+PKGREVISION=	13
 CATEGORIES=	comms
 EXTRACT_SUFX=	.zip
 
@@ -12,6 +12,8 @@ COMMENT=	Open source SAM-BA compatible Atmel ARM programmer
 LICENSE=	gnu-gpl-v3
 
 INSTALLATION_DIRS=	bin
+
+BUILDLINK_TRANSFORM+=	rm:-Werror
 
 LDFLAGS+=	${COMPILER_RPATH_FLAG}${BUILDLINK_PREFIX.readline}/lib \
 		-L${BUILDLINK_PREFIX.readline}/lib

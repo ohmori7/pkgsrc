@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.118 2019/05/23 19:23:01 rillig Exp $
+# $NetBSD: Makefile,v 1.133 2021/03/08 08:13:02 jaapb Exp $
 
 VERSION=		4.0.1
 PKGNAME=		camlimages-${VERSION}
-PKGREVISION=		79
+PKGREVISION=		92
 CATEGORIES=		graphics
 MASTER_SITES=		https://bitbucket.org/camlspotter/camlimages/get/
 DISTNAME=		v${VERSION}
-DIST_SUBDIR=		${PKGNAME_NOREV}
+DIST_SUBDIR=		${PKGNAME_NOREV}a
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://gallium.inria.fr/camlimages/
@@ -18,7 +18,7 @@ BUILD_DEPENDS+=		ocaml-findlib>=1.2.6:../../devel/ocaml-findlib
 
 MAKE_JOBS_SAFE=		no
 
-WRKSRC=			${WRKDIR}/camlspotter-camlimages-v${VERSION}
+WRKSRC=			${WRKDIR}/camlspotter-camlimages-c803efa9d5d3
 
 SUBST_CLASSES+=		omf
 SUBST_STAGE.omf=	pre-configure

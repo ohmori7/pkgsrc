@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2014/04/18 13:44:32 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/11/05 09:07:26 ryoon Exp $
 
 GST_PLUGINS0.10_NAME=	musepack
 GST_PLUGINS0.10_DIRS=	ext/musepack
-PKGREVISION=		3
+PKGREVISION=		6
 
 .include "../../multimedia/gst-plugins0.10-bad/Makefile.common"
 

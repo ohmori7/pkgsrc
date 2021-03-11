@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2019/05/10 19:30:03 ryoon Exp $
+# $NetBSD: Makefile,v 1.4 2020/10/02 16:52:01 ryoon Exp $
 
-DISTNAME=		mingw-w64-6.0.0
+DISTNAME=		mingw-w64-8.0.0
 CATEGORIES=		cross
 MASTER_SITES=		# empty
 DISTFILES=		# empty
@@ -12,6 +12,8 @@ COMMENT=		Cross toolchains for win32 and win64 cross-development
 META_PACKAGE=		yes
 
 DEPENDS+=		mingw-w64-x86_64-gcc-[0-9]*:../../cross/mingw-w64-x86_64-gcc
+DEPENDS+=		mingw-w64-x86_64-gcc-winpthreads-[0-9]*:../../cross/mingw-w64-x86_64-gcc-winpthreads
 DEPENDS+=		mingw-w64-i686-gcc-[0-9]*:../../cross/mingw-w64-i686-gcc
+DEPENDS+=		mingw-w64-i686-gcc-winpthreads-[0-9]*:../../cross/mingw-w64-i686-gcc-winpthreads
 
 .include "../../mk/bsd.pkg.mk"

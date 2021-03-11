@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.163 2019/04/25 07:32:36 maya Exp $
+# $NetBSD: Makefile,v 1.177 2021/01/28 07:30:00 triaxx Exp $
 
-DISTNAME=	rhythmbox-3.4.2
-PKGREVISION=	10
+DISTNAME=	rhythmbox-3.4.4
 CATEGORIES=	audio gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/rhythmbox/3.4/}
 EXTRACT_SUFX=	.tar.xz
@@ -26,24 +25,24 @@ CONFIGURE_ARGS+=	--disable-fm-radio
 CONFIGURE_ARGS+=	--without-gudev
 CONFIGURE_ARGS+=	--enable-vala
 CONFIGURE_ARGS+=	--with-brasero
+CONFIGURE_ARGS+=	--with-ipod
 
 BUILD_DEPENDS+=	itstool-[0-9]*:../../textproc/itstool
 DEPENDS+=	gst-plugins1-libav-[0-9]*:../../multimedia/gst-plugins1-libav
-DEPENDS+=	gst-plugins1-good-[0-9]*:../../multimedia/gst-plugins1-libav
+DEPENDS+=	gst-plugins1-good-[0-9]*:../../multimedia/gst-plugins1-good
 DEPENDS+=	gst-plugins1-oss-[0-9]*:../../audio/gst-plugins1-oss
 DEPENDS+=	grilo-plugins-[0-9]*:../../net/grilo-plugins
 DEPENDS+=	${PYPKGPREFIX}-mako-[0-9]*:../../devel/py-mako
 DEPENDS+=	${PYPKGPREFIX}-gobject3-[0-9]*:../../devel/py-gobject3
 
 .include "../../lang/python/application.mk"
-.include "../../comms/lirc/buildlink3.mk"
+.include "../../audio/libgpod/buildlink3.mk"
 .include "../../databases/tdb/buildlink3.mk"
 .include "../../devel/dconf/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/schemas.mk"
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../devel/libpeas/buildlink3.mk"
-.include "../../devel/libmtp/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/vala/buildlink3.mk"
 .include "../../multimedia/gstreamer1/buildlink3.mk"

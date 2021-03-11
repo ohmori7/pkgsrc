@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.8 2019/01/26 01:30:03 markd Exp $
+$NetBSD: distinfo,v 1.10 2021/02/13 10:42:07 markd Exp $
 
-SHA1 (tex-etoolbox-48436/etoolbox.tar.xz) = 72109d12413677f4e5fa685400ccc3d42544337b
-RMD160 (tex-etoolbox-48436/etoolbox.tar.xz) = 9e37b043f78acc7d36ae7460b80f9ad05fe7e4c6
-SHA512 (tex-etoolbox-48436/etoolbox.tar.xz) = 10df1906c7fc0617ca28164da6002c47852316684b15f0cb871082b6556c8d8f1710e9378b8f361e00a77eb9444a37dd5805a5c3003da8e7e55303f4714d81b9
-Size (tex-etoolbox-48436/etoolbox.tar.xz) = 8304 bytes
+SHA1 (etoolbox.r56554.tar.xz) = b5f243a410bd7105add05cdaf0e92d733fc03b72
+RMD160 (etoolbox.r56554.tar.xz) = 4116825f1a885dad844fdf1050c62a9ba7bbe0ea
+SHA512 (etoolbox.r56554.tar.xz) = b4c2ba570b1636b7ccd741c8960335f4863fb7242253be6c071100b64ce0d6ffc1bcc9da5e9bc65830ae5e34cb4cf887220585c0006d7afce0af3ca95f96b36e
+Size (etoolbox.r56554.tar.xz) = 8752 bytes

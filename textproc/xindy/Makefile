@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.4 2019/05/09 09:47:37 adam Exp $
+# $NetBSD: Makefile,v 1.8 2020/08/31 18:12:19 wiz Exp $
 
 .include "../../print/texlive/Makefile.common"
 
 PKGNAME=	xindy-2.5.1
-PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	print
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.tug.org/texlive/
+HOMEPAGE=	https://www.tug.org/texlive/
 COMMENT=	xindy runtime required by the tex-xindy package
 LICENSE=	gnu-gpl-v2
 

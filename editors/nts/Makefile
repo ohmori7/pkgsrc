@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2019/06/08 10:40:56 rillig Exp $
+# $NetBSD: Makefile,v 1.17 2020/12/04 20:45:15 nia Exp $
 
 DISTNAME=	nts-78
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	editors
 MASTER_SITES=	http://www.duke.edu/~dgraham/NTS/
 
@@ -13,7 +13,7 @@ LICENSE=	gnu-gpl-v2
 DEPENDS+=	${PYPKGPREFIX}-dateutil-[0-9]*:../../time/py-dateutil
 DEPENDS+=	${PYPKGPREFIX}-wxWidgets>=2.8.7:../../x11/py-wxWidgets
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # py-wxWidgets
+PYTHON_VERSIONS_ACCEPTED=	27 # py-wxWidgets
 
 USE_LANGUAGES=	# none
 

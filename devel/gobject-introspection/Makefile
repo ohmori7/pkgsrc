@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.63 2019/06/13 09:43:19 wiz Exp $
+# $NetBSD: Makefile,v 1.75 2021/01/11 19:15:24 jperkin Exp $
 
-DISTNAME=	gobject-introspection-1.60.1
+DISTNAME=	gobject-introspection-1.66.1
 PKGREVISION=	1
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gobject-introspection/${PKGVERSION_NOREV:R}/}
@@ -14,9 +14,12 @@ LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2
 DEPENDS+=	${PYPKGPREFIX}-cElementTree-[0-9]*:../../textproc/py-cElementTree
 DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
 USE_TOOLS+=	pkg-config flex bison
 
 MESON_ARGS+=	-Dpython=${PYTHONBIN}
+MESON_ARGS+=	-Ddoctool=disabled
 
 PKGCONFIG_OVERRIDE+=	gobject-introspection-1.0.pc.in
 PKGCONFIG_OVERRIDE+=	gobject-introspection-no-export-1.0.pc.in
@@ -34,13 +37,18 @@ SUBST_SED.timet=	-e 's,@TIMET_TYPENAME@,TYPE_LONG,g'
 SUBST_SED.timet+=	-e 's,@TIMET_CTYPE@,glong,g'
 .endif
 
+SUBST_CLASSES+=		libdirs
+SUBST_STAGE.libdirs=	pre-configure
+SUBST_FILES.libdirs=	giscanner/ccompiler.py
+SUBST_VARS.libdirs=	_OPSYS_LIB_DIRS
+
 MAKE_ENV+=	LD_LIBRARY_PATH=${WRKSRC}/output/girepository
 
 BUILDLINK_API_DEPENDS.glib2+= glib2>=2.58.0
 .include "../../devel/glib2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libffi+= libffi>=3.0.0
 .include "../../devel/libffi/buildlink3.mk"
-.include "../../devel/py-meson/build.mk"
+.include "../../devel/meson/build.mk"
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"

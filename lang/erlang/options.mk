@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.10 2019/05/05 21:09:11 nia Exp $
+# $NetBSD: options.mk,v 1.13 2021/02/20 01:02:29 gutteridge Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.erlang
 PKG_SUPPORTED_OPTIONS=		java erlang-hipe
@@ -12,7 +12,7 @@ PKG_SUGGESTED_OPTIONS=	# empty
 ###
 .if (${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64") &&	\
     (${OPSYS} == "FreeBSD" || ${OPSYS} == "Linux" ||			\
-     ${OPSYS} == "NetBSD"  || ${OPSYS} == "OpenBSD")
+     ${OPSYS} == "NetBSD"  || ${OPSYS} == "OpenBSD" || ${OPSYS} == "SunOS")
 PKG_SUGGESTED_OPTIONS+=	erlang-hipe
 .endif
 
@@ -35,10 +35,12 @@ PLIST_SRC+=		PLIST.java
 CONFIGURE_ARGS+=	--without-javac
 .endif
 
+# Some hipe-related files are still installed even when --disable-hipe
+# is supplied, and these should remain in the general PLIST.
 .if !empty(PKG_OPTIONS:Merlang-hipe)
 CONFIGURE_ARGS+=	--enable-hipe
 PLIST_SRC+=		PLIST.hipe
-USE_TOOLS+=		m4
+USE_TOOLS+=		gm4	# needs -P
 .else
 CONFIGURE_ARGS+=	--disable-hipe
 .endif
@@ -68,6 +70,8 @@ CONFIGURE_ARGS+=	--with-dynamic-trace=dtrace
 CONFIGURE_ARGS+=	--with-dynamic-trace=systemtap
 .  endif
 PLIST.dtrace=		yes
+.else
+CONFIGURE_ARGS+=	--without-dynamic-trace
 .endif
 
 # Help generate optional PLIST parts:

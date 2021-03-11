@@ -1,22 +1,22 @@
-# $NetBSD: Makefile,v 1.21 2018/12/13 19:52:15 adam Exp $
+# $NetBSD: Makefile,v 1.29 2021/01/01 08:24:53 ryoon Exp $
 
 DISTNAME=	omxplayer-20170112
-PKGREVISION=	10
+PKGREVISION=	17
 CATEGORIES=	multimedia
-MASTER_SITES=   ${MASTER_SITE_GITHUB:=popcornmix/}
-GITHUB_PROJECT= omxplayer
-GITHUB_TAG=     12b472eaa75bce25dc63ec61d9233aadb996f3a4
+MASTER_SITES=	${MASTER_SITE_GITHUB:=popcornmix/}
+GITHUB_PROJECT=	omxplayer
+GITHUB_TAG=	12b472eaa75bce25dc63ec61d9233aadb996f3a4
 
 MAINTAINER=	port-arm@NetBSD.org
 HOMEPAGE=	https://github.com/popcornmix/omxplayer
 COMMENT=	Raspberry Pi video player
 LICENSE=	gnu-gpl-v2
 
-USE_LANGUAGES=	c++
-USE_TOOLS+=	gmake bash:build
-BUILD_TARGET=	omxplayer.bin
-INSTALLATION_DIRS+= bin share/docs/omxplayer
-REPLACE_BASH=	omxplayer
+USE_LANGUAGES=		c++
+USE_TOOLS+=		gmake bash:build
+BUILD_TARGET=		omxplayer.bin
+INSTALLATION_DIRS+=	bin share/docs/omxplayer
+REPLACE_BASH=		omxplayer
 
 EXTRACT_USING=	bsdtar
 
@@ -24,6 +24,8 @@ ONLY_FOR_PLATFORM=	NetBSD-*-earm*hf
 
 CFLAGS+=	-DPREFIX=\"${PREFIX}\"
 CFLAGS+=	-Dfopen64=fopen -Dfseeko64=fseeko -Dftello64=ftello
+
+NOT_PAX_MPROTECT_SAFE+=	bin/omxplayer.bin
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/omxplayer.bin ${DESTDIR}${PREFIX}/bin

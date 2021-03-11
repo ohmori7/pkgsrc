@@ -1,21 +1,21 @@
-# $NetBSD: Makefile,v 1.7 2019/05/23 19:23:02 rillig Exp $
+# $NetBSD: Makefile,v 1.10 2020/08/31 18:09:49 wiz Exp $
 
 DISTNAME=	ghc-6.8.3
 PKGNAME=	ghc-bootstrap-6.8.3
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	lang
 MASTER_SITES=	http://www.haskell.org/ghc/dist/6.8.3/
 DISTFILES=	ghc-6.8.3-src.tar.bz2
 
 OWNER=		dholland@NetBSD.org
-HOMEPAGE=	http://www.haskell.org/ghc/
+HOMEPAGE=	https://www.haskell.org/ghc/
 COMMENT=	Bootstrap kit generator for the GHC Haskell compiler
 
 #
 # build defs
 #
 
-CONFLICTS+=	ghc-[0-9]*
+CONFLICTS+=		ghc-[0-9]*
 # Disable this (at least for now) so bootstrap kits get built by autobuilds.
 #NOT_FOR_BULK_PLATFORM=	*-*-*	# Package is useful only for maintainers.
 

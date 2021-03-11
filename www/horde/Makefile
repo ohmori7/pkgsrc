@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.84 2019/05/23 19:23:20 rillig Exp $
+# $NetBSD: Makefile,v 1.86 2020/05/09 12:26:22 rillig Exp $
 
 DISTNAME=	horde-3.3.13
 PKGREVISION=	4
@@ -34,13 +34,13 @@ USE_TOOLS+=	pax
 
 .include "../../mk/bsd.prefs.mk"
 
-DOCDIR=		${PREFIX}/share/doc/horde
-EGDIR=		${PREFIX}/share/examples/horde
-HORDEDIR=	${PREFIX}/share/horde
-PAXDIRS=	js lib locale po scripts services templates themes util admin \
+DOCDIR=			${PREFIX}/share/doc/horde
+EGDIR=			${PREFIX}/share/examples/horde
+HORDEDIR=		${PREFIX}/share/horde
+PAXDIRS=		js lib locale po scripts services templates themes util admin \
 		rpc
-SENDMAIL?=	/usr/sbin/sendmail
-PKG_USERS_VARS+=APACHE_USER
+SENDMAIL?=		/usr/sbin/sendmail
+PKG_USERS_VARS+=	APACHE_USER
 
 PKG_SYSCONFSUBDIR?=	httpd
 MESSAGE_SUBST+=		HORDEDIR=${HORDEDIR}
@@ -88,8 +88,7 @@ CONF_FILES_PERMS+=	${EGDIR}/config/hooks.php \
 
 SUBST_CLASSES+=		files
 SUBST_STAGE.files=	post-build
-SUBST_FILES.files=	horde.conf.dist config/conf.xml config/conf.xml.dist \
-			scripts/set_perms.sh
+SUBST_FILES.files=	horde.conf.dist config/conf.xml config/conf.xml.dist
 SUBST_VARS.files=	HORDEDIR
 SUBST_SED.files+=	-e "s|/usr/lib/sendmail|${SENDMAIL}|g"
 SUBST_SED.files+=	-e "s|/bin/sh|${SH}|g"
@@ -113,10 +112,10 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${DOCDIR}
 	${INSTALL_DATA} ${WRKSRC}/docs/* ${DESTDIR}${DOCDIR}
 .for d in ${PAXDIRS}
-		${INSTALL_DATA_DIR} ${DESTDIR}${HORDEDIR}/${d}
+	${INSTALL_DATA_DIR} ${DESTDIR}${HORDEDIR}/${d}
 .endfor
 .for d in ${PAXDIRS}
-		cd ${WRKSRC}/${d} && pax -rwpam . ${DESTDIR}${HORDEDIR}/${d}
+	cd ${WRKSRC}/${d} && pax -rwpam . ${DESTDIR}${HORDEDIR}/${d}
 .endfor
 	cd ${WRKSRC}/config && for f in *.dist; do \
 		${INSTALL_DATA} $$f ${DESTDIR}${EGDIR}/config/$${f%.dist}; \

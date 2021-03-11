@@ -1,4 +1,6 @@
-$NetBSD: patch-src_zmf.cpp,v 1.1 2017/02/15 00:54:25 joerg Exp $
+$NetBSD: patch-src_zmf.cpp,v 1.3 2020/08/25 16:42:21 gdt Exp $
+
+\todo Explain
 
 --- src/zmf.cpp.orig	2017-02-15 00:51:13.260940737 +0000
 +++ src/zmf.cpp

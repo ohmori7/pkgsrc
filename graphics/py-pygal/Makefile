@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2017/09/16 19:26:58 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2020/11/27 08:02:38 adam Exp $
 
 DISTNAME=	pygal-2.4.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
@@ -14,12 +14,13 @@ DEPENDS+=	${PYPKGPREFIX}-cairosvg-[0-9]*:../../converters/py-cairosvg
 DEPENDS+=	${PYPKGPREFIX}-lxml-[0-9]*:../../textproc/py-lxml
 BUILD_DEPENDS+=	${PYPKGPREFIX}-flask-[0-9]*:../../www/py-flask
 BUILD_DEPENDS+=	${PYPKGPREFIX}-pyquery-[0-9]*:../../textproc/py-pyquery
-BUILD_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
 BUILD_DEPENDS+=	${PYPKGPREFIX}-test-cov-[0-9]*:../../devel/py-test-cov
 BUILD_DEPENDS+=	${PYPKGPREFIX}-test-runner-[0-9]*:../../devel/py-test-runner
 # more BUILD_DEPENDS needed
 
 USE_LANGUAGES=	# none
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27 # py-pyquery
 
 post-install:
 	cd ${DESTDIR}${PREFIX}/bin && ${MV} pygal_gen.py pygal_gen${PYVERSSUFFIX}.py || ${TRUE}

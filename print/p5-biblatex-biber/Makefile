@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.22 2019/02/09 02:00:20 markd Exp $
+# $NetBSD: Makefile,v 1.29 2021/02/14 21:28:47 markd Exp $
 
-DISTNAME=	biber-2.12
+DISTNAME=	biber-2.16
 PKGNAME=	p5-biblatex-${DISTNAME}
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_GITHUB:=plk/}
@@ -31,7 +31,6 @@ DEPENDS+=		p5-Encode-EUCJPASCII-[0-9]*:../../textproc/p5-Encode-EUCJPASCII
 DEPENDS+=		p5-Encode-HanExtra-[0-9]*:../../textproc/p5-Encode-HanExtra
 DEPENDS+=		p5-Encode-JIS2K-[0-9]*:../../textproc/p5-Encode-JIS2K
 DEPENDS+=		p5-File-Slurper-[0-9]*:../../devel/p5-File-Slurper
-DEPENDS+=		p5-IPC-Cmd-[0-9]*:../../devel/p5-IPC-Cmd
 DEPENDS+=		p5-IPC-Run3-[0-9]*:../../devel/p5-IPC-Run3
 DEPENDS+=		p5-Lingua-Translit>=0.25:../../textproc/p5-Lingua-Translit
 DEPENDS+=		p5-List-AllUtils-[0-9]*:../../devel/p5-List-AllUtils
@@ -47,9 +46,7 @@ DEPENDS+=		p5-Text-BibTeX>=0.76:../../textproc/p5-Text-BibTeX
 DEPENDS+=		p5-Text-CSV-[0-9]*:../../textproc/p5-Text-CSV
 DEPENDS+=		p5-Text-CSV_XS-[0-9]*:../../textproc/p5-Text-CSV_XS
 DEPENDS+=		p5-Text-Roman-[0-9]*:../../textproc/p5-Text-Roman
-DEPENDS+=		p5-Unicode-Collate>=1.19:../../converters/p5-Unicode-Collate
 DEPENDS+=		p5-Unicode-LineBreak>=2016.003:../../textproc/p5-Unicode-LineBreak
-DEPENDS+=		p5-Unicode-Normalize>=1.25:../../converters/p5-Unicode-Normalize
 DEPENDS+=		p5-XML-LibXML-Simple-[0-9]*:../../textproc/p5-XML-LibXML-Simple
 DEPENDS+=		p5-XML-LibXML>=1.70:../../textproc/p5-XML-LibXML
 DEPENDS+=		p5-XML-LibXSLT-[0-9]*:../../textproc/p5-XML-LibXSLT

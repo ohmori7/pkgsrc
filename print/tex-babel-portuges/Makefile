@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2015/05/04 12:38:33 markd Exp $
+# $NetBSD: Makefile,v 1.4 2020/05/10 23:16:08 markd Exp $
 
 DISTNAME=	babel-portuges
-PKGNAME=	tex-${DISTNAME}-1.2q
-TEXLIVE_REV=	30284
+PKGNAME=	tex-${DISTNAME}-1.2r
+TEXLIVE_REV=	55008
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/babel-portuges
+HOMEPAGE=	https://ctan.org/pkg/babel-portuges
 COMMENT=	Babel support for Portuges
 LICENSE=	lppl-1.3c
 

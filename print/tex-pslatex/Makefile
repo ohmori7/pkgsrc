@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2017/09/06 16:49:43 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2021/02/13 05:39:00 markd Exp $
 
 DISTNAME=	pslatex
-PKGNAME=	tex-${DISTNAME}-2009
-TEXLIVE_REV=	16416
-DIST_SUBDIR=	${PKGBASE}-${TEXLIVE_REV}.2010
+PKGNAME=	tex-${DISTNAME}-1.3
+TEXLIVE_REV=	57434
 
 MAINTAINER=	minskim@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/pslatex
 COMMENT=	Use PostScript fonts by default
 LICENSE=	lppl-1.3c
 

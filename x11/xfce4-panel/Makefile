@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.77 2019/05/23 02:28:34 gutteridge Exp $
+# $NetBSD: Makefile,v 1.89 2020/08/31 18:13:27 wiz Exp $
 
+PKGREVISION= 2
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
-DISTNAME=		xfce4-panel-4.13.5
+DISTNAME=		xfce4-panel-4.14.4
 CATEGORIES=		x11
-MASTER_SITES+=		http://archive.xfce.org/src/xfce/xfce4-panel/4.13/
+MASTER_SITES+=		https://archive.xfce.org/src/xfce/xfce4-panel/4.14/
 
-HOMEPAGE=		http://docs.xfce.org/xfce/xfce4-panel/start
+HOMEPAGE=		https://docs.xfce.org/xfce/xfce4-panel/start
 COMMENT=		Xfce panel
 
 TOOL_DEPENDS+=		gdbus-codegen-[0-9]*:../../devel/gdbus-codegen

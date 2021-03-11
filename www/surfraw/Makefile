@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.57 2018/08/22 09:47:59 wiz Exp $
+# $NetBSD: Makefile,v 1.60 2020/08/31 18:13:17 wiz Exp $
 
 DISTNAME=	surfraw-2.3.0
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	www
 MASTER_SITES=	http://surfraw.alioth.debian.org/dist/
 
-MAINTAINER=	wiz@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://gitlab.com/surfraw/Surfraw
 COMMENT=	Shell Users' Revolutionary Front Rage Against the Web
 LICENSE=	public-domain

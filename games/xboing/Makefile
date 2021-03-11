@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.28 2012/10/06 11:54:59 asau Exp $
+# $NetBSD: Makefile,v 1.30 2020/01/26 17:31:18 rillig Exp $
 #
 
 DISTNAME=		xboing2.4
@@ -8,7 +8,7 @@ CATEGORIES=		games x11
 MASTER_SITES=		${MASTER_SITE_XCONTRIB:=games/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.techrescue.org/xboing/
+HOMEPAGE=		https://www.techrescue.org/xboing/
 COMMENT=		Breakout style game for X11
 
 WRKSRC=			${WRKDIR}/xboing
@@ -25,7 +25,7 @@ SETGIDGAME=		yes
 SPECIAL_PERMS+=		bin/xboing ${SETGID_GAMES_PERMS}
 
 CONF_FILES_PERMS+=		/dev/null ${VARBASE}/games/xboing.scr \
-			${GAMES_USER} ${GAMES_GROUP} ${GAMEDATAMODE}
+				${GAMES_USER} ${GAMES_GROUP} ${GAMEDATAMODE}
 
 post-install:
 	${INSTALL_MAN} ${WRKSRC}/xboing.man ${DESTDIR}${PREFIX}/${PKGMANDIR}/man6/xboing.6

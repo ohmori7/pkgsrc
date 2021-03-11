@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.22 2018/08/22 09:47:07 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2020/08/31 18:12:10 wiz Exp $
 #
 
 DISTNAME=	XML-Handler-YAWriter-0.23
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	15
+PKGREVISION=	17
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=XML/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/XML-Handler-YAWriter/
+HOMEPAGE=	https://metacpan.org/release/XML-Handler-YAWriter
 COMMENT=	Another Perl module for writing XML documents
 
 # really: XML::Parser::PerlSAX' => 0.06

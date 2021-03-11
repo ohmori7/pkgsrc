@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.94 2019/04/03 00:32:50 ryoon Exp $
+# $NetBSD: Makefile,v 1.103 2020/11/05 09:06:58 ryoon Exp $
 #
 
 DISTNAME=		parrot-${PARROT_VERSION}
-PKGREVISION=		19
+PKGREVISION=		24
 CATEGORIES=		lang
 MASTER_SITES=		ftp://ftp.parrot.org/pub/parrot/releases/${PARROT_RTYPE}/${PARROT_VERSION}/
 
@@ -44,13 +44,19 @@ SUBST_SED.pthread+=	-e '/^LINKFLAGS /s|$$|${PTHREAD_LDFLAGS:Q} ${PTHREAD_LIBS:Q}
 SUBST_SED.pthread+=	-e '/^LDFLAGS /s|$$|${PTHREAD_LDFLAGS:Q} ${PTHREAD_LIBS:Q}|'
 
 PLIST_SUBST+=		PARROT_VERSION=${PARROT_VERSION:Q}
-PRINT_PLIST_AWK+=        { gsub(/${PARROT_VERSION}/, "$${PARROT_VERSION}") }
+PRINT_PLIST_AWK+=	{ gsub(/${PARROT_VERSION}/, "$${PARROT_VERSION}") }
 PLIST_SRC+=		${PLIST_SRC_DFLT}
 # Default this to ELF shared libs with .so,
 # Darwin has PLIST.Darwin which gets included automatically.
 .if (${OPSYS} != "Darwin")
 PLIST_SRC+=		PLIST.shared
 .endif
+
+SUBST_CLASSES+=		path
+SUBST_STAGE.path=	pre-configure
+SUBST_MESSAGE.path=	To avoid work/.tools/bin/perl recorded in installation
+SUBST_FILES.path=	config/gen/config_pm/myconfig.in
+SUBST_SED.path=		-e 's,@perl@,${PREFIX}/bin/perl,'
 
 REPLACE_PERL+=		tools/build/ops2c.pl
 REPLACE_PERL+=		tools/build/pmc2c.pl
@@ -60,15 +66,10 @@ REPLACE_PERL+=		tools/dev/mk_language_shell.in
 REPLACE_PERL+=		tools/dev/pprof2cg.pl
 REPLACE_PERL+=		tools/dev/reconfigure.pl
 
-REPLACE_INTERPRETER+=	parrot
-REPLACE.parrot.old=	.*parrot[^[:space:]]*
-REPLACE.parrot.new=	${PREFIX}/bin/parrot
-REPLACE_FILES.parrot+= 	tools/dev/pbc_to_exe.pir
-
-REPLACE_INTERPRETER+=	parrot-nqp
-REPLACE.parrot-nqp.old=	.*parrot-nqp[^[:space:]]*
-REPLACE.parrot-nqp.new= ${PREFIX}/bin/parrot-nqp
-REPLACE_FILES.parrot-nqp+= compilers/data_json/JSON.nqp
+REPLACE_INTERPRETER+=		parrot-nqp
+REPLACE.parrot-nqp.old=		.*parrot-nqp[^[:space:]]*
+REPLACE.parrot-nqp.new=		${PREFIX}/bin/parrot-nqp
+REPLACE_FILES.parrot-nqp+=	compilers/data_json/JSON.nqp
 
 REPLACE_INTERPRETER+=	nqp
 REPLACE.nqp.old=	.*nqp[^[:space:]]*

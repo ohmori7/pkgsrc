@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.14 2018/08/22 09:46:58 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:11:59 wiz Exp $
 #
 
 DISTNAME=	Text-Aspell-0.09
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	11
+PKGREVISION=	13
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Text/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Text-Aspell/
+HOMEPAGE=	https://metacpan.org/release/Text-Aspell
 COMMENT=	Perl interface to the GNU Aspell library
 
 BUILD_DEPENDS+=	aspell-en>0:../../textproc/aspell-en

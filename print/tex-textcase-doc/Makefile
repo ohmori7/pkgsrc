@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2013/01/14 00:23:32 minskim Exp $
+# $NetBSD: Makefile,v 1.4 2020/05/05 12:01:04 markd Exp $
 
 DISTNAME=	textcase.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-0.07
-TEXLIVE_REV=	15878
+PKGNAME=	tex-${DISTNAME:S/./-/}-1.00
+TEXLIVE_REV=	52092
 
 MAINTAINER=	prlw1@cam.ac.uk
-HOMEPAGE=	http://www.ctan.org/tex-archive/macros/latex/contrib/textcase/
+HOMEPAGE=	https://ctan.org/pkg/textcase
 COMMENT=	Documentation for tex-textcase
 LICENSE=	lppl-1.3c
 

@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.44 2018/08/22 09:47:08 wiz Exp $
+# $NetBSD: Makefile,v 1.48 2020/09/07 17:21:34 wiz Exp $
 
-DISTNAME=	XML-SAX-1.00
+DISTNAME=	XML-SAX-1.02
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=XML/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/XML-SAX/
+HOMEPAGE=	https://metacpan.org/release/XML-SAX
 COMMENT=	Perl interface to the SAX2 XML Parser
 LICENSE=	${PERL5_LICENSE}
 

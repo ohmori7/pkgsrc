@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.44 2018/11/14 22:21:55 kleink Exp $
+# $NetBSD: Makefile,v 1.52 2021/02/07 06:30:28 ryoon Exp $
 #
 
 SQUEAK_VERSION=	4.10.2.2614
 
 DISTNAME=	Squeak-${SQUEAK_VERSION}-src
 PKGNAME=	squeak-vm-${SQUEAK_VERSION:C/-/./}
-PKGREVISION=	17
+PKGREVISION=	23
 CATEGORIES=	lang
 MASTER_SITES=	http://squeakvm.org/unix/release/
 MASTER_SITES+=	http://ftp.squeak.org/3.10/unix-linux/
@@ -20,7 +20,7 @@ CHECK_PORTABILITY_SKIP=	unix/config/configure	# not used anymore
 
 USE_LANGUAGES=	c c++
 USE_CMAKE=	yes
-USE_TOOLS=	gzip
+USE_TOOLS+=	gzip pkg-config
 
 CONFIGURE_DIRS=	build
 CMAKE_ARG_PATH=	../unix
@@ -43,6 +43,7 @@ PLIST_VARS+=	oss
 pre-configure:
 	cd ${WRKSRC} && ${MKDIR} ${CONFIGURE_DIRS}
 
+.include "../../audio/alsa-lib/buildlink3.mk"
 .include "../../audio/libvorbis/buildlink3.mk"
 .include "../../audio/speex/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
@@ -55,7 +56,7 @@ pre-configure:
 .include "../../x11/libXt/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"
-.if $(OSS_TYPE) != "none"
+.if ${OSS_TYPE} != "none"
 PLIST.oss=	yes
 CMAKE_ARGS+=	-DLIBOSSAUDIO=${LIBOSSAUDIO:S/-l//}
 .endif

@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.51 2019/04/03 00:33:11 ryoon Exp $
+# $NetBSD: Makefile,v 1.59 2020/11/05 09:09:19 ryoon Exp $
 
-DISTNAME=	Surfer-0.2.10
-PKGNAME=	deforaos-surfer-0.2.10
-PKGREVISION=	19
+DISTNAME=	Surfer-0.3.0
+PKGNAME=	deforaos-surfer-0.3.0
+PKGREVISION=	6
 CATEGORIES=	www
-MASTER_SITES=	https://www.defora.org/os/download/download/4430/
+MASTER_SITES=	https://ftp.defora.org/pub/DeforaOS/Apps/Desktop/src/Surfer/
 
 MAINTAINER=	khorben@defora.org
 HOMEPAGE=	https://www.defora.org/
@@ -45,7 +45,7 @@ post-install:
 .include "options.mk"
 
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../www/webkit24-gtk/buildlink3.mk"
+.include "../../www/webkit24-gtk3/buildlink3.mk"
 .include "../../x11/deforaos-libdesktop/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

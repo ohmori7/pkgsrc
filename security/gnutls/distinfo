@@ -1,13 +1,13 @@
-$NetBSD: distinfo,v 1.134 2019/03/27 16:46:40 leot Exp $
+$NetBSD: distinfo,v 1.146 2020/12/03 12:27:38 nia Exp $
 
-SHA1 (gnutls-3.6.7.tar.xz) = 71f73b9829e44c947bb668b25b8b2e594a065345
-RMD160 (gnutls-3.6.7.tar.xz) = 0def1ae12df5f6dd30e3b2b853e0426837c6247e
-SHA512 (gnutls-3.6.7.tar.xz) = ae9b8996eb9b7269d28213f0aca3a4a17890ba8d47e3dc3b8e754ab8e2b4251e9412aaaa161a8bf56167f04cc169b4cada46f55a7bde92b955eb36cd717a99f3
-Size (gnutls-3.6.7.tar.xz) = 8153728 bytes
-SHA1 (patch-lib_Makefile.in) = c9a6bbe6238ccd9de41c708012e36b202d2a86e7
-SHA1 (patch-lib_accelerated_x86_x86-common.c) = eaf3c473b1ca83c5b15be26f8c06a82d7961420c
-SHA1 (patch-src_libopts_autoopts_options.h) = 9202c55314fe8764ac82c95bbfabfa1b031e9ba4
-SHA1 (patch-src_libopts_compat_compat.h) = 240fbfc0ba20af35e0634ba873fe9e34bfbcc921
-SHA1 (patch-src_libopts_libopts.c) = ce5e7681def882e95ed5ab770564d1f999b97039
-SHA1 (patch-src_libopts_makeshell.c) = e5b7d66caaec45e12ae5490d515fc9fc75de3d92
-SHA1 (patch-src_libopts_proto.h) = 78f845bdcbac8de74953a3cee0b77fa9c5b05386
+SHA1 (gnutls-3.7.0.tar.xz) = d535ebe4ae157fb79dbc34a2cf17b5173906ea0e
+RMD160 (gnutls-3.7.0.tar.xz) = 764391c259d604a0267bb673649738bc3a495507
+SHA512 (gnutls-3.7.0.tar.xz) = 5cf1025f2d0a0cbf5a83dd7f3b22dafd1769f7c3349096c0272d08573bb5ff87f510e0e69b4bbb47dad1b64476aa5479804b2f4ceb2216cd747bbc53bf42d885
+Size (gnutls-3.7.0.tar.xz) = 6129176 bytes
+SHA1 (patch-configure) = 3653f74914f874aa369f62c8b267a46fd6b78eaa
+SHA1 (patch-lib_system_certs.c) = fba74b2834a36d66bddcd7d3405d0c91c1b14efc
+SHA1 (patch-src_libopts_autoopts_options.h) = ebeeafc834bce3b6b3f938e360b089e165ee4f9e
+SHA1 (patch-src_libopts_compat_compat.h) = 6e88b5e73a56c296f356aa5ce7e6048e1bcff450
+SHA1 (patch-src_libopts_libopts.c) = 6e2453a886aa4be0a17dfbdb8a23ef9d7a0f62f8
+SHA1 (patch-src_libopts_makeshell.c) = 1b08ab63e6e382bd471699530e5d8bff075b3f24
+SHA1 (patch-src_libopts_proto.h) = 7601830e5ff45632ae337a387548f9ed5e591c4f

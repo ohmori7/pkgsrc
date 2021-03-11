@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2019/04/03 00:32:55 ryoon Exp $
+# $NetBSD: Makefile,v 1.43 2020/11/05 09:08:48 ryoon Exp $
 
 PKGNAME=	minidlna-1.2.1.20180601
-PKGREVISION=	4
+PKGREVISION=	9
 DISTNAME=	minidlna-git-799e6cf505ec470b2bf0ae4118143380aa16b837
 CATEGORIES=	multimedia
 #MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=minidlna/}
@@ -13,9 +13,9 @@ HOMEPAGE=	http://minidlna.sourceforge.net/
 COMMENT=	DLNA server
 LICENSE=	gnu-gpl-v2
 
-GNU_CONFIGURE=      yes
+GNU_CONFIGURE=	yes
 EGDIR=		${PREFIX}/share/examples/minidlna
-USE_TOOLS+=     msgfmt autoreconf autoconf automake
+USE_TOOLS+=	msgfmt autoreconf autoconf automake
 
 CONF_FILES=	${EGDIR}/minidlna.conf \
 		${PKG_SYSCONFDIR}/minidlna.conf
@@ -34,7 +34,7 @@ pre-install:
 
 BUILD_DEPENDS+=	gettext-tools-[0-9]*:../../devel/gettext-tools
 
-.include "../../multimedia/ffmpeg3/buildlink3.mk"
+.include "../../multimedia/ffmpeg4/buildlink3.mk"
 .include "../../audio/flac/buildlink3.mk"
 .include "../../audio/libvorbis/buildlink3.mk"
 .include "../../multimedia/libogg/buildlink3.mk"

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.120 2018/11/14 22:22:25 kleink Exp $
+# $NetBSD: Makefile,v 1.128 2020/11/05 09:07:08 ryoon Exp $
 
-PKGREVISION=		38
+PKGREVISION=		45
 
 PKGCONFIG_OVERRIDE=	gnome-vfs-2.0.pc.in
 PKGCONFIG_OVERRIDE+=	gnome-vfs-module-2.0.pc.in
@@ -10,7 +10,7 @@ OWN_DIRS=		${PKG_SYSCONFDIR}/modules
 EGFILES+=		modules/default-modules.conf
 EGFILES+=		modules/ssl-modules.conf
 
-GCONF_SCHEMAS=		desktop_default_applications.schemas
+GCONF_SCHEMAS=	desktop_default_applications.schemas
 GCONF_SCHEMAS+=	desktop_gnome_url_handlers.schemas
 GCONF_SCHEMAS+=	system_dns_sd.schemas
 GCONF_SCHEMAS+=	system_http_proxy.schemas

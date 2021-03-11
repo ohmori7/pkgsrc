@@ -1,19 +1,22 @@
-# $NetBSD: Makefile,v 1.40 2018/12/13 19:52:01 adam Exp $
+# $NetBSD: Makefile,v 1.56 2021/02/07 06:30:27 ryoon Exp $
 
-DISTNAME=	kolourpaint-16.04.0
-PKGREVISION=	7
+DISTNAME=	kolourpaint-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	graphics
+
+HOMEPAGE=	https://kde.org/applications/graphics/kolourpaint/
 COMMENT=	KDE paint program
-MASTER_SITES=	${MASTER_SITE_KDE:=applications/16.04.0/src/}
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2 AND gnu-lgpl-v2
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+.include "../../meta-pkgs/kde/applications.mk"
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
+
+USE_TOOLS+=	msgmerge pkg-config
 
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/libksane/buildlink3.mk"
-.include "../../graphics/qimageblitz/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/kdelibs4support/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

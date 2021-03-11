@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.14 2018/08/22 09:46:57 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:11:58 wiz Exp $
 
 DISTNAME=	Template-Tiny-1.12
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Template/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Template-Tiny/
+HOMEPAGE=	https://metacpan.org/release/Template-Tiny
 COMMENT=	Template Toolkit reimplemented in as little code as possible
 LICENSE=	${PERL5_LICENSE}
 

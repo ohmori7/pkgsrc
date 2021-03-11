@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.49 2019/04/25 07:32:44 maya Exp $
+# $NetBSD: Makefile,v 1.60 2020/12/04 20:45:08 nia Exp $
 
-DISTNAME=	dconf-0.30.1
-PKGREVISION=	2
+DISTNAME=	dconf-0.36.0
+PKGREVISION=	3
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/dconf/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -16,18 +16,9 @@ BUILD_DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
 BUILD_DEPENDS+=	docbook-xsl-[0-9]*:../../textproc/docbook-xsl
 
 USE_LANGUAGES=	c99
-USE_TOOLS+=	pkg-config gmake
+USE_TOOLS+=	pkg-config
 
 REPLACE_PYTHON+=	*.py
-
-SUBST_CLASSES+=		sysdir
-SUBST_MESSAGE.sysdir=	Fixes hard-coded dconf database directory name
-SUBST_STAGE.sysdir=	post-configure
-SUBST_FILES.sysdir+=	engine/dconf-engine-source-system.c
-SUBST_FILES.sysdir+=	engine/dconf-engine-profile.c
-SUBST_FILES.sysdir+=	tests/engine.c
-SUBST_FILES.sysdir+=	bin/dconf-update.vala
-SUBST_SED.sysdir=	-e s,/etc,${PKG_SYSCONFDIR},g
 
 # gtk-doc wants to run dconf-scan, but that does not find its library libdconf.so.1
 # https://bugzilla.gnome.org/show_bug.cgi?id=795348
@@ -68,7 +59,7 @@ BUILDLINK_DEPMETHOD.vala=	build
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.44.0
 #.include "../../textproc/gtk-doc/buildlink3.mk"
 .include "../../devel/glib2/modules.mk"
-.include "../../devel/py-meson/build.mk"
+.include "../../devel/meson/build.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

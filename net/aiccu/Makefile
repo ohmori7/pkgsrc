@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2018/07/04 13:40:27 jperkin Exp $
+# $NetBSD: Makefile,v 1.22 2020/05/22 10:56:25 adam Exp $
 
 DISTNAME=		aiccu_20070115
 PKGNAME=		${DISTNAME:S/_/-/:S/.//g}
-PKGREVISION=		4
+PKGREVISION=		7
 CATEGORIES=		net
 MASTER_SITES=		http://www.sixxs.net/archive/sixxs/aiccu/unix/
 
@@ -12,7 +12,7 @@ COMMENT=		Automatic IPv6 Connectivity Client Utility
 
 USE_TOOLS+=		gmake
 USE_FEATURES+=		inet6
-CHECK_PORTABILITY_SKIP+=debian/*
+CHECK_PORTABILITY_SKIP+= debian/*
 
 SUBST_CLASSES+=		sysconfdir
 SUBST_STAGE.sysconfdir=	pre-configure

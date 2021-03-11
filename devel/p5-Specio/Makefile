@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.19 2018/11/25 13:17:48 wen Exp $
+# $NetBSD: Makefile,v 1.25 2020/09/08 13:16:38 wiz Exp $
 
-DISTNAME=	Specio-0.43
+DISTNAME=	Specio-0.46
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
-MASTER_SITES=	http://search.cpan.org/CPAN/authors/id/D/DR/DROLSKY/
+MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/D/DR/DROLSKY/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~drolsky/Specio/
+HOMEPAGE=	https://metacpan.org/release/Specio
 COMMENT=	Type constraints and coercions for Perl
 LICENSE=	artistic-2.0
 
@@ -19,9 +20,9 @@ DEPENDS+=	p5-Sub-Quote-[0-9]*:../../devel/p5-Sub-Quote
 # recommended
 DEPENDS+=	p5-Ref-Util-[0-9]*:../../devel/p5-Ref-Util
 
-# TEST_DEPENDS
-BUILD_DEPENDS+=	p5-Test-Needs-[0-9]*:../../devel/p5-Test-Needs
-BUILD_DEPENDS+=	p5-Test-Fatal-[0-9]*:../../devel/p5-Test-Fatal
+TEST_DEPENDS+=	p5-Test-Needs-[0-9]*:../../devel/p5-Test-Needs
+TEST_DEPENDS+=	p5-Test-Fatal-[0-9]*:../../devel/p5-Test-Fatal
+TEST_DEPENDS+=	p5-XString-[0-9]*:../../devel/p5-XString
 
 PERL5_PACKLIST=	auto/Specio/.packlist
 

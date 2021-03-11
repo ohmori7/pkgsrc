@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.4 2018/08/22 09:44:32 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2020/08/31 18:08:43 wiz Exp $
 
 DISTNAME=	PerlIO-via-Timeout-0.32
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=PerlIO/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/PerlIO-via-Timeout/
+HOMEPAGE=	https://metacpan.org/release/PerlIO-via-Timeout
 COMMENT=	PerlIO layer to add read and write timeouts to a handle
 LICENSE=	${PERL5_LICENSE}
 

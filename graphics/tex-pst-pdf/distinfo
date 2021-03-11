@@ -1,7 +1,7 @@
-$NetBSD: distinfo,v 1.5 2017/08/23 23:51:35 markd Exp $
+$NetBSD: distinfo,v 1.7 2021/02/15 11:03:11 markd Exp $
 
-SHA1 (tex-pst-pdf-44665/pst-pdf.tar.xz) = 0072b07ece4c92aaf38efe5fda14a47b74f6cd21
-RMD160 (tex-pst-pdf-44665/pst-pdf.tar.xz) = bb982494a1fe24515a5a979e37f3709dd4f6041d
-SHA512 (tex-pst-pdf-44665/pst-pdf.tar.xz) = ba85656810cc2c0b33b133a756266c052ef0ccc1663be3df05a72a49b8ae55351240cb4635aa5f433c8d2184fbad35edd853e8b365af681fefef36f5a1f6b312
-Size (tex-pst-pdf-44665/pst-pdf.tar.xz) = 7300 bytes
+SHA1 (pst-pdf.r56622.tar.xz) = ed8a0c723d444bd07f005c0649ff9a9fb8c0177d
+RMD160 (pst-pdf.r56622.tar.xz) = 46a6eb2f5cf2e19b0780c728e55ee3e358415c93
+SHA512 (pst-pdf.r56622.tar.xz) = 5f5850f0e908bf6b10977bf616aa82ce05d1f0afd4127b5db14379a510ca62614a3552cc85ec0136805fb479201c817442872f9d1074fa6cc1367f41403476e1
+Size (pst-pdf.r56622.tar.xz) = 7512 bytes
 SHA1 (patch-bin_ps4pdf) = e27eb9cce0e9fbf45f332a7ef20f1fbfbc4ac5e9

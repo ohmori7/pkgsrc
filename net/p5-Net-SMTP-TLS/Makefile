@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.11 2018/08/22 09:46:02 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2020/08/31 18:10:46 wiz Exp $
 #
 
 DISTNAME=	Net-SMTP-TLS-0.12
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Net-SMTP-TLS/
+HOMEPAGE=	https://metacpan.org/release/Net-SMTP-TLS
 COMMENT=	Perl5 SMTP client module supporting TLS and AUTH
 LICENSE=	${PERL5_LICENSE} # see README
 

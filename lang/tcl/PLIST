@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.25 2018/12/09 18:33:55 adam Exp $
+@comment $NetBSD: PLIST,v 1.28 2021/01/20 20:38:48 adam Exp $
 bin/sqlite3_analyzer
 bin/tclsh
 bin/tclsh${BASEVER}
@@ -296,12 +296,12 @@ lib/tcl${BASEVER}/tcltest2.5/pkgIndex.tcl
 lib/tcl${BASEVER}/tcltest2.5/tcltest.tcl
 lib/tcl${BASEVER}/tm.tcl
 lib/tcl${BASEVER}/word.tcl
-lib/tcl8/8.4/platform-1.0.14.tm
+lib/tcl8/${BASEVER}/http-2.9.5.tm
+lib/tcl8/${BASEVER}/tdbc/sqlite3-${TDBC_VERSION}.tm
+lib/tcl8/8.4/platform-1.0.15.tm
 lib/tcl8/8.4/platform/shell-1.1.4.tm
 lib/tcl8/8.5/msgcat-1.6.1.tm
-lib/tcl8/8.5/tcltest-2.5.0.tm
-lib/tcl8/8.6/http-2.9.0.tm
-lib/tcl8/8.6/tdbc/sqlite3-${TDBC_VERSION}.tm
+lib/tcl8/8.5/tcltest-2.5.3.tm
 lib/tclConfig.sh
 lib/tclooConfig.sh
 lib/tdbc${TDBC_VERSION}/libtdbc${TDBC_VERSION}.so
@@ -322,6 +322,9 @@ lib/thread${THREAD_VERSION}/libthread${THREAD_VERSION}.so
 lib/thread${THREAD_VERSION}/pkgIndex.tcl
 lib/thread${THREAD_VERSION}/ttrace.tcl
 man/man1/tclsh.1
+man/man3/DString.3
+man/man3/Notifier.3
+man/man3/RegExp.3
 man/man3/TCL_MEM_DEBUG.3
 man/man3/Tcl_Access.3
 man/man3/Tcl_AddErrorInfo.3
@@ -401,6 +404,7 @@ man/man3/Tcl_CreateAlias.3
 man/man3/Tcl_CreateAliasObj.3
 man/man3/Tcl_CreateChannel.3
 man/man3/Tcl_CreateChannelHandler.3
+man/man3/Tcl_CreateChild.3
 man/man3/Tcl_CreateCloseHandler.3
 man/man3/Tcl_CreateCommand.3
 man/man3/Tcl_CreateEncoding.3
@@ -576,6 +580,7 @@ man/man3/Tcl_GetChannelOption.3
 man/man3/Tcl_GetChannelThread.3
 man/man3/Tcl_GetChannelType.3
 man/man3/Tcl_GetCharLength.3
+man/man3/Tcl_GetChild.3
 man/man3/Tcl_GetClassAsObject.3
 man/man3/Tcl_GetCommandFromObj.3
 man/man3/Tcl_GetCommandFullName.3
@@ -631,6 +636,7 @@ man/man3/Tcl_GetObjectFromObj.3
 man/man3/Tcl_GetObjectName.3
 man/man3/Tcl_GetObjectNamespace.3
 man/man3/Tcl_GetOpenFile.3
+man/man3/Tcl_GetParent.3
 man/man3/Tcl_GetPathType.3
 man/man3/Tcl_GetRange.3
 man/man3/Tcl_GetRegExpFromObj.3
@@ -886,6 +892,7 @@ man/man3/Tcl_StringMatch.3
 man/man3/Tcl_SubstObj.3
 man/man3/Tcl_TakeBignumFromObj.3
 man/man3/Tcl_Tell.3
+man/man3/Tcl_Thread.3
 man/man3/Tcl_ThreadAlert.3
 man/man3/Tcl_ThreadQueueEvent.3
 man/man3/Tcl_TraceCommand.3
@@ -1051,6 +1058,7 @@ man/mann/itclwidget.n
 man/mann/join.n
 man/mann/lappend.n
 man/mann/lassign.n
+man/mann/library.n
 man/mann/lindex.n
 man/mann/linsert.n
 man/mann/list.n
@@ -1080,8 +1088,10 @@ man/mann/oo_objdefine.n
 man/mann/oo_object.n
 man/mann/open.n
 man/mann/package.n
+man/mann/packagens.n
 man/mann/parray.n
 man/mann/pid.n
+man/mann/pkgMkIndex.n
 man/mann/pkg_create.n
 man/mann/pkg_mkIndex.n
 man/mann/platform.n
@@ -1145,6 +1155,7 @@ man/mann/tell.n
 man/mann/thread.n
 man/mann/throw.n
 man/mann/time.n
+man/mann/timerate.n
 man/mann/tm.n
 man/mann/tpool.n
 man/mann/trace.n

@@ -1,21 +1,20 @@
-# $NetBSD: Makefile,v 1.12 2019/05/15 09:18:59 markd Exp $
+# $NetBSD: Makefile,v 1.15 2021/02/14 03:17:10 markd Exp $
 
 DISTNAME=	collection-langenglish
-PKGNAME=	texlive-${DISTNAME}-2019
+PKGNAME=	texlive-${DISTNAME}-2020
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	50985
+TEXLIVE_REV=	57292
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.tug.org/texlive/
+HOMEPAGE=	https://www.tug.org/texlive/
 COMMENT=	US and UK English TeX packages
 
 DEPENDS+=	texlive-collection-basic>=2014:../../meta-pkgs/texlive-collection-basic
 
-DEPENDS+=	tex-hyphen-english-[0-9]*:../../print/tex-hyphen-english
-# FAQ-en is documentation only
 # MemoirChapStyles is documentation only
 # Type1fonts is documentation only
+# amiweb2c-guide is documentation only
 # amscls-doc is documentation only
 # amslatex-primer is documentation only
 # around-the-bend is documentation only
@@ -31,6 +30,7 @@ DEPENDS+=	tex-hyphen-english-[0-9]*:../../print/tex-hyphen-english
 # gentle is documentation only
 DEPENDS+=	tex-guide-to-latex-[0-9]*:../../print/tex-guide-to-latex
 # happy4th is documentation only
+DEPENDS+=	tex-hyphen-english-[0-9]*:../../print/tex-hyphen-english
 # impatient is documentation only
 # intro-scientific is documentation only
 # knuth is documentation only
@@ -49,7 +49,6 @@ DEPENDS+=	tex-guide-to-latex-[0-9]*:../../print/tex-guide-to-latex
 DEPENDS+=	tex-latexfileinfo-pkgs-[0-9]*:../../print/tex-latexfileinfo-pkgs
 # lshort-english is documentation only
 # macros2e is documentation only
-# math-e is documentation only
 # math-into-latex-4 is documentation only
 # maths-symbols is documentation only
 # memdesign is documentation only
@@ -58,20 +57,21 @@ DEPENDS+=	tex-latexfileinfo-pkgs-[0-9]*:../../print/tex-latexfileinfo-pkgs
 # patgen2-tutorial is documentation only
 # pictexsum is documentation only
 # plain-doc is documentation only
-# presentations-en is documentation only
 # short-math-guide is documentation only
 # simplified-latex is documentation only
+# startlatex2e is documentation only
 # svg-inkscape is documentation only
-# tabulars-e is documentation only
 # tamethebeast is documentation only
 # tds is documentation only
 # tex-font-errors-cheatsheet is documentation only
+# tex-nutshell is documentation only
 # tex-overview is documentation only
 # tex-refs is documentation only
 # texbytopic is documentation only
 # texonly is documentation only
 # titlepages is documentation only
 # tlc2 is documentation only
+# tlmgrbasics is documentation only
 # undergradmath is documentation only
 # visualfaq is documentation only
 # webguide is documentation only

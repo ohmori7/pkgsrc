@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.97 2019/03/18 16:17:48 gdt Exp $
+# $NetBSD: Makefile,v 1.107 2020/12/04 04:55:59 riastradh Exp $
 
 DISTNAME=	pstoedit-3.70
-PKGREVISION=	13
+PKGREVISION=	22
 CATEGORIES=	converters graphics print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pstoedit/}
 
@@ -24,7 +24,7 @@ CONFIGURE_ARGS+=	--without-emf
 CONFIGURE_ENV+=		CXXFLAGS="${CFLAGS} -Dunix"
 CONFIGURE_ENV+=		ac_cv_path_GS=${TOOLS_PATH.gs}
 
-GNU_CONFIGURE_LIBSUBDIR=pstoedit	# plugin dir -- unused for now
+GNU_CONFIGURE_LIBSUBDIR=	pstoedit	# plugin dir -- unused for now
 #BUILD_TARGET=
 
 LIBS.SunOS+=	-ldl

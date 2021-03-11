@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.6 2021/02/02 18:45:09 pin Exp $
+
+SHA1 (Arqiver-0.7.0.tar.gz) = 0bb441c01ed3925c50a398a3ca60292002637957
+RMD160 (Arqiver-0.7.0.tar.gz) = ae5497e3eda51351dc4e942e07daa3e357fd73d2
+SHA512 (Arqiver-0.7.0.tar.gz) = 82968411961ad5bd4e523d7ea464e2eac647dff3fd5dc52ebaf8f5be7c8200f5fa53ffd184f544d707a476574f6ee6ca5d26a8e55280324d224e7e366c1f63c8
+Size (Arqiver-0.7.0.tar.gz) = 124380 bytes

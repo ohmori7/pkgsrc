@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.49 2018/11/14 18:22:54 kleink Exp $
+# $NetBSD: Makefile,v 1.51 2020/08/17 20:18:52 leot Exp $
 
 DISTNAME=		xconq-7.4.1
-PKGREVISION=		14
+PKGREVISION=		15
 CATEGORIES=		games x11
 MASTER_SITES=		ftp://sources.redhat.com/pub/xconq/
 
@@ -15,9 +15,9 @@ CONFIGURE_ARGS+=	--enable-alternate-scoresdir=${SCOREDIR}
 CONFIGURE_ARGS+=	--with-tclconfig="${BUILDLINK_PREFIX.tcl}/lib"
 CONFIGURE_ARGS+=	--with-tkconfig="${BUILDLINK_PREFIX.tk}/lib"
 
-MAKE_ENV+=		LOCALBASE=${LOCALBASE}
-MAKE_FLAGS+=		mandir=${PREFIX}/${PKGMANDIR}		\
-			infodir=${PREFIX}/${PKGINFODIR}
+MAKE_ENV+=	LOCALBASE=${LOCALBASE}
+MAKE_FLAGS+=	mandir=${PREFIX}/${PKGMANDIR}		\
+		infodir=${PREFIX}/${PKGINFODIR}
 INFO_FILES=	yes
 
 # XXX SETGIDGAME should go away and the rest of these should come from

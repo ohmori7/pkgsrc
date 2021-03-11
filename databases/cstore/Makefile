@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.16 2018/08/22 09:43:11 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:06:55 wiz Exp $
 
 DISTNAME=	cstore0.2
 PKGNAME=	cstore-0.2
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	databases
 MASTER_SITES=	http://db.lcs.mit.edu/projects/cstore/
 MASTER_SITES+=	http://db.csail.mit.edu/data/

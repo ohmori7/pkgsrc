@@ -1,16 +1,12 @@
-# $NetBSD: Makefile,v 1.19 2019/05/23 19:23:13 rillig Exp $
+# $NetBSD: Makefile,v 1.41 2021/01/04 14:32:17 prlw1 Exp $
 
 .include "../../print/cups/Makefile.common"
 
-DISTNAME=	cups-${CUPS_VERS}-source
 PKGNAME=	cups-base-${CUPS_VERS}
-CATEGORIES=	print
-MASTER_SITES=	${MASTER_SITE_GITHUB:=apple/}
+MASTER_SITES=	${MASTER_SITE_GITHUB:=OpenPrinting/}
 
 MAINTAINER=	sbd@NetBSD.org
-HOMEPAGE=	https://www.cups.org/
 COMMENT=	Common UNIX Printing System
-LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2
 
 GITHUB_PROJECT=	cups
 GITHUB_RELEASE=	v${PKGVERSION_NOREV}
@@ -35,17 +31,12 @@ CONFIGURE_ARGS+=	--with-cups-group=${CUPS_GROUP}
 CONFIGURE_ARGS+=	--with-system-groups=${CUPS_SYSTEM_GROUPS:Q}
 CONFIGURE_ARGS+=	--with-exe-file-perm=0755
 CONFIGURE_ARGS+=	--enable-libpaper
-CONFIGURE_ARGS+=	--enable-libtool
 CONFIGURE_ARGS+=	--enable-ssl
-CONFIGURE_ARGS+=	--with-manext=bsd
+CONFIGURE_ARGS+=	--enable-gnutls
+CONFIGURE_ARGS+=	--disable-cdsassl
 CONFIGURE_ARGS+=	--without-bundledir
 CONFIGURE_ARGS+=	--without-icondir
 CONFIGURE_ARGS+=	--without-menudir
-CONFIGURE_ARGS+=	--without-perl
-CONFIGURE_ARGS+=	--without-php
-CONFIGURE_ARGS+=	--without-python
-CONFIGURE_ARGS+=	--without-java
-CONFIGURE_ARGS+=	--disable-gssapi
 
 CONFIGURE_ENV+=		DSOFLAGS=${LDFLAGS:M*:Q}
 
@@ -62,13 +53,6 @@ LIBS+=			${BUILDLINK_LDADD.iconv}
 # can not be used when making a shared object; recompile with -fPIC
 BUILDLINK_TRANSFORM.FreeBSD+=	rm:-Wl,-pie
 
-# CUPS_USER		user to run filter and CGI programs as
-# CUPS_GROUP		group to run filter and CGI programs as
-# CUPS_SYSTEM_GROUPS	group for system administration
-#
-CUPS_USER?=		lp
-CUPS_GROUP?=		lp
-CUPS_SYSTEM_GROUPS?=	${REAL_ROOT_GROUP}
 FILES_SUBST+=		CUPS_USER=${CUPS_USER}
 FILES_SUBST+=		CUPS_GROUP=${CUPS_GROUP}
 FILES_SUBST+=		CUPS_SYSTEM_GROUPS=${CUPS_SYSTEM_GROUPS:Q}
@@ -122,7 +106,7 @@ SUBST_MESSAGE.rpathfix=	Adding rpath to cups-config.
 SUBST_SED.rpathfix=	-e 's|@EXPORT_LDFLAGS@|${COMPILER_RPATH_FLAG}${PREFIX}/lib|g'
 SUBST_STAGE.rpathfix=	pre-configure
 
-.if !empty(OPSYS:MNetBSD) && !empty(MACHINE_ARCH:Mpowerpc)
+.if ${OPSYS} == NetBSD && ${MACHINE_ARCH} == powerpc
 SUBST_CLASSES+=		piefix
 SUBST_FILES.piefix=	Makedefs.in
 SUBST_MESSAGE.piefix=	Removing PIE flags
@@ -131,7 +115,6 @@ SUBST_STAGE.piefix=	pre-configure
 .endif
 
 INSTALLATION_DIRS=	${DOCDIR} ${EGDIR} ${MIMEDIR}
-INSTALL_ENV+=		DSTROOT=${DESTDIR}
 
 pre-configure:
 .if !empty(CUPS_SYSTEM_GROUPS:M${CUPS_GROUP})
@@ -144,7 +127,12 @@ post-extract:
 	${CP} ${FILESDIR}/cups.pam ${WRKDIR}/cups.pam
 
 post-install:
-	set -e; for file in LICENSE.txt README.md; do			\
+	# Delete files installed by libcups
+	${RM} ${DESTDIR}${PREFIX}/bin/cups-config
+	${RM} -rf ${DESTDIR}${PREFIX}/lib
+	${RM} -rf ${DESTDIR}${PREFIX}/include/cups
+	${RM} -rf ${DESTDIR}${PREFIX}/share/locale
+	set -e; for file in LICENSE README.md; do			\
 		${INSTALL_DATA} ${WRKSRC}/$${file}			\
 		     ${DESTDIR}${DOCDIR}/$${file}; \
 	done
@@ -164,6 +152,7 @@ post-install:
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
+.include "../../print/libcups/buildlink3.mk"
 .include "../../print/libpaper/buildlink3.mk"
 .include "../../security/gnutls/buildlink3.mk"
 .include "../../textproc/libunistring/buildlink3.mk"

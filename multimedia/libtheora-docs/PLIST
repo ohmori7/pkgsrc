@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.9 2016/11/24 13:43:36 mef Exp $
+@comment $NetBSD: PLIST,v 1.11 2020/12/25 22:21:35 nia Exp $
 share/doc/${SUBDIR}/color.html
 share/doc/${SUBDIR}/doxygen-build.stamp
 share/doc/${SUBDIR}/draft-ietf-avt-rtp-theora-00.txt
@@ -15,6 +15,7 @@ share/doc/${SUBDIR}/html/dir_000001.html
 share/doc/${SUBDIR}/html/doc.png
 share/doc/${SUBDIR}/html/doxygen.css
 share/doc/${SUBDIR}/html/doxygen.png
+share/doc/${SUBDIR}/html/doxygen.svg
 share/doc/${SUBDIR}/html/dynsections.js
 share/doc/${SUBDIR}/html/files.html
 share/doc/${SUBDIR}/html/folderclosed.png
@@ -81,6 +82,7 @@ share/doc/${SUBDIR}/latex/group__decfuncs.tex
 share/doc/${SUBDIR}/latex/group__encfuncs.tex
 share/doc/${SUBDIR}/latex/group__oldfuncs.tex
 share/doc/${SUBDIR}/latex/index.tex
+share/doc/${SUBDIR}/latex/longtable_doxygen.sty
 share/doc/${SUBDIR}/latex/modules.tex
 share/doc/${SUBDIR}/latex/refman.tex
 share/doc/${SUBDIR}/latex/structth__comment.tex
@@ -94,6 +96,7 @@ share/doc/${SUBDIR}/latex/structtheora__comment.tex
 share/doc/${SUBDIR}/latex/structtheora__info.tex
 share/doc/${SUBDIR}/latex/structtheora__state.tex
 share/doc/${SUBDIR}/latex/structyuv__buffer.tex
+share/doc/${SUBDIR}/latex/tabu_doxygen.sty
 share/doc/${SUBDIR}/latex/theora_8h.tex
 share/doc/${SUBDIR}/latex/theoradec_8h.tex
 share/doc/${SUBDIR}/latex/theoraenc_8h.tex

@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.6 2018/11/02 11:51:38 adam Exp $
+@comment $NetBSD: PLIST,v 1.9 2021/02/10 08:26:31 adam Exp $
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
 ${PYSITELIB}/${EGG_INFODIR}/dependency_links.txt
@@ -14,6 +14,9 @@ ${PYSITELIB}/asyncpg/_testbase/__init__.pyo
 ${PYSITELIB}/asyncpg/_testbase/fuzzer.py
 ${PYSITELIB}/asyncpg/_testbase/fuzzer.pyc
 ${PYSITELIB}/asyncpg/_testbase/fuzzer.pyo
+${PYSITELIB}/asyncpg/_version.py
+${PYSITELIB}/asyncpg/_version.pyc
+${PYSITELIB}/asyncpg/_version.pyo
 ${PYSITELIB}/asyncpg/cluster.py
 ${PYSITELIB}/asyncpg/cluster.pyc
 ${PYSITELIB}/asyncpg/cluster.pyo
@@ -57,20 +60,18 @@ ${PYSITELIB}/asyncpg/pgproto/codecs/geometry.pyx
 ${PYSITELIB}/asyncpg/pgproto/codecs/hstore.pyx
 ${PYSITELIB}/asyncpg/pgproto/codecs/int.pyx
 ${PYSITELIB}/asyncpg/pgproto/codecs/json.pyx
+${PYSITELIB}/asyncpg/pgproto/codecs/jsonpath.pyx
 ${PYSITELIB}/asyncpg/pgproto/codecs/misc.pyx
 ${PYSITELIB}/asyncpg/pgproto/codecs/network.pyx
 ${PYSITELIB}/asyncpg/pgproto/codecs/numeric.pyx
+${PYSITELIB}/asyncpg/pgproto/codecs/pg_snapshot.pyx
 ${PYSITELIB}/asyncpg/pgproto/codecs/text.pyx
 ${PYSITELIB}/asyncpg/pgproto/codecs/tid.pyx
-${PYSITELIB}/asyncpg/pgproto/codecs/txid.pyx
 ${PYSITELIB}/asyncpg/pgproto/codecs/uuid.pyx
 ${PYSITELIB}/asyncpg/pgproto/consts.pxi
 ${PYSITELIB}/asyncpg/pgproto/cpythonx.pxd
 ${PYSITELIB}/asyncpg/pgproto/debug.h
 ${PYSITELIB}/asyncpg/pgproto/debug.pxd
-${PYSITELIB}/asyncpg/pgproto/exceptions.py
-${PYSITELIB}/asyncpg/pgproto/exceptions.pyc
-${PYSITELIB}/asyncpg/pgproto/exceptions.pyo
 ${PYSITELIB}/asyncpg/pgproto/frb.pxd
 ${PYSITELIB}/asyncpg/pgproto/frb.pyx
 ${PYSITELIB}/asyncpg/pgproto/hton.h
@@ -79,9 +80,12 @@ ${PYSITELIB}/asyncpg/pgproto/pgproto.c
 ${PYSITELIB}/asyncpg/pgproto/pgproto.pxd
 ${PYSITELIB}/asyncpg/pgproto/pgproto.pyx
 ${PYSITELIB}/asyncpg/pgproto/pgproto.so
+${PYSITELIB}/asyncpg/pgproto/tohex.h
+${PYSITELIB}/asyncpg/pgproto/tohex.pxd
 ${PYSITELIB}/asyncpg/pgproto/types.py
 ${PYSITELIB}/asyncpg/pgproto/types.pyc
 ${PYSITELIB}/asyncpg/pgproto/types.pyo
+${PYSITELIB}/asyncpg/pgproto/uuid.pyx
 ${PYSITELIB}/asyncpg/pool.py
 ${PYSITELIB}/asyncpg/pool.pyc
 ${PYSITELIB}/asyncpg/pool.pyo
@@ -116,6 +120,8 @@ ${PYSITELIB}/asyncpg/protocol/protocol.so
 ${PYSITELIB}/asyncpg/protocol/record/__init__.pxd
 ${PYSITELIB}/asyncpg/protocol/record/recordobj.c
 ${PYSITELIB}/asyncpg/protocol/record/recordobj.h
+${PYSITELIB}/asyncpg/protocol/scram.pxd
+${PYSITELIB}/asyncpg/protocol/scram.pyx
 ${PYSITELIB}/asyncpg/protocol/settings.pxd
 ${PYSITELIB}/asyncpg/protocol/settings.pyx
 ${PYSITELIB}/asyncpg/serverversion.py

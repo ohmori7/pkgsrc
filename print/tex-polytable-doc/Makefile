@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.5 2016/01/27 09:46:17 markd Exp $
+# $NetBSD: Makefile,v 1.7 2021/02/20 10:38:29 markd Exp $
 
 DISTNAME=	polytable.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-0.8.5
-TEXLIVE_REV=	31235
+PKGNAME=	tex-${DISTNAME:S/./-/}-0.8.6
+TEXLIVE_REV=	55837
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/polytable
 COMMENT=	Documentation for tex-polytable
 LICENSE=	lppl-1.3c
 

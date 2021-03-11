@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.45 2019/05/05 22:49:45 ryoon Exp $
+# $NetBSD: buildlink3.mk,v 1.50 2020/11/05 09:06:43 ryoon Exp $
 
 BUILDLINK_TREE+=	libpurple
 
@@ -6,21 +6,20 @@ BUILDLINK_TREE+=	libpurple
 LIBPURPLE_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.libpurple+=	libpurple>=2.11.0
-BUILDLINK_ABI_DEPENDS.libpurple+=	libpurple>=2.13.0nb6
+BUILDLINK_ABI_DEPENDS.libpurple+=	libpurple>=2.14.1nb3
 BUILDLINK_PKGSRCDIR.libpurple?=		../../chat/libpurple
 
 pkgbase := libpurple
 .include "../../mk/pkg-build-options.mk"
 
-.if !empty(PKG_BUILD_OPTIONS.libpurple:Mdbus)
+.if ${PKG_BUILD_OPTIONS.libpurple:Mdbus}
 .  include "../../sysutils/dbus/buildlink3.mk"
 .  include "../../sysutils/dbus-glib/buildlink3.mk"
-.  include "../../sysutils/py-dbus/buildlink3.mk"
 .endif
-.if !empty(PKG_BUILD_OPTIONS.libpurple:Mfarstream)
+.if ${PKG_BUILD_OPTIONS.libpurple:Mfarstream}
 .  include "../../chat/farstream/buildlink3.mk"
 .endif
-.if !empty(PKG_BUILD_OPTIONS.libpurple:Mgstreamer)
+.if ${PKG_BUILD_OPTIONS.libpurple:Mgstreamer}
 .  include "../../multimedia/gstreamer1/buildlink3.mk"
 .  include "../../multimedia/gst-plugins1-base/buildlink3.mk"
 .endif

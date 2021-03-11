@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.42 2018/08/22 09:45:20 wiz Exp $
+# $NetBSD: Makefile,v 1.47 2020/08/31 18:09:49 wiz Exp $
 
 DISTNAME=		gforth-0.7.3
-PKGREVISION=		4
+PKGREVISION=		7
 CATEGORIES=		lang
 MASTER_SITES=		${MASTER_SITE_GNU:=gforth/}
 MASTER_SITES+=		http://www.complang.tuwien.ac.at/forth/gforth/
 
 MAINTAINER=		simonb@NetBSD.org
-HOMEPAGE=		http://www.complang.tuwien.ac.at/forth/gforth/
+HOMEPAGE=		https://www.complang.tuwien.ac.at/forth/gforth/
 COMMENT=		Fast interpreter for the Forth language
 LICENSE=		gnu-gpl-v3
 
@@ -60,9 +60,9 @@ PLIST_SUBST+=	KERNEL_FI=${KERNEL_FI_cmd:sh:Q}
 # demand at least gcc 4.3 for arm.
 .include "../../mk/bsd.prefs.mk"
 .if !empty(MACHINE_ARCH:Marm*) || !empty(MACHINE_ARCH:Mearm*)
-.if !empty(PKGSRC_COMPILER:Mgcc)
+.  if !empty(PKGSRC_COMPILER:Mgcc)
 GCC_REQD+=	4.3
-.endif
+.  endif
 .endif
 
 # XXX Need test.

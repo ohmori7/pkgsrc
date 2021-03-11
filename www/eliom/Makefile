@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.27 2019/05/13 11:55:44 jaapb Exp $
+# $NetBSD: Makefile,v 1.34 2021/03/08 08:13:08 jaapb Exp $
 #
 
 GITHUB_PROJECT=	eliom
-DISTNAME=	${GITHUB_PROJECT}-6.7.0
+DISTNAME=	${GITHUB_PROJECT}-6.12.4
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ocsigen/}
 
@@ -11,12 +12,12 @@ HOMEPAGE=	http://ocsigen.org/download/
 COMMENT=	Dynamic webpage generation library
 LICENSE=	gnu-lgpl-v2.1
 
-USE_TOOLS+=	gmake
-USE_LANGUAGES=	c
+USE_TOOLS+=		gmake
+USE_LANGUAGES=		c
 OCAML_USE_FINDLIB=	yes
+UNLIMIT_RESOURCES+=	stacksize
 
-DEPENDS+=	ocsigen>=2.9:../../www/ocsigen
-DEPENDS+=	ocaml-deriving-ocsigen>=0.8.1:../../devel/ocaml-deriving-ocsigen
+DEPENDS+=	ocsigen>=2.16.1:../../www/ocsigen
 
 .include "../../mk/ocaml.mk"
 

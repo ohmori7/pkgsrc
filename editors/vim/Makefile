@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.74 2013/03/25 00:34:49 mspo Exp $
+# $NetBSD: Makefile,v 1.77 2020/05/03 13:14:21 morr Exp $
 
 PKGNAME=		vim-${VIM_VERSION}.${VIM_PATCHLEVEL}
 
@@ -15,7 +15,7 @@ CONFIGURE_ARGS+=	--enable-gui=no --without-x
 CONFIGURE_ARGS+=	--with-tlib=${BUILDLINK_LIBNAME.termcap}
 
 BUILD_TARGET=		vim
-INSTALL_TARGET=		installvimbin
+INSTALL_TARGET=		installvimbin installvimdiff installtutorbin
 TEST_TARGET=		check
 
 post-install:

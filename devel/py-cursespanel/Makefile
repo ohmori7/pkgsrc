@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.31 2017/09/03 08:53:08 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2020/01/08 13:44:41 joerg Exp $
 
 PKGNAME=	${PYPKGPREFIX}-cursespanel-${PY_DISTVERSION}
 PKGREVISION=	4
@@ -13,19 +13,10 @@ DEPENDS+=	${PYPKGPREFIX}-curses-[0-9]*:../../devel/py-curses
 USE_CURSES=	getsyx
 FAKE_NCURSES=	yes
 
-EXTRACT_ELEMENTS=	${PYSUBDIR}/Modules/_curses_panel.c
-PYDISTUTILSPKG=	yes
-PY_PATCHPLIST=	yes
+PYDISTUTILSPKG=		yes
 
-PY_SETUP_SUBST=	NCURSESPREFIX=${BUILDLINK_PREFIX.ncurses}
+PY_SETUP_SUBST=		NCURSESPREFIX=${BUILDLINK_PREFIX.ncurses}
 PYSETUPINSTALLARGS+=	--install-lib ${PREFIX}/${PYLIB}/lib-dynload
-
-# ignore errors due to missing files (EXTRACT_ELEMENTS!)
-do-patch:
-	(cd ${WRKSRC}; \
-	for f in ${PATCHDIR}/patch-*;do \
-	${PATCH} --batch <$$f || ${TRUE}; \
-	done)
 
 .include "../../lang/python/extension.mk"
 .include "../../lang/python/srcdist.mk"

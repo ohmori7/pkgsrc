@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2016/06/19 16:23:59 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2020/12/14 00:40:10 dbj Exp $
 
 DISTNAME=	mingw-runtime-3.14
 PKGNAME=	mingw-runtime-bin-3.14
@@ -15,7 +15,7 @@ NO_CONFIGURE=	yes
 USE_TOOLS+=	pax
 WRKSRC=		${WRKDIR}
 
-INSTALLATION_DIRS+=	${MINGW_TARGET}
+INSTALLATION_DIRS+=	cross/${MINGW_TARGET}
 
 do-install:
 	cd ${WRKSRC} && pax -rw -pp bin include lib \

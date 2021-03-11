@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.49 2018/08/22 09:46:46 wiz Exp $
+# $NetBSD: Makefile,v 1.53 2020/08/31 18:11:43 wiz Exp $
 
 DISTNAME=	latex2html-2016
-PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	textproc converters
 MASTER_SITES=	${MASTER_SITE_TEX_CTAN:=support/latex2html/}
 
 MAINTAINER=	wennmach@NetBSD.org
-HOMEPAGE=	http://www.latex2html.org/
+HOMEPAGE=	https://www.latex2html.org/
 COMMENT=	LaTeX to HTML converter
 LICENSE=	gnu-gpl-v2
 

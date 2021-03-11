@@ -1,12 +1,14 @@
-# $NetBSD: Makefile,v 1.75 2017/05/17 21:58:05 he Exp $
+# $NetBSD: Makefile,v 1.86 2021/01/24 14:50:25 nia Exp $
 
-DISTNAME=	libsndfile-1.0.28
-PKGREVISION=	2
+DISTNAME=	libsndfile-1.0.31
 CATEGORIES=	audio
-MASTER_SITES=	http://www.mega-nerd.com/libsndfile/files/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=libsndfile/}
+GITHUB_PROJECT=	libsndfile
+GITHUB_RELEASE=	${PKGVERSION_NOREV}
+EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.mega-nerd.com/libsndfile/
+HOMEPAGE=	https://libsndfile.github.io/libsndfile/
 COMMENT=	Library for reading and writing audio files
 LICENSE=	gnu-lgpl-v2.1
 
@@ -15,6 +17,7 @@ USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config
 PKGCONFIG_OVERRIDE=	sndfile.pc.in
 GNU_CONFIGURE=		yes
+PYTHON_FOR_BUILD_ONLY=	tool
 
 TEST_TARGET=		check
 
@@ -29,8 +32,9 @@ CXXFLAGS+=		-features=extensions
 .endif
 
 .include "../../audio/flac/buildlink3.mk"
-#BUILDLINK_API_DEPENDS.libvorbis+=	libvorbis>=1.2.1
+.include "../../audio/libopus/buildlink3.mk"
 .include "../../audio/libvorbis/buildlink3.mk"
+.include "../../lang/python/tool.mk"
 BUILDLINK_API_DEPENDS.libogg+=	libogg>=1.1.3
 .include "../../multimedia/libogg/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

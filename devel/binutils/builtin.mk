@@ -1,10 +1,10 @@
-# $NetBSD: builtin.mk,v 1.9 2015/06/08 06:49:55 dsainty Exp $
+# $NetBSD: builtin.mk,v 1.11 2019/11/03 10:39:06 rillig Exp $
 
 BINUTILS_PREFIX?=	/usr
 
-BUILTIN_PKG:=	binutils
-BUILTIN_FIND_FILES_VAR := BINUTILS_FILES
-BUILTIN_FIND_FILES.BINUTILS_FILES := ${BINUTILS_PREFIX}/include/bfd.h
+BUILTIN_PKG:=				binutils
+BUILTIN_FIND_FILES_VAR:=		BINUTILS_FILES
+BUILTIN_FIND_FILES.BINUTILS_FILES:=	${BINUTILS_PREFIX}/include/bfd.h
 .include "../../mk/buildlink3/bsd.builtin.mk"
 
 ###
@@ -52,7 +52,7 @@ USE_BUILTIN.binutils=	no
 .    endfor
 .  endif  # PREFER.binutils
 .endif
-MAKEVARS+=	USE_BUILTIN.binutils
+MAKEVARS+=		USE_BUILTIN.binutils
 
 # if USE_BINUTILS is defined, then force the use of a true binutils
 # implementation.

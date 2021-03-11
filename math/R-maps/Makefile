@@ -1,17 +1,16 @@
-# $NetBSD: Makefile,v 1.11 2018/07/28 14:40:49 brook Exp $
+# $NetBSD: Makefile,v 1.13 2019/08/08 19:53:51 brook Exp $
 
+R_PKGNAME=	maps
+R_PKGVER=	3.3.0
 CATEGORIES=	math
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	${R_HOMEPAGE_BASE}/maps/
-COMMENT=	Display maps in R
+COMMENT=	Draw geographical maps
 LICENSE=	gnu-gpl-v2
-
-R_PKGNAME=	maps
-R_PKGVER=	2.3-9
 
 USE_TOOLS+=	gmake
 MAKE_ENV+=	AWK=${AWK:Q}
+USE_LANGUAGES=	c
 
 .include "../../math/R/Makefile.extension"
 .include "../../mk/bsd.pkg.mk"

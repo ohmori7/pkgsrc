@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2018/08/22 09:47:24 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2020/08/31 18:12:33 wiz Exp $
 
 DISTNAME=	e2guardian-5.1.1
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=e2guardian/}
 GITHUB_PROJECT=	e2guardian
@@ -41,7 +41,7 @@ PKG_SYSCONFSUBDIR=	e2guardian
 BUILD_DEFS+=		VARBASE
 
 OWN_DIRS_PERMS+=	${VARBASE}/log/e2guardian \
-                        ${E2G_USER} ${E2G_GROUP} 0755
+			${E2G_USER} ${E2G_GROUP} 0755
 
 CONFIGURE_ARGS+=	--with-proxyuser=${E2G_USER}
 CONFIGURE_ARGS+=	--with-proxygroup=${E2G_GROUP}
@@ -55,7 +55,7 @@ WRKSRC=		${WRKDIR}/${DISTNAME}
 
 .include "options.mk"
 
-CHECK_WRKREF_SKIP= 	sbin/e2guardian
+CHECK_WRKREF_SKIP=	sbin/e2guardian
 
 REPLACE_PERL+=		data/e2guardian.pl
 

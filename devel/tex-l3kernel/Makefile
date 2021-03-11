@@ -1,21 +1,22 @@
-# $NetBSD: Makefile,v 1.12 2019/05/14 11:08:33 markd Exp $
+# $NetBSD: Makefile,v 1.19 2021/02/25 08:25:47 markd Exp $
 
 DISTNAME=	l3kernel
-PKGNAME=	tex-${DISTNAME}-2019
-TEXLIVE_REV=	51037
+PKGNAME=	tex-${DISTNAME}-2020.57669
+PKGREVISION=	1
+TEXLIVE_REV=	57669
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/l3kernel
+HOMEPAGE=	https://ctan.org/pkg/l3kernel
 COMMENT=	LaTeX3 programming conventions
 LICENSE=	lppl-1.3c
 
 DEPENDS+=	tex-booktabs-[0-9]*:../../print/tex-booktabs
 DEPENDS+=	tex-colortbl-[0-9]*:../../print/tex-colortbl
-DEPENDS+=	tex-csquotes-[0-9]*:../../print/tex-csquotes
 DEPENDS+=	tex-enumitem-[0-9]*:../../print/tex-enumitem
 DEPENDS+=	tex-etex-pkg-[0-9]*:../../print/tex-etex-pkg
 DEPENDS+=	tex-fancyvrb-[0-9]*:../../print/tex-fancyvrb
 DEPENDS+=	tex-graphics-[0-9]*:../../print/tex-graphics
+DEPENDS+=	tex-l3backend-[0-9]*:../../devel/tex-l3backend
 DEPENDS+=	tex-latex-[0-9]*:../../print/tex-latex
 DEPENDS+=	tex-lm-[0-9]*:../../fonts/tex-lm
 DEPENDS+=	tex-oberdiek-[0-9]*:../../print/tex-oberdiek

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.38 2018/12/13 19:52:00 adam Exp $
+# $NetBSD: Makefile,v 1.50 2021/01/01 08:24:45 ryoon Exp $
 
 DISTNAME=	kgamma-${_KDE_VERSION}
-PKGREVISION=	12
+PKGREVISION=	24
 CATEGORIES=	graphics
 COMMENT=	KDE screen gamma values kcontrol module
 

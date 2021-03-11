@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.32 2018/08/22 09:45:05 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2020/08/31 18:09:28 wiz Exp $
 #
 
 DISTNAME=	raines-0.43.3
 PKGNAME=	${DISTNAME:S/raines/raine/}
-PKGREVISION=	11
+PKGREVISION=	13
 CATEGORIES=	emulators
 MASTER_SITES=	http://rainemu.swishparty.co.uk/html/archive/
 EXTRACT_SUFX=	.tar.bz2
@@ -24,7 +24,7 @@ PTHREAD_OPTS+=	require
 INSTALL_MAKE_FLAGS+=	prefix=${DESTDIR}${PREFIX}
 
 # Uses i386 assembler.
-ONLY_FOR_PLATFORM=  *-*-i386
+ONLY_FOR_PLATFORM=	*-*-i386
 
 post-build:
 	(${ECHO} "#!${SH}";					\

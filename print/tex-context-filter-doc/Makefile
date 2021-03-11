@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.5 2019/01/25 20:10:40 markd Exp $
+# $NetBSD: Makefile,v 1.9 2021/02/15 04:21:10 markd Exp $
 
 DISTNAME=	context-filter.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-2018.48390
-TEXLIVE_REV=	48390
+PKGNAME=	tex-${DISTNAME:S/./-/}-2020.55718
+TEXLIVE_REV=	55718
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/context-filter
+HOMEPAGE=	https://ctan.org/pkg/context-filter
 COMMENT=	Documentation for tex-context-filter
 LICENSE=	2-clause-bsd
 

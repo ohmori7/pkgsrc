@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.55 2019/06/17 15:23:34 nia Exp $
+# $NetBSD: Makefile,v 1.61 2020/12/04 20:45:17 nia Exp $
 
 DISTNAME=		openmsx-0.15.0
+PKGREVISION=		1
 CATEGORIES=		emulators
 MASTER_SITES=		${MASTER_SITE_GITHUB:=openMSX/}
 GITHUB_PROJECT=		openMSX
@@ -17,14 +18,14 @@ HAS_CONFIGURE=		yes
 
 MAKE_FILE=		GNUmakefile
 MAKE_ENV+=		OPENMSX_FLAVOUR=opt
-CONFIGURE_ENV+= 	OPENMSX_FLAVOUR=opt
-CONFIGURE_ENV+= 	LOCALBASE=${PREFIX}
+CONFIGURE_ENV+=		OPENMSX_FLAVOUR=opt
+CONFIGURE_ENV+=		LOCALBASE=${PREFIX}
 INSTALLATION_DIRS+=	bin
 INSTALL_MAKE_FLAGS+=	SYMLINK_FOR_BINARY=false
 INSTALL_MAKE_FLAGS+=	INSTALL_BASE=${PREFIX}/openmsx
 MAKE_ENV+=		OPENMSX_INSTALL=${PREFIX}/openmsx
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.9.0
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.9.0
 
 SUBST_CLASSES+=			bswap
 SUBST_STAGE.bswap=		pre-configure
@@ -41,16 +42,7 @@ GCC_REQD+=	5
 .include "../../mk/bsd.prefs.mk"
 
 do-configure:
-.if !empty(PKGSRC_COMPILER:Mclang)
-	cd ${WRKSRC} && ${CONFIGURE_ENV} CXX=clang++ \
-	    ${GMAKE} -f build/main.mk probe
-.elif !empty(PKGSRC_COMPILER:Mgcc)
-	cd ${WRKSRC} && ${CONFIGURE_ENV} CXX=g++ \
-	    ${GMAKE} -f build/main.mk probe
-.else
-	cd ${WRKSRC} && ${CONFIGURE_ENV} \
-	    ${GMAKE} -f build/main.mk probe
-.endif
+	cd ${WRKSRC} && ${CONFIGURE_ENV} ${GMAKE} -f build/main.mk probe
 
 post-extract:
 	${CP} ${WRKSRC}/build/platform-freebsd.mk \

@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.9 2018/09/14 02:08:28 schmonz Exp $
+$NetBSD: distinfo,v 1.16 2021/03/04 10:02:02 leot Exp $
 
-SHA1 (entr-4.1.tar.gz) = 507d40c570e68d4d4da0bffc881ea4961a0eddaa
-RMD160 (entr-4.1.tar.gz) = 5abec400fdf589f9e3c4f576c835459480ed4e27
-SHA512 (entr-4.1.tar.gz) = 0a80aa9caa97f2603e43957b716bf5b5746cea8bfb2f2cc884aab8c97a34341d6223035fbb5d4bf86234ea1c9314c077cec9d59ba442a2730fcbd7151425a459
-Size (entr-4.1.tar.gz) = 25265 bytes
+SHA1 (entr-4.8.tar.gz) = 9f65589f5eeb87ee162915cf0b59e8870390ad03
+RMD160 (entr-4.8.tar.gz) = a65ae16cab5fbf78137d3210729fe8b6b990f8bf
+SHA512 (entr-4.8.tar.gz) = fc99a257fe9a30a9b08f0b6283f9ee3b65c38362744842dd976a4ac7749df7f6ff630235443af17f664f9cbf2a197dbb8c1114fe491e675921745294b4fa4d8f
+Size (entr-4.8.tar.gz) = 25408 bytes

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.25 2018/08/22 09:42:52 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2020/08/31 18:06:29 wiz Exp $
 
-DISTNAME=	EV-4.22
+DISTNAME=	EV-4.33
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/M/ML/MLEHMANN/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/EV/
+HOMEPAGE=	https://metacpan.org/release/EV
 COMMENT=	Perl interface to libev, a high performance full-featured event loop
 LICENSE=	${PERL5_LICENSE}
 

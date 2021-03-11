@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.1 2019/03/16 08:03:56 bsiegert Exp $
+# $NetBSD: Makefile,v 1.3 2020/01/18 21:48:26 jperkin Exp $
 
-DISTNAME=       cjose-0.6.1
+DISTNAME=	cjose-0.6.1
+PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GITHUB:=cisco/}
 

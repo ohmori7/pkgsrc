@@ -1,59 +1,60 @@
-# $NetBSD: Makefile.common,v 1.18 2019/04/26 13:14:02 maya Exp $
+# $NetBSD: Makefile.common,v 1.30 2021/01/01 09:08:42 ryoon Exp $
 # This Makefile fragment is included in the package Makefiles for
 # GNU Radio distributed packages (they all share common configure and build
 # settings).
-# used by ham/gnuradio-atsc/Makefile
+
 # used by ham/gnuradio-channels/Makefile
 # used by ham/gnuradio-companion/Makefile
 # used by ham/gnuradio-core/Makefile
 # used by ham/gnuradio-ctrlport/Makefile
-
 # used by ham/gnuradio-digital/Makefile
 # used by ham/gnuradio-doxygen/Makefile
 # used by ham/gnuradio-dtv/Makefile
-# used by ham/gnuradio-fcd/Makefile
 # used by ham/gnuradio-fec/Makefile
-
-# used by ham/gnuradio-fcd/Makefile
-# used by ham/gnuradio-noaa/Makefile
-# used by ham/gnuradio-pager/Makefile
 # used by ham/gnuradio-qtgui/Makefile
 # used by ham/gnuradio-trellis/Makefile
-
 # used by ham/gnuradio-uhd/Makefile
 # used by ham/gnuradio-utils/Makefile
 # used by ham/gnuradio-video-sdl/Makefile
 # used by ham/gnuradio-vocoder/Makefile
 # used by ham/gnuradio-wavelet/Makefile
-
-# used by ham/gnuradio-wxgui/Makefile
 # used by ham/gnuradio-zeromq/Makefile
 
-.include	"../../ham/gnuradio-core/Makefile.version"
+.include	"../../ham/gnuradio-core/version.mk"
 
 DISTNAME?=	gnuradio-${VERSION}
 CATEGORIES+=	ham
-MASTER_SITES=  http://s3-dist.gnuradio.org/
-MASTER_SITES=  http://gnuradio.org/releases/gnuradio/
+#MASTER_SITES=	http://s3-dist.gnuradio.org/
+#MASTER_SITES+=	http://gnuradio.org/releases/gnuradio/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=gnuradio/}
+GITHUB_PROJECT=	gnuradio
+GITHUB_RELEASE=	v${VERSION}
 
 MAINTAINER?=	pkgsrc-users@NetBSD.org
-HOMEPAGE?=	http://www.gnu.org/software/gnuradio/
+HOMEPAGE?=	https://www.gnu.org/software/gnuradio/
 LICENSE=	gnu-gpl-v3
 
-USE_LANGUAGES=	c c++
-USE_TOOLS=	perl gmake cmake pkg-config
-USE_CMAKE=	yes
+USE_LANGUAGES=		c c++
+USE_TOOLS=		perl gmake cmake pkg-config
+USE_CMAKE=		yes
+LDFLAGS.NetBSD+=	-lrt
 
-DEPENDS+=	${PYPKGPREFIX}-cheetah-[0-9]*:../../devel/py-cheetah
-DEPENDS+=	${PYPKGPREFIX}-mako-[0-9]*:../../devel/py-mako
+DEPENDS+=	${PYPKGPREFIX}-cheetah-[0-9]*:../../devel/py-cheetah3
 DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
 # gr_filter_design in gnuradio-core ask for:
-DEPENDS+=	${PYPKGPREFIX}-qwt-qt4-[0-9]*:../../x11/py-qwt-qt4
+DEPENDS+=	${PYPKGPREFIX}-qwt-qt5-[0-9]*:../../x11/py-qwt-qt5
+DEPENDS+=	${PYPKGPREFIX}-mako-[0-9]*:../../devel/py-mako
+DEPENDS+=	${PYPKGPREFIX}-cairo-[0-9]*:../../graphics/py-cairo
+DEPENDS+=	${PYPKGPREFIX}-yaml-[0-9]*:../../textproc/py-yaml
+DEPENDS+=	${PYPKGPREFIX}-numpy-[0-9]*:../../math/py-numpy
+DEPENDS+=	${PYPKGPREFIX}-gobject3-[0-9]*:../../devel/py-gobject3
 
 DISTINFO_FILE=		${.CURDIR}/../../ham/gnuradio-core/distinfo
 PATCHDIR=		${.CURDIR}/../../ham/gnuradio-core/patches
 
-PYTHON_VERSIONS_INCOMPATIBLE=    36 37 # not yet ported as of 3.3.0
+# see CMakeLists.txt GR_PYTHON_MIN_VERSION
+PYTHON_VERSIONS_INCOMPATIBLE= 27
+
 PLIST_SUBST+=	PYVERSSUFFIX=${PYVERSSUFFIX}
 PLIST_SUBST+=	PYSITELIB=${PYSITELIB}
 PY_PATCHPLIST=	yes
@@ -64,6 +65,7 @@ EGDIR=			share/gnuradio/examples
 PKG_SYSCONFSUBDIR=	gnuradio/conf.d
 
 CXXFLAGS+=		-pthread
+CFLAGS+=		-pthread
 LDFLAGS.DragonFly+=	-lboost_system
 LDFLAGS.SunOS+=		-lboost_system
 CXXFLAGS.SunOS+=	-pthreads
@@ -84,7 +86,7 @@ CMAKE_ARGS+=	-DENABLE_GR_BLOCKS=ON
 CMAKE_ARGS+=	-DENABLE_GR_FFT=ON
 CMAKE_ARGS+=	-DENABLE_GR_FILTER=ON
 CMAKE_ARGS+=	-DENABLE_PYTHON=ON
-CMAKE_ARGS+=	-DENABLE_VOLK=ON
+CMAKE_ARGS+=	-DENABLE_VOLK=ON -DENABLE_INTERNAL_VOLK=OFF
 CMAKE_ARGS+=	-DCMAKE_HAVE_PTHREADS_CREATE=OFF
 
 # Default setting (for pkgsrc)
@@ -96,17 +98,24 @@ CMAKE_ARGS+=	-DCMAKE_INSTALL_RPATH=${PREFIX}/lib:${PREFIX}/lib/portaudio2
 CMAKE_ARGS+=	-DCMAKE_INSTALL_RPATH_USE_LINK_PATH=TRUE
 CMAKE_ARGS+=	-DLIBUSB_INCLUDE_DIR=${PREFIX}/include/libusb-1.0
 
-CMAKE_ARGS+=	-DGR_LIBRARY_DIR=${PREFIX}/lib
+CMAKE_ARGS+=	-DGR_LIBRARY_DIR=${PREFIX}/lib -lrt
 CMAKE_ARGS+=	-DGR_PREFSDIR=${PREFIX}/share/gnuradio/examples/
 
 # adhoc setup not to pick non default version (say python3.6)
 # at configure
-CMAKE_ARGS+=	-DPYTHON_EXECUTABLE=${PREFIX}/bin/python${PYVERSSUFFIX}
+#MAKE_ARGS+=	-DPYTHON_EXECUTABLE=${PREFIX}/bin/python${PYVERSSUFFIX}
 
 CMAKE_ARGS+=	-DZEROMQ_INCLUDE_DIRS=${PREFIX}/include
 CMAKE_ARG_PATH=	../
 
 .include "options.mk"
+
+# Fixes build errors w/ clang
+SUBST_CLASSES+=		boost
+SUBST_MESSAGE.boost=	prepend boost placeholders with namespace
+SUBST_FILES.boost=	*/lib/*.cc
+SUBST_SED.boost=	-e 's, _1), boost::placeholders::_1),'
+SUBST_STAGE.boost=	pre-configure
 
 # disable/enable ALSA, see also patches/patch-gr-audio_lib_CMakeLists.txt
 SUBST_CLASSES+=		alsa
@@ -122,26 +131,31 @@ SUBST_MESSAGE.pyvers=	Fix SPHINX_EXECUTABLE NAMES(sphinx-build)
 SUBST_VARS.pyvers+=	PYVERSSUFFIX
 SUBST_STAGE.pyvers=	pre-configure
 
-# REPLACE_PYTHON is some 600 files
-.include	"../../ham/gnuradio-core/files/REPLACE_PYTHON"
+REPLACE_PYTHON=		*/*.py */*/*.py */*/*/*.py */*/*/*/*.py */*/*/*/*/*.py \
+			*/*/*/*/*/*/*.py */*/*/*/*/*/*/*.py */*/*/*/*/*/*/*/*.py
 
 pre-configure:
-	(${MKDIR} ${WRKSRC}/build;)
+	${MKDIR} ${WRKSRC}/build
 
 do-install:
-	(cd ${WRKSRC}/build; ${GMAKE} DESTDIR=${DESTDIR} install)
+	cd ${WRKSRC}/${BUILD_DIRS} && ${GMAKE} DESTDIR=${DESTDIR} install
 
 .include	"../../audio/gsm/buildlink3.mk"
 .include	"../../audio/jack/buildlink3.mk"
-.include	"../../audio/portaudio-devel/buildlink3.mk"
+.include	"../../audio/portaudio/buildlink3.mk"
 
 .include	"../../devel/boost-headers/buildlink3.mk"
 .include	"../../devel/boost-libs/buildlink3.mk"
 .include	"../../devel/cppunit/buildlink3.mk"
-# VOLK needs orc.h, so in the common
-.include	"../../devel/orc/buildlink3.mk"
-.include	"../../devel/swig2/buildlink3.mk"
+.include	"../../devel/gmp/buildlink3.mk"
+.include	"../../devel/swig3/buildlink3.mk"
 
 .include	"../../lang/python/application.mk"
 .include	"../../math/fftwf/buildlink3.mk"
 .include	"../../math/gsl/buildlink3.mk"
+.include	"../../math/volk/buildlink3.mk"
+.include	"../../textproc/log4cpp/buildlink3.mk"
+.include	"../../textproc/icu/buildlink3.mk"
+.include	"../../graphics/cairo/buildlink3.mk"
+.include	"../../graphics/cairo-gobject/buildlink3.mk"
+.include	"../../x11/gtk3/buildlink3.mk"

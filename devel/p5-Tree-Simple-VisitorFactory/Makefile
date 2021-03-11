@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.17 2018/08/22 09:44:53 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2020/08/31 18:09:12 wiz Exp $
 
 DISTNAME=	Tree-Simple-VisitorFactory-0.15
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Tree/}
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Tree-Simple-VisitorFactory/
+HOMEPAGE=	https://metacpan.org/release/Tree-Simple-VisitorFactory
 COMMENT=	Collection of visitor objects for use with Tree::Simple
 LICENSE=	${PERL5_LICENSE}
 

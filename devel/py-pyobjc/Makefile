@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2019/01/08 20:29:42 adam Exp $
+# $NetBSD: Makefile,v 1.6 2020/05/23 11:07:21 adam Exp $
 
 META_PACKAGE=	yes
 
@@ -31,6 +31,7 @@ DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-Collaboration>=${PYOBJC_VERS}:../../de
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-ColorSync>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-ColorSync
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-Contacts>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-Contacts
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-ContactsUI>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-ContactsUI
+DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-CoreAudio>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-CoreAudio
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-CoreBluetooth>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-CoreBluetooth
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-CoreData>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-CoreData
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-CoreLocation>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-CoreLocation
@@ -73,8 +74,6 @@ DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-OpenDirectory>=${PYOBJC_VERS}:../../de
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-Photos>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-Photos
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-PhotosUI>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-PhotosUI
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-PreferencePanes>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-PreferencePanes
-DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-PubSub>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-PubSub
-DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-QTKit>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-QTKit
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-Quartz>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-Quartz
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-SafariServices>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-SafariServices
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-SceneKit>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-SceneKit
@@ -93,6 +92,19 @@ DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-Vision>=${PYOBJC_VERS}:../../devel/py-
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-WebKit>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-WebKit
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-iTunesLibrary>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-iTunesLibrary
 DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-libdispatch>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-libdispatch
+
+.include "../../mk/bsd.prefs.mk"
+
+.if empty(MACHINE_PLATFORM:MDarwin-19.*)
+DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-QTKit>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-QTKit
+DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-PubSub>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-PubSub
+.endif
+
+.if !empty(MACHINE_PLATFORM:MDarwin-1[89].*)
+DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-Metal>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-Metal
+DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-MetalKit>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-MetalKit
+DEPENDS+=	${PYPKGPREFIX}-pyobjc-framework-NaturalLanguage>=${PYOBJC_VERS}:../../devel/py-pyobjc-framework-NaturalLanguage
+.endif
 
 .include "../../lang/python/pyversion.mk"
 .include "../../mk/bsd.pkg.mk"

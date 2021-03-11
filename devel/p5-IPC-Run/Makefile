@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.35 2018/08/22 09:44:10 wiz Exp $
+# $NetBSD: Makefile,v 1.39 2020/09/07 06:54:28 wiz Exp $
 
-DISTNAME=	IPC-Run-20180523.0
+DISTNAME=	IPC-Run-20200505.0
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=IPC/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/IPC-Run/
+HOMEPAGE=	https://metacpan.org/release/IPC-Run
 COMMENT=	Perl module for interacting with child processes
 LICENSE=	gnu-gpl-v2 OR artistic
 
@@ -15,6 +14,7 @@ LICENSE=	gnu-gpl-v2 OR artistic
 #     How about Interix?
 DEPENDS+=	p5-IO-tty>=1.08:../../devel/p5-IO-Tty
 
+USE_TOOLS+=		perl # for self-tests (!?)
 USE_LANGUAGES=		# empty
 PERL5_PACKLIST=		auto/IPC/Run/.packlist
 

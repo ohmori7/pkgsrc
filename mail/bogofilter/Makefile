@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.70 2019/04/03 00:32:51 ryoon Exp $
+# $NetBSD: Makefile,v 1.77 2020/11/05 09:08:34 ryoon Exp $
 
 DISTNAME=	bogofilter-1.2.4
-PKGREVISION=	14
+PKGREVISION=	19
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=bogofilter/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://bogofilter.sourceforge.net/
+HOMEPAGE=	https://bogofilter.sourceforge.io/
 COMMENT=	Bayesian spam filter written in C
 LICENSE=	gnu-gpl-v2
 

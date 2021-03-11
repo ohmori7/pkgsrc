@@ -1,12 +1,14 @@
-# $NetBSD: Makefile,v 1.1 2017/09/29 16:51:00 minskim Exp $
+# $NetBSD: Makefile,v 1.3 2021/02/05 15:23:58 taca Exp $
 
-DISTNAME=	rex-random_identifier-0.1.4
+DISTNAME=	rex-random_identifier-0.1.5
 CATEGORIES=	security
 
 MAINTAINER=	minskim@NetBSD.org
 HOMEPAGE=	https://github.com/rapid7/rex-random_identifier
 COMMENT=	Ruby Exploitation library for generating random identifiers
 LICENSE=	modified-bsd
+
+USE_LANGUAGES=	# none
 
 DEPENDS+=	${RUBY_PKGPREFIX}-rex-text-[0-9]*:../../security/ruby-rex-text
 

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.42 2019/01/25 04:54:35 msaitoh Exp $
+# $NetBSD: Makefile,v 1.46 2021/03/06 10:30:15 markd Exp $
 
-DISTNAME=	pciutils-3.6.2
+DISTNAME=	pciutils-3.7.0
 PKGREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	ftp://atrey.karlin.mff.cuni.cz/pub/linux/pci/
@@ -15,6 +15,7 @@ MAKE_JOBS_SAFE=		no
 ONLY_FOR_PLATFORM=	AIX-*-* Darwin-*-* FreeBSD-*-* Linux-*-* NetBSD-*-*
 ONLY_FOR_PLATFORM+=	DragonFly-*-* OpenBSD-*-* SunOS-5.11-* Haiku-*-*
 
+CFLAGS+=		-fPIC
 MAKE_FLAGS+=		CFLAGS=${CFLAGS:Q}
 MAKE_FLAGS+=		LDFLAGS=${LDFLAGS:Q}
 

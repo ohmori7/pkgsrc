@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.57 2019/04/30 07:55:33 adam Exp $
+# $NetBSD: Makefile,v 1.68 2021/01/24 20:29:04 adam Exp $
 
-DISTNAME=	fonttools-3.41.0
+DISTNAME=	fonttools-4.18.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	fonts python
 MASTER_SITES=	${MASTER_SITE_PYPI:=F/FontTools/}
@@ -11,14 +11,17 @@ HOMEPAGE=	https://github.com/fonttools/fonttools
 COMMENT=	Library for manipulating fonts
 LICENSE=	mit
 
+BUILD_DEPENDS+=	${PYPKGPREFIX}-cython-[0-9]*:../../devel/py-cython
 DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 TEST_DEPENDS+=	${PYPKGPREFIX}-fs-[0-9]*:../../filesystems/py-fs
 TEST_DEPENDS+=	${PYPKGPREFIX}-test>=3.0:../../devel/py-test
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-runner-[0-9]*:../../devel/py-test-runner
 
-USE_LANGUAGES=	# none
-
+# as of 4.17.1:
+# 3 failed, 3456 passed, 143 skipped, 2 xfailed, 23 warnings, 6 errors
 PYSETUPTESTTARGET=	pytest
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27 # since 4.0.0
 
 SUBST_CLASSES+=		man
 SUBST_STAGE.man=	pre-configure
@@ -27,12 +30,12 @@ SUBST_FILES.man+=	setup.py
 SUBST_SED.man+=		-e "s,share/man,${PKGMANDIR},"
 
 post-install:
+.for bin in fonttools pyftmerge pyftsubset ttx
 	cd ${DESTDIR}${PREFIX}/bin && \
-	for i in fonttools pyftmerge pyftsubset ttx; do \
-		${MV} $${i} $${i}-${PYVERSSUFFIX}; \
-	done
+	${MV} ${bin} ${bin}-${PYVERSSUFFIX} || ${TRUE}
+.endfor
 	cd ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1 && \
-		${MV} ttx.1 ttx-${PYVERSSUFFIX}.1 || ${TRUE}
+	${MV} ttx.1 ttx-${PYVERSSUFFIX}.1 || ${TRUE}
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

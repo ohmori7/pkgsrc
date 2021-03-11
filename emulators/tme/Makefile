@@ -1,24 +1,27 @@
-# $NetBSD: Makefile,v 1.69 2018/11/14 22:21:26 kleink Exp $
+# $NetBSD: Makefile,v 1.81 2020/08/31 18:09:29 wiz Exp $
 #
 
 DISTNAME=		tme-0.8
-PKGREVISION=		37
+PKGREVISION=		47
 CATEGORIES=		emulators
 MASTER_SITES=		http://csail.mit.edu/~fredette/tme/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-
-MAKE_JOBS_SAFE=		no
-
 HOMEPAGE=		http://csail.mit.edu/~fredette/tme/
 COMMENT=		The Machine Emulator
+LICENSE=		original-bsd
 
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake perl:run pkg-config yacc
 
+MAKE_JOBS_SAFE=		no
+
+.if empty(CFLAGS:M*-g*)
 CONFIGURE_ARGS+=	--disable-debug
+.endif
+
 # XXX Turn off -Werror for now; there are a very very large number of
 # warnings generated, increasing with every compiler version.
 CONFIGURE_ARGS+=	--disable-warnings
@@ -36,6 +39,9 @@ PLIST_VARS+=	bsd
     ${OPSYS} == "OpenBSD" || ${OPSYS} == "DragonFly"
 PLIST.bsd=	yes
 .endif
+
+post-extract:
+	${CP} ${FILESDIR}/bsd-tap.c ${WRKSRC}/host/bsd
 
 .include "../../devel/libltdl/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

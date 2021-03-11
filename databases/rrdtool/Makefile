@@ -1,5 +1,6 @@
-# $NetBSD: Makefile,v 1.134 2019/02/11 08:22:44 adam Exp $
+# $NetBSD: Makefile,v 1.143 2020/11/05 09:06:45 ryoon Exp $
 
+PKGREVISION= 7
 .include "Makefile.common"
 
 DEPENDS+=		dejavu-ttf>=2.26:../../fonts/dejavu-ttf
@@ -21,12 +22,6 @@ PERL5_PACKLIST+=	auto/RRDs/.packlist
 # rrdtool explicitly forbids any use of -ffast-math
 BUILDLINK_TRANSFORM+=	rm:-ffast-math
 
-SUBST_CLASSES+=		prefix
-SUBST_STAGE.prefix=	post-build
-SUBST_MESSAGE.prefix=	Fixing $${prefix} in scripts.
-SUBST_FILES.prefix=	examples/cgi-demo.cgi
-SUBST_SED.prefix=	-e '1s,^\#! \$${prefix},\#! ${PREFIX},'
-
 TEST_TARGET=		check
 
 RCD_SCRIPTS=		rrdcached
@@ -41,10 +36,10 @@ post-install:
 RRDCACHED_USER?=	rrdcached
 RRDCACHED_GROUP?=	${RRDCACHED_USER}
 
-PKG_USERS_VARS=		RRDCACHED_USER
-PKG_GROUPS_VARS=	RRDCACHED_GROUP
-PKG_GROUPS=		${RRDCACHED_GROUP}
-PKG_USERS=		${RRDCACHED_USER}:${RRDCACHED_GROUP}
+PKG_USERS_VARS=			RRDCACHED_USER
+PKG_GROUPS_VARS=		RRDCACHED_GROUP
+PKG_GROUPS=			${RRDCACHED_GROUP}
+PKG_USERS=			${RRDCACHED_USER}:${RRDCACHED_GROUP}
 PKG_GECOS.${RRDCACHED_USER}=	RRDCacheD daemon user
 
 OPSYSVARS+=		SOEXT

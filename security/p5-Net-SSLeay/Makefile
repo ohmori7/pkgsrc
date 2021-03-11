@@ -1,20 +1,19 @@
-# $NetBSD: Makefile,v 1.90 2018/08/22 09:46:27 wiz Exp $
+# $NetBSD: Makefile,v 1.96 2020/08/31 18:11:19 wiz Exp $
 
-DISTNAME=	Net-SSLeay-1.85
+DISTNAME=	Net-SSLeay-1.88
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	security perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Net-SSLeay/
+HOMEPAGE=	https://metacpan.org/release/Net-SSLeay
 COMMENT=	Perl5 module for using OpenSSL
 LICENSE=	openssl
 
-# TEST_DEPENDS
-BUILD_DEPENDS+=	p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
-BUILD_DEPENDS+=	p5-Test-Warn-[0-9]*:../../devel/p5-Test-Warn
-BUILD_DEPENDS+=	p5-Test-NoWarnings-[0-9]*:../../devel/p5-Test-NoWarnings
+TEST_DEPENDS+=	p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
+TEST_DEPENDS+=	p5-Test-Warn-[0-9]*:../../devel/p5-Test-Warn
+TEST_DEPENDS+=	p5-Test-NoWarnings-[0-9]*:../../devel/p5-Test-NoWarnings
 
 USE_LANGUAGES=		c
 

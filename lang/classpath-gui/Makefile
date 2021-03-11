@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.45 2018/11/14 22:21:54 kleink Exp $
+# $NetBSD: Makefile,v 1.50 2020/08/17 20:19:20 leot Exp $
 
 .include "../../lang/classpath/Makefile.common"
 
 PKGNAME=	${DISTNAME:S/classpath/classpath-gui/}
-PKGREVISION=	30
+PKGREVISION=	34
 COMMENT+=	(GUI libraries)
 
 DEPENDS+=	classpath>=0.93:../../lang/classpath
@@ -14,7 +14,7 @@ BUILD_DIRS=	native/jni/classpath
 BUILD_DIRS+=	native/jni/gtk-peer
 INSTALL_DIRS=	native/jni/gtk-peer
 
-BUILDLINK_FILES.libart+=	bin/libart2-config
+BUILDLINK_FILES.libart+=		bin/libart2-config
 BUILDLINK_FNAME_TRANSFORM.libart+=	-e 's|/libart2-config|/libart-config|g'
 
 BUILDLINK_DEPMETHOD.libXt?=	build

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2018/08/22 09:45:59 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2020/08/31 18:10:43 wiz Exp $
 
-DISTNAME=	Net-Frame-Layer-ICMPv6-1.10
+DISTNAME=	Net-Frame-Layer-ICMPv6-1.11
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	net perl5
@@ -8,7 +8,7 @@ MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Internet Control Message Protocol v6 layer object
-HOMEPAGE=	http://search.cpan.org/dist/Net-Frame-Layer-ICMPv6/
+HOMEPAGE=	https://metacpan.org/release/Net-Frame-Layer-ICMPv6
 LICENSE=	artistic
 
 DEPENDS+=	p5-Net-Frame-[0-9]*:../../net/p5-Net-Frame

@@ -1,9 +1,4 @@
-File Roller is an archive manager for the GNOME2 environment. This means
-that you can:
-- Create and modify archives.
-- View the content of an archive.
-- View a file contained in the archive.
-- Extract files from the archive.
-
-Supported file types include: .tar, .tar.gz, .tar.gz, .tar.bz2, .tar.Z,
-.tar.lzo, .zip, .jar, .ear, .war, .lzh and .rar.
+File Roller is an archive manager for the GNOME environment.  This means
+that you can create and modify archives; view the content of an archive;
+view and modify a file contained in the archive; extract files from the
+archive.

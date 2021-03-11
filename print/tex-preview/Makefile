@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.7 2017/09/06 16:49:43 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2021/02/20 10:40:36 markd Exp $
 
 DISTNAME=	preview
-PKGNAME=	tex-${DISTNAME}-11.91
-TEXLIVE_REV=	44883
+PKGNAME=	tex-${DISTNAME}-12.3
+TEXLIVE_REV=	56708
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/preview
+HOMEPAGE=	https://ctan.org/pkg/preview
 COMMENT=	Extract bits of a LaTeX source for output
 LICENSE=	gnu-gpl-v3
 

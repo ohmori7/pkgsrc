@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:43:45 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:07:40 wiz Exp $
 
 DISTNAME=	Class-Unload-0.11
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Class/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Class-Unload/
+HOMEPAGE=	https://metacpan.org/release/Class-Unload
 COMMENT=	Perl 5 module to unload a class
 LICENSE=	${PERL5_LICENSE}
 

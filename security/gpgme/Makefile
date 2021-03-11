@@ -1,21 +1,25 @@
-# $NetBSD: Makefile,v 1.93 2019/05/23 19:23:14 rillig Exp $
+# $NetBSD: Makefile,v 1.101 2021/01/31 13:03:07 adam Exp $
 
-DISTNAME=	gpgme-1.13.0
+DISTNAME=	gpgme-1.15.1
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/gpgme/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnupg.org/related_software/gpgme/
+HOMEPAGE=	https://www.gnupg.org/related_software/gpgme/
 COMMENT=	GnuPG Made Easy
 LICENSE=	gnu-gpl-v2
 
-USE_LANGUAGES+=		c c++
+USE_LANGUAGES+=		c99 c++
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake
 GNU_CONFIGURE=		yes
 PTHREAD_OPTS+=		require
 INFO_FILES=		yes
+CONFIGURE_ARGS+=	--enable-languages="cl cpp"
+
+# configure: error: A compiler with c++11 support is required for the c++ binding.
+GCC_REQD+=		4.8
 
 SUBST_CLASSES+=		pthread
 SUBST_FILES.pthread=	src/gpgme-config.in
@@ -26,13 +30,15 @@ SUBST_STAGE.pthread=	pre-configure
 CPPFLAGS.Darwin=	-D_POSIX_C_SOURCE=200809L
 LIBS.SunOS+=		-lnsl -lsocket
 
-TEST_TARGET=		check
+BUILDLINK_TRANSFORM+=	rm:-Wsuggest-override
+
+TEST_TARGET=		all
+TEST_DIRS=		tests
 
 .include "options.mk"
 
-.include "../../mk/pthread.buildlink3.mk"
-BUILDLINK_API_DEPENDS.libassuan+=	libassuan>=2.0.2
 .include "../../security/libassuan2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libgpg-error+=	libgpg-error>=1.28
 .include "../../security/libgpg-error/buildlink3.mk"
+.include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

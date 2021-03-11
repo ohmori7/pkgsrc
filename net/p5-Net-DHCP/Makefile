@@ -1,19 +1,19 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:45:58 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:10:41 wiz Exp $
 #
 
 DISTNAME=	Net-DHCP-0.696
 PKGNAME=	p5-${DISTNAME:S/696/69.6/}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Net-DHCP/
+HOMEPAGE=	https://metacpan.org/release/Net-DHCP
 COMMENT=	Object methods to create a DHCP packet
 LICENSE=	${PERL5_LICENSE}
 
-EGSUBDIR=       share/examples/p5-Net-DHCP
-INSTALLATION_DIRS+=     ${EGSUBDIR}
+EGSUBDIR=		share/examples/p5-Net-DHCP
+INSTALLATION_DIRS+=	${EGSUBDIR}
 
 EGFILES=	examples/dhcp_sniffer.pl
 EGFILES+=	examples/dhcpd.pl
@@ -27,7 +27,7 @@ EGFILES+=	examples/send_packet.pl
 PERL5_REQD+=		5.8.0
 PERL5_MODULE_TYPE=	Module::Build
 
-REPLACE_PERL+=	${EGFILES}
+REPLACE_PERL+=			${EGFILES}
 # has /bin/false as shebang argument
 CHECK_INTERPRETER_SKIP+=	${PERL5_SUB_INSTALLVENDORLIB}/Net/DHCP/Constants.pm
 CHECK_INTERPRETER_SKIP+=	${PERL5_SUB_INSTALLVENDORLIB}/Net/DHCP/Packet.pm

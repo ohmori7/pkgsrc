@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2019/05/02 12:50:42 wiedi Exp $
+# $NetBSD: Makefile,v 1.26 2021/02/16 19:40:33 adam Exp $
 
 .include "dist.mk"
 
 PKGNAME=	python37-${PY_DISTVERSION}
-PKGREVISION=	1
 CATEGORIES=	lang python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -38,7 +37,7 @@ PTHREAD_OPTS+=	require
 
 # http://bugs.python.org/issue13241
 .if !empty(MACHINE_PLATFORM:MDarwin-10.*)
-PKGSRC_COMPILER=	clang
+PKGSRC_COMPILER?=	clang
 PKG_CC=			clang
 PKG_CXX=		clang++
 .endif
@@ -156,6 +155,12 @@ SUBST_FILES.findlib+=	Lib/ctypes/util.py
 SUBST_FILES.findlib+=	Lib/distutils/unixccompiler.py
 SUBST_SED.findlib=	-e 's,/usr/local,${PREFIX},'
 SUBST_SED.findlib+=	-e "s!\('-Wl,-t'\)!'${COMPILER_RPATH_FLAG}${PREFIX}/lib', '-L${PREFIX}/lib', \1!"
+SUBST_NOOP_OK.findlib=	yes
+
+SUBST_CLASSES+=		pkgversion
+SUBST_STAGE.pkgversion=	pre-configure
+SUBST_FILES.pkgversion=	Lib/lib2to3/pgen2/driver.py
+SUBST_VARS.pkgversion=	PKGVERSION_NOREV
 
 .include "options.mk"
 
@@ -171,6 +176,7 @@ post-install:
 		${DESTDIR}${PREFIX}/lib/libpython3.7.sl.1.0
 .endif
 
+# needed to make devel/py-readline pick up the correct readline implementation
 BUILDLINK_DEPMETHOD.readline=		build
 
 .include "../../archivers/bzip2/buildlink3.mk"
@@ -180,7 +186,6 @@ BUILDLINK_DEPMETHOD.readline=		build
 .include "../../devel/libuuid/buildlink3.mk"
 .include "../../devel/readline/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.openssl+=	openssl>=1.0.2
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bdb.buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"

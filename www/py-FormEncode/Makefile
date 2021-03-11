@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2017/10/27 15:47:31 adam Exp $
+# $NetBSD: Makefile,v 1.5 2020/03/22 12:28:28 rillig Exp $
 
 DISTNAME=	FormEncode-1.3.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
@@ -10,11 +10,17 @@ HOMEPAGE=	http://formencode.org/
 COMMENT=	HTML form validation, generation, and conversion package
 LICENSE=	python-software-foundation
 
-BUILD_DEPENDS+=	${PYPKGPREFIX}-country-[0-9]*:../../geography/py-country
-BUILD_DEPENDS+=	${PYPKGPREFIX}-dns-[0-9]*:../../net/py-dns
-BUILD_DEPENDS+=	${PYPKGPREFIX}-nose-[0-9]*:../../devel/py-nose
+TEST_DEPENDS+=	${PYPKGPREFIX}-country-[0-9]*:../../geography/py-country
+TEST_DEPENDS+=	${PYPKGPREFIX}-dns-[0-9]*:../../net/py-dns
+TEST_DEPENDS+=	${PYPKGPREFIX}-nose-[0-9]*:../../devel/py-nose
 
-USE_LANGUAGES=		# none
+USE_LANGUAGES=	# none
+
+.include "../../lang/python/pyversion.mk"
+.if ${PYPKGPREFIX} == py27
+TEST_DEPENDS=	# none; py-country is incompatible with py27
+do-test:
+.endif
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

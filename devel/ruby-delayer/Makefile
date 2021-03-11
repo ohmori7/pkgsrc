@@ -1,13 +1,15 @@
-# $NetBSD: Makefile,v 1.3 2019/06/16 16:05:21 tsutsui Exp $
+# $NetBSD: Makefile,v 1.7 2020/02/16 04:00:52 tsutsui Exp $
 
-DISTNAME=	delayer-1.0.0
+DISTNAME=	delayer-1.1.2
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	tsutsui@NetBSD.org
 HOMEPAGE=	https://rubygems.org/gems/delayer
 COMMENT=	Ruby module to delay the processing
 LICENSE=	mit
+
+USE_LANGUAGES=	# none
 
 .include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

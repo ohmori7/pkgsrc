@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.129 2019/04/18 09:59:34 adam Exp $
+# $NetBSD: Makefile,v 1.158 2021/02/21 15:42:40 adam Exp $
 
-DISTNAME=	gtk+-3.24.8
+DISTNAME=	gtk+-3.24.25
 PKGNAME=	${DISTNAME:S/gtk/gtk3/}
 CATEGORIES=	x11 gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtk+/${PKGVERSION_NOREV:R}/}
@@ -11,18 +11,19 @@ HOMEPAGE=	https://www.gtk.org/
 COMMENT=	GIMP Toolkit v3 - libraries for building X11 user interfaces
 LICENSE=	gnu-lgpl-v2.1
 
-USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		ggrep gmake perl pkg-config bash xgettext msgmerge
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
+USE_PKGLOCALEDIR=	yes
+USE_TOOLS+=		ggrep gmake perl pkg-config bash xgettext msgmerge
+GNU_CONFIGURE=		yes
 PTHREAD_AUTO_VARS=	yes
 TOOL_DEPENDS+=		gdbus-codegen-[0-9]*:../../devel/gdbus-codegen
 TOOL_DEPENDS+=		gettext-tools>=0.19.4nb1:../../devel/gettext-tools
+
 # There is no logic in gettext.mk to detect the native version of xgettext,
 # and we do need it to be compiled with Glade support.
-_TOOLS_USE_PKGSRC.xgettext=yes
+_TOOLS_USE_PKGSRC.xgettext=	yes
 
-GNU_CONFIGURE=		yes
 # XXX there is a subtle bashism in "configure" or a bug in NetBSD's sh
 CONFIG_SHELL=		${TOOLS_PATH.bash}
 CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/libdata
@@ -68,11 +69,12 @@ INSTALL_TEMPLATES+=	../../x11/gtk2/files/icon-cache.tmpl
 _BUILDING_GTK3=	yes
 .include "modules.mk"
 
+.include "../../converters/fribidi/buildlink3.mk"
 .include "../../databases/shared-mime-info/buildlink3.mk"
 BUILDLINK_API_DEPENDS.atk+=	atk>=2.15.1
 .include "../../devel/atk/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.49.4
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.57.2
 .include "../../devel/glib2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.gdk-pixbuf2+=	gdk-pixbuf2>=2.30.0
 .include "../../graphics/gdk-pixbuf2/buildlink3.mk"
@@ -86,6 +88,7 @@ BUILDLINK_API_DEPENDS.gobject-introspection+=	gobject-introspection>=1.39.0
 
 BUILDLINK_API_DEPENDS.pango+=	pango>=1.41
 .include "../../devel/pango/buildlink3.mk"
+BUILDLINK_API_DEPENDS.fontconfig+=	fontconfig>=2.11.91
 .include "../../fonts/fontconfig/buildlink3.mk"
 BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.14.0
 .include "../../graphics/cairo/buildlink3.mk"

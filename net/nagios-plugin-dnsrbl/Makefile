@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2017/09/08 02:26:20 manu Exp $
+# $NetBSD: Makefile,v 1.6 2020/01/26 17:31:51 rillig Exp $
 #
 
 PKGNAME=	nagios-plugin-dnsrbl-${DISTNAME:C/.*-//}
@@ -8,11 +8,11 @@ MASTER_SITES=	http://ftp.espci.fr/pub/nagios-local/
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	manu@NetBSD.org
-HOMEPAGE=	http://ftp.espci.fr/pub/nagios-local/
+HOMEPAGE=	https://ftp.espci.fr/pub/nagios-local/
 COMMENT=	DNSRBL monitoring plugin for Nagios
 LICENSE=	modified-bsd
 
-INSTALLATION_DIRS+= libexec/nagios
+INSTALLATION_DIRS+=	libexec/nagios
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/check_dnsrbl \

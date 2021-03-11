@@ -1,18 +1,18 @@
-# $NetBSD: Makefile,v 1.42 2018/12/13 19:51:35 adam Exp $
+# $NetBSD: Makefile,v 1.58 2021/02/07 06:30:29 ryoon Exp $
 
-DISTNAME=	analitza-${_KDE_VERSION}
-PKGREVISION=	15
+DISTNAME=	analitza-${KAPPSVER}
+PKGREVISION=	5
 CATEGORIES=	math
+
+HOMEPAGE=	https://edu.kde.org/
 COMMENT=	KDE library for mathematical features
+LICENSE=	gnu-lgpl-v2 AND gnu-gpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+.include "../../meta-pkgs/kde/applications.mk"
 
-BROKEN_READLINE_DETECTION=	yes
-
-.include "../../meta-pkgs/kde4/kde4.mk"
-
-.include "../../devel/readline/buildlink3.mk"
-.include "../../devel/ncurses/buildlink3.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../math/eigen3/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
+.include "../../x11/qt5-qttools/buildlink3.mk"
+.include "../../x11/qt5-qtsvg/buildlink3.mk"
+.include "../../x11/qt5-qtdeclarative/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

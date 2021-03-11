@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.11 2016/08/07 10:32:05 markd Exp $
+# $NetBSD: Makefile,v 1.14 2021/02/14 00:40:25 markd Exp $
 
 DISTNAME=	dvipdfmx.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-2016.41623
-TEXLIVE_REV=	41623
+PKGNAME=	tex-${DISTNAME:S/./-/}-2020
+TEXLIVE_REV=	56557
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/dvipdfmx
+HOMEPAGE=	https://ctan.org/pkg/dvipdfmx
 COMMENT=	Documentation for tex-dvipdfmx
 LICENSE=	gnu-gpl-v2
 

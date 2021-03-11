@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.66 2018/11/14 22:22:11 kleink Exp $
+# $NetBSD: Makefile,v 1.81 2021/02/07 06:30:35 ryoon Exp $
 #
 
 DISTNAME=	gtk-vnc-0.5.2
-PKGREVISION=	26
+PKGREVISION=	40
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtk-vnc/0.5/}
 EXTRACT_SUFX=	.tar.xz
@@ -20,7 +20,7 @@ PKGCONFIG_OVERRIDE+=	gtk-vnc-1.0.pc.in
 PKGCONFIG_OVERRIDE+=	gtk-vnc-2.0.pc.in
 PKGCONFIG_OVERRIDE+=	gvnc-1.0.pc.in
 PKGCONFIG_OVERRIDE+=	gvncpulse-1.0.pc.in
-PY_PATCHPLIST=	yes
+PY_PATCHPLIST=		yes
 
 CONFIGURE_ARGS+=	--with-coroutine=gthread
 
@@ -50,7 +50,7 @@ SUBST_STAGE.mapfile=	pre-build
 SUBST_FILES.mapfile=	gtk3-build/src/Makefile
 SUBST_SED.mapfile=	-e '/VERSION_SCRIPT_FLAGS.*GTK_VNC_VERSION_FILE/d'
 
-#VIEW_REQUIRED=0.6.0
+#VIEW_REQUIRED=	0.6.0
 #libview
 
 .include "../../devel/glib2/buildlink3.mk"

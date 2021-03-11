@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.20 2018/08/22 09:45:34 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2020/08/31 18:10:08 wiz Exp $
 #
 
 DISTNAME=	qmail-lint-0.55
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	mail
 MASTER_SITES=	${HOMEPAGE}
 EXTRACT_SUFX=	#
 
 MAINTAINER=	schmonz@NetBSD.org
-HOMEPAGE=	http://www.qmail.org/
+HOMEPAGE=	http://qmailorg.schmonz.com/
 COMMENT=	Examine the qmail configuration for common errors
 
 WRKSRC=		${WRKDIR}

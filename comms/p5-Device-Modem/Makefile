@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.31 2018/08/22 09:43:04 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2020/09/06 19:44:40 wiz Exp $
 
-DISTNAME=	Device-Modem-1.57
+DISTNAME=	Device-Modem-1.59
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	5
 CATEGORIES=	comms perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Device/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Device-Modem/
+HOMEPAGE=	https://metacpan.org/release/Device-Modem
 COMMENT=	Perl module to talk to modem devices connected via serial port
 LICENSE=	${PERL5_LICENSE}
 

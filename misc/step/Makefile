@@ -1,20 +1,40 @@
-# $NetBSD: Makefile,v 1.38 2018/12/13 19:52:12 adam Exp $
+# $NetBSD: Makefile,v 1.60 2021/02/07 06:30:32 ryoon Exp $
 
-DISTNAME=	step-${_KDE_VERSION}
-PKGREVISION=	12
+DISTNAME=	step-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	misc
+
+HOMEPAGE=	https://kde.org/applications/education/step/
 COMMENT=	KDE interactive physical simulator
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+.include "../../meta-pkgs/kde/applications.mk"
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
 
-.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-BUILDLINK_API_DEPENDS.eigen2+=  eigen2>=2.0.3
-.include "../../math/eigen2/buildlink3.mk"
+USE_TOOLS+=	msgmerge pkg-config
+
+SUBST_CLASSES+=		xdg
+SUBST_STAGE.xdg=	pre-configure
+SUBST_MESSAGE.xdg=	Install via examples dir.
+SUBST_FILES.xdg=	step/CMakeLists.txt
+SUBST_SED.xdg=		-e 's:{KDE_INSTALL_CONFDIR}:{KDE_INSTALL_XDG_EX_DIR}:'
+
+MAKE_DIRS+=	${PKG_SYSCONFDIR}/xdg
+CONF_FILES+=	${PREFIX}/share/examples/kde-xdg/step.knsrc \
+		${PKG_SYSCONFDIR}/xdg/step.knsrc
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+PYTHON_FOR_BUILD_ONLY=		yes
+.include "../../lang/python/tool.mk"
+
+.include "../../graphics/kplotting/buildlink3.mk"
+.include "../../math/eigen3/buildlink3.mk"
 .include "../../math/gsl/buildlink3.mk"
 .include "../../math/qalculate/buildlink3.mk"
+.include "../../net/knewstuff/buildlink3.mk"
+.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../www/khtml/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

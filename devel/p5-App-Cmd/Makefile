@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.39 2018/08/22 09:43:36 wiz Exp $
+# $NetBSD: Makefile,v 1.42 2020/08/31 18:07:27 wiz Exp $
 
 DISTNAME=	App-Cmd-0.331
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=App/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/App-Cmd/
+HOMEPAGE=	https://metacpan.org/release/App-Cmd
 COMMENT=	Perl 5 module to write command line apps with less suffering
 LICENSE=	${PERL5_LICENSE}
 

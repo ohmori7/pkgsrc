@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.14 2019/04/26 14:12:49 maya Exp $
+# $NetBSD: Makefile.common,v 1.20 2020/12/31 20:04:14 nia Exp $
 # used by www/webkit24-gtk/Makefile
 # used by www/webkit24-gtk3/Makefile
 
@@ -62,7 +62,7 @@ BUILD_DEPENDS+=	${RUBY_BASE}>=${RUBY_VERSION}:${RUBY_SRCDIR}
 CONFIGURE_ENV+=	RUBY=${RUBY}
 
 PYTHON_FOR_BUILD_ONLY=	yes
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 1.10.2
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 1.10.2
 .include "../../lang/python/application.mk"
 CONFIGURE_ENV+=	PYTHON=${PYTHONBIN}
 
@@ -72,11 +72,18 @@ CXXFLAGS.SunOS+=	-fpermissive
 CXXFLAGS+=	-Wno-c++11-narrowing
 .endif
 
+CXXFLAGS+=	-Wno-expansion-to-defined
+
 .if !empty(MACHINE_PLATFORM:MSunOS-*-x86_64)
 CONFIGURE_ARGS+=	--disable-fast-malloc
 CPPFLAGS+=		-DUSE_SYSTEM_MALLOC
 .endif
 
+.if ${OPSYS} == "NetBSD" && ${MACHINE_CPU:U} == "arm"
+LDFLAGS+=	-Wl,-no-keep-memory -Wl,-reduce-memory
+.endif
+
+.include "../../mk/atomic64.mk"
 BUILDLINK_API_DEPENDS.glib2+= glib2>=2.32.1
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
@@ -86,8 +93,10 @@ BUILDLINK_API_DEPENDS.glib2+= glib2>=2.32.1
 # This is optional, but needs testing.
 #.include "../../devel/pango/buildlink3.mk"
 # A correct Webkit build requires flex 2.5.33
+.include "../../fonts/harfbuzz-icu/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/libwebp/buildlink3.mk"
+.include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
 BUILDLINK_API_DEPENDS.png+= png>=1.5.1beta08
 .include "../../graphics/png/buildlink3.mk"

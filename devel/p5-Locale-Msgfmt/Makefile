@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:44:12 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:08:16 wiz Exp $
 #
 
 DISTNAME=	Locale-Msgfmt-0.15
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Module/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Locale-Msgfmt/
+HOMEPAGE=	https://metacpan.org/release/Locale-Msgfmt
 COMMENT=	Perl 5 module to compile .po files to .mo files
 LICENSE=	${PERL5_LICENSE}
 

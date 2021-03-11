@@ -1,26 +1,36 @@
-# $NetBSD: Makefile,v 1.54 2018/12/13 19:51:48 adam Exp $
-#
+# $NetBSD: Makefile,v 1.74 2021/02/07 06:30:18 ryoon Exp $
 
-DISTNAME=	kdiff3-0.9.98
-PKGREVISION=	12
+VERSION=	1.8.5
+DISTNAME=	kdiff3-${VERSION}
+PKGREVISION=	1
 CATEGORIES=	devel
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=kdiff3/}
+MASTER_SITES=	${MASTER_SITE_KDE:=kdiff3/}
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://kdiff3.sourceforge.net/
-COMMENT=	File and directory diff and merge tool (KDE4)
+HOMEPAGE=	https://kde.org/applications/development/org.kde.kdiff3
+COMMENT=	File and directory diff and merge tool
 LICENSE=	gnu-gpl-v2
 
-BUILD_DEPENDS+=	automoc4>=0.9.83:../../devel/automoc4
+USE_CMAKE=	yes
+USE_LANGUAGES=	c c++
 
-USE_PKGLOCALEDIR=	yes
-USE_LANGUAGES=		c c++
+BUILDLINK_TRANSFORM+=	rm:-Wl,--fatal-warnings
 
-USE_TOOLS+=	msgfmt pkg-config
+BUILD_DEPENDS+=		extra-cmake-modules>=5.10.0:../../devel/extra-cmake-modules
+TOOLS_DEPENDS.cmake=	cmake>=3.1:../../devel/cmake
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+.include "../../devel/gettext-lib/buildlink3.mk"
+BUILDLINK_API_DEPENDS.kcoreaddons+=	kcoreaddons>=5.70.0
+.include "../../devel/kcoreaddons/buildlink3.mk"
+.include "../../devel/kcrash/buildlink3.mk"
+.include "../../devel/kdoctools/buildlink3.mk"
+BUILDLINK_API_DEPENDS.ki18n+=	ki18n>=5.70.0
+.include "../../devel/ki18n/buildlink3.mk"
+.include "../../devel/kio/buildlink3.mk"
+.include "../../devel/kparts/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../x11/kde-baseapps4/buildlink3.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../graphics/kiconthemes/buildlink3.mk"
+.include "../../x11/kwidgetsaddons/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

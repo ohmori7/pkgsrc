@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.13 2018/12/13 19:51:39 adam Exp $
+# $NetBSD: Makefile,v 1.20 2021/01/01 08:24:33 ryoon Exp $
 
-DISTNAME=	innoextract-1.7
-PKGREVISION=	2
+DISTNAME=	innoextract-1.9
+PKGREVISION=	1
 CATEGORIES=	archivers
-MASTER_SITES=	http://constexpr.org/innoextract/files/
+MASTER_SITES=	https://constexpr.org/innoextract/files/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://constexpr.org/innoextract/
+HOMEPAGE=	https://constexpr.org/innoextract/
 COMMENT=	Tool to unpack installers created by Inno Setup
 LICENSE=	zlib
 
@@ -14,7 +14,7 @@ USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
 
 CMAKE_ARGS+=	-DCMAKE_INSTALL_MANDIR=${PREFIX}/${PKGMANDIR}
-CMAKE_ARGS+=	-DUSE_CXX11=OFF
+CMAKE_ARGS+=	-DSET_OPTIMIZATION_FLAGS=OFF
 
 .include "../../archivers/xz/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"

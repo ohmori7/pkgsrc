@@ -1,17 +1,17 @@
-# $NetBSD: Makefile,v 1.19 2012/10/08 09:57:18 asau Exp $
+# $NetBSD: Makefile,v 1.21 2019/11/03 17:04:20 rillig Exp $
 
 DISTNAME=	colortail-0.3.0
 CATEGORIES=	misc
 MASTER_SITES=	http://joakimandersson.se/files/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://joakimandersson.se/projects/colortail/
+HOMEPAGE=	https://joakimandersson.se/projects/colortail/
 COMMENT=	Colour-able replacement for tail(1)
 
 USE_LANGUAGES=	c c++
 
-GNU_CONFIGURE=	yes
-CONFIGURE_ARGS+=--datadir=${PREFIX}/share/examples/colortail
+GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--datadir=${PREFIX}/share/examples/colortail
 
 INSTALLATION_DIRS=	${PKGMANDIR}/man1 share/examples/colortail
 

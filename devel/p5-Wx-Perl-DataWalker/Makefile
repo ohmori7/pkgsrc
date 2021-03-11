@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.42 2018/11/14 22:21:19 kleink Exp $
+# $NetBSD: Makefile,v 1.49 2020/08/31 18:09:14 wiz Exp $
 #
 
 DISTNAME=	Wx-Perl-DataWalker-0.02
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	40
+PKGREVISION=	46
 CATEGORIES=	x11 perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Wx/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Wx-Perl-DataWalker/
+HOMEPAGE=	https://metacpan.org/release/Wx-Perl-DataWalker
 COMMENT=	Shows a relatively simple Perl data structure browser
 LICENSE=	${PERL5_LICENSE}
 

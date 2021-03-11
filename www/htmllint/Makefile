@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.37 2019/05/23 19:23:20 rillig Exp $
-#
+# $NetBSD: Makefile,v 1.42 2020/08/31 18:12:34 wiz Exp $
 
 DISTNAME=	htmllint
-PKGNAME=	htmllint-20051019
-PKGREVISION=	8
+PKGNAME=	htmllint-20111128
+PKGREVISION=	1
 CATEGORIES=	www japanese
 MASTER_SITES=	http://openlab.ring.gr.jp/k16/htmllint/archives/
 EXTRACT_SUFX=	.zip
@@ -11,6 +10,7 @@ EXTRACT_SUFX=	.zip
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://openlab.ring.gr.jp/k16/htmllint/
 COMMENT=	Another HTML-Lint program
+#LICENSE=	# Three lines NOTE is on the web, will adjust later
 
 DEPENDS+=	p5-Jcode>=0.68:../../converters/p5-Jcode
 DEPENDS+=	p5-libwww>=5.8:../../www/p5-libwww

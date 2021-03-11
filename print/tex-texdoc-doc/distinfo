@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.8 2019/05/12 03:26:38 markd Exp $
+$NetBSD: distinfo,v 1.10 2021/02/15 04:01:10 markd Exp $
 
-SHA1 (tex-texdoc-50627/texdoc.doc.tar.xz) = da81ab68711a51f75e31ea073c5f8be2dc51881a
-RMD160 (tex-texdoc-50627/texdoc.doc.tar.xz) = d63e73d6568fa541011fcedd41eced44e6347fbc
-SHA512 (tex-texdoc-50627/texdoc.doc.tar.xz) = 133abc048e8cbfa84bd2788fe0942bc48d4d2844bec525c010a3590afa62b22ca77518ebbfd26e78c825152ec0eea0a8e1513d15931332656b8fec702b0b7479
-Size (tex-texdoc-50627/texdoc.doc.tar.xz) = 124736 bytes
+SHA1 (texdoc.doc.r56358.tar.xz) = 399e2c1ca7f27cc3d69ac1d57f686c1eb50c00d1
+RMD160 (texdoc.doc.r56358.tar.xz) = 440374de454f590456cf4e2b91e98dbe6631c4e2
+SHA512 (texdoc.doc.r56358.tar.xz) = 798d915aa45428f14f281143f8dae0e7763002b3f4ee9f2292cf55f14e56616d314610208b7f50f78f45d1d7be1e2555ac1b5671e683d04af3321876b1c7f823
+Size (texdoc.doc.r56358.tar.xz) = 132780 bytes

@@ -1,15 +1,16 @@
-@comment $NetBSD: PLIST,v 1.19 2019/05/09 09:28:22 adam Exp $
+@comment $NetBSD: PLIST,v 1.23 2020/11/20 19:08:06 wiz Exp $
 include/poppler/Annot.h
 include/poppler/Array.h
-include/poppler/BuiltinFont.h
-include/poppler/BuiltinFontTables.h
+include/poppler/BBoxOutputDev.h
 include/poppler/CMap.h
 include/poppler/CachedFile.h
+include/poppler/CairoFontEngine.h
+include/poppler/CairoOutputDev.h
+include/poppler/CairoRescaleBox.h
 include/poppler/Catalog.h
 include/poppler/CertificateInfo.h
 include/poppler/CharCodeToUnicode.h
 include/poppler/CharTypes.h
-include/poppler/CompactFontTables.h
 include/poppler/CurlCachedFile.h
 include/poppler/CurlPDFDocBuilder.h
 include/poppler/DateInfo.h
@@ -32,6 +33,7 @@ include/poppler/JArithmeticDecoder.h
 include/poppler/JBIG2Stream.h
 include/poppler/JPEG2000Stream.h
 include/poppler/JPXStream.h
+include/poppler/JSInfo.h
 include/poppler/Lexer.h
 include/poppler/Linearization.h
 include/poppler/Link.h
@@ -84,7 +86,6 @@ include/poppler/fofi/FoFiIdentifier.h
 include/poppler/fofi/FoFiTrueType.h
 include/poppler/fofi/FoFiType1.h
 include/poppler/fofi/FoFiType1C.h
-include/poppler/goo/FixedPoint.h
 include/poppler/goo/GooCheckedOps.h
 include/poppler/goo/GooLikely.h
 include/poppler/goo/GooString.h

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.28 2018/08/22 09:45:27 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2020/08/31 18:09:58 wiz Exp $
 
 DISTNAME=	opendkim-2.10.3
-PKGREVISION=	2
+PKGREVISION=	6
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=opendkim/}
 
@@ -11,6 +11,7 @@ COMMENT=	Open source DKIM library, MTA filter implementation and tools
 LICENSE=	sendmail-open-source-license
 
 USE_LIBTOOL=		yes
+USE_TOOLS+=             autoconf automake autoreconf
 USE_TOOLS+=		pkg-config perl:run
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
@@ -41,9 +42,11 @@ PKGCONFIG_OVERRIDE+=	libopendkim/opendkim.pc.in
 
 .include "options.mk"
 
+pre-configure:
+	cd ${WRKSRC} && autoreconf -fiv
+
 PLIST_SRC+=		${PKGDIR}/PLIST
 
-BUILDLINK_API_DEPENDS.openssl+=		openssl>=0.9.8
 .include "../../security/openssl/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libmilter+=	libmilter>=8.13.0
 .include "../../mail/libmilter/buildlink3.mk"

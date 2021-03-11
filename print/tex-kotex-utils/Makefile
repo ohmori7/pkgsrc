@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:46:15 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:11:04 wiz Exp $
 
 DISTNAME=	kotex-utils
 PKGNAME=	tex-${DISTNAME}-2.1.0
-PKGREVISION=	2
+PKGREVISION=	4
 TEXLIVE_REV=	38727
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/kotex-utils
+HOMEPAGE=	https://ctan.org/pkg/kotex-utils
 COMMENT=	Utility scripts and support files for typesetting Korean
 LICENSE=	lppl-1.3c
 
@@ -17,6 +17,7 @@ REPLACE_PERL=	bin/jamo-normalize bin/komkindex bin/ttf2kotexfont
 
 INSTALLATION_DIRS+=	bin
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 
 post-extract:

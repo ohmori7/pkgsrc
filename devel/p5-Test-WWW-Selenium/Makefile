@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.19 2018/08/22 09:44:51 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2020/08/31 18:09:09 wiz Exp $
 #
 
 DISTNAME=	Test-WWW-Selenium-1.36
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	devel perl5 www
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Test/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Test-WWW-Selenium/
+HOMEPAGE=	https://metacpan.org/release/Test-WWW-Selenium
 COMMENT=	Perl 5 module to test applications using Selenium Remote Control
 LICENSE=	${PERL5_LICENSE}
 

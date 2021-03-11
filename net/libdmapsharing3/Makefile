@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.44 2019/04/03 00:32:59 ryoon Exp $
+# $NetBSD: Makefile,v 1.53 2020/11/05 09:07:04 ryoon Exp $
 
 DISTNAME=	libdmapsharing-2.9.15
 PKGNAME=	${DISTNAME:S/sharing/sharing3/}
-PKGREVISION=	41
+PKGREVISION=	48
 CATEGORIES=	net
 MASTER_SITES=	https://www.flyn.org/projects/libdmapsharing/
 
@@ -18,7 +18,7 @@ USE_TOOLS+=		gmake pkg-config
 PKGCONFIG_OVERRIDE=	libdmapsharing-3.0.pc.in
 
 BUILDLINK_ABI_DEPENDS.gst-plugins0.10-base+= gst-plugins0.10-base>=0.10.23.2
-BUILDLINK_ABI_DEPENDS.libsoup+= libsoup>=2.32
+BUILDLINK_ABI_DEPENDS.libsoup+=	libsoup>=2.32
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libgee0.6/buildlink3.mk"
@@ -26,4 +26,5 @@ BUILDLINK_ABI_DEPENDS.libsoup+= libsoup>=2.32
 .include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
 .include "../../net/avahi/buildlink3.mk"
 .include "../../net/libsoup/buildlink3.mk"
+.include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

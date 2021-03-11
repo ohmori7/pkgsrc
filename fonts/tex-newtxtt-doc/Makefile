@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.3 2017/06/21 10:14:21 markd Exp $
+# $NetBSD: Makefile,v 1.6 2020/04/26 12:21:18 markd Exp $
 
 DISTNAME=	newtxtt.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-1.055
-TEXLIVE_REV=	44510
+PKGNAME=	tex-${DISTNAME:S/./-/}-1.056
+TEXLIVE_REV=	54512
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/newtxtt
+HOMEPAGE=	https://ctan.org/pkg/newtxtt
 COMMENT=	Documentation for tex-newtxtt
 LICENSE=	gnu-gpl-v3 AND lppl-1.3c
 

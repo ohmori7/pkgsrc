@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.14 2017/09/03 08:53:13 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/05/20 06:09:07 rillig Exp $
 #
 
 DISTNAME=	OpenAG-1.1.1
@@ -18,13 +18,20 @@ USE_TOOLS+=	wget:run
 
 CONFIGURE_ENV+=	WGET=wget
 
+# mp3info/mp3info.cpp: In function 'long int get_length(mp3_file_info*, FILE*, long int)':
+# mp3info/mp3info.cpp:436:52: error: array subscript has type 'char' [-Werror=char-subscripts]
+#       sample_rate = samples_rates_frequencies[mpeg_v][((scan2&0x0c) >> 2)];
+#                                                     ^
+# Maybe fix this later.
+BUILDLINK_TRANSFORM+=	rm:-Werror=char-subscripts
+
 .include "../../devel/zlib/buildlink3.mk"
 
 INSTALLATION_DIRS+=	share/doc/OpenAG
 
 post-install:
 .for i in AUTHORS ChangeLog INSTALL NEWS README
-		${INSTALL_MAN} ${WRKSRC}/${i} ${DESTDIR}${PREFIX}/share/doc/OpenAG/${i}
+	${INSTALL_MAN} ${WRKSRC}/${i} ${DESTDIR}${PREFIX}/share/doc/OpenAG/${i}
 .endfor
 
 .include "../../mk/bsd.pkg.mk"

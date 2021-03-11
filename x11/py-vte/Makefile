@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.37 2019/04/26 13:14:25 maya Exp $
+# $NetBSD: Makefile,v 1.46 2020/11/05 09:09:27 ryoon Exp $
 
 .include "../../x11/vte/Makefile.common"
 
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	24
+PKGREVISION=	30
 CATEGORIES=	x11 python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -17,10 +17,9 @@ GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake intltool msgfmt pkg-config
 
 CONFIGURE_ARGS+=	--enable-python
-CONFIGURE_ARGS+=	--disable-freetype-test
 CONFIGURE_ARGS+=	--enable-Bsymbolic=auto
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-gtk2
+PYTHON_VERSIONS_ACCEPTED=	27 # py-gtk2
 
 BUILD_DIRS=	python
 

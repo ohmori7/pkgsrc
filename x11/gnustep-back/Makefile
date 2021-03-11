@@ -1,9 +1,12 @@
-# $NetBSD: Makefile,v 1.75 2019/04/03 00:33:14 ryoon Exp $
+# $NetBSD: Makefile,v 1.81 2020/11/14 22:40:18 mef Exp $
 
-DISTNAME=	gnustep-back-0.22.0
-PKGREVISION=	21
+GITHUB_PROJECT=	libs-back
+GITHUB_TAG=	back-0_28_0
+DISTNAME=	back-0_28_0
+PKGREVISION=	1
 CATEGORIES=	x11 gnustep
-MASTER_SITES=	${MASTER_SITE_GNUSTEP:=core/}
+PKGNAME=	gnustep-${DISTNAME:S/_/./g}
+MASTER_SITES=	${MASTER_SITE_GITHUB:=gnustep/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gnustep.org/
@@ -17,17 +20,19 @@ CONFIGURE_ARGS+=	--exec-prefix=${PREFIX}/libexec/GNUstep
 LDFLAGS=		${COMPILER_RPATH_FLAG}${PREFIX}/lib
 MAKE_FILE=		GNUmakefile
 
+PLIST_SUBST=	API_VERSION=${PKGVERSION_NOREV:C/\.[0-9]$//:C/\.//}
+
 pre-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${GNUSTEP_ROOT}/lib/GNUstep/Fonts
 
 .include "../../devel/gnustep-make/gnustep.mk"
 
-PREFER_PKGSRC+=	freetype2
+#REFER_PKGSRC+=	freetype2
 
 .include "../../x11/gnustep-gui/buildlink3.mk"
 .include "../../graphics/MesaLib/buildlink3.mk"
-.include "../../graphics/freetype2/buildlink3.mk"
 .include "../../fonts/fontconfig/buildlink3.mk"
+.include "../../graphics/cairo/buildlink3.mk"
 .include "../../graphics/libart/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"

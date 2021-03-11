@@ -1,6 +1,6 @@
 #! /bin/sh
 
-# $NetBSD: mksandbox,v 1.15 2019/01/25 20:08:21 agc Exp $
+# $NetBSD: mksandbox,v 1.18 2021/01/22 11:59:52 jperkin Exp $
 
 # Copyright (c) 2002,2012 Alistair Crooks <agc@NetBSD.org>
 # All rights reserved.
@@ -289,6 +289,7 @@ SunOS)
 	;;
 Linux)
 	$mountprog $mountflags /dev $sandbox/dev
+	$mountprog -t tmpfs tmpfs $sandbox/dev/shm
 	;;
 *)
 	$cpprog /dev/MAKEDEV* $sandbox/dev
@@ -314,6 +315,10 @@ esac
 
 echo "Make empty dirs upon which to mount the null mounts"
 for d in $sandboxMountDirs; do
+	if [ -L $d ]; then
+		$cpprog -P $d $sandbox$d
+		continue
+	fi
 	test -d $d || continue;
 	case $d in
 	*X11*)	test "$with_x" = "yes" || continue ;;
@@ -434,6 +439,7 @@ xmount)
 		;;
 	Linux)
 		$mountprog $mountflags /dev \$sandbox/dev
+		$mountprog -t tmpfs tmpfs \$sandbox/dev/shm
 		;;
 	SunOS)
 		$mountprog -F lofs -r /dev \$sandbox/dev
@@ -451,7 +457,11 @@ xumount)
 		umount \$sandbox/\$mntpoint
 	done
 	case \$opsys in
-	Darwin|DragonFly|FreeBSD|Linux)
+	Linux)
+		umount \$sandbox/dev/shm
+		umount \$sandbox/dev
+		;;
+	Darwin|DragonFly|FreeBSD)
 		umount \$sandbox/dev
 		;;
 	SunOS)

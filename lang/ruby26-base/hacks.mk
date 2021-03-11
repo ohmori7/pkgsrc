@@ -1,7 +1,7 @@
-# $NetBSD: hacks.mk,v 1.2 2019/02/07 10:07:21 mrg Exp $
+# $NetBSD: hacks.mk,v 1.4 2021/02/14 15:31:02 taca Exp $
 
-.if !defined(RUBY24_BASE_HACKS_MK)
-RUBY24_BASE_HACKS_MK=	defined
+.if !defined(RUBY26_BASE_HACKS_MK)
+RUBY26_BASE_HACKS_MK=	defined
 
 .include "../../mk/compiler.mk"
 
@@ -36,9 +36,9 @@ BUILDLINK_TRANSFORM+=	opt:-Os:-O1 rm:-freorder-blocks
 
 # On NetBSD/aarch64, gcc optimisation produces segmentation faulting
 # miniruby binary.
-.if !empty(MACHINE_PLATFORM:MNetBSD-*-aarch64) && !empty(CC_VERSION:Mgcc-[67].*)
+.if !empty(MACHINE_PLATFORM:MNetBSD-*-aarch64) && !empty(CC_VERSION:Mgcc-*)
 PKG_HACKS+=		optimisation
 BUILDLINK_TRANSFORM+=	rm:-fomit-frame-pointer
 .endif
 
-.endif	# RUBY24_BASE_HACKS_MK
+.endif	# RUBY26_BASE_HACKS_MK

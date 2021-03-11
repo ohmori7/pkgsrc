@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2019/04/03 00:32:42 ryoon Exp $
+# $NetBSD: Makefile,v 1.24 2020/11/05 09:08:06 ryoon Exp $
 
 DISTNAME=	homebank-5.1.6
-PKGREVISION=	13
+PKGREVISION=	22
 CATEGORIES=	finance
 MASTER_SITES=	http://homebank.free.fr/public/
 
@@ -10,9 +10,9 @@ HOMEPAGE=	http://homebank.free.fr/
 COMMENT=	HomeBank is to manage your personal accounts at home
 LICENSE=	gnu-gpl-v2
 
-GNU_CONFIGURE=	yes
-USE_PKGLOCALEDIR=   yes
-USE_TOOLS+=	pkg-config perl intltool gmake msgfmt
+GNU_CONFIGURE=		yes
+USE_PKGLOCALEDIR=	yes
+USE_TOOLS+=		pkg-config perl intltool gmake msgfmt
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.homebank
 PKG_SUPPORTED_OPTIONS=	libofx

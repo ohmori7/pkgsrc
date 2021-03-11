@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.4 2019/04/25 07:32:49 maya Exp $
+# $NetBSD: Makefile,v 1.6 2020/12/04 20:45:12 nia Exp $
 #
 
 DISTNAME=	PythonTidy-1.20
 PKGNAME=	${DISTNAME:tl}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	http://lacusveris.com/PythonTidy/
 EXTRACT_SUFX=	.python
@@ -15,15 +15,15 @@ LICENSE=	gnu-gpl-v2
 
 WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
 
-NO_BUILD=	yes
+NO_BUILD=		yes
 INSTALLATION_DIRS=	bin
 
-REPLACE_PYTHON=	${WRKSRC}/*.py
-SUBST_CLASSES+=                 pythonbin
-SUBST_STAGE.pythonbin=          pre-configure
-SUBST_MESSAGE.pythonbin=        Fixing references to python interpreter.
-SUBST_FILES.pythonbin=          *.py
-SUBST_SED.pythonbin=            -e 's,%PYTHONBIN%,${PYTHONBIN},g'
+REPLACE_PYTHON=			${WRKSRC}/*.py
+SUBST_CLASSES+=			pythonbin
+SUBST_STAGE.pythonbin=		pre-configure
+SUBST_MESSAGE.pythonbin=	Fixing references to python interpreter.
+SUBST_FILES.pythonbin=		*.py
+SUBST_SED.pythonbin=		-e 's,%PYTHONBIN%,${PYTHONBIN},g'
 
 do-extract:
 	${MKDIR} ${WRKSRC:Q}

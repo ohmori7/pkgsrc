@@ -1,19 +1,24 @@
-# $NetBSD: Makefile,v 1.52 2019/05/05 22:49:54 ryoon Exp $
+# $NetBSD: Makefile,v 1.65 2021/03/08 08:13:10 jaapb Exp $
 
-DISTNAME=	lablgtk-2.18.8
+GITHUB_PROJECT=	lablgtk
+DISTNAME=	${GITHUB_PROJECT}-2.18.10
 PKGNAME=	ocaml-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	8
 CATEGORIES=	x11
-MASTER_SITES=	https://github.com/garrigue/lablgtk/releases/download/lablgtk2188/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=garrigue/}
 
 MAINTAINER=	jaapb@NetBSD.org
-HOMEPAGE=	http://lablgtk.forge.ocamlcore.org/
+HOMEPAGE=	https://lablgtk.forge.ocamlcore.org/
 COMMENT=	GTK+ 2.x bindings for Objective Caml
 # for installed files; more restrictions on applications/
 LICENSE=	gnu-lgpl-v2
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-debug
+CONFIGURE_ARGS+=	--without-gnomecanvas
+CONFIGURE_ARGS+=	--without-gnomeui
+CONFIGURE_ARGS+=	--without-gtksourceview
+CONFIGURE_ARGS+=	--without-panel
 USE_TOOLS+=		gmake pkg-config
 OCAML_USE_FINDLIB=	yes
 OCAML_FINDLIB_DIRS=	lablgtk2

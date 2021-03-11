@@ -1,16 +1,25 @@
-$NetBSD: patch-CMakeLists.txt,v 1.1 2018/01/25 14:13:22 tnn Exp $
+$NetBSD: patch-CMakeLists.txt,v 1.5 2020/10/22 13:47:34 tnn Exp $
 
---- CMakeLists.txt.orig	2017-09-18 11:05:03.000000000 +0000
+Don't use hardcoded paths for finding libcrypto and libssl.
+
+--- CMakeLists.txt.orig	2020-08-25 14:19:22.000000000 +0000
 +++ CMakeLists.txt
-@@ -299,10 +299,8 @@ elseif (${CMAKE_SYSTEM_NAME} MATCHES "Da
-         ${OPENSSL_ROOT}/lib/libssl.a
-         ${OPENSSL_ROOT}/lib/libcrypto.a
+@@ -301,17 +301,8 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Window
+         ${OPENSSL_ROOT}/lib/libssl.lib
+         ${OPENSSL_ROOT}/lib/libcrypto.lib
      )
--elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-+else()
-     set (OPENSSL_LIBS ssl crypto)
--else()
+-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+-    set (OPENSSL_ROOT /usr/local/opt/openssl)
+-    include_directories (BEFORE SYSTEM ${OPENSSL_ROOT}/include)
+-    set (OPENSSL_LIBS
+-        ${OPENSSL_ROOT}/lib/libssl.a
+-        ${OPENSSL_ROOT}/lib/libcrypto.a
+-    )
+-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux|.*BSD|DragonFly")
+-    set (OPENSSL_LIBS ssl crypto)
+ else()
 -    message (FATAL_ERROR "Couldn't find OpenSSL")
++    set (OPENSSL_LIBS ssl crypto)
  endif()
  
  #

@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.53 2019/01/18 13:06:02 youri Exp $
+# $NetBSD: Makefile,v 1.61 2020/08/31 18:11:39 wiz Exp $
 
+PKGREVISION= 4
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
-VERSION=	1.2.2
+VERSION=	1.2.3
 DISTNAME=	xfce4-systemload-plugin-${VERSION}
 CATEGORIES=	sysutils
 MASTER_SITES=	http://archive.xfce.org/src/panel-plugins/xfce4-systemload-plugin/${VERSION:R}/
 
-HOMEPAGE=	http://goodies.xfce.org/projects/panel-plugins/xfce4-systemload-plugin
+HOMEPAGE=	https://goodies.xfce.org/projects/panel-plugins/xfce4-systemload-plugin
 COMMENT=	Xfce system load plugin
 
 MAKE_ENV.DragonFly+=	OS_LIBS=-lkinfo

@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.2 2015/11/04 01:01:56 agc Exp $
+$NetBSD: distinfo,v 1.4 2021/02/14 21:55:12 markd Exp $
 
-SHA1 (tex-chessboard-33801/chessboard.doc.tar.xz) = ecb1345934cc57b9b5bd37330a781536b4083b41
-RMD160 (tex-chessboard-33801/chessboard.doc.tar.xz) = 1ed5a26ef7b62528711341b569d19c1bbdc2acfb
-SHA512 (tex-chessboard-33801/chessboard.doc.tar.xz) = 9b9eef6edced5d003703d12466de3e8b6a1d21d53b28a321bcf5ef9dcfe526df3a9f0a1703f5665307964633916a61170c3048b8f3547fc926083886cd6f6437
-Size (tex-chessboard-33801/chessboard.doc.tar.xz) = 1620 bytes
+SHA1 (chessboard.doc.r56833.tar.xz) = 391a2e92373886ad691e88a8e655d359273343b8
+RMD160 (chessboard.doc.r56833.tar.xz) = b293cb8d4099341262dd6aef2a1ac63102587fe6
+SHA512 (chessboard.doc.r56833.tar.xz) = 1c2e8ab2776a247ab1cbaf5527e04392dbcd1eae3a9b1c6785223268d1811a778c0812a1a5437a15cf4bbf08ff28785a57da10c472dd7567f1f0217b2d7de556
+Size (chessboard.doc.r56833.tar.xz) = 523316 bytes

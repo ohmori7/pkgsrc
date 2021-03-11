@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.3 2020/12/07 11:26:45 pin Exp $
+
+SHA1 (lxqt-build-tools-0.8.0.tar.xz) = 89fd8937aec14b5c9e9db4ac58d317f1381db447
+RMD160 (lxqt-build-tools-0.8.0.tar.xz) = 6ab472e3a8eaae33f9419780d342e73f9224dace
+SHA512 (lxqt-build-tools-0.8.0.tar.xz) = 7c235df623ae8c88fa551f38bf24d0621958ce3586296a798b50bbce87084cb624298f4e5aaaa40d3244afae17b7fa373d2b8b6084377f9d7a355fc4bfcbb531
+Size (lxqt-build-tools-0.8.0.tar.xz) = 25340 bytes

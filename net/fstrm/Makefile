@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2019/03/12 08:53:23 he Exp $
+# $NetBSD: Makefile,v 1.8 2020/01/18 21:50:13 jperkin Exp $
 
-DISTNAME=	fstrm-0.5.0
+DISTNAME=	fstrm-0.6.0
+PKGREVISION=	3
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GITHUB:=farsightsec/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -20,6 +21,8 @@ GNU_CONFIGURE=	yes
 USE_LANGUAGES+=	c
 
 BUILDLINK_API_DEPENDS.libevent+=	libevent>=2.0
+
+LDFLAGS.SunOS+=	-lnsl
 
 pre-configure:
 	cd ${WRKSRC} && sh ./autogen.sh

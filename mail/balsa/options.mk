@@ -1,9 +1,7 @@
-# $NetBSD: options.mk,v 1.3 2013/08/16 09:20:40 obache Exp $
-#
+# $NetBSD: options.mk,v 1.5 2020/04/22 05:01:51 nia Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.balsa
-PKG_SUPPORTED_OPTIONS=	canberra compface ldap sqlite ssl
-PKG_SUGGESTED_OPTIONS=	compface ldap sqlite ssl
+PKG_SUPPORTED_OPTIONS=	compface ldap
 
 .include "../../mk/bsd.options.mk"
 
@@ -15,14 +13,4 @@ CONFIGURE_ARGS+=	--with-compface
 .if !empty(PKG_OPTIONS:Mldap)
 CONFIGURE_ARGS+=	--with-ldap
 .  include "../../databases/openldap-client/buildlink3.mk"
-.endif
-
-.if !empty(PKG_OPTIONS:Msqlite)
-CONFIGURE_ARGS+=	--with-sqlite
-.  include "../../databases/sqlite3/buildlink3.mk"
-.endif
-
-.if !empty(PKG_OPTIONS:Mssl)
-CONFIGURE_ARGS+=	--with-ssl=${BUILDLINK_PREFIX.openssl}
-.  include "../../security/openssl/buildlink3.mk"
 .endif

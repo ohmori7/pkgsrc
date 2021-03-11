@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2019/05/29 20:51:47 adam Exp $
+# $NetBSD: Makefile,v 1.18 2020/03/08 16:50:47 wiz Exp $
 
-DISTNAME=	gst-python-1.16.0
+DISTNAME=	gst-python-1.16.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/gst-python/gstreamer1/}
+PKGREVISION=	1
 CATEGORIES=	multimedia
 MASTER_SITES=	https://gstreamer.freedesktop.org/src/gst-python/
 EXTRACT_SUFX=	.tar.xz
@@ -22,7 +23,7 @@ PY_PATCHPLIST=		yes
 TEST_TARGET=		check
 
 .include "../../devel/py-gobject3-common/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gstreamer1+=	gstreamer1>=1.16.0
+BUILDLINK_API_DEPENDS.gstreamer1+=	gstreamer1>=1.16.2
 .include "../../multimedia/gstreamer1/buildlink3.mk"
 .include "../../multimedia/gst-plugins1-base/buildlink3.mk"
 .include "../../lang/python/extension.mk"

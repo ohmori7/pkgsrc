@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.98 2019/03/11 14:16:00 ryoon Exp $
+# $NetBSD: Makefile,v 1.109 2020/09/20 20:01:19 schmonz Exp $
 
 DISTNAME=	nspr-${NSPR_RELEASE:S/.0$//}
-NSPR_RELEASE=	4.21.0
+NSPR_RELEASE=	4.29.0
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_MOZILLA_ALL:=nspr/releases/v${NSPR_RELEASE:S/.0$//}/src/}
 
@@ -10,15 +10,15 @@ HOMEPAGE=	https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSPR
 COMMENT=	Platform-neutral API for system level and libc like functions
 LICENSE=	mpl-2.0
 
-CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}security/nss/tests/libpkix/libpkix.sh
-CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}security/nss/tests/multinit/multinit.sh
-CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}js/src/configure
-CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}configure
+CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}security/nss/tests/libpkix/libpkix.sh
+CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}security/nss/tests/multinit/multinit.sh
+CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}js/src/configure
+CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}configure
 
 OVERRIDE_DIRDEPTH=	3
 
 GNU_CONFIGURE=		yes
-GNU_CONFIGURE_LIBSUBDIR=nspr
+GNU_CONFIGURE_LIBSUBDIR= nspr
 CONFIGURE_DIRS=		nspr
 
 USE_GCC_RUNTIME=	yes
@@ -45,7 +45,7 @@ SUBST_FILES.nspr-rpath=		nspr/lib/libc/src/Makefile.in nspr/lib/ds/Makefile.in
 SUBST_SED.nspr-rpath=		-e 's|$$$$ORIGIN|${PREFIX}/lib/nspr|g'
 
 .if ${OPSYS} == "OpenBSD"
-CHECK_SHLIBS_SUPPORTED= no
+CHECK_SHLIBS_SUPPORTED=	no
 .endif
 
 SUBST_CLASSES.Darwin+=		exec_path
@@ -71,9 +71,9 @@ PLIST_VARS+=		sun4u_32
 .  if defined(ABI) && ${ABI} == "64"
 CONFIGURE_ARGS+=	--enable-64bit
 .  else
-HW_CLASS!=	${UNAME} -m
+HW_CLASS!=		${UNAME} -m
 .    if ${HW_CLASS} == "sun4u"
-PLIST.sun4u_32=                yes
+PLIST.sun4u_32=		yes
 .    endif
 .  endif
 .endif
@@ -85,15 +85,12 @@ CONFIGURE_ARGS+=	--enable-64bit
 .endif
 
 .if ${OPSYS} == "Darwin"
-# Avoid using invalid deployment targets.
-CONFIGURE_ARGS+=	--with-macos-sdk=/nonexistent
 .  if defined(ABI) && ${ABI} == "64"
 CONFIGURE_ARGS+=	--enable-64bit
 .  endif
-.endif
-
-.if ${OPSYS} == "Darwin" && exists(/Developer/Headers/FlatCarbon)
+.  if exists(/Developer/Headers/FlatCarbon)
 BUILDLINK_PASSTHRU_DIRS+=	Developer/Headers/FlatCarbon
+.  endif
 .endif
 
 pre-configure:

@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.1 2018/08/15 14:02:46 ryoon Exp $
+$NetBSD: distinfo,v 1.4 2021/02/18 10:20:30 wiz Exp $
 
-SHA1 (libnumbertext-1.0.3.tar.xz) = 53ba7d5656b06e4b187eb02e17b87f3717ce660f
-RMD160 (libnumbertext-1.0.3.tar.xz) = 4309670e620e82cf2f9b3b3cb99614f637696745
-SHA512 (libnumbertext-1.0.3.tar.xz) = 0ce9c68c8d928f7c8aa13f4760360ab3077ff0923a6b34256a1ca1047b7401a7d99ac5205b80b3e57c6e693c59ccc8328e04cfebeee07794c906a1ab750a3a7a
-Size (libnumbertext-1.0.3.tar.xz) = 279948 bytes
+SHA1 (libnumbertext-1.0.7.tar.xz) = fa60020dab9db22903fc470c230ee6f4145d8991
+RMD160 (libnumbertext-1.0.7.tar.xz) = 9d66a690efc6de630ff4293ffa60dcd68ce9fbbc
+SHA512 (libnumbertext-1.0.7.tar.xz) = 7755c713dd9b9b75e486eac7ffbfb418c3bdfefd67ecb149f0e25a339410814bf73296f69a4e009a17f9f21292f0eeafa931aef60596cd3d932dab47278de8c2
+Size (libnumbertext-1.0.7.tar.xz) = 289764 bytes

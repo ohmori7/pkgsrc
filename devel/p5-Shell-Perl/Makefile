@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:44:37 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:08:50 wiz Exp $
 #
 
 DISTNAME=	Shell-Perl-0.004
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Shell/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Shell-Perl/
+HOMEPAGE=		https://metacpan.org/release/Shell-Perl
 COMMENT=		Read-eval-print loop in Perl
 LICENSE=		${PERL5_LICENSE}
 

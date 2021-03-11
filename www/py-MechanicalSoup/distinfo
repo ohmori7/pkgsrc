@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.4 2018/12/03 19:59:32 adam Exp $
+$NetBSD: distinfo,v 1.6 2021/02/06 20:45:45 leot Exp $
 
-SHA1 (MechanicalSoup-0.11.0.tar.gz) = 909af99ddb5f42170880eb2d9e835c5042384a6c
-RMD160 (MechanicalSoup-0.11.0.tar.gz) = c16ddaaaa25b8a8196db71afaf3f71a598116018
-SHA512 (MechanicalSoup-0.11.0.tar.gz) = 3fab6ae1aace2581f6d0a031ba3b144a78404f5deebc0fc1b8eede606f72a912ac9a9506da78e0f5ca30483676b170570d72bcbf0712a7e193587ec264bdbff7
-Size (MechanicalSoup-0.11.0.tar.gz) = 43088 bytes
+SHA1 (MechanicalSoup-1.0.0.tar.gz) = 552f82014ccccf7bfe50030a4c1511ae07b0308a
+RMD160 (MechanicalSoup-1.0.0.tar.gz) = cfd626f44e1eafb98f7e2c565333ad716a2c1e9d
+SHA512 (MechanicalSoup-1.0.0.tar.gz) = 00e2c5220c065b517301d9381a9bc5019f6f75dc5951a5ab4427fd7939b296b6b33a20b8f8a7e82c6feed2c9100e3481f38a424d63065883d71a6927119ad88c
+Size (MechanicalSoup-1.0.0.tar.gz) = 47572 bytes

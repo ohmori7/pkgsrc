@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.103 2018/11/29 11:21:53 prlw1 Exp $
+# $NetBSD: Makefile,v 1.111 2020/11/05 09:08:36 ryoon Exp $
 #
 
 DISTNAME=	mail-notification-5.4
-PKGREVISION=	47
+PKGREVISION=	54
 CATEGORIES=	mail gnome
 MASTER_SITES=	http://savannah.nongnu.org/download/mailnotify/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	gdt@NetBSD.org
-HOMEPAGE=	http://www.nongnu.org/mailnotify/
+HOMEPAGE=	https://www.nongnu.org/mailnotify/
 COMMENT=	Status icon that provides new mail notifications
 
 HAS_CONFIGURE=		YES

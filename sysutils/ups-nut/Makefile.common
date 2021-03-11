@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.7 2018/09/21 08:13:26 jperkin Exp $
+# $NetBSD: Makefile.common,v 1.9 2021/02/11 10:05:13 wiz Exp $
 # used by sysutils/ups-nut/Makefile
 # used by sysutils/ups-nut-cgi/Makefile
 # used by sysutils/ups-nut-snmp/Makefile
@@ -34,6 +34,9 @@ CONFIGURE_ARGS+=	--with-group=${NUT_GROUP}
 CHECK_PORTABILITY_SKIP=	packaging/*
 
 .include "../../mk/bsd.prefs.mk"
+.include "options.mk"
+
+BUILD_DEFS+=		VARBASE
 
 PKG_SYSCONFSUBDIR?=	nut
 NUT_CONFDIR=		${PKG_SYSCONFDIR}

@@ -1,4 +1,13 @@
-# $NetBSD: builtin.mk,v 1.23 2013/11/23 10:58:46 obache Exp $
+# $NetBSD: builtin.mk,v 1.25 2020/01/13 17:35:05 rillig Exp $
+#
+# Package-settable variables:
+#
+# GNU_CONFIGURE_ICONV: YesNo
+#	Whether to add --with-libiconv-prefix to CONFIGURE_ARGS.
+#
+#	Default: yes
+#
+# Keywords: iconv
 
 BUILTIN_PKG:=	iconv
 
@@ -25,7 +34,7 @@ IS_BUILTIN.iconv=	no
 IS_BUILTIN.iconv=	yes
 .  endif
 .endif
-MAKEVARS+=	IS_BUILTIN.iconv
+MAKEVARS+=		IS_BUILTIN.iconv
 
 ###
 ### If there is a built-in implementation, then set BUILTIN_PKG.<pkg> to
@@ -54,7 +63,7 @@ BUILTIN_VERSION.iconv=	1.9.2		# latest version on 1.9.x branch
 .  endif
 BUILTIN_PKG.iconv=	libiconv-${BUILTIN_VERSION.iconv}
 .endif
-MAKEVARS+=	BUILTIN_PKG.iconv
+MAKEVARS+=		BUILTIN_PKG.iconv
 
 ###
 ### Determine whether we should use the built-in implementation if it
@@ -112,7 +121,7 @@ USE_BUILTIN.iconv=	no
 .    endfor
 .  endif  # PREFER.iconv
 .endif
-MAKEVARS+=	USE_BUILTIN.iconv
+MAKEVARS+=		USE_BUILTIN.iconv
 
 # If USE_GNU_ICONV is defined, then force the use of a GNU libiconv
 # implementation.
@@ -157,7 +166,7 @@ BUILDLINK_TRANSFORM+=		rm:-liconv
 .    endif
 .  endif
 
-.  if defined(GNU_CONFIGURE)
+.  if defined(GNU_CONFIGURE) && ${GNU_CONFIGURE_ICONV:Uyes:M[yY][eE][sS]}
 .    if !empty(USE_BUILTIN.iconv:M[nN][oO])
 CONFIGURE_ARGS+=	--with-libiconv-prefix=${BUILDLINK_PREFIX.iconv}
 .    endif

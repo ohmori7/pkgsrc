@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2020/11/20 17:49:10 wiz Exp $
+
+SHA1 (gcc-10.2.0.tar.xz) = 8de0aecd3a52bb92b43082df8a9256356d1f03be
+RMD160 (gcc-10.2.0.tar.xz) = 73f182e7d40e5c2988b2b8cd80cfca601f20e9fc
+SHA512 (gcc-10.2.0.tar.xz) = 42ae38928bd2e8183af445da34220964eb690b675b1892bbeb7cd5bb62be499011ec9a93397dba5e2fb681afadfc6f2767d03b9035b44ba9be807187ae6dc65e
+Size (gcc-10.2.0.tar.xz) = 75004144 bytes

@@ -1,49 +1,58 @@
-# $NetBSD: Makefile,v 1.97 2019/04/26 13:14:00 maya Exp $
+# $NetBSD: Makefile,v 1.109 2020/11/19 19:28:49 nia Exp $
 
-DISTNAME=	eog-2.32.1
-PKGREVISION=	29
+DISTNAME=	eog-3.38.0
 CATEGORIES=	graphics gnome
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/eog/2.32/}
-EXTRACT_SUFX=	.tar.bz2
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/eog/${PKGVERSION_NOREV:R}/}
+EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	prlw1@cam.ac.uk
 HOMEPAGE=	https://www.gnome.org/
 COMMENT=	Eye of GNOME: an image viewing and cataloging program
 LICENSE=	gnu-gpl-v2
 
-GNU_CONFIGURE=		YES
-USE_TOOLS+=		gmake intltool msgfmt pkg-config
-USE_PKGLOCALEDIR=	YES
-USE_LIBTOOL=		yes
+PREV_PKGPATH=	graphics/eog3
 
-GCONF_SCHEMAS=	eog.schemas
+USE_TOOLS+=	msgfmt pkg-config xgettext
 
-# XXX Python plugins do more harm than good for now
-#.include "../../lang/python/application.mk"
-#.include "../../x11/py-gtk2/buildlink3.mk"
-#PYTHON_VERSIONS_INCOMPATIBLE=	 36 # py-gtk2
-.include "../../devel/GConf/schemas.mk"
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.15.3
-.include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/gettext-lib/buildlink3.mk"
-#.include "../../devel/eel/buildlink3.mk"
-.include "../../devel/exempi/buildlink3.mk"
-.include "../../devel/pango/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gnome-icon-theme+= gnome-icon-theme>=2.20.0
-.include "../../graphics/gnome-icon-theme/buildlink3.mk"
+TOOL_DEPENDS+=	itstool-[0-9]*:../../textproc/itstool
+
+# some linux-only packaging thing
+MESON_ARGS+=	-Dlibportal=false
+
+LDFLAGS+=	${COMPILER_RPATH_FLAG}${PREFIX}/lib/eog
+
+.include "../../mk/bsd.prefs.mk"
+
+# msgfmt: unknown option -- desktop
+.if ${OPSYS} == "NetBSD"
+TOOLS_PLATFORM.msgfmt=
+.endif
+
+PYTHON_FOR_BUILD_ONLY=	tool
+
+PKGCONFIG_OVERRIDE_STAGE=	pre-install
+PKGCONFIG_OVERRIDE+=		output/meson-private/eog.pc
+
+.include "../../devel/meson/build.mk"
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.42.0
+.include "../../devel/glib2/schemas.mk"
+.include "../../devel/gobject-introspection/buildlink3.mk"
+.include "../../devel/libpeas/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../mk/jpeg.buildlink3.mk"
-.include "../../graphics/lcms/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libexif+=	libexif>=0.6.12
-.include "../../graphics/libexif/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-BUILDLINK_API_DEPENDS.shared-mime-info+= shared-mime-info>=0.20
-.include "../../databases/shared-mime-info/buildlink3.mk"
-BUILDLINK_API_DEPENDS.dbus-glib+=	dbus-glib>=0.71
-.include "../../sysutils/dbus-glib/buildlink3.mk"
-.include "../../textproc/gnome-doc-utils/buildlink3.mk"
-.include "../../mk/omf-scrollkeeper.mk"
-.include "../../x11/gnome-desktop/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.11.6
-.include "../../x11/gtk2/buildlink3.mk"
+.include "../../textproc/libxml2/buildlink3.mk"
+.include "../../x11/gnome-desktop3/buildlink3.mk"
+BUILDLINK_API_DEPENDS.gtk3+=	gtk3+>=3.22.0
+.include "../../x11/gtk3/buildlink3.mk"
+
+# "semi-optional":
+.include "../../mk/jpeg.buildlink3.mk"
+
+.include "../../devel/exempi/buildlink3.mk"
+.include "../../graphics/lcms2/buildlink3.mk"
+BUILDLINK_API_DEPENDS.libexif+= libexif>=0.6.14
+.include "../../graphics/libexif/buildlink3.mk"
+BUILDLINK_API_DEPENDS.librsvg+=	librsvg>=2.36.2
+.include "../../graphics/librsvg/buildlink3.mk"
+
 .include "../../mk/bsd.pkg.mk"

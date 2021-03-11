@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.5 2019/02/18 14:16:52 bsiegert Exp $
+# $NetBSD: Makefile,v 1.15 2021/02/21 12:13:07 nia Exp $
 
-DISTNAME=	rakudo-2018.12
+DISTNAME=	rakudo-2020.12
 CATEGORIES=	lang perl6
-MASTER_SITES=	http://rakudo.org/downloads/rakudo/
+MASTER_SITES=	https://rakudo.org/dl/rakudo/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://rakudo.org/
+HOMEPAGE=	https://rakudo.org/
 COMMENT=	Perl 6 reference implementation
 LICENSE=	artistic-2.0
 
@@ -21,7 +21,10 @@ CONFIG_SHELL=		${PERL5}
 CONFIGURE_SCRIPT=	Configure.pl
 CONFIGURE_ARGS=		--prefix=${PREFIX} --backends=moar
 
-REPLACE_PERL6=		tools/install-dist.p6
+REPLACE_INTERPRETER+=	raku
+REPLACE.raku.old=	/usr/bin/env raku
+REPLACE.raku.new=	${PREFIX}/bin/raku
+REPLACE_FILES.raku=	tools/install-dist.p6
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -31,9 +34,13 @@ PLIST_SUBST+=	EXT=dylib
 PLIST_SUBST+=	EXT=so
 .endif
 
+INSTALLATION_DIRS=	share/perl6/bin
+
 post-install:
+	${RM} -rf ${DESTDIR}${PREFIX}/share/perl6/core/precomp/*
 	${RM} -rf ${DESTDIR}${PREFIX}/share/perl6/precomp/*
-	${INSTALL_SCRIPT} ${WRKSRC}/tools/install-dist.p6 ${DESTDIR}${PREFIX}/share/perl6/bin
+	${INSTALL_SCRIPT} ${WRKSRC}/tools/install-dist.p6 ${DESTDIR}${PREFIX}/share/perl6/bin/
+
 
 .include "../../devel/MoarVM/buildlink3.mk"
 .include "../../lang/nqp/buildlink3.mk"

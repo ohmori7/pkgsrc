@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.9 2014/02/24 19:29:02 schnoebe Exp $
+# $NetBSD: Makefile,v 1.11 2020/01/26 17:31:57 rillig Exp $
 
 DISTNAME=	udns-0.4
 CATEGORIES=	net
 MASTER_SITES=	http://www.corpit.ru/mjt/udns/
 
 MAINTAINER=	eric@cirr.com
-HOMEPAGE=	http://www.corpit.ru/mjt/udns.html
+HOMEPAGE=	https://www.corpit.ru/mjt/udns.html
 COMMENT=	Lightweight DNS resolver supporting asynchronous queries
 LICENSE=	gnu-lgpl-v2.1
 
@@ -38,8 +38,8 @@ LDFLAGS.SunOS+=	-lsocket -lnsl
 
 # gcc on NetBSD botch's if (!<ptr>) tests at -O2. (or higher)
 .if ${OPSYS} == "NetBSD"
-. if ${MACHINE_ARCH} == "alpha"
+.  if ${MACHINE_ARCH} == "alpha"
 BUILDLINK_TRANSFORM+=	opt:-O[2-9]:-O1
 # BUILDLINK_TRANSFORM+=	rm:-O[2-9]
-. endif
+.  endif
 .endif

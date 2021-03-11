@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.12 2018/10/08 13:52:20 schmonz Exp $
+# $NetBSD: Makefile,v 1.17 2020/09/17 21:07:10 schmonz Exp $
 
 .include "../../textproc/libhighlight/Makefile.common"
 
-PKGNAME=		p5-highlight-${VERSION}
-COMMENT+=		 (Perl bindings)
+PKGNAME=	p5-highlight-${VERSION}
+COMMENT+=	(Perl bindings)
 
 BUILD_DEPENDS+=		swig3-[0-9]*:../../devel/swig3
 

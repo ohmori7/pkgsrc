@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2019/05/23 19:23:09 rillig Exp $
+# $NetBSD: Makefile,v 1.17 2021/02/17 19:52:22 schmonz Exp $
 
-DISTNAME=		djbdnscurve6-34
+DISTNAME=		djbdnscurve6-37
 CATEGORIES=		net
 MASTER_SITES=		https://www.fehcom.de/ipnet/djbdnscurve6/
 EXTRACT_SUFX=		.tgz
@@ -8,13 +8,12 @@ EXTRACT_SUFX=		.tgz
 MAINTAINER=		schmonz@NetBSD.org
 HOMEPAGE=		https://www.fehcom.de/ipnet/djbdnscurve6.html
 COMMENT=		Fork of djbdns with IPv6 and DNSCurve support
-#LICENSE=		# TODO: (see mk/license.mk)
+LICENSE=		public-domain
 
 CONFLICTS+=		djbdns-[0-9]*
 
 WRKSRC=			${WRKDIR}/net/${PKGBASE}/${DISTNAME}
 DJB_SLASHPACKAGE=	yes
-DJB_RESTRICTED=		no
 
 DJB_CONFIG_DIR=		${WRKSRC}
 
@@ -24,11 +23,11 @@ SUBST_FILES.etc=	src/dns_rcrw.c man/qualification.5
 SUBST_SED.etc=		-e 's|/etc/dnsrewrite|${PKG_SYSCONFBASE}/dnsrewrite|g'
 SUBST_MESSAGE.etc=	Fixing prefix.
 
-SUBST_CLASSES+=		sysconfdir
-SUBST_STAGE.sysconfdir=	do-configure
-SUBST_FILES.sysconfdir=	src/dnscache-conf.c
-SUBST_VARS.sysconfdir=	PKG_SYSCONFDIR
-SUBST_MESSAGE.sysconfdir=Fixing sysconfdir.
+SUBST_CLASSES+=			sysconfdir
+SUBST_STAGE.sysconfdir=		do-configure
+SUBST_FILES.sysconfdir=		src/dnscache-conf.c
+SUBST_VARS.sysconfdir=		PKG_SYSCONFDIR
+SUBST_MESSAGE.sysconfdir=	Fixing sysconfdir.
 
 EGDIR=			${PREFIX}/share/examples/${PKGBASE}
 CONF_FILES+=		${EGDIR}/dnsroots.global ${PKG_SYSCONFDIR}/dnsroots.global
@@ -36,11 +35,6 @@ BUILD_DEFS+=		PKG_SYSCONFBASE
 
 INSTALLATION_DIRS=	${PKGMANDIR}/man1 ${PKGMANDIR}/man5 ${PKGMANDIR}/man8 \
 			share/examples/${PKGBASE}
-
-.include "../../mk/bsd.prefs.mk"
-
-CFLAGS+=		-I${PREFIX}/include/qlibs
-LDFLAGS+=		-L${PREFIX}/lib/qlibs
 
 do-install:
 	cd ${WRKSRC}/compile && ./install && ./instcheck
@@ -50,6 +44,6 @@ do-install:
 	done
 
 .include "../../net/fehqlibs/buildlink3.mk"
-.include "../../security/nacl/buildlink3.mk"
+.include "../../security/libsodium/buildlink3.mk"
 .include "../../mk/djbware.mk"
 .include "../../mk/bsd.pkg.mk"

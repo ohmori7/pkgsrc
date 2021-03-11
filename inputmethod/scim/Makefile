@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.55 2018/11/14 22:21:52 kleink Exp $
+# $NetBSD: Makefile,v 1.64 2021/01/11 23:49:28 mef Exp $
 #
 
-DISTNAME=		scim-1.4.15
-PKGREVISION=		14
+DISTNAME=		scim-1.4.17
 CATEGORIES=		inputmethod
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=scim/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.scim-im.org/
+HOMEPAGE=		https://github.com/scim-im/scim
 COMMENT=		Smart Common Input Method
 LICENSE=		gnu-lgpl-v2.1
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.55 2019/03/20 12:19:38 wiz Exp $
+# $NetBSD: Makefile,v 1.65 2020/05/22 10:56:11 adam Exp $
 
 DISTNAME=	GMT4.1.4
 PKGNAME=	GMT-4.1.4
-PKGREVISION=	15
+PKGREVISION=	24
 CATEGORIES=	graphics
 MASTER_SITES=	ftp://ftp.scc.u-tokai.ac.jp/pub/gmt/4/
 MASTER_SITES+=	ftp://ftp.iris.washington.edu/pub/gmt/4/
@@ -27,16 +27,16 @@ GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	pax
 
-CONFIGURE_ARGS+=--includedir=${PREFIX}/include/gmt
-CONFIGURE_ARGS+=--datadir=${PREFIX}/share/gmt
-CONFIGURE_ARGS+=--enable-eps
-CONFIGURE_ARGS+=--enable-netcdf=${BUILDLINK_PREFIX.netcdf}
-CONFIGURE_ARGS+=--enable-www=${PREFIX}/share/doc
-CONFIGURE_ARGS+=--enable-mansect=1
-CONFIGURE_ARGS+=--disable-mex
+CONFIGURE_ARGS+=	--includedir=${PREFIX}/include/gmt
+CONFIGURE_ARGS+=	--datadir=${PREFIX}/share/gmt
+CONFIGURE_ARGS+=	--enable-eps
+CONFIGURE_ARGS+=	--enable-netcdf=${BUILDLINK_PREFIX.netcdf}
+CONFIGURE_ARGS+=	--enable-www=${PREFIX}/share/doc
+CONFIGURE_ARGS+=	--enable-mansect=1
+CONFIGURE_ARGS+=	--disable-mex
 
 BUILD_TARGET=	all suppl
-INSTALL_TARGET= install-all
+INSTALL_TARGET=	install-all
 LIBS+=		${X11_LDFLAGS} # XXX: LDFLAGS doesn't work
 
 post-extract:

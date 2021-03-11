@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.10 2019/06/05 07:52:58 nia Exp $
-#
+# $NetBSD: Makefile,v 1.13 2020/02/20 14:50:07 nia Exp $
 
-DISTNAME=	flashrom-v1.0.1
+DISTNAME=	flashrom-v1.2
 PKGNAME=	${DISTNAME:S/-v/-/}
 CATEGORIES=	sysutils
 MASTER_SITES=	https://download.flashrom.org/releases/
@@ -10,9 +9,9 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	jakllsch@NetBSD.org
 HOMEPAGE=	https://www.flashrom.org/
 COMMENT=	Universal (coreboot/LinuxBIOS) flash utility
-LICENSE=        gnu-gpl-v2
+LICENSE=	gnu-gpl-v2
 
-USE_TOOLS+= gmake pkg-config
+USE_TOOLS+=	gmake pkg-config
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -26,7 +25,7 @@ SUBST_FILES.pciutils=	Makefile
 SUBST_FILES.pciutils+=	hwaccess.h
 SUBST_MESSAGE.pciutils=	adjusting pciutils headers
 SUBST_STAGE.pciutils=	pre-configure
-SUBST_SED.pciutils+= -e 's,<pci/pci.h>,<pciutils/pci.h>,g'
+SUBST_SED.pciutils+=	-e 's,<pci/pci.h>,<pciutils/pci.h>,g'
 
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "SunOS"
 LDFLAGS+=	-lpci
@@ -34,7 +33,9 @@ CPPFLAGS+=	-I/${PREFIX}/include
 .endif
 
 LDFLAGS.SunOS+=		-lsocket -lnsl
-MAKE_ENV.SunOS+=	WARNERROR=0
+
+# Disable -Werror.
+MAKE_ENV+=		WARNERROR=no
 
 INSTALLATION_DIRS=	sbin ${PKGMANDIR}/man8
 

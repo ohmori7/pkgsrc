@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.42 2018/07/24 12:39:36 bsiegert Exp $
+# $NetBSD: Makefile,v 1.47 2020/11/23 16:36:03 bsiegert Exp $
 
-DISTNAME=	alpine-2.21
+DISTNAME=	alpine-2.24
 CATEGORIES=	mail
 MASTER_SITES=	http://alpine.x10host.com/alpine/release/src/
 EXTRACT_SUFX=	.tar.xz
@@ -10,27 +10,23 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Program for Internet News and E-mail
 LICENSE=	apache-2.0
 
-GNU_CONFIGURE=	yes
-CONFIGURE_ARGS+= --with-ssl-dir=${SSLBASE}
-CONFIGURE_ARGS+= --with-ssl-certs-dir=${SSLCERTS:Q}
-CONFIGURE_ARGS+= --with-ssl-include-dir=${SSLBASE}/include
-CONFIGURE_ARGS+= --with-ssl-lib-dir=${SSLBASE}/lib
-CONFIGURE_ARGS+= --with-system-pinerc=${PKG_SYSCONFDIR}/pine.conf
-CONFIGURE_ARGS+= --with-system-fixed-pinerc=${PKG_SYSCONFDIR}/pine.conf.fixed
-CONFIGURE_ARGS+= --with-passfile=.pine-passfile
+GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--with-ssl-dir=${SSLBASE}
+CONFIGURE_ARGS+=	--with-ssl-certs-dir=${SSLCERTS:Q}
+CONFIGURE_ARGS+=	--with-ssl-include-dir=${SSLBASE}/include
+CONFIGURE_ARGS+=	--with-ssl-lib-dir=${SSLBASE}/lib
+CONFIGURE_ARGS+=	--with-system-pinerc=${PKG_SYSCONFDIR}/pine.conf
+CONFIGURE_ARGS+=	--with-system-fixed-pinerc=${PKG_SYSCONFDIR}/pine.conf.fixed
+CONFIGURE_ARGS+=	--with-passfile=.pine-passfile
 # disabled, for Web Alpine Support
 CONFIGURE_ARGS+=	--without-tcl
 
 USE_LIBTOOL=	yes
 
-MAKE_JOBS_SAFE=         no
+MAKE_JOBS_SAFE=		no
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 
 .include "../../mk/bsd.prefs.mk"
-
-.if ${OPSYS} == "NetBSD" && empty(OS_VERSION:M4.99.*) && empty(OS_VERSION:M[5-9]*)
-CONFIGURE_ARGS+= --without-pthread
-.endif
 
 # mach/mach.h defines panic, differently.
 SUBST_CLASSES.Darwin+=	panic

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.41 2019/04/26 13:14:01 maya Exp $
+# $NetBSD: Makefile,v 1.47 2020/12/04 20:45:23 nia Exp $
 
 DISTNAME=	skencil-0.6.17
-PKGREVISION=	15
+PKGREVISION=	17
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=sketch/}
 
@@ -13,8 +13,8 @@ DEPENDS+=	${PYPKGPREFIX}-Tk-[0-9]*:../../x11/py-Tk
 
 USE_TOOLS+=	pax
 
-REPLACE_PYTHON= sk2ppm.py sk2ps.py skconvert.py skencil.py skshow.py
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-imaging
+REPLACE_PYTHON=	sk2ppm.py sk2ps.py skconvert.py skencil.py skshow.py
+PYTHON_VERSIONS_ACCEPTED= 27 # py-imaging
 
 SK_CONF_ARGS=	--imaging-include=${BUILDLINK_PREFIX.pyimaging}/${PYINC}/PIL
 SK_TKFLAGS=	-L${BUILDLINK_PREFIX.tk}/lib ${COMPILER_RPATH_FLAG}${BUILDLINK_PREFIX.tk}/lib -ltk -ltcl

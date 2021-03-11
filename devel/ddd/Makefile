@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.79 2017/08/11 22:17:34 maya Exp $
+# $NetBSD: Makefile,v 1.84 2021/02/02 01:42:14 gutteridge Exp $
 #
 
 DISTNAME=	ddd-3.3.12
@@ -7,10 +7,10 @@ CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNU:=ddd/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnu.org/software/ddd/
+HOMEPAGE=	https://www.gnu.org/software/ddd/
 COMMENT=	Data Display Debugger -- graphical front-end for GDB/DBX/XDB
 
-LICENSE=        gnu-gpl-v3
+LICENSE=	gnu-gpl-v3
 
 GNU_CONFIGURE=		YES
 INFO_FILES=		YES # PLIST
@@ -18,13 +18,16 @@ TEST_TARGET=		check
 BUILD_DEFS+=		PAPERSIZE
 USE_TOOLS+=		gmake gzip
 USE_LANGUAGES=		c c++
+TOOLS_BROKEN+=		perl
 
 CONFIGURE_ARGS+=	--with-ncurses=no
 CONFIGURE_ENV+=		COMPFACE=${FALSE:Q}
 
 .include "../../mk/bsd.prefs.mk"
 
-INSTALLATION_DIRS+= share/doc/ddd
+CXXFLAGS.SunOS+=	-fpermissive
+
+INSTALLATION_DIRS+=	share/doc/ddd
 
 # Default paper size is A4
 .if !empty(PAPERSIZE:MLetter*)

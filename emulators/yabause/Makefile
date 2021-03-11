@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.47 2018/11/14 22:21:27 kleink Exp $
+# $NetBSD: Makefile,v 1.61 2021/02/07 06:30:21 ryoon Exp $
 
-DISTNAME=	yabause-0.9.14
-PKGREVISION=	9
+DISTNAME=	yabause-0.9.15
+PKGREVISION=	10
 CATEGORIES=	emulators
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=yabause/}
+MASTER_SITES=	https://download.tuxfamily.org/yabause/releases/${PKGVERSION_NOREV}/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://yabause.sourceforge.net/

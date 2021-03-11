@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.21 2018/08/22 09:44:04 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2020/08/31 18:08:06 wiz Exp $
 
 DISTNAME=	Getopt-Euclid-0.4.5
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Getopt/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Getopt-Euclid/
+HOMEPAGE=	https://metacpan.org/release/Getopt-Euclid
 COMMENT=	Perl 5 module to create command-line parser from documentation
 LICENSE=	${PERL5_LICENSE}
 

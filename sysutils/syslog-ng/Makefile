@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.34 2019/03/15 10:04:00 bouyer Exp $
+# $NetBSD: Makefile,v 1.39 2020/05/31 17:30:17 rillig Exp $
 
 .include "../../sysutils/syslog-ng/Makefile.common"
 
-PKGREVISION=		1
+PKGREVISION=		4
 
-CONFIGURE_ARGS+=	--enable-ssl
 CONFIGURE_ARGS+=	--enable-stomp
 CONFIGURE_ARGS+=	--enable-tcp-wrapper
 CONFIGURE_ARGS+=	--with-jsonc=system
@@ -45,7 +44,7 @@ PKGCONFIG_OVERRIDE=	libtest/syslog-ng-test.pc.in			\
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/contrib/syslog-ng.conf.doc ${DESTDIR}${DOCDIR}
 .for f in syslog-ng.conf.HP-UX syslog-ng.conf.RedHat syslog-ng.conf.SunOS
-		${INSTALL_DATA} ${WRKSRC}/contrib/${f} ${DESTDIR}${EGDIR}
+	${INSTALL_DATA} ${WRKSRC}/contrib/${f} ${DESTDIR}${EGDIR}
 .endfor
 	${INSTALL_SCRIPT} ${WRKSRC}/contrib/syslog2ng ${DESTDIR}${PREFIX}/bin
 

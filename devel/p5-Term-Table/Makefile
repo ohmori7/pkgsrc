@@ -1,21 +1,19 @@
-# $NetBSD: Makefile,v 1.9 2018/12/16 07:08:54 wen Exp $
+# $NetBSD: Makefile,v 1.17 2020/09/08 13:16:39 wiz Exp $
 
-DISTNAME=	Term-Table-0.013
+DISTNAME=	Term-Table-0.015
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
-MASTER_SITES=	http://search.cpan.org/CPAN/authors/id/E/EX/EXODIST/
+MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/E/EX/EXODIST/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/CPAN/authors/id/E/EX/EXODIST/
+HOMEPAGE=	https://metacpan.org/pod/Term::Table
 COMMENT=	Format a header and rows into a table
 LICENSE=	${PERL5_LICENSE}
 
-# for make test
-BUILD_DEPENDS+=	p5-Test-Simple-[0-9]*:../../devel/p5-Test-Simple
-BUILD_DEPENDS+=	p5-Importer-[0-9]*:../../devel/p5-Importer
+TEST_DEPENDS+=	p5-Importer-[0-9]*:../../devel/p5-Importer
 
 PERL5_PACKLIST=	auto/Term/Table/.packlist
-
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

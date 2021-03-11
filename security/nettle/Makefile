@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.21 2018/12/13 10:49:38 gson Exp $
+# $NetBSD: Makefile,v 1.25 2021/02/18 10:59:09 adam Exp $
 
-DISTNAME=	nettle-3.4.1
+DISTNAME=	nettle-3.7.1
 CATEGORIES=	devel security
 MASTER_SITES=	http://www.lysator.liu.se/~nisse/archive/
 MASTER_SITES+=	ftp://ftp.lysator.liu.se/pub/security/lsh/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.lysator.liu.se/~nisse/nettle/
+HOMEPAGE=	https://www.lysator.liu.se/~nisse/nettle/
 COMMENT=	Cryptographic library
 LICENSE=	gnu-lgpl-v2.1
 
@@ -15,7 +15,8 @@ USE_LIBTOOL=		yes
 USE_TOOLS+=		gm4 gmake
 GNU_CONFIGURE=		yes
 SET_LIBDIR=		yes
-CONFIGURE_ARGS+=	--disable-openssl --disable-shared
+CONFIGURE_ARGS+=	--disable-openssl
+CONFIGURE_ARGS+=	--disable-shared
 
 .include "../../mk/bsd.prefs.mk"
 

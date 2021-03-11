@@ -1,6 +1,8 @@
-# $NetBSD: Makefile,v 1.144 2018/11/14 23:12:51 kleink Exp $
+# $NetBSD: Makefile,v 1.147 2020/08/17 20:17:27 leot Exp $
 
 .include "../../graphics/cairo/Makefile.common"
+
+PKGREVISION=	2
 
 TEST_TARGET=			check
 
@@ -8,9 +10,7 @@ TEST_TARGET=			check
 
 .include "../../archivers/lzo/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.fontconfig+=	fontconfig>=2.2.95
 .include "../../fonts/fontconfig/buildlink3.mk"
-BUILDLINK_API_DEPENDS.freetype2+=	freetype2>=2.1.9
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 # include?

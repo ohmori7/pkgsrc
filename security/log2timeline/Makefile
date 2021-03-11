@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2018/08/22 09:46:19 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.13 2020/09/04 14:22:58 wiz Exp $
 
 DISTNAME=	log2timeline_${L2T_VERSION}
 PKGNAME=	${DISTNAME:S/_/-/}
-PKGREVISION=	5
+PKGREVISION=	8
 CATEGORIES=	security
 MASTER_SITES=	http://log2timeline.googlecode.com/files/
 EXTRACT_SUFX=	.tgz
@@ -15,15 +14,6 @@ LICENSE=	gnu-gpl-v3
 
 L2T_VERSION=	0.65
 
-REPLACE_PERL=	lib/Log2t/BinRead.pm
-REPLACE_PERL=	lib/Log2t/Common.pm
-REPLACE_PERL=	lib/Log2t/Network.pm
-REPLACE_PERL=	lib/Log2t/Numbers.pm
-REPLACE_PERL=	lib/Log2t/Time.pm
-REPLACE_PERL=	lib/Log2t/Win.pm
-REPLACE_PERL=	lib/Log2t/WinReg.pm
-REPLACE_PERL=	lib/Log2t/input/ff_cache.pm
-REPLACE_PERL=	lib/Log2t/input/safari.pm
 REPLACE_PERL=	l2t_process_old.pl
 
 DEPENDS+=	p5-Archive-Zip>=1.18:../../archivers/p5-Archive-Zip
@@ -48,7 +38,6 @@ DEPENDS+=	p5-Net-Pcap>=0:../../net/p5-Net-Pcap
 DEPENDS+=	p5-Params-Validate>=0:../../devel/p5-Params-Validate
 DEPENDS+=	p5-Parse-Win32Registry>=0:../../misc/p5-Parse-Win32Registry
 DEPENDS+=	p5-XML-LibXML>=0:../../textproc/p5-XML-LibXML
-DEPENDS+=	p5-version>=0:../../devel/p5-version
 
 PERL5_PACKLIST=	auto/Log2t/.packlist
 USE_LANGUAGES=	# none

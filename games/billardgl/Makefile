@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.13 2018/07/18 00:06:16 joerg Exp $
+# $NetBSD: Makefile,v 1.16 2020/03/08 16:49:33 wiz Exp $
 #
 
 DISTNAME=	BillardGL-1.75
 PKGNAME=	${DISTNAME:S/BillardGL/billardgl/}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=billardgl/}
 
@@ -33,5 +33,6 @@ INSTALLATION_DIRS=	bin
 
 .include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../graphics/glu/buildlink3.mk"
-.include "../../graphics/glut/buildlink3.mk"
+.include "../../graphics/freeglut/buildlink3.mk"
+.include "../../x11/libXmu/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,9 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:45:27 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2021/02/17 01:49:12 manu Exp $
 
-DISTNAME=	opendmarc-1.3.1
-PKGREVISION=	4
+GITHUB_PROJECT=	OpenDMARC
+GITHUB_TAG=	rel-opendmarc-1-4-0-Beta1
+DISTNAME=	rel-opendmarc-1-4-0-Beta1
+PKGNAME=	opendmarc-1.4.0b1
+PKGREVISION=	1
 CATEGORIES=	mail
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=opendmarc/}
+MASTER_SITES=	${MASTER_SITE_GITHUB:=trusteddomainproject/}
+DIST_SUBDIR=	${GITHUB_PROJECT}
 
 MAINTAINER=	pettai@NetBSD.org
 HOMEPAGE=	http://www.trusteddomain.org/opendmarc/
@@ -14,15 +18,19 @@ DEPENDS+=	p5-DBI-[0-9]*:../../databases/p5-DBI
 DEPENDS+=	p5-DBD-mysql-[0-9]*:../../databases/p5-DBD-mysql
 #DEPENDS+=	{perl>=5.6.1,p5-File-Temp-[0-9]*}:../../devel/p5-File-Temp
 DEPENDS+=	p5-Switch-[0-9]*:../../lang/p5-Switch
+DEPENDS+=	p5-HTTP-Message-[0-9]*:../../www/p5-HTTP-Message
 
 RCD_SCRIPTS=	opendmarc
 
 USE_LIBTOOL=	yes
-USE_TOOLS+=	perl
+USE_TOOLS+=	perl autoconf automake
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--with-milter=${BUILDLINK_PREFIX.libmilter}
+CONFIGURE_ARGS+=	--with-spf
+CONFIGURE_ARGS+=	--with-spf2-lib=${BUILDLINK_PREFIX.libspf2}/lib
+CONFIGURE_ARGS+= --with-spf2-include=${BUILDLINK_PREFIX.libspf2}/include/spf2
 
 REPLACE_PERL=	reports/opendmarc-expire.in
 REPLACE_PERL+=	reports/opendmarc-import.in
@@ -33,13 +41,17 @@ EGDIR=		${PREFIX}/share/examples/${PKGBASE}
 
 INSTALLATION_DIRS=	${EGDIR}
 
+pre-configure:
+	set -e; cd ${WRKSRC}; \
+	libtoolize; aclocal; autoheader; automake -a --foreign -i; autoconf
+
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/opendmarc/opendmarc.conf.sample \
 		${DESTDIR}${EGDIR}/
 
-BUILDLINK_API_DEPENDS.openssl+=		openssl>=0.9.8
 .include "../../security/openssl/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libmilter+=	libmilter>=8.13.0
 .include "../../mail/libmilter/buildlink3.mk"
+.include "../../mail/libspf2/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,22 +1,38 @@
-# $NetBSD: Makefile,v 1.22 2018/12/13 19:52:25 adam Exp $
+# $NetBSD: Makefile,v 1.33 2021/01/24 16:30:44 nia Exp $
 
-DISTNAME=	lua-curl-0.2
-PKGNAME=	${LUA_PKGPREFIX}-curl-0.2
-PKGREVISION=	17
-CATEGORIES=	www
-MASTER_SITES=	http://luaforge.net/frs/download.php/2634/
+DISTNAME=	lua-curl-0.3.12
+PKGNAME=	${LUA_PKGPREFIX}-${DISTNAME:S/lua-//}
+CATEGORIES=	www lua
+MASTER_SITES=	${MASTER_SITE_GITHUB:=Lua-cURL/}
+GITHUB_PROJECT=	Lua-cURLv3
+GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	agc@NetBSD.org
-#HOMEPAGE=	http://lua-curl.luaforge.net/
+HOMEPAGE=	https://github.com/Lua-cURL/Lua-cURLv3
 COMMENT=	Full lua bindings for libcurl
 LICENSE=	mit
 
-GNU_CONFIGURE=	yes
-USE_LIBTOOL=	yes
-USE_LANGUAGES+=	c c++
-USE_TOOLS+=	pkg-config
+USE_TOOLS+=	gmake pkg-config
 
-AUTO_MKDIRS=	yes
+.include "../../mk/bsd.prefs.mk"
+
+.if ${OPSYS} != "Darwin" && ${OPSYS} != "Linux"
+LDFLAGS+=	-shared
+.endif
+
+MAKE_FLAGS+=	LUA_CMOD=${LUA_CDIR}
+MAKE_FLAGS+=	LUA_LMOD=${LUA_LDIR}
+MAKE_FLAGS+=	LUA_IMPL=lua-${_LUA_DOT_VERSION}
+
+INSTALLATION_DIRS+=	${LUA_CDIR}
+INSTALLATION_DIRS+=	${LUA_LDIR}/cURL/impl
+
+do-install:
+	${INSTALL_LIB} ${WRKSRC}/lcurl.so ${DESTDIR}${PREFIX}/${LUA_CDIR}
+	${INSTALL_DATA} ${WRKSRC}/src/lua/cURL.lua ${DESTDIR}${PREFIX}/${LUA_LDIR}
+	${INSTALL_DATA} ${WRKSRC}/src/lua/cURL/safe.lua ${DESTDIR}${PREFIX}/${LUA_LDIR}/cURL
+	${INSTALL_DATA} ${WRKSRC}/src/lua/cURL/utils.lua ${DESTDIR}${PREFIX}/${LUA_LDIR}/cURL
+	${INSTALL_DATA} ${WRKSRC}/src/lua/cURL/impl/cURL.lua ${DESTDIR}${PREFIX}/${LUA_LDIR}/cURL/impl
 
 .include "../../www/curl/buildlink3.mk"
 .include "../../lang/lua/buildlink3.mk"

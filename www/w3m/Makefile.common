@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.67 2018/07/04 13:40:42 jperkin Exp $
+# $NetBSD: Makefile.common,v 1.72 2021/01/30 14:10:12 mef Exp $
 #
 # used by www/w3m/Makefile
 # used by www/w3m-img/Makefile
@@ -15,13 +15,13 @@ HOMEPAGE=	http://w3m.sourceforge.net/
 
 WRKSRC=		${WRKDIR}/w3m-${W3M_VERS:S/+/-/}
 
-GNU_CONFIGURE=	yes
-USE_LANGUAGES=	c c++
-USE_TOOLS+=	gmake	# Needed for some combinations of options...
-USE_TOOLS+=	msgfmt
+GNU_CONFIGURE=		yes
+USE_LANGUAGES=		c c++
+USE_TOOLS+=		gmake	# Needed for some combinations of options...
+USE_TOOLS+=		msgfmt
 USE_PKGLOCALEDIR=	yes
 
-W3M_VERS=	0.5.3+git20180125
+W3M_VERS=	0.5.3+git20210102
 W3M_PKGVERS=	${W3M_VERS:S/+git/.0./}
 
 # For w3mman, xface2xpm, cgi scripts.

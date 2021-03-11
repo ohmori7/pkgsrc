@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2020/12/13 22:24:10 mef Exp $
+
+SHA1 (R/processx_3.4.5.tar.gz) = 6dcba4257d66ed21f8a101d018d838987279c526
+RMD160 (R/processx_3.4.5.tar.gz) = f69954a604bc7fcfeb51bc6d200409f229be7a19
+SHA512 (R/processx_3.4.5.tar.gz) = db234cd7a70da40d456f50deb9ed048380d7938b9c4adcd63ba3128b707a3fd705a3b71410b626723ec0dc9315ddb383a88334d042710bdc1be1ea361d8e4e90
+Size (R/processx_3.4.5.tar.gz) = 135121 bytes

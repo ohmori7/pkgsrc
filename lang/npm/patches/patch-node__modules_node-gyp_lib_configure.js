@@ -1,22 +1,22 @@
-$NetBSD: patch-node__modules_node-gyp_lib_configure.js,v 1.1 2018/05/04 13:23:53 fhajny Exp $
+$NetBSD: patch-node__modules_node-gyp_lib_configure.js,v 1.3 2019/11/24 20:21:23 adam Exp $
 
 Skip Python detection, version 2.7 is required and we know where it is.
 
---- node_modules/node-gyp/lib/configure.js.orig	2018-04-24 05:41:37.000000000 +0000
+--- node_modules/node-gyp/lib/configure.js.orig	2019-11-18 18:22:06.000000000 +0000
 +++ node_modules/node-gyp/lib/configure.js
-@@ -29,21 +29,14 @@ exports.usage = 'Generates ' + (win ? 'M
+@@ -15,21 +15,14 @@ if (win) {
+ }
  
  function configure (gyp, argv, callback) {
- 
--  var python = gyp.opts.python || process.env.PYTHON || 'python2'
+-  var python
 +  var python = '@PYTHONBIN@'
-     , buildDir = path.resolve('build')
-     , configNames = [ 'config.gypi', 'common.gypi' ]
-     , configs = []
-     , nodeDir
-     , release = processRelease(argv, gyp, process.version, process.release)
+   var buildDir = path.resolve('build')
+   var configNames = ['config.gypi', 'common.gypi']
+   var configs = []
+   var nodeDir
+   var release = processRelease(argv, gyp, process.version, process.release)
  
--  findPython(python, function (err, found) {
+-  findPython(gyp.opts.python, function (err, found) {
 -    if (err) {
 -      callback(err)
 -    } else {
@@ -27,4 +27,4 @@ Skip Python detection, version 2.7 is required and we know where it is.
 +  getNodeDir()
  
    function getNodeDir () {
- 
+     // 'python' should be set by now

@@ -1,11 +1,13 @@
-@comment $NetBSD: PLIST,v 1.2 2019/05/10 19:30:04 ryoon Exp $
+@comment $NetBSD: PLIST,v 1.4 2020/10/02 16:49:37 ryoon Exp $
 cross/x86_64-w64-mingw32/mingw/include/GL/gl.h
 cross/x86_64-w64-mingw32/mingw/include/GL/glaux.h
 cross/x86_64-w64-mingw32/mingw/include/GL/glcorearb.h
 cross/x86_64-w64-mingw32/mingw/include/GL/glext.h
 cross/x86_64-w64-mingw32/mingw/include/GL/glu.h
 cross/x86_64-w64-mingw32/mingw/include/GL/glxext.h
+cross/x86_64-w64-mingw32/mingw/include/GL/wgl.h
 cross/x86_64-w64-mingw32/mingw/include/GL/wglext.h
+cross/x86_64-w64-mingw32/mingw/include/KHR/khrplatform.h
 cross/x86_64-w64-mingw32/mingw/include/_bsd_types.h
 cross/x86_64-w64-mingw32/mingw/include/_cygwin.h
 cross/x86_64-w64-mingw32/mingw/include/_dbdao.h
@@ -13,8 +15,6 @@ cross/x86_64-w64-mingw32/mingw/include/_mingw.h
 cross/x86_64-w64-mingw32/mingw/include/_mingw_dxhelper.h
 cross/x86_64-w64-mingw32/mingw/include/_mingw_mac.h
 cross/x86_64-w64-mingw32/mingw/include/_mingw_off_t.h
-cross/x86_64-w64-mingw32/mingw/include/_mingw_print_pop.h
-cross/x86_64-w64-mingw32/mingw/include/_mingw_print_push.h
 cross/x86_64-w64-mingw32/mingw/include/_mingw_secapi.h
 cross/x86_64-w64-mingw32/mingw/include/_mingw_stat64.h
 cross/x86_64-w64-mingw32/mingw/include/_mingw_stdarg.h
@@ -63,9 +63,7 @@ cross/x86_64-w64-mingw32/mingw/include/alg.h
 cross/x86_64-w64-mingw32/mingw/include/alink.h
 cross/x86_64-w64-mingw32/mingw/include/amaudio.h
 cross/x86_64-w64-mingw32/mingw/include/amstream.h
-cross/x86_64-w64-mingw32/mingw/include/amstream.idl
 cross/x86_64-w64-mingw32/mingw/include/amvideo.h
-cross/x86_64-w64-mingw32/mingw/include/amvideo.idl
 cross/x86_64-w64-mingw32/mingw/include/apdevpkey.h
 cross/x86_64-w64-mingw32/mingw/include/apiset.h
 cross/x86_64-w64-mingw32/mingw/include/apisetcconv.h
@@ -84,7 +82,6 @@ cross/x86_64-w64-mingw32/mingw/include/audioengineendpoint.h
 cross/x86_64-w64-mingw32/mingw/include/audiopolicy.h
 cross/x86_64-w64-mingw32/mingw/include/audiosessiontypes.h
 cross/x86_64-w64-mingw32/mingw/include/austream.h
-cross/x86_64-w64-mingw32/mingw/include/austream.idl
 cross/x86_64-w64-mingw32/mingw/include/authif.h
 cross/x86_64-w64-mingw32/mingw/include/authz.h
 cross/x86_64-w64-mingw32/mingw/include/aux_ulib.h
@@ -180,11 +177,15 @@ cross/x86_64-w64-mingw32/mingw/include/compressapi.h
 cross/x86_64-w64-mingw32/mingw/include/compstui.h
 cross/x86_64-w64-mingw32/mingw/include/comsvcs.h
 cross/x86_64-w64-mingw32/mingw/include/comutil.h
+cross/x86_64-w64-mingw32/mingw/include/concurrencysal.h
 cross/x86_64-w64-mingw32/mingw/include/confpriv.h
 cross/x86_64-w64-mingw32/mingw/include/conio.h
 cross/x86_64-w64-mingw32/mingw/include/control.h
 cross/x86_64-w64-mingw32/mingw/include/cor.h
+cross/x86_64-w64-mingw32/mingw/include/corecrt.h
 cross/x86_64-w64-mingw32/mingw/include/corecrt_startup.h
+cross/x86_64-w64-mingw32/mingw/include/corecrt_stdio_config.h
+cross/x86_64-w64-mingw32/mingw/include/corecrt_wstdlib.h
 cross/x86_64-w64-mingw32/mingw/include/corerror.h
 cross/x86_64-w64-mingw32/mingw/include/corhdr.h
 cross/x86_64-w64-mingw32/mingw/include/correg.h
@@ -212,28 +213,21 @@ cross/x86_64-w64-mingw32/mingw/include/d2dbasetypes.h
 cross/x86_64-w64-mingw32/mingw/include/d2derr.h
 cross/x86_64-w64-mingw32/mingw/include/d3d.h
 cross/x86_64-w64-mingw32/mingw/include/d3d10.h
-cross/x86_64-w64-mingw32/mingw/include/d3d10.idl
 cross/x86_64-w64-mingw32/mingw/include/d3d10_1.h
-cross/x86_64-w64-mingw32/mingw/include/d3d10_1.idl
 cross/x86_64-w64-mingw32/mingw/include/d3d10_1shader.h
 cross/x86_64-w64-mingw32/mingw/include/d3d10effect.h
 cross/x86_64-w64-mingw32/mingw/include/d3d10misc.h
 cross/x86_64-w64-mingw32/mingw/include/d3d10sdklayers.h
-cross/x86_64-w64-mingw32/mingw/include/d3d10sdklayers.idl
 cross/x86_64-w64-mingw32/mingw/include/d3d10shader.h
 cross/x86_64-w64-mingw32/mingw/include/d3d11.h
-cross/x86_64-w64-mingw32/mingw/include/d3d11.idl
 cross/x86_64-w64-mingw32/mingw/include/d3d11_1.h
-cross/x86_64-w64-mingw32/mingw/include/d3d11_1.idl
 cross/x86_64-w64-mingw32/mingw/include/d3d11_2.h
-cross/x86_64-w64-mingw32/mingw/include/d3d11_2.idl
 cross/x86_64-w64-mingw32/mingw/include/d3d11_3.h
-cross/x86_64-w64-mingw32/mingw/include/d3d11_3.idl
 cross/x86_64-w64-mingw32/mingw/include/d3d11_4.h
-cross/x86_64-w64-mingw32/mingw/include/d3d11_4.idl
 cross/x86_64-w64-mingw32/mingw/include/d3d11sdklayers.h
-cross/x86_64-w64-mingw32/mingw/include/d3d11sdklayers.idl
 cross/x86_64-w64-mingw32/mingw/include/d3d11shader.h
+cross/x86_64-w64-mingw32/mingw/include/d3d12.h
+cross/x86_64-w64-mingw32/mingw/include/d3d12shader.h
 cross/x86_64-w64-mingw32/mingw/include/d3d8.h
 cross/x86_64-w64-mingw32/mingw/include/d3d8caps.h
 cross/x86_64-w64-mingw32/mingw/include/d3d8types.h
@@ -242,7 +236,6 @@ cross/x86_64-w64-mingw32/mingw/include/d3d9caps.h
 cross/x86_64-w64-mingw32/mingw/include/d3d9types.h
 cross/x86_64-w64-mingw32/mingw/include/d3dcaps.h
 cross/x86_64-w64-mingw32/mingw/include/d3dcommon.h
-cross/x86_64-w64-mingw32/mingw/include/d3dcommon.idl
 cross/x86_64-w64-mingw32/mingw/include/d3dcompiler.h
 cross/x86_64-w64-mingw32/mingw/include/d3dhal.h
 cross/x86_64-w64-mingw32/mingw/include/d3drm.h
@@ -322,6 +315,7 @@ cross/x86_64-w64-mingw32/mingw/include/ddk/ntddpcm.h
 cross/x86_64-w64-mingw32/mingw/include/ddk/ntddsnd.h
 cross/x86_64-w64-mingw32/mingw/include/ddk/ntifs.h
 cross/x86_64-w64-mingw32/mingw/include/ddk/ntimage.h
+cross/x86_64-w64-mingw32/mingw/include/ddk/ntintsafe.h
 cross/x86_64-w64-mingw32/mingw/include/ddk/ntnls.h
 cross/x86_64-w64-mingw32/mingw/include/ddk/ntpoapi.h
 cross/x86_64-w64-mingw32/mingw/include/ddk/ntstrsafe.h
@@ -355,6 +349,7 @@ cross/x86_64-w64-mingw32/mingw/include/ddk/video.h
 cross/x86_64-w64-mingw32/mingw/include/ddk/videoagp.h
 cross/x86_64-w64-mingw32/mingw/include/ddk/wdm.h
 cross/x86_64-w64-mingw32/mingw/include/ddk/wdmguid.h
+cross/x86_64-w64-mingw32/mingw/include/ddk/wdmsec.h
 cross/x86_64-w64-mingw32/mingw/include/ddk/wmidata.h
 cross/x86_64-w64-mingw32/mingw/include/ddk/wmilib.h
 cross/x86_64-w64-mingw32/mingw/include/ddk/ws2san.h
@@ -363,7 +358,6 @@ cross/x86_64-w64-mingw32/mingw/include/ddraw.h
 cross/x86_64-w64-mingw32/mingw/include/ddrawgdi.h
 cross/x86_64-w64-mingw32/mingw/include/ddrawi.h
 cross/x86_64-w64-mingw32/mingw/include/ddstream.h
-cross/x86_64-w64-mingw32/mingw/include/ddstream.idl
 cross/x86_64-w64-mingw32/mingw/include/debugapi.h
 cross/x86_64-w64-mingw32/mingw/include/delayimp.h
 cross/x86_64-w64-mingw32/mingw/include/devguid.h
@@ -381,11 +375,13 @@ cross/x86_64-w64-mingw32/mingw/include/dhtmliid.h
 cross/x86_64-w64-mingw32/mingw/include/digitalv.h
 cross/x86_64-w64-mingw32/mingw/include/dimm.h
 cross/x86_64-w64-mingw32/mingw/include/dinput.h
+cross/x86_64-w64-mingw32/mingw/include/dinputd.h
 cross/x86_64-w64-mingw32/mingw/include/dir.h
 cross/x86_64-w64-mingw32/mingw/include/direct.h
 cross/x86_64-w64-mingw32/mingw/include/dirent.h
 cross/x86_64-w64-mingw32/mingw/include/diskguid.h
 cross/x86_64-w64-mingw32/mingw/include/dispatch.h
+cross/x86_64-w64-mingw32/mingw/include/dispatcherqueue.h
 cross/x86_64-w64-mingw32/mingw/include/dispdib.h
 cross/x86_64-w64-mingw32/mingw/include/dispex.h
 cross/x86_64-w64-mingw32/mingw/include/dlcapi.h
@@ -398,7 +394,6 @@ cross/x86_64-w64-mingw32/mingw/include/dmerror.h
 cross/x86_64-w64-mingw32/mingw/include/dmksctrl.h
 cross/x86_64-w64-mingw32/mingw/include/dmo.h
 cross/x86_64-w64-mingw32/mingw/include/dmodshow.h
-cross/x86_64-w64-mingw32/mingw/include/dmodshow.idl
 cross/x86_64-w64-mingw32/mingw/include/dmoreg.h
 cross/x86_64-w64-mingw32/mingw/include/dmort.h
 cross/x86_64-w64-mingw32/mingw/include/dmplugin.h
@@ -437,6 +432,7 @@ cross/x86_64-w64-mingw32/mingw/include/dssec.h
 cross/x86_64-w64-mingw32/mingw/include/dtchelp.h
 cross/x86_64-w64-mingw32/mingw/include/dvbsiparser.h
 cross/x86_64-w64-mingw32/mingw/include/dvdevcod.h
+cross/x86_64-w64-mingw32/mingw/include/dvdif.h
 cross/x86_64-w64-mingw32/mingw/include/dvdmedia.h
 cross/x86_64-w64-mingw32/mingw/include/dvec.h
 cross/x86_64-w64-mingw32/mingw/include/dvobj.h
@@ -450,23 +446,15 @@ cross/x86_64-w64-mingw32/mingw/include/dxerr8.h
 cross/x86_64-w64-mingw32/mingw/include/dxerr9.h
 cross/x86_64-w64-mingw32/mingw/include/dxfile.h
 cross/x86_64-w64-mingw32/mingw/include/dxgi.h
-cross/x86_64-w64-mingw32/mingw/include/dxgi.idl
 cross/x86_64-w64-mingw32/mingw/include/dxgi1_2.h
-cross/x86_64-w64-mingw32/mingw/include/dxgi1_2.idl
 cross/x86_64-w64-mingw32/mingw/include/dxgi1_3.h
-cross/x86_64-w64-mingw32/mingw/include/dxgi1_3.idl
 cross/x86_64-w64-mingw32/mingw/include/dxgi1_4.h
-cross/x86_64-w64-mingw32/mingw/include/dxgi1_4.idl
 cross/x86_64-w64-mingw32/mingw/include/dxgi1_5.h
-cross/x86_64-w64-mingw32/mingw/include/dxgi1_5.idl
 cross/x86_64-w64-mingw32/mingw/include/dxgi1_6.h
-cross/x86_64-w64-mingw32/mingw/include/dxgi1_6.idl
 cross/x86_64-w64-mingw32/mingw/include/dxgicommon.h
-cross/x86_64-w64-mingw32/mingw/include/dxgicommon.idl
+cross/x86_64-w64-mingw32/mingw/include/dxgidebug.h
 cross/x86_64-w64-mingw32/mingw/include/dxgiformat.h
-cross/x86_64-w64-mingw32/mingw/include/dxgiformat.idl
 cross/x86_64-w64-mingw32/mingw/include/dxgitype.h
-cross/x86_64-w64-mingw32/mingw/include/dxgitype.idl
 cross/x86_64-w64-mingw32/mingw/include/dxtmpl.h
 cross/x86_64-w64-mingw32/mingw/include/dxva.h
 cross/x86_64-w64-mingw32/mingw/include/dxva2api.h
@@ -506,6 +494,7 @@ cross/x86_64-w64-mingw32/mingw/include/exchform.h
 cross/x86_64-w64-mingw32/mingw/include/excpt.h
 cross/x86_64-w64-mingw32/mingw/include/exdisp.h
 cross/x86_64-w64-mingw32/mingw/include/exdispid.h
+cross/x86_64-w64-mingw32/mingw/include/expandedresources.h
 cross/x86_64-w64-mingw32/mingw/include/fci.h
 cross/x86_64-w64-mingw32/mingw/include/fcntl.h
 cross/x86_64-w64-mingw32/mingw/include/fdi.h
@@ -599,6 +588,7 @@ cross/x86_64-w64-mingw32/mingw/include/http.h
 cross/x86_64-w64-mingw32/mingw/include/httpext.h
 cross/x86_64-w64-mingw32/mingw/include/httpfilt.h
 cross/x86_64-w64-mingw32/mingw/include/httprequestid.h
+cross/x86_64-w64-mingw32/mingw/include/hvsocket.h
 cross/x86_64-w64-mingw32/mingw/include/i_cryptasn1tls.h
 cross/x86_64-w64-mingw32/mingw/include/ia64reg.h
 cross/x86_64-w64-mingw32/mingw/include/iaccess.h
@@ -685,6 +675,7 @@ cross/x86_64-w64-mingw32/mingw/include/kxia64.h
 cross/x86_64-w64-mingw32/mingw/include/l2cmn.h
 cross/x86_64-w64-mingw32/mingw/include/libgen.h
 cross/x86_64-w64-mingw32/mingw/include/libloaderapi.h
+cross/x86_64-w64-mingw32/mingw/include/libloaderapi2.h
 cross/x86_64-w64-mingw32/mingw/include/limits.h
 cross/x86_64-w64-mingw32/mingw/include/lm.h
 cross/x86_64-w64-mingw32/mingw/include/lmaccess.h
@@ -748,9 +739,7 @@ cross/x86_64-w64-mingw32/mingw/include/mdhcp.h
 cross/x86_64-w64-mingw32/mingw/include/mdmsg.h
 cross/x86_64-w64-mingw32/mingw/include/mediaerr.h
 cross/x86_64-w64-mingw32/mingw/include/mediaobj.h
-cross/x86_64-w64-mingw32/mingw/include/mediaobj.idl
 cross/x86_64-w64-mingw32/mingw/include/medparam.h
-cross/x86_64-w64-mingw32/mingw/include/medparam.idl
 cross/x86_64-w64-mingw32/mingw/include/mem.h
 cross/x86_64-w64-mingw32/mingw/include/memory.h
 cross/x86_64-w64-mingw32/mingw/include/memoryapi.h
@@ -777,7 +766,6 @@ cross/x86_64-w64-mingw32/mingw/include/mmcobj.h
 cross/x86_64-w64-mingw32/mingw/include/mmdeviceapi.h
 cross/x86_64-w64-mingw32/mingw/include/mmreg.h
 cross/x86_64-w64-mingw32/mingw/include/mmstream.h
-cross/x86_64-w64-mingw32/mingw/include/mmstream.idl
 cross/x86_64-w64-mingw32/mingw/include/mmsystem.h
 cross/x86_64-w64-mingw32/mingw/include/mobsync.h
 cross/x86_64-w64-mingw32/mingw/include/moniker.h
@@ -828,6 +816,7 @@ cross/x86_64-w64-mingw32/mingw/include/msinkaut.h
 cross/x86_64-w64-mingw32/mingw/include/msinkaut_i.c
 cross/x86_64-w64-mingw32/mingw/include/msiquery.h
 cross/x86_64-w64-mingw32/mingw/include/msoav.h
+cross/x86_64-w64-mingw32/mingw/include/msoledbsql.h
 cross/x86_64-w64-mingw32/mingw/include/msopc.h
 cross/x86_64-w64-mingw32/mingw/include/msp.h
 cross/x86_64-w64-mingw32/mingw/include/mspab.h
@@ -889,6 +878,8 @@ cross/x86_64-w64-mingw32/mingw/include/ndhelper.h
 cross/x86_64-w64-mingw32/mingw/include/ndkinfo.h
 cross/x86_64-w64-mingw32/mingw/include/ndr64types.h
 cross/x86_64-w64-mingw32/mingw/include/ndrtypes.h
+cross/x86_64-w64-mingw32/mingw/include/netcfgn.h
+cross/x86_64-w64-mingw32/mingw/include/netcfgx.h
 cross/x86_64-w64-mingw32/mingw/include/netcon.h
 cross/x86_64-w64-mingw32/mingw/include/neterr.h
 cross/x86_64-w64-mingw32/mingw/include/netevent.h
@@ -905,6 +896,7 @@ cross/x86_64-w64-mingw32/mingw/include/nldef.h
 cross/x86_64-w64-mingw32/mingw/include/nmsupp.h
 cross/x86_64-w64-mingw32/mingw/include/npapi.h
 cross/x86_64-w64-mingw32/mingw/include/nsemail.h
+cross/x86_64-w64-mingw32/mingw/include/nserror.h
 cross/x86_64-w64-mingw32/mingw/include/nspapi.h
 cross/x86_64-w64-mingw32/mingw/include/ntdd1394.h
 cross/x86_64-w64-mingw32/mingw/include/ntdd8042.h
@@ -1003,6 +995,7 @@ cross/x86_64-w64-mingw32/mingw/include/powrprof.h
 cross/x86_64-w64-mingw32/mingw/include/prnasnot.h
 cross/x86_64-w64-mingw32/mingw/include/prnsetup.dlg
 cross/x86_64-w64-mingw32/mingw/include/prntfont.h
+cross/x86_64-w64-mingw32/mingw/include/prntvpt.h
 cross/x86_64-w64-mingw32/mingw/include/process.h
 cross/x86_64-w64-mingw32/mingw/include/processenv.h
 cross/x86_64-w64-mingw32/mingw/include/processthreadsapi.h
@@ -1041,10 +1034,8 @@ cross/x86_64-w64-mingw32/mingw/include/pthread_signal.h
 cross/x86_64-w64-mingw32/mingw/include/pthread_time.h
 cross/x86_64-w64-mingw32/mingw/include/pthread_unistd.h
 cross/x86_64-w64-mingw32/mingw/include/qedit.h
-cross/x86_64-w64-mingw32/mingw/include/qedit.idl
 cross/x86_64-w64-mingw32/mingw/include/qmgr.h
 cross/x86_64-w64-mingw32/mingw/include/qnetwork.h
-cross/x86_64-w64-mingw32/mingw/include/qnetwork.idl
 cross/x86_64-w64-mingw32/mingw/include/qos.h
 cross/x86_64-w64-mingw32/mingw/include/qos2.h
 cross/x86_64-w64-mingw32/mingw/include/qosname.h
@@ -1115,7 +1106,6 @@ cross/x86_64-w64-mingw32/mingw/include/scrptids.h
 cross/x86_64-w64-mingw32/mingw/include/sddl.h
 cross/x86_64-w64-mingw32/mingw/include/sdkddkver.h
 cross/x86_64-w64-mingw32/mingw/include/sdks/_mingw_ddk.h
-cross/x86_64-w64-mingw32/mingw/include/sdks/_mingw_directx.h
 cross/x86_64-w64-mingw32/mingw/include/sdoias.h
 cross/x86_64-w64-mingw32/mingw/include/sdpblb.h
 cross/x86_64-w64-mingw32/mingw/include/sdperr.h
@@ -1151,6 +1141,7 @@ cross/x86_64-w64-mingw32/mingw/include/share.h
 cross/x86_64-w64-mingw32/mingw/include/shdeprecated.h
 cross/x86_64-w64-mingw32/mingw/include/shdispid.h
 cross/x86_64-w64-mingw32/mingw/include/shellapi.h
+cross/x86_64-w64-mingw32/mingw/include/shellscalingapi.h
 cross/x86_64-w64-mingw32/mingw/include/sherrors.h
 cross/x86_64-w64-mingw32/mingw/include/shfolder.h
 cross/x86_64-w64-mingw32/mingw/include/shldisp.h
@@ -1173,6 +1164,7 @@ cross/x86_64-w64-mingw32/mingw/include/smtpguid.h
 cross/x86_64-w64-mingw32/mingw/include/smx.h
 cross/x86_64-w64-mingw32/mingw/include/snmp.h
 cross/x86_64-w64-mingw32/mingw/include/softpub.h
+cross/x86_64-w64-mingw32/mingw/include/spatialaudioclient.h
 cross/x86_64-w64-mingw32/mingw/include/specstrings.h
 cross/x86_64-w64-mingw32/mingw/include/sperror.h
 cross/x86_64-w64-mingw32/mingw/include/sphelper.h
@@ -1253,6 +1245,7 @@ cross/x86_64-w64-mingw32/mingw/include/textserv.h
 cross/x86_64-w64-mingw32/mingw/include/textstor.h
 cross/x86_64-w64-mingw32/mingw/include/threadpoolapiset.h
 cross/x86_64-w64-mingw32/mingw/include/threadpoollegacyapiset.h
+cross/x86_64-w64-mingw32/mingw/include/thumbcache.h
 cross/x86_64-w64-mingw32/mingw/include/time.h
 cross/x86_64-w64-mingw32/mingw/include/timeprov.h
 cross/x86_64-w64-mingw32/mingw/include/timezoneapi.h
@@ -1325,12 +1318,12 @@ cross/x86_64-w64-mingw32/mingw/include/vfw.h
 cross/x86_64-w64-mingw32/mingw/include/vfwmsgs.h
 cross/x86_64-w64-mingw32/mingw/include/virtdisk.h
 cross/x86_64-w64-mingw32/mingw/include/vmr9.h
-cross/x86_64-w64-mingw32/mingw/include/vmr9.idl
 cross/x86_64-w64-mingw32/mingw/include/vsadmin.h
 cross/x86_64-w64-mingw32/mingw/include/vsbackup.h
 cross/x86_64-w64-mingw32/mingw/include/vsmgmt.h
 cross/x86_64-w64-mingw32/mingw/include/vsprov.h
 cross/x86_64-w64-mingw32/mingw/include/vss.h
+cross/x86_64-w64-mingw32/mingw/include/vsserror.h
 cross/x86_64-w64-mingw32/mingw/include/vsstyle.h
 cross/x86_64-w64-mingw32/mingw/include/vssym32.h
 cross/x86_64-w64-mingw32/mingw/include/vswriter.h
@@ -1372,6 +1365,7 @@ cross/x86_64-w64-mingw32/mingw/include/winapifamily.h
 cross/x86_64-w64-mingw32/mingw/include/winbase.h
 cross/x86_64-w64-mingw32/mingw/include/winber.h
 cross/x86_64-w64-mingw32/mingw/include/wincodec.h
+cross/x86_64-w64-mingw32/mingw/include/wincodecsdk.h
 cross/x86_64-w64-mingw32/mingw/include/wincon.h
 cross/x86_64-w64-mingw32/mingw/include/wincred.h
 cross/x86_64-w64-mingw32/mingw/include/wincrypt.h
@@ -1385,6 +1379,7 @@ cross/x86_64-w64-mingw32/mingw/include/windows.h
 cross/x86_64-w64-mingw32/mingw/include/windows.security.cryptography.h
 cross/x86_64-w64-mingw32/mingw/include/windows.storage.h
 cross/x86_64-w64-mingw32/mingw/include/windows.storage.streams.h
+cross/x86_64-w64-mingw32/mingw/include/windows.system.h
 cross/x86_64-w64-mingw32/mingw/include/windows.system.threading.h
 cross/x86_64-w64-mingw32/mingw/include/windowsx.h
 cross/x86_64-w64-mingw32/mingw/include/windowsx.h16
@@ -1393,6 +1388,9 @@ cross/x86_64-w64-mingw32/mingw/include/winerror.h
 cross/x86_64-w64-mingw32/mingw/include/winevt.h
 cross/x86_64-w64-mingw32/mingw/include/wingdi.h
 cross/x86_64-w64-mingw32/mingw/include/winhttp.h
+cross/x86_64-w64-mingw32/mingw/include/winhvemulation.h
+cross/x86_64-w64-mingw32/mingw/include/winhvplatform.h
+cross/x86_64-w64-mingw32/mingw/include/winhvplatformdefs.h
 cross/x86_64-w64-mingw32/mingw/include/wininet.h
 cross/x86_64-w64-mingw32/mingw/include/winineti.h
 cross/x86_64-w64-mingw32/mingw/include/winioctl.h
@@ -1404,6 +1402,7 @@ cross/x86_64-w64-mingw32/mingw/include/winnt.h
 cross/x86_64-w64-mingw32/mingw/include/winnt.rh
 cross/x86_64-w64-mingw32/mingw/include/winperf.h
 cross/x86_64-w64-mingw32/mingw/include/winreg.h
+cross/x86_64-w64-mingw32/mingw/include/winres.h
 cross/x86_64-w64-mingw32/mingw/include/winresrc.h
 cross/x86_64-w64-mingw32/mingw/include/winsafer.h
 cross/x86_64-w64-mingw32/mingw/include/winsatcominterfacei.h
@@ -1477,6 +1476,7 @@ cross/x86_64-w64-mingw32/mingw/include/wsdxmldom.h
 cross/x86_64-w64-mingw32/mingw/include/wshisotp.h
 cross/x86_64-w64-mingw32/mingw/include/wsipv6ok.h
 cross/x86_64-w64-mingw32/mingw/include/wsipx.h
+cross/x86_64-w64-mingw32/mingw/include/wslapi.h
 cross/x86_64-w64-mingw32/mingw/include/wsman.h
 cross/x86_64-w64-mingw32/mingw/include/wsmandisp.h
 cross/x86_64-w64-mingw32/mingw/include/wsnetbs.h
@@ -1488,6 +1488,10 @@ cross/x86_64-w64-mingw32/mingw/include/wtsapi32.h
 cross/x86_64-w64-mingw32/mingw/include/wtypes.h
 cross/x86_64-w64-mingw32/mingw/include/wtypesbase.h
 cross/x86_64-w64-mingw32/mingw/include/xa.h
+cross/x86_64-w64-mingw32/mingw/include/xapo.h
+cross/x86_64-w64-mingw32/mingw/include/xapofx.h
+cross/x86_64-w64-mingw32/mingw/include/xaudio2.h
+cross/x86_64-w64-mingw32/mingw/include/xaudio2fx.h
 cross/x86_64-w64-mingw32/mingw/include/xcmc.h
 cross/x86_64-w64-mingw32/mingw/include/xcmcext.h
 cross/x86_64-w64-mingw32/mingw/include/xcmcmsx2.h

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.13 2019/05/27 15:18:21 bsiegert Exp $
+# $NetBSD: Makefile,v 1.30 2021/01/23 14:22:56 bsiegert Exp $
 
 DISTNAME=	errors-0.8.0
 PKGNAME=	go-${DISTNAME}
-PKGREVISION=	6
+PKGREVISION=	22
 MASTER_SITES=	${MASTER_SITE_GITHUB:=pkg/}
 CATEGORIES=	devel
 GITHUB_TAG=	v${PKGVERSION_NOREV}
-GITHUB_PROJECT= ${PKGBASE:S/^go-//}
+GITHUB_PROJECT=	${PKGBASE:S/^go-//}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/pkg/errors

@@ -1,20 +1,21 @@
-# $NetBSD: Makefile,v 1.17 2018/12/15 16:53:02 schmonz Exp $
+# $NetBSD: Makefile,v 1.21 2020/10/26 10:04:12 schmonz Exp $
 #
 
 DISTNAME=		tpm-1.1b
 PKGNAME=		${DISTNAME:S/tpm/libtcpa/}
-PKGREVISION=		7
+PKGREVISION=		8
 CATEGORIES=		security
 MASTER_SITES=		${HOMEPAGE}
 DISTFILES=		${DISTNAME}${EXTRACT_SUFX} tcpa_man_20031210.tgz
 
 MAINTAINER=		schmonz@NetBSD.org
-HOMEPAGE=		http://www.research.ibm.com/gsal/tcpa/
+HOMEPAGE=		https://web.archive.org/web/20090129204118/http://www.research.ibm.com/gsal/tcpa/
 COMMENT=		TCPA libraries and test programs from IBM
+LICENSE=		modified-bsd
 
 WRKSRC=			${WRKDIR}/TPM
 
-SITES.tcpa_man_20031210.tgz= http://www.citi.umich.edu/u/rwash/projects/trusted/
+SITES.tcpa_man_20031210.tgz=	http://www.citi.umich.edu/u/rwash/projects/trusted/
 
 BUILD_DIRS=		libtcpa examples
 INSTALLATION_DIRS=	bin lib ${PKGMANDIR}/man3 share/doc/${PKGBASE}
@@ -31,7 +32,5 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/libtcpa/License ${DESTDIR}${PREFIX}/share/doc/${PKGBASE}
 	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/${PKGBASE}
 
-BUILDLINK_API_DEPENDS.openssl+=	openssl<1.1
-BUILDLINK_ABI_DEPENDS.openssl+=	openssl<1.1
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.11 2019/05/23 19:23:13 rillig Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:10:59 wiz Exp $
 
-PKGNAME=	pkglint4-4.164
+PKGNAME=	pkglint4-4.193.2
 PKGREVISION=	1
 CATEGORIES=	pkgtools
 
 OWNER=		rillig@NetBSD.org
-HOMEPAGE=	http://www.NetBSD.org/docs/pkgsrc/
+HOMEPAGE=	https://www.NetBSD.org/docs/pkgsrc/
 COMMENT=	Verifier for NetBSD packages (old version, for all platforms)
 LICENSE=	2-clause-bsd
 
@@ -36,7 +36,7 @@ SUBST_SED.pkglint+=	-e s\|@PKGSRCDIR@\|/usr/pkgsrc\|g
 .else
 SUBST_VARS.pkglint=	PKGSRCDIR
 .endif
-SUBST_VARS.pkglint=	PREFIX
+SUBST_VARS.pkglint+=	PREFIX
 SUBST_SED.pkglint+=	-e s\|@DISTVER@\|${PKGNAME:S/pkglint-//}\|g
 SUBST_VARS.pkglint+=	MAKE
 SUBST_SED.pkglint+=	-e s\|@PERL@\|${PERL5:Q}\|g
@@ -57,7 +57,7 @@ do-build:
 		&& mv pkglint.pl.inlined pkglint.pl
 
 do-test:
-	cd ${WRKSRC} && prove pkglint.t
+	cd ${WRKSRC} && prove -v -I. pkglint.t
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/pkglint.pl ${DESTDIR}${PREFIX}/bin/pkglint

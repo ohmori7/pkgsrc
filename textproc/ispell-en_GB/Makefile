@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2016/02/26 10:32:47 jperkin Exp $
+# $NetBSD: Makefile,v 1.10 2021/01/28 22:35:12 gutteridge Exp $
 #
 
-DISTNAME=	ispell-3.4.00
+DISTNAME=	ispell-3.4.02
 PKGNAME=	${DISTNAME:S/-/-${DICT_LANG}-/1}
 CATEGORIES=	textproc
 MASTER_SITES=	http://fmg-www.cs.ucla.edu/geoff/tars/
@@ -11,6 +11,7 @@ HOMEPAGE=	http://ficus-www.cs.ucla.edu/geoff/ispell.html
 COMMENT=	British dictionary for interactive spelling checker
 
 CONFLICTS+=	ispell-british-[0-9]*
+USE_TOOLS+=	yacc
 DEPENDS+=	ispell>=3.3.02:../../textproc/ispell
 
 PATCHDIR=	${.CURDIR}/../../textproc/ispell/patches
@@ -35,7 +36,8 @@ do-configure:
 	${ECHO} "#define LANGUAGES \"{${DICT_LANG},MASTERDICTS=${DICT_LANG}.xlg,HASHFILES=${DICT_LANG}xlg.hash,EXTRADICT=}\""  >>local.h; \
 	${ECHO} '#define MASTERHASH "${DICT_LANG}xlg.hash"'  >> local.h ;	\
 	${ECHO} "#undef WORDS"  >> local.h ;				\
-	${ECHO} '#define WORDS   "${WORDS}"'  >> local.h
+	${ECHO} '#define WORDS   "${WORDS}"'  >> local.h ; 		\
+	${PRINTF} '#ifdef __sun\n#include<sys/types.h>\n#include<sys/dirent.h>\n#define USG 1\n#endif' >> local.h
 
 do-install:
 	${CP} ${WRKSRC}/languages/${DICT_LANG}/${DICT_LANG}xlg.hash ${DESTDIR}${PREFIX}/lib

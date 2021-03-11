@@ -1,22 +1,28 @@
-# $NetBSD: Makefile,v 1.47 2018/12/13 19:51:39 adam Exp $
+# $NetBSD: Makefile,v 1.66 2021/02/07 06:30:11 ryoon Exp $
 
-DISTNAME=	ark-${_KDE_VERSION}
-PKGREVISION=	16
-CATEGORIES=	archivers
+DISTNAME=	ark-${KAPPSVER}
+PKGREVISION=	8
+CATEGORIES=	x11
+
+HOMEPAGE=	https://kde.org/applications/utilities/ark/
 COMMENT=	Manages various archive formats within the KDE environment
+LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+.include "../../meta-pkgs/kde/applications.mk"
 
-CMAKE_ARGS+=	-DWITH_QJSON:BOOL=OFF
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+USE_TOOLS+=	msgmerge
 
 .include "../../archivers/bzip2/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libarchive+=	libarchive>=2.6.0
+BUILDLINK_API_DEPENDS.libarchive+=	libarchive>=3.3.3
 .include "../../archivers/libarchive/buildlink3.mk"
+.include "../../archivers/libzip/buildlink3.mk"
 .include "../../archivers/xz/buildlink3.mk"
+.include "../../devel/kitemmodels/buildlink3.mk"
+.include "../../devel/kparts/buildlink3.mk"
+.include "../../devel/kpty/buildlink3.mk"
+.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-.include "../../x11/kde-baseapps4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

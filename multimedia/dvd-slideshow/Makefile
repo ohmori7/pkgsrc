@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.18 2015/07/04 16:18:38 joerg Exp $
+# $NetBSD: Makefile,v 1.23 2020/07/13 20:05:12 wiz Exp $
 
 DISTNAME=	dvd-slideshow-0.7.5
-PKGREVISION=	12
+PKGREVISION=	13
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=dvd-slideshow/}
 
-MAINTAINER=	darcy@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://dvd-slideshow.sourceforge.net/
 COMMENT=	Script that creates a slideshow-style DVD with some simple menus
 
@@ -18,7 +18,7 @@ DEPENDS+=	dvd+rw-tools-[0-9]*:../../sysutils/dvd+rw-tools
 DEPENDS+=	ImageMagick-[0-9]*:../../graphics/ImageMagick
 # uses programs only (mplex, ffmpeg)
 DEPENDS+=	mjpegtools-[0-9]*:../../multimedia/mjpegtools
-DEPENDS+=	ffmpeg1-[0-9]*:../../multimedia/ffmpeg1
+DEPENDS+=	ffmpeg4-[0-9]*:../../multimedia/ffmpeg4
 
 USE_TOOLS+=	bash:run
 NO_BUILD=	yes
@@ -34,16 +34,16 @@ REPLACE_BASH =	dir2slideshow dvd-burn dvd-encode dvd-iso dvd-menu \
 				dvd-slideshow dvd-slideshow.orig gallery1-to-slideshow \
 				install.sh jigl2slideshow
 
-SUBST_CLASSES+=			fonts
-SUBST_STAGE.fonts=		post-configure
-SUBST_FILES.fonts=		dvd-menu dvd-slideshow
-SUBST_SED.fonts=		-e 's,/usr/share/fonts/,${PREFIX}/share/fonts/,g'
+SUBST_CLASSES+=		fonts
+SUBST_STAGE.fonts=	post-configure
+SUBST_FILES.fonts=	dvd-menu dvd-slideshow
+SUBST_SED.fonts=	-e 's,/usr/share/fonts/,${PREFIX}/share/fonts/,g'
 SUBST_MESSAGE.fonts=	Fixing hardcoded fonts paths.
 
-SUBST_CLASSES+=			pipeline
+SUBST_CLASSES+=		pipeline
 SUBST_STAGE.pipeline=	post-configure
 SUBST_FILES.pipeline=	dvd-slideshow
-SUBST_SED.pipeline=		-e 's/print0/printx/g;s/sort -z/sort/g;s/xargs -0/xargs/g'
+SUBST_SED.pipeline=	-e 's/print0/printx/g;s/sort -z/sort/g;s/xargs -0/xargs/g'
 SUBST_MESSAGE.pipeline=	Fixing Linux centric pipeline.
 
 SUBST_CLASSES+=			lsof

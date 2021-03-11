@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2019/04/25 07:33:14 maya Exp $
+# $NetBSD: Makefile,v 1.5 2020/12/04 20:45:38 nia Exp $
 
 DISTNAME=	pdf-redact-tools-0.1
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_GITHUB:=firstlook/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -15,8 +15,6 @@ DEPENDS+=	ImageMagick-[0-9]*:../../graphics/ImageMagick
 DEPENDS+=	p5-Image-ExifTool-[0-9]*:../../graphics/p5-Image-ExifTool
 
 USE_LANGUAGES=	# none
-
-REPLACE_PYTHON=	pdf-react-tools
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/distutils.mk"

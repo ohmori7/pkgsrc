@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.12 2019/05/13 20:38:11 adam Exp $
+# $NetBSD: Makefile.common,v 1.24 2021/02/15 18:58:36 adam Exp $
 #
 # This Makefile fragment is included by all PostgreSQL packages built from
 # the main sources of the PostgreSQL distribution except jdbc-postgresql.
@@ -16,7 +16,7 @@
 # used by databases/postgresql10-pltcl/Makefile
 # used by databases/postgresql10-server/Makefile
 
-DISTNAME=	postgresql-10.8
+DISTNAME=	postgresql-10.16
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_PGSQL:=source/v${PKGVERSION_NOREV}/}
 EXTRACT_SUFX=	.tar.bz2
@@ -37,8 +37,7 @@ DISTINFO_FILE?=		${.CURDIR}/../../databases/postgresql10/distinfo
 COMMON_FILESDIR?=	${.CURDIR}/../../databases/postgresql10/files
 PATCHDIR?=		${.CURDIR}/../../databases/postgresql10/patches
 
-USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		bison gmake lex msgfmt
+USE_TOOLS+=		bison gmake lex
 PKG_SYSCONFSUBDIR=	postgresql
 
 .include "../../mk/bsd.prefs.mk"
@@ -46,6 +45,7 @@ PKG_SYSCONFSUBDIR=	postgresql
 PG_TEMPLATE.SunOS=	solaris
 PG_TEMPLATE.IRIX=	irix5
 PG_TEMPLATE.MirBSD=	openbsd
+PG_TEMPLATE.DragonFly=	freebsd
 .if !defined(PG_TEMPLATE.${OPSYS})
 PG_TEMPLATE.${OPSYS}=	${LOWER_OPSYS}
 .endif
@@ -62,7 +62,6 @@ CONFIGURE_ARGS+=	--docdir=${PG_DOC_DIR}
 CONFIGURE_ARGS+=	--localedir=${PG_LOCALE_DIR}
 CONFIGURE_ARGS+=	--with-template=${PG_TEMPLATE.${OPSYS}}
 
-CONFIGURE_ARGS+=	--enable-nls
 CONFIGURE_ARGS+=	--with-libxml
 CONFIGURE_ARGS+=	--with-readline
 CONFIGURE_ARGS+=	--without-perl
@@ -85,8 +84,8 @@ CONFIGURE_ENV+=		pgac_cv_prog_cc_ldflags__Wl___as_needed=no
 .endif
 
 # configure fails on OpenBSD and MirBSD if thread safety is enabled.
-CONFIGURE_ARGS.MirBSD+=	--disable-thread-safety
-CONFIGURE_ARGS.OpenBSD+=--disable-thread-safety
+CONFIGURE_ARGS.MirBSD+=		--disable-thread-safety
+CONFIGURE_ARGS.OpenBSD+=	--disable-thread-safety
 
 # PGSQL_BLCKSZ is the size in bytes of a PostgreSQL disk page or block.
 # This also limits the size of a tuple.  The valid values are powers
@@ -107,8 +106,6 @@ USE_LIBLTDL?=		yes
 .endif
 USE_LIBLTDL?=		no
 
-.include "../../devel/gettext-lib/buildlink3.mk"
-LIBS.SunOS+=		-lintl
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 
@@ -120,19 +117,19 @@ CONFIGURE_ARGS+=	--with-libedit-preferred
 .if !defined(META_PACKAGE)
 post-extract:
 .  if !empty(USE_LIBLTDL:M[yY][eE][sS])
-	cp -f ${COMMON_FILESDIR}/dynloader-ltdl.h \
+	${CP} -f ${COMMON_FILESDIR}/dynloader-ltdl.h \
 		${WRKSRC}/src/backend/port/dynloader/${PG_TEMPLATE.${OPSYS}:Q}.h
 	${ECHO} "static int dummy = 0;" \
 		> ${WRKSRC}/src/backend/port/dynloader/${PG_TEMPLATE.${OPSYS}:Q}.c
 .  endif
-	touch ${WRKSRC}/src/template/dragonfly
-	cp ${WRKSRC}/src/backend/port/dynloader/freebsd.c \
+	${TOUCH} ${WRKSRC}/src/template/dragonfly
+	${CP} ${WRKSRC}/src/backend/port/dynloader/freebsd.c \
 		${WRKSRC}/src/backend/port/dynloader/dragonfly.c
-	cp ${WRKSRC}/src/backend/port/dynloader/freebsd.h \
+	${CP} ${WRKSRC}/src/backend/port/dynloader/freebsd.h \
 		${WRKSRC}/src/backend/port/dynloader/dragonfly.h
-	cp ${WRKSRC}/src/include/port/freebsd.h \
+	${CP} ${WRKSRC}/src/include/port/freebsd.h \
 		${WRKSRC}/src/include/port/dragonfly.h
-	cp ${WRKSRC}/src/makefiles/Makefile.freebsd \
+	${CP} ${WRKSRC}/src/makefiles/Makefile.freebsd \
 		${WRKSRC}/src/makefiles/Makefile.dragonfly
 .endif
 

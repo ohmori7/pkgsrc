@@ -1,24 +1,24 @@
-# $NetBSD: Makefile,v 1.172 2018/11/14 22:21:58 kleink Exp $
+# $NetBSD: Makefile,v 1.181 2020/08/17 20:19:24 leot Exp $
 
 DISTNAME=	sylpheed-3.7.0
-PKGREVISION=	2
+PKGREVISION=	8
 CATEGORIES=	mail news x11
 MASTER_SITES=	http://sylpheed.sraoss.jp/sylpheed/v3.7/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	ahoka@NetBSD.org
-HOMEPAGE=	http://sylpheed.sraoss.jp/en/
+HOMEPAGE=	https://sylpheed.sraoss.jp/en/
 COMMENT=	Gtk based e-mail and netnews client
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1
 
 CONFLICTS=		sylpheed-claws-[0-9]*
+CHECK_PORTABILITY_SKIP+=sylpheed.spec.in
 
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake msgfmt pkg-config
 
 GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--enable-nls
 CONFIGURE_ARGS+=	--enable-ssl
 CONFIGURE_ARGS+=	--enable-compface
 

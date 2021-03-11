@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.56 2018/08/22 09:43:09 wiz Exp $
+# $NetBSD: Makefile,v 1.59 2020/08/31 18:06:51 wiz Exp $
 
 DISTNAME=	skf_${VERSION}.4
 VERSION=	2.00
 PKGNAME=	${DISTNAME:S/_/-/}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	japanese converters
 MASTER_SITES=	${MASTER_SITE_OSDN:=skf/64426/}
 EXTRACT_SUFX=	.tar.xz
@@ -24,7 +24,7 @@ MAKE_JOBS_SAFE=		no
 
 REPLACE_PERL=	scripts/parse_uni.p
 
-PLIST_SUBST+=	VERSION=${VERSION}
+PLIST_SUBST+=		VERSION=${VERSION}
 PRINT_PLIST_AWK+=	{gsub(/${VERSION}/, "$${VERSION}");}
 
 .include "../../converters/libiconv/buildlink3.mk"

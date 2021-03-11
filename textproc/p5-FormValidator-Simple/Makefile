@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.21 2018/08/22 09:46:49 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2020/08/31 18:11:47 wiz Exp $
 
 DISTNAME=	FormValidator-Simple-0.29
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=FormValidator/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/FormValidator-Simple/
+HOMEPAGE=	https://metacpan.org/release/FormValidator-Simple
 COMMENT=	Validation with simple chains of constraints
 LICENSE=	${PERL5_LICENSE}
 
@@ -26,8 +26,8 @@ DEPENDS+=	p5-List-MoreUtils>=0.16:../../devel/p5-List-MoreUtils
 DEPENDS+=	p5-UNIVERSAL-require>=0.10:../../devel/p5-UNIVERSAL-require
 DEPENDS+=	p5-YAML>=0.39:../../textproc/p5-YAML
 
-USE_LANGUAGES=	# empty
-PERL5_PACKLIST=	auto/FormValidator/Simple/.packlist
+USE_LANGUAGES=		# empty
+PERL5_PACKLIST=		auto/FormValidator/Simple/.packlist
 PERL5_MODULE_TYPE=	Module::Install::Bundled
 
 MAKE_ENV+=	PERL_USE_UNSAFE_INC=1

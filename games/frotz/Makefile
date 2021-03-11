@@ -1,25 +1,34 @@
-# $NetBSD: Makefile,v 1.32 2017/01/19 18:52:10 agc Exp $
+# $NetBSD: Makefile,v 1.39 2020/08/18 17:57:51 leot Exp $
 
-DISTNAME=	frotz-2.43
-PKGREVISION=	5
+DISTNAME=	frotz-2.52
+PKGREVISION=	1
 CATEGORIES=	games
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=frotz/}
-MASTER_SITES+=	ftp://ftp.ifarchive.org/if-archive/infocom/interpreters/frotz/
+MASTER_SITES=	https://gitlab.com/DavidGriffith/frotz/-/archive/${PKGVERSION_NOREV}/
 
 MAINTAINER=	seebs@plethora.net
-HOMEPAGE=	http://frotz.sourceforge.net/
+HOMEPAGE=	https://davidgriffith.gitlab.io/frotz/
 COMMENT=	Curses-based interpreter for Infocom-compatible games
+LICENSE=	gnu-gpl-v2
 
-.include "../../mk/bsd.prefs.mk"
+USE_TOOLS+=	gmake pkg-config
 
-.if ${OPSYS} != "Darwin"
-MAKE_ENV+=	SOUND_DEFS=-DOSS_SOUND
-MAKE_ENV+=	SOUND_LIB=${LIBOSSAUDIO}
-MAKE_ENV+=	SOUND_DEV=${DEVOSSSOUND}
+BUILD_TARGET=	curses
+FAKE_NCURSES=	yes
+USE_CURSES=	wide
+
+MAKE_FLAGS+=	CURSES=ncursesw
+MAKE_FLAGS+=	CONFIG_DIR=${PKG_SYSCONFDIR}
+
+.include "../../mk/curses.buildlink3.mk"
+
+.if ${CURSES_TYPE} == "curses"
+LDFLAGS+=	-lcurses
 .endif
 
 SAMPLEDIR=	${PREFIX}/share/examples/frotz
 DOCDIR=		${PREFIX}/share/doc/frotz
+
+CONF_FILES+=	${SAMPLEDIR}/frotz.conf ${PKG_SYSCONFDIR}/frotz.conf
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man6
 
@@ -34,6 +43,8 @@ do-install:
 	cd ${WRKSRC} && ${INSTALL_DATA} README INSTALL HOW_TO_PLAY \
 		${DESTDIR}${DOCDIR}
 
-.include "../../mk/curses.buildlink3.mk"
-.include "../../mk/oss.buildlink3.mk"
+.include "../../audio/libao/buildlink3.mk"
+.include "../../audio/libmodplug/buildlink3.mk"
+.include "../../audio/libsamplerate/buildlink3.mk"
+.include "../../audio/libsndfile/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

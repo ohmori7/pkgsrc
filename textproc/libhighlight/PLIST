@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.8 2019/05/21 21:56:57 schmonz Exp $
+@comment $NetBSD: PLIST,v 1.16 2021/01/01 19:41:37 schmonz Exp $
 lib/libhighlight.la
 share/doc/highlight/AUTHORS
 share/doc/highlight/COPYING
@@ -85,6 +85,7 @@ share/highlight/langDefs/autohotkey.lang
 share/highlight/langDefs/autoit.lang
 share/highlight/langDefs/avenue.lang
 share/highlight/langDefs/awk.lang
+share/highlight/langDefs/ballerina.lang
 share/highlight/langDefs/bat.lang
 share/highlight/langDefs/bbcode.lang
 share/highlight/langDefs/bcpl.lang
@@ -136,6 +137,7 @@ share/highlight/langDefs/express.lang
 share/highlight/langDefs/fame.lang
 share/highlight/langDefs/fasm.lang
 share/highlight/langDefs/felix.lang
+share/highlight/langDefs/fish.lang
 share/highlight/langDefs/fortran77.lang
 share/highlight/langDefs/fortran90.lang
 share/highlight/langDefs/frink.lang
@@ -147,11 +149,13 @@ share/highlight/langDefs/gdb.lang
 share/highlight/langDefs/gdscript.lang
 share/highlight/langDefs/go.lang
 share/highlight/langDefs/graphviz.lang
+share/highlight/langDefs/haml.lang
 share/highlight/langDefs/haskell.lang
 share/highlight/langDefs/haxe.lang
 share/highlight/langDefs/hcl.lang
 share/highlight/langDefs/html.lang
 share/highlight/langDefs/httpd.lang
+share/highlight/langDefs/hugo.lang
 share/highlight/langDefs/icon.lang
 share/highlight/langDefs/idl.lang
 share/highlight/langDefs/idlang.lang
@@ -184,9 +188,9 @@ share/highlight/langDefs/lua.lang
 share/highlight/langDefs/luban.lang
 share/highlight/langDefs/make.lang
 share/highlight/langDefs/maple.lang
+share/highlight/langDefs/markdown.lang
 share/highlight/langDefs/matlab.lang
 share/highlight/langDefs/maya.lang
-share/highlight/langDefs/md.lang
 share/highlight/langDefs/mercury.lang
 share/highlight/langDefs/meson.lang
 share/highlight/langDefs/miranda.lang
@@ -213,6 +217,7 @@ share/highlight/langDefs/objc.lang
 share/highlight/langDefs/ocaml.lang
 share/highlight/langDefs/octave.lang
 share/highlight/langDefs/oorexx.lang
+share/highlight/langDefs/org.lang
 share/highlight/langDefs/os.lang
 share/highlight/langDefs/oz.lang
 share/highlight/langDefs/paradox.lang
@@ -244,13 +249,16 @@ share/highlight/langDefs/qml.lang
 share/highlight/langDefs/qu.lang
 share/highlight/langDefs/r.lang
 share/highlight/langDefs/rebol.lang
+share/highlight/langDefs/rego.lang
 share/highlight/langDefs/rexx.lang
 share/highlight/langDefs/rnc.lang
 share/highlight/langDefs/rpg.lang
 share/highlight/langDefs/rpl.lang
 share/highlight/langDefs/rs.lang
+share/highlight/langDefs/rst.lang
 share/highlight/langDefs/ruby.lang
 share/highlight/langDefs/s.lang
+share/highlight/langDefs/sam.lang
 share/highlight/langDefs/sas.lang
 share/highlight/langDefs/scad.lang
 share/highlight/langDefs/scala.lang
@@ -289,7 +297,9 @@ share/highlight/langDefs/verilog.lang
 share/highlight/langDefs/vhd.lang
 share/highlight/langDefs/vimscript.lang
 share/highlight/langDefs/vue.lang
+share/highlight/langDefs/wat.lang
 share/highlight/langDefs/whiley.lang
+share/highlight/langDefs/wren.lang
 share/highlight/langDefs/xml.lang
 share/highlight/langDefs/xpp.lang
 share/highlight/langDefs/yaiff.lang
@@ -320,17 +330,21 @@ share/highlight/plugins/outhtml_add_background_svg.lua
 share/highlight/plugins/outhtml_add_figure.lua
 share/highlight/plugins/outhtml_add_line.lua
 share/highlight/plugins/outhtml_add_shadow.lua
+share/highlight/plugins/outhtml_ansi_esc.lua
 share/highlight/plugins/outhtml_codefold.lua
+share/highlight/plugins/outhtml_copy_clipboard.lua
 share/highlight/plugins/outhtml_curly_brackets_matcher.lua
 share/highlight/plugins/outhtml_ie7_webctrl.lua
 share/highlight/plugins/outhtml_keyword_matcher.lua
 share/highlight/plugins/outhtml_ligature_fonts.lua
+share/highlight/plugins/outhtml_lsp_clangd.lua
 share/highlight/plugins/outhtml_modern_fonts.lua
 share/highlight/plugins/outhtml_parantheses_matcher.lua
 share/highlight/plugins/outhtml_tooltips.lua
 share/highlight/plugins/perl_ref_perl_org.lua
 share/highlight/plugins/python_ref_python_org.lua
 share/highlight/plugins/reduce_filesize.lua
+share/highlight/plugins/sam_seq.lua
 share/highlight/plugins/scala_ref_scala_lang_org.lua
 share/highlight/plugins/terminal_add_info.lua
 share/highlight/plugins/theme_invert.lua
@@ -466,6 +480,11 @@ share/highlight/themes/darkplus.theme
 share/highlight/themes/darkslategray.theme
 share/highlight/themes/darkspectrum.theme
 share/highlight/themes/denim.theme
+share/highlight/themes/duotone-dark-earth.theme
+share/highlight/themes/duotone-dark-forest.theme
+share/highlight/themes/duotone-dark-sea.theme
+share/highlight/themes/duotone-dark-sky.theme
+share/highlight/themes/duotone-dark-space.theme
 share/highlight/themes/dusk.theme
 share/highlight/themes/earendel.theme
 share/highlight/themes/easter.theme
@@ -507,6 +526,7 @@ share/highlight/themes/navy.theme
 share/highlight/themes/neon.theme
 share/highlight/themes/night.theme
 share/highlight/themes/nightshimmer.theme
+share/highlight/themes/nord.theme
 share/highlight/themes/nuvola.theme
 share/highlight/themes/olive.theme
 share/highlight/themes/orion.theme

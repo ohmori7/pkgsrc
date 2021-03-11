@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.20 2019/03/20 12:16:19 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2020/08/17 20:19:28 leot Exp $
 
 DISTNAME=	# empty
-PKGNAME=	modular-xorg-libs-1.6
+PKGNAME=	modular-xorg-libs-1.12
+PKGREVISION=	1
 CATEGORIES=	meta-pkgs x11
 MASTER_SITES=	${MASTER_SITE_XORG:=lib/}
 DISTFILES=	# empty
 
 MAINTAINER=	joerg@NetBSD.org
-HOMEPAGE=	http://xorg.freedesktop.org/
+HOMEPAGE=	https://xorg.freedesktop.org/
 COMMENT=	Modular Xorg library meta-package
 LICENSE=	2-clause-bsd
 
@@ -18,14 +19,11 @@ META_PACKAGE=	yes
 .if ${OPSYS} == "Darwin"
 .include "../../wm/libAppleWM/buildlink3.mk"
 .endif
-.include "../../x11/libdmx/buildlink3.mk"
 .include "../../x11/libFS/buildlink3.mk"
 .include "../../x11/libICE/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
-.include "../../wm/libWindowsWM/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXScrnSaver/buildlink3.mk"
-.include "../../x11/libXTrap/buildlink3.mk"
 .include "../../x11/libXau/buildlink3.mk"
 .include "../../x11/libXaw/buildlink3.mk"
 .include "../../x11/libXaw3d/buildlink3.mk"
@@ -33,7 +31,6 @@ META_PACKAGE=	yes
 .include "../../x11/libXcursor/buildlink3.mk"
 .include "../../x11/libXdamage/buildlink3.mk"
 .include "../../x11/libXdmcp/buildlink3.mk"
-.include "../../x11/libXevie/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXfixes/buildlink3.mk"
 .include "../../x11/libXfont2/buildlink3.mk"
@@ -51,13 +48,11 @@ META_PACKAGE=	yes
 .include "../../x11/libXv/buildlink3.mk"
 .include "../../x11/libXvMC/buildlink3.mk"
 .include "../../x11/libXxf86dga/buildlink3.mk"
-.include "../../x11/libXxf86misc/buildlink3.mk"
 .include "../../x11/libXxf86vm/buildlink3.mk"
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "DragonFly" || ${OPSYS} == "FreeBSD" \
     || ${OPSYS} == "OpenBSD" || ${OPSYS} == "Linux" || ${OPSYS} == "SunOS"
 .include "../../x11/libdrm/buildlink3.mk"
 .endif
 .include "../../x11/libxkbfile/buildlink3.mk"
-.include "../../x11/libxkbui/buildlink3.mk"
 
 .include "../../mk/bsd.pkg.mk"

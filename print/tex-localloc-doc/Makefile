@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2016/09/20 12:47:52 markd Exp $
+# $NetBSD: Makefile,v 1.4 2021/02/20 10:26:42 markd Exp $
 
 DISTNAME=	localloc.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-1.1b
-TEXLIVE_REV=	21934
+PKGNAME=	tex-${DISTNAME:S/./-/}-1.1b.56496
+TEXLIVE_REV=	56496
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/localloc
+HOMEPAGE=	https://ctan.org/pkg/localloc
 COMMENT=	Documentation for tex-localloc
 #LICENSE=	other-free
 

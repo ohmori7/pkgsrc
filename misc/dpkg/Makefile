@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.47 2018/08/31 13:58:44 adam Exp $
+# $NetBSD: Makefile,v 1.51 2020/08/31 18:10:20 wiz Exp $
 
-DISTNAME=	dpkg_1.18.25
+DISTNAME=	dpkg_1.20.0
 PKGNAME=	${DISTNAME:S/_/-/}
+PKGREVISION=	1
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_DEBIAN:=pool/main/d/dpkg/}
 EXTRACT_SUFX=	.tar.xz
@@ -20,16 +21,20 @@ BUILD_DEFS+=	VARBASE
 
 USE_PKGLOCALEDIR=	yes
 USE_LANGUAGES=		c c++
+USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake msgfmt perl:run gtar:run pod2man
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-admindir=${VARBASE}/db/dpkg
 CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/share/dpkg
+CONFIGURE_ARGS+=	--enable-shared
 CONFIGURE_ARGS.Darwin+=	--enable-linker-optimizations=no
 CONFIGURE_ENV+=		PATCH=${PREFIX}/bin/gpatch
 TEST_TARGET=		check
 INCOMPAT_CURSES+=	NetBSD-[0-5].*-*
 
 REPLACE_PERL=		scripts/*.pl
+
+CONFIGURE_ARGS+=	DPKG_DEVEL_MODE=1
 
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../archivers/xz/buildlink3.mk"

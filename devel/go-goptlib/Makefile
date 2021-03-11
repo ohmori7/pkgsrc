@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.13 2019/05/27 15:18:22 bsiegert Exp $
+# $NetBSD: Makefile,v 1.30 2021/01/23 14:22:58 bsiegert Exp $
 
 DISTNAME=	1.0.0
 DIST_SUBDIR=	go-goptlib
 PKGNAME=	${DIST_SUBDIR}-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	19
 CATEGORIES=	devel net
 MASTER_SITES=	https://gitweb.torproject.org/pluggable-transports/goptlib.git/snapshot/
 
-MAINTAINER=	alnsn@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://gitweb.torproject.org/pluggable-transports/goptlib.git
 COMMENT=	Library for writing Tor pluggable transports in Go
 LICENSE=	cc0-1.0-universal

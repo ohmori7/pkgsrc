@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.6 2017/12/17 04:54:15 ryoon Exp $
+# $NetBSD: Makefile,v 1.9 2020/12/31 22:16:15 fcambus Exp $
 #
 
-DISTNAME=	gnucobol-2.2
+DISTNAME=	gnucobol-3.1.2
 CATEGORIES=	lang
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=open-cobol/}
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gnucobol/}
 
 MAINTAINER=	rodo@bloerp.de
-HOMEPAGE=	https://open-cobol.sourceforge.io/
+HOMEPAGE=	https://gnucobol.sourceforge.io/
 COMMENT=	Open-source COBOL compiler
 LICENSE=	gnu-gpl-v3 AND gnu-lgpl-v3
 
@@ -21,9 +21,8 @@ USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		msgfmt
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-db
-CONFIGURE_ARGS+=	--with-lfs
-CONFIGURE_ARGS+=	--without-readline
 INFO_FILES=		yes
+TEST_TARGET=		check
 
 SUBST_CLASSES+=		bdb
 SUBST_MESSAGE.bdb=	Detect pkgsrc Berkeley DB library

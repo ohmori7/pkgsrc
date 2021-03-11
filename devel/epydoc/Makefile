@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.26 2019/04/25 07:32:44 maya Exp $
+# $NetBSD: Makefile,v 1.30 2020/12/04 20:45:08 nia Exp $
 
 DISTNAME=	epydoc-3.0.1
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=epydoc/}
 
-MAINTAINER=	darcy@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://epydoc.sourceforge.net/
 COMMENT=	Python documentation framework
 LICENSE=	mit

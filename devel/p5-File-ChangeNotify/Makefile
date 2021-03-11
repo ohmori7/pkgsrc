@@ -1,20 +1,21 @@
-# $NetBSD: Makefile,v 1.32 2019/02/09 00:35:48 wen Exp $
+# $NetBSD: Makefile,v 1.36 2020/08/31 18:08:00 wiz Exp $
 
 DISTNAME=	File-ChangeNotify-0.31
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=File/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/File-ChangeNotify/
+HOMEPAGE=	https://metacpan.org/release/File-ChangeNotify
 COMMENT=	Watch for changes to files, cross-platform style
 LICENSE=	artistic-2.0
 
 #BUILD_DEPENDS+=	{perl>=5.10.1,p5-Test-Simple>=0.88}:../../devel/p5-Test-Simple
-DEPENDS+=	p5-MooseX-Params-Validate>=0.08:../../devel/p5-MooseX-Params-Validate
-DEPENDS+=	p5-MooseX-SemiAffordanceAccessor-[0-9]*:../../devel/p5-MooseX-SemiAffordanceAccessor
-DEPENDS+=	p5-namespace-autoclean-[0-9]*:../../devel/p5-namespace-autoclean
-DEPENDS+=	p5-Type-Tiny-[0-9]*:../../devel/p5-Type-Tiny
+DEPENDS+=		p5-MooseX-Params-Validate>=0.08:../../devel/p5-MooseX-Params-Validate
+DEPENDS+=		p5-MooseX-SemiAffordanceAccessor-[0-9]*:../../devel/p5-MooseX-SemiAffordanceAccessor
+DEPENDS+=		p5-namespace-autoclean-[0-9]*:../../devel/p5-namespace-autoclean
+DEPENDS+=		p5-Type-Tiny-[0-9]*:../../devel/p5-Type-Tiny
 
 # for make test
 BUILD_DEPENDS+=	p5-Moo-[0-9]*:../../devel/p5-Moo

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.8 2019/05/12 11:52:42 markd Exp $
+# $NetBSD: Makefile,v 1.12 2021/02/20 00:12:07 markd Exp $
 
 DISTNAME=	fira.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-4.3
-TEXLIVE_REV=	50944
+PKGNAME=	tex-${DISTNAME:S/./-/}-4.3.55437
+TEXLIVE_REV=	55437
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/fira
+HOMEPAGE=	https://ctan.org/pkg/fira
 COMMENT=	Documentation for tex-fira
 LICENSE=	ofl-v1.1 AND lppl-1.3c
 

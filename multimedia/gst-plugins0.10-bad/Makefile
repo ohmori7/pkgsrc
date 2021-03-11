@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.28 2016/03/05 11:29:00 jperkin Exp $
+# $NetBSD: Makefile,v 1.33 2020/11/05 09:07:01 ryoon Exp $
 #
 
 USE_LANGUAGES=	c c++
 
 .include "Makefile.common"
-PKGREVISION=	6
+PKGREVISION=	10
 
 COMMENT+=	Bad plugins
 
 # builds gsettings module
-BUILDLINK_API_DEPENDS.glib2+= glib2>=2.26.0
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.26.0
 
 .include "../../devel/glib2/schemas.mk"
 # bzip2 is likely present anyway, make it default

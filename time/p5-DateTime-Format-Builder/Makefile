@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.19 2019/03/16 13:28:29 wen Exp $
+# $NetBSD: Makefile,v 1.24 2020/09/07 17:39:28 wiz Exp $
 
-DISTNAME=	DateTime-Format-Builder-0.82
+DISTNAME=	DateTime-Format-Builder-0.83
 PKGNAME=	p5-${DISTNAME}00
 CATEGORIES=	time perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DateTime/}
 
 MAINTAINER=	abs@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~drolsky/DateTime-Format-Builder/
+HOMEPAGE=	https://metacpan.org/release/DateTime-Format-Builder
 COMMENT=	Create DateTime parser classes and objects
 LICENSE=	${PERL5_LICENSE}
 
@@ -19,7 +19,7 @@ BUILD_DEPENDS+=	p5-Package-Stash-[0-9]*:../../devel/p5-Package-Stash
 BUILD_DEPENDS+=	p5-Sub-Name-[0-9]*:../../devel/p5-Sub-Name
 
 USE_LANGUAGES=	# empty
-PERL5_PACKLIST=		auto/DateTime/Format/Builder/.packlist
+PERL5_PACKLIST=	auto/DateTime/Format/Builder/.packlist
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

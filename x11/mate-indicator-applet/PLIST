@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.4 2019/02/17 06:15:37 gutteridge Exp $
+@comment $NetBSD: PLIST,v 1.6 2020/04/05 16:05:43 bsiegert Exp $
 libexec/mate-indicator-applet
 libexec/mate-indicator-applet-appmenu
 libexec/mate-indicator-applet-complete
@@ -69,6 +69,7 @@ share/locale/hu/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/hy/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/ia/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/id/LC_MESSAGES/mate-indicator-applet.mo
+share/locale/ie/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/ig/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/is/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/it/LC_MESSAGES/mate-indicator-applet.mo
@@ -137,11 +138,11 @@ share/locale/vi/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/wa/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/xh/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/yo/LC_MESSAGES/mate-indicator-applet.mo
+share/locale/zh-Hans/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/zh_CN/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/zh_HK/LC_MESSAGES/mate-indicator-applet.mo
-share/locale/zh-Hans/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/zh_TW/LC_MESSAGES/mate-indicator-applet.mo
 share/locale/zu/LC_MESSAGES/mate-indicator-applet.mo
-share/mate-panel/applets/org.ayatana.panel.IndicatorApplet.mate-panel-applet
-share/mate-panel/applets/org.ayatana.panel.IndicatorAppletAppmenu.mate-panel-applet
-share/mate-panel/applets/org.ayatana.panel.IndicatorAppletComplete.mate-panel-applet
+share/mate-panel/applets/org.mate.applets.Indicator.mate-panel-applet
+share/mate-panel/applets/org.mate.applets.IndicatorAppmenu.mate-panel-applet
+share/mate-panel/applets/org.mate.applets.IndicatorComplete.mate-panel-applet

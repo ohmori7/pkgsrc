@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.33 2018/11/14 22:22:39 kleink Exp $
+# $NetBSD: Makefile,v 1.40 2020/09/13 04:32:35 khorben Exp $
 #
 
-DISTNAME=	Panel-0.3.6
-PKGNAME=	deforaos-panel-0.3.6
-PKGREVISION=	9
+DISTNAME=	Panel-0.4.1
+PKGNAME=	deforaos-panel-0.4.1
 CATEGORIES=	x11
-MASTER_SITES=	https://www.defora.org/os/download/download/4417/
+MASTER_SITES=	https://ftp.defora.org/pub/DeforaOS/Apps/Desktop/src/Panel/
 
 MAINTAINER=	khorben@defora.org
 HOMEPAGE=	https://www.defora.org/
@@ -36,12 +35,14 @@ post-install:
 	${MV} ${DESTDIR}${PREFIX}/share/man/html1/panel-notify.html ${DESTDIR}${PREFIX}/${PKGMANDIR}/html1/panel-notify.html
 	${MV} ${DESTDIR}${PREFIX}/share/man/html1/panel.html ${DESTDIR}${PREFIX}/${PKGMANDIR}/html1/panel.html
 	${MV} ${DESTDIR}${PREFIX}/share/man/html1/panelctl.html ${DESTDIR}${PREFIX}/${PKGMANDIR}/html1/panelctl.html
+	${MV} ${DESTDIR}${PREFIX}/share/man/html1/settings.html ${DESTDIR}${PREFIX}/${PKGMANDIR}/html1/settings.html
 	${MV} ${DESTDIR}${PREFIX}/share/man/html1/wifibrowser.html ${DESTDIR}${PREFIX}/${PKGMANDIR}/html1/wifibrowser.html
 	${MV} ${DESTDIR}${PREFIX}/share/man/man1/panel-embed.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/panel-embed.1
 	${MV} ${DESTDIR}${PREFIX}/share/man/man1/panel-message.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/panel-message.1
 	${MV} ${DESTDIR}${PREFIX}/share/man/man1/panel-notify.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/panel-notify.1
 	${MV} ${DESTDIR}${PREFIX}/share/man/man1/panel.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/panel.1
 	${MV} ${DESTDIR}${PREFIX}/share/man/man1/panelctl.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/panelctl.1
+	${MV} ${DESTDIR}${PREFIX}/share/man/man1/settings.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/settings.1
 	${MV} ${DESTDIR}${PREFIX}/share/man/man1/wifibrowser.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/wifibrowser.1
 	${RMDIR} ${DESTDIR}${PREFIX}/share/man/html1
 	${RMDIR} ${DESTDIR}${PREFIX}/share/man/man1
@@ -52,5 +53,6 @@ post-install:
 
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../x11/deforaos-libdesktop/buildlink3.mk"
+.include "../../x11/libxkbfile/buildlink3.mk"
 .include "../../sysutils/deforaos-browser/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

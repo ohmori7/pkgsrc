@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.62 2019/04/03 00:32:34 ryoon Exp $
+# $NetBSD: Makefile,v 1.72 2020/11/05 09:07:52 ryoon Exp $
 #
 
 DISTNAME=	cutter-1.2.4
-PKGREVISION=	22
+PKGREVISION=	29
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=cutter/}
 
@@ -11,10 +11,10 @@ HOMEPAGE=	http://cutter.sourceforge.net/
 COMMENT=	Unit Testing Framework for C and C++
 LICENSE=	gnu-lgpl-v3
 
-GNU_CONFIGURE=	yes
-USE_LIBTOOL=	yes
-USE_TOOLS+=	gmake intltool pkg-config xgettext msgmerge msgfmt
-USE_LANGUAGES=	c c++
+GNU_CONFIGURE=		yes
+USE_LIBTOOL=		yes
+USE_TOOLS+=		gmake intltool pkg-config xgettext msgmerge msgfmt
+USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes
 
 PKGCONFIG_OVERRIDE+=	cppcutter.pc.in

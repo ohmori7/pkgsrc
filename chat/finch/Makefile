@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.69 2019/05/05 22:49:45 ryoon Exp $
+# $NetBSD: Makefile,v 1.76 2020/11/05 09:07:33 ryoon Exp $
 
 PKGNAME=	finch-${PIDGIN_VERSION}
 PKGREVISION=	2
@@ -37,14 +37,15 @@ pre-build:
 INSTALL_DIRS=		finch doc
 
 # this was an option, but doesn't seem to be one as of 2.10.12
-.  include "../../multimedia/gstreamer1/buildlink3.mk"
-.  include "../../multimedia/gst-plugins1-base/buildlink3.mk"
+.include "../../multimedia/gstreamer1/buildlink3.mk"
+.include "../../multimedia/gst-plugins1-base/buildlink3.mk"
 
 BUILDLINK_API_DEPENDS.libpurple+=	libpurple-${PIDGIN_VERSION}{,nb*}
 .include "../../chat/libpurple/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libidn/buildlink3.mk"
+.include "../../devel/libgnt/buildlink3.mk"
 .include "../../devel/ncursesw/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

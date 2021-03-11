@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.26 2019/05/02 11:25:23 ryoon Exp $
+# $NetBSD: Makefile,v 1.42 2021/01/08 19:29:48 ryoon Exp $
 
-DISTNAME=	qpdf-8.4.1
+DISTNAME=	qpdf-10.1.0
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=qpdf/}
 
@@ -11,13 +11,12 @@ LICENSE=	apache-2.0
 
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake perl:run pkg-config
+USE_TOOLS+=		gmake pkg-config perl
 GNU_CONFIGURE=		yes
 PKGCONFIG_OVERRIDE+=	libqpdf.pc.in
-
-REPLACE_PERL=	qpdf/fix-qdf
 
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../devel/pcre/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
+.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

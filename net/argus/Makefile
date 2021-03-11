@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2018/08/22 09:45:51 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2020/08/31 18:10:31 wiz Exp $
 
 DISTNAME=	argus-3.7
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	net
 MASTER_SITES=	http://www.tcp4me.com/code/argus-archive/
 EXTRACT_SUFX=	.tgz
@@ -21,7 +21,7 @@ DEPENDS+=	p5-Crypt-DES-[0-9]*:../../security/p5-Crypt-DES
 DEPENDS+=	p5-DBI-[0-9]*:../../databases/p5-DBI
 
 USE_TOOLS+=		perl:run
-HAS_CONFIGURE=	yes
+HAS_CONFIGURE=		yes
 CONFIGURE_SCRIPT=	${WRKSRC}/Configure
 CONFIGURE_ARGS+=	--bin_dir ${PREFIX}/bin
 CONFIGURE_ARGS+=	--sbin_dir ${PREFIX}/sbin
@@ -31,11 +31,9 @@ CONFIGURE_ARGS+=	--data_dir ${VARBASE}/argus
 CONFIGURE_ARGS+=	--www_dir ${VARBASE}/argus/www/htdocs
 CONFIGURE_ENV+=		PERL=${TOOLS_PERL5:Q}
 
-REPLACE_PERL+=		${WRKSRC}/built/argus-config
-
 RCD_SCRIPTS=		argusd
 
-INSTALL_MAKE_FLAGS+= 	INSTALL_BIN=${DESTDIR}${PREFIX}/bin \
+INSTALL_MAKE_FLAGS+=	INSTALL_BIN=${DESTDIR}${PREFIX}/bin \
 			INSTALL_SBIN=${DESTDIR}${PREFIX}/sbin \
 			INSTALL_CGI=${DESTDIR}${PREFIX}/libexec/cgi-bin \
 			INSTALL_LIB=${DESTDIR}${PREFIX}/lib/argus \

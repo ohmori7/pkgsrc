@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.77 2019/05/05 22:49:46 ryoon Exp $
+# $NetBSD: Makefile,v 1.88 2020/11/05 09:06:43 ryoon Exp $
 
 COMMENT=		Multi-protocol Instant Messaging client GTK frontend
-PKGREVISION=		4
+PKGREVISION=		3
 
 .include		"../../chat/libpurple/Makefile.common"
 
@@ -25,9 +25,9 @@ pre-build:
 INSTALL_DIRS=		pidgin doc
 
 # was an option, but is not as of 2.10.12
-.  include "../../multimedia/gstreamer1/buildlink3.mk"
-.  include "../../multimedia/gst-plugins1-base/buildlink3.mk"
-.  include "../../chat/farstream/buildlink3.mk"
+.include "../../multimedia/gstreamer1/buildlink3.mk"
+.include "../../multimedia/gst-plugins1-base/buildlink3.mk"
+.include "../../chat/farstream/buildlink3.mk"
 
 .include "../../chat/libpurple/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

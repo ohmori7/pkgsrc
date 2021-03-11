@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.19 2018/08/22 09:46:31 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2020/08/31 18:11:24 wiz Exp $
 #
 
 DISTNAME=	boxbackup-0.11.1
 PKGNAME=	boxbackup-server-0.11.1
-PKGREVISION=	9
+PKGREVISION=	12
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=boxbackup/}
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.boxbackup.org/
+HOMEPAGE=	https://www.boxbackup.org/
 COMMENT=	Backup tool
 
 PATCHDIR=	${.CURDIR}/../../sysutils/boxbackup-client/patches
@@ -30,7 +30,7 @@ INSTALLATION_DIRS+=	bin
 
 # for backtrace
 .if ${OPSYS} == "NetBSD" && exists(/usr/include/execinfo.h)
-LIBS+=  -lexecinfo
+LIBS+=	-lexecinfo
 .endif
 
 do-install:

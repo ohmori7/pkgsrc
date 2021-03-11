@@ -1,17 +1,21 @@
-# $NetBSD: Makefile,v 1.18 2015/03/20 16:33:28 taca Exp $
+# $NetBSD: Makefile,v 1.23 2020/11/05 09:08:55 ryoon Exp $
 
 MODNAME=		xmlrpc
 CATEGORIES+=		net
 COMMENT=		PHP extension for XML-RPC support
+PKGREVISION=		2
 
 CONFLICTS=	php-xmlrpc-[0-9]*
 
 HOMEPAGE=		http://xmlrpc-epi.sourceforge.net/
 
 USE_PHP_EXT_PATCHES=	YES
-CONFIGURE_ARGS+=	--enable-${MODNAME}=shared,${BUILDLINK_DIR}
 
 .include "../../lang/php/phpversion.mk"
+
+.if ${PKG_PHP_VERSION} != 56
+CONFIGURE_ARGS+=	--enable-${MODNAME}=shared,${BUILDLINK_DIR}
+.endif
 
 CONFIGURE_ARGS+=	--with-libxml-dir=${BUILDLINK_PREFIX.libxml2}
 

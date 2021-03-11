@@ -1,16 +1,19 @@
-# $NetBSD: Makefile,v 1.34 2017/09/04 18:00:56 wiz Exp $
+# $NetBSD: Makefile,v 1.41 2021/02/10 11:23:13 nia Exp $
 
-DISTNAME=	scrot-0.8
-PKGREVISION=	20
+DISTNAME=	scrot-1.5
 CATEGORIES=	graphics
-MASTER_SITES=	http://linuxbrit.co.uk/downloads/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=resurrecting-open-source-projects/}
+GITHUB_RELEASE=	${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-#HOMEPAGE=	http://linuxbrit.co.uk/scrot/
-COMMENT=	Commandline screen capture util like "import", but using imlib2
+HOMEPAGE=	https://github.com/resurrecting-open-source-projects/scrot
+COMMENT=	Command line screen capture util like "import", but using imlib2
+LICENSE=	mit
 
-GNU_CONFIGURE=	YES
+GNU_CONFIGURE=	yes
 
 .include "../../devel/giblib/buildlink3.mk"
-
+.include "../../x11/libXcomposite/buildlink3.mk"
+.include "../../x11/libXcursor/buildlink3.mk"
+.include "../../x11/libXfixes/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

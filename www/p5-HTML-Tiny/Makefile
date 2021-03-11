@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:47:40 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:12:53 wiz Exp $
 #
 
 DISTNAME=	HTML-Tiny-1.05
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=HTML/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/HTML-Tiny/
+HOMEPAGE=	https://metacpan.org/release/HTML-Tiny
 COMMENT=	Lightweight, dependency free HTML/XML generation in Perl
 LICENSE=	gnu-gpl-v2 # OR artistic
 

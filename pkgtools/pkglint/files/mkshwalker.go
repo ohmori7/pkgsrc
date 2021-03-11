@@ -1,10 +1,5 @@
 package pkglint
 
-import (
-	"reflect"
-	"strings"
-)
-
 type MkShWalker struct {
 	Callback struct {
 		List               func(list *MkShList)
@@ -62,37 +57,13 @@ func NewMkShWalker() *MkShWalker {
 	return &MkShWalker{}
 }
 
-// Path returns a representation of the path in the AST that is
-// currently visited.
-//
-// It is used for debugging only.
-//
-// See Test_MkShWalker_Walk, Callback.SimpleCommand for examples.
-func (w *MkShWalker) Path() string {
-	var path []string
-	for _, level := range w.Context {
-		typeName := reflect.TypeOf(level.Element).Elem().Name()
-		if typeName == "" && reflect.TypeOf(level.Element).Kind() == reflect.Slice {
-			typeName = "[]" + reflect.TypeOf(level.Element).Elem().Elem().Name()
-		}
-		abbreviated := strings.TrimPrefix(typeName, "MkSh")
-		if level.Index == -1 {
-			// TODO: This form should also be used if index == 0 and len == 1.
-			path = append(path, abbreviated)
-		} else {
-			path = append(path, sprintf("%s[%d]", abbreviated, level.Index))
-		}
-	}
-	return strings.Join(path, ".")
-}
-
 // Walk calls the given callback for each node of the parsed shell program,
 // in visiting order from large to small.
 func (w *MkShWalker) Walk(list *MkShList) {
 	w.walkList(-1, list)
 
-	// If this fails, the calls to w.push and w.pop are unbalanced.
-	assertf(len(w.Context) == 0, "MkShWalker.Walk %v", w.Context)
+	// The calls to w.push and w.pop must be balanced.
+	assert(len(w.Context) == 0)
 }
 
 func (w *MkShWalker) walkList(index int, list *MkShList) {
@@ -214,7 +185,9 @@ func (w *MkShWalker) walkCase(caseClause *MkShCase) {
 			callback(caseItem)
 		}
 		w.walkWords(-1, caseItem.Patterns)
-		w.walkList(-1, caseItem.Action)
+		if caseItem.Action != nil {
+			w.walkList(-1, caseItem.Action)
+		}
 		w.pop()
 	}
 

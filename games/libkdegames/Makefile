@@ -1,21 +1,20 @@
-# $NetBSD: Makefile,v 1.30 2018/12/13 19:51:56 adam Exp $
+# $NetBSD: Makefile,v 1.47 2021/02/07 06:30:08 ryoon Exp $
 
-DISTNAME=	libkdegames-${_KDE_VERSION}
-PKGREVISION=	13
+DISTNAME=	libkdegames-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	games
-COMMENT=	library for the kdegames package
 
-SUBST_CLASSES+=		path
-SUBST_STAGE.path=	pre-configure
-SUBST_FILES.path=	KDEGamesConfig.cmake.in
-SUBST_SED.path+=	-e 's;KDEGAMES_INCLUDE_DIR .*;KDEGAMES_INCLUDE_DIR "${PREFIX}/include");'
+HOMEPAGE=	https://www.kde.org/applications/games/
+COMMENT=	Common code and data for many KDE games
+LICENSE=	gnu-lgpl-v2 AND gnu-gpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+.include "../../meta-pkgs/kde/applications.mk"
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+USE_TOOLS+=	msgmerge
 
-.include "../../audio/openal-soft/buildlink3.mk"
 .include "../../audio/libsndfile/buildlink3.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../devel/kdeclarative/buildlink3.mk"
+.include "../../net/kdnssd/buildlink3.mk"
+.include "../../net/knewstuff/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

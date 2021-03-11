@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1 2019/03/19 11:25:41 jaapb Exp $
+# $NetBSD: Makefile,v 1.6 2021/03/08 08:12:53 jaapb Exp $
 
-DISTNAME=	logs-0.6.2
+DISTNAME=	logs-0.7.0
 PKGNAME=	ocaml-${DISTNAME}
+PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	https://erratique.ch/software/logs/releases/
 EXTRACT_SUFX=	.tbz
@@ -14,7 +15,7 @@ LICENSE=	isc
 USE_LANGUAGES=	# none
 
 OCAML_USE_TOPKG=	yes
-OCAML_USE_OPAM=	yes
+OCAML_USE_OPAM=		yes
 
 .include "options.mk"
 .include "../../devel/ocamlbuild/buildlink3.mk"

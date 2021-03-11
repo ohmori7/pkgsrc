@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.18 2018/08/22 09:47:25 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2020/08/31 18:12:34 wiz Exp $
 
-DISTNAME=	h2o-2.2.5
+DISTNAME=	h2o-2.2.6
 PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=h2o/}
@@ -20,6 +20,7 @@ PKGCONFIG_OVERRIDE+=	libh2o.pc.in
 CMAKE_ARGS+=		-DWITH_BUNDLED_SSL=off
 # TODO: make it an option
 CMAKE_ARGS+=		-DWITH_MRUBY=off
+CMAKE_ARGS+=		-DBUILD_SHARED_LIBS=on
 
 SUBST_CLASSES+=		interp
 SUBST_STAGE.interp=	post-extract

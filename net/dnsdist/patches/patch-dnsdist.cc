@@ -1,15 +1,15 @@
-$NetBSD: patch-dnsdist.cc,v 1.3 2018/08/08 15:39:55 fhajny Exp $
+$NetBSD: patch-dnsdist.cc,v 1.6 2020/08/06 16:28:03 adam Exp $
 
-Bring arg in sync with the code.
+Always use the pkgsrc editline layout.
 
---- dnsdist.cc.orig	2018-07-10 12:43:20.000000000 +0000
+--- dnsdist.cc.orig	2020-07-29 16:09:33.000000000 +0000
 +++ dnsdist.cc
-@@ -2523,7 +2523,7 @@ try
- #ifdef SO_REUSEPORT
-       SSetsockopt(cs->tcpFD, SOL_SOCKET, SO_REUSEPORT, 1);
- #else
--      warnlog("SO_REUSEPORT has been configured on local address '%s' but is not supported", cs.local.toStringWithPort());
-+      warnlog("SO_REUSEPORT has been configured on local address '%s' but is not supported", cs->local.toStringWithPort());
- #endif
-     }
-     if(cs->local.sin4.sin_family == AF_INET6) {
+@@ -31,7 +31,7 @@
+ #include <sys/resource.h>
+ #include <unistd.h>
+ 
+-#if defined (__OpenBSD__) || defined(__NetBSD__)
++#if 1
+ // If this is not undeffed, __attribute__ wil be redefined by /usr/include/readline/rlstdc.h
+ #undef __STRICT_ANSI__
+ #include <readline/readline.h>

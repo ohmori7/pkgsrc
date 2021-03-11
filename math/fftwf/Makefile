@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.26 2019/05/24 15:48:49 adam Exp $
+# $NetBSD: Makefile,v 1.29 2021/01/04 10:27:38 wiz Exp $
 
 .include "../../math/fftw/Makefile.common"
 

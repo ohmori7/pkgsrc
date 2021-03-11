@@ -1,16 +1,17 @@
-# $NetBSD: Makefile,v 1.20 2019/02/09 08:35:53 wen Exp $
+# $NetBSD: Makefile,v 1.24 2020/08/31 18:09:03 wiz Exp $
 
 DISTNAME=		Test-Kwalitee-1.28
 PKGNAME=		p5-${DISTNAME}
+PKGREVISION=		2
 CATEGORIES=		devel perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Test/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Test-Kwalitee/
+HOMEPAGE=		https://metacpan.org/release/Test-Kwalitee
 COMMENT=		Perl5 module to test the Kwalitee of a distribution
 LICENSE=		${PERL5_LICENSE}
 
-DEPENDS+=  		p5-Module-CPANTS-Analyse>=0.82:../../devel/p5-Module-CPANTS-Analyse
+DEPENDS+=		p5-Module-CPANTS-Analyse>=0.82:../../devel/p5-Module-CPANTS-Analyse
 DEPENDS+=		p5-Test-Warnings>=0:../../devel/p5-Test-Warnings
 DEPENDS+=		p5-CPAN-Meta-Check>=0:../../devel/p5-CPAN-Meta-Check
 DEPENDS+=		p5-namespace-clean-[0-9]*:../../devel/p5-namespace-clean

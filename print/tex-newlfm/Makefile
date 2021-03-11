@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2015/09/01 21:17:55 markd Exp $
+# $NetBSD: Makefile,v 1.3 2020/01/18 23:34:33 rillig Exp $
 
 DISTNAME=	newlfm
 PKGNAME=	tex-${DISTNAME}-9.4
 TEXLIVE_REV=	15878
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/newlfm
+HOMEPAGE=	https://ctan.org/pkg/newlfm
 COMMENT=	Write letters, facsimiles, and memos
 LICENSE=	gnu-gpl-v2
 
@@ -18,5 +18,6 @@ DEPENDS+=	tex-rotating-[0-9]*:../../print/tex-rotating
 DEPENDS+=	tex-setspace-[0-9]*:../../print/tex-setspace
 DEPENDS+=	tex-tools-[0-9]*:../../print/tex-tools
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

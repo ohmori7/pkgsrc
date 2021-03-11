@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.48 2019/05/29 19:52:50 adam Exp $
+# $NetBSD: Makefile,v 1.61 2021/01/01 08:24:45 ryoon Exp $
 
 DISTNAME=	enblend-enfuse-4.2
-PKGREVISION=	11
+PKGREVISION=	21
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=enblend/}
 
@@ -21,8 +21,7 @@ BUILD_DEPENDS+=		help2man-[0-9]*:../../converters/help2man
 .include "../../mk/bsd.prefs.mk"
 
 .if ${OPSYS} != "Darwin"
-CONFIGURE_ARGS+=	--with-x
-.include "../../graphics/glut/buildlink3.mk"
+.include "../../graphics/freeglut/buildlink3.mk"
 .endif
 
 .include "../../devel/boost-headers/buildlink3.mk"

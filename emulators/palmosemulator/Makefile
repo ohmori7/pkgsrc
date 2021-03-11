@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.47 2018/08/22 09:45:04 wiz Exp $
+# $NetBSD: Makefile,v 1.50 2020/08/31 18:09:28 wiz Exp $
 #
 
 DISTNAME=	emulator_src_${POSE_VERSION}
 PKGNAME=	palmosemulator-${POSE_VERSION}
-PKGREVISION=	21
+PKGREVISION=	23
 CATEGORIES=	emulators x11
 MASTER_SITES=	http://www.palmos.com/dev/tools/emulator/sources/
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
@@ -12,7 +12,7 @@ DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
 MAINTAINER=	dsainty@NetBSD.org
 #HOMEPAGE=	http://www.palmos.com/dev/tools/emulator/
 COMMENT=	Palm OS Emulator
-#LICENSE=       GPL
+#LICENSE=	GPL
 
 # This package doesn't draw a clear distinction between host and guest
 # addresses, so 64-bit host addresses give it fits. If you want to try
@@ -39,7 +39,7 @@ BUILD_DIRS=	${POSE_BUILD_DIR}
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	gmake perl:run
 
-GNU_CONFIGURE=	YES
+GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--with-fltk=${BUILDLINK_PREFIX.fltk}
 CONFIGURE_ENV+=		PACKAGE_SKINS_DIR=${POSE_SKINS_DIR:Q}
 

@@ -1,15 +1,19 @@
-# $NetBSD: Makefile,v 1.49 2019/06/18 14:41:09 nia Exp $
+# $NetBSD: Makefile,v 1.69 2021/02/07 06:30:33 ryoon Exp $
 
 PKGNAME=	${DISTNAME:S/ffmpeg/ffmpeg2/}
-PKGREVISION=	8
+PKGREVISION=	6
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ffmpeg.mplayerhq.hu/
+HOMEPAGE=	https://ffmpeg.org/
 COMMENT=	Decoding, encoding and streaming software (v2.x)
 
 CONFIGURE_ARGS+=	--enable-avfilter
 #CONFIGURE_ARGS+=	--enable-avfilter-lavf
 CONFIGURE_ARGS+=	--enable-postproc
 CONFIGURE_ARGS+=	--disable-ffplay
+
+# Seems to cause internal compiler errors
+CONFIGURE_ARGS+=	--disable-mmx
+CONFIGURE_ARGS+=	--disable-mmxext
 
 INSTALLATION_DIRS=	lib/ffmpeg2 share/doc/ffmpeg2 share/examples/ffmpeg2
 

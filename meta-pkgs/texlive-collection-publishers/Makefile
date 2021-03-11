@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.17 2019/05/15 10:09:52 markd Exp $
+# $NetBSD: Makefile,v 1.22 2021/02/14 23:24:47 markd Exp $
 
 DISTNAME=	collection-publishers
-PKGNAME=	texlive-${DISTNAME}-2019pre1
+PKGNAME=	texlive-${DISTNAME}-2020pre1
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	50974
+TEXLIVE_REV=	57312
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.tug.org/texlive/
+HOMEPAGE=	https://www.tug.org/texlive/
 COMMENT=	Publisher styles, theses, etc TeX packages
 
 DEPENDS+=	texlive-collection-latex-[0-9]*:../../meta-pkgs/texlive-collection-latex
@@ -26,11 +26,13 @@ DEPENDS+=	tex-acmconf-[0-9]*:../../print/tex-acmconf
 # depend aguplus
 # depend aiaa
 # depend ametsoc
+# depend anonymous-acm
 # depend anufinalexam
 # depend aomart
 # depend apa
 DEPENDS+=	tex-apa6-[0-9]*:../../print/tex-apa6
 # depend apa6e
+# depend apa7
 DEPENDS+=	tex-arsclassica-[0-9]*:../../print/tex-arsclassica
 # depend articleingud
 # depend asaetr
@@ -48,9 +50,11 @@ DEPENDS+=	tex-arsclassica-[0-9]*:../../print/tex-arsclassica
 # depend br-lex
 # depend brandeis-dissertation
 # depend brandeis-problemset
+# depend brandeis-thesis
 # depend cascadilla
 # depend cesenaexam
 # depend chem-journal
+# depend chifoot
 # depend chs-physics-report
 # depend cje
 # depend classicthesis
@@ -90,8 +94,12 @@ DEPENDS+=	tex-elsarticle-[0-9]*:../../print/tex-elsarticle
 # depend hagenberg-thesis
 # depend har2nat
 # depend hecthese
+# depend hep-paper
 # depend hithesis
+# depend hitszbeamer
+# depend hitszthesis
 # depend hobete
+# depend hu-berlin-bundle
 # depend hustthesis
 # depend icsv
 # depend ieeepes
@@ -99,6 +107,7 @@ DEPENDS+=	tex-elsarticle-[0-9]*:../../print/tex-elsarticle
 # depend ijsra
 # depend imac
 # depend imtekda
+# depend inkpaper
 # depend iodhbwm
 # depend iscram
 # depend jacow
@@ -110,6 +119,7 @@ DEPENDS+=	tex-elsarticle-[0-9]*:../../print/tex-elsarticle
 # depend ksp-thesis
 # depend ku-template
 # depend langsci
+# depend langsci-avm
 # depend limecv
 # depend lion-msc
 # depend llncsconf
@@ -120,11 +130,13 @@ DEPENDS+=	tex-elsarticle-[0-9]*:../../print/tex-elsarticle
 # depend mcmthesis
 # depend mentis
 # depend mlacls
+# depend mluexercise
 # depend mnras
 # depend modeles-factures-belges-assocs
 # depend msu-thesis
 # depend mucproc
 # depend mugsthesis
+# depend muling
 # depend musuos
 # depend muthesis
 # depend mynsfc
@@ -132,39 +144,45 @@ DEPENDS+=	tex-elsarticle-[0-9]*:../../print/tex-elsarticle
 # depend navydocs
 # depend nddiss
 # depend ndsu-thesis
-# depend novel
-# depend nwejm
 # depend nih
 # depend nihbiosketch
 # depend nostarch
+# depend novel
 # depend nrc
+# depend nwejm
 # depend onrannual
 # depend opteng
+# depend oup-authoring-template
 # depend philosophersimprint
 # depend pittetd
 # depend pkuthss
-# depend powerdot-FUBerlin
+# depend powerdot-fuberlin
 # depend powerdot-tuliplab
 # depend pracjourn
 # depend procIAGssymp
 # depend proposal
 # depend prtec
 # depend ptptex
+# depend qrbill
+# depend quantumarticle
 # depend resphilosophica
 # depend resumecls
 DEPENDS+=	tex-revtex-[0-9]*:../../print/tex-revtex
 DEPENDS+=	tex-revtex4-[0-9]*:../../print/tex-revtex4
+# depend revtex4-1
 # depend rutitlepage
 # depend ryersonsgsthesis
 # depend ryethesis
 # depend sageep
 # depend sapthesis
 # depend schule
-# depend scrjrnl
 # depend scientific-thesis-cover
+# depend scrjrnl
 # depend sduthesis
 # depend seuthesis
 # depend seuthesix
+# depend shortmathj
+# depend shtthesis
 # depend soton
 # depend sphdthesis
 # depend spie
@@ -181,17 +199,19 @@ DEPENDS+=	tex-revtex4-[0-9]*:../../print/tex-revtex4
 # depend thesis-gwu
 # depend thesis-qom
 # depend thesis-titlepage-fhac
+# depend thuaslogos
 # depend thucoursework
 # depend thuthesis
 # depend timbreicmc
 # depend tlc-article
 # depend topletter
 DEPENDS+=	tex-toptesi-[0-9]*:../../print/tex-toptesi
+# depend tuda-ci
 # depend tudscr
 # depend tugboat
 # depend tugboat-plain
-# depend turabian
 # depend tui
+# depend turabian
 # depend uaclasses
 # depend uafthesis
 # depend uantwerpendocs
@@ -206,25 +226,29 @@ DEPENDS+=	tex-toptesi-[0-9]*:../../print/tex-toptesi
 # depend uiucthesis
 # depend ulthese
 # depend umbclegislation
-# depend umthesis
 # depend umich-thesis
+# depend umthesis
+# depend unam-thesis
 # depend unamth-template
 # depend unamthesis
+# depend unifith
 # depend unitn-bimrep
 # depend univie-ling
+# depend unizgklasa
 # depend unswcover
 # depend uothesis
-# depend urcls
 # depend uowthesis
 # depend uowthesistitlepage
+# depend urcls
 # depend uspatent
 # depend ut-thesis
 # depend utexasthesis
 # depend uwthesis
 # depend vancouver
-# depend xduthesis
 # depend wsemclassic
+# depend xduthesis
 # depend yathesis
+# depend yazd-thesis
 # depend york-thesis
 
 META_PACKAGE=	yes

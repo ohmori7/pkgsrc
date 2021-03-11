@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.8 2019/05/12 03:55:02 markd Exp $
+# $NetBSD: Makefile,v 1.12 2021/02/21 05:46:18 markd Exp $
 
 DISTNAME=	japanese-otf
-PKGNAME=	tex-${DISTNAME}-1.7b8
-TEXLIVE_REV=	50769
+PKGNAME=	tex-${DISTNAME}-1.7b8.56938
+TEXLIVE_REV=	56938
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/japanese-otf
+HOMEPAGE=	https://ctan.org/pkg/japanese-otf
 COMMENT=	Advanced font selection for platex and its friends
 LICENSE=	modified-bsd
 

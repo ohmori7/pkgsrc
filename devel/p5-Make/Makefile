@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.30 2018/08/22 09:44:14 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2020/09/07 07:02:36 wiz Exp $
 
-DISTNAME=	Make-1.2.0
+DISTNAME=	Make-2.002
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Make/}
 
@@ -12,9 +11,7 @@ COMMENT=	Perl5 module implementing 'make' in Perl
 LICENSE=	${PERL5_LICENSE}
 
 # for make test
-BUILD_DEPENDS+= p5-Test-Compile-[0-9]*:../../devel/p5-Test-Compile
-
-REPLACE_PERL=	pmake
+BUILD_DEPENDS+=	p5-Test-Compile-[0-9]*:../../devel/p5-Test-Compile
 
 PERL5_PACKLIST=		auto/Make/.packlist
 

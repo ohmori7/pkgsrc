@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.30 2016/03/05 11:29:21 jperkin Exp $
+# $NetBSD: Makefile,v 1.32 2020/01/18 21:50:38 jperkin Exp $
 #
 
 DISTNAME=	arpd-0.2
 PKGNAME=	honeyd-arpd-0.2
-PKGREVISION=	18
+PKGREVISION=	19
 CATEGORIES=	security net
 MASTER_SITES=	http://niels.xtdnet.nl/honeyd/
 
@@ -15,7 +15,7 @@ RCD_SCRIPTS=	honeydarpd
 GNU_CONFIGURE=	yes
 WRKSRC=		${WRKDIR}/arpd
 
-CONFIGURE_ARGS+=    --with-libevent=${BUILDLINK_PREFIX.libevent}
+CONFIGURE_ARGS+=	--with-libevent=${BUILDLINK_PREFIX.libevent}
 
 INSTALLATION_DIRS=	sbin ${PKGMANDIR}/man8
 

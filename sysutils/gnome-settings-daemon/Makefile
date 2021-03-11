@@ -1,55 +1,95 @@
-# $NetBSD: Makefile,v 1.71 2018/11/29 11:21:57 prlw1 Exp $
-#
+# $NetBSD: Makefile,v 1.77 2021/02/07 06:30:37 ryoon Exp $
 
-DISTNAME=	gnome-settings-daemon-2.32.1
-PKGREVISION=	46
-CATEGORIES=	sysutils
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gnome-settings-daemon/2.32/}
-EXTRACT_SUFX=	.tar.bz2
+DISTNAME=	gnome-settings-daemon-3.38.1
+PKGREVISION=	3
+CATEGORIES=	sysutils gnome
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/${PKGBASE}/${PKGVERSION_NOREV:R}/}
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://www.gnome.org/
+HOMEPAGE=	https://gitlab.gnome.org/GNOME/gnome-settings-daemon
 COMMENT=	GNOME settings daemon
+LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1
 
-GNU_CONFIGURE=	yes
-USE_LIBTOOL=	yes
-USE_TOOLS+=	pkg-config intltool gmake msgfmt
+TOOL_DEPENDS+=	gdbus-codegen-[0-9]*:../../devel/gdbus-codegen
+TOOL_DEPENDS+=	docbook-xsl-[0-9]*:../../textproc/docbook-xsl
+
+USE_TOOLS+=	pkg-config msgfmt xgettext perl
 
 CONFLICTS+=	gnome-control-center<2.22.0
 
-GCONF_SCHEMAS+=	gnome-settings-daemon.schemas
-GCONF_SCHEMAS+=	desktop_gnome_font_rendering.schemas
-GCONF_SCHEMAS+=	desktop_gnome_keybindings.schemas
-GCONF_SCHEMAS+=	apps_gnome_settings_daemon_keybindings.schemas
-GCONF_SCHEMAS+=	apps_gnome_settings_daemon_xrandr.schemas
-GCONF_SCHEMAS+=	apps_gnome_settings_daemon_housekeeping.schemas
-GCONF_SCHEMAS+=	desktop_gnome_peripherals_touchpad.schemas
-GCONF_SCHEMAS+=	desktop_gnome_peripherals_smartcard.schemas
-PKGCONFIG_OVERRIDE+=	data/gnome-settings-daemon.pc.in
+LDFLAGS+=	${COMPILER_RPATH_FLAG}${PREFIX}/lib/gnome-settings-daemon-3.0
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.gnome-settings-daemon
-PKG_SUPPORTED_OPTIONS=	pulseaudio
-.include "../../mk/bsd.options.mk"
-PLIST_VARS+=		pulseaudio
+MESON_ARGS+=		-Dgudev=false
+MESON_ARGS+=		-Drfkill=false
+MESON_ARGS+=		-Dnetwork_manager=false
+MESON_ARGS+=		-Dsystemd=false
+MESON_ARGS+=		-Dwayland=false
+MESON_ARGS+=		-Dsmartcard=false
+MESON_ARGS+=		-Dwwan=false
+MESON_ARGS+=		-Dalsa=false
 
-.if !empty(PKG_OPTIONS:Mpulseaudio)
-PLIST.pulseaudio=	yes
-BUILDLINK_API_DEPENDS.pulseaudio+=	pulseaudio>=0.9.15
+PKGCONFIG_OVERRIDE_STAGE=	pre-install
+PKGCONFIG_OVERRIDE+=		output/meson-private/gnome-settings-daemon.pc
+
+CONF_FILES+=	${PREFIX}/share/examples/xdg/Xwayland-session.d/00-xrdb \
+		${PKG_SYSCONFDIR}/xdg/Xwayland-session.d/00-xrdb
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.A11ySettings.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.A11ySettings.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.Color.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.Color.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.Datetime.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.Datetime.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.Housekeeping.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.Housekeeping.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.Keyboard.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.Keyboard.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.MediaKeys.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.MediaKeys.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.Power.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.Power.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.PrintNotifications.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.PrintNotifications.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.Rfkill.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.Rfkill.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.ScreensaverProxy.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.ScreensaverProxy.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.Sharing.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.Sharing.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.Smartcard.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.Smartcard.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.Sound.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.Sound.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.UsbProtection.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.UsbProtection.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.Wacom.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.Wacom.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.Wwan.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.Wwan.desktop
+CONF_FILES+=	${PREFIX}/share/examples/xdg/autostart/org.gnome.SettingsDaemon.XSettings.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/org.gnome.SettingsDaemon.XSettings.desktop
+
+.include "../../devel/meson/build.mk"
 .include "../../audio/pulseaudio/buildlink3.mk"
 .include "../../audio/libcanberra/buildlink3.mk"
-.endif
-.include "../../devel/GConf/schemas.mk"
+.include "../../devel/dconf/buildlink3.mk"
+.include "../../devel/libgweather/buildlink3.mk"
+.include "../../geography/geoclue/buildlink3.mk"
+.include "../../geography/geocode-glib/buildlink3.mk"
+.include "../../graphics/colord/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 BUILDLINK_API_DEPENDS.dbus-glib+=	dbus-glib>=0.74
-.include "../../sysutils/dbus-glib/buildlink3.mk"
-.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../graphics/lcms2/buildlink3.mk"
+.include "../../print/libcups/buildlink3.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"
-.include "../../x11/gnome-desktop/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gtk2+=		gtk2+>=2.21.2
-.include "../../x11/gtk2/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libgnomekbd2+=	libgnomekbd2>=2.31.2
-.include "../../x11/libgnomekbd2/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libxklavier+=	libxklavier>=5.0
-.include "../../x11/libxklavier/buildlink3.mk"
-
+BUILDLINK_API_DEPENDS.gsettings-desktop-schemas+=	gsettings-desktop-schemas>=3.15.4
+.include "../../sysutils/gsettings-desktop-schemas/buildlink3.mk"
+.include "../../security/polkit/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../sysutils/dbus-glib/buildlink3.mk"
+.include "../../sysutils/upower/buildlink3.mk"
+.include "../../textproc/iso-codes/buildlink3.mk"
+.include "../../textproc/json-glib/buildlink3.mk"
+.include "../../x11/gnome-desktop3/buildlink3.mk"
+.include "../../x11/gtk3/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.28 2017/09/29 07:57:38 wen Exp $
+# $NetBSD: Makefile,v 1.30 2020/01/18 21:51:09 jperkin Exp $
 
-DISTNAME=	mini_httpd-1.27
+DISTNAME=	mini_httpd-1.30
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	http://www.acme.com/software/mini_httpd/
 
@@ -17,7 +18,7 @@ MAKE_ENV+=	PKG_LDFLAGS=${LDFLAGS:Q}
 MAKE_ENV+=	PKG_LIBS=${LIBS:Q}
 
 MAKE_ENV.NetBSD+=	CRYPT_LIB=-lcrypt
-MAKE_ENV.SunOS+=	SYSV_LIBS="-lnsl -lsocket"
+MAKE_ENV.SunOS+=	SYSV_LIBS="-lnsl -lsocket -lsendfile"
 
 SUBST_CLASSES=		htpasswd
 SUBST_MESSAGE.htpasswd=	Fix name of (m)htpasswd in manual pages.

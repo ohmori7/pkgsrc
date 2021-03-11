@@ -1,22 +1,22 @@
-# $NetBSD: Makefile,v 1.83 2019/05/29 10:01:28 nia Exp $
+# $NetBSD: Makefile,v 1.96 2021/02/03 08:49:49 schmonz Exp $
 
-DISTNAME=	lighttpd-1.4.54
+DISTNAME=	lighttpd-1.4.59
 CATEGORIES=	www
-MASTER_SITES=	http://download.lighttpd.net/lighttpd/releases-1.4.x/
+MASTER_SITES=	https://download.lighttpd.net/lighttpd/releases-1.4.x/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.lighttpd.net/
+HOMEPAGE=	https://www.lighttpd.net/
 COMMENT=	Fast, light-footprint HTTP server
 LICENSE=	modified-bsd
 
-USE_LIBTOOL=		yes
-SHLIBTOOL_OVERRIDE=	# empty
-USE_TOOLS+=		pkg-config
-GNU_CONFIGURE=		yes
-GNU_CONFIGURE_LIBSUBDIR=${PKGBASE}
-CONFIGURE_ARGS+=	--with-pcre
-TEST_TARGET=		check
+USE_LIBTOOL=			yes
+SHLIBTOOL_OVERRIDE=		# empty
+USE_TOOLS+=			pkg-config
+GNU_CONFIGURE=			yes
+GNU_CONFIGURE_LIBSUBDIR=	${PKGBASE}
+CONFIGURE_ARGS+=		--with-pcre
+TEST_TARGET=			check
 
 DOCDIR=			${PREFIX}/share/doc/${PKGBASE}
 EGDIR=			${PREFIX}/share/examples/${PKGBASE}

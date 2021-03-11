@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.9 2019/06/02 09:07:39 adam Exp $
+# $NetBSD: Makefile,v 1.14 2020/11/05 09:07:52 ryoon Exp $
 
 DISTNAME=	creduce-2.10.0
+PKGREVISION=	5
 CATEGORIES=	devel
 MASTER_SITES=	https://embed.cs.utah.edu/creduce/
 
@@ -16,7 +17,7 @@ DEPENDS+=	p5-Term-ReadKey-[0-9]*:../../devel/p5-Term-ReadKey
 DEPENDS+=	p5-Sys-CPU-[0-9]*:../../sysutils/p5-Sys-CPU
 DEPENDS+=	p5-Regexp-Common-[0-9]*:../../textproc/p5-Regexp-Common
 
-USE_LANGUAGES=	c c++11
+USE_LANGUAGES=	c c++14
 USE_TOOLS+=	flex perl:run gmake
 GNU_CONFIGURE=	yes
 TEST_TARGET=	check

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2011/11/06 08:43:31 minskim Exp $
+# $NetBSD: Makefile,v 1.5 2020/05/10 04:31:41 markd Exp $
 
 DISTNAME=	cm-super
 PKGNAME=	tex-${DISTNAME}-0.3.4
-PKGREVISION=	1
+PKGREVISION=	2
 TEXLIVE_REV=	15878
 
 MAINTAINER=	minskim@NetBSD.org
@@ -16,5 +16,6 @@ TEX_MIXEDMAP_FILES+=	cm-super-t2c.map
 TEX_MIXEDMAP_FILES+=	cm-super-ts1.map
 TEX_MIXEDMAP_FILES+=	cm-super-x2.map
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.16 2019/05/08 01:33:42 gutteridge Exp $
+# $NetBSD: Makefile,v 1.29 2020/12/04 04:56:19 riastradh Exp $
 
+PKGREVISION= 5
 .include "../../meta-pkgs/mate/Makefile.common"
 
-DISTNAME=	mate-control-center-${VERSION:R}.1
+DISTNAME=	mate-control-center-${VERSION:R}.0
 CATEGORIES=	sysutils
 
 COMMENT=	MATE Control Center
@@ -22,9 +23,10 @@ MAKE_DIRS+=	${PKG_SYSCONFDIR}/xdg/menus
 CONF_FILES+=	${PREFIX}/share/examples/${PKGBASE}/xdg/menus/matecc.menu \
 		${PKG_SYSCONFDIR}/xdg/menus/matecc.menu
 
+.include "options.mk"
+
 .include "../../devel/glib2/schemas.mk"
 
-.include "../../devel/libappindicator3/buildlink3.mk"
 .include "../../x11/libmatekbd/buildlink3.mk"
 .include "../../x11/mate-desktop/buildlink3.mk"
 .include "../../x11/mate-menus/buildlink3.mk"
@@ -34,6 +36,7 @@ CONF_FILES+=	${PREFIX}/share/examples/${PKGBASE}/xdg/menus/matecc.menu \
 .include "../../devel/pango/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
+.include "../../security/polkit/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
@@ -42,7 +45,6 @@ CONF_FILES+=	${PREFIX}/share/examples/${PKGBASE}/xdg/menus/matecc.menu \
 .include "../../x11/libXi/buildlink3.mk"
 .include "../../x11/libXcursor/buildlink3.mk"
 .include "../../x11/libXft/buildlink3.mk"
-.include "../../x11/libXxf86misc/buildlink3.mk"
 .include "../../x11/libXScrnSaver/buildlink3.mk"
 .include "../../x11/libICE/buildlink3.mk"
 .include "../../databases/shared-mime-info/mimedb.mk"

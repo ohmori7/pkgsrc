@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2018/08/22 09:43:02 wiz Exp $
+# $NetBSD: Makefile,v 1.38 2020/08/31 18:06:43 wiz Exp $
 
 DISTNAME=	sirc-2.211
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	chat
 MASTER_SITES=	http://www.iagora.com/~espel/sirc/
 DISTFILES=	${DEFAULT_DISTFILES} \
@@ -20,7 +20,7 @@ BUILD_DEFS+=	IPV6_READY
 
 EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 USE_TOOLS+=	perl:run
-SIRC_SCRIPTS= \
+SIRC_SCRIPTS=	\
 		adcc.pl				\
 		akickban.pl			\
 		avoice.pl			\
@@ -42,7 +42,7 @@ SIRC_SCRIPTS= \
 		yiff.pl
 
 .for script in ${SIRC_SCRIPTS}
-SITES.${script:T:S/=/--/}?= ${MASTER_SITES:=scripts/}
+SITES.${script:T:S/=/--/}?=	${MASTER_SITES:=scripts/}
 .endfor
 
 NO_BUILD=	yes

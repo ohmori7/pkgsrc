@@ -1,18 +1,16 @@
-# $NetBSD: Makefile,v 1.89 2019/05/29 19:52:49 adam Exp $
+# $NetBSD: Makefile,v 1.118 2021/02/25 10:22:14 nia Exp $
 
-DISTNAME=	flightgear-2018.3.2
-PKGREVISION=	6
+DISTNAME=	flightgear-2020.3.6
 CATEGORIES=	games
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=flightgear/release-2018.3/}
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=flightgear/release-${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.flightgear.org/
+HOMEPAGE=	https://www.flightgear.org/
 COMMENT=	The FlightGear Simulator
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1
 
 USE_LANGUAGES=		c c++
-USE_PKGLOCALEDIR=	yes
 USE_CMAKE=		yes
 LDFLAGS.NetBSD+=	-lexecinfo
 
@@ -23,16 +21,16 @@ CMAKE_ARG_PATH=		..
 CMAKE_ARGS+=		-DCMAKE_BUILD_TYPE=Release
 CMAKE_ARGS+=		-DFG_BUILD_TYPE=Release
 
-BUILDLINK_TRANSFORM+=	l:glut:freeglut
-
 # The cmake script warns against building in the source directory.
 pre-configure:
 	cd ${WRKSRC} && ${MKDIR} fgbuild
 
 .include "../../audio/openal-soft/buildlink3.mk"
 .include "../../devel/boost-headers/buildlink3.mk"
+BUILDLINK_API_DEPENDS.libevent+=	libevent>=2
+.include "../../devel/libevent/buildlink3.mk"
 .include "../../games/plib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.simgear+=	simgear>=2018.3.0
+BUILDLINK_API_DEPENDS.simgear+=	simgear>=2019.1.1
 .include "../../games/simgear/buildlink3.mk"
 .include "../../graphics/freeglut/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"

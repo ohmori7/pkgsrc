@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.73 2019/05/05 22:49:48 ryoon Exp $
+# $NetBSD: Makefile,v 1.80 2020/11/05 09:06:52 ryoon Exp $
 
 PKGVER=			0.8.4
 DISTNAME=		compizconfig-python-${PKGVER}
 PKGNAME=		${PYPKGPREFIX}-compizconfig-${PKGVER}
-PKGREVISION=		56
+PKGREVISION=		62
 CATEGORIES=		devel gnome
 MASTER_SITES=		http://releases.compiz.org/${PKGVER}/
 
@@ -19,7 +19,7 @@ USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config gmake
 
 PY_PATCHPLIST=		yes
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-pyrex
+PYTHON_VERSIONS_ACCEPTED=	 27 # py-pyrex
 
 .include "../../wm/compiz/buildlink3.mk"
 .include "../../devel/libcompizconfig/buildlink3.mk"

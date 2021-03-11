@@ -1,18 +1,18 @@
-# $NetBSD: Makefile,v 1.119 2019/06/11 15:09:00 abs Exp $
+# $NetBSD: Makefile,v 1.133 2020/11/05 09:09:21 ryoon Exp $
 
-DISTNAME=	midori-v8.0
+DISTNAME=	midori-v9.0
 PKGNAME=	${DISTNAME:S/v//}
-PKGREVISION=	3
+PKGREVISION=	11
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=midori-browser/}
 GITHUB_PROJECT=	core
 GITHUB_RELEASE=	v${PKGVERSION_NOREV}
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://midori-browser.org/
-COMMENT=	Lightweight web browser using WebKit
-LICENSE=	gnu-lgpl-v2.1
-USE_GCC_RUNTIME=yes
+MAINTAINER=		pkgsrc-users@NetBSD.org
+HOMEPAGE=		http://midori-browser.org/
+COMMENT=		Lightweight web browser using WebKit
+LICENSE=		gnu-lgpl-v2.1
+USE_GCC_RUNTIME=	yes
 
 USE_CMAKE=	yes
 USE_TOOLS+=	intltool msgfmt pkg-config

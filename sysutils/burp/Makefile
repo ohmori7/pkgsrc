@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2016/09/01 16:18:07 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2020/05/09 20:03:39 rillig Exp $
 
 DISTNAME=	burp-1.4.40
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	sysutils archivers
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=burp/}
 EXTRACT_SUFX=	.tar.bz2
@@ -22,12 +22,12 @@ SUBST_MESSAGE.dirs=	Fixing directories
 SUBST_FILES.dirs=	configs/server/burp.conf \
 			configs/server/summary_script \
 			configs/client/burp.conf \
-			configs/CA/CA.cnf \
-			configs/CA/burp_ca \
+			configs/certs/CA/CA.cnf \
+			configs/certs/CA/burp_ca \
 			manpages/*.8
-SUBST_SED.dirs=	-e 's,@LIBEXECDIR@,${PREFIX}/libexec/burp,' \
-		-e 's,@PKG_SYSCONFDIR@,${PKG_SYSCONFDIR},' \
-		-e 's,@SBINDIR@,${PREFIX}/sbin,'
+SUBST_SED.dirs=		-e 's,@LIBEXECDIR@,${PREFIX}/libexec/burp,' \
+			-e 's,@PKG_SYSCONFDIR@,${PKG_SYSCONFDIR},' \
+			-e 's,@SBINDIR@,${PREFIX}/sbin,'
 
 REPLACE_SH+=	configs/certs/CA/burp_ca \
 		configs/server/notify_script \

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.24 2018/08/22 09:45:46 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2020/08/31 18:10:24 wiz Exp $
 
 DISTNAME=		Mac-Macbinary-0.06
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		10
+PKGREVISION=		12
 CATEGORIES=		misc perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Mac/}
 

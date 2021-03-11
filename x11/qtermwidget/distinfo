@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.4 2020/12/07 11:48:54 pin Exp $
+
+SHA1 (qtermwidget-0.16.1.tar.xz) = 89252cb4f96428375a74f15adf99979408d4e7d5
+RMD160 (qtermwidget-0.16.1.tar.xz) = 2257ef2540dcc7f56af6bfc6b0af9f1990131a76
+SHA512 (qtermwidget-0.16.1.tar.xz) = 689d067e259aa07b22e1d3344467180109e871a8d45551085625c04670f1422b821bbbf52caf2b67e10ce8e78214c8e65811e6eb4fc61dd246fc25598ed095c5
+Size (qtermwidget-0.16.1.tar.xz) = 182764 bytes

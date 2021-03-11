@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.102 2019/02/25 11:54:05 jperkin Exp $
+# $NetBSD: Makefile,v 1.109 2020/03/30 08:53:42 jperkin Exp $
 
 .include "Makefile.common"
-PKGREVISION=	5
+PKGREVISION=	2
+
 COMMENT=	CRT screen handling and optimization package
 
 INSTALLATION_DIRS+=	share/examples
@@ -22,5 +23,6 @@ post-install:
 		${DESTDIR}${PREFIX}/share/examples/ncurses++demo.cc
 	${FIND} ${DESTDIR}${PREFIX}/${TERMINFODIR} -type f -print | ${SORT} | \
 	${SED} -e "s,^${DESTDIR}${PREFIX}/,," >${WRKDIR}/PLIST.terminfo
+	${RM} -f ${DESTDIR}${PREFIX}/lib/terminfo
 
 .include "../../mk/bsd.pkg.mk"

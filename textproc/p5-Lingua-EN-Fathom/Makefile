@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.7 2018/11/10 06:36:24 wen Exp $
+# $NetBSD: Makefile,v 1.10 2020/08/31 18:11:48 wiz Exp $
 
 DISTNAME=	Lingua-EN-Fathom-1.22
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	perl5 textproc
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Lingua/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~kimryan/Lingua-EN-Fathom/
+HOMEPAGE=	https://metacpan.org/release/Lingua-EN-Fathom
 COMMENT=	Measure readability of English text
 LICENSE=	artistic AND gnu-gpl-v1
 

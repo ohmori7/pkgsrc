@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.34 2018/02/18 05:01:02 rillig Exp $
+# $NetBSD: Makefile,v 1.37 2020/11/26 16:35:17 nia Exp $
 
-DISTNAME=	jhead-3.00
-PKGREVISION=	1
+DISTNAME=	jhead-3.04
 CATEGORIES=	graphics
-MASTER_SITES=	http://www.sentex.net/~mwandel/jhead/
+MASTER_SITES=	https://www.sentex.net/~mwandel/jhead/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.sentex.net/~mwandel/jhead/
+HOMEPAGE=	https://www.sentex.net/~mwandel/jhead/
 COMMENT=	Extract EXIF header from JPEG image
 LICENSE=	public-domain
 

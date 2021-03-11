@@ -1,10 +1,10 @@
-$NetBSD: patch-setup.py,v 1.2 2017/09/13 06:21:02 adam Exp $
+$NetBSD: patch-setup.py,v 1.4 2019/09/25 08:45:54 adam Exp $
 
-Use external libuv.
+Use system libuv (--use-system-libuv option does not work for 'install').
 
---- setup.py.orig	2017-09-12 20:04:48.000000000 +0000
+--- setup.py.orig	2019-09-25 08:40:47.000000000 +0000
 +++ setup.py
-@@ -80,7 +80,7 @@ class uvloop_build_ext(build_ext):
+@@ -87,7 +87,7 @@ class uvloop_build_ext(build_ext):
              return
  
          super().initialize_options()

@@ -1,4 +1,4 @@
-# $NetBSD: builtin.mk,v 1.14 2017/08/25 11:41:43 jperkin Exp $
+# $NetBSD: builtin.mk,v 1.16 2019/11/03 10:39:20 rillig Exp $
 
 BUILTIN_PKG:=	ncursesw
 
@@ -29,7 +29,7 @@ IS_BUILTIN.ncursesw=	no
 IS_BUILTIN.ncursesw=	yes
 .  endif
 .endif
-MAKEVARS+=	IS_BUILTIN.ncursesw
+MAKEVARS+=		IS_BUILTIN.ncursesw
 
 ###
 ### If there is a built-in implementation, then set BUILTIN_PKG.<pkg> to
@@ -47,7 +47,7 @@ BUILTIN_VERSION.ncursesw!=						\
 	' ${H_NCURSESW:Q}
 BUILTIN_PKG.ncursesw=	ncursesw-${BUILTIN_VERSION.ncursesw}
 .endif
-MAKEVARS+=	BUILTIN_PKG.ncursesw
+MAKEVARS+=		BUILTIN_PKG.ncursesw
 
 ###
 ### Determine whether we should use the built-in implementation if it
@@ -85,7 +85,7 @@ USE_BUILTIN.ncursesw=	yes
 .    endif
 .  endif  # PREFER.ncursesw
 .endif
-MAKEVARS+=	USE_BUILTIN.ncursesw
+MAKEVARS+=		USE_BUILTIN.ncursesw
 
 # If USE_NCURSES is defined, then only use the built-in "ncursesw"
 # if it's *actually* ncursesw.
@@ -127,7 +127,7 @@ buildlink-ncursesw-fake-libs:
 	${RUN}								\
 	for f in form panel menu; do					\
 		${ECHO_BUILDLINK_MSG} "Touching fake ncurses library ($$f)"; \
-		${TOUCH} ${TOUCH_FLAGS} "$BUILDLINK_DIR/lib/lib$${f}w.a"; \
+		${TOUCH} ${TOUCH_FLAGS} "${BUILDLINK_DIR}/lib/lib$${f}w.a"; \
 	done
 BUILDLINK_TARGET+=	buildlink-ncursesw-fake-libs
 .  endif

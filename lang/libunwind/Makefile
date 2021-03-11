@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.17 2019/06/02 08:35:56 adam Exp $
+# $NetBSD: Makefile,v 1.24 2020/10/20 06:34:23 jperkin Exp $
 
-DISTNAME=	libunwind-8.0.0.src
+.include "../../lang/llvm/version.mk"
+
+DISTNAME=	libunwind-${LLVM_VERSION}.src
 PKGNAME=	${DISTNAME:S/.src//}
+PKGREVISION=	1
 CATEGORIES=	lang devel
-MASTER_SITES=	http://llvm.org/releases/${PKGVERSION_NOREV}/
-EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 #HOMEPAGE=	http://libunwind.llvm.org/
 COMMENT=	LLVM libunwind
-LICENSE=	modified-bsd
+LICENSE=	apache-2.0
 
 CONFIGURE_DIRS=		${WRKDIR}/build
 
@@ -28,9 +29,10 @@ CMAKE_ARG_PATH=	${WRKSRC}
 INSTALLATION_DIRS=	include
 
 post-extract:
-	${RUN} mkdir -p ${WRKDIR}/build
+	${MKDIR} ${WRKDIR}/build
 
 post-install:
+	${RM} -f ${WRKSRC}/include/__libunwind_config.h.orig
 	cd ${WRKSRC}/include && ${PAX} -rw . ${DESTDIR}${PREFIX}/include
 
 BUILDLINK_DEPMETHOD.llvm=	build

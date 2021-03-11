@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.67 2019/04/26 14:12:33 maya Exp $
+# $NetBSD: Makefile,v 1.77 2020/12/04 20:45:02 nia Exp $
 
 DISTNAME=	telepathy-gabble-0.18.3
-PKGREVISION=	15
+PKGREVISION=	23
 CATEGORIES=	chat
 MASTER_SITES=	http://telepathy.freedesktop.org/releases/telepathy-gabble/
 
@@ -12,14 +12,14 @@ LICENSE=	gnu-lgpl-v2.1 AND mit
 
 BUILD_DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 
-GNU_CONFIGURE=	yes
+GNU_CONFIGURE=		yes
 OVERRIDE_DIRDEPTH=	3
-USE_LIBTOOL=	yes
-USE_TOOLS+=	gmake pkg-config
-CONFIGURE_ENV+=	UUID_CFLAGS=" " UUID_LIBS=" "
+USE_LIBTOOL=		yes
+USE_TOOLS+=		gmake pkg-config
+CONFIGURE_ENV+=		UUID_CFLAGS=" " UUID_LIBS=" "
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.11.10
-REPLACE_PYTHON+=	plugins/telepathy-gabble-xmpp-console
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.11.10
+REPLACE_PYTHON+=		plugins/telepathy-gabble-xmpp-console
 
 .include "../../mk/compiler.mk"
 .if !empty(PKGSRC_COMPILER:Mclang)

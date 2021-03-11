@@ -1,10 +1,10 @@
-# $NetBSD: Makefile.common,v 1.18 2018/11/08 02:56:06 markd Exp $
+# $NetBSD: Makefile.common,v 1.21 2020/03/17 22:29:34 rillig Exp $
 # used by devel/hdf5/Makefile
 # used by devel/hdf5-c++/Makefile
 
-DISTNAME=	hdf5-1.10.4
+DISTNAME=	hdf5-1.10.6
 CATEGORIES=	devel
-MASTER_SITES=	https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.4/src/
+MASTER_SITES=	https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-${PKGVERSION_NOREV}/src/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -20,6 +20,9 @@ CFLAGS.SunOS+=		-std=c99 -D_XOPEN_SOURCE=600 -D__EXTENSIONS__
 
 DISTINFO_FILE=	${.CURDIR}/../../devel/hdf5/distinfo
 PATCHDIR=	${.CURDIR}/../../devel/hdf5/patches
+
+# These 2 files are not used in the build. They use [[ ... ]].
+CHECK_PORTABILITY_SKIP=	bin/snapshot hl/tools/h5watch/testh5watch.sh.in
 
 # it appears that this file is informative only and is not actually
 # used by any installed tools

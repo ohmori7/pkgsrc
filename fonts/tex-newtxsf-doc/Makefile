@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.5 2019/01/24 10:16:07 markd Exp $
+# $NetBSD: Makefile,v 1.9 2021/02/20 00:31:32 markd Exp $
 
 DISTNAME=	newtxsf.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-1.051
-TEXLIVE_REV=	47958
+PKGNAME=	tex-${DISTNAME:S/./-/}-1.053
+TEXLIVE_REV=	56527
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/newtxsf
+HOMEPAGE=	https://ctan.org/pkg/newtxsf
 COMMENT=	Documentation for tex-newtxsf
 LICENSE=	ofl-v1.1
 

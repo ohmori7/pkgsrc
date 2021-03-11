@@ -1,33 +1,46 @@
-# $NetBSD: Makefile,v 1.42 2019/02/01 12:49:04 tnn Exp $
+# $NetBSD: Makefile,v 1.61 2021/02/07 06:30:36 ryoon Exp $
 
-DISTNAME=	remmina-0.9.3
-PKGREVISION=	37
+DISTNAME=	Remmina-v1.4.8
+PKGNAME=	${DISTNAME:tl:S/-v/-/1}
+PKGREVISION=	4
 CATEGORIES=	net
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=remmina/}
+MASTER_SITES=	https://gitlab.com/Remmina/Remmina/-/archive/v${PKGVERSION_NOREV}/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://remmina.sourceforge.net/
-COMMENT=	Remmina is a remote desktop client based on GTK+
+HOMEPAGE=	https://www.remmina.org/
+COMMENT=	Remote desktop client based on GTK+
+LICENSE=	gnu-gpl-v2
 
-DEPENDS+=	rdesktop>=1.6.0:../../net/rdesktop
+USE_CMAKE=	yes
+USE_LANGUAGES=	c99 c++
 
-GNU_CONFIGURE=	yes
-USE_LANGUAGES=	c99
-USE_TOOLS+=	intltool perl pkg-config gmake msgfmt
+USE_TOOLS+=	pkg-config msgmerge
 
-LDFLAGS.SunOS+=	-lsocket -lnsl
+REPLACE_SH+=	data/desktop/remmina-file-wrapper.in
 
-.include "../../devel/glib2/buildlink3.mk"
+CMAKE_ARGS+=	-DWITH_WWW=OFF
+
+LDFLAGS.SunOS+=		-lsocket -lnsl
+LDFLAGS.NetBSD+=	-rdynamic
+
+.include "options.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libvncserver=		libvncserver>=0.9.1
+.include "../../net/freerdp2/buildlink3.mk"
+.include "../../net/libsoup/buildlink3.mk"
 .include "../../net/libvncserver/buildlink3.mk"
-.include "../../sysutils/desktop-file-utils/desktopdb.mk"
-BUILDLINK_API_DEPENDS.libgcrypt=		libgcrypt>=1.4.4
+.include "../../print/libcups/buildlink3.mk"
+.include "../../security/kwallet/buildlink3.mk"
 .include "../../security/libgcrypt/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libssh=		libssh>=0.54
+.include "../../security/libsecret/buildlink3.mk"
+.include "../../security/libsodium/buildlink3.mk"
 .include "../../security/libssh/buildlink3.mk"
-.include "../../x11/libunique/buildlink3.mk" # ???
-.include "../../x11/vte/buildlink3.mk"
-.include "../../x11/gtk2/buildlink3.mk"
+.include "../../security/openssl/buildlink3.mk"
+.include "../../sysutils/spice-protocol/buildlink3.mk"
+.include "../../sysutils/spice-gtk/buildlink3.mk"
+.include "../../textproc/json-glib/buildlink3.mk"
+.include "../../x11/gtk3/buildlink3.mk"
+.include "../../x11/libxkbfile/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
+.include "../../x11/vte3/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

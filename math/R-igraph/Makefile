@@ -1,17 +1,19 @@
-# $NetBSD: Makefile,v 1.2 2018/09/04 00:23:12 minskim Exp $
+# $NetBSD: Makefile,v 1.7 2020/11/05 09:08:36 ryoon Exp $
 
-DISTNAME=	igraph_1.2.1
-CATEGORIES=	graphics
+R_PKGNAME=	igraph
+R_PKGVER=	1.2.4.1
+PKGREVISION=	2
+CATEGORIES=	math graphics
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://igraph.org/
-COMMENT=	Network Analysis and Visualization
-LICENSE=	gnu-gpl-v2
+COMMENT=	Network analysis and visualization
+LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3
 
-DEPENDS+=	R-magrittr-[0-9]*:../../devel/R-magrittr
+DEPENDS+=	R-magrittr>=1.5:../../devel/R-magrittr
 DEPENDS+=	R-pkgconfig>=2.0.0:../../devel/R-pkgconfig
 
-USE_LANGUAGES=	c
+USE_LANGUAGES=	c c++ fortran
 
 .include "../../math/R/Makefile.extension"
+.include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

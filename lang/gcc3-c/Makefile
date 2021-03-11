@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.28 2015/03/21 01:17:08 tnn Exp $
+# $NetBSD: Makefile,v 1.30 2020/05/13 05:02:08 rillig Exp $
 
 PKGNAME=	gcc3${GCC3_PKGMODIF}-c-${GCC_VERSION}
 PKGREVISION=	1
@@ -7,6 +7,8 @@ COMMENT=	GNU Compiler Collection, v3 - C compiler
 INFO_FILES=	yes
 
 .include "../../lang/gcc3/Makefile.common"
+
+TOOLS_BROKEN+=	perl
 
 # The "gcc" frontend knows all languages (by patch)
 CONFIGURE_ARGS+=	--enable-languages=c
@@ -33,12 +35,12 @@ GENERATE_PLIST+=							\
 post-install:
 .if ${OPSYS} == "SunOS"
 	cd ${DESTDIR:Q}${GCC_ARCHDIR}/include && ${RM} -f fixed
-.if exists(${DESTDIR}${GCC_ARCHDIR}/include/v7)
+.  if exists(${DESTDIR}${GCC_ARCHDIR}/include/v7)
 	${RMDIR} ${DESTDIR:Q}${GCC_ARCHDIR}/include/v7
-.endif
-.if exists(${DESTDIR}${GCC_ARCHDIR}/include/v9)
+.  endif
+.  if exists(${DESTDIR}${GCC_ARCHDIR}/include/v9)
 	${RMDIR} ${DESTDIR:Q}${GCC_ARCHDIR}/include/v9
-.endif
+.  endif
 .endif
 	${INSTALL_DATA_DIR} ${DESTDIR:Q}${GCC_PREFIX}/mk
 	${INSTALL_DATA} ${WRKDIR}/gcc3.mk ${DESTDIR:Q}${GCC_PREFIX}/mk/c.mk

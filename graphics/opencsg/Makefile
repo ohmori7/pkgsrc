@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.8 2016/02/25 13:37:48 jperkin Exp $
+# $NetBSD: Makefile,v 1.10 2020/03/08 16:50:05 wiz Exp $
 
 DISTNAME=	OpenCSG-1.3.2
 PKGNAME=	${DISTNAME:tl}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.opencsg.org/
 
@@ -26,6 +26,6 @@ do-install:
 	${LIBTOOL} --mode=install ${INSTALL_LIB} \
 		${WRKSRC}/src/libopencsg.la ${DESTDIR}${PREFIX}/lib
 
-.include "../../graphics/glut/buildlink3.mk"
+.include "../../graphics/freeglut/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

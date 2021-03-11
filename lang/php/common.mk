@@ -1,7 +1,8 @@
-# $NetBSD: common.mk,v 1.6 2019/04/07 05:03:41 taca Exp $
+# $NetBSD: common.mk,v 1.9 2021/01/03 15:21:42 taca Exp $
 # used by lang/php56/Makefile.common
-# used by lang/php70/Makefile.common
 # used by lang/php71/Makefile.common
+# used by lang/php73/Makefile.common
+# used by lang/php74/Makefile.common
 # 
 .if !defined(PHPCOMMON_MK)
 PHPCOMMON_MK=	defined
@@ -13,7 +14,7 @@ MASTER_SITES?=		https://www.php.net/distributions/ \
 			https://uk.php.net/distributions/ \
 			https://de.php.net/distributions/ \
 			https://us.php.net/distributions/
-EXTRACT_SUFX?=		.tar.bz2
+EXTRACT_SUFX?=		.tar.xz
 .endif
 
 HOMEPAGE?=		https://www.php.net/

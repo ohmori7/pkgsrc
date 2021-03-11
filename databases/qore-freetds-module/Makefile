@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2018/06/08 20:49:41 nros Exp $
+# $NetBSD: Makefile,v 1.16 2020/05/22 10:56:01 adam Exp $
 
 DISTNAME=	qore-sybase-modules-1.0.4
 PKGNAME=	${DISTNAME:S/sybase-modules/freetds-module/}
-PKGREVISION=	6
+PKGREVISION=	10
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_GITHUB:=qorelanguage/}
 EXTRACT_SUFX=	.tar.bz2
@@ -20,8 +20,8 @@ USE_LANGUAGES=	c c++11
 USE_TOOLS+=	pax
 PTHREAD_OPTS+=	require
 
-CONFIGURE_ARGS+=--with-sybase=no
-CONFIGURE_ARGS+=--with-libsuffix=""
+CONFIGURE_ARGS+=	--with-sybase=no
+CONFIGURE_ARGS+=	--with-libsuffix=""
 
 INSTALLATION_DIRS+=     share/doc/${PKGBASE}
 post-install:

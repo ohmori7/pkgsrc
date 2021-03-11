@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2018/12/23 12:27:34 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2020/05/31 20:47:23 joerg Exp $
 
 .include "../../math/z3/Makefile.common"
 
@@ -8,10 +8,8 @@ GITHUB_PROJECT=	z3
 COMMENT=	Python bindings for the Z3 theorem prover / SMT solver
 
 CONFIGURE_ARGS+=	--python
-NO_BUILD=	yes
-PY_PATCHPLIST=	yes
-
-PYTHON_VERSIONS_ACCEPTED=	27
+NO_BUILD=		yes
+PY_PATCHPLIST=		yes
 
 PYZ3DIR=		${PREFIX}/${PYSITELIB}/z3
 INSTALLATION_DIRS+=	${PYZ3DIR}

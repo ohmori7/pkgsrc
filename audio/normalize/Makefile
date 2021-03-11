@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.34 2018/10/24 12:30:07 jperkin Exp $
+# $NetBSD: Makefile,v 1.37 2020/08/31 18:06:34 wiz Exp $
 
 DISTNAME=	normalize-0.7.7
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	audio
 MASTER_SITES=	http://savannah.nongnu.org/download/normalize/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://normalize.nongnu.org/
+HOMEPAGE=	https://normalize.nongnu.org/
 COMMENT=	Audio file volume normalizer (wav,mp3,ogg)
 LICENSE=	gnu-gpl-v2
 

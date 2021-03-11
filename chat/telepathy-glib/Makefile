@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.59 2019/04/26 14:12:33 maya Exp $
+# $NetBSD: Makefile,v 1.68 2020/11/05 09:07:37 ryoon Exp $
 
 DISTNAME=	telepathy-glib-0.24.1
-PKGREVISION=	11
+PKGREVISION=	18
 CATEGORIES=	chat
 MASTER_SITES=	http://telepathy.freedesktop.org/releases/telepathy-glib/
 
@@ -12,18 +12,18 @@ LICENSE=	gnu-gpl-v2 AND modified-bsd
 
 BUILD_DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 
-GNU_CONFIGURE=	yes
-CONFIGURE_ARGS+= --enable-vala-bindings
-USE_LIBTOOL=	yes
-USE_TOOLS+=	gmake pkg-config
+GNU_CONFIGURE=		yes
+CONFIGURE_ARGS+=	--enable-vala-bindings
+USE_LIBTOOL=		yes
+USE_TOOLS+=		gmake pkg-config
 
 PKGCONFIG_OVERRIDE+=	telepathy-glib/telepathy-glib.pc.in
 
-PYTHON_FOR_BUILD_ONLY=	yes
-CONFIGURE_ENV+=		ac_cv_prog_PYTHON=${PYTHONBIN}
-REPLACE_PYTHON+=	tests/all-errors-documented.py
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.24.1
-TEST_TARGET=		check
+PYTHON_FOR_BUILD_ONLY=		yes
+CONFIGURE_ENV+=			ac_cv_prog_PYTHON=${PYTHONBIN}
+REPLACE_PYTHON+=		tests/all-errors-documented.py
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.24.1
+TEST_TARGET=			check
 
 BUILDLINK_API_DEPENDS.glib2+=		glib2>=2.36
 .include "../../devel/glib2/buildlink3.mk"

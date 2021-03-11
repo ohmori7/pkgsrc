@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.33 2019/05/23 19:23:23 rillig Exp $
+# $NetBSD: Makefile,v 1.41 2020/11/29 22:08:56 dbj Exp $
 
-DISTNAME=	wxWidgets-3.0.4
+DISTNAME=	wxWidgets-3.0.5.1
 PKGNAME=	${DISTNAME:S/wxWidgets/wxGTK30/}
 PKGREVISION=	2
 CATEGORIES=	x11
@@ -10,7 +10,7 @@ GITHUB_RELEASE=	v${PKGVERSION_NOREV}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	dbj@NetBSD.org
-HOMEPAGE=	http://www.wxwidgets.org/
+HOMEPAGE=	https://www.wxwidgets.org/
 COMMENT=	Cross-platform wxWidgets GUI library
 # LGPLv2 with additional permission; http://opensource.org/licenses/wxwindows
 LICENSE=	gnu-lgpl-v2
@@ -26,6 +26,7 @@ CONFIGURE_ARGS+=	--with-opengl
 CONFIGURE_ARGS+=	--with-expat=sys
 CONFIGURE_ARGS+=	--with-zlib=sys
 CONFIGURE_ARGS+=	--with-regex=builtin
+CONFIGURE_ARGS+=	--disable-webview
 CONFIGURE_ARGS+=	--enable-mediactrl
 # wxregexu symbols are not exported properly as of 3.0.1
 # http://trac.wxwidgets.org/ticket/16571

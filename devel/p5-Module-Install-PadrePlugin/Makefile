@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.11 2018/08/22 09:44:17 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2020/08/31 18:08:23 wiz Exp $
 
 DISTNAME=	Module-Install-PadrePlugin-0.01
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Module/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Module-Install-PadrePlugin/
+HOMEPAGE=	https://metacpan.org/release/Module-Install-PadrePlugin
 COMMENT=	Module::Install support for Padre plugins
 LICENSE=	${PERL5_LICENSE}
 

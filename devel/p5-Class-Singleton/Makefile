@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.20 2018/08/22 09:43:44 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2021/02/11 00:47:16 wen Exp $
 
-DISTNAME=	Class-Singleton-1.5
+DISTNAME=	Class-Singleton-1.6
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Class/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Class-Singleton/
+HOMEPAGE=	https://metacpan.org/release/Class-Singleton
 COMMENT=	Perl module to implement Singleton classes
 LICENSE=	${PERL5_LICENSE}
 

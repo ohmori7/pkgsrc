@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.37 2019/06/01 07:10:42 wen Exp $
+# $NetBSD: Makefile,v 1.44 2020/12/02 11:06:55 ast Exp $
 #
 
-DISTNAME=	Perl-Critic-1.134
+DISTNAME=	Perl-Critic-1.138
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Perl/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Perl-Critic/
+HOMEPAGE=	https://metacpan.org/release/Perl-Critic
 COMMENT=	Perl 5 module providing a static Perl source code analysis engine
 LICENSE=	${PERL5_LICENSE}
 
@@ -26,19 +27,20 @@ DEPENDS+=	p5-PPIx-Regexp>=0.022:../../devel/p5-PPIx-Regexp
 DEPENDS+=	p5-PPIx-Utilities>=1.001:../../devel/p5-PPIx-Utilities
 DEPENDS+=	p5-Perl-Tidy-[0-9]*:../../devel/p5-Perl-Tidy
 DEPENDS+=	p5-Pod-Spell>=1:../../textproc/p5-Pod-Spell
+DEPENDS+=	p5-Pod-Parser>=1.63:../../textproc/p5-Pod-Parser
 DEPENDS+=	p5-Readonly>=2.0:../../devel/p5-Readonly
 DEPENDS+=	p5-String-Format>=1.13:../../devel/p5-String-Format
 DEPENDS+=	p5-Task-Weaken-[0-9]*:../../devel/p5-Task-Weaken
 
-BUILD_DEPENDS+=	p5-Test-Deep-[0-9]*:../../devel/p5-Test-Deep
-BUILD_DEPENDS+=	p5-Module-Pluggable-[0-9]*:../../devel/p5-Module-Pluggable
+TEST_DEPENDS+=	p5-Test-Deep-[0-9]*:../../devel/p5-Test-Deep
+TEST_DEPENDS+=	p5-Module-Pluggable-[0-9]*:../../devel/p5-Module-Pluggable
 
 # Recommended dependencies
 DEPENDS+=	p5-Readonly-XS-[0-9]*:../../devel/p5-Readonly-XS
 #DEPENDS+=	p5-Regexp-Parser>=0.20:../../devel/p5-Regexp-Parser
 
-USE_LANGUAGES=	# empty
-PERL5_PACKLIST=	auto/Perl/Critic/.packlist
+USE_LANGUAGES=		# empty
+PERL5_PACKLIST=		auto/Perl/Critic/.packlist
 PERL5_MODULE_TYPE=	Module::Build
 
 .include "../../lang/perl5/module.mk"

@@ -1,17 +1,15 @@
-# $NetBSD: Makefile,v 1.13 2019/05/12 11:28:02 markd Exp $
+# $NetBSD: Makefile,v 1.18 2021/02/15 01:21:57 markd Exp $
 
 DISTNAME=	tex4ht
-PKGNAME=	tex-${DISTNAME}-2019
-TEXLIVE_REV=	50884
+PKGNAME=	tex-${DISTNAME}-2020.57704
+TEXLIVE_REV=	57704
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/tex4ht
+HOMEPAGE=	https://ctan.org/pkg/tex4ht
 COMMENT=	Convert (La)TeX to HTML/XML
 LICENSE=	lppl-1.3c
 
 DEPENDS+=	tex4ht-[0-9]*:../../print/tex4ht
-
-#TEXLIVE_IGNORE_PATTERNS=	texmf-dist/scripts
 
 post-patch:
 	rm ${WRKDIR}/texmf-dist/scripts/tex4ht/*.sh

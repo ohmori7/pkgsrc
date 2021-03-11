@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2019/04/03 00:32:29 ryoon Exp $
+# $NetBSD: Makefile,v 1.24 2021/01/01 08:24:38 ryoon Exp $
 
 DISTNAME=	libzmf-0.0.2
-PKGREVISION=	9
+PKGREVISION=	17
 CATEGORIES=	converters
 MASTER_SITES=	http://dev-www.libreoffice.org/src/libzmf/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	ryoon@NetBSD.org
-HOMEPAGE=	http://dev-www.libreoffice.org/src/libzmf/
+HOMEPAGE=	https://dev-www.libreoffice.org/src/libzmf/
 COMMENT=	Library to parse Zoner Callisto/Draw documents
 LICENSE=	mpl-2.0
 

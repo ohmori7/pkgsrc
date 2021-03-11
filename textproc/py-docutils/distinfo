@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.21 2017/09/04 18:05:58 adam Exp $
+$NetBSD: distinfo,v 1.23 2020/04/12 11:19:48 adam Exp $
 
-SHA1 (docutils-0.14.tar.gz) = 32cefb69ac3dab5b04c4d150776f35419cc4c863
-RMD160 (docutils-0.14.tar.gz) = 3331c1b684d377a0a2cb5c1e7431b019b8793840
-SHA512 (docutils-0.14.tar.gz) = 1ed72c2ef7d2ca38d1c6f3154b7986ea46f599d9bd826405a5257fdd7740c8626957d6298aa95fb0edea8a24515de22f1ad9b2ecbd59341a1ab7a2bab30f500c
-Size (docutils-0.14.tar.gz) = 1727105 bytes
+SHA1 (docutils-0.16.tar.gz) = 35f6d15225f8e830ef379cbc9a7ae0b82db97231
+RMD160 (docutils-0.16.tar.gz) = d790713e8a48c19ea7826b57d60536561f0a1f74
+SHA512 (docutils-0.16.tar.gz) = 4e0c6662924cac6b8f28bb77a4f50eafd637c1083990a23dbd905d8a05362a18dae96e63408ed43b595b693ca755c7961d1282129d3215ed3774af0dddcc0466
+Size (docutils-0.16.tar.gz) = 1962041 bytes

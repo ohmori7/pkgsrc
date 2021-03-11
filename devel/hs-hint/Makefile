@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.4 2016/01/04 12:23:05 szptvlfn Exp $
+# $NetBSD: Makefile,v 1.7 2020/01/11 08:18:47 pho Exp $
 
-DISTNAME=	hint-0.4.2.3
+DISTNAME=	hint-0.9.0.2
 CATEGORIES=	devel
 
 MAINTAINER=	pho@cielonegro.org
@@ -9,9 +9,7 @@ LICENSE=	modified-bsd
 
 .include "../../mk/haskell.mk"
 .include "../../devel/hs-exceptions/buildlink3.mk"
-.include "../../devel/hs-extensible-exceptions/buildlink3.mk"
-.include "../../devel/hs-ghc-mtl/buildlink3.mk"
 .include "../../devel/hs-ghc-paths/buildlink3.mk"
-.include "../../devel/hs-mtl/buildlink3.mk"
 .include "../../devel/hs-random/buildlink3.mk"
+.include "../../sysutils/hs-temporary/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

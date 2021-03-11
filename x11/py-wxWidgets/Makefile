@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.75 2019/04/26 14:12:50 maya Exp $
+# $NetBSD: Makefile,v 1.85 2020/08/31 18:13:22 wiz Exp $
 
 VERSION=	2.8.12.0
 DISTNAME=	wxPython-src-${VERSION}
 PKGNAME=	${PYPKGPREFIX}-wxWidgets-${VERSION}
-PKGREVISION=	11
+PKGREVISION=	17
 CATEGORIES=	x11 python
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=wxpython/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://wxpython.org/
+HOMEPAGE=	https://wxpython.org/
 COMMENT=	Python bindings for wxWidgets
 
 WRKSRC=		${WRKDIR}/wxPython-src-${VERSION}/wxPython
@@ -17,9 +17,9 @@ USE_LANGUAGES=	c c++
 USE_TOOLS+=	gmake pkg-config
 
 # previous name of the package
-CONFLICTS+=		${PYPKGPREFIX}-wxWindows-[0-9]*
-PYTHON_SELF_CONFLICT=	yes
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 2.8.10.1
+CONFLICTS+=			${PYPKGPREFIX}-wxWindows-[0-9]*
+PYTHON_SELF_CONFLICT=		yes
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 2.8.10.1
 
 # no scripts to avoid conflicts
 #PYSETUPBUILDARGS+=	NO_SCRIPTS=1
@@ -36,7 +36,6 @@ SUBST_FILES.fix-python+=	wx/lib/floatcanvas/Utilities/*.py
 SUBST_FILES.fix-python+=	wx/tools/Editra/*.py
 SUBST_FILES.fix-python+=	wx/tools/Editra/src/*.py
 SUBST_FILES.fix-python+=	wx/tools/Editra/src/extern/*.py
-SUBST_FILES.fix-python+=	wx/tools/Editra/tests/syntax/python.python
 SUBST_FILES.fix-python+=	wx/tools/Editra/Editra*
 SUBST_SED.fix-python+=		-e 's,/usr/bin/env python,${PYTHONBIN},'
 

@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.1 2018/04/30 04:53:25 ryoon Exp $
+$NetBSD: distinfo,v 1.4 2020/05/28 14:21:22 ryoon Exp $
 
-SHA1 (libmypaint-1.3.0.tar.xz) = d9d2ac9d6ee45056e02bbbc497a66dc861db5c05
-RMD160 (libmypaint-1.3.0.tar.xz) = b70855b627d29a5150e8e89c5c49be17f2f10c9e
-SHA512 (libmypaint-1.3.0.tar.xz) = 553eeb3439ffd0c013e33254a16334242583b8bab76d1a3e937f3ed1d7e05a832c6eb26acd7220dce20c6a7d997c32afe828202ce48e25a5fe57b67efd853fcf
-Size (libmypaint-1.3.0.tar.xz) = 438160 bytes
+SHA1 (libmypaint-1.6.1.tar.xz) = 04c08ed585de3469f6f23d52b83f3566a27fb4a6
+RMD160 (libmypaint-1.6.1.tar.xz) = 1c09037ab87cadddb57345e5fc2057ba4fadfe23
+SHA512 (libmypaint-1.6.1.tar.xz) = e9413fd6a5336791ab3228a5ad9e7f06871d075c7ded236942f896a205ba44ea901a945fdc97b8be357453a1505331b59e824fe67500fbcda0cc4f11f79af608
+Size (libmypaint-1.6.1.tar.xz) = 519464 bytes

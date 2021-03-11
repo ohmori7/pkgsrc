@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2018/09/04 14:43:09 fhajny Exp $
+# $NetBSD: Makefile,v 1.5 2020/12/04 12:15:41 jperkin Exp $
 #
 
-DISTNAME=	duo_unix-1.10.4
+DISTNAME=	duo_unix-1.11.4
 PKGNAME=	${DISTNAME:S/_/-/}
 CATEGORIES=	security
 MASTER_SITES=	https://dl.duosecurity.com/
@@ -31,11 +31,11 @@ CONF_FILES_PERMS+=	share/examples/duo-unix/login_duo.conf	\
 
 SPECIAL_PERMS+=		sbin/login_duo ${SETUID_ROOT_PERMS}
 
-SUBST_CLASSES+=		man
-SUBST_STAGE.man=	pre-configure
-SUBST_MESSAGE.man=	Fixing sysconfdir references
-SUBST_FILES.man=	login_duo/login_duo.8 pam_duo/pam_duo.8
-SUBST_SED.man=		-e 's,/etc/duo,${PKG_SYSCONFDIR},g'
+SUBST_CLASSES+=		paths
+SUBST_STAGE.paths=	pre-configure
+SUBST_FILES.paths=	login_duo/login_duo.8 pam_duo/pam_duo.8
+SUBST_SED.paths=	-e 's,/etc/duo,${PKG_SYSCONFDIR},g'
+SUBST_SED.paths+=	-e 's,/usr/local,${PREFIX},g'
 
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

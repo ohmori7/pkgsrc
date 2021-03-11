@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.62 2019/05/26 19:37:42 adam Exp $
+# $NetBSD: Makefile,v 1.75 2020/11/23 20:11:24 nia Exp $
 
-DISTNAME=	memcached-1.5.16
+DISTNAME=	memcached-1.6.9
 CATEGORIES=	devel
-MASTER_SITES=	http://www.memcached.org/files/
+MASTER_SITES=	https://memcached.org/files/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.memcached.org/
+HOMEPAGE=	https://memcached.org/
 COMMENT=	High-performance distributed memory object caching system
 LICENSE=	2-clause-bsd
 
@@ -28,10 +28,10 @@ MEMCACHED_USER?=	memcached
 MEMCACHED_GROUP?=	memcached
 MEMCACHED_HOME?=	${VARBASE}/chroot/${PKGBASE}
 
-PKG_GROUPS=		${MEMCACHED_GROUP}
-PKG_USERS=		${MEMCACHED_USER}:${MEMCACHED_GROUP}
-PKG_GROUPS_VARS+=	MEMCACHED_GROUP
-PKG_USERS_VARS=		MEMCACHED_USER
+PKG_GROUPS=			${MEMCACHED_GROUP}
+PKG_USERS=			${MEMCACHED_USER}:${MEMCACHED_GROUP}
+PKG_GROUPS_VARS+=		MEMCACHED_GROUP
+PKG_USERS_VARS=			MEMCACHED_USER
 PKG_HOME.${MEMCACHED_USER}=	${MEMCACHED_HOME}
 PKG_GECOS.${MEMCACHED_USER}=	Memcached
 

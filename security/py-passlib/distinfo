@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.5 2017/06/21 10:24:19 adam Exp $
+$NetBSD: distinfo,v 1.7 2020/10/12 11:57:02 adam Exp $
 
-SHA1 (passlib-1.7.1.tar.gz) = 1fccaee7a5a158ee04274e18f4927a6a603c6901
-RMD160 (passlib-1.7.1.tar.gz) = 5e46aff6cdb6aeb26991f2d794cd78e8ba1490f2
-SHA512 (passlib-1.7.1.tar.gz) = 3d5f069cd4e44e5e87cdabc46845acbdd6c1eeedb7ce1f611aebee87b0f7af19009b6a47a10ec555fd84260b9f5c933c6429e325d30326de3869f05031674168
-Size (passlib-1.7.1.tar.gz) = 645724 bytes
+SHA1 (passlib-1.7.4.tar.gz) = 7881275c4fdbb235ebf610e4fd0b661d9fb3c249
+RMD160 (passlib-1.7.4.tar.gz) = b32ad2ad061cc5eaac37b114684f8364686dfbdd
+SHA512 (passlib-1.7.4.tar.gz) = 350bd6da5ac57e6c266ffe8bf9684c8c2cce3fc6b513eb6c7bc1b302d2d8a1b701e9c01c953782520a2ac37b7ec1f6d7bd5855f99f6ee0e2dbbf33f2d49a9530
+Size (passlib-1.7.4.tar.gz) = 689844 bytes

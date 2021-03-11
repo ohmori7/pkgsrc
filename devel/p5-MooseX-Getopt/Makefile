@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.42 2018/11/24 11:42:34 wen Exp $
+# $NetBSD: Makefile,v 1.45 2020/08/31 18:08:29 wiz Exp $
 
 DISTNAME=	MooseX-Getopt-0.74
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MooseX/}
 
@@ -16,26 +17,26 @@ DEPENDS+=	p5-MooseX-Role-Parameterized-[0-9]*:../../devel/p5-MooseX-Role-Paramet
 DEPENDS+=	p5-Try-Tiny-[0-9]*:../../devel/p5-Try-Tiny
 DEPENDS+=	p5-namespace-autoclean-[0-9]*:../../devel/p5-namespace-autoclean
 
-TEST_DEPENDS+=	p5-Module-Runtime-[0-9]*:../../devel/p5-Module-Runtime
-TEST_DEPENDS+=	p5-Path-Tiny>=0.009:../../filesystems/p5-Path-Tiny
-TEST_DEPENDS+=	p5-Test-Deep-[0-9]*:../../devel/p5-Test-Deep
-TEST_DEPENDS+=	p5-Test-Fatal>=0.003:../../devel/p5-Test-Fatal
-TEST_DEPENDS+=	p5-Test-Kwalitee>=1.12:../../devel/p5-Test-Kwalitee
-TEST_DEPENDS+=	p5-Test-Needs-[0-9]*:../../devel/p5-Test-Needs
-TEST_DEPENDS+=	p5-Test-Pod>=1.41:../../devel/p5-Test-Pod
-TEST_DEPENDS+=	p5-Test-Pod-Coverage>=1.08:../../devel/p5-Test-Pod-Coverage
-TEST_DEPENDS+=	p5-Test-Requires-[0-9]*:../../devel/p5-Test-Requires
-TEST_DEPENDS+=	p5-Test-Trap-[0-9]*:../../devel/p5-Test-Trap
-TEST_DEPENDS+=	p5-Test-Warnings>=0.009:../../devel/p5-Test-Warnings
+TEST_DEPENDS+=		p5-Module-Runtime-[0-9]*:../../devel/p5-Module-Runtime
+TEST_DEPENDS+=		p5-Path-Tiny>=0.009:../../filesystems/p5-Path-Tiny
+TEST_DEPENDS+=		p5-Test-Deep-[0-9]*:../../devel/p5-Test-Deep
+TEST_DEPENDS+=		p5-Test-Fatal>=0.003:../../devel/p5-Test-Fatal
+TEST_DEPENDS+=		p5-Test-Kwalitee>=1.12:../../devel/p5-Test-Kwalitee
+TEST_DEPENDS+=		p5-Test-Needs-[0-9]*:../../devel/p5-Test-Needs
+TEST_DEPENDS+=		p5-Test-Pod>=1.41:../../devel/p5-Test-Pod
+TEST_DEPENDS+=		p5-Test-Pod-Coverage>=1.08:../../devel/p5-Test-Pod-Coverage
+TEST_DEPENDS+=		p5-Test-Requires-[0-9]*:../../devel/p5-Test-Requires
+TEST_DEPENDS+=		p5-Test-Trap-[0-9]*:../../devel/p5-Test-Trap
+TEST_DEPENDS+=		p5-Test-Warnings>=0.009:../../devel/p5-Test-Warnings
 # recommended modules ...
 #BUILD_DEPENDS+=	p5-CPAN-Meta-[0-9]*:../../devel/p5-CPAN-Meta
 #BUILD_DEPENDS+=	p5-CPAN-Meta-Requirements>=2.120900:../../devel/p5-CPAN-Meta-Requirements
 #BUILD_DEPENDS+=	p5-MooseX-ConfigFromFile-[0-9]*:../../devel/p5-MooseX-ConfigFromFile
 #BUILD_DEPENDS+=	p5-MooseX-SimpleConfig>=0.07:../../devel/p5-MooseX-SimpleConfig
 
-USE_LANGUAGES=	# empty
+USE_LANGUAGES=		# empty
 PERL5_MODULE_TYPE=	Module::Build::Tiny
-PERL5_PACKLIST=	auto/MooseX/Getopt/.packlist
+PERL5_PACKLIST=		auto/MooseX/Getopt/.packlist
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

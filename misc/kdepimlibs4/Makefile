@@ -1,28 +1,22 @@
-# $NetBSD: Makefile,v 1.88 2019/04/03 00:32:54 ryoon Exp $
+# $NetBSD: Makefile,v 1.103 2021/01/01 08:24:50 ryoon Exp $
 
 DISTNAME=	kdepimlibs-4.14.10
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	16
+PKGREVISION=	29
 CATEGORIES=	misc
 COMMENT=	Support libraries for PIM for the KDE integrated X11 desktop
 MASTER_SITES=	${MASTER_SITE_KDE:=applications/15.04.3/src/}
 
 .include "../../meta-pkgs/kde4/Makefile.kde4"
 
-SUBST_CLASSES+=			phononrelpath
-SUBST_STAGE.phononrelpath=	post-configure
-SUBST_MESSAGE.phononrelpath=	Fixing phonon RELWITHDEBINFO path
-SUBST_FILES.phononrelpath=	_KDE_build/CMakeFiles/Export/${LOCALBASE:S^/^_^}/lib/cmake/KdepimLibs/KDEPimLibsLibraryTargetsWithPrefix-${TARGET_NAME}.cmake
-SUBST_SED.phononrelpath=	-e 's:[^"]*/\.buildlink/lib/libphonon\.so::'
-
-CMAKE_DEPENDENCIES_REWRITE= _KDE_build/KDEPimLibsDependencies.cmake
+CMAKE_DEPENDENCIES_REWRITE=	_KDE_build/KDEPimLibsDependencies.cmake
 
 CMAKE_ARGS+=	-DKDE4_BUILD_TESTS:BOOL=OFF
 
 # for strcasecmp
 CFLAGS.SunOS+=	-D__EXTENSIONS__
 
-REPLACE_PERL+= mailtransport/kconf_update/migrate-transports.pl
+REPLACE_PERL+=	mailtransport/kconf_update/migrate-transports.pl
 
 BUILDLINK_API_DEPENDS.akonadi+=	akonadi>=1.8.51
 

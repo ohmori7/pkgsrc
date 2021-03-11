@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:45:17 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.20 2020/09/08 13:16:41 wiz Exp $
 
 DISTNAME=	Template-GD-2.66
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	11
+PKGREVISION=	13
 CATEGORIES=	graphics
-MASTER_SITES=	http://search.cpan.org/CPAN/authors/id/A/AB/ABW/
+MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/A/AB/ABW/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/CPAN/authors/id/A/AB/ABW/
+HOMEPAGE=	https://metacpan.org/release/Template-GD
 COMMENT=	GD plugin(s) for the Template Toolkit
 LICENSE=	${PERL5_LICENSE}
 

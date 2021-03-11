@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.13 2019/05/13 20:38:12 adam Exp $
+@comment $NetBSD: PLIST,v 1.21 2021/02/15 18:58:42 adam Exp $
 man/man1/clusterdb.1
 man/man1/createdb.1
 man/man1/createlang.1
@@ -445,6 +445,7 @@ share/doc/postgresql/html/datetime-config-files.html
 share/doc/postgresql/html/datetime-input-rules.html
 share/doc/postgresql/html/datetime-invalid-input.html
 share/doc/postgresql/html/datetime-keywords.html
+share/doc/postgresql/html/datetime-posix-timezone-specs.html
 share/doc/postgresql/html/datetime-units-history.html
 share/doc/postgresql/html/dblink.html
 share/doc/postgresql/html/ddl-alter.html
@@ -886,7 +887,15 @@ share/doc/postgresql/html/release-9-6-10.html
 share/doc/postgresql/html/release-9-6-11.html
 share/doc/postgresql/html/release-9-6-12.html
 share/doc/postgresql/html/release-9-6-13.html
+share/doc/postgresql/html/release-9-6-14.html
+share/doc/postgresql/html/release-9-6-15.html
+share/doc/postgresql/html/release-9-6-16.html
+share/doc/postgresql/html/release-9-6-17.html
+share/doc/postgresql/html/release-9-6-18.html
+share/doc/postgresql/html/release-9-6-19.html
 share/doc/postgresql/html/release-9-6-2.html
+share/doc/postgresql/html/release-9-6-20.html
+share/doc/postgresql/html/release-9-6-21.html
 share/doc/postgresql/html/release-9-6-3.html
 share/doc/postgresql/html/release-9-6-4.html
 share/doc/postgresql/html/release-9-6-5.html

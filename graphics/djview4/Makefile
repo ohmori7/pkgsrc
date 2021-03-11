@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.38 2018/07/04 13:40:20 jperkin Exp $
+# $NetBSD: Makefile,v 1.53 2021/02/07 06:30:26 ryoon Exp $
 #
 
-DISTNAME=	djview-4.10.6
+DISTNAME=	djview-4.12
 PKGNAME=	${DISTNAME:S/djview/djview4/}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=djvu/}
 
@@ -12,10 +12,13 @@ HOMEPAGE=	http://djvu.sourceforge.net/
 COMMENT=	Portable DjVu viewer and browser plugin
 LICENSE=	gnu-gpl-v2
 
+WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
+
 GNU_CONFIGURE=	yes
+CONFIGURE_SCRIPT=	autogen.sh
 USE_LANGUAGES=	c c++
 USE_LIBTOOL=	yes
-USE_TOOLS+=	gmake pkg-config
+USE_TOOLS+=	automake gmake pkg-config
 
 SUBST_CLASSES+=		nsdejavu
 SUBST_STAGE.nsdejavu=	pre-configure
@@ -24,8 +27,9 @@ SUBST_FILES.nsdejavu=	nsdejavu/nsdejavu.c
 SUBST_SED.nsdejavu=	-e 's:/usr/local/lib:${LOCALBASE}/lib:'
 
 .include "../../graphics/djvulibre-lib/buildlink3.mk"
-.include "../../x11/qt4-libs/buildlink3.mk"
-.include "../../x11/qt4-tools/buildlink3.mk"
+BUILDLINK_DEPMETHOD.qt5-qttools= build
+.include "../../x11/qt5-qttools/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

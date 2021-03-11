@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2014/10/14 13:53:01 taca Exp $
+# $NetBSD: Makefile,v 1.13 2020/01/23 08:11:27 taca Exp $
 
 PKGNAME=	isc-dhcrelay-${DHVER}
 COMMENT=	ISC Dynamic Host Configuration Protocol (DHCP) Relay
@@ -8,7 +8,7 @@ SUBDIR=		relay
 RCD_SCRIPTS=	isc_dhcrelay
 FILES_SUBST+=	DHCP_HOME=${DHCP_HOME}
 
-.include "${.CURDIR}/../isc-dhcp4/options.mk"
+.include "../../net/isc-dhcp4/options.mk"
 
 .include "../../net/isc-dhcp4/Makefile.common"
 .include "../../net/isc-dhcp4/buildlink3.mk"

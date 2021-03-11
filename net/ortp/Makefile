@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.10 2018/09/13 12:10:03 jperkin Exp $
+# $NetBSD: Makefile,v 1.13 2020/03/08 16:50:57 wiz Exp $
 #
 
 DISTNAME=	ortp-0.16.1
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	net
 MASTER_SITES=	http://download.savannah.nongnu.org/releases/linphone/ortp/sources/
 
@@ -15,7 +15,7 @@ GNU_CONFIGURE=	yes
 USE_LANGUAGES=	c99
 USE_LIBTOOL=	yes
 
-CONFIGURE_ENV+=	ac_cv_path_DOXYGEN=false
+CONFIGURE_ENV+=		ac_cv_path_DOXYGEN=false
 PKGCONFIG_OVERRIDE+=	ortp.pc.in
 
 CFLAGS.SunOS+=	-D_XOPEN_SOURCE=600 -D__EXTENSIONS__ -DBSD_COMP

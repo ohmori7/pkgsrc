@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.24 2019/05/06 05:30:39 taca Exp $
+# $NetBSD: Makefile,v 1.31 2021/02/05 14:56:01 taca Exp $
 
-DISTNAME=	pkg-config-1.3.7
+DISTNAME=	pkg-config-1.4.5
 CATEGORIES=	devel
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://github.com/ruby-gnome2/pkg-config
+HOMEPAGE=	https://github.com/ruby-gnome/pkg-config
 COMMENT=	Pure Ruby implementation of pkg-config
 LICENSE=	gnu-lgpl-v2.1
 
 CONFLICTS+=	${RUBY_PKGPREFIX}-gnome2-glib<0.90.0
+
+USE_LANGUAGES=	# none
 
 CONFIGURE_ARGS+=	--siteruby=${PREFIX}/${RUBY_VENDORLIB_BASE} \
 			--siterubyver=${PREFIX}/${RUBY_VENDORLIB} \

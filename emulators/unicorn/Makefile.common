@@ -1,12 +1,15 @@
-# $NetBSD: Makefile.common,v 1.2 2018/03/24 17:09:34 joerg Exp $
+# $NetBSD: Makefile.common,v 1.6 2021/02/28 13:25:47 wiz Exp $
 #
 # used by emulators/py-unicorn/Makefile
 
-DISTNAME=	unicorn-1.0.1
+DISTNAME=	unicorn-1.0.2
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_GITHUB:=unicorn-engine/}
+GITHUB_PROJECT=	unicorn
 
-HOMEPAGE=	http://www.unicorn-engine.org/
+HOMEPAGE=	https://www.unicorn-engine.org/
 
 DISTINFO_FILE=	${.CURDIR}/../../emulators/unicorn/distinfo
 PATCHDIR=	${.CURDIR}/../../emulators/unicorn/patches
+
+CHECK_PORTABILITY_SKIP+=	install-cmocka-linux.sh

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.43 2013/07/15 02:02:23 ryoon Exp $
+# $NetBSD: Makefile,v 1.45 2019/11/03 19:04:01 rillig Exp $
 
 DISTNAME=	hugs98-Sep2006
 PKGNAME=	hugs98-200609
@@ -7,7 +7,7 @@ CATEGORIES=	lang
 MASTER_SITES=	http://cvs.haskell.org/Hugs/downloads/2006-09/
 
 MAINTAINER=	nathanw@mit.edu
-HOMEPAGE=	http://www.haskell.org/hugs/
+HOMEPAGE=	https://www.haskell.org/hugs/
 COMMENT=	Functional programming system based on Haskell 98
 LICENSE=	modified-bsd
 
@@ -41,5 +41,5 @@ CONFIGURE_ARGS+=	ac_cv_lib_readline_readline=no
 # The default -O2 breaks the interpreter producing strange internal errors
 # at run time.
 .if !empty(CC_VERSION:Mgcc-4*)
-CFLAGS+=    -O0
+CFLAGS+=	-O0
 .endif

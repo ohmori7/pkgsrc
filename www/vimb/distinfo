@@ -1,9 +1,6 @@
-$NetBSD: distinfo,v 1.5 2019/05/26 20:25:13 leot Exp $
+$NetBSD: distinfo,v 1.7 2020/01/03 14:55:27 leot Exp $
 
-SHA1 (vimb-3.4.0.tar.gz) = 6a179822fd5bb03a4597ffc7267ccd2e8357ad16
-RMD160 (vimb-3.4.0.tar.gz) = a339e8227bbace0004d10f6d36095079559da973
-SHA512 (vimb-3.4.0.tar.gz) = 80586c1ee5836b848a63cb4efd53c4a75fbeede0a3f6ee405b6e145063a17c32c3856af122b6a385cd2283519b86ad480fbf88c978ec0a32830c74d68c95a6ea
-Size (vimb-3.4.0.tar.gz) = 138452 bytes
-SHA1 (patch-Makefile) = 973017a0cc4b2a65535aaa40ae2eb63a4b020acf
-SHA1 (patch-src_main.c) = 127beefbe9cb853a7f2e1b7a0f19d4e87cbc9db3
-SHA1 (patch-src_util.c) = 8794f09aaf86cb2e19372f404e3c60fa1b045505
+SHA1 (vimb-3.6.0.tar.gz) = c068cb9743be8f326c7d3da416d45ef2d1844b76
+RMD160 (vimb-3.6.0.tar.gz) = 96e23c9df28d067fec149e7a97a9f3b24048c0ec
+SHA512 (vimb-3.6.0.tar.gz) = 0c1a131641c47ec0dd7a5346d5e7260f85293ecc105e04e6265680c53bbbdc8d98acc4f4e11443efc4e4148aa0b77c496cf7e5f59d44857e6e612c3d4a643c8f
+Size (vimb-3.6.0.tar.gz) = 144750 bytes

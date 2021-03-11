@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.30 2019/04/25 21:17:13 markd Exp $
+# $NetBSD: Makefile,v 1.51 2021/02/07 06:30:10 ryoon Exp $
 
 DISTNAME=	kactivities-${KF5VER}
 PKGNAME=	kactivities5-${KF5VER}
+PKGREVISION=	7
 CATEGORIES=	x11
 
 HOMEPAGE=	https://community.kde.org/Frameworks
@@ -11,16 +12,6 @@ LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1
 .include "../../meta-pkgs/kde/kf5.mk"
 
 PKGCONFIG_OVERRIDE+=	src/lib/libKActivities.pc.cmake
-
-SUBST_CLASSES+=		xdg
-SUBST_STAGE.xdg=	pre-configure
-SUBST_MESSAGE.xdg=	Install via examples dir.
-SUBST_FILES.xdg=	CMakeLists.txt
-SUBST_SED.xdg=		-e 's:{KDE_INSTALL_CONFDIR}:{KDE_INSTALL_XDG_EX_DIR}:'
-
-MAKE_DIRS+=	${PKG_SYSCONFDIR}/xdg
-CONF_FILES+=	${PREFIX}/share/examples/kde-xdg/kactivities.categories \
-		${PKG_SYSCONFDIR}/xdg/kactivities.categories
 
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../devel/kio/buildlink3.mk"

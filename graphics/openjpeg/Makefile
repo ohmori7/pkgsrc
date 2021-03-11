@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.17 2019/04/03 08:04:08 adam Exp $
+# $NetBSD: Makefile,v 1.22 2021/01/06 12:32:34 adam Exp $
 
-DISTNAME=	openjpeg-2.3.1
+DISTNAME=	openjpeg-2.4.0
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GITHUB:=uclouvain/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.openjpeg.org/
+HOMEPAGE=	https://www.openjpeg.org/
 COMMENT=	JPEG 2000 library
 LICENSE=	2-clause-bsd
 

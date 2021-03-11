@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.6 2015/11/03 20:56:55 agc Exp $
+$NetBSD: distinfo,v 1.9 2020/06/09 11:56:08 markd Exp $
 
-SHA1 (klickety-4.14.3.tar.xz) = 4dcc4f91e41a44b4e7794f4d996bcc49b402b3c2
-RMD160 (klickety-4.14.3.tar.xz) = 0ce861944441fe355676644794ef9f59e8e32565
-SHA512 (klickety-4.14.3.tar.xz) = e89408db89294374bcc810c195c6564876dab0ff29db58b573123503b895b421b583779dcae8a67e289440d9b6c2e33165e0c12a50ab4a1f8df6cac2f2c74341
-Size (klickety-4.14.3.tar.xz) = 784020 bytes
+SHA1 (klickety-20.04.1.tar.xz) = 97a27b3ce916469c38389a30ad9151279f1fd1b7
+RMD160 (klickety-20.04.1.tar.xz) = 41b7e750d416aad796ad670a5f078aa460b240e9
+SHA512 (klickety-20.04.1.tar.xz) = 8a409f3ad658245a9967fb43ad1b63ee960ca63c3a0b168516c82fc6990918091bb4a141ac94cc2c0300ee7a4cc6f5e29495d7dea655aa2a638cbf8aa69a53c3
+Size (klickety-20.04.1.tar.xz) = 1390580 bytes

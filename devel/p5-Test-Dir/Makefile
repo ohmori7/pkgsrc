@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.9 2018/08/22 09:44:45 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2020/08/31 18:09:00 wiz Exp $
 #
 
 DISTNAME=		Test-Dir-1.16
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		2
+PKGREVISION=		4
 CATEGORIES=		devel perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Test/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Test-Dir/
+HOMEPAGE=		https://metacpan.org/release/Test-Dir
 COMMENT=		Test directory attributes
 LICENSE=		${PERL5_LICENSE}
 

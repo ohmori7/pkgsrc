@@ -1,17 +1,26 @@
-$NetBSD: patch-configure,v 1.2 2016/09/23 17:50:19 jnemeth Exp $
+$NetBSD: patch-configure,v 1.4 2021/01/02 22:45:43 jnemeth Exp $
 
---- configure.orig	2015-10-09 21:48:48.000000000 +0000
+--- configure.orig	2020-11-19 12:31:10.000000000 +0000
 +++ configure
-@@ -12920,7 +12920,7 @@ fi
- 
- 
- 
--if test "x$JANSSON_LIB" == "x"; then
-+if test "x$JANSSON_LIB" = "x"; then
-   as_fn_error $? "*** JSON support not found (this typically means the libjansson development package is missing)" "$LINENO" 5
+@@ -8937,7 +8937,7 @@ $as_echo_n "checking for clang -fblocks.
+ 				AST_CLANG_BLOCKS="-Wno-unknown-warning-option -fblocks"
+ 				{ $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+ $as_echo "yes" >&6; }
+-			elif test "`echo 'int main(){return ^{return 42;}();}' | ${CC} -o /dev/null -fblocks -x c -lBlocksRuntime - 2>&1`" = ""; then
++			elif test "`echo 'int main(){return ^{return 42;}();}' | ${CC} ${LDFLAGS} -o /dev/null -fblocks -x c -lBlocksRuntime - 2>&1`" = ""; then
+ 				AST_CLANG_BLOCKS_LIBS="-lBlocksRuntime"
+ 				AST_CLANG_BLOCKS="-fblocks"
+ 				{ $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+@@ -9034,7 +9034,7 @@ if test "${with_pjproject_bundled+set}" 
  fi
  
-@@ -13441,7 +13441,7 @@ fi
+ 
+-if test "${with_pjproject}" == "no" || test "${with_pjproject}" == "n" ; then
++if test "${with_pjproject}" = "no" || test "${with_pjproject}" = "n" ; then
+ 	PJPROJECT_BUNDLED=no
+ fi
+ 
+@@ -14947,7 +14947,7 @@ fi
  done
  
  
@@ -20,16 +29,16 @@ $NetBSD: patch-configure,v 1.2 2016/09/23 17:50:19 jnemeth Exp $
  if test "x$ac_cv_header_sys_poll_h" = xyes; then :
  
  else
-@@ -15496,7 +15496,7 @@ fi
+@@ -16962,7 +16962,7 @@ fi
  done
  
  
--for ac_func in asprintf atexit closefrom dup2 eaccess endpwent euidaccess ffsll ftruncate getcwd gethostbyname gethostname getloadavg gettimeofday glob ioperm inet_ntoa isascii memchr memmove memset mkdir mkdtemp munmap newlocale ppoll putenv re_comp regcomp select setenv socket strcasecmp strcasestr strchr strcspn strdup strerror strlcat strlcpy strncasecmp strndup strnlen strrchr strsep strspn strstr strtod strtol strtold strtoq unsetenv utime vasprintf getpeereid sysctl swapctl
-+for ac_func in asprintf atexit closefrom dup2 eaccess endpwent euidaccess ffsll ftruncate getcwd gethostbyname gethostname getloadavg gettimeofday glob ioperm inet_ntoa isascii memchr memmove memset mkdir mkdtemp munmap newlocale ppoll putenv re_comp regcomp select setenv socket strcasecmp strcasestr strchr strcspn strdup strerror strftime_l strlcat strlcpy strncasecmp strndup strnlen strptime_l strrchr strsep strspn strstr strtod strtol strtold strtoq unsetenv utime vasprintf getpeereid sysctl swapctl
+-for ac_func in asprintf atexit closefrom dup2 eaccess endpwent euidaccess ffsll ftruncate getcwd gethostbyname gethostname getloadavg gettimeofday glob ioperm inet_ntoa isascii memchr memmove memset mkdir mkdtemp munmap newlocale pipe2 ppoll putenv re_comp regcomp select setenv socket strcasecmp strcasestr strchr strcspn strdup strerror strlcat strlcpy strncasecmp strndup strnlen strrchr strsep strspn strstr strtod strtol strtold strtoq unsetenv uselocale utime vasprintf getpeereid sysctl swapctl malloc_trim
++for ac_func in asprintf atexit closefrom dup2 eaccess endpwent euidaccess ffsll ftruncate getcwd gethostbyname gethostname getloadavg gettimeofday glob ioperm inet_ntoa isascii memchr memmove memset mkdir mkdtemp munmap newlocale pipe2 ppoll putenv re_comp regcomp select setenv socket strcasecmp strcasestr strchr strcspn strdup strerror strftime_l strlcat strlcpy strncasecmp strndup strnlen strptime_l strrchr strsep strspn strstr strtod strtol strtold strtoq unsetenv uselocale utime vasprintf getpeereid sysctl swapctl malloc_trim
  do :
    as_ac_var=`$as_echo "ac_cv_func_$ac_func" | $as_tr_sh`
  ac_fn_c_check_func "$LINENO" "$ac_func" "$as_ac_var"
-@@ -15731,7 +15731,7 @@ rm -f core conftest.err conftest.$ac_obj
+@@ -17197,7 +17197,7 @@ rm -f core conftest.err conftest.$ac_obj
  LDFLAGS=${old_LDFLAGS}
  rm -f conftest.dynamics
  
@@ -38,7 +47,7 @@ $NetBSD: patch-configure,v 1.2 2016/09/23 17:50:19 jnemeth Exp $
  if test "x$ac_cv_header_sys_poll_h" = xyes; then :
    HAS_POLL=1
  
-@@ -18063,6 +18063,148 @@ fi
+@@ -19468,6 +19468,148 @@ fi
  
  
  
@@ -187,7 +196,7 @@ $NetBSD: patch-configure,v 1.2 2016/09/23 17:50:19 jnemeth Exp $
  # The cast to long int works around a bug in the HP C Compiler
  # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
  # declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
-@@ -19313,6 +19455,8 @@ $as_echo_n "checking if \"struct ifaddrs
+@@ -20570,6 +20712,8 @@ $as_echo_n "checking for getifaddrs() su
  
  	cat confdefs.h - <<_ACEOF >conftest.$ac_ext
  /* end confdefs.h.  */

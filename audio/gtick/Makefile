@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.54 2018/11/14 22:21:03 kleink Exp $
+# $NetBSD: Makefile,v 1.63 2021/02/07 06:30:13 ryoon Exp $
 #
 
 DISTNAME=	gtick-0.5.4
-PKGREVISION=	14
+PKGREVISION=	23
 CATEGORIES=	audio
 MASTER_SITES=	http://www.antcom.de/gtick/download/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.antcom.de/gtick/
+HOMEPAGE=	https://www.antcom.de/gtick/
 COMMENT=	Metronome application using GTK2+
 LICENSE=	gnu-gpl-v3
 

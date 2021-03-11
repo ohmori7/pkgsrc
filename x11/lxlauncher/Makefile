@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2018/11/14 22:22:46 kleink Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/17 20:20:29 leot Exp $
 
 DISTNAME=	lxlauncher-0.2.5
-PKGREVISION=	7
+PKGREVISION=	11
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=lxde/}
 EXTRACT_SUFX=	.tar.xz
@@ -17,8 +17,8 @@ GNU_CONFIGURE=	yes
 USE_TOOLS+=	intltool pkg-config msgfmt
 
 PKG_SYSCONFSUBDIR=	xdg
-MAKE_DIRS+=	${PKG_SYSCONFDIR}/lxlauncher \
-		${PKG_SYSCONFDIR}/menus
+MAKE_DIRS+=		${PKG_SYSCONFDIR}/lxlauncher \
+			${PKG_SYSCONFDIR}/menus
 
 EGDIR=			share/examples
 

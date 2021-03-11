@@ -1,0 +1,28 @@
+$NetBSD: patch-velox.conf.sample,v 1.2 2020/01/11 16:18:15 nia Exp $
+
+Make the defaults a bit more sensible for pkgsrc.
+
+--- velox.conf.sample.orig	2019-12-11 19:08:40.000000000 +0000
++++ velox.conf.sample
+@@ -1,7 +1,7 @@
+ # velox.conf
+ 
+ #   property                        value
+-set mod                             logo
++set mod                             alt
+ set window.border_color_active      0xff338833
+ set window.border_color_inactive    0xff888888
+ set window.border_width             2
+@@ -19,9 +19,9 @@ set tag.8.name                      8
+ set tag.9.name                      9
+ 
+ #      name             type    arguments
+-action spawn_terminal   spawn   exec st
+-action spawn_run        spawn   exec dmenu_run -b
+-action spawn_browser    spawn   exec netsurf
++action spawn_terminal   spawn   exec sakura
++action spawn_run	spawn   exec dmenu-wld_run -fn Terminus:pixelsize=14 -nf '#999999' -nb '#1a1a1a' -sf '#ffffff' -sb '#338833'
++action spawn_browser    spawn   exec netsurf-gtk3
+ 
+ #   key         modifiers           action
+ key j           mod                 focus_next

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.26 2019/02/09 19:51:09 rhialto Exp $
+# $NetBSD: Makefile,v 1.28 2020/01/26 17:31:48 rillig Exp $
 
 DISTNAME=	dante-1.4.2
-PKGREVISION=    1
+PKGREVISION=	1
 CATEGORIES=	net security
 MASTER_SITES=	http://www.inet.no/dante/files/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.inet.no/dante/
+HOMEPAGE=	https://www.inet.no/dante/
 COMMENT=	BSD-licensed socks 4/5 proxy suite
 LICENSE=	modified-bsd
 

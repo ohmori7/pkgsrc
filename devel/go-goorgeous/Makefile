@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.13 2019/05/27 15:18:22 bsiegert Exp $
+# $NetBSD: Makefile,v 1.30 2021/01/23 14:22:57 bsiegert Exp $
 
 DISTNAME=	goorgeous-0.0.20170816
 PKGNAME=	go-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	26
 MASTER_SITES=	${MASTER_SITE_GITHUB:=chaseadamsio/}
 CATEGORIES=	devel
 GITHUB_TAG=	16f200711ca25290fa82178ce651f31f0fea17d8
-GITHUB_PROJECT= ${PKGBASE:S/^go-//}
+GITHUB_PROJECT=	${PKGBASE:S/^go-//}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/chaseadamsio/goorgeous

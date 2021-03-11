@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.49 2019/03/25 06:21:06 leot Exp $
+# $NetBSD: Makefile,v 1.61 2020/11/05 09:09:18 ryoon Exp $
 
 DISTNAME=	mod_auth_mellon-0.14.2
 PKGNAME=	${APACHE_PKG_PREFIX}-${DISTNAME:S/mod_//:S/_/-/g}
+PKGREVISION=	10
 #PKGREVISION=	1
 CATEGORIES=	www security
 MASTER_SITES=	${MASTER_SITE_GITHUB:=UNINETT/}
@@ -24,6 +25,7 @@ SUBST_CLASSES+=		pthflags
 SUBST_STAGE.pthflags=	post-configure
 SUBST_FILES.pthflags=	Makefile
 SUBST_SED.pthflags=	-e 's| -pthread | |g'
+SUBST_NOOP_OK.pthflags=	yes
 
 INSTALLATION_DIRS+=	lib/httpd
 
@@ -33,7 +35,7 @@ do-install:
 	    ${APXS} -i -S LIBEXECDIR=${DESTDIR}"$${libexecdir}" 	\
 	      -n auth_mellon  mod_auth_mellon.la
 
-BUILDLINK_ABI_DEPENDS.lasso+=   lasso>=2.1.0
+BUILDLINK_ABI_DEPENDS.lasso+=	lasso>=2.1.0
 
 .include "../../security/lasso/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"

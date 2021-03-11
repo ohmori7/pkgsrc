@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.11 2019/05/23 12:00:48 adam Exp $
+# $NetBSD: Makefile,v 1.16 2020/04/01 17:44:54 adam Exp $
 
 PKGNAME=	${PYPKGPREFIX}-werkzeug-docs-${DISTNAME:C/[^-]*-//}
 COMMENT=	Python WSGI Utility Library (HTML documentation)
 
-BUILD_DEPENDS+=	${PYPKGPREFIX}-pallets-sphinx-themes-[0-9]*:../../textproc/py-pallets-sphinx-themes
-BUILD_DEPENDS+=	${PYPKGPREFIX}-sphinx>=1.2.3nb1:../../textproc/py-sphinx
-BUILD_DEPENDS+=	${PYPKGPREFIX}-sphinx-issues-[0-9]*:../../textproc/py-sphinx-issues
+TOOL_DEPENDS+=	${PYPKGPREFIX}-pallets-sphinx-themes>=1.2.2nb1:../../textproc/py-pallets-sphinx-themes
+TOOL_DEPENDS+=	${PYPKGPREFIX}-sphinx-issues-[0-9]*:../../textproc/py-sphinx-issues
+TOOL_DEPENDS+=	${PYPKGPREFIX}-sphinxcontrib-log-cabinet-[0-9]*:../../textproc/py-sphinxcontrib-log-cabinet
+TOOL_DEPENDS+=	${PYPKGPREFIX}-werkzeug-[0-9]*:../../www/py-werkzeug
 
 USE_TOOLS+=	gmake
 NO_CONFIGURE=	yes
@@ -29,7 +30,7 @@ do-install:
 
 PYTHON_FOR_BUILD_ONLY=	yes
 
-MAKE_FLAGS+=	SPHINXBUILD=${PREFIX}/bin/sphinx-build${PYVERSSUFFIX}
+MAKE_FLAGS+=	SPHINXBUILD=${PREFIX}/bin/sphinx-build-${PYVERSSUFFIX}
 
 .include "../../lang/python/pyversion.mk"
 .include "../../mk/bsd.pkg.mk"

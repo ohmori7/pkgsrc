@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.16 2018/08/22 09:45:06 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2020/08/31 18:09:30 wiz Exp $
 
 DISTNAME=	Data-Currency-0.06000
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	finance perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Data/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/perldoc?Data::Currency
+HOMEPAGE=	https://metacpan.org/pod/Data::Currency
 COMMENT=	Container class for currency conversion/formatting
 LICENSE=	${PERL5_LICENSE}
 

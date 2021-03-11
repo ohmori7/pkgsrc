@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2017/09/10 01:01:34 dholland Exp $
+# $NetBSD: Makefile,v 1.5 2021/01/09 12:53:45 rxg Exp $
 
-DISTNAME=	tmate-2.2.1
+DISTNAME=	tmate-2.4.0
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_GITHUB:=tmate-io/}
 GITHUB_TAG=	${PKGVERSION_NOREV}
@@ -19,6 +19,7 @@ pre-configure:
 	cd ${WRKSRC} && ./autogen.sh
 
 .include "../../devel/libevent/buildlink3.mk"
+.include "../../devel/libexecinfo/buildlink3.mk"
 .include "../../devel/msgpack/buildlink3.mk"
 .include "../../security/libssh/buildlink3.mk"
 .include "../../mk/curses.buildlink3.mk"

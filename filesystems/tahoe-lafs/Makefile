@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.38 2019/04/26 13:13:57 maya Exp $
+# $NetBSD: Makefile,v 1.42 2020/12/04 20:45:18 nia Exp $
 
 DISTNAME=	tahoe-lafs-1.12.1
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	filesystems
 MASTER_SITES=	https://tahoe-lafs.org/source/tahoe-lafs/tarballs/
 EXTRACT_SUFX=	.tar.bz2
@@ -40,7 +40,7 @@ DEPENDS+=	${PYPKGPREFIX}-nevow>=0.11.1:../../www/py-nevow
 DEPENDS+=	${PYPKGPREFIX}-service_identity-[0-9]*:../../security/py-service_identity
 DEPENDS+=	${PYPKGPREFIX}-yaml>=3.11:../../textproc/py-yaml
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-xml via py-nevow, py-zbase32, py-cryptopp, py-darcsver
+PYTHON_VERSIONS_ACCEPTED=	27 # py-xml via py-nevow, py-zbase32, py-cryptopp, py-darcsver
 
 # Note that there is an upstream (inherited from setuptools) bug
 #   https://tahoe-lafs.org/trac/tahoe-lafs/ticket/1258#comment:29 that
@@ -59,12 +59,10 @@ post-extract:
 	chmod -R +r ${WRKSRC}
 .endif
 
-REPLACE_PYTHON+= src/allmydata/reliability.py
-REPLACE_PYTHON+= src/allmydata/storage/shares.py
-REPLACE_PYTHON+= src/buildtest/test_build_with_fake_dist.py
+REPLACE_PYTHON+=	src/allmydata/storage/shares.py
 
-PKG_GROUPS=	tahoes
-PKG_USERS=	tahoes:tahoes
+PKG_GROUPS=		tahoes
+PKG_USERS=		tahoes:tahoes
 PKG_GECOS.tahoes=	tahoe server
 
 do-test:

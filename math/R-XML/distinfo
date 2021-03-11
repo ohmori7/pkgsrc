@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.8 2018/02/09 00:19:24 minskim Exp $
+$NetBSD: distinfo,v 1.10 2021/01/03 11:14:17 mef Exp $
 
-SHA1 (R/XML_3.98-1.9.tar.gz) = 830d507ad565cd681d4f48a7bbe2dc86ed3a19bd
-RMD160 (R/XML_3.98-1.9.tar.gz) = 3ebdabaeaf827bded9db214af9298687e26a3294
-SHA512 (R/XML_3.98-1.9.tar.gz) = 7b8c658a14555492c415f74d2381dac348e838f0ef4b669f0e0c0ce529d27e3101b3c21a1163f4e6a78f19db026edfdfb1ddd116670cc8d0f95bb8f87ab8a501
-Size (R/XML_3.98-1.9.tar.gz) = 1599437 bytes
+SHA1 (R/XML_3.99-0.5.tar.gz) = 6f4cd00bb328516a868c08c73340d5c8f92a5485
+RMD160 (R/XML_3.99-0.5.tar.gz) = 7efd196060fdd1a1cff87a095f0ca83e76df3b15
+SHA512 (R/XML_3.99-0.5.tar.gz) = 43737430783d905cd1df0831275047d27d0adf7f3ffc6d4e19f1b2e030e13e2bbbc1fac5de7db7548c43e3de5c79db1dc918874a862c379b8fa2bace6f43fcdb
+Size (R/XML_3.99-0.5.tar.gz) = 968563 bytes

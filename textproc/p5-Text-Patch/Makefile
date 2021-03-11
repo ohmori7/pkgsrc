@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.9 2018/08/22 09:47:01 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2020/08/31 18:12:03 wiz Exp $
 
 DISTNAME=	Text-Patch-1.8
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	perl5 textproc
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Text/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Perl5 module patches text with given patch
-HOMEPAGE=	http://search.cpan.org/dist/Text-Patch/
+HOMEPAGE=	https://metacpan.org/release/Text-Patch
 LICENSE=	gnu-gpl-v2
 
 DEPENDS+=		p5-Text-Diff-[0-9]*:../../textproc/p5-Text-Diff

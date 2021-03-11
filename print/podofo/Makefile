@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.30 2018/03/12 11:17:27 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2020/08/17 20:19:56 leot Exp $
 
-DISTNAME=	podofo-0.9.5
+DISTNAME=	podofo-0.9.6
 PKGREVISION=	2
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=podofo/}
@@ -13,11 +13,16 @@ LICENSE=	gnu-lgpl-v2 AND gnu-gpl-v2
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	pkg-config
-CMAKE_ARGS+=	-DPODOFO_BUILD_SHARED:BOOL=TRUE
-CMAKE_ARGS+=	-DPODOFO_BUILD_STATIC:BOOL=TRUE
+
+CMAKE_ARGS+=	-DPODOFO_BUILD_SHARED=ON
+CMAKE_ARGS+=	-DPODOFO_BUILD_STATIC=ON
 CMAKE_ARGS+=	-DFREETYPE_INCLUDE_DIR_FT2BUILD:PATH=${BUILDLINK_PREFIX.freetype2}/include/freetype2
 CMAKE_ARGS+=	-DFREETYPE_INCLUDE_DIR_FTHEADER:PATH=${BUILDLINK_PREFIX.freetype2}/include/freetype2/config
 CMAKE_ARGS+=	-DFREETYPE_LIB_PATHS:PATH=${BUILDLINK_PREFIX.freetype2}/lib
+
+# Avoid building unit tests.
+CMAKE_ARGS+=	-DCMAKE_DISABLE_FIND_PACKAGE_CppUnit=TRUE
+CMAKE_ARGS+=	-DCMAKE_DISABLE_FIND_PACKAGE_LUA=TRUE
 
 .include "options.mk"
 
@@ -29,5 +34,6 @@ CMAKE_ARGS+=	-DFREETYPE_LIB_PATHS:PATH=${BUILDLINK_PREFIX.freetype2}/lib
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
+.include "../../textproc/libunistring/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,68 +1,66 @@
-# $NetBSD: Makefile,v 1.192 2019/05/05 22:49:53 ryoon Exp $
-#
+# $NetBSD: Makefile,v 1.200 2020/12/04 04:56:16 riastradh Exp $
 
-DISTNAME=		gnome-session-2.26.2
-PKGREVISION=		74
+DISTNAME=		gnome-session-3.38.0
+PKGREVISION=		1
 CATEGORIES=		x11 gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-session/2.26/}
-SITES.gnome-splash-2.16.0.png=	${MASTER_SITE_LOCAL:=gnome-splash/}
-EXTRACT_SUFX=		.tar.bz2
-DISTFILES=		${DISTNAME}${EXTRACT_SUFX} gnome-splash-2.16.0.png
+MASTER_SITES=		${MASTER_SITE_GNOME:=sources/${PKGBASE}/${PKGVERSION_NOREV:R}/}
+EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		https://www.gnome.org/
-COMMENT=		GNOME2 session management utilities
+HOMEPAGE=		https://gitlab.gnome.org/GNOME/gnome-session
+COMMENT=		GNOME3 session management utilities
+LICENSE=		gnu-gpl-v2
 
-BUILD_DEPENDS+=		xmlto-[0-9]*:../../textproc/xmlto
+TOOL_DEPENDS+=		gdbus-codegen-[0-9]*:../../devel/gdbus-codegen
+TOOL_DEPENDS+=		libxslt-[0-9]*:../../textproc/libxslt
+TOOL_DEPENDS+=		xmlto-[0-9]*:../../textproc/xmlto
 
-CONFLICTS+=		gnome-core<1.4.2nb4
+USE_TOOLS+=		pkg-config msgfmt xgettext
 
-EXTRACT_ONLY=		${DISTNAME}${EXTRACT_SUFX}
-GNU_CONFIGURE=		yes
-USE_LIBTOOL=		yes
-USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		gmake intltool msgfmt perl pkg-config
+.include "../../mk/bsd.prefs.mk"
 
-MAKE_ENV+=		REAL_GCONFTOOL=${GCONFTOOL2:Q}
+# msgfmt: unknown option -- xml
+.if ${OPSYS} == "NetBSD"
+TOOLS_PLATFORM.msgfmt=
+.endif
 
-CPPFLAGS+=		-DPREFIX="\"${PREFIX}\""
-CPPFLAGS+=		-DPKG_SYSCONFDIR="\"${PKG_SYSCONFDIR}\""
+.include "../../graphics/MesaLib/features.mk"
 
-GCONF_SCHEMAS=		gnome-session.schemas
+PLIST_VARS+=		gles2
+.if ${MESALIB_SUPPORTS_GLESv2} == "no"
+MESON_ARGS+=		-Dgles2=false
+.else
+PLIST.gles2=		yes
+.endif
 
-post-extract:
-	${MV} ${WRKSRC}/data/gnome-splash.png \
-	    ${WRKSRC}/data/gnome-splash-orig.png
-	${CP} ${DISTDIR}/gnome-splash-2.16.0.png \
-	    ${WRKSRC}/data/gnome-splash.png
+MESON_ARGS+=		-Dsystemd=false
+MESON_ARGS+=		-Dsystemd_session=disable
+MESON_ARGS+=		-Dsystemd_journal=false
+MESON_ARGS+=		-Dconsolekit=true
 
-post-install:
-	${INSTALL_DATA} ${WRKSRC}/data/gnome-splash-orig.png \
-	    ${DESTDIR}${PREFIX}/share/pixmaps/splash/gnome-splash-orig.png
-
+.include "../../devel/meson/build.mk"
+.include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
-.include "../../devel/GConf/schemas.mk"
-.include "../../devel/GConf-ui/buildlink3.mk"
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.16.0
-.include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/libglade/buildlink3.mk"
+.include "../../devel/glib2/schemas.mk"
 .include "../../devel/pango/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../graphics/libepoxy/buildlink3.mk"
+.include "../../textproc/libxslt/buildlink3.mk"
 .include "../../security/policykit/buildlink3.mk"
 .include "../../security/policykit-gnome/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 BUILDLINK_API_DEPENDS.dbus-glib+=	dbus-glib>=0.76
 .include "../../sysutils/dbus-glib/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../sysutils/gsettings-desktop-schemas/buildlink3.mk"
 .include "../../sysutils/gnome-settings-daemon/buildlink3.mk"
-BUILDLINK_DEPMETHOD.libxslt?=	build
-.include "../../textproc/libxslt/buildlink3.mk"
-.include "../../x11/gnome-control-center/buildlink3.mk"
-.include "../../x11/gnome-desktop/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.11.1
-.include "../../x11/gtk2/buildlink3.mk"
+.include "../../textproc/json-glib/buildlink3.mk"
+.include "../../x11/gnome-desktop3/buildlink3.mk"
+.include "../../x11/gtk3/buildlink3.mk"
 .include "../../x11/libSM/buildlink3.mk"
 .include "../../x11/libXau/buildlink3.mk"
 .include "../../x11/libXrender/buildlink3.mk"
 .include "../../x11/startup-notification/buildlink3.mk"
-.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../x11/xtrans/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

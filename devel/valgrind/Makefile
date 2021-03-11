@@ -1,19 +1,18 @@
-# $NetBSD: Makefile,v 1.29 2019/02/22 23:47:50 alnsn Exp $
+# $NetBSD: Makefile,v 1.33 2020/10/08 03:30:58 mcf Exp $
 #
 
-DISTNAME=		valgrind-3.13.0
-PKGREVISION=		1
+DISTNAME=		valgrind-3.16.1
 CATEGORIES=		devel
 MASTER_SITES=		ftp://sourceware.org/pub/valgrind/
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://valgrind.org/
+HOMEPAGE=		https://valgrind.org/
 COMMENT=		Debugging and profiling tools
 LICENSE=		gnu-gpl-v2
 
 USE_PKGLOCALEDIR=	yes
-PKGCONFIG_OVERRIDE+=	${WRKSRC}/valgrind.pc.in
+PKGCONFIG_OVERRIDE+=	valgrind.pc.in
 GNU_CONFIGURE=		yes
 
 ONLY_FOR_PLATFORM=	Darwin-*-i386 Darwin-*-x86_64 \

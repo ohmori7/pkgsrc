@@ -1,9 +1,11 @@
-@comment $NetBSD: PLIST,v 1.29 2019/05/23 03:04:16 gutteridge Exp $
+@comment $NetBSD: PLIST,v 1.32 2020/01/29 05:00:58 gutteridge Exp $
 bin/xfdesktop
 bin/xfdesktop-settings
 man/man1/xfdesktop.1
 share/applications/xfce-backdrop-settings.desktop
 share/backgrounds/xfce/xfce-blue.jpg
+share/backgrounds/xfce/xfce-stripes.png
+share/backgrounds/xfce/xfce-teal.jpg
 share/icons/hicolor/32x32/apps/xfce4-backdrop.png
 share/icons/hicolor/32x32/apps/xfce4-menueditor.png
 share/icons/hicolor/48x48/apps/xfce4-backdrop.png
@@ -35,11 +37,13 @@ share/locale/gl/LC_MESSAGES/xfdesktop.mo
 share/locale/he/LC_MESSAGES/xfdesktop.mo
 share/locale/hr/LC_MESSAGES/xfdesktop.mo
 share/locale/hu/LC_MESSAGES/xfdesktop.mo
+share/locale/hy_AM/LC_MESSAGES/xfdesktop.mo
 share/locale/id/LC_MESSAGES/xfdesktop.mo
 share/locale/ie/LC_MESSAGES/xfdesktop.mo
 share/locale/is/LC_MESSAGES/xfdesktop.mo
 share/locale/it/LC_MESSAGES/xfdesktop.mo
 share/locale/ja/LC_MESSAGES/xfdesktop.mo
+share/locale/ka/LC_MESSAGES/xfdesktop.mo
 share/locale/kk/LC_MESSAGES/xfdesktop.mo
 share/locale/ko/LC_MESSAGES/xfdesktop.mo
 share/locale/lt/LC_MESSAGES/xfdesktop.mo

@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.39 2018/11/14 22:22:09 kleink Exp $
+# $NetBSD: buildlink3.mk,v 1.47 2021/01/08 14:08:35 nia Exp $
 
 BUILDLINK_TREE+=	avahi
 
@@ -6,39 +6,8 @@ BUILDLINK_TREE+=	avahi
 AVAHI_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.avahi+=	avahi>=0.6.23
-BUILDLINK_ABI_DEPENDS.avahi+=	avahi>=0.6.32nb16
+BUILDLINK_ABI_DEPENDS.avahi+=	avahi>=0.6.32nb25
 BUILDLINK_PKGSRCDIR.avahi?=	../../net/avahi
-
-pkgbase := avahi
-.include "../../mk/pkg-build-options.mk"
-
-.if !empty(PKG_BUILD_OPTIONS.avahi:Mgdbm)
-.  include "../../databases/gdbm/buildlink3.mk"
-.endif
-
-.if !empty(PKG_BUILD_OPTIONS.avahi:Mgtk2)
-.include "../../x11/gtk2/buildlink3.mk"
-.endif
-
-.if !empty(PKG_BUILD_OPTIONS.avahi:Mgtk3)
-.include "../../x11/gtk3/buildlink3.mk"
-.endif
-
-.if !empty(PKG_BUILD_OPTIONS.avahi:Mintrospection)
-.include "../../devel/gobject-introspection/buildlink3.mk"
-.endif
-
-.if !empty(PKG_BUILD_OPTIONS.avahi:Mmono)
-.include "../../x11/gtk-sharp/buildlink3.mk"
-.endif
-
-.if !empty(PKG_BUILD_OPTIONS.avahi:Mqt)
-.include "../../x11/qt4-libs/buildlink3.mk"
-.endif
-
-.if !empty(PKG_BUILD_OPTIONS.avahi:Mpython)
-.include "../../lang/python/application.mk"
-.endif
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"

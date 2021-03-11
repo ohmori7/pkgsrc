@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.56 2019/05/05 07:59:38 adam Exp $
+# $NetBSD: Makefile,v 1.62 2021/03/03 08:30:48 adam Exp $
 
-DISTNAME=	rocksndiamonds-4.1.2.0
+DISTNAME=	rocksndiamonds-4.2.3.1
 
 COMMENT=	Game like Boulder Dash, Emerald Mine, or Sokoban
 

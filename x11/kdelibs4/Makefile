@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.99 2019/05/23 19:23:23 rillig Exp $
+# $NetBSD: Makefile,v 1.122 2021/01/01 08:24:59 ryoon Exp $
 
 DISTNAME=	kdelibs-4.14.38
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	4
+PKGREVISION=	19
 CATEGORIES=	x11
 COMMENT=	Support libraries for the KDE integrated X11 desktop
 MASTER_SITES=	${MASTER_SITE_KDE:=applications/17.08.3/src/}
@@ -18,9 +18,9 @@ CONFLICTS=	kdelibs-[0-9]*
 # BUILD_MAKE_FLAGS+= VERBOSE=1
 #CMAKE_ARGS+=	-DCMAKE_BUILD_TYPE=Debug
 
-CMAKE_DEPENDENCIES_REWRITE= _KDE_build/KDELibsDependencies.cmake
-CMAKE_DEPENDENCIES_REWRITE+= _KDE_build/KDELibsDependenciesInternal.cmake
-CMAKE_MODULE_PATH_OVERRIDE+= kjsembed/qtonly/CMakeLists.txt
+CMAKE_DEPENDENCIES_REWRITE=	_KDE_build/KDELibsDependencies.cmake
+CMAKE_DEPENDENCIES_REWRITE+=	_KDE_build/KDELibsDependenciesInternal.cmake
+CMAKE_MODULE_PATH_OVERRIDE+=	kjsembed/qtonly/CMakeLists.txt
 
 CMAKE_ARGS+=	-DKDE_DISTRIBUTION_TEXT:STRING="NetBSD pkgsrc"
 CMAKE_ARGS+=	-DWITH_Avahi:BOOL=off
@@ -39,6 +39,8 @@ CONF_FILES+=	${PREFIX}/share/examples/kde4-dbus/org.kde.auth.conf \
 DEPENDS+=	docbook-xml>=4.2:../../textproc/docbook-xml
 DEPENDS+=	docbook-xsl>=1.75:../../textproc/docbook-xsl
 
+USE_LANGUAGES+=	gnu++11
+
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1 ${PKGMANDIR}/man7 ${PKGMANDIR}/man8
 
 REPLACE_PERL+= \
@@ -46,25 +48,18 @@ REPLACE_PERL+= \
 	kio/useragent.pl \
 	kio/misc/fileshareset \
 	kioslave/http/kcookiejar/kcookiescfg.pl \
-	kdeui/preparetips \
-	plasma/data/kconfig_updates/plasma_popupapplet_fix_groups.pl
+	kdeui/preparetips
 
-CHECK_PORTABILITY_SKIP+=kate/tests/hl/highlight.sh
+CHECK_PORTABILITY_SKIP+=	kate/tests/hl/highlight.sh
 
 SUBST_CLASSES+=			kdelibsfix
 SUBST_STAGE.kdelibsfix=		pre-configure
 SUBST_MESSAGE.kdelibsfix=	Fixing hardcoded paths.
 SUBST_FILES.kdelibsfix=		kde3support/kdeui/k3sconfig.cpp
-SUBST_FILES.kdelibsfix+=	kio/kssl/kopenssl.cpp
 SUBST_VARS.kdelibsfix=		LOCALBASE
 
 # Avoid the WRKDIR path in the installed cmake file
-SUBST_CLASSES+=			phononrelpath
-SUBST_STAGE.phononrelpath=	post-configure
-SUBST_MESSAGE.phononrelpath=	Fixing phonon RELWITHDEBINFO path
-SUBST_FILES.phononrelpath=	_KDE_build/CMakeFiles/Export/${LOCALBASE:S^/^_^}/share/kde/apps/cmake/modules/KDELibs4LibraryTargets-${TARGET_NAME}.cmake
-SUBST_FILES.phononrelpath+=	_KDE_build/experimental/libkdeclarative/CMakeFiles/Export/${LOCALBASE:S^/^_^}/lib/cmake/KDeclarative/KDeclarativeLibraryTargets-${TARGET_NAME}.cmake
-SUBST_SED.phononrelpath=	-e 's:${BUILDLINK_DIR}:${PREFIX}:'
+# SUBST BLOCK deleted
 
 USE_TOOLS+=	flex gmake
 PLIST_VARS+=	kgrantpty mac notmac
@@ -92,11 +87,12 @@ LDFLAGS.SunOS+=		-lintl
 
 # jasper uses SIZE_MAX and friends in its headers.
 CXXFLAGS+=	-D__STDC_LIMIT_MACROS
+CXXFLAGS+=	-fpermissive
 
 BUILDLINK_DEPMETHOD.qt4-tools=		full
 .include "../../meta-pkgs/kde4/kde4.mk"
 
-BUILDLINK_API_DEPENDS.strigi+=	strigi>=0.5.11
+BUILDLINK_API_DEPENDS.strigi+=		strigi>=0.5.11
 #BUILDLINK_API_DEPENDS.soprano+=	soprano>=2.5.60
 #BUILDLINK_API_DEPENDS.shared-desktop-ontologies+=	shared-desktop-ontologies>=0.10.0
 

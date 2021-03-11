@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:46:35 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:11:28 wiz Exp $
 
 DISTNAME=		lilo-22.8.src
-PKGREVISION=		7
+PKGREVISION=		9
 PKGNAME=		${DISTNAME:S/.src//}
 CATEGORIES=		sysutils
 MASTER_SITES=		${MASTER_SITE_SUNSITE:=system/boot/lilo/}
@@ -20,9 +20,9 @@ WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 # Don't force perl for extra tool -- maybe a MESSAGE?
 #USE_PERL5=		YES
 
-#BUILD_DEPENDS+=		dev86>=0.16.10:../../devel/dev86
+#BUILD_DEPENDS+=	dev86>=0.16.10:../../devel/dev86
 # bcc is old and doesn't have -v switch to indicate version
-#BUILD_DEPENDS+=		bcc>=95.3.12:../../devel/bcc
+#BUILD_DEPENDS+=	bcc>=95.3.12:../../devel/bcc
 BUILD_DEPENDS+=		bin86>=0.16.10:../../devel/bin86
 BUILD_DEPENDS+=		nasm>=0.98:../../devel/nasm
 

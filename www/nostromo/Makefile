@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.1 2018/02/11 13:56:21 ast Exp $
+# $NetBSD: Makefile,v 1.7 2020/12/03 10:45:54 ast Exp $
 
-DISTNAME=	nostromo-1.9.6
-PKGREVISION=	1
+DISTNAME=	nostromo-1.9.9
+PKGREVISION=	3
 CATEGORIES=	www
 MASTER_SITES=	http://www.nazgul.ch/dev/
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
@@ -24,13 +24,8 @@ INSTALLATION_DIRS+=	${EGDIR}/icons
 INSTALLATION_DIRS+=	${EGDIR}/htdocs ${EGDIR}/htdocs/cgi-bin
 
 SUBST_CLASSES+=		nostromo
-SUBST_MESSAGE.nostromo=	Fixing GNUmakefile src/nhttpd/GNUmakefile
-SUBST_STAGE.nostromo=	pre-patch
-SUBST_FILES.nostromo=	GNUmakefile \
-			src/nhttpd/GNUmakefile \
-			src/tools/GNUmakefile \
-			src/libbsd/GNUmakefile \
-			src/libmy/GNUmakefile
+SUBST_STAGE.nostromo=	post-extract
+SUBST_FILES.nostromo=	GNUmakefile
 SUBST_SED.nostromo+=	-e '/install -d -o root -g daemon -m 755/d'
 SUBST_SED.nostromo+=	-e 's,cc ${CCFLAGS},${CC} ${CCFLAGS},g'
 SUBST_SED.nostromo+=	-e 's,install -c -o root -g bin -m 555,${INSTALL},g'
@@ -39,5 +34,7 @@ SUBST_SED.nostromo+=	-e 's,install -c -o root -g bin -m 644,${INSTALL_DATA},g'
 SUBST_SED.nostromo+=	-e 's,/usr/local,${DESTDIR}${PREFIX},g'
 SUBST_SED.nostromo+=	-e 's,/usr/share/man,${DESTDIR}${PREFIX}/${PKGMANDIR},g'
 SUBST_SED.nostromo+=	-e 's,/var/nostromo,${DESTDIR}${PREFIX}/${EGDIR},g'
+
+BUILDLINK_TRANSFORM+=	rm:-Werror
 
 .include "../../mk/bsd.pkg.mk"

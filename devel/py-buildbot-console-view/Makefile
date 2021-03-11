@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.6 2018/11/15 14:14:14 adam Exp $
+# $NetBSD: Makefile,v 1.8 2020/02/19 19:07:18 adam Exp $
 
-DISTNAME=	buildbot-console-view-1.5.0
+DISTNAME=	buildbot-console-view-2.6.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel net python
 MASTER_SITES=	${MASTER_SITE_PYPI:=b/buildbot-console-view/}
@@ -14,6 +14,8 @@ DEPENDS+=	${PYPKGPREFIX}-buildbot-[0-9]*:../../devel/py-buildbot
 BUILD_DEPENDS+=	${PYPKGPREFIX}-buildbot-pkg-[0-9]*:../../devel/py-buildbot-pkg
 
 USE_LANGUAGES=	# none
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

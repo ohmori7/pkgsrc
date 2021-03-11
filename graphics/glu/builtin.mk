@@ -1,4 +1,4 @@
-# $NetBSD: builtin.mk,v 1.15 2018/01/14 14:58:39 rillig Exp $
+# $NetBSD: builtin.mk,v 1.17 2019/11/02 22:37:58 rillig Exp $
 
 BUILTIN_PKG:=	glu
 
@@ -32,7 +32,7 @@ MAKEVARS+=	IS_BUILTIN.glu
 .  if empty(PC_GLU:M__nonexistent__)
 BUILTIN_VERSION.Mesa!= ${SED} -n -e 's/Version: //p' ${PC_GLU}
 .  elif empty(H_GLU:M__nonexistent__)
-.    include "../../graphics/Mesa/version.mk"
+.    include "../../graphics/MesaLib/version.mk"
 .  else # ?
 BUILTIN_VERSION.Mesa:= 0.something-weird-happened
 .  endif
@@ -66,7 +66,7 @@ USE_BUILTIN.glu!=							\
 .    endif
 .  endif  # PREFER.glu
 .endif
-MAKEVARS+=	USE_BUILTIN.glu
+MAKEVARS+=		USE_BUILTIN.glu
 
 ###
 ### The section below only applies if we are not including this file

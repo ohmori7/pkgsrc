@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.37 2018/08/22 09:44:19 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2020/08/31 18:08:26 wiz Exp $
 
-DISTNAME=	Moo-2.003004
+DISTNAME=	Moo-2.004000
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/H/HA/HAARG/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Moo/
+HOMEPAGE=	https://metacpan.org/release/Moo
 COMMENT=	Minimalist Object Orientation (with Moose compatiblity)
 LICENSE=	${PERL5_LICENSE}
 
@@ -19,9 +19,7 @@ DEPENDS+=	p5-strictures>=2.000000:../../devel/p5-strictures
 DEPENDS+=	p5-Import-Into>=1.002000:../../devel/p5-Import-Into
 DEPENDS+=	p5-Sub-Quote>=2.003001:../../devel/p5-Sub-Quote
 
-BUILD_DEPENDS+=	p5-Test-Fatal>=0.003:../../devel/p5-Test-Fatal
-
-EXTRACT_USING=	bsdtar
+TEST_DEPENDS+=	p5-Test-Fatal>=0.003:../../devel/p5-Test-Fatal
 
 PERL5_PACKLIST=	auto/Moo/.packlist
 

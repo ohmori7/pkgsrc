@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2018/12/16 08:31:20 ryoon Exp $
+# $NetBSD: Makefile,v 1.3 2020/03/13 15:48:52 nia Exp $
 #
 
 TB_VER=		52.9.1
@@ -11,12 +11,14 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.mozillamessaging.com/en-US/thunderbird/
 COMMENT=	Language packs for mail/thunderbird
 
+DEPENDS+=	thunderbird52>=${PKGVERSION_NOREV}:../../mail/thunderbird52
+
 DIST_SUBDIR=	${PKGNAME_NOREV:S/thunderbird52-/thunderbird-/}
 DISTFILES=	${XPI_FILES}
 
 NO_BUILD=	yes
 
-TB_LOCALES=	        ar ast be bg bn-BD br ca cs cy		\
+TB_LOCALES=		ar ast be bg bn-BD br ca cs cy		\
                         da de dsb el en-GB en-US es-AR es-ES et	\
                         eu fi fr fy-NL ga-IE gd gl he hr hsb	\
                         hy-AM hu id is it ja ko			\

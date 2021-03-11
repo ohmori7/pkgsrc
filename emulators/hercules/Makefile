@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2018/08/22 09:45:04 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2020/08/31 18:09:27 wiz Exp $
 
-DISTNAME=		hercules-3.11
-PKGREVISION=		4
+DISTNAME=		hercules-3.13
+PKGREVISION=		1
 CATEGORIES=		emulators
 MASTER_SITES=		http://downloads.hercules-390.eu/
 
@@ -25,7 +25,7 @@ USE_TOOLS+=		perl:run
 
 INSTALLATION_DIRS+=	bin share/examples/hercules
 #CONFIGURE_ARGS+=	--enable-setuid-hercifc=hercules
-#SPECIAL_PERMS+=		${PREFIX}/bin/hercifc ${SETUID_ROOT_PERMS}
+#SPECIAL_PERMS+=	${PREFIX}/bin/hercifc ${SETUID_ROOT_PERMS}
 
 pre-configure:
 	${RM} ${WRKSRC}/ltdl.h ${WRKSRC}/ltdl.c

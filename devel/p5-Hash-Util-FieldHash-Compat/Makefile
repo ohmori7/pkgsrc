@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.16 2018/08/22 09:44:07 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.21 2020/09/04 13:45:14 wiz Exp $
 
 DISTNAME=	Hash-Util-FieldHash-Compat-0.11
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Hash/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Hash-Util-FieldHash-Compat/
+HOMEPAGE=	https://metacpan.org/release/Hash-Util-FieldHash-Compat
 COMMENT=	Perl 5 module to user Hash::Util::FieldHash or ties
 LICENSE=	${PERL5_LICENSE}
 
@@ -19,13 +18,11 @@ PERL5_PACKLIST=	auto/Hash/Util/FieldHash/Compat/.packlist
 # version for pkgsrc. The module Hash::Util::FieldHash is a core
 # module since version 5.9.4. Thus this module/package does not need
 # any of the two dependencies below.
-#DEPENDS+= p5-Tie-RefHash>=1.38:../../devel/p5-Tie-RefHash
+#DEPENDS+=	p5-Tie-RefHash>=1.38:../../devel/p5-Tie-RefHash
 # ---------------------
 # Data for 2015-06-01
 # Tie::RefHash::Weak was not in CORE (or so I think)
-DEPENDS+= p5-Tie-RefHash-Weak>=0.08:../../devel/p5-Tie-RefHash-Weak
-
-BUILD_DEPENDS+=	p5-Test-Simple>=1.001010:../../devel/p5-Test-Simple
+DEPENDS+=	p5-Tie-RefHash-Weak>=0.08:../../devel/p5-Tie-RefHash-Weak
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

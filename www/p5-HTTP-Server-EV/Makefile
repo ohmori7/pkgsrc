@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:47:43 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2020/08/31 18:12:57 wiz Exp $
 
 DISTNAME=	HTTP-Server-EV-0.69
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=HTTP/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/HTTP-Server-EV/
+HOMEPAGE=	https://metacpan.org/release/HTTP-Server-EV
 COMMENT=	Asynchronous HTTP server using EV event loop
 LICENSE=	${PERL5_LICENSE}
 
@@ -21,7 +21,7 @@ BUILD_DEPENDS+=	p5-AnyEvent-HTTP-[0-9]*:../../www/p5-AnyEvent-HTTP
 BUILD_DEPENDS+=	p5-HTTP-Message-[0-9]*:../../www/p5-HTTP-Message
 
 EXTRACT_USING=	bsdtar
-PERL5_PACKLIST=		auto/HTTP/Server/EV/.packlist
+PERL5_PACKLIST=	auto/HTTP/Server/EV/.packlist
 
 .include "../../devel/p5-EV/buildlink3.mk"
 .include "../../lang/perl5/module.mk"

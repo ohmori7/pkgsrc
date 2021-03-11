@@ -1,12 +1,15 @@
-@comment $NetBSD: PLIST,v 1.3 2016/11/17 22:33:54 wiedi Exp $
+@comment $NetBSD: PLIST,v 1.6 2021/02/26 15:39:46 schmonz Exp $
 bin/goaccess
 man/man1/goaccess.1
-share/doc/goaccess/app.css
-share/doc/goaccess/app.js
-share/doc/goaccess/bootstrap.min.css
-share/doc/goaccess/charts.js
-share/doc/goaccess/d3.v3.min.js
-share/doc/goaccess/fa.min.css
-share/doc/goaccess/hogan.min.js
-share/doc/goaccess/tpls.html
+share/examples/goaccess/browsers.list
 share/examples/goaccess/goaccess.conf
+share/examples/goaccess/podcast.list
+share/locale/de/LC_MESSAGES/goaccess.mo
+share/locale/es/LC_MESSAGES/goaccess.mo
+share/locale/fr/LC_MESSAGES/goaccess.mo
+share/locale/ja/LC_MESSAGES/goaccess.mo
+share/locale/pt_BR/LC_MESSAGES/goaccess.mo
+share/locale/ru/LC_MESSAGES/goaccess.mo
+share/locale/sv/LC_MESSAGES/goaccess.mo
+share/locale/uk/LC_MESSAGES/goaccess.mo
+share/locale/zh_CN/LC_MESSAGES/goaccess.mo

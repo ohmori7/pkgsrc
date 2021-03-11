@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.110 2018/11/14 22:21:06 kleink Exp $
+# $NetBSD: Makefile,v 1.118 2021/01/03 18:54:05 adam Exp $
 
-DISTNAME=	TiMidity++-2.14.0
+DISTNAME=	TiMidity++-2.15.0
 PKGNAME=	${DISTNAME:S/TiMidity++/timidity/}
-PKGREVISION=	25
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=timidity/}
-EXTRACT_SUFX=	.tar.bz2
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://timidity.sourceforge.net/
@@ -49,8 +48,8 @@ TIMIDITY_NATIVE_AUDIO=	alsa,oss
 TIMIDITY_NATIVE_AUDIO=	darwin
 .endif
 
-EGDIR=${PREFIX}/share/examples/timidity
-CONF_FILES=${EGDIR}/timidity.cfg ${PKG_SYSCONFDIR}/timidity.cfg
+EGDIR=		${PREFIX}/share/examples/timidity
+CONF_FILES=	${EGDIR}/timidity.cfg ${PKG_SYSCONFDIR}/timidity.cfg
 
 pre-configure:
 	${SED} "s|@PREFIX@|${PREFIX}|" < ${FILESDIR}/timidity.cfg > \

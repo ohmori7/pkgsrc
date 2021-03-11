@@ -1,23 +1,26 @@
-# $NetBSD: Makefile,v 1.34 2018/08/22 09:46:07 wiz Exp $
+# $NetBSD: Makefile,v 1.38 2020/08/31 18:10:53 wiz Exp $
 #
 
 DISTNAME=	spread-src-3.17.3
 PKGNAME=	${DISTNAME:S/-src//}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	net
 MASTER_SITES=	http://www.cnds.jhu.edu/download/noformdown/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.spread.org/
 COMMENT=	Group communication system providing a number of messaging services
+# \todo Deal with LICENSE.
+#   - Is the license acceptable to Debian?  (Seems like that could go either way.)
+#   - Put license in licenses and add a line.
 
-WRKSRC=		${WRKDIR}/${DISTNAME}
-USE_GCC_RUNTIME=yes
-USE_TOOLS+=	perl
-GNU_CONFIGURE=	YES
+WRKSRC=			${WRKDIR}/${DISTNAME}
+USE_GCC_RUNTIME=	yes
+USE_TOOLS+=		perl
+GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--includedir=${PREFIX:Q}/include/spread
 CONFIGURE_ARGS+=	--with-pid-dir=${RUNTIME_DIR:Q}
-MAKE_FLAGS+=	LD=${CC:Q}
+MAKE_FLAGS+=		LD=${CC:Q}
 
 BUILD_DEFS+=	SPREAD_DIR
 

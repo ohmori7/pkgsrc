@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.19 2018/08/22 09:43:46 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2020/08/31 18:07:42 wiz Exp $
 
 DISTNAME=	Config-Find-0.31
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Config/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Config-Find/
+HOMEPAGE=	https://metacpan.org/release/Config-Find
 COMMENT=	Perl module for finding configuration files in the native OS fashion
 LICENSE=	${PERL5_LICENSE}
 

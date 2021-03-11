@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2019/04/25 07:32:50 maya Exp $
+# $NetBSD: Makefile,v 1.15 2020/12/04 20:45:13 nia Exp $
 
 DISTNAME=	swig-2.0.12
 PKGNAME=	${DISTNAME:S/swig-/swig2-/}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=swig/}
 
@@ -39,7 +39,9 @@ BUILD_TARGET=		swig
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake pax
+TOOLS_BROKEN+=		perl
 GNU_CONFIGURE=		yes
+GNU_CONFIGURE_STRICT=	no # has sub-configures
 
 INSTALLATION_DIRS+=	share/doc/swig/2.0 share/examples/swig/2.0
 

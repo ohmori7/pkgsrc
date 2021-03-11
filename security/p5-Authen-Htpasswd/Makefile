@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:46:20 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/08/31 18:11:10 wiz Exp $
 #
 
 DISTNAME=	Authen-Htpasswd-0.171
 PKGNAME=	p5-${DISTNAME:S/161/16.1/}
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	security perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Authen/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Authen-Htpasswd/
+HOMEPAGE=	https://metacpan.org/release/Authen-Htpasswd
 COMMENT=	Interface to read and modify Apache .htpasswd files
 LICENSE=	${PERL5_LICENSE}
 

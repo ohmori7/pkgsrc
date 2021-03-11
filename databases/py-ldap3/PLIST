@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.3 2017/11/15 07:47:47 adam Exp $
+@comment $NetBSD: PLIST,v 1.7 2021/02/13 19:23:25 adam Exp $
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
 ${PYSITELIB}/${EGG_INFODIR}/dependency_links.txt
@@ -37,6 +37,9 @@ ${PYSITELIB}/ldap3/core/exceptions.pyo
 ${PYSITELIB}/ldap3/core/pooling.py
 ${PYSITELIB}/ldap3/core/pooling.pyc
 ${PYSITELIB}/ldap3/core/pooling.pyo
+${PYSITELIB}/ldap3/core/rdns.py
+${PYSITELIB}/ldap3/core/rdns.pyc
+${PYSITELIB}/ldap3/core/rdns.pyo
 ${PYSITELIB}/ldap3/core/results.py
 ${PYSITELIB}/ldap3/core/results.pyc
 ${PYSITELIB}/ldap3/core/results.pyo
@@ -67,6 +70,9 @@ ${PYSITELIB}/ldap3/extend/microsoft/dirSync.pyo
 ${PYSITELIB}/ldap3/extend/microsoft/modifyPassword.py
 ${PYSITELIB}/ldap3/extend/microsoft/modifyPassword.pyc
 ${PYSITELIB}/ldap3/extend/microsoft/modifyPassword.pyo
+${PYSITELIB}/ldap3/extend/microsoft/persistentSearch.py
+${PYSITELIB}/ldap3/extend/microsoft/persistentSearch.pyc
+${PYSITELIB}/ldap3/extend/microsoft/persistentSearch.pyo
 ${PYSITELIB}/ldap3/extend/microsoft/removeMembersFromGroups.py
 ${PYSITELIB}/ldap3/extend/microsoft/removeMembersFromGroups.pyc
 ${PYSITELIB}/ldap3/extend/microsoft/removeMembersFromGroups.pyo
@@ -241,6 +247,9 @@ ${PYSITELIB}/ldap3/protocol/schemas/ds389.pyo
 ${PYSITELIB}/ldap3/protocol/schemas/edir888.py
 ${PYSITELIB}/ldap3/protocol/schemas/edir888.pyc
 ${PYSITELIB}/ldap3/protocol/schemas/edir888.pyo
+${PYSITELIB}/ldap3/protocol/schemas/edir914.py
+${PYSITELIB}/ldap3/protocol/schemas/edir914.pyc
+${PYSITELIB}/ldap3/protocol/schemas/edir914.pyo
 ${PYSITELIB}/ldap3/protocol/schemas/slapd24.py
 ${PYSITELIB}/ldap3/protocol/schemas/slapd24.pyc
 ${PYSITELIB}/ldap3/protocol/schemas/slapd24.pyo
@@ -274,6 +283,12 @@ ${PYSITELIB}/ldap3/strategy/restartable.pyo
 ${PYSITELIB}/ldap3/strategy/reusable.py
 ${PYSITELIB}/ldap3/strategy/reusable.pyc
 ${PYSITELIB}/ldap3/strategy/reusable.pyo
+${PYSITELIB}/ldap3/strategy/safeRestartable.py
+${PYSITELIB}/ldap3/strategy/safeRestartable.pyc
+${PYSITELIB}/ldap3/strategy/safeRestartable.pyo
+${PYSITELIB}/ldap3/strategy/safeSync.py
+${PYSITELIB}/ldap3/strategy/safeSync.pyc
+${PYSITELIB}/ldap3/strategy/safeSync.pyo
 ${PYSITELIB}/ldap3/strategy/sync.py
 ${PYSITELIB}/ldap3/strategy/sync.pyc
 ${PYSITELIB}/ldap3/strategy/sync.pyo
@@ -307,6 +322,9 @@ ${PYSITELIB}/ldap3/utils/ntlm.pyo
 ${PYSITELIB}/ldap3/utils/ordDict.py
 ${PYSITELIB}/ldap3/utils/ordDict.pyc
 ${PYSITELIB}/ldap3/utils/ordDict.pyo
+${PYSITELIB}/ldap3/utils/port_validators.py
+${PYSITELIB}/ldap3/utils/port_validators.pyc
+${PYSITELIB}/ldap3/utils/port_validators.pyo
 ${PYSITELIB}/ldap3/utils/repr.py
 ${PYSITELIB}/ldap3/utils/repr.pyc
 ${PYSITELIB}/ldap3/utils/repr.pyo

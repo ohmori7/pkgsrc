@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2017/01/26 11:03:17 adam Exp $
+# $NetBSD: Makefile,v 1.6 2020/06/29 13:24:54 ryoon Exp $
 #
 # NOTE:
 # When updating this package, a change in the minor (6.n -> 6.(n+1))
@@ -6,13 +6,13 @@
 # ABI depends in buildlink3.mk and bump PKGREVISIONs for all dependencies.
 # In particular, take care to include BDB_ACCEPTED=db6 packages.
 
-DISTNAME=	db-6.2.23
+DISTNAME=	db-6.2.32
 PKGNAME=	${DISTNAME:S/db/db6/}
 CATEGORIES=	databases
 MASTER_SITES=	http://download.oracle.com/berkeley-db/
 
 MAINTAINER=	ryoon@NetBSD.org
-HOMEPAGE=	http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/overview/index.html
+HOMEPAGE=	https://www.oracle.com/technetwork/database/database-technologies/berkeleydb/overview/index.html
 COMMENT=	Berkeley DB version 6 from Oracle
 LICENSE=	gnu-agpl-v3
 

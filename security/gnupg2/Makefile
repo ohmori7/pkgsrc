@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.103 2019/06/02 09:29:09 adam Exp $
+# $NetBSD: Makefile,v 1.121 2021/01/12 11:49:56 adam Exp $
 
-DISTNAME=	gnupg-2.2.16
+DISTNAME=	gnupg-2.2.27
 PKGNAME=	${DISTNAME:S/gnupg-/gnupg2-/}
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/gnupg/
@@ -33,9 +33,11 @@ CONFIGURE_ARGS.SunOS+=	ac_cv_func_getaddrinfo=yes
 
 TEST_TARGET=		check
 
+LDFLAGS.NetBSD+=	-lintl
 LDFLAGS.Darwin+=	-lintl -lresolv
 LDFLAGS.FreeBSD+=	-lintl
 LDFLAGS.SunOS+=		-lintl -lsocket
+LDFLAGS.Linux+=		-lrt
 
 .include "options.mk"
 

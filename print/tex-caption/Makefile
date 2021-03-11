@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.7 2019/01/26 09:04:13 markd Exp $
+# $NetBSD: Makefile,v 1.11 2021/02/13 10:27:35 markd Exp $
 
 DISTNAME=	caption
-PKGNAME=	tex-${DISTNAME}-20181006
-TEXLIVE_REV=	48863
+PKGNAME=	tex-${DISTNAME}-20201026
+TEXLIVE_REV=	56771
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/caption
+HOMEPAGE=	https://ctan.org/pkg/caption
 COMMENT=	Customising captions in floating environments
 LICENSE=	lppl-1.3c
 

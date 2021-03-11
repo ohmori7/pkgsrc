@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.75 2019/04/03 00:32:46 ryoon Exp $
+# $NetBSD: Makefile,v 1.91 2021/01/11 18:18:58 gdt Exp $
 
-DISTNAME=	geeqie-1.4
-PKGREVISION=	9
+DISTNAME=	geeqie-1.6
+PKGREVISION=	1
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.geeqie.org/
 EXTRACT_SUFX=	.tar.xz
@@ -19,22 +19,17 @@ USE_PKGLOCALEDIR=	yes
 USE_LANGUAGES=		c c++
 USE_TOOLS=		bash:run gmake intltool msgfmt pkg-config automake autoconf autoreconf
 
-REPLACE_BASH=		plugins/rotate/geeqie-rotate
-REPLACE_BASH+=		plugins/ufraw/geeqie-ufraw
-REPLACE_BASH+=		plugins/import/geeqie-import
+REPLACE_BASH+=		plugins/*/*
 REPLACE_BASH+=		gen_changelog.sh
 
 pre-configure:
 	cd ${WRKSRC} && NOCONFIGURE=yes ${SH} ./autogen.sh
-
-post-build:
-	cd ${WRKSRC}/doc && ${MAKE_PROGRAM} html
 
 .include "options.mk"
 
 .include "../../graphics/exiv2/buildlink3.mk"
 .include "../../graphics/lcms2/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
+BUILDLINK_API_DEPENDS.gnome-doc-utils+=	gnome-doc-utils>=0.20.10nb4
 .include "../../textproc/gnome-doc-utils/buildlink3.mk"
-.include "../../x11/gtk2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

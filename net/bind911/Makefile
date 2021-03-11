@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.9 2019/05/20 16:03:55 taca Exp $
+# $NetBSD: Makefile,v 1.39 2021/02/17 21:45:19 wiz Exp $
 
 DISTNAME=	bind-${BIND_VERSION}
 PKGNAME=	${DISTNAME:S/-P/pl/}
 CATEGORIES=	net
-MASTER_SITES=	ftp://ftp.isc.org/isc/bind9/${BIND_VERSION}/
+MASTER_SITES=	https://downloads.isc.org/isc/bind9/${BIND_VERSION}/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.isc.org/software/bind/
+HOMEPAGE=	https://www.isc.org/software/bind/
 COMMENT=	Berkeley Internet Name Daemon implementation of DNS, version 9.11
 LICENSE=	mpl-2.0
 
@@ -14,7 +14,7 @@ CONFLICTS+=	host-[0-9]*
 
 MAKE_JOBS_SAFE=	no
 
-BIND_VERSION=	9.11.7
+BIND_VERSION=	9.11.28
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -22,22 +22,25 @@ BUILD_DEFS+=	BIND_DIR VARBASE
 
 .include "options.mk"
 
-USE_TOOLS+=		pax perl
+USE_TOOLS+=		pax perl pkg-config tar
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
+MAKE_ENV+=		WRKDIR=${WRKDIR} PREFIX=${PREFIX}
 
-CONFIGURE_ARGS+=	--with-libtool
-CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
-CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
-CONFIGURE_ARGS+=	--with-openssl=${SSLBASE:Q}
-CONFIGURE_ARGS+=	--with-python=no
+CONFIGURE_ARGS+=		--with-libtool
+CONFIGURE_ARGS+=		--sysconfdir=${PKG_SYSCONFDIR}
+CONFIGURE_ARGS+=		--localstatedir=${VARBASE}
+CONFIGURE_ARGS+=		--with-openssl=${SSLBASE:Q}
+CONFIGURE_ARGS+=		--with-python=no
+CONFIGURE_ARGS+=		--with-lmdb=no
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-m68k) || \
     !empty(MACHINE_PLATFORM:MNetBSD-*-mipsel) || \
-    !empty(MACHINE_PLATFORM:MNetBSD-*-vax)
-CONFIGURE_ARGS+=	--disable-atomic
+    !empty(MACHINE_PLATFORM:MNetBSD-*-vax) || \
+    !empty(MACHINE_PLATFORM:MNetBSD-*-i386)
+CONFIGURE_ARGS+=		--disable-atomic
 .endif
 .if ${MACHINE_PLATFORM:MNetBSD-*-powerpc} != ""
-CONFIGURE_ARGS+=	--disable-threads
+CONFIGURE_ARGS+=		--disable-threads
 .endif
 CONFIGURE_ARGS.DragonFly+=	--disable-kqueue
 
@@ -74,5 +77,7 @@ post-install:
 .endfor
 	${INSTALL_DATA} ${WRKSRC}/doc/arm/*.html ${DESTDIR}${PREFIX}/${DOCDIR}/arm
 
+.include "../../mk/atomic64.mk"
+.include "../../devel/zlib/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

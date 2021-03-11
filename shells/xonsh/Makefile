@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.4 2019/04/25 07:33:17 maya Exp $
+# $NetBSD: Makefile,v 1.6 2020/12/04 20:45:40 nia Exp $
 
 DISTNAME=	xonsh-0.8.8
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	shells python
 MASTER_SITES=	${MASTER_SITE_GITHUB:=xonsh/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://xon.sh/
+HOMEPAGE=	https://xon.sh/
 COMMENT=	Python-ish, BASHwards-looking shell language and command prompt
 LICENSE=	2-clause-bsd
 

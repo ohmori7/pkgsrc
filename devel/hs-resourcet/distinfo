@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.3 2015/11/03 03:27:33 agc Exp $
+$NetBSD: distinfo,v 1.5 2020/01/11 08:26:22 pho Exp $
 
-SHA1 (resourcet-1.1.3.1.tar.gz) = b06a6f96e2f05791f1153dea9a9434cf41a8bc91
-RMD160 (resourcet-1.1.3.1.tar.gz) = 590b8fc510586fd32c2145233ceb11b3cf751314
-SHA512 (resourcet-1.1.3.1.tar.gz) = e5c677893affe9b0cde8c25f235f68090db0ff8839d0bcb884540971822eac637da52f766233c96ce00b9c75db49b36975faac753e408ca1a7faea061c17ae9d
-Size (resourcet-1.1.3.1.tar.gz) = 11218 bytes
+SHA1 (resourcet-1.2.2.tar.gz) = d2877fd89d03bcf5b2d2d80a816fefac96a6ad43
+RMD160 (resourcet-1.2.2.tar.gz) = 3a538045c41fe447bba06e0e3fe3a049d1b09217
+SHA512 (resourcet-1.2.2.tar.gz) = 08577b3a36d95dad8f71808f533db00ee3f52fc19f2ed87f2d059ed3c899df07d33b3f9d3b9cf894788be22ec594ad3ac2f329ba6177912fded70eb4c6110950
+Size (resourcet-1.2.2.tar.gz) = 16541 bytes

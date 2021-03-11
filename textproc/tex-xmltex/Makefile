@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2019/01/26 04:02:59 markd Exp $
+# $NetBSD: Makefile,v 1.17 2020/05/10 04:32:07 markd Exp $
 
 DISTNAME=	xmltex
 PKGNAME=	tex-${DISTNAME}-1.9
-PKGREVISION=	10
+PKGREVISION=	11
 TEXLIVE_REV=	35755
 
 MAINTAINER=	minskim@NetBSD.org
@@ -23,6 +23,7 @@ INSTALLATION_DIRS=	bin
 TEX_FORMATS=	"xmltex pdftex language.dat *xmltex.ini\\npdfxmltex pdftex language.dat *pdfxmltex.ini\\n"
 TEX_TEXMF_DIRS=	${PREFIX}/share/texmf-dist
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 
 post-install:

@@ -1,7 +1,6 @@
-$NetBSD: distinfo,v 1.8 2017/06/07 14:53:52 ryoon Exp $
+$NetBSD: distinfo,v 1.10 2020/09/07 17:37:19 wiz Exp $
 
-SHA1 (Data-ICal-0.22.tar.gz) = 9f97a3e60c80eb8e739ad10f111ef20df78bf57d
-RMD160 (Data-ICal-0.22.tar.gz) = 6a79b318f200e588b46986fb7ade80b37601d0fc
-SHA512 (Data-ICal-0.22.tar.gz) = a02364dfb0a1e24efcf2efdb7240bb6c47ad5ed3a99ada51ddb9817b4e433038d57113699c6875f7d592cd3af46f5b074a1ac50cf951b7af449bde1765ed5d55
-Size (Data-ICal-0.22.tar.gz) = 119116 bytes
-SHA1 (patch-Makefile.PL) = f3f73fe13a06b5b71d2d95b5957e1393523d1f53
+SHA1 (Data-ICal-0.24.tar.gz) = 3d82dbbda204a88aa45fb71597f7e5ebd9f1e105
+RMD160 (Data-ICal-0.24.tar.gz) = 7d3e1eeaaf5f57eb9a3446744a791feb45a5f933
+SHA512 (Data-ICal-0.24.tar.gz) = 592cc76dd8dd00d8ce365a7105c6b732ecb94838876d6b430f1f3078e8674f9584c5a6248c5ec5ebbee9d35f3758d9709d45e70728899c528d030424abe81d9e
+Size (Data-ICal-0.24.tar.gz) = 120451 bytes

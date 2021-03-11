@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.37 2018/11/25 14:51:02 wen Exp $
+# $NetBSD: Makefile,v 1.44 2020/09/13 07:54:02 wiz Exp $
 
-DISTNAME=	Perl-Tidy-20181120
+DISTNAME=	Perl-Tidy-20200907
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Perl/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://perltidy.sourceforge.net/
-#HOMEPAGE=	http://search.cpan.org/dist/Perl-Tidy/
+HOMEPAGE=	https://metacpan.org/pod/Perl::Tidy
 COMMENT=	Parses and beautifies perl source
 LICENSE=	gnu-gpl-v2
 

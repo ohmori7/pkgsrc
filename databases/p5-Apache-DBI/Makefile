@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.34 2018/08/22 09:43:13 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2020/08/31 18:06:57 wiz Exp $
 
 DISTNAME=	Apache-DBI-1.12
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Apache/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Apache-DBI/
+HOMEPAGE=	https://metacpan.org/release/Apache-DBI
 COMMENT=	DBI support for Apache+mod_perl
 LICENSE=	${PERL5_LICENSE}
 

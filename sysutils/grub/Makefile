@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.58 2018/07/04 13:40:37 jperkin Exp $
+# $NetBSD: Makefile,v 1.60 2020/01/18 23:35:17 rillig Exp $
 
 DISTNAME=	grub-0.97
 PKGREVISION=	10
@@ -6,7 +6,7 @@ CATEGORIES=	sysutils
 MASTER_SITES=	ftp://alpha.gnu.org/gnu/grub/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnu.org/software/grub/
+HOMEPAGE=	https://www.gnu.org/software/grub/
 COMMENT=	GRand Unified Bootloader -- Boots *BSD, Linux, groks ffs, FAT, ext2
 LICENSE=	gnu-gpl-v2
 
@@ -35,9 +35,9 @@ PLIST_VARS+=		netboot
 CONFIGURE_ARGS+=	--enable-diskless
 PLIST.netboot=		yes
 
-.for nic in ${GRUB_NETWORK_CARDS}
+.  for nic in ${GRUB_NETWORK_CARDS}
 CONFIGURE_ARGS+=	--enable-${nic}
-.endfor
+.  endfor
 
 post-install: grub-netboot-install
 .PHONY: grub-netboot-install

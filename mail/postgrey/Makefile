@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.48 2018/08/22 09:45:33 wiz Exp $
+# $NetBSD: Makefile,v 1.53 2020/08/31 18:10:07 wiz Exp $
 
 DISTNAME=	postgrey-1.36
-PKGREVISION=	3
+PKGREVISION=	7
 CATEGORIES=	mail
 MASTER_SITES=	http://postgrey.schweikert.ch/pub/
 
-MAINTAINER=	kim@tac.nyc.ny.us
-HOMEPAGE=	http://postgrey.schweikert.ch/
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://postgrey.schweikert.ch/
 COMMENT=	Postfix Greylist Policy Server
 LICENSE=	gnu-gpl-v2
 

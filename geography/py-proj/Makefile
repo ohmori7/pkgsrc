@@ -1,34 +1,22 @@
-# $NetBSD: Makefile,v 1.18 2018/03/02 01:19:25 gdt Exp $
+# $NetBSD: Makefile,v 1.28 2021/03/06 16:12:30 gdt Exp $
 
-VERSION=		1.9.4
-PKGNAMEBASE=		pyproj
-DISTNAME=		v${VERSION}rel
-DIST_SUBDIR=		pyproj
-EGG_NAME=		${PKGNAMEBASE}-${VERSION}
-PKGNAME=		${PYPKGPREFIX}-${PKGNAMEBASE:S/pyproj/proj/}-${VERSION}
+DISTNAME=		pyproj-2.6.1
+# After proj is >= 7
+#DISTNAME=		pyproj-3.0.1
+PKGNAME=		${PYPKGPREFIX}-${DISTNAME}
 PKGREVISION=		2
 CATEGORIES=		geography
-MASTER_SITES=		${MASTER_SITE_GITHUB:=jswhit/pyproj/archive/}
+MASTER_SITES=		${MASTER_SITE_PYPI:=p/pyproj/}
 
 MAINTAINER=		gdt@NetBSD.org
-HOMEPAGE=		https://jswhit.github.io/pyproj/
-COMMENT=		Python wrapper for proj
+HOMEPAGE=		https://github.com/pyproj4/pyproj
+COMMENT=		Python interface to PROJ.4 library
 LICENSE=		mit
 
-WRKSRC=			${WRKDIR}/${PKGNAMEBASE}-${VERSION}rel
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
-INSTALLATION_DIRS=	share/doc/${PKGNAME_NOREV}
+BUILD_DEPENDS+=	${PYPKGPREFIX}-cython>=0:../../devel/py-cython
 
-# Horrible kludge: the package has a private copy of projects.h, which
-# proj used to not install, and the private copy has RCSID-type macros
-# which are needed.  Until this is fixed upstream, avoid the
-# proj-provided projects.h.
-pre-build:
-	rm ${WRKDIR}/.buildlink/include/projects.h
-
-post-install:
-	${INSTALL} ${WRKSRC}/README.md ${DESTDIR}${PREFIX}/share/doc/${PKGNAME_NOREV}
-
-.include "../../lang/python/distutils.mk"
 .include "../../geography/proj/buildlink3.mk"
+.include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

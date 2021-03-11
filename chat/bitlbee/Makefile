@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.79 2019/06/04 19:00:09 nia Exp $
+# $NetBSD: Makefile,v 1.85 2020/05/22 10:55:57 adam Exp $
 
 DISTNAME=		bitlbee-3.6
+PKGREVISION=		5
 CATEGORIES=		chat
 MASTER_SITES=		http://get.bitlbee.org/src/
 
@@ -26,6 +27,7 @@ CONFIGURE_ARGS+=	--pidfile=${VARBASE}/run/bitlbee/pid
 CONFIGURE_ARGS+=	--ipcsocket=${VARBASE}/run/bitlbee/sock
 CONFIGURE_ARGS+=	--flood=0
 CONFIGURE_ARGS+=	--ssl=gnutls
+CONFIGURE_ARGS.SunOS+=	--pie=0
 
 PKG_SYSCONFSUBDIR=	bitlbee
 CONF_FILES=		${DATADIR}/motd.txt ${PKG_SYSCONFDIR}/motd.txt
@@ -39,6 +41,8 @@ DATADIR=		${PREFIX}/share/bitlbee
 DOCDIR=			${PREFIX}/share/doc/bitlbee
 STATEDIR=		${VARBASE}/db/bitlbee
 
+.include "../../mk/bsd.prefs.mk"
+
 BITLBEE_USER?=		bitlbee
 BITLBEE_GROUP?=		nobody
 
@@ -50,6 +54,9 @@ PKG_USERS=		${BITLBEE_USER}:${BITLBEE_GROUP}
 PKG_HOME.bitlbee=	${VARBASE}/db/bitlbee
 
 INSTALLATION_DIRS=	${PKGMANDIR}/man5 ${PKGMANDIR}/man8 sbin
+INSTALLATION_DIRS+=	lib/pkgconfig include/bitlbee
+
+CPPFLAGS.SunOS+=	-Du_int16_t=uint16_t
 
 post-build:
 	cd ${WRKSRC}/doc/user-guide && \
@@ -70,25 +77,18 @@ do-install:
 .for f in AUTHORS FAQ README CREDITS user-guide/user-guide.txt user-guide/user-guide.html
 	${INSTALL_DATA} ${WRKSRC}/doc/${f} ${DESTDIR}${DOCDIR}
 .endfor
-
-PKG_OPTIONS_VAR=	PKG_OPTIONS.bitlbee
-PKG_SUPPORTED_OPTIONS=	inet6
-PKG_SUGGESTED_OPTIONS=	inet6
-
-.include "../../mk/bsd.options.mk"
-
-.if !empty(PKG_OPTIONS:Minet6)
-CONFIGURE_ARGS+=	--ipv6=1
-.else
-CONFIGURE_ARGS+=	--ipv6=0
-.endif
+	${INSTALL_DATA} ${WRKSRC}/bitlbee.pc ${DESTDIR}${PREFIX}/lib/pkgconfig
+	${INSTALL_DATA} ${WRKSRC}/*.h ${DESTDIR}${PREFIX}/include/bitlbee
+	${INSTALL_DATA} ${WRKSRC}/lib/*.h ${DESTDIR}${PREFIX}/include/bitlbee
+	${INSTALL_DATA} ${WRKSRC}/protocols/*.h ${DESTDIR}${PREFIX}/include/bitlbee
 
 RCD_SCRIPTS=		bitlbee
 RCD_SCRIPT_SRC.bitlbee=	${FILESDIR}/bitlbee.sh
 
 # see https://savannah.gnu.org/support/index.php?107660
-#BUILDLINK_ABI_DEPENDS.gnutls+= gnutls<2.12.0
+#BUILDLINK_ABI_DEPENDS.gnutls+=	gnutls<2.12.0
 
+.include "options.mk"
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 PYTHON_FOR_BUILD_ONLY=	yes

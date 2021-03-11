@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.140 2019/04/26 14:12:48 maya Exp $
+# $NetBSD: Makefile,v 1.151 2020/12/04 20:45:47 nia Exp $
 
 DISTNAME=	bluefish-2.2.10
-PKGREVISION=	1
+PKGREVISION=	10
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=bluefish/${PKGVERSION_NOREV}/}
 EXTRACT_SUFX=	.tar.bz2
@@ -22,14 +22,14 @@ CONFIGURE_ARGS+=	--with-freedesktop_org-mime=${PREFIX:Q}/share/mime
 CONFIGURE_ENV+=		EXTERNAL_GREP=${TOOLS_GREP:Q}
 CONFIGURE_ENV+=		EXTERNAL_FIND=${TOOLS_FIND:Q}
 
-CHECK_WRKREF_SKIP+=	lib/bluefish/about.so
-REPLACE_PYTHON+=	data/lorem-ipsum-generator data/jsbeautify
-REPLACE_PYTHON+=	data/cssmin.py data/jsmin.py
-REPLACE_PYTHON+=	data/css_decompressor
-CHECK_INTERPRETER_SKIP+= share/bluefish/plugins/*/*.py
-CHECK_INTERPRETER_SKIP+= share/bluefish/plugins/*/*/*.py
+CHECK_WRKREF_SKIP+=		lib/bluefish/about.so
+REPLACE_PYTHON+=		data/lorem-ipsum-generator data/jsbeautify
+REPLACE_PYTHON+=		data/cssmin.py data/jsmin.py
+REPLACE_PYTHON+=		data/css_decompressor
+CHECK_INTERPRETER_SKIP+=	share/bluefish/plugins/*/*.py
+CHECK_INTERPRETER_SKIP+=	share/bluefish/plugins/*/*/*.py
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 2.2.4
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 2.2.4
 
 # XXX this doesn't work
 #XML_CATALOGS=	${PREFIX}/share/xml/bluefish/catalog.xml

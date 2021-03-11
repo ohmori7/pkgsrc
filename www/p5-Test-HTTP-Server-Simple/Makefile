@@ -1,18 +1,18 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:47:54 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2020/08/31 18:13:11 wiz Exp $
 
 DISTNAME=	Test-HTTP-Server-Simple-0.11
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Test/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Test-HTTP-Server-Simple/
+HOMEPAGE=	https://metacpan.org/release/Test-HTTP-Server-Simple
 COMMENT=	Perl 5 module providing Test::More functions for HTTP::Server::Simple
 LICENSE=	${PERL5_LICENSE}
 
 USE_LANGUAGES=	# empty
-PERL5_PACKLIST= auto/Test/HTTP/Server/Simple/.packlist
+PERL5_PACKLIST=	auto/Test/HTTP/Server/Simple/.packlist
 
 DEPENDS+=	p5-HTTP-Server-Simple-[0-9]*:../../www/p5-HTTP-Server-Simple
 # This may be only a build dependency - No, it's not

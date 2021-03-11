@@ -1,16 +1,16 @@
-$NetBSD: patch-ELF_Options.td,v 1.1 2019/02/01 16:30:00 mgorny Exp $
+$NetBSD: patch-ELF_Options.td,v 1.4 2019/11/03 12:10:29 kamil Exp $
 
-Add support for customizing LLD behavior on target triple.
-https://reviews.llvm.org/D56650
+Add dummy option for an AArch64 erratum.
 
---- ELF/Options.td.orig	2018-07-30 17:36:38.000000000 +0000
+--- ELF/Options.td.orig	2019-07-17 14:54:02.000000000 +0000
 +++ ELF/Options.td
-@@ -303,6 +303,8 @@ defm symbol_ordering_file:
+@@ -168,6 +168,9 @@ defm filter: Eq<"filter", "Set DT_FILTER
  
- defm sysroot: Eq<"sysroot", "Set the system root">;
+ defm fini: Eq<"fini", "Specify a finalizer function">, MetaVarName<"<symbol>">;
  
-+defm target: Eq<"target", "Apply configuration defaults for a given target">;
++def fix_cortex_a53_835769: F<"fix-cortex-a53-835769">,
++  HelpText<"Apply fixes for AArch64 Cortex-A53 erratum 835769">;
 +
- def target1_rel: F<"target1-rel">, HelpText<"Interpret R_ARM_TARGET1 as R_ARM_REL32">;
+ def fix_cortex_a53_843419: F<"fix-cortex-a53-843419">,
+   HelpText<"Apply fixes for AArch64 Cortex-A53 erratum 843419">;
  
- def target1_abs: F<"target1-abs">, HelpText<"Interpret R_ARM_TARGET1 as R_ARM_ABS32 (default)">;

@@ -1,10 +1,12 @@
-# $NetBSD: Makefile,v 1.11 2017/09/06 16:49:25 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2020/05/10 04:31:52 markd Exp $
 
 DISTNAME=	psnfss
-PKGNAME=	tex-${DISTNAME}-9.2a.33946
-TEXLIVE_REV=	33946
+PKGNAME=	tex-${DISTNAME}-9.3
+PKGREVISION=	1
+TEXLIVE_REV=	54694
 
 MAINTAINER=	minskim@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/psnfss
 COMMENT=	Font support for common PostScript fonts
 LICENSE=	lppl-1.3c
 

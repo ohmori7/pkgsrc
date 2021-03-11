@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2019/01/12 23:11:31 dholland Exp $
+# $NetBSD: Makefile,v 1.23 2020/12/01 21:03:16 wiz Exp $
 
 DISTNAME=	xorg-server-${XORG_VERSION}
 PKGNAME=	modular-xorg-xephyr-${XORG_VERSION}
@@ -15,6 +15,7 @@ BROKEN_ON_PLATFORM+=	Darwin-*-*
 
 CONFIGURE_ARGS+=	--disable-xorg
 CONFIGURE_ARGS+=	--disable-xnest
+CONFIGURE_ARGS+=	--disable-xwayland
 CONFIGURE_ARGS+=	--enable-xephyr
 CONFIGURE_ARGS+=	--enable-kdrive
 CONFIGURE_ARGS+=	--disable-xvfb

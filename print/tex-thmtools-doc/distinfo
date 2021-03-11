@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.1 2017/06/22 10:53:02 markd Exp $
+$NetBSD: distinfo,v 1.3 2021/02/20 11:00:46 markd Exp $
 
-SHA1 (tex-thmtools-33624/thmtools.doc.tar.xz) = 67113c8b3367d7678b37ff022f2c7f0aa1f0eda6
-RMD160 (tex-thmtools-33624/thmtools.doc.tar.xz) = a2d0ac932aa83407489465978b66d50c94540fd5
-SHA512 (tex-thmtools-33624/thmtools.doc.tar.xz) = 3daf8297fc3d36402fca16a979c51c2073f0830f7da4cff203583f5a24b3a7cee1e4bbb373030cdbeb348f73b7dbf9da733912d7fad87d324ee564e920b29c08
-Size (tex-thmtools-33624/thmtools.doc.tar.xz) = 240444 bytes
+SHA1 (thmtools.doc.r56070.tar.xz) = e46a6ee6f9ded49080ab4eb6f2e2f5ef4cd3a638
+RMD160 (thmtools.doc.r56070.tar.xz) = 2d45a697aa0b8ea9019cb7c7acc55e971de72db8
+SHA512 (thmtools.doc.r56070.tar.xz) = 602711e37b3ff9a46c0e19cd99b1d4e3b40406192fef9746bca7d667273907c1f9aceb97078bb877ba52dc75dcd8cf13cfd31de3c184e2ea7760b9a721cf991a
+Size (thmtools.doc.r56070.tar.xz) = 253364 bytes

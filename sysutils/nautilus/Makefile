@@ -1,52 +1,40 @@
-# $NetBSD: Makefile,v 1.145 2018/11/14 22:22:27 kleink Exp $
+# $NetBSD: Makefile,v 1.150 2020/11/22 21:45:51 nia Exp $
 
-DISTNAME=		nautilus-2.32.2.1
-PKGREVISION=		29
-CATEGORIES=		sysutils gnome
-MASTER_SITES=		${MASTER_SITE_GNOME:=sources/nautilus/2.32/}
-EXTRACT_SUFX=		.tar.bz2
+DISTNAME=	nautilus-3.38.1
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/${PKGBASE}/${PKGVERSION_NOREV:R}/}
+PKGREVISION=	1
+CATEGORIES=	sysutils gnome
+EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://live.gnome.org/Nautilus
-COMMENT=		Nautilus file manager for GNOME2
-#LICENSE=		gnu-gpl-v2 AND gnu-fdl-v1.1 AND gnu-lgpl-v2 AND TRADEMARK_NOTICE
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://wiki.gnome.org/Apps/Files
+COMMENT=	Simple file manager for GNOME
+LICENSE=	gnu-gpl-v2
 
-USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		gmake intltool msgfmt pkg-config
-USE_LIBTOOL=		yes
-GNU_CONFIGURE=		yes
-PKGCONFIG_OVERRIDE=	libnautilus-extension/libnautilus-extension.pc.in
+TOOL_DEPENDS+=	gdbus-codegen-[0-9]*:../../devel/gdbus-codegen
 
-CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
+USE_TOOLS+=	pkg-config msgfmt xgettext
 
-GCONF_SCHEMAS=		apps_nautilus_preferences.schemas
+DEPENDS+=	gnome-tracker-miners-[0-9]*:../../sysutils/gnome-tracker-miners
 
-# needed for nautilus-2.28 and gtk2-2.20 -- remove on next update
-BUILDLINK_TRANSFORM+=	rm:-DG_DISABLE_DEPRECATED
-BUILDLINK_TRANSFORM+=	rm:-DGDK_DISABLE_DEPRECATED
-BUILDLINK_TRANSFORM+=	rm:-DGDK_PIXBUF_DISABLE_DEPRECATED
-BUILDLINK_TRANSFORM+=	rm:-DGTK_DISABLE_DEPRECATED
+# XXX msgfmt: unknown option -- desktop
+_TOOLS_USE_PKGSRC.msgfmt=	yes
 
-# current default path
-INSTALLATION_DIRS+=	lib/nautilus/extensions-2.0
+PYTHON_FOR_BUILD_ONLY=	tool
 
-.include "../../databases/shared-mime-info/mimedb.mk"
-.include "../../devel/GConf/schemas.mk"
-.include "../../devel/exempi/buildlink3.mk"
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.17.5
-.include "../../devel/glib2/buildlink3.mk"
-.include "../../devel/pango/buildlink3.mk"
+PKGCONFIG_OVERRIDE_STAGE=	pre-install
+PKGCONFIG_OVERRIDE+=		output/meson-private/libnautilus-extension.pc
+
+.include "../../devel/meson/build.mk"
+.include "../../archivers/gnome-autoar/buildlink3.mk"
+.include "../../devel/glib2/schemas.mk"
+.include "../../devel/gobject-introspection/buildlink3.mk"
+.include "../../graphics/gexiv2/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../graphics/libexif/buildlink3.mk"
-.include "../../graphics/librsvg/buildlink3.mk"
-.include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../textproc/libxml2/buildlink3.mk"
-.include "../../x11/gnome-desktop/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.13.0
-.include "../../x11/gtk2/buildlink3.mk"
-.include "../../x11/libSM/buildlink3.mk"
-.include "../../x11/libX11/buildlink3.mk"
-BUILDLINK_DEPMETHOD.libXt?=	build
-.include "../../x11/libXt/buildlink3.mk"
-.include "../../x11/libunique/buildlink3.mk"
+.include "../../lang/python/tool.mk"
+.include "../../multimedia/gst-plugins1-base/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/buildlink3.mk"
+.include "../../sysutils/gnome-tracker/buildlink3.mk"
+.include "../../x11/gnome-desktop3/buildlink3.mk"
+.include "../../x11/gtk3/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

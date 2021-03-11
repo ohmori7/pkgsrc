@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.10 2019/01/25 19:26:55 markd Exp $
+# $NetBSD: Makefile,v 1.14 2021/02/19 23:59:25 markd Exp $
 
 DISTNAME=	musixtex.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-1.29
-TEXLIVE_REV=	48353
+PKGNAME=	tex-${DISTNAME:S/./-/}-1.31
+TEXLIVE_REV=	57353
 
 MAINTAINER=	dgriffi@cs.csubak.edu
-HOMEPAGE=	http://ctan.org/pkg/musixtex
+HOMEPAGE=	https://ctan.org/pkg/musixtex
 COMMENT=	Documentation for tex-musixtex
 LICENSE=	gnu-gpl-v2
 

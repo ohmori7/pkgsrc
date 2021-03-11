@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.20 2019/06/02 20:03:32 rjs Exp $
+# $NetBSD: Makefile,v 1.36 2020/12/04 04:56:08 riastradh Exp $
 
 DISTNAME=	netatalk-2.2.6
-PKGNAME=        ${DISTNAME:C/-/22-/}
-PKGREVISION=	10
+PKGNAME=	${DISTNAME:C/-/22-/}
+PKGREVISION=	22
 CATEGORIES=	net print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=netatalk/}
 EXTRACT_SUFX=	.tar.bz2
@@ -17,20 +17,19 @@ LICENSE=	gnu-gpl-v2
 
 BDB_ACCEPTED=		db4 db5
 USE_LIBTOOL=		yes
-USE_OLD_DES_API=	yes
 USE_TOOLS+=		gmake pkg-config perl:run
 GNU_CONFIGURE=		yes
 
 BUILDLINK_TRANSFORM+=	l:db48:${BDB_TYPE}
 
 PKG_SYSCONFSUBDIR=	netatalk
-EGDIR=		${PREFIX}/share/examples/netatalk
-CONF_FILES=	${EGDIR}/AppleVolumes.default ${PKG_SYSCONFDIR}/AppleVolumes.default
-CONF_FILES+=	${EGDIR}/AppleVolumes.system ${PKG_SYSCONFDIR}/AppleVolumes.system
-CONF_FILES+=	${EGDIR}/afpd.conf ${PKG_SYSCONFDIR}/afpd.conf
-CONF_FILES+=	${EGDIR}/atalkd.conf ${PKG_SYSCONFDIR}/atalkd.conf
-CONF_FILES+=	${EGDIR}/netatalk.conf ${PKG_SYSCONFDIR}/netatalk.conf
-CONF_FILES+=	${EGDIR}/papd.conf ${PKG_SYSCONFDIR}/papd.conf
+EGDIR=			${PREFIX}/share/examples/netatalk
+CONF_FILES=		${EGDIR}/AppleVolumes.default ${PKG_SYSCONFDIR}/AppleVolumes.default
+CONF_FILES+=		${EGDIR}/AppleVolumes.system ${PKG_SYSCONFDIR}/AppleVolumes.system
+CONF_FILES+=		${EGDIR}/afpd.conf ${PKG_SYSCONFDIR}/afpd.conf
+CONF_FILES+=		${EGDIR}/atalkd.conf ${PKG_SYSCONFDIR}/atalkd.conf
+CONF_FILES+=		${EGDIR}/netatalk.conf ${PKG_SYSCONFDIR}/netatalk.conf
+CONF_FILES+=		${EGDIR}/papd.conf ${PKG_SYSCONFDIR}/papd.conf
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -54,8 +53,8 @@ MAKE_DIRS+=		${PKG_SYSCONFDIR}/msg
 SUBST_CLASSES+=		paths
 SUBST_MESSAGE.paths=	Fixing hardcoded paths.
 SUBST_STAGE.paths=	pre-configure
-SUBST_FILES.paths=	etc/psf/etc2ps.sh distrib/initscripts/Makefile.in
-SUBST_SED.paths=	-e "s,^\\(DVIPS=\\)\\(/usr/local/tex\\)\\(/bin\\),\\1${PREFIX}\\3,"
+SUBST_FILES.paths=	etc/psf/etc2ps.sh
+SUBST_SED.paths=	-e 's,^\(DVIPS="*\)/usr\(/bin\),\1${PREFIX}\2,'
 
 PLIST_VARS+=		rcd
 .if ${OPSYS} == "NetBSD"
@@ -69,7 +68,7 @@ PLIST.rcd=		yes
 
 PLIST_VARS+=		ea
 .if ${OPSYS} == "SunOS" || ${OPSYS} == "DragonFly" || ${OPSYS} == "Linux" || \
-	(${OPSYS} == "NetBSD" && empty(OS_VERSION:M[0-6].[0-8]*)) || \
+	(${OPSYS} == "NetBSD" && empty(OS_VERSION:M[0-6].[0-8].*)) || \
 	${OPSYS} == "FreeBSD"
 PLIST.ea=		yes
 .endif

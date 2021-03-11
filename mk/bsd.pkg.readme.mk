@@ -1,4 +1,4 @@
-# $NetBSD: bsd.pkg.readme.mk,v 1.28 2014/10/09 13:50:08 wiz Exp $
+# $NetBSD: bsd.pkg.readme.mk,v 1.30 2021/02/21 10:23:40 nia Exp $
 #
 # This Makefile fragment is included by bsd.pkg.mk and encapsulates the
 # code to produce README.html files in each package directory.
@@ -42,6 +42,8 @@ _HTML_PKGLINK=		<a href="../../${PKGPATH}/README.html">${PKGNAME}</a>
 package-name:
 .  if (${PACKAGE_NAME_TYPE} == "html")
 	@${ECHO} ${_HTML_PKGLINK:Q}
+.  elif (${PACKAGE_NAME_TYPE} == "path")
+	@${ECHO} ${PKGPATH}
 .  else
 	@${ECHO} ${PKGNAME}
 .  endif # PACKAGE_NAME_TYPE
@@ -308,6 +310,7 @@ print-run-depends-list:
 print-summary-data:
 	@${ECHO} depends ${PKGPATH} ${DEPENDS:Q}
 	@${ECHO} build_depends ${PKGPATH} ${BUILD_DEPENDS:Q}
+	@${ECHO} tool_depends ${PKGPATH} ${TOOL_DEPENDS:Q}
 	@${ECHO} conflicts ${PKGPATH} ${CONFLICTS:Q}
 	@${ECHO} index ${PKGPATH} ${PKGNAME:Q}
 	@${ECHO} htmlname ${PKGPATH} ${_HTML_PKGLINK:Q}

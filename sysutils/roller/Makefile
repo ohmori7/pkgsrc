@@ -1,17 +1,18 @@
-# $NetBSD: Makefile,v 1.41 2018/08/22 09:46:40 wiz Exp $
+# $NetBSD: Makefile,v 1.44 2020/08/31 18:11:35 wiz Exp $
 #
 
-DISTNAME=		roller-1.20
-PKGREVISION=		7
+DISTNAME=		roller-1.21
+PKGREVISION=		#
+PKGREVISION=		1
 CATEGORIES=		sysutils
-MASTER_SITES=		http://oss.gw.com/people/kim/
+MASTER_SITES=		http://software.kimmo.suominen.com/
 
-MAINTAINER=		kim@tac.nyc.ny.us
+MAINTAINER=		pkgsrc-users@NetBSD.org
 COMMENT=		Roll log files
 
 DEPENDS+=		cpogm-[0-9]*:../../sysutils/cpogm
 DEPENDS+=		logtime-[0-9]*:../../time/logtime
-DEPENDS+=		pflogsumm-[0-9]*:../../sysutils/pflogsumm
+DEPENDS+=		pflogsumm>=1.1.5:../../sysutils/pflogsumm
 
 .include "../../mk/bsd.prefs.mk"
 

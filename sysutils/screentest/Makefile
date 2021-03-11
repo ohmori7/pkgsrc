@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.44 2018/11/14 22:22:28 kleink Exp $
+# $NetBSD: Makefile,v 1.53 2020/11/05 09:09:11 ryoon Exp $
 
 DISTNAME=	screentest-2.0
-PKGREVISION=	28
+PKGREVISION=	34
 CATEGORIES=	sysutils x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=screentest/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://screentest.sourceforge.net/
+HOMEPAGE=	https://screentest.sourceforge.io/
 COMMENT=	CRT/LCD screen testing utility using GTK+
 
-GNU_CONFIGURE=	yes
-USE_TOOLS+=	pkg-config msgfmt
+GNU_CONFIGURE=		yes
+USE_TOOLS+=		pkg-config msgfmt
 USE_PKGLOCALEDIR=	yes
 
 INSTALLATION_DIRS+=	share/doc/screentest

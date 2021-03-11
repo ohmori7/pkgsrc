@@ -1,20 +1,18 @@
-# $NetBSD: Makefile,v 1.35 2018/08/22 09:46:24 wiz Exp $
+# $NetBSD: Makefile,v 1.40 2020/09/08 12:19:10 wiz Exp $
 
 DISTNAME=	Crypt-SSLeay-0.72
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	5
+PKGREVISION=	9
 CATEGORIES=	security perl5 www
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Crypt/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Crypt-SSLeay/
+HOMEPAGE=	https://metacpan.org/release/Crypt-SSLeay
 COMMENT=	Crypt::SSLeay - OpenSSL glue that provides LWP https support
 LICENSE=	${PERL5_LICENSE}
 
 DEPENDS+=	p5-Path-Class>=0.26:../../devel/p5-Path-Class
 DEPENDS+=	p5-Try-Tiny>=0.19:../../devel/p5-Try-Tiny
-
-USE_LANGUAGES=		c
 
 PERL5_PACKLIST=		auto/Crypt/SSLeay/.packlist
 

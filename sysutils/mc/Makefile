@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.114 2019/04/28 18:55:19 rillig Exp $
+# $NetBSD: Makefile,v 1.121 2021/01/24 16:45:03 nia Exp $
 
-DISTNAME=	mc-4.8.22
+DISTNAME=	mc-4.8.26
 CATEGORIES=	sysutils
-MASTER_SITES=	http://www.midnight-commander.org/downloads/
-EXTRACT_SUFX=	.tar.bz2
+# Supports HTTPS, but cert is invalid...
+MASTER_SITES=	http://ftp.midnight-commander.org/
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	cheusov@NetBSD.org
-HOMEPAGE=	http://www.midnight-commander.org/
+HOMEPAGE=	https://www.midnight-commander.org/
 COMMENT=	User-friendly file manager and visual shell
 LICENSE=	gnu-gpl-v2
 
@@ -59,6 +60,6 @@ CONF_FILES+=	${EGDIR}/${i} ${PKG_SYSCONFDIR}/mc/${i}
 .endfor
 
 .include "../../devel/gettext-lib/buildlink3.mk"
-BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.26.0
+BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.30.0
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

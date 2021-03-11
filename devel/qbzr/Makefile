@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.27 2019/04/26 14:12:37 maya Exp $
+# $NetBSD: Makefile,v 1.29 2020/12/04 20:45:12 nia Exp $
 
 DISTNAME=	qbzr-${VER}
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	devel
 MASTER_SITES=	http://launchpad.net/qbzr/${VER:R}/${VER}/+download/
 VER=		0.22.1
@@ -17,7 +17,7 @@ USE_TOOLS+=	msgfmt
 
 WRKSRC=		${WRKDIR}/qbzr
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.22.1
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.22.1
 REPLACE_PYTHON=		lib/uifactory.py
 
 .include "../../devel/bzr/plugin.mk"

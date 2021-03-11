@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.2 2019/05/11 22:35:14 markd Exp $
+# $NetBSD: Makefile,v 1.5 2020/05/03 11:57:32 markd Exp $
 
 DISTNAME=	listofitems
-PKGNAME=	tex-${DISTNAME}-1.61
-TEXLIVE_REV=	50216
+PKGNAME=	tex-${DISTNAME}-1.63
+TEXLIVE_REV=	51923
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/listofitems
+HOMEPAGE=	https://ctan.org/pkg/listofitems
 COMMENT=	Grab items in lists using user-specified sep char
 LICENSE=	lppl-1.3c
 

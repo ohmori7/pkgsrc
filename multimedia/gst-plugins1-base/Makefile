@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.17 2018/11/08 14:42:51 prlw1 Exp $
+# $NetBSD: Makefile,v 1.24 2020/11/05 09:08:46 ryoon Exp $
 
+PKGREVISION= 4
 .include "Makefile.common"
 
 COMMENT+=	Base plugins
 
-USE_TOOLS+=	perl:run
+USE_TOOLS+=		perl:run
 PKGCONFIG_OVERRIDE+=	pkgconfig/*.pc.in
 
 # only useful if gstreamer was built with the "gstcheck" option

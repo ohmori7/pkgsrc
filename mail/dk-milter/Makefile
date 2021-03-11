@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.30 2018/07/04 13:40:23 jperkin Exp $
+# $NetBSD: Makefile,v 1.32 2020/01/18 21:49:48 jperkin Exp $
 
 DISTNAME=	dk-milter-1.0.2
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=dk-milter/}
 
@@ -26,7 +26,7 @@ SUBST_SED.libs+=	-e 's|@LMBASE@|${BUILDLINK_PREFIX.libmilter}|g'
 SUBST_SED.libs+=	-e 's|@PTHREAD@|${BUILDLINK_PREFIX.pthread}|g'
 SUBST_SED.libs+=	-e 's|@PTHREAD_LDFLAGS@|${PTHREAD_LDFLAGS:Q} ${PTHREAD_LIBS:Q}|g'
 .if ${OPSYS} == SunOS
-SUBST_SED.libs+=        -e 's|-lrt|-lrt -lresolv|g'
+SUBST_SED.libs+=	-e 's|-lrt|-lrt -lresolv|g'
 .endif
 SUBST_MESSAGE.libs=	Fixing makefile references.
 

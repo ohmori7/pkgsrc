@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.64 2018/11/29 11:21:49 prlw1 Exp $
+# $NetBSD: Makefile,v 1.72 2020/11/05 09:07:54 ryoon Exp $
 
 DISTNAME=	guile-gnome-platform-2.16.5
-PKGREVISION=	3
+PKGREVISION=	10
 CATEGORIES=	devel
 MASTER_SITES=	http://ftp.gnu.org/gnu/guile-gnome/guile-gnome-platform/
 
 MAINTAINER=	gdt@NetBSD.org
-HOMEPAGE=	http://www.gnu.org/software/guile-gnome/
+HOMEPAGE=	https://www.gnu.org/software/guile-gnome/
 COMMENT=	Library to access gobject/glib/gtk and gnome from guile
 LICENSE=	gnu-gpl-v2
 

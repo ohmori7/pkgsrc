@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.19 2018/08/22 09:43:21 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2020/08/31 18:07:08 wiz Exp $
 
 DISTNAME=	Search-QueryParser-SQL-0.010
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Search/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Search-QueryParser-SQL/
+HOMEPAGE=	https://metacpan.org/release/Search-QueryParser-SQL
 COMMENT=	Perl module to turn free-text queries into SQL WHERE clauses
 LICENSE=	${PERL5_LICENSE}
 

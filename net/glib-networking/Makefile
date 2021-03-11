@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.42 2019/06/12 22:04:40 leot Exp $
+# $NetBSD: Makefile,v 1.56 2020/12/04 20:45:34 nia Exp $
 
-DISTNAME=	glib-networking-2.60.3
+DISTNAME=	glib-networking-2.64.3
+PKGREVISION=	1
 CATEGORIES=	net gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/glib-networking/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -12,16 +13,18 @@ LICENSE=	gnu-lgpl-v2
 
 USE_TOOLS+=	pkg-config gmake gettext
 
+CPPFLAGS.SunOS+=	-D__EXTENSIONS__
+
 REPLACE_PYTHON+=	meson_post_install.py
 
 .include "options.mk"
 
-BUILDLINK_API_DEPENDS.glib2+=		glib2>=2.56.0
+BUILDLINK_API_DEPENDS.glib2+=		glib2>=2.60.0
 .include "../../devel/glib2/modules.mk"
 BUILDLINK_API_DEPENDS.libproxy+=	libproxy>=0.3.1
 .include "../../www/libproxy/buildlink3.mk"
 .include "../../security/p11-kit/buildlink3.mk"
 .include "../../sysutils/gsettings-desktop-schemas/buildlink3.mk"
-.include "../../devel/py-meson/build.mk"
+.include "../../devel/meson/build.mk"
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

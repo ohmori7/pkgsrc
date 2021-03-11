@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.22 2018/08/22 09:46:02 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2020/08/31 18:10:46 wiz Exp $
 
 DISTNAME=	Net-Packet-3.28
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Modules to assemble/disassemble network packets
-HOMEPAGE=	http://search.cpan.org/dist/Net-Packet/
+HOMEPAGE=	https://metacpan.org/release/Net-Packet
 LICENSE=	artistic
 
 DEPENDS+=	p5-Bit-Vector-[0-9]*:../../devel/p5-Bit-Vector

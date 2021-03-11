@@ -1,18 +1,17 @@
-# $NetBSD: Makefile,v 1.49 2019/04/03 00:32:34 ryoon Exp $
+# $NetBSD: Makefile,v 1.64 2021/02/07 13:55:18 js Exp $
 
-DISTNAME=	fossil-src-2.8
+DISTNAME=	fossil-src-2.14
 PKGNAME=	${DISTNAME:S/-src//}
-PKGREVISION=	1
 WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
 CATEGORIES=	devel scm
 MASTER_SITES=	https://www.fossil-scm.org/index.html/uv/
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.fossil-scm.org/
+MAINTAINER=	js@pkgsrc.org
+HOMEPAGE=	https://www.fossil-scm.org/
 COMMENT=	High-reliability, distributed software configuration management
 LICENSE=	2-clause-bsd
 
-HAS_CONFIGURE=	yes
+HAS_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-openssl=${BUILDLINK_PREFIX.openssl:Q}
 CONFIGURE_ARGS+=	--with-zlib=${BUILDLINK_PREFIX.zlib:Q}
 

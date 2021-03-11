@@ -1,10 +1,10 @@
-# $NetBSD: options.mk,v 1.14 2017/07/08 21:45:42 adam Exp $
+# $NetBSD: options.mk,v 1.16 2020/09/04 09:39:57 wiz Exp $
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.lftp
+PKG_OPTIONS_VAR=		PKG_OPTIONS.lftp
 PKG_OPTIONS_OPTIONAL_GROUPS=	ssl
-PKG_OPTIONS_GROUP.ssl=	gnutls ssl
-PKG_SUPPORTED_OPTIONS=	perl dnssec
-PKG_SUGGESTED_OPTIONS=	ssl
+PKG_OPTIONS_GROUP.ssl=		gnutls ssl
+PKG_SUPPORTED_OPTIONS=		perl dnssec
+PKG_SUGGESTED_OPTIONS=		ssl
 
 .include "../../mk/bsd.options.mk"
 
@@ -28,7 +28,6 @@ CONFIGURE_ARGS+=	--without-openssl
 
 .if !empty(PKG_OPTIONS:Mperl)
 USE_TOOLS+=		perl:run
-DEPENDS+=		p5-Digest-MD5-[0-9]*:../../security/p5-Digest-MD5
 DEPENDS+=		p5-String-CRC32-[0-9]*:../../textproc/p5-String-CRC32
 REPLACE_PERL+=		src/convert-mozilla-cookies src/verify-file
 PLIST.perl=		yes

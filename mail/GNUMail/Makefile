@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.51 2019/04/03 00:32:50 ryoon Exp $
+# $NetBSD: Makefile,v 1.55 2020/11/05 09:08:34 ryoon Exp $
 
 DISTNAME=	GNUMail-1.2.0
-PKGREVISION=	16
+PKGREVISION=	19
 CATEGORIES=	mail gnustep
 MASTER_SITES=	http://debian.uni-essen.de/misc/GNUstep/Apps/GNUMail/
 
@@ -15,7 +15,7 @@ USE_LANGUAGES=	objc
 NO_CONFIGURE=	yes
 MAKE_FILE=	GNUmakefile
 
-FIX_GNUSTEP_INSTALLATION_DIR= yes
+FIX_GNUSTEP_INSTALLATION_DIR=		yes
 .for dir in Account Advanced Clock Colors Compose Face Filtering	\
 	Fonts Import MIME PGP Receiving Sending Viewing
 SUBST_FILES.gnustep_installation_dir+=	Bundles/${dir}/GNUmakefile

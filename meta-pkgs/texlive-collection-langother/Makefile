@@ -1,17 +1,19 @@
-# $NetBSD: Makefile,v 1.10 2019/05/15 09:25:25 markd Exp $
+# $NetBSD: Makefile,v 1.14 2021/02/14 22:48:54 markd Exp $
 
 DISTNAME=	collection-langother
-PKGNAME=	texlive-${DISTNAME}-2019pre1
+PKGNAME=	texlive-${DISTNAME}-2020pre1
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	51013
+TEXLIVE_REV=	57462
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.tug.org/texlive/
+HOMEPAGE=	https://www.tug.org/texlive/
 COMMENT=	Other languages TeX packages
 
 DEPENDS+=	texlive-collection-basic-[0-9]*:../../meta-pkgs/texlive-collection-basic
 
+# depend aalok
+# depend akshar
 # amsldoc-vn is documentation only
 DEPENDS+=	tex-aramaic-serto-[0-9]*:../../fonts/tex-aramaic-serto
 # depend babel-azerbaijani
@@ -27,6 +29,7 @@ DEPENDS+=	tex-babel-vietnamese-[0-9]*:../../print/tex-babel-vietnamese
 # depend bangtex
 # depend bengali
 # depend burmese
+# depend chhaya
 DEPENDS+=	tex-cjhebrew-[0-9]*:../../fonts/tex-cjhebrew
 DEPENDS+=	tex-ctib-[0-9]*:../../print/tex-ctib
 # depend ebong
@@ -34,8 +37,8 @@ DEPENDS+=	tex-ethiop-[0-9]*:../../print/tex-ethiop
 DEPENDS+=	tex-ethiop-t1-[0-9]*:../../fonts/tex-ethiop-t1
 DEPENDS+=	tex-fc-[0-9]*:../../fonts/tex-fc
 DEPENDS+=	tex-fonts-tlwg-[0-9]*:../../fonts/tex-fonts-tlwg
-DEPENDS+=	tex-hyphen-armenian-[0-9]*:../../print/tex-hyphen-armenian
 DEPENDS+=	tex-hyphen-afrikaans-[0-9]*:../../print/tex-hyphen-afrikaans
+DEPENDS+=	tex-hyphen-armenian-[0-9]*:../../print/tex-hyphen-armenian
 DEPENDS+=	tex-hyphen-coptic-[0-9]*:../../print/tex-hyphen-coptic
 DEPENDS+=	tex-hyphen-esperanto-[0-9]*:../../print/tex-hyphen-esperanto
 DEPENDS+=	tex-hyphen-ethiopic-[0-9]*:../../print/tex-hyphen-ethiopic
@@ -48,8 +51,10 @@ DEPENDS+=	tex-hyphen-thai-[0-9]*:../../print/tex-hyphen-thai
 DEPENDS+=	tex-hyphen-turkmen-[0-9]*:../../print/tex-hyphen-turkmen
 # depend latex-mr
 # depend latexbangla
+# depend latino-sine-flexione
 # lshort-thai is documentation only
 # lshort-vietnamese is documentation only
+# depend marathi
 # ntheorem-vn is documentation only
 # depend padauk
 # depend quran-ur
@@ -57,6 +62,7 @@ DEPENDS+=	tex-hyphen-turkmen-[0-9]*:../../print/tex-hyphen-turkmen
 # depend sanskrit-t1
 # depend thaienum
 # depend thaispec
+# depend unicode-alphabets
 # depend velthuis
 DEPENDS+=	tex-vntex-[0-9]*:../../print/tex-vntex
 # depend wnri

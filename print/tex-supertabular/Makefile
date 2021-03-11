@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2018/05/08 11:28:25 markd Exp $
+# $NetBSD: Makefile,v 1.7 2020/05/03 11:57:37 markd Exp $
 
 DISTNAME=	supertabular
-PKGNAME=	tex-${DISTNAME}-4.1e
-TEXLIVE_REV=	15878
+PKGNAME=	tex-${DISTNAME}-4.1g
+TEXLIVE_REV=	53658
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/supertabular
+HOMEPAGE=	https://ctan.org/pkg/supertabular
 COMMENT=	Multi-page tables package
 LICENSE=	lppl-1.3c
 

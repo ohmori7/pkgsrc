@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.6 2018/11/14 22:21:19 kleink Exp $
+# $NetBSD: Makefile,v 1.14 2020/09/04 11:09:01 wiz Exp $
 
 DISTNAME=	Alien-SDL-1.446
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	5
+PKGREVISION=	11
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Alien/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~froggs/Alien-SDL/lib/Alien/SDL.pm
+HOMEPAGE=	https://metacpan.org/pod/distribution/Alien-SDL/lib/Alien/SDL.pm
 COMMENT=	Alien::SDL - building, finding and using SDL binaries
 LICENSE=	${PERL5_LICENSE}
 
@@ -20,12 +20,11 @@ DEPENDS+=	p5-File-Which-[0-9]*:../../devel/p5-File-Which
 DEPENDS+=	p5-Capture-Tiny-[0-9]*:../../devel/p5-Capture-Tiny
 
 DEPENDS+=	p5-Text-Patch>=1.4:../../textproc/p5-Text-Patch
-DEPENDS+=	p5-Digest-SHA-[0-9]*:../../security/p5-Digest-SHA
 DEPENDS+=	p5-Tie-Simple-[0-9]*:../../devel/p5-Tie-Simple
 
 # To set this configure log "checking SDL_INST_DIR env var... yes, /usr/pkg"
 MAKE_ENV+=	SDL_INST_DIR=${PREFIX}
-USE_LANGUAGES=		c
+USE_LANGUAGES=	c
 
 SUBST_CLASSES+=		path
 SUBST_MESSAGE.path=	Adjust path (see console output at configure stage)

@@ -1,17 +1,17 @@
-# $NetBSD: Makefile,v 1.6 2017/09/16 19:53:50 alnsn Exp $
+# $NetBSD: Makefile,v 1.10 2020/07/02 10:26:16 nia Exp $
 
 DISTNAME=	LuaBitOp-1.0.2
 PKGNAME=	${DISTNAME:S/Lua/${LUA_PKGPREFIX}-/}
 PKGREVISION=	1
-CATEGORIES=	devel
+CATEGORIES=	devel lua
 MASTER_SITES=	http://bitop.luajit.org/download/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://bitop.luajit.org/
+HOMEPAGE=	https://bitop.luajit.org/
 COMMENT=	Lua module which adds bitwise operations on numbers
 LICENSE=	mit
 
-LUA_VERSIONS_INCOMPATIBLE=	53
+LUA_VERSIONS_ACCEPTED=	52 51
 
 NO_CONFIGURE=	yes
 USE_TOOLS+=	gmake
@@ -23,7 +23,7 @@ MAKE_FLAGS+=	INSTALLPATH=${DESTDIR}${PREFIX}/${LUA_CDIR}
 .include "../../mk/bsd.prefs.mk"
 
 .if ${OPSYS} == "Darwin"
-BUILD_TARGET=   macosx
+BUILD_TARGET=	macosx
 .endif
 
 INSTALLATION_DIRS+=	${LUA_CDIR} ${LUA_DOCDIR}

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.32 2019/04/26 13:14:09 maya Exp $
+# $NetBSD: Makefile,v 1.35 2020/01/26 17:31:54 rillig Exp $
 
 DISTNAME=	foolscap-0.13.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
@@ -6,7 +6,7 @@ CATEGORIES=	net python
 MASTER_SITES=	${MASTER_SITE_PYPI:=f/foolscap/}
 
 MAINTAINER=	kamel.derouiche@gmail.com
-HOMEPAGE=	http://foolscap.lothar.com/trac
+HOMEPAGE=	https://foolscap.lothar.com/trac
 COMMENT=	RPC protocol for Twisted
 LICENSE=	mit
 
@@ -14,7 +14,7 @@ DEPENDS+=	${PYPKGPREFIX}-OpenSSL>=0.6:../../security/py-OpenSSL
 DEPENDS+=	${PYPKGPREFIX}-ZopeInterface>=3.6.1:../../devel/py-ZopeInterface
 DEPENDS+=	${PYPKGPREFIX}-twisted>=16.0:../../net/py-twisted
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # as of 0.12.7
+PYTHON_VERSIONS_ACCEPTED=	27 # as of 0.12.7
 
 TEST_TARGET=	test
 

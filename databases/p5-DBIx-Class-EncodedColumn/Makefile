@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.19 2018/08/22 09:43:16 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2020/08/31 18:07:01 wiz Exp $
 
-DISTNAME=	DBIx-Class-EncodedColumn-0.00015
+DISTNAME=	DBIx-Class-EncodedColumn-0.00020
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	1
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DBIx/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/DBIx-Class-EncodedColumn/
+HOMEPAGE=	https://metacpan.org/release/DBIx-Class-EncodedColumn
 COMMENT=	DBIx::Class component to automatically encode columns
 LICENSE=	${PERL5_LICENSE}
 
@@ -28,14 +28,15 @@ DEPENDS+=	p5-Crypt-Eksblowfish-[0-9]*:../../security/p5-Crypt-Eksblowfish
 DEPENDS+=	p5-Crypt-OpenPGP-[0-9]*:../../security/p5-Crypt-OpenPGP
 DEPENDS+=	p5-Crypt-CAST5_PP-[0-9]*:../../security/p5-Crypt-CAST5_PP
 
-BUILD_DEPENDS+=	p5-DBD-SQLite-[0-9]*:../../databases/p5-DBD-SQLite
-BUILD_DEPENDS+=	p5-Dir-Self-[0-9]*:../../devel/p5-Dir-Self
-BUILD_DEPENDS+=	p5-SQL-Translator>=0.11002:../../databases/p5-SQL-Translator
-BUILD_DEPENDS+=	p5-Module-Install-ReadmeFromPod-[0-9]*:../../devel/p5-Module-Install-ReadmeFromPod
+TEST_DEPENDS+=	p5-DBD-SQLite-[0-9]*:../../databases/p5-DBD-SQLite
+TEST_DEPENDS+=	p5-Dir-Self-[0-9]*:../../devel/p5-Dir-Self
+TEST_DEPENDS+=	p5-SQL-Translator>=0.11002:../../databases/p5-SQL-Translator
+TEST_DEPENDS+=	p5-Module-Install-ReadmeFromPod-[0-9]*:../../devel/p5-Module-Install-ReadmeFromPod
+TEST_DEPENDS+=	p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
 
 USE_LANGUAGES=		# empty
 PERL5_PACKLIST=		auto/DBIx/Class/EncodedColumn/.packlist
-PERL5_MODULE_TYPE=	Module::Install::Bundled
+PERL5_MODULE_TYPE=	Module::Build::Tiny
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

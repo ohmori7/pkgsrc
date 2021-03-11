@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.103 2018/11/14 22:21:28 kleink Exp $
+# $NetBSD: Makefile,v 1.110 2020/11/05 09:06:52 ryoon Exp $
 #
 
 DISTNAME=	gucharmap-2.32.1
-PKGREVISION=	26
+PKGREVISION=	32
 CATEGORIES=	fonts gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gucharmap/2.32/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://live.gnome.org/Gucharmap
+HOMEPAGE=	https://live.gnome.org/Gucharmap
 COMMENT=	Unicode/ISO10646 character map and font viewer
 # unicode-license = BSD style?
 #LICENSE=	gnu-gpl-v2 AND unicode-license

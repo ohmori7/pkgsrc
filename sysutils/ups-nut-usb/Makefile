@@ -1,5 +1,6 @@
-# $NetBSD: Makefile,v 1.9 2018/09/21 00:59:53 jym Exp $
+# $NetBSD: Makefile,v 1.11 2021/02/11 10:05:13 wiz Exp $
 
+PKGREVISION=		1
 .include "../../sysutils/ups-nut/Makefile.common"
 
 PKGNAME=		${DISTNAME:S/nut/ups-nut-usb/}
@@ -12,6 +13,7 @@ INSTALLATION_DIRS+=	${PREFIX}/${PKGMANDIR}/man8
 
 BUILD_DEFS+=		NUT_STATEDIR
 
+TOOLS_BROKEN+=		perl
 CONFIGURE_ARGS+=	--with-usb --with-drvpath=${NUT_DRVDIR:Q}
 
 do-install:

@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.18 2018/12/27 15:15:22 joerg Exp $
+# $NetBSD: Makefile,v 1.20 2020/01/18 21:48:14 jperkin Exp $
 
 DISTNAME=	qore-0.8.13.5
+PKGREVISION=	1
 CATEGORIES=	lang
-MASTER_SITES=   ${MASTER_SITE_GITHUB:=qorelanguage/}
-EXTRACT_SUFX=   .tar.bz2
+MASTER_SITES=	${MASTER_SITE_GITHUB:=qorelanguage/}
+EXTRACT_SUFX=	.tar.bz2
 
 GITHUB_RELEASE=	release-${PKGVERSION_NOREV}
 
@@ -24,7 +25,7 @@ REPLACE_QORE=		bin/qdbg bin/qdbg-remote bin/qdbg-server
 REPLACE_QORE+=		bin/qget bin/rest bin/schema-reverse
 REPLACE_QORE+=		bin/sfrest bin/sqlutil doxygen/qdx
 
-CONFIGURE_ARGS+=--with-libsuffix="" --disable-single-compilation-unit
+CONFIGURE_ARGS+=	--with-libsuffix="" --disable-single-compilation-unit
 
 #This is needed in order to comply the with MIT license and binary distribution
 #Install docs

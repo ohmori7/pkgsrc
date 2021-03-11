@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.8 2019/05/02 09:16:47 adam Exp $
+# $NetBSD: Makefile,v 1.21 2021/03/09 11:26:20 adam Exp $
 
-DISTNAME=	mypy-0.701
+DISTNAME=	mypy-0.812
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	lang python
 MASTER_SITES=	${MASTER_SITE_PYPI:=m/mypy/}
@@ -10,20 +10,22 @@ HOMEPAGE=	http://www.mypy-lang.org/
 COMMENT=	Optional static typing for Python
 LICENSE=	mit
 
-DEPENDS+=	${PYPKGPREFIX}-typed-ast>=1.3.1:../../devel/py-typed-ast
-DEPENDS+=	${PYPKGPREFIX}-mypy_extensions>=0.4.0:../../lang/py-mypy_extensions
-
-PYTHON_VERSIONS_INCOMPATIBLE=	27
+DEPENDS+=	${PYPKGPREFIX}-mypy_extensions>=0.4.3:../../lang/py-mypy_extensions
+DEPENDS+=	${PYPKGPREFIX}-typed-ast>=1.4.0:../../devel/py-typed-ast
+DEPENDS+=	${PYPKGPREFIX}-typing-extensions>=3.7.4:../../devel/py-typing-extensions
 
 USE_LANGUAGES=	# none
 
-REPLACE_PYTHON=	mypy/typeshed/tests/*.py
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
+REPLACE_PYTHON+=	mypy/typeshed/scripts/update-stubtest-whitelist.py
+REPLACE_PYTHON+=	mypy/typeshed/tests/*.py
 
 post-install:
+.for bin in dmypy mypy mypyc stubgen stubtest
 	cd ${DESTDIR}${PREFIX}/bin && \
-		${MV} dmypy dmypy-${PYVERSSUFFIX} && \
-		${MV} mypy mypy-${PYVERSSUFFIX} && \
-		${MV} stubgen stubgen-${PYVERSSUFFIX} || ${TRUE}
+	${MV} ${bin} ${bin}-${PYVERSSUFFIX} || ${TRUE}
+.endfor
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/egg.mk"

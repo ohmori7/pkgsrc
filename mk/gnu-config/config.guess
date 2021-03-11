@@ -182,13 +182,16 @@ case "$UNAME_MACHINE:$UNAME_SYSTEM:$UNAME_RELEASE:$UNAME_VERSION" in
 	    "/usr/sbin/$sysctl" 2>/dev/null || \
 	    echo unknown)`
 	case "$UNAME_MACHINE_ARCH" in
+	    aarch64eb) machine=aarch64_be-unknown ;;
 	    armeb) machine=armeb-unknown ;;
 	    arm*) machine=arm-unknown ;;
 	    sh3el) machine=shl-unknown ;;
 	    sh3eb) machine=sh-unknown ;;
 	    sh5el) machine=sh5le-unknown ;;
-	    earmv*)
-		arch=`echo "$UNAME_MACHINE_ARCH" | sed -e 's,^e\(armv[0-9]\).*$,\1,'`
+	    earm*)
+		arch="${UNAME_MACHINE_ARCH#e}"
+		arch="${arch%eb}"
+		arch="${arch%hf}"
 		endian=`echo "$UNAME_MACHINE_ARCH" | sed -ne 's,^.*\(eb\)$,\1,p'`
 		machine="${arch}${endian}"-unknown
 		;;
@@ -219,7 +222,7 @@ case "$UNAME_MACHINE:$UNAME_SYSTEM:$UNAME_RELEASE:$UNAME_VERSION" in
 	# Determine ABI tags.
 	case "$UNAME_MACHINE_ARCH" in
 	    earm*)
-		expr='s/^earmv[0-9]/-eabi/;s/eb$//'
+		expr='s/v[0-9]//;s/earm/-eabi/;s/eb$//'
 		abi=`echo "$UNAME_MACHINE_ARCH" | sed -e "$expr"`
 		;;
 	esac

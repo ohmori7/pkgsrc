@@ -1,18 +1,20 @@
-# $NetBSD: Makefile,v 1.87 2019/04/20 07:26:07 wen Exp $
+# $NetBSD: Makefile,v 1.94 2020/09/13 08:06:06 wiz Exp $
 
-DISTNAME=		Net-DNS-1.20
+DISTNAME=		Net-DNS-1.27
 PKGNAME=		p5-${DISTNAME}
 CATEGORIES=		net perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Net/}
 MASTER_SITES+=		http://www.net-dns.org/download/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.net-dns.org/
+HOMEPAGE=		https://www.net-dns.org/
 COMMENT=		Perl5 module for DNS resolution
 LICENSE=		${PERL5_LICENSE}
 
 DEPENDS+=		p5-Digest-HMAC>=1.0:../../security/p5-Digest-HMAC
 DEPENDS+=		p5-Net-IP>=1.20:../../net/p5-Net-IP
+
+TEST_DEPENDS+=		p5-Net-DNS-SEC-[0-9]*:../../security/p5-Net-DNS-SEC
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.p5-Net-DNS
 PKG_SUPPORTED_OPTIONS=	inet6 online-tests
@@ -33,8 +35,6 @@ MAKE_PARAMS+=		--online-tests
 .else
 MAKE_PARAMS+=		--no-online-tests
 .endif
-
-USE_LANGUAGES=		c
 
 PERL5_PACKLIST=		auto/Net/DNS/.packlist
 

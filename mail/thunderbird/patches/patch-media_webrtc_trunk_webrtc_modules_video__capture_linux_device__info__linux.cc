@@ -1,42 +1,20 @@
-$NetBSD: patch-media_webrtc_trunk_webrtc_modules_video__capture_linux_device__info__linux.cc,v 1.1 2018/12/16 08:12:16 ryoon Exp $
+$NetBSD: patch-media_webrtc_trunk_webrtc_modules_video__capture_linux_device__info__linux.cc,v 1.3 2020/09/03 15:26:22 ryoon Exp $
 
---- media/webrtc/trunk/webrtc/modules/video_capture/linux/device_info_linux.cc.orig	2018-12-04 23:11:54.000000000 +0000
+--- media/webrtc/trunk/webrtc/modules/video_capture/linux/device_info_linux.cc.orig	2020-08-28 21:33:15.000000000 +0000
 +++ media/webrtc/trunk/webrtc/modules/video_capture/linux/device_info_linux.cc
-@@ -25,6 +25,9 @@
- #else
- #include <linux/videodev2.h>
- #endif
-+#ifdef HAVE_LIBV4L2
-+#include <libv4l2.h>
-+#endif
+@@ -385,11 +385,15 @@ bool DeviceInfoLinux::IsDeviceNameMatche
  
- #include "webrtc/system_wrappers/include/trace.h"
- 
-@@ -33,6 +36,15 @@
- #define BUF_LEN     ( 1024 * ( EVENT_SIZE + 16 ) )
- #endif
- 
-+#ifdef HAVE_LIBV4L2
-+#define open	v4l2_open
-+#define close	v4l2_close
-+#define dup	v4l2_dup
-+#define ioctl	v4l2_ioctl
-+#define mmap	v4l2_mmap
-+#define munmap	v4l2_munmap
-+#endif
-+
- namespace webrtc
+ bool DeviceInfoLinux::IsVideoCaptureDevice(struct v4l2_capability* cap)
  {
- namespace videocapturemodule
-@@ -314,6 +326,11 @@ int32_t DeviceInfoLinux::GetDeviceName(
-     memset(deviceNameUTF8, 0, deviceNameLength);
-     memcpy(cameraName, cap.card, sizeof(cap.card));
++#ifdef V4L2_CAP_DEVICE_CAPS
+   if (cap->capabilities & V4L2_CAP_DEVICE_CAPS) {
+     return cap->device_caps & V4L2_CAP_VIDEO_CAPTURE;
+   } else {
+     return cap->capabilities & V4L2_CAP_VIDEO_CAPTURE;
+   }
++#else
++  return 1;
++#endif
+ }
  
-+    if (cameraName[0] == '\0')
-+    {
-+        sprintf(cameraName, "Camera at /dev/video%d", deviceNumber);
-+    }
-+
-     if (deviceNameLength >= strlen(cameraName))
-     {
-         memcpy(deviceNameUTF8, cameraName, strlen(cameraName));
+ int32_t DeviceInfoLinux::FillCapabilities(int fd) {

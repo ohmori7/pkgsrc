@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2018/08/22 09:45:42 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2020/08/31 18:10:19 wiz Exp $
 #
 
 DISTNAME=	beacon-1.3
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	mbone
 MASTER_SITES=	${MASTER_SITE_FREEBSD}
 
@@ -11,7 +11,7 @@ MAINTAINER=	pettai@NetBSD.org
 COMMENT=	Multicast supervision tool
 LICENSE=	modified-bsd
 
-GNU_CONFIGURE=	YES
+GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--sysconfdir=${PREFIX}/share/examples/beacon
 
 USE_TOOLS+=	tar patch perl

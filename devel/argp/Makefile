@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2018/09/28 20:07:50 wiedi Exp $
+# $NetBSD: Makefile,v 1.7 2021/01/13 09:17:24 nia Exp $
 
 DISTNAME=	argp-standalone-1.3
 PKGNAME=	argp-1.3
@@ -7,8 +7,9 @@ CATEGORIES=	devel
 MASTER_SITES=	http://www.lysator.liu.se/~nisse/misc/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnu.org/software/libc/manual/html_node/Argp.html
+HOMEPAGE=	https://www.gnu.org/software/libc/manual/html_node/Argp.html
 COMMENT=	Argument parsing function from glibc
+LICENSE=	gnu-lgpl-v2
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.2 2016/06/16 04:06:03 markd Exp $
+# $NetBSD: Makefile,v 1.6 2021/02/14 03:00:49 markd Exp $
 
 DISTNAME=	eplain.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-3.8
-TEXLIVE_REV=	41154
+PKGNAME=	tex-${DISTNAME:S/./-/}-3.11
+TEXLIVE_REV=	57186
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/eplain
+HOMEPAGE=	https://ctan.org/pkg/eplain
 COMMENT=	Documentation for tex-eplain
 LICENSE=	gnu-gpl-v2
 

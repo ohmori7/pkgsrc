@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:44:22 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/08/31 18:08:30 wiz Exp $
 #
 
 DISTNAME=	MooseX-Meta-TypeConstraint-ForceCoercion-0.01
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MooseX/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/MooseX-Meta-TypeConstraint-ForceCoercion/
+HOMEPAGE=	https://metacpan.org/release/MooseX-Meta-TypeConstraint-ForceCoercion
 COMMENT=	Perl 5 module providing forced coercion validating type constraints
 LICENSE=	${PERL5_LICENSE}
 

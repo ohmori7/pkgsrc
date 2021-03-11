@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.16 2019/05/27 15:18:33 bsiegert Exp $
+# $NetBSD: Makefile,v 1.33 2021/01/23 14:23:13 bsiegert Exp $
 
 DISTNAME=	caddy-${GITHUB_TAG:S/v//}
-PKGREVISION=	4
+PKGREVISION=	20
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=mholt/}
 GITHUB_TAG=	v0.11.4
@@ -11,9 +11,9 @@ HOMEPAGE=	${MASTER_SITE_GITHUB:=mholt/caddy/}
 COMMENT=	General-purpose web server
 LICENSE=	apache-2.0
 
-GO_DIST_BASE=	${DISTNAME}
-GO_SRCPATH=	github.com/mholt/caddy
-GO_BUILD_PATTERN= ${GO_SRCPATH}/caddy
+GO_DIST_BASE=		${DISTNAME}
+GO_SRCPATH=		github.com/mholt/caddy
+GO_BUILD_PATTERN=	${GO_SRCPATH}/caddy
 
 CHECK_RELRO_SKIP+=	bin/caddy
 

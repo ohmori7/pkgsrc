@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2015/03/15 17:20:19 hiramatsu Exp $
+# $NetBSD: Makefile,v 1.20 2019/11/04 21:43:48 rillig Exp $
 #
 
 DISTNAME=	tokyodystopia-0.9.15
@@ -6,7 +6,7 @@ CATEGORIES=	textproc
 MASTER_SITES=	${HOMEPAGE}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://fallabs.com/tokyodystopia/
+HOMEPAGE=	https://fallabs.com/tokyodystopia/
 COMMENT=	Full-text search system
 LICENSE=	gnu-lgpl-v2.1
 
@@ -18,7 +18,7 @@ PKGCONFIG_OVERRIDE+=	tokyodystopia.pc.in
 TEST_TARGET=	check
 
 post-extract:
-		${RM} -f ${WRKSRC}/doc/index.html~
+	${RM} -f ${WRKSRC}/doc/index.html~
 
 BUILDLINK_API_DEPENDS.tokyocabinet+=	tokyocabinet>=1.4.29
 .include "../../databases/tokyocabinet/buildlink3.mk"

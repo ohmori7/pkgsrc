@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.6 2015/08/02 11:09:07 markd Exp $
+# $NetBSD: Makefile,v 1.10 2021/02/20 10:08:29 markd Exp $
 
 DISTNAME=	draftwatermark
-PKGNAME=	tex-${DISTNAME}-1.2
-TEXLIVE_REV=	37498
+PKGNAME=	tex-${DISTNAME}-3.0
+TEXLIVE_REV=	57099
 
 MAINTAINER=	reed@reedmedia.net
-HOMEPAGE=	http://ctan.org/pkg/draftwatermark
+HOMEPAGE=	https://ctan.org/pkg/draftwatermark
 COMMENT=	Textual watermark package for LaTeX
 LICENSE=	lppl-1.3c
 

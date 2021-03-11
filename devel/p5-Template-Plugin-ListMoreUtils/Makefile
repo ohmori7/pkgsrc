@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:44:41 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:08:55 wiz Exp $
 #
 
 DISTNAME=	Template-Plugin-ListMoreUtils-0.03
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Template/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Template-Plugin-ListMoreUtils/
+HOMEPAGE=	https://metacpan.org/release/Template-Plugin-ListMoreUtils
 COMMENT=	TT2 plugin to use List::MoreUtils
 LICENSE=	${PERL5_LICENSE}
 

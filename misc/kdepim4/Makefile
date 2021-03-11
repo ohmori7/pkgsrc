@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.90 2018/12/13 19:52:10 adam Exp $
+# $NetBSD: Makefile,v 1.107 2021/01/01 08:24:50 ryoon Exp $
 
 DISTNAME=	kdepim-4.14.10
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	16
+PKGREVISION=	32
 CATEGORIES=	misc
 COMMENT=	Personal Information Management tools for the KDE desktop
 MASTER_SITES=	${MASTER_SITE_KDE:=applications/15.04.3/src/}
@@ -13,16 +13,16 @@ USE_TOOLS+=	gmake
 
 # BUILD_MAKE_FLAGS+= VERBOSE=1
 
-CMAKE_ARGS+=-DKDEPIM_BUILD_MOBILE=OFF
+CMAKE_ARGS+=	-DKDEPIM_BUILD_MOBILE=OFF
 
-CHECK_PORTABILITY_SKIP+=ktimetracker/test/booktime-baddate.sh \
-		ktimetracker/test/booktime-badduration.sh \
-		ktimetracker/test/booktime-badtime.sh \
-		ktimetracker/test/booktime-baduid.sh \
-		ktimetracker/test/booktime-works.sh \
-		ktimetracker/test/delete.sh \
-		ktimetracker/test/refresh_on_change.sh \
-		ktimetracker/test/version.sh
+CHECK_PORTABILITY_SKIP+=	ktimetracker/test/booktime-baddate.sh \
+				ktimetracker/test/booktime-badduration.sh \
+				ktimetracker/test/booktime-badtime.sh \
+				ktimetracker/test/booktime-baduid.sh \
+				ktimetracker/test/booktime-works.sh \
+				ktimetracker/test/delete.sh \
+				ktimetracker/test/refresh_on_change.sh \
+				ktimetracker/test/version.sh
 
 REPLACE_BASH+=	kmail/kconf_update/kmail-*.sh
 
@@ -61,7 +61,12 @@ SUBST_SED.perlfix=	-e 's:@PERL@:${PERL5}:g'
 post-install:
 	${RM} ${DESTDIR}${PREFIX}/share/icons/oxygen/*/mimetypes/x-mail-distribution-list.png
 
-BUILDLINK_DEPMETHOD.qt4-tools=full
+NOT_PAX_MPROTECT_SAFE+=	bin/kmail
+NOT_PAX_MPROTECT_SAFE+=	bin/kontact
+NOT_PAX_MPROTECT_SAFE+=	bin/blogilo
+NOT_PAX_MPROTECT_SAFE+=	bin/knode
+
+BUILDLINK_DEPMETHOD.qt4-tools=	full
 
 .include "../../meta-pkgs/kde4/kde4.mk"
 

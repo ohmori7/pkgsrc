@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.3 2019/01/26 02:58:05 markd Exp $
+# $NetBSD: Makefile,v 1.6 2020/04/27 22:35:36 markd Exp $
 
 DISTNAME=	apa6
-PKGNAME=	tex-${DISTNAME}-2.33
-TEXLIVE_REV=	48546
+PKGNAME=	tex-${DISTNAME}-2.34
+TEXLIVE_REV=	53406
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/apa6
+HOMEPAGE=	https://ctan.org/pkg/apa6
 COMMENT=	Format documents in APA style (6th edition)
 LICENSE=	lppl-1.3c
 

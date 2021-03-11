@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.44 2019/04/25 18:42:41 adam Exp $
+# $NetBSD: Makefile,v 1.59 2021/02/08 13:31:58 otis Exp $
 
 .include "Makefile.common"
 
@@ -16,11 +16,6 @@ SMF_NAME=		pdns
 EGDIR=			${PREFIX}/share/examples/pdns
 
 CONF_FILES+=		${EGDIR}/pdns.conf-dist ${PKG_SYSCONFDIR}/pdns.conf
-
-SUBST_CLASSES+=		conf
-SUBST_STAGE.conf=	pre-install
-SUBST_FILES.conf=	pdns/pdns.conf-dist
-SUBST_VARS.conf+=	PREFIX PKG_SYSCONFDIR
 
 LDFLAGS.SunOS+=		-lsocket -lnsl
 

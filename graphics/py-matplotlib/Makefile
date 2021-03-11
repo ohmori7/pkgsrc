@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.54 2019/06/16 13:11:34 adam Exp $
+# $NetBSD: Makefile,v 1.66 2021/02/07 15:31:44 adam Exp $
 
-DISTNAME=	matplotlib-3.1.0
+DISTNAME=	matplotlib-3.3.4
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	graphics python
 MASTER_SITES=	${MASTER_SITE_PYPI:=m/matplotlib/}
@@ -10,24 +10,26 @@ HOMEPAGE=	https://matplotlib.org/
 COMMENT=	Matlab-style plotting package for Python
 # LICENSE=	see ${WRKSRC}/LICENSE/LICENSE
 
-DEPENDS+=	${PYPKGPREFIX}-Pillow>=3.4:../../graphics/py-Pillow
+DEPENDS+=	${PYPKGPREFIX}-Pillow>=6.2.0:../../graphics/py-Pillow
 DEPENDS+=	${PYPKGPREFIX}-cairo-[0-9]*:../../graphics/py-cairo
 DEPENDS+=	${PYPKGPREFIX}-cycler>=0.10:../../graphics/py-cycler
 DEPENDS+=	${PYPKGPREFIX}-dateutil>=2.1:../../time/py-dateutil
 DEPENDS+=	${PYPKGPREFIX}-kiwisolver>=1.0.1:../../math/py-kiwisolver
 DEPENDS+=	${PYPKGPREFIX}-pyparsing>=2.2.0:../../devel/py-pyparsing
+DEPENDS+=	${PYPKGPREFIX}-certifi-[0-9]*:../../security/py-certifi
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
 
-USE_LANGUAGES=		c c++
-USE_TOOLS+=		pkg-config
-
-PYTHON_VERSIONS_INCOMPATIBLE=	27
+USE_LANGUAGES=	c c++
+USE_TOOLS+=	pkg-config
 
 PYSETUPTESTTARGET=	pytest
 
-.include "../../lang/python/egg.mk"
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
+.include "../../lang/python/egg.mk"
 .include "../../math/py-numpy/buildlink3.mk"
+.include "../../math/qhull/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

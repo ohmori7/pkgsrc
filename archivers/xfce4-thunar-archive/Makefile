@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.13 2018/11/14 22:20:59 kleink Exp $
-#
+# $NetBSD: Makefile,v 1.21 2020/08/31 18:06:32 wiz Exp $
 
-PKGREVISION= 3
+PKGREVISION= 10
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
 DISTNAME=	thunar-archive-plugin-0.4.0
@@ -10,10 +9,10 @@ CATEGORIES=	archivers
 MASTER_SITES=	http://archive.xfce.org/src/thunar-plugins/thunar-archive-plugin/0.4/
 
 MAINTAINER=	youri@NetBSD.org
-HOMEPAGE=	http://goodies.xfce.org/projects/thunar-plugins/thunar-archive-plugin
+HOMEPAGE=	https://goodies.xfce.org/projects/thunar-plugins/thunar-archive-plugin
 COMMENT=	Thunar archive plugin
 
-DEPENDS=	file-roller-[0-9]*:../../archivers/file-roller
+DEPENDS=	xfce4-xarchiver-[0-9]*:../../sysutils/xfce4-xarchiver
 
 .include "../../sysutils/xfce4-thunar/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.30 2017/09/04 18:01:05 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2020/03/08 16:51:50 wiz Exp $
 #
 
 DISTNAME=	ssystem-1.6
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	x11 graphics
 MASTER_SITES=	${MASTER_SITE_LOCAL}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 #HOMEPAGE=	http://www1.las.es/~amil/ssystem/
 COMMENT=	Solar System Flyby Simulator
-
-MAKE_JOBS_SAFE=		no
 
 USE_TOOLS+=	flex bison
 
@@ -28,6 +26,9 @@ do-install:
 	    ${INSTALL_DATA} ${DOC_FILES} ${DESTDIR}${PREFIX}/share/doc/ssystem; \
 	    ${INSTALL_DATA} hires/README ${DESTDIR}${PREFIX}/share/ssystem/hires
 
-.include "../../graphics/Mesa/buildlink3.mk"
+.include "../../graphics/MesaLib/buildlink3.mk"
+.include "../../graphics/freeglut/buildlink3.mk"
+.include "../../graphics/glu/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
+.include "../../x11/libXmu/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

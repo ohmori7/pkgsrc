@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2021/03/09 09:55:30 schmonz Exp $
+
+SHA1 (libretls-3.3.1p1.tar.gz) = 3083dded5b4ba0afe4d183fb7e41ea359c95bcce
+RMD160 (libretls-3.3.1p1.tar.gz) = 8e6d5ac96375c13f634685d2154e29e4347448ad
+SHA512 (libretls-3.3.1p1.tar.gz) = 49c2f3d2c9c9dea92572a9eeac595a99ca3fa4a395f7ee8e92228d8ab6217ce6f83fe58df23dcd57f81547f60094b93adbef132aa2e4f51ac7190e78a84a02c5
+Size (libretls-3.3.1p1.tar.gz) = 433028 bytes

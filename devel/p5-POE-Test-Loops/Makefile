@@ -1,20 +1,20 @@
-# $NetBSD: Makefile,v 1.21 2018/08/22 09:44:28 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2020/08/31 18:08:37 wiz Exp $
 
 DISTNAME=	POE-Test-Loops-1.360
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=POE/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/POE-Test-Loops/
+HOMEPAGE=	https://metacpan.org/release/POE-Test-Loops
 COMMENT=	Perl module providing reusable tests for POE::Loop authors
 LICENSE=	${PERL5_LICENSE}
 
 PERL5_PACKLIST=		auto/POE/Test/Loops/.packlist
 
-TESTS_TO_FIX= 00_info.pm comp_tcp_concurrent.pm all_errors.pm comp_tcp.pm \
-	connect_errors.pm k_alarms.pm k_aliases.pm k_detach.pm \
+TESTS_TO_FIX=	00_info.pm comp_tcp_concurrent.pm all_errors.pm comp_tcp.pm \
+		connect_errors.pm k_alarms.pm k_aliases.pm k_detach.pm \
 	k_run_returns.pm k_selects.pm k_sig_child.pm k_signals.pm \
 	k_signals_rerun.pm sbk_signal_init.pm \
 	ses_nfa.pm ses_session.pm wheel_accept.pm wheel_curses.pm \
@@ -26,7 +26,7 @@ TESTS_TO_FIX= 00_info.pm comp_tcp_concurrent.pm all_errors.pm comp_tcp.pm \
 	z_rt54319_bazerka_followtail.pm z_steinert_signal_integrity.pm
 
 .for t in ${TESTS_TO_FIX}
-REPLACE_PERL+= lib/POE/Test/Loops/${t}
+REPLACE_PERL+=	lib/POE/Test/Loops/${t}
 .endfor
 
 SUBST_CLASSES+=		perl

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2014/08/08 21:31:07 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2020/11/20 11:40:09 nia Exp $
 
 GST_PLUGINS1_NAME=	oss
 GST_PLUGINS1_DIRS=	sys/oss
 
+PKGREVISION= 1
 .include "../../multimedia/gst-plugins1-good/Makefile.common"
 
 SUBST_CLASSES+=		devoss
@@ -14,4 +15,9 @@ SUBST_SED.devoss=	-e 's|/dev/dsp|${DEVOSSAUDIO}|g'
 LIBS+=			${LIBOSSAUDIO}
 
 .include "../../mk/oss.buildlink3.mk"
+
+.if ${OSS_TYPE} == "none"
+PKG_SKIP_REASON+=	"No OSS implementation available."
+.endif
+
 .include "../../mk/bsd.pkg.mk"

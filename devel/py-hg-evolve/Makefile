@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2019/04/26 13:13:51 maya Exp $
+# $NetBSD: Makefile,v 1.16 2021/02/06 07:55:09 wiz Exp $
 
-DISTNAME=	hg-evolve-8.4.0
-PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=	2
+DISTNAME=	hg-evolve-10.2.0.post1
+PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/post//}
 CATEGORIES=	devel scm
 MASTER_SITES=	${MASTER_SITE_PYPI:=h/hg-evolve/}
 
@@ -11,12 +10,28 @@ HOMEPAGE=	https://www.mercurial-scm.org/doc/evolution/
 COMMENT=	Experimental Mercurial extensions from Facebook
 LICENSE=	gnu-gpl-v2
 
-DEPENDS+=	${PYPKGPREFIX}-mercurial>=4.3.1:../../devel/py-mercurial
+DEPENDS+=	${PYPKGPREFIX}-mercurial>=5.4nb1:../../devel/py-mercurial
+DEPENDS+=	${PYPKGPREFIX}-sqlite3>=0:../../databases/py-sqlite3
+TEST_DEPENDS+=	curl-[0-9]*:../../www/curl
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # See Mercurial itself.
+USE_TOOLS+=	bash:test
 
 post-install:
 	rm -f ${DESTDIR}${PREFIX}/${PYSITELIB}/hgext3rd/__init__.py*
+	rm -f ${DESTDIR}${PREFIX}/${PYSITELIB}/hgext3rd/__pycache__/__init__.*
+
+# Test status as of 10.1.0 with mercurial 5.6:
+# Failed test-check-compat-strings.t: output changed
+# Failed test-check-debian.t: output changed
+# Failed test-evolve-content-divergent-case-A2.t: output changed
+# Ran 194 tests, 4 skipped, 3 failed.
+
+.if 0
+HG_WRKSRC=	cd ../py-mercurial && ${MAKE} show-var VARNAME=WRKSRC
+
+do-test:
+	HGROOT=${HG_WRKSRC:sh}; cd ${WRKSRC}/tests && ${PYTHONBIN} $${HGROOT}/tests/run-tests.py ${_MAKE_JOBS:Q}
+.endif
 
 .include "../../lang/python/distutils.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,23 +1,49 @@
-# $NetBSD: Makefile,v 1.30 2016/08/20 05:31:09 mef Exp $
+# $NetBSD: Makefile,v 1.43 2021/03/05 10:26:36 nia Exp $
 
-DISTNAME=		ncmpc-0.25
-CATEGORIES=		audio
-#MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=musicpd/}
-MASTER_SITES=		http://www.musicpd.org/download/ncmpc/0/
-EXTRACT_SUFX=		.tar.xz
+DISTNAME=	ncmpc-0.45
+CATEGORIES=	audio
+MASTER_SITES=	https://musicpd.org/download/ncmpc/0/
+EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://mpd.wikia.com/wiki/Client:Ncmpc
-COMMENT=		Curses client for Music Player Daemon
-LICENSE=		gnu-gpl-v2
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://musicpd.org/clients/ncmpc/
+COMMENT=	Fully featured musicpd client using curses
+LICENSE=	gnu-gpl-v2
+
+USE_TOOLS+=	pkg-config xgettext
+USE_LANGUAGES=	c c++
+FAKE_NCURSES=	yes
+
+PYTHON_VERSIONED_DEPENDENCIES=	sphinx:tool
+
+MESON_ARGS+=	-Dlirc=disabled
+MESON_ARGS+=	-Dhtml_manual=false
+
+# C++17
+GCC_REQD+=	7
+
+# make stderr readable
+CXXFLAGS+=	-Wno-undef
+
+LDFLAGS+=	${BUILDLINK_LDADD.curses}
+
+LDFLAGS.SunOS+=		-lintl
+LDFLAGS.NetBSD+=	-lintl
+
+PYTHON_FOR_BUILD_ONLY=	tool
+
+SUBST_CLASSES+=		py
+SUBST_STAGE.py=		pre-configure
+SUBST_MESSAGE.py=	Set Python version variables.
+SUBST_FILES.py+=	doc/meson.build
+SUBST_VARS.py+=		PYVERSSUFFIX
 
 .include "options.mk"
-
-GNU_CONFIGURE=		yes
-USE_PKGLOCALEDIR=	yes
-USE_LIBTOOL=		yes
-USE_TOOLS+=		pkg-config msgfmt
-
+.include "../../devel/meson/build.mk"
 .include "../../audio/libmpdclient/buildlink3.mk"
-.include "../../devel/glib2/buildlink3.mk"
+.include "../../devel/boost-headers/buildlink3.mk"
+.include "../../devel/pcre/buildlink3.mk"
+.include "../../lang/python/tool.mk"
+.include "../../lang/python/versioned_dependencies.mk"
+.include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

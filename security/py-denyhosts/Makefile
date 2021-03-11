@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.18 2019/04/26 13:14:12 maya Exp $
+# $NetBSD: Makefile,v 1.22 2020/03/20 11:58:19 nia Exp $
 
 VER=		2.6
 DISTNAME=	DenyHosts-${VER}
@@ -12,7 +12,7 @@ MAINTAINER=	he@NetBSD.org
 HOMEPAGE=	http://denyhosts.sourceforge.net/
 COMMENT=	Watch auth log for invalid ssh login attempts and block hosts
 
-PYDISTUTILSPKG= yes
+PYDISTUTILSPKG=	yes
 
 CONF_FILES+=	${PREFIX}/share/denyhosts/denyhosts.cfg-dist \
 		${PREFIX}/etc/denyhosts.conf
@@ -20,16 +20,16 @@ CONF_FILES+=	${PREFIX}/share/denyhosts/denyhosts.cfg-dist \
 FILES_SUBST+=	PYTHONBIN=${PYTHONBIN:Q}
 
 SUBST_CLASSES+=	cf
-SUBST_STAGE.cf= post-configure
+SUBST_STAGE.cf=	post-configure
 SUBST_VARS.cf=	VARBASE PREFIX VARBASE PKG_SYSCONFDIR PYTHONBIN
 SUBST_FILES.cf=	setup.py denyhosts.cfg-dist daemon-control-dist
 
-REPLACE_PYTHON=	daemon-control-dist plugins/test_deny.py setup.py
-REPLACE_PYTHON+= scripts/restricted_from_invalid.py
-REPLACE_PYTHON+= scripts/restricted_from_passwd.py
+REPLACE_PYTHON=		daemon-control-dist plugins/test_deny.py setup.py
+REPLACE_PYTHON+=	scripts/restricted_from_invalid.py
+REPLACE_PYTHON+=	scripts/restricted_from_passwd.py
 
-PYTHON_SELF_CONFLICT=	yes
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37
+PYTHON_SELF_CONFLICT=		yes
+PYTHON_VERSIONS_ACCEPTED=	27
 
 RCD_SCRIPTS+=	denyhosts
 SMF_NAME=	denyhost

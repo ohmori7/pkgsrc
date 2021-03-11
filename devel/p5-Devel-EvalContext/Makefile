@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:43:53 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:07:52 wiz Exp $
 
 DISTNAME=	Devel-EvalContext-0.09
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Devel/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Devel-EvalContext/
+HOMEPAGE=	https://metacpan.org/release/Devel-EvalContext
 COMMENT=	Perl 5 module to save lexicals and hints between calls to eval
 LICENSE=	${PERL5_LICENSE}
 

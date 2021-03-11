@@ -1,14 +1,11 @@
-# $NetBSD: Makefile,v 1.7 2018/07/28 14:40:50 brook Exp $
-
-CATEGORIES=	math
-
-MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	${R_HOMEPAGE_BASE}/plyr/
-COMMENT=	Tools for splitting, applying and combining data
-LICENSE=	mit
+# $NetBSD: Makefile,v 1.10 2020/07/31 18:37:34 brook Exp $
 
 R_PKGNAME=	plyr
-R_PKGVER=	1.8.4
+R_PKGVER=	1.8.6
+
+MAINTAINER=	pkgsrc-users@NetBSD.org
+COMMENT=	Tools for splitting, applying and combining data
+LICENSE=	mit
 
 USE_LANGUAGES+=	c c++
 

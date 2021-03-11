@@ -1,7 +1,8 @@
-$NetBSD: distinfo,v 1.41 2019/06/15 09:42:52 leot Exp $
+$NetBSD: distinfo,v 1.48 2020/11/01 05:15:35 khorben Exp $
 
-SHA1 (tmux-2.9a.tar.gz) = 33cba73e64c62f46bd244d4472c59371fb747f56
-RMD160 (tmux-2.9a.tar.gz) = e5460971073abb865adcea2a6711e82d84c53838
-SHA512 (tmux-2.9a.tar.gz) = aca6882688727c10c5647443fdd18bbd6c0f80b7a3bf9667903d1b89d523e604cd715f176f33f2e5673258f00e626a6dc273f80fe97ae4f91621814d89985713
-Size (tmux-2.9a.tar.gz) = 510915 bytes
-SHA1 (patch-osdep-netbsd.c) = 90d335b544dbacc3860cfa6c13ecd61b11f09f30
+SHA1 (tmux-3.1c.tar.gz) = 7cf2736fd9c1cc9daf614679e4084d2746a15390
+RMD160 (tmux-3.1c.tar.gz) = 3c1ab6dcb1120129f66a6639214126565a7388e8
+SHA512 (tmux-3.1c.tar.gz) = aad2e6457dd350369f245f711f1936a575d0588b72e660d10e7abc7d373da0d322903b451ad00b96a3e0e6847ca855673da6a4c5447cea91fa756edd23659397
+Size (tmux-3.1c.tar.gz) = 561323 bytes
+SHA1 (patch-compat_daemon-darwin.c) = e8feeb4b100e73ab197eb2fd776fa648a1da28e4
+SHA1 (patch-osdep-darwin.c) = 4bcb0705e3ffa87df614e0946121b0ae66ad3f53

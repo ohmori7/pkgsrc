@@ -1,19 +1,25 @@
-# $NetBSD: Makefile,v 1.26 2018/08/22 09:46:25 wiz Exp $
+# $NetBSD: Makefile,v 1.30 2020/08/31 18:11:16 wiz Exp $
 
 DISTNAME=	Digest-Hashcash-1.1
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	security perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Digest/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Digest-Hashcash/
+HOMEPAGE=	https://metacpan.org/release/Digest-Hashcash
 COMMENT=	Perl5 extension module for hashcash hashes
 LICENSE=	gnu-gpl-v2
 
 DEPENDS+=	p5-Canary-Stability-[0-9]*:../../devel/p5-Canary-Stability
 
 PERL5_PACKLIST=		auto/Digest/Hashcash/.packlist
+
+# Hashcash.xs: In function 'XS_Digest__Hashcash__gentoken':
+# Hashcash.xs:441:28: error: array subscript has type 'char' [-Werror=char-subscripts]
+#                *s = nextenc [*s];
+# Maybe fix this later.
+BUILDLINK_TRANSFORM+=	rm:-Werror=char-subscripts
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

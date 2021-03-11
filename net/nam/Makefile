@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.37 2018/03/12 11:17:21 wiz Exp $
+# $NetBSD: Makefile,v 1.40 2020/08/17 20:19:49 leot Exp $
 
 DISTNAME=	nam-src-1.15
 PKGNAME=	nam-1.15
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=nsnam/}
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://www.isi.edu/nsnam/nam/
+HOMEPAGE=	https://www.isi.edu/nsnam/nam/
 COMMENT=	The UCB/LBNL Network Animator
 
 WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
@@ -23,6 +23,12 @@ CONFIGURE_ARGS+=	--with-otcl=${BUILDLINK_PREFIX.tcl-otcl}
 CONFIGURE_ARGS+=	--with-tclcl=${BUILDLINK_PREFIX.tcl-tclcl}
 
 CONFIGURE_ENV+=		V_LIBS="`${CONFIG_SHELL} -c '. ${TCLCONFIG_SH}; . ${TKCONFIG_SH}; ${ECHO} $$TK_LIBS'`"
+
+SUBST_CLASSES+=		char
+SUBST_STAGE.char=	pre-configure
+SUBST_MESSAGE.char=	unsigned char needed for 8bit values
+SUBST_FILES.char=	bitmap/*.xbm
+SUBST_SED.char=		-e 's,char,u_char,'
 
 MESSAGE_SUBST+=		HOMEPAGE=${HOMEPAGE}
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.37 2019/04/26 13:13:48 maya Exp $
+# $NetBSD: Makefile,v 1.40 2020/12/04 20:45:07 nia Exp $
 
 DISTNAME=	bzr-svn-${VER}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	devel scm
 MASTER_SITES=	http://launchpad.net/bzr-svn/${VER:R}/${VER}/+download/
 MASTER_SITES+=	http://samba.org/~jelmer/bzr/
@@ -12,7 +12,7 @@ HOMEPAGE=	http://wiki.bazaar.canonical.com/ForeignBranches/Subversion
 COMMENT=	Foreign Subversion repository support for Bazaar
 LICENSE=	gnu-gpl-v2
 
-REPLACE_PYTHON= info.py wiki.py
+REPLACE_PYTHON=	info.py wiki.py
 
 DEPENDS+=	${PYPKGPREFIX}-subvertpy>=0.8.8:../../devel/py-subvertpy
 DEPENDS=	${PYPKGPREFIX}-sqlite3-[0-9]*:../../databases/py-sqlite3
@@ -26,7 +26,7 @@ USE_LANGUAGES=	#none
 #TEST_DEPENDS+=	${PYPKGPREFIX}-paramiko-[0-9]*:../../security/py-paramiko
 #TEST_TARGET=	check-verbose
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-subvertpy
+PYTHON_VERSIONS_ACCEPTED=	27 # py-subvertpy
 
 .include "../../devel/bzr/plugin.mk"
 .include "../../lang/python/application.mk"

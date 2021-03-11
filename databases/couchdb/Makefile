@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.55 2019/04/03 00:32:30 ryoon Exp $
-#
+# $NetBSD: Makefile,v 1.72 2021/01/27 16:20:20 jperkin Exp $
 
-DISTNAME=		apache-couchdb-2.1.1
+DISTNAME=		apache-couchdb-2.3.1
 PKGNAME=		${DISTNAME:S/apache-//}
-PKGREVISION=		9
+PKGREVISION=		10
 CATEGORIES=		databases
 MASTER_SITES=		${MASTER_SITE_APACHE:=couchdb/source/${PKGVERSION_NOREV}/}
 
-MAINTAINER=		fhajny@NetBSD.org
-HOMEPAGE=		http://couchdb.apache.org/
+MAINTAINER=		pkgsrc-users@NetBSD.org
+HOMEPAGE=		https://couchdb.apache.org/
 COMMENT=		Document database server, accessible via a RESTful JSON API
 LICENSE=		apache-2.0
 
@@ -19,7 +18,9 @@ USE_LIBTOOL=		yes
 BUILD_DEFS+=		VARBASE
 
 BUILD_DEPENDS+=		help2man-[0-9]*:../../converters/help2man
-BUILD_DEPENDS+=		rebar>=2.6.0<3:../../devel/rebar
+BUILD_DEPENDS+=		rebar21>=2.6.0<3:../../devel/rebar21
+
+MAKE_ENV+=		REBAR=${PREFIX}/bin/rebar
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -30,11 +31,11 @@ COUCH_RUNDIR?=		${VARBASE}/run/couchdb
 COUCH_USER?=		couchdb
 COUCH_GROUP?=		${COUCH_USER}
 
-PKG_GROUPS+=		${COUCH_GROUP}
-PKG_USERS+=		${COUCH_USER}:${COUCH_GROUP}
-PKG_GECOS.${COUCH_USER}=CouchDB Server User
-PKG_HOME.${COUCH_USER}=	${COUCH_DBDIR}
-PKG_SHELL.${COUCH_USER}=${COMMAND_SHELL}
+PKG_GROUPS+=			${COUCH_GROUP}
+PKG_USERS+=			${COUCH_USER}:${COUCH_GROUP}
+PKG_GECOS.${COUCH_USER}=	CouchDB Server User
+PKG_HOME.${COUCH_USER}=		${COUCH_DBDIR}
+PKG_SHELL.${COUCH_USER}=	${COMMAND_SHELL}
 
 FILES_SUBST+=		COUCH_USER=${COUCH_USER}
 FILES_SUBST+=		COUCH_GROUP=${COUCH_GROUP}
@@ -49,18 +50,17 @@ OWN_DIRS_PERMS+=	${COUCH_RUNDIR} ${COUCH_USER} ${COUCH_GROUP} 0770
 
 PKG_SYSCONFSUBDIR=	couchdb
 PKG_SYSCONFDIR_PERMS=	${COUCH_USER} ${COUCH_GROUP} 0775
-CONF_FILES_PERMS+=	${COUCH_EGDIR}/default.ini ${PKG_SYSCONFDIR}/default.ini\
+CONF_FILES_PERMS+=	${COUCH_EGDIR}/default.ini ${PKG_SYSCONFDIR}/default.ini \
 			${COUCH_USER} ${COUCH_GROUP} 0660
-CONF_FILES_PERMS+=	${COUCH_EGDIR}/local.ini ${PKG_SYSCONFDIR}/local.ini	\
+CONF_FILES_PERMS+=	${COUCH_EGDIR}/local.ini ${PKG_SYSCONFDIR}/local.ini \
 			${COUCH_USER} ${COUCH_GROUP} 0660
-CONF_FILES_PERMS+=	${COUCH_EGDIR}/vm.args ${PKG_SYSCONFDIR}/vm.args	\
+CONF_FILES_PERMS+=	${COUCH_EGDIR}/vm.args ${PKG_SYSCONFDIR}/vm.args \
 			${COUCH_USER} ${COUCH_GROUP} 0660
 
 SUBST_CLASSES+=		paths
 SUBST_MESSAGE.paths=	Setting standard paths
 SUBST_STAGE.paths=	pre-configure
-SUBST_FILES.paths=	configure
-SUBST_FILES.paths+=	rel/overlay/bin/couchdb
+SUBST_FILES.paths+=	rel/files/couchdb.in
 SUBST_FILES.paths+=	rel/overlay/etc/default.ini
 SUBST_FILES.paths+=	src/config/src/config_app.erl
 SUBST_VARS.paths=	COUCH_DBDIR COUCH_LOGDIR COUCH_RUNDIR PREFIX PKG_SYSCONFDIR
@@ -80,22 +80,26 @@ INSTALLATION_DIRS+=	couchdb/share/server couchdb/share/www/docs
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 INSTALLATION_DIRS+=	share/examples/couchdb
 
+CTF_FILES_SKIP+=	couchdb/erts*/bin/*
+CTF_FILES_SKIP+=	couchdb/lib/*/priv/bin/*
+CTF_FILES_SKIP+=	couchdb/lib/*/priv/lib/*.so
+
 RCD_SCRIPTS+=		couchdb
 
 # This is silly, but the rebar release target embeds the Erlang VM
 # into the tree, including existing Erlang module versions that might
 # differ from those included in the tarball. We use a dynamic PLIST
 # for the parts that may change.
-GENERATE_PLIST=		cd ${DESTDIR}${PREFIX}; ${FIND}				\
-				couchdb/erts-* couchdb/lib			\
-				\( -type f -o -type l \) -print |		\
+GENERATE_PLIST=		cd ${DESTDIR}${PREFIX}; ${FIND}			\
+				couchdb/erts-* couchdb/lib		\
+				\( -type f -o -type l \) -print |	\
 				${SORT} -u;
 # Ignore dynamically generated parts when doing print-PLIST
 PRINT_PLIST_AWK+=	/^couchdb\/erts-/ { next; }
 PRINT_PLIST_AWK+=	/^couchdb\/lib\// { next; }
 
 # We need to know the version of erts and subst it inside the SMF manifest
-.include "../../lang/erlang/Makefile.versions"
+.include "../../lang/erlang21/Makefile.versions"
 
 do-install:
 	cd ${WRKSRC}/rel/couchdb &&						\
@@ -115,8 +119,7 @@ do-install:
 # The erlang VM gets embedded, but it may still need the curses lib
 BUILDLINK_DEPMETHOD.erlang=	build
 .include "../../mk/termcap.buildlink3.mk"
-.include "../../lang/erlang/buildlink3.mk"
-
+.include "../../lang/erlang21/buildlink3.mk"
 .include "../../lang/spidermonkey185/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"

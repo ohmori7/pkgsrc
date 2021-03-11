@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.41 2018/08/22 09:47:07 wiz Exp $
+# $NetBSD: Makefile,v 1.47 2020/11/05 09:09:14 ryoon Exp $
 
-DISTNAME=	XML-LibXSLT-1.96
+DISTNAME=	XML-LibXSLT-1.99
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=XML/}
 
 MAINTAINER=	adam@migus.org
-HOMEPAGE=	http://search.cpan.org/dist/XML-LibXSLT/
+HOMEPAGE=	https://metacpan.org/release/XML-LibXSLT
 COMMENT=	Perl interface to the libxslt library
 LICENSE=	${PERL5_LICENSE}
 

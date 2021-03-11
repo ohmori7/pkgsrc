@@ -1,5 +1,8 @@
-/*	$NetBSD: main.c,v 1.66 2018/02/26 23:45:02 ginsbach Exp $	*/
+/*	$NetBSD: main.c,v 1.69 2020/12/02 10:45:47 wiz Exp $	*/
 
+#ifdef HAVE_NBTOOL_CONFIG_H
+#include "nbtool_config.h"
+#else
 #if HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -7,10 +10,11 @@
 #if HAVE_SYS_CDEFS_H
 #include <sys/cdefs.h>
 #endif
-__RCSID("$NetBSD: main.c,v 1.66 2018/02/26 23:45:02 ginsbach Exp $");
+#endif
+__RCSID("$NetBSD: main.c,v 1.69 2020/12/02 10:45:47 wiz Exp $");
 
 /*-
- * Copyright (c) 1999-2009 The NetBSD Foundation, Inc.
+ * Copyright (c) 1999-2019 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
  * This code is derived from software contributed to The NetBSD Foundation
@@ -59,8 +63,10 @@ __RCSID("$NetBSD: main.c,v 1.66 2018/02/26 23:45:02 ginsbach Exp $");
 #endif
 #ifndef NETBSD
 #include <nbcompat/md5.h>
+#include <nbcompat/sha2.h>
 #else
 #include <md5.h>
+#include <sha2.h>
 #endif
 #if HAVE_LIMITS_H
 #include <limits.h>
@@ -88,11 +94,31 @@ struct pkgdb_count {
 	size_t packages;
 };
 
+/*
+ * A hashed list of +REQUIRED_BY entries.
+ */
+struct reqd_by_entry {
+	char *pkgname;
+	SLIST_ENTRY(reqd_by_entry) entries;
+};
+SLIST_HEAD(reqd_by_entry_head, reqd_by_entry);
+
+/*
+ * A hashed list of packages that contain +REQUIRED_BY entries.
+ */
+struct pkg_reqd_by {
+	char *pkgname;
+	struct reqd_by_entry_head required_by[PKG_HASH_SIZE];
+	SLIST_ENTRY(pkg_reqd_by) entries;
+};
+SLIST_HEAD(pkg_reqd_by_head, pkg_reqd_by);
+
 static const char Options[] = "C:K:SVbd:qs:v";
 
 int	quiet, verbose;
 
 static void set_unset_variable(char **, Boolean);
+static void digest_input(char **);
 
 /* print usage message and exit */
 void 
@@ -277,37 +303,79 @@ remove_required_by(const char *pkgname, void *cookie)
 }
 
 static void
-add_required_by(const char *pattern, const char *required_by)
+add_required_by(const char *pattern, const char *pkgname, struct pkg_reqd_by_head *hash)
 {
-	char *best_installed, *path;
-	int fd;
-	size_t len;
+	struct pkg_reqd_by_head *phead;
+	struct pkg_reqd_by *pkg;
+	struct reqd_by_entry_head *ehead;
+	struct reqd_by_entry *entry;
+	char *best_installed;
+	int i;
 
-	best_installed = find_best_matching_installed_pkg(pattern);
+	best_installed = find_best_matching_installed_pkg(pattern, 1);
 	if (best_installed == NULL) {
-		warnx("Dependency %s of %s unresolved", pattern, required_by);
+		warnx("Dependency %s of %s unresolved", pattern, pkgname);
 		return;
 	}
 
-	path = pkgdb_pkg_file(best_installed, REQUIRED_BY_FNAME);
+	/*
+	 * Find correct reqd_by head based on hash of best_installed, which is
+	 * the package in question that we are adding +REQUIRED_BY entries for.
+	 */
+	phead = &hash[PKG_HASH_ENTRY(best_installed)];
+
+	/*
+	 * Look for an existing entry in this hash list.
+	 */
+	SLIST_FOREACH(pkg, phead, entries) {
+		if (strcmp(pkg->pkgname, best_installed) == 0) {
+
+			/*
+			 * Found an entry, now see if it already has a
+			 * +REQUIRED_BY entry recorded for this pkgname,
+			 * and if not then add it.
+			 */
+			ehead = &pkg->required_by[PKG_HASH_ENTRY(pkgname)];
+			SLIST_FOREACH(entry, ehead, entries) {
+				if (strcmp(entry->pkgname, pkgname) == 0)
+					break;
+			}
+
+			if (entry == NULL) {
+				entry = xmalloc(sizeof(*entry));
+				entry->pkgname = xstrdup(pkgname);
+				SLIST_INSERT_HEAD(ehead, entry, entries);
+			}
+
+			break;
+		}
+	}
+
+	/*
+	 * Create new package containing its first +REQUIRED_BY entry.
+	 */
+	if (pkg == NULL) {
+		pkg = xmalloc(sizeof(*pkg));
+		pkg->pkgname = xstrdup(best_installed);
+		for (i = 0; i < PKG_HASH_SIZE; i++)
+		       SLIST_INIT(&pkg->required_by[i]);
+
+		ehead = &pkg->required_by[PKG_HASH_ENTRY(pkgname)];
+		entry = xmalloc(sizeof(*entry));
+		entry->pkgname = xstrdup(pkgname);
+		SLIST_INSERT_HEAD(ehead, entry, entries);
+
+		SLIST_INSERT_HEAD(phead, pkg, entries);
+	}
+
 	free(best_installed);
-
-	if ((fd = open(path, O_WRONLY | O_APPEND | O_CREAT, 0644)) == -1)
-		errx(EXIT_FAILURE, "Cannot write to %s", path);
-	free(path);
-	
-	len = strlen(required_by);
-	if (write(fd, required_by, len) != (ssize_t)len ||
-	    write(fd, "\n", 1) != 1 ||
-	    close(fd) == -1)
-		errx(EXIT_FAILURE, "Cannot write to %s", path);
 }
-
 
 static int
 add_depends_of(const char *pkgname, void *cookie)
 {
 	FILE *fp;
+	struct pkg_reqd_by_head *h = cookie;
 	plist_t *p;
 	package_t plist;
 	char *path;
@@ -322,7 +390,7 @@ add_depends_of(const char *pkgname, void *cookie)
 
 	for (p = plist.head; p; p = p->next) {
 		if (p->type == PLIST_PKGDEP)
-			add_required_by(p->name, pkgname);
+			add_required_by(p->name, pkgname, h);
 	}
 
 	free_plist(&plist);	
@@ -333,10 +401,53 @@ add_depends_of(const char *pkgname, void *cookie)
 static void
 rebuild_tree(void)
 {
+	FILE *fp;
+	struct pkg_reqd_by_head pkgs[PKG_HASH_SIZE];
+	struct pkg_reqd_by *p;
+	struct reqd_by_entry *e;
+	int fd, i, j;
+	char *path;
+
+	for (i = 0; i < PKG_HASH_SIZE; i++)
+		SLIST_INIT(&pkgs[i]);
+
+	/*
+	 * First, calculate all of the +REQUIRED_BY entries and store in our
+	 * pkgs hashed list.
+	 */
+	if (iterate_pkg_db(add_depends_of, &pkgs) == -1)
+		errx(EXIT_FAILURE, "cannot iterate pkgdb");
+
+	/*
+	 * Now we can remove all existing +REQUIRED_BY files.
+	 */
 	if (iterate_pkg_db(remove_required_by, NULL) == -1)
 		errx(EXIT_FAILURE, "cannot iterate pkgdb");
-	if (iterate_pkg_db(add_depends_of, NULL) == -1)
-		errx(EXIT_FAILURE, "cannot iterate pkgdb");
+
+	/*
+	 * Finally, write out all the new +REQUIRED_BY files.
+	 */
+	for (i = 0; i < PKG_HASH_SIZE; i++) {
+		SLIST_FOREACH(p, &pkgs[i], entries) {
+			path = pkgdb_pkg_file(p->pkgname, REQUIRED_BY_FNAME);
+
+			if ((fd = open(path, O_WRONLY | O_APPEND | O_CREAT,
+			    0644)) == -1)
+				errx(EXIT_FAILURE, "cannot write to %s", path);
+
+			if ((fp = fdopen(fd, "a")) == NULL)
+				errx(EXIT_FAILURE, "cannot open %s", path);
+
+			for (j = 0; j < PKG_HASH_SIZE; j++) {
+				SLIST_FOREACH(e, &p->required_by[j], entries)
+					fprintf(fp, "%s\n", e->pkgname);
+			}
+			if (fclose(fp) == EOF) {
+				remove(path);
+				errx(EXIT_FAILURE, "cannot close %s", path);
+			}
+		}
+	}
 }
 
 int 
@@ -521,6 +632,9 @@ main(int argc, char *argv[])
 	} else if (strcasecmp(argv[0], "unset") == 0) {
 		argv++;		/* "unset" */
 		set_unset_variable(argv, TRUE);
+	} else if (strcasecmp(argv[0], "digest") == 0) {
+		argv++;		/* "digest" */
+		digest_input(argv);
 	} else if (strcasecmp(argv[0], "config-var") == 0) {
 		argv++;
 		if (argv == NULL || argv[1] != NULL)
@@ -735,4 +849,23 @@ set_unset_variable(char **argv, Boolean unset)
 	free(variable);
 
 	return;
+}
+
+static void
+digest_input(char **argv)
+{
+	char digest[SHA256_DIGEST_STRING_LENGTH];
+	int failures = 0;
+
+	while (*argv != NULL) {
+		if (SHA256_File(*argv, digest)) {
+			puts(digest);
+		} else {
+			warn("cannot process %s", *argv);
+			++failures;
+		}
+		argv++;
+	}
+	if (failures)
+		exit(EXIT_FAILURE);
 }

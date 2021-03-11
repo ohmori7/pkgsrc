@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.2 2019/05/11 22:51:58 markd Exp $
+$NetBSD: distinfo,v 1.4 2021/02/20 10:12:14 markd Exp $
 
-SHA1 (tex-etoc-50317/etoc.tar.xz) = 01a3f299ba6b3eec8a7d5a22ec8ba4d6c4874c58
-RMD160 (tex-etoc-50317/etoc.tar.xz) = 2ca1226c32e38a2521237b153b75f55ed2f30295
-SHA512 (tex-etoc-50317/etoc.tar.xz) = f513ad397a4c48add5b1eb21714bacc54989532a9ef56ae2e7d02254e325acb430a1bfdbd9d90ec8bd20c5ed473c7f8a73b3f2ff615690ba85ae2c69acd283f5
-Size (tex-etoc-50317/etoc.tar.xz) = 10500 bytes
+SHA1 (etoc.r55156.tar.xz) = fc2fc203e93acaf7a73ba07ffbe63302bf938e75
+RMD160 (etoc.r55156.tar.xz) = 3127f57671f95424e00acc3ad20e6c51cd7e75da
+SHA512 (etoc.r55156.tar.xz) = 4000c9627c76648046d647843dbcf93f56111433d0294f8fe448549191886dd4cbea8815910b305f9e27a18b42a85ac8fe8a5999584da60d66a67f4a376d227b
+Size (etoc.r55156.tar.xz) = 10548 bytes

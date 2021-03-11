@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.25 2018/08/22 09:47:31 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2020/08/31 18:12:42 wiz Exp $
 
 DISTNAME=	Catalyst-Action-REST-1.21
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Catalyst/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Catalyst-Action-REST/
+HOMEPAGE=	https://metacpan.org/release/Catalyst-Action-REST
 COMMENT=	Automated REST Method Dispatching
 LICENSE=	${PERL5_LICENSE}
 
@@ -29,7 +29,7 @@ DEPENDS+=	p5-libwww>=5.831:../../www/p5-libwww
 DEPENDS+=	p5-namespace-autoclean-[0-9]*:../../devel/p5-namespace-autoclean
 
 USE_LANGUAGES=		# empty
-PERL5_PACKLIST= 	auto/Catalyst/Action/REST/.packlist
+PERL5_PACKLIST=		auto/Catalyst/Action/REST/.packlist
 PERL5_MODULE_TYPE=	Module::Install::Bundled
 
 .include "../../lang/perl5/module.mk"

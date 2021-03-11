@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.45 2018/11/14 22:21:25 kleink Exp $
+# $NetBSD: Makefile,v 1.50 2020/08/17 20:18:38 leot Exp $
 #
 
 DISTNAME=		gens-rc3
 PKGNAME=		gens-2.12rc3
-PKGREVISION=		37
+PKGREVISION=		41
 CATEGORIES=		emulators
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gens/}
 
@@ -20,7 +20,7 @@ WRKSRC=			${WRKDIR}/GensForLinux
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		gmake pkg-config
 
-INSTALLATION_DIRS+= share/doc/gens
+INSTALLATION_DIRS+=	share/doc/gens
 
 .include "../../devel/SDL/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"

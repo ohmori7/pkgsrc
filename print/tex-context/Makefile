@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.17 2019/05/12 03:18:33 markd Exp $
+# $NetBSD: Makefile,v 1.24 2020/06/01 06:28:49 rillig Exp $
 
 DISTNAME=	context
-PKGNAME=	tex-${DISTNAME}-2019
-TEXLIVE_REV=	50573
+PKGNAME=	tex-${DISTNAME}-2020
+PKGREVISION=	1
+TEXLIVE_REV=	54364
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/context
+HOMEPAGE=	https://ctan.org/pkg/context
 COMMENT=	The ConTeXt macro package
 
 DEPENDS+=	tex-lm>=2.004nb1:../../fonts/tex-lm
@@ -21,12 +22,10 @@ DEPENDS+=	xetex>=0.9995.3nb1:../../print/xetex
 USE_TOOLS+=	sh:run
 
 CHECK_INTERPRETER_SKIP=	share/texmf-dist/scripts/context/ruby/*.rb
-REPLACE_SH=	bin/context bin/ctxtools bin/luatools
-REPLACE_TEXLUA=	bin/mtxrun \
-		texmf-dist/scripts/context/stubs/mswin/mtxrun.lua \
-		texmf-dist/scripts/context/stubs/mswin/luatools.lua \
-		texmf-dist/scripts/context/stubs/unix/mtxrun \
-		texmf-dist/scripts/context/stubs/unix/luatools
+REPLACE_SH=		bin/context bin/ctxtools bin/luatools
+REPLACE_TEXLUA=		bin/mtxrun \
+			texmf-dist/scripts/context/stubs/mswin/mtxrun.lua \
+			texmf-dist/scripts/context/stubs/unix/mtxrun
 
 TEX_FORMATS+=		"cont-en pdftex cont-usr.tex -8bit *cont-en.mkii\\ncont-en xetex cont-usr.tex -8bit *cont-en.mkii\\n"
 TEX_MAP_FILES+=		original-context-symbol.map

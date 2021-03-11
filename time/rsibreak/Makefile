@@ -1,25 +1,33 @@
-# $NetBSD: Makefile,v 1.62 2018/12/13 19:52:24 adam Exp $
+# $NetBSD: Makefile,v 1.79 2021/02/07 06:30:39 ryoon Exp $
 
-DISTNAME=		rsibreak-0.11
-PKGREVISION=		38
-CATEGORIES=		time kde
-MASTER_SITES=		http://www.rsibreak.org/files/
-EXTRACT_SUFX=           .tar.bz2
+DISTNAME=	rsibreak-0.12.13
+PKGREVISION=	6
+CATEGORIES=	time
+MASTER_SITES=	${MASTER_SITE_KDE:=rsibreak/0.12/}
 
-MAINTAINER=		markd@NetBSD.org
-HOMEPAGE=		http://www.rsibreak.org/
-COMMENT=		RSI management tool
-LICENSE=		gnu-gpl-v2
+HOMEPAGE=	https://userbase.kde.org/RSIBreak/
+COMMENT=	RSI management tool
+LICENSE=	gnu-gpl-v2
 
-BUILD_DEPENDS+=		automoc4>=0.9.87:../../devel/automoc4
+.include "../../meta-pkgs/kde/applications.mk"
 
-USE_TOOLS+=		msgfmt perl
-USE_LANGUAGES=		c c++
+BUILD_DEPENDS+=	kdoctools>=${KF5VER}:../../devel/kdoctools
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+USE_TOOLS+=	msgmerge
+
+SUBST_CLASSES+=		xdg
+SUBST_STAGE.xdg=	pre-configure
+SUBST_MESSAGE.xdg=	Install via examples dir.
+SUBST_FILES.xdg=	src/CMakeLists.txt
+SUBST_SED.xdg=		-e 's:{AUTOSTART_INSTALL_DIR}:{KDE_INSTALL_AUTOSTARTEXDIR}:'
+
+MAKE_DIRS+=	${PKG_SYSCONFDIR}/xdg
+CONF_FILES+=	${PREFIX}/share/examples/kde-xdg/autostart/rsibreak_autostart.desktop \
+		${PKG_SYSCONFDIR}/xdg/autostart/rsibreak_autostart.desktop
+
+.include "../../devel/kidletime/buildlink3.mk"
+.include "../../devel/knotifyconfig/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-.include "../../x11/libXScrnSaver/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

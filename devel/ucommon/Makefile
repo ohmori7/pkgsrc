@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2019/01/13 18:21:24 adam Exp $
+# $NetBSD: Makefile,v 1.19 2020/05/22 10:55:45 adam Exp $
 
 DISTNAME=	ucommon-7.0.0
+PKGREVISION=	5
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNU:=commoncpp/}
 
@@ -9,17 +10,19 @@ HOMEPAGE=	https://www.gnu.org/software/commoncpp/
 COMMENT=	Very light-weight C++ library for deeply embedded applications
 LICENSE=	gnu-lgpl-v3
 
-USE_CMAKE=		yes
-USE_LANGUAGES=		c c++
-USE_TOOLS+=		intltool pkg-config
-#USE_LIBTOOL=		yes
+USE_CMAKE=	yes
+USE_LANGUAGES=	c c++
+USE_TOOLS+=	pkg-config
+
+# Incompatible with OpenSSL 1.1
+CMAKE_ARGS+=	-DCRYPTO_OPENSSL=OFF
+
 PKGCONFIG_OVERRIDE+=	commoncpp.pc.in
 PKGCONFIG_OVERRIDE+=	ucommon.pc.in
 
-.include "options.mk"
-
 LDFLAGS.SunOS+=		-lsocket -lnsl -lintl
 
+.include "options.mk"
 .include "../../mk/dlopen.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

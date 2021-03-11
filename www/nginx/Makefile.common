@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.15 2019/05/06 09:38:48 adam Exp $
+# $NetBSD: Makefile.common,v 1.20 2020/11/25 11:40:06 jperkin Exp $
 # used by www/nginx/Makefile
 # used by www/nginx-devel/Makefile
 
@@ -10,7 +10,7 @@ CATEGORIES=	www
 MASTER_SITES=	http://nginx.org/download/
 DISTFILES=	${DEFAULT_DISTFILES}
 
-HOMEPAGE=	http://nginx.org/
+HOMEPAGE=	https://nginx.org/
 COMMENT=	Lightweight HTTP server and mail proxy server
 LICENSE=	2-clause-bsd
 
@@ -29,9 +29,9 @@ PKG_GROUPS_VARS+=	NGINX_GROUP
 PKG_GROUPS=		${NGINX_GROUP}
 PKG_USERS=		${NGINX_USER}:${NGINX_GROUP}
 
-PKG_GECOS.${NGINX_USER}=NGINX server user
-PKG_HOME.${NGINX_USER}=	${NGINX_DATADIR}
-PKG_SHELL.${NGINX_USER}=${NOLOGIN}
+PKG_GECOS.${NGINX_USER}=	NGINX server user
+PKG_HOME.${NGINX_USER}=		${NGINX_DATADIR}
+PKG_SHELL.${NGINX_USER}=	${NOLOGIN}
 
 USE_PKGLOCALEDIR=	yes
 HAS_CONFIGURE=		yes
@@ -75,11 +75,6 @@ OWN_DIRS_PERMS+=	${NGINX_DATADIR} ${NGINX_USER} ${NGINX_GROUP} 0700
 
 BUILD_TARGET=		build
 
-SUBST_CLASSES+=		prefix
-SUBST_STAGE.prefix=	pre-configure
-SUBST_FILES.prefix=	auto/lib/pcre/conf
-SUBST_VARS.prefix=	PREFIX
-
 SUBST_CLASSES+=		paths
 SUBST_STAGE.paths=	pre-configure
 SUBST_FILES.paths=	conf/nginx.conf
@@ -121,4 +116,3 @@ do-install:
 .endif
 
 .include "../../devel/zlib/buildlink3.mk"
-.include "../../mk/bsd.pkg.mk"

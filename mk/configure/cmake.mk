@@ -1,9 +1,9 @@
-# $NetBSD: cmake.mk,v 1.16 2018/04/08 19:11:27 chuck Exp $
+# $NetBSD: cmake.mk,v 1.20 2020/08/12 14:10:11 schmonz Exp $
 #
 # This file handles packages that use CMake as their primary build
 # system. For more information about CMake, see http://www.cmake.org/.
 #
-# === Package-settable variables ===
+# Package-settable variables:
 #
 # CMAKE_DEPENDENCIES_REWRITE
 #	A list of files (XXX: variable name) relative to WRKSRC in
@@ -38,12 +38,17 @@
 # CMAKE_INSTALL_PREFIX
 #	Destination directory to install software. The default is ${PREFIX}.
 #
+# CMAKE_INSTALL_NAME_DIR
+#       Destination directory to install shlibs, used by
+#       install_name_tool(1) on macOS. The default is ${PREFIX}/lib.
+#
 
 _CMAKE_DIR=	${BUILDLINK_DIR}/cmake-Modules
 
 CMAKE_USE_GNU_INSTALL_DIRS?=	yes
 
 CMAKE_INSTALL_PREFIX?=	${PREFIX}
+CMAKE_INSTALL_NAME_DIR?=${PREFIX}/lib
 
 CMAKE_ARGS+=	-DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_INSTALL_PREFIX}
 CMAKE_ARGS+=	-DCMAKE_MODULE_PATH:PATH=${_CMAKE_DIR}
@@ -54,7 +59,7 @@ CMAKE_ARGS+=    -DCMAKE_PKGSRC_BUILD_FLAGS:BOOL=TRUE
 CMAKE_ARGS+=	-DCMAKE_SKIP_RPATH:BOOL=TRUE
 .else
 CMAKE_ARGS+=	-DCMAKE_SKIP_RPATH:BOOL=FALSE
-CMAKE_ARGS+=	-DCMAKE_INSTALL_NAME_DIR:PATH=${PREFIX}/lib
+CMAKE_ARGS+=	-DCMAKE_INSTALL_NAME_DIR:PATH=${CMAKE_INSTALL_NAME_DIR}
 .endif
 .if defined(CMAKE_USE_GNU_INSTALL_DIRS) && empty(CMAKE_USE_GNU_INSTALL_DIRS:M[nN][oO])
 CMAKE_ARGS+=	-DCMAKE_INSTALL_LIBDIR:PATH=lib
@@ -83,7 +88,10 @@ SUBST_STAGE.cmake=	do-configure-pre-hook
 SUBST_MESSAGE.cmake=	Fixing CMAKE_MODULE_PATH in CMakeLists.txt
 SUBST_FILES.cmake=	${CMAKE_MODULE_PATH_OVERRIDE}
 SUBST_SED.cmake=	\
-	's|set *( *CMAKE_MODULE_PATH |set (CMAKE_MODULE_PATH "${_CMAKE_DIR}" |'
+	-e 's|set *( *CMAKE_MODULE_PATH |set (CMAKE_MODULE_PATH "${_CMAKE_DIR}" |'
+SUBST_SED.cmake+=	\
+	-e 's|SET *( *CMAKE_MODULE_PATH |SET (CMAKE_MODULE_PATH "${_CMAKE_DIR}" |'
+SUBST_NOOP_OK.cmake=	yes # not all packages need this
 
 do-configure-pre-hook: __cmake-copy-module-tree
 __cmake-copy-module-tree: .PHONY

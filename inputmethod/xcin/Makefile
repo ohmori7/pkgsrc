@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.40 2018/08/22 09:45:18 wiz Exp $
+# $NetBSD: Makefile,v 1.43 2020/08/31 18:09:47 wiz Exp $
 
 DISTNAME=	xcin-2.5.3.pre2
 PKGNAME=	xcin-2.5.3rc2
-PKGREVISION=	17
+PKGREVISION=	19
 CATEGORIES=	chinese x11
 MASTER_SITES=	ftp://xcin.linux.org.tw/pub/xcin/xcin/devel/
 
@@ -67,7 +67,7 @@ INSTALL_MAKE_FLAGS+=	program_prefix=${DESTDIR}
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 
-BDB_ACCEPTED=	db2 db3 db4 db5
+BDB_ACCEPTED=		db2 db3 db4 db5
 BUILDLINK_TRANSFORM+=	l:db:${BDB_TYPE}
 
 .include "../../converters/libiconv/buildlink3.mk"

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.31 2019/02/18 09:41:18 adam Exp $
+# $NetBSD: Makefile,v 1.40 2021/03/03 18:06:09 adam Exp $
 
-DISTNAME=	dulwich-0.19.11
+DISTNAME=	dulwich-0.20.20
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=d/dulwich/}
@@ -17,11 +17,13 @@ TEST_DEPENDS+=	${PYPKGPREFIX}-gevent-[0-9]*:../../net/py-gevent
 TEST_DEPENDS+=	${PYPKGPREFIX}-geventhttpclient-[0-9]*:../../net/py-geventhttpclient
 TEST_DEPENDS+=	${PYPKGPREFIX}-mock-[0-9]*:../../devel/py-mock
 
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
 post-install:
 	cd ${DESTDIR}${PREFIX}/bin && \
-		${MV} dul-receive-pack dul-receive-pack-${PYVERSSUFFIX} && \
-		${MV} dul-upload-pack dul-upload-pack-${PYVERSSUFFIX} && \
-		${MV} dulwich dulwich-${PYVERSSUFFIX} || ${TRUE}
+	${MV} dul-receive-pack dul-receive-pack-${PYVERSSUFFIX} && \
+	${MV} dul-upload-pack dul-upload-pack-${PYVERSSUFFIX} && \
+	${MV} dulwich dulwich-${PYVERSSUFFIX} || ${TRUE}
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

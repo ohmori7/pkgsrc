@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.3 2016/01/30 04:56:42 markd Exp $
+# $NetBSD: Makefile,v 1.6 2020/05/10 04:31:45 markd Exp $
 
 DISTNAME=	fourier
-PKGNAME=	tex-${DISTNAME}-1.3
+PKGNAME=	tex-${DISTNAME}-2.2
 PKGREVISION=	1
-TEXLIVE_REV=	15878
+TEXLIVE_REV=	54090
 
 MAINTAINER=	minskim@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/fourier
 COMMENT=	Using Utopia fonts in LaTeX documents
 LICENSE=	lppl-1.3c
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2019/04/26 13:13:57 maya Exp $
+# $NetBSD: Makefile,v 1.12 2020/11/05 09:08:05 ryoon Exp $
 
 DISTNAME=	ori-0.8.1
-PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	filesystems
 MASTER_SITES=	https://bitbucket.org/orifs/ori/downloads/
 EXTRACT_SUFX=	.tar.xz
@@ -14,7 +14,7 @@ LICENSE=	isc
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	pkg-config
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37	# python2 SCons files
+PYTHON_VERSIONS_ACCEPTED=	27	# python2 SCons files
 
 SUBST_CLASSES+=		man
 SUBST_SED.man+=		-e "s,share/man,${PKGMANDIR},"

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2018/07/04 13:40:31 jperkin Exp $
+# $NetBSD: Makefile,v 1.12 2020/01/18 21:50:26 jperkin Exp $
 
 DISTNAME=		sysmon-0.93
+PKGREVISION=		1
 CATEGORIES=		net
 MASTER_SITES=		ftp://puck.nether.net/pub/jared/
 
@@ -21,13 +22,13 @@ SMDOC=			${PREFIX}/share/doc/sysmon
 CONF_FILES=		${EGDIR}/sysmon.conf.dist \
 			${PKG_SYSCONFDIR}/sysmon.conf
 
-SUBST_CLASSES+=         paths
-SUBST_FILES.paths=      ${WRKSRC}/autoconf/Makefile.in
-SUBST_STAGE.paths=      pre-configure
-SUBST_SED.paths=        -e 's,@destdir@,${DESTDIR},g'
+SUBST_CLASSES+=		paths
+SUBST_FILES.paths=	${WRKSRC}/autoconf/Makefile.in
+SUBST_STAGE.paths=	pre-configure
+SUBST_SED.paths=	-e 's,@destdir@,${DESTDIR},g'
 
-INSTALLATION_DIRS=      share/examples/sysmon
-INSTALLATION_DIRS+=     share/doc/sysmon bin ${PKGMANDIR}/man5 ${PKGMANDIR}/man8
+INSTALLATION_DIRS=	share/examples/sysmon
+INSTALLATION_DIRS+=	share/doc/sysmon bin ${PKGMANDIR}/man5 ${PKGMANDIR}/man8
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/examples/sysmon.conf.dist ${DESTDIR}${EGDIR}/sysmon.conf.dist

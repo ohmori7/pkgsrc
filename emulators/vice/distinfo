@@ -1,8 +1,8 @@
-$NetBSD: distinfo,v 1.47 2019/06/17 14:12:18 nia Exp $
+$NetBSD: distinfo,v 1.49 2021/01/01 12:46:03 rhialto Exp $
 
-SHA1 (vice-3.3.tar.gz) = 55a34feb29955da40067ee5a5171278ed0191c93
-RMD160 (vice-3.3.tar.gz) = 7b014f2b3ed1287e74ba93c1e30a547fe40582ce
-SHA512 (vice-3.3.tar.gz) = 702942e33b6e3d7e29ca6ed483242319ed5f6be26831def88a282cf7dce25d4c34dbf3651fcf8b583492fcb280ce5f4304c6eda3712088a73db24772c7a2bb3a
-Size (vice-3.3.tar.gz) = 22742913 bytes
-SHA1 (patch-configure) = df3517e6cb5c9b4a28fad4d9074b74cfae9d5d0b
-SHA1 (patch-data_fonts_Makefile.in) = ed5b427acb6c6a20ff9e69fa9863b108e1d1675d
+SHA1 (vice-3.5.tar.gz) = 09caf57ace1015fcdd6ad0dd05699dbe71204571
+RMD160 (vice-3.5.tar.gz) = c037f4c892b5712f4829bcb6f84c4cbeb21ff0aa
+SHA512 (vice-3.5.tar.gz) = 02f364c1645138cacb461346d44de8f524fb2aba7d980181caf039c46ca9d30db98466e5b0e56e6a41417cd7bbd63d73bf6eb110af1271e23732e320dd1fab70
+Size (vice-3.5.tar.gz) = 22557578 bytes
+SHA1 (patch-configure) = 29dc9191d3caca6c6f5c5aef7ae714b73beaa0b0
+SHA1 (patch-src_arch_gtk3_data_unix_Makefile.in) = e22566e8566bf750f8c1618fe00f582acc18cfda

@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.164 2019/05/27 03:53:31 schmonz Exp $
-#
+# $NetBSD: Makefile,v 1.172 2020/12/04 20:45:48 nia Exp $
 
-DISTNAME=		ikiwiki_3.20190228.orig
+DISTNAME=		ikiwiki_3.20200202.3.orig
 PKGNAME=		${DISTNAME:S/_/-/:S/.orig//}
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		www textproc
 MASTER_SITES=		${MASTER_SITE_DEBIAN:=pool/main/i/ikiwiki/}
 EXTRACT_SUFX=		.tar.xz
@@ -33,19 +32,23 @@ DEPENDS+=		p5-gettext-[0-9]*:../../devel/p5-gettext
 DEPENDS+=		p5-YAML-LibYAML-[0-9]*:../../textproc/p5-YAML-LibYAML
 DEPENDS+=		p5-LWPx-ParanoidAgent-[0-9]*:../../www/p5-LWPx-ParanoidAgent
 
-WRKSRC=			${WRKDIR}/${PKGNAME_NOREV:S/ikiwiki-/IkiWiki-/}
+WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 PERL5_PACKLIST=		auto/IkiWiki/.packlist
-USE_LANGUAGES=		c
 USE_TOOLS+=		gmake msgfmt perl:run xgettext
 
 REPLACE_PYTHON+=	plugins/proxy.py plugins/pythondemo plugins/rst
-REPLACE_PERL+=		pm_filter
+REPLACE_PERL+=		pm_filter ikiwiki.in ikiwiki-comment.in
+REPLACE_PERL+=		ikiwiki-transition.in ikiwiki-calendar.in
 
 MAKE_FLAGS+=		W3M_CGI_BIN=${PREFIX:Q}/libexec/w3m/cgi-bin
 MAKE_FLAGS+=		SYSCONFDIR=${PKG_SYSCONFDIR:Q}
+MAKE_FLAGS+=		SYSCONFDIR_EXAMPLES=${EGDIR:Q}
 MAKE_FLAGS+=		MANDIR=${PREFIX:Q}/${PKGMANDIR:Q}
 
-INSTALL_MAKE_FLAGS+=	SYSCONFDIR=${EGDIR:Q}
+SUBST_CLASSES+=		buildonce
+SUBST_STAGE.buildonce=	post-configure
+SUBST_FILES.buildonce=	Makefile
+SUBST_SED.buildonce=	-e 's|_vendor_install :: all|_vendor_install ::|'
 
 PKG_SYSCONFSUBDIR=	${PKGBASE}
 EGDIR=			${PREFIX}/share/examples/${PKGBASE}
@@ -53,12 +56,8 @@ EGDIR=			${PREFIX}/share/examples/${PKGBASE}
 CONF_FILES+=		${EGDIR}/${f} ${PKG_SYSCONFDIR}/${f}
 .endfor
 
-TEST_TARGET=		test
-
-maintainer-find-default-perl-shebangs-not-substed:
-	cd ${WRKSRC} && \
-	find . -type f -print | \
-	perl -ne 'open(F, "<$$_"); $$l=<F>; print if $$l =~ m|^#!/usr/bin/perl|'
+#maintainer-find-default-perl-shebangs-not-substed:
+#	cd ${WRKSRC} && find . -type f -print | perl -ne 'open(F, "<$$_"); $$l=<F>; print if $$l =~ m|^#!/usr/bin/perl|'
 
 .include "options.mk"
 

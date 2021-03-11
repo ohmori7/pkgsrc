@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.48 2018/11/14 22:21:28 kleink Exp $
+# $NetBSD: Makefile,v 1.54 2020/08/17 20:18:42 leot Exp $
 
 DISTNAME=	crack-attack-1.1.14
-PKGREVISION=	34
+PKGREVISION=	38
 CATEGORIES=	games
 MASTER_SITES=	http://savannah.nongnu.org/download/crack-attack/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://savannah.nongnu.org/projects/crack-attack
+HOMEPAGE=	https://savannah.nongnu.org/projects/crack-attack
 COMMENT=	Tetris Attack inspired game
 
 GNU_CONFIGURE=		YES
@@ -22,8 +22,9 @@ post-install:
 
 .include "../../audio/SDL_mixer/buildlink3.mk"
 .include "../../devel/SDL/buildlink3.mk"
-.include "../../graphics/Mesa/buildlink3.mk"
+.include "../../graphics/MesaLib/buildlink3.mk"
+.include "../../graphics/freeglut/buildlink3.mk"
+.include "../../graphics/glu/buildlink3.mk"
 .include "../../x11/gtk2/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"
-
 .include "../../mk/bsd.pkg.mk"

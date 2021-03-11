@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.20 2019/04/25 07:32:56 maya Exp $
+# $NetBSD: Makefile,v 1.22 2020/12/04 20:45:20 nia Exp $
 #
 
 DISTNAME=	stegavorto-src-2009.01.22
 PKGNAME=	${DISTNAME:S/-src//}
-PKGREVISION=	15
+PKGREVISION=	16
 CATEGORIES=	games
 MASTER_SITES=	http://hamsterrepublic.com/games/stegavorto/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://james.hamsterrepublic.com/?p=130
+HOMEPAGE=	https://james.hamsterrepublic.com/?p=130
 COMMENT=	Discover secret messages embedded in the works of great authors
 
 WRKSRC=		${WRKDIR}/stegavorto-src

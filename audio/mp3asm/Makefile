@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2016/04/20 12:10:29 nros Exp $
+# $NetBSD: Makefile,v 1.15 2020/03/20 11:57:22 nia Exp $
 #
 
 DISTNAME=	mp3asm-0.1.3-1
@@ -15,7 +15,7 @@ LICENSE=	gnu-gpl-v2
 WRKSRC=		${WRKDIR}/mp3asm-0.1
 GNU_CONFIGURE=	yes
 
-INSTALLATION_DIRS+= share/doc/mp3asm
+INSTALLATION_DIRS+=	share/doc/mp3asm
 
 post-patch:
 	${SED} "s/getprogname/_getprogname/g" ${WRKSRC}/src/mp3asm.c		\

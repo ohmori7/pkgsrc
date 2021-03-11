@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.11 2019/05/12 03:30:28 markd Exp $
+# $NetBSD: Makefile,v 1.14 2020/04/26 12:21:11 markd Exp $
 
 DISTNAME=	adobemapping
-PKGNAME=	tex-${DISTNAME}-2019
-CATEGORIES=	fonts
-TEXLIVE_REV=	50714
+PKGNAME=	tex-${DISTNAME}-2020
+TEXLIVE_REV=	51787
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/adobemapping
+HOMEPAGE=	https://ctan.org/pkg/adobemapping
 COMMENT=	Adobe cmap and pdfmapping files
 LICENSE=	modified-bsd
 

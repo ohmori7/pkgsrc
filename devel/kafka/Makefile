@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2018/12/15 21:12:20 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2020/05/27 19:37:39 wiz Exp $
 
 DISTNAME=	kafka_${SCALA_VERSION}-1.1.0
 PKGNAME=	${DISTNAME:S/_${SCALA_VERSION}//}
@@ -6,8 +6,8 @@ CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_APACHE:=kafka/${PKGVERSION_NOREV}/}
 EXTRACT_SUFX=	.tgz
 
-MAINTAINER=	fhajny@NetBSD.org
-HOMEPAGE=	http://kafka.apache.org/
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://kafka.apache.org/
 COMMENT=	Distributed streaming platform
 LICENSE=	apache-2.0 AND cddl-1.0
 
@@ -35,10 +35,10 @@ KAFKA_LOGDIR?=	${VARBASE}/log/kafka
 KAFKA_USER?=	kafka
 KAFKA_GROUP?=	kafka
 
-PKG_GROUPS+=		${KAFKA_GROUP}
-PKG_USERS+=		${KAFKA_USER}:${KAFKA_GROUP}
-PKG_GECOS.${KAFKA_USER}=Kafka service user
-PKG_HOME.${KAFKA_USER}=	${KAFKA_DATADIR}
+PKG_GROUPS+=			${KAFKA_GROUP}
+PKG_USERS+=			${KAFKA_USER}:${KAFKA_GROUP}
+PKG_GECOS.${KAFKA_USER}=	Kafka service user
+PKG_HOME.${KAFKA_USER}=		${KAFKA_DATADIR}
 
 OWN_DIRS_PERMS+=	${KAFKA_DATADIR} ${KAFKA_USER} ${KAFKA_GROUP} 0755
 OWN_DIRS_PERMS+=	${KAFKA_LOGDIR} ${KAFKA_USER} ${KAFKA_GROUP} 0755

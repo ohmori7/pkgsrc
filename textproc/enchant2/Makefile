@@ -1,9 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2018/11/22 15:06:09 nia Exp $
-#
+# $NetBSD: Makefile,v 1.17 2021/01/04 10:22:23 wiz Exp $
 
-DISTNAME=		enchant-2.2.3
-PKGNAME=		enchant2-2.2.3
-PKGREVISION=		1
+DISTNAME=		enchant-2.2.15
+PKGNAME=		${DISTNAME:S/enchant/enchant2/}
 CATEGORIES=		textproc
 MASTER_SITES=		${MASTER_SITE_GITHUB:=AbiWord/}
 GITHUB_PROJECT=		enchant
@@ -15,7 +13,7 @@ COMMENT=		Generic spell checking library
 LICENSE=		gnu-lgpl-v2.1
 
 USE_TOOLS+=		pkg-config autoconf
-USE_LANGUAGES=		c c++11
+USE_LANGUAGES=		c c++
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes
 PKGCONFIG_OVERRIDE+=	enchant.pc.in
@@ -28,19 +26,21 @@ CONF_FILES=		${PREFIX}/share/examples/enchant.ordering ${PREFIX}/share/enchant/e
 # unsupported in pkgsrc - other dictionaries can be used instead
 # avoid PLIST problems
 CONFIGURE_ARGS+=	--without-hspell
-CONFIGURE_ARGS+=	--without-uspell
 CONFIGURE_ARGS+=	--without-voikko
 
-# XXX: needs unittest-cpp as a test dependency
-#TEST_TARGET=		check
+# Status as of 2.2.7:
+# FAILURE: 230 out of 425 tests failed (385 failures).
+TEST_TARGET=		check
+
+# C++11
+GCC_REQD+=		4.8
 
 post-install:
 	cd ${DESTDIR}${PREFIX}/share && ${MV} enchant/enchant.ordering examples/enchant.ordering
 
-
 .include "options.mk"
 
 .include "../../devel/glib2/buildlink3.mk"
-#BUILDLINK_DEPMETHOD.unittest-cpp=	build	# XXX: for tests
-#.include "../../wip/unittest-cpp/buildlink3.mk"
+BUILDLINK_DEPMETHOD.unittest-cpp=	build	# XXX: for tests
+.include "../../devel/unittest-cpp/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

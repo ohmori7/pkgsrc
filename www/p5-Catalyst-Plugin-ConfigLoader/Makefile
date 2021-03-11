@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.22 2018/08/22 09:47:34 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2020/09/07 20:41:21 wiz Exp $
 
-DISTNAME=	Catalyst-Plugin-ConfigLoader-0.34
+DISTNAME=	Catalyst-Plugin-ConfigLoader-0.35
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Catalyst/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Catalyst-Plugin-ConfigLoader/
+HOMEPAGE=	https://metacpan.org/release/Catalyst-Plugin-ConfigLoader
 COMMENT=	Load Catalyst config from YAML file
 LICENSE=	${PERL5_LICENSE}
 
@@ -17,7 +16,7 @@ DEPENDS+=	p5-Data-Visitor>=0.24:../../devel/p5-Data-Visitor
 DEPENDS+=	p5-MRO-Compat>=0.09:../../devel/p5-MRO-Compat
 
 USE_LANGUAGES=	# empty
-PERL5_PACKLIST= auto/Catalyst/Plugin/ConfigLoader/.packlist
+PERL5_PACKLIST=	auto/Catalyst/Plugin/ConfigLoader/.packlist
 
 EXTRACT_USING=	gtar
 

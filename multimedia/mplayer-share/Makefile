@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.64 2019/06/04 13:39:38 nia Exp $
+# $NetBSD: Makefile,v 1.75 2021/02/07 06:30:34 ryoon Exp $
 
 .include "Makefile.common"
 
 PKGNAME=	mplayer-share-${MPLAYER_VERSION}
+PKGREVISION=	10
 COMMENT=	Documentation used by mplayer and gmplayer
 
 DEPENDS+=	mplayer-fonts-[0-9]*:../../fonts/mplayer-fonts
@@ -19,7 +20,7 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/etc/codecs.conf ${DESTDIR}${PREFIX}/share/mplayer
 	${INSTALL_DATA} ${WRKSRC}/etc/input.conf ${DESTDIR}${PREFIX}/share/mplayer
 	(set -e; cd ${WRKSRC}/DOCS && \
-		pax -rwpppm * ${DESTDIR}${PREFIX}/share/mplayer/DOCS); \
+		pax -rwppm * ${DESTDIR}${PREFIX}/share/mplayer/DOCS); \
 	${FIND} ${DESTDIR}${PREFIX}/share/mplayer/DOCS -type d -print | \
 		${XARGS} ${CHMOD} ${PKGDIRMODE}
 	${FIND} ${DESTDIR}${PREFIX}/share/mplayer/DOCS -type f -print | \

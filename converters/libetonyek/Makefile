@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.22 2019/02/13 21:15:36 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2021/01/01 08:24:37 ryoon Exp $
 
 DISTNAME=	libetonyek-0.1.9
+PKGREVISION=	8
 CATEGORIES=	converters
 MASTER_SITES=	http://dev-www.libreoffice.org/src/
 EXTRACT_SUFX=	.tar.xz
@@ -15,7 +16,7 @@ TOOL_DEPENDS+=	gperf-[0-9]*:../../devel/gperf
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake pkg-config
-USE_LANGUAGES=	c c++0x
+USE_LANGUAGES=	c c++17
 
 CONFIGURE_ARGS+=	--disable-tests
 CONFIGURE_ARGS+=	--without-docs

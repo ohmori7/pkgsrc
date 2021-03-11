@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.20 2019/05/23 19:23:07 rillig Exp $
+# $NetBSD: Makefile,v 1.23 2020/08/31 18:10:04 wiz Exp $
 #
 
 DISTNAME=		Ezmlm-0.08.2
 PKGNAME=		p5-Mail-${DISTNAME}
-PKGREVISION=		5
+PKGREVISION=		7
 CATEGORIES=		mail perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Mail/}
 
 MAINTAINER=		schmonz@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/~sumpfrall/Ezmlm/
+HOMEPAGE=		https://metacpan.org/release/Ezmlm
 COMMENT=		Perl5 module for managing ezmlm mailing lists
 
 DEPENDS+=		qmail>=1.03:../../mail/qmail

@@ -1,17 +1,19 @@
-# $NetBSD: Makefile,v 1.4 2018/12/16 06:53:27 wen Exp $
+# $NetBSD: Makefile,v 1.8 2020/08/31 18:08:50 wiz Exp $
 
-DISTNAME=	Shell-Config-Generate-0.33
+DISTNAME=	Shell-Config-Generate-0.34
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Shell/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Shell-Config-Generate/
+HOMEPAGE=	https://metacpan.org/release/Shell-Config-Generate
 COMMENT=	Portably generate config for any shell
 LICENSE=	${PERL5_LICENSE}
 
 DEPENDS+=	p5-Shell-Guess-[0-9]*:../../devel/p5-Shell-Guess
-BUILD_DEPENDS+=	p5-Test2-Suite-[0-9]*:../../devel/p5-Test2-Suite
+TEST_DEPENDS+=	p5-Test2-Suite-[0-9]*:../../devel/p5-Test2-Suite
+TEST_DEPENDS+=	tcsh-[0-9]*:../../shells/tcsh
 
 PERL5_PACKLIST=	auto/Shell/Config/Generate/.packlist
 

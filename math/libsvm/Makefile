@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.8 2019/04/25 07:33:05 maya Exp $
+# $NetBSD: Makefile,v 1.11 2020/12/04 20:45:29 nia Exp $
 
-DISTNAME=	libsvm-3.20
+DISTNAME=	libsvm-3.24
 PKGREVISION=	1
 CATEGORIES=	math
 MASTER_SITES=	https://www.csie.ntu.edu.tw/~cjlin/libsvm/
@@ -18,7 +18,7 @@ AUTO_MKDIRS=	yes
 
 REPLACE_PYTHON=		tools/*.py
 
-SUBST_CLASSES+=         paths
+SUBST_CLASSES+=		paths
 SUBST_SED.paths=	-e 's,[.][.]/svm-train,${PREFIX}/bin/svm-train,'
 SUBST_SED.paths+=	-e 's,[.][.]/svm-scale,${PREFIX}/bin/svm-scale,'
 SUBST_SED.paths+=	-e 's,[.][.]/svm-predict,${PREFIX}/bin/svm-predict,'

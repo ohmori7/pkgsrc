@@ -1,0 +1,22 @@
+$NetBSD: patch-Makefile,v 1.2 2020/03/22 10:20:06 nia Exp $
+
+Don't force -O3, -g
+
+--- Makefile.orig	2020-02-12 16:22:40.000000000 +0000
++++ Makefile
+@@ -6,14 +6,13 @@
+ #CC ?= clang
+ 
+ # Enable compiler warnings. This is an absolute minimum.
+-CFLAGS += -Wall -std=c99 -O3 #-Wextra
++CFLAGS += -Wall -std=c99 #-Wextra
+ 
+ # Define your optimization flags.
+ #
+ # These are good for regular use.
+ #CFLAGS += -O2 -fomit-frame-pointer -falign-functions=2 -falign-loops=2 -falign-jumps=2
+ # These are handy for debugging.
+-CFLAGS += -g
+ 
+ # Define where you want Frotz installed
+ PREFIX ?= /usr/local

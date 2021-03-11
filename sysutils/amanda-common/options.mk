@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.14 2018/11/23 22:33:13 spz Exp $
+# $NetBSD: options.mk,v 1.17 2020/06/01 11:45:38 bouyer Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.amanda
 # Common options.
@@ -6,8 +6,10 @@ PKG_SUPPORTED_OPTIONS+=	inet6 amanda-bsdtar amanda-fqdn amanda-ssh kerberos ndmp
 PKG_SUGGESTED_OPTIONS+=	inet6 amanda-fqdn amanda-ssh
 # Client options.
 PKG_SUPPORTED_OPTIONS+=	amanda-smb amanda-dump-snap
-.if (${OPSYS} != "NetBSD" || \
-    (!empty(OS_VERSION:M[7-9].*)))
+
+# don't enable on NetBSD - FFS snapshots are instable.
+# PR kern/55279, and I've also seen deadlocks on 9.0_STABLE
+.if ${OPSYS} != "NetBSD" 
 PKG_SUGGESTED_OPTIONS+=	amanda-dump-snap
 .endif
 
@@ -32,17 +34,17 @@ CONFIGURE_ARGS+=	--without-ipv6
 .endif
 
 .if !empty(PKG_OPTIONS:Mamanda-bsdtar)
-CONFIGURE_ARGS+=        --with-bsdtar=/usr/bin/tar
+CONFIGURE_ARGS+=	--with-bsdtar=/usr/bin/tar
 .else
-CONFIGURE_ARGS+=        --without-bsdtar
+CONFIGURE_ARGS+=	--without-bsdtar
 .endif
 
 .if !empty(PKG_OPTIONS:Mamanda-fqdn)
-CONFIGURE_ARGS+=        --with-fqdn
+CONFIGURE_ARGS+=	--with-fqdn
 .endif
 
 .if !empty(PKG_OPTIONS:Mamanda-ssh)
-CONFIGURE_ARGS+=        --with-ssh-security
+CONFIGURE_ARGS+=	--with-ssh-security
 
 .  if !exists(/usr/bin/ssh)
 DEPENDS+=		openssh-[0-9]*:../../security/openssh

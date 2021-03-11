@@ -1,7 +1,8 @@
-# $NetBSD: options.mk,v 1.15 2019/06/07 11:26:20 tm Exp $
+# $NetBSD: options.mk,v 1.17 2020/06/29 13:58:53 ryoon Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.apache
 PKG_SUPPORTED_OPTIONS=		apache-mpm-event apache-mpm-prefork apache-mpm-worker \
+				apache-managed-domain-handling \
 				brotli lua http2 suexec xml
 PKG_SUGGESTED_OPTIONS=		apache-mpm-event apache-mpm-prefork \
 				apache-mpm-worker brotli http2 xml
@@ -9,7 +10,7 @@ PKG_SUGGESTED_OPTIONS=		apache-mpm-event apache-mpm-prefork \
 .if ${OPSYS} == "SunOS" && !empty(OS_VERSION:M5.1[0-9])
 PKG_SUPPORTED_OPTIONS+=		privileges
 # Disabled until DTrace support is fully implemented/fixed
-#PKG_SUPPORTED_OPTIONS+=		dtrace
+#PKG_SUPPORTED_OPTIONS+=	dtrace
 .endif
 
 .include "../../mk/bsd.options.mk"
@@ -25,7 +26,7 @@ PKG_SUPPORTED_OPTIONS+=		privileges
 #	worker		hybrid multi-threaded multi-process web server
 #
 PLIST_VARS+=		worker prefork event only-prefork not-only-prefork
-PLIST_VARS+=		brotli http2 lua privileges suexec xml
+PLIST_VARS+=		brotli http2 lua md privileges suexec xml
 
 .if !empty(PKG_OPTIONS:Mapache-mpm-event)
 MPMS+=			event
@@ -127,3 +128,10 @@ PLIST.brotli=          yes
 #.if !empty(PKG_OPTIONS:Mdtrace)
 #CONFIGURE_ARGS+=	--enable-dtrace
 #.endif
+
+.if !empty(PKG_OPTIONS:Mapache-managed-domain-handling)
+.include "../../www/curl/buildlink3.mk"
+.include "../../textproc/jansson/buildlink3.mk"
+CONFIGURE_ARGS+=       --enable-md
+PLIST.md= 	         yes
+.endif

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.45 2018/12/13 19:51:40 adam Exp $
+# $NetBSD: Makefile,v 1.57 2020/08/17 20:18:04 leot Exp $
 
 DISTNAME=	xmms-scrobbler-0.4.0
 PKGNAME=	${DISTNAME:S/xmms/bmp/}
-PKGREVISION=	42
+PKGREVISION=	53
 CATEGORIES=	audio
 MASTER_SITES=	http://armish.linux-sevenler.org/downloads/pub/
 EXTRACT_SUFX=	.tar.bz2
@@ -13,9 +13,9 @@ COMMENT=	BMP plugin for last.fm
 
 LICENSE=	gnu-lgpl-v2.1
 
-GNU_CONFIGURE=	YES
-USE_LIBTOOL=	YES
-USE_TOOLS+=	gmake pkg-config
+GNU_CONFIGURE=		YES
+USE_LIBTOOL=		YES
+USE_TOOLS+=		gmake pkg-config
 CONFIGURE_ARGS+=	--disable-xmms-plugin
 
 .include "../../audio/musicbrainz/buildlink3.mk"

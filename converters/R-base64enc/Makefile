@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.1 2018/05/31 01:30:33 wen Exp $
+# $NetBSD: Makefile,v 1.3 2019/08/08 19:53:37 brook Exp $
 
-DISTNAME=	base64enc_0.1-3
+R_PKGNAME=	base64enc
+R_PKGVER=	0.1-3
 CATEGORIES=	converters
 
 MAINTAINER=	wen@NetBSD.org
-HOMEPAGE=	http://www.rforge.net/base64enc
 COMMENT=	Tools for base64 encoding
-LICENSE=	gnu-gpl-v2
+LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3
 
 USE_LANGUAGES+=	c c++
-
-BUILDLINK_API_DEPENDS.R+=	R>=2.9.0
 
 .include "../../math/R/Makefile.extension"
 .include "../../mk/bsd.pkg.mk"

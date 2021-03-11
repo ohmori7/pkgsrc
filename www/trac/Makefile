@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.86 2019/06/11 05:30:23 maya Exp $
+# $NetBSD: Makefile,v 1.91 2020/07/27 16:37:52 gdt Exp $
 
-DISTNAME=	Trac-1.2.3
+DISTNAME=	Trac-1.4.2
 PKGNAME=	${DISTNAME:tl}
-CATEGORIES=	devel www
+CATEGORIES=	www devel
 MASTER_SITES=	http://ftp.edgewall.org/pub/trac/
 
-MAINTAINER=	gdt@NetBSD.org
-HOMEPAGE=	http://trac.edgewall.org/
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://trac.edgewall.org/
 COMMENT=	Repository browser, wiki, and issue tracking system
 LICENSE=	modified-bsd
 
@@ -19,14 +19,16 @@ LICENSE=	modified-bsd
 # that use the other.
 
 DEPENDS+=	${PYPKGPREFIX}-genshi>=0.6:../../www/py-genshi
+DEPENDS+=	${PYPKGPREFIX}-jinja2>=2.11:../../textproc/py-jinja2
 
 USE_TOOLS+=	pax
 
-# The Trac 1.2 series does not support python 3.
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37
+# The Trac 1.4 series does not support python 3.
+PYTHON_VERSIONS_ACCEPTED=	27
 
-REPLACE_PYTHON=	contrib/cgi-bin/trac.* contrib/*.py contrib/*-hook
+REPLACE_PYTHON=		contrib/*.py contrib/*-hook
 REPLACE_PYTHON+=	trac/tests/functional/*.py
+
 .include "../../lang/python/application.mk"
 
 EGDIR=		${PREFIX}/share/examples/trac

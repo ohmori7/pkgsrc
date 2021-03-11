@@ -1,11 +1,8 @@
-$NetBSD: distinfo,v 1.16 2018/10/02 12:05:35 adam Exp $
+$NetBSD: distinfo,v 1.22 2021/01/04 12:38:05 wiz Exp $
 
-SHA1 (ilmbase-2.3.0.tar.gz) = 1cddb28b14b60025b1e1604d5616540ed038cb16
-RMD160 (ilmbase-2.3.0.tar.gz) = bd60ebfdc114e186db87f8c8b92c4f031b17e0d9
-SHA512 (ilmbase-2.3.0.tar.gz) = db0804a7c37c2a97f9dbf81b20f40f7fdea73242baa2759d9dc3728e6849e7ecae0e178fa1c710add980d050499151650675e4b2cda6cbbaa61aca406a1f929a
-Size (ilmbase-2.3.0.tar.gz) = 595490 bytes
-SHA1 (patch-Iex_IexBaseExc.cpp) = 5bf551e1eacffa8dc3ec1c5643e5bfd5f8fc5701
-SHA1 (patch-Iex_IexThrowErrnoExc.cpp) = 1a4206619320a2a95378b7c2db14fde20b0ffd71
-SHA1 (patch-Imath_ImathFun.h) = 79ab60ada8cecd52e5b16fadbded82492d79a1df
-SHA1 (patch-bootstrap) = 16e655c408fdb0d275d8da8f77b83cebca132637
-SHA1 (patch-configure) = 5f20c43310a099b3ce888db7f39cdc33127b4d24
+SHA1 (openexr-2.5.4.tar.gz) = 13a75bed4e3bfc10ff1304599b8de3613844971b
+RMD160 (openexr-2.5.4.tar.gz) = 8ee37ad4d26a54cd5572d30ca9ccdc35b3fcbb07
+SHA512 (openexr-2.5.4.tar.gz) = f0fe305987981e0c7e5a854367702585e4935ad37b0e8c10dcbc7468ae3a6d34bf963ec9ec75cc3abe4cf00e359644476b643978d0289dca46c9785a25d3f7f1
+Size (openexr-2.5.4.tar.gz) = 27535491 bytes
+SHA1 (patch-IlmBase_configure.ac) = 563b483c24c1fa75f7fd203082ff872266d48d50
+SHA1 (patch-IlmBase_m4_threads.m4) = 7b1f38dbc733a2f324fd5800e9def6f040f33393

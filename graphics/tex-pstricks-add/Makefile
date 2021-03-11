@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.8 2019/01/30 07:54:01 markd Exp $
+# $NetBSD: Makefile,v 1.11 2020/04/27 02:08:14 markd Exp $
 
 DISTNAME=	pstricks-add
-PKGNAME=	tex-${DISTNAME}-3.87
-TEXLIVE_REV=	49680
+PKGNAME=	tex-${DISTNAME}-3.89a
+TEXLIVE_REV=	53763
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/pstricks-add
+HOMEPAGE=	https://ctan.org/pkg/pstricks-add
 COMMENT=	Collection of add-ons and bugfixes for PSTricks
 LICENSE=	lppl-1.3c
 

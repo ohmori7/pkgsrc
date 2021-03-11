@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.11 2019/05/12 11:32:01 markd Exp $
+$NetBSD: distinfo,v 1.13 2020/05/01 00:15:12 markd Exp $
 
-SHA1 (tex-csplain-50907/csplain.tar.xz) = e035e757fcbf90fd4a1e6bbf1e9ecb1fd02894f5
-RMD160 (tex-csplain-50907/csplain.tar.xz) = 6e91d2a05f8b984c4f89d79de00db64622fe6465
-SHA512 (tex-csplain-50907/csplain.tar.xz) = 90023501aa0187ae8701d9b8ee27e5990ba00685b68acef563d9c605293f1664a7ec6be6d9e88c14e264d9d5c808e7f9be10890180d1f08599c4cd7a75128487
-Size (tex-csplain-50907/csplain.tar.xz) = 122028 bytes
+SHA1 (csplain.r54699.tar.xz) = 2d9ec93cc92efb4aa2f6a7ea1f2d9ea0f0098290
+RMD160 (csplain.r54699.tar.xz) = 3b50885ba79d6d0f79295f217ee4b360110c62e6
+SHA512 (csplain.r54699.tar.xz) = 872a7456edf6aa1ae8bc124bba2a80c3e4634f663722efeb40e04ad5e5850ca68f6d298e8e35a13f3430413baef9510352a07e92b1d87a7cd2f1651061f2b174
+Size (csplain.r54699.tar.xz) = 122276 bytes

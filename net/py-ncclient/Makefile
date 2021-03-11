@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.11 2019/05/20 11:16:34 adam Exp $
+# $NetBSD: Makefile,v 1.15 2021/03/07 07:46:01 adam Exp $
 
-DISTNAME=	ncclient-0.6.4
+DISTNAME=	ncclient-0.6.10
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=n/ncclient/}
@@ -12,7 +12,6 @@ LICENSE=	apache-2.0
 
 DEPENDS+=	${PYPKGPREFIX}-lxml>=3.3.0:../../textproc/py-lxml
 DEPENDS+=	${PYPKGPREFIX}-paramiko>=1.15.0:../../security/py-paramiko
-DEPENDS+=	${PYPKGPREFIX}-setuptools>0.6:../../devel/py-setuptools
 DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
 
 .include "../../lang/python/pyversion.mk"
@@ -22,5 +21,8 @@ DEPENDS+=	${PYPKGPREFIX}-selectors2>=2.0.1:../../devel/py-selectors2
 
 USE_LANGUAGES=	# none
 
+PYTHON_VERSIONED_DEPENDENCIES+=	setuptools
+
 .include "../../lang/python/egg.mk"
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

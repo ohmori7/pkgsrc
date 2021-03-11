@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:46:08 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:10:54 wiz Exp $
 #
 
 DISTNAME=		udpcast-20060619
-PKGREVISION=		6
+PKGREVISION=		8
 CATEGORIES=		net
 MASTER_SITES=		http://www.udpcast.linux.lu/download/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.udpcast.linux.lu/
+HOMEPAGE=		https://www.udpcast.linux.lu/
 COMMENT=		Send data simultaneously to many destinations on a LAN
 
 MAKE_JOBS_SAFE=		no

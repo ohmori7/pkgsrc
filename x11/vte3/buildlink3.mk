@@ -1,18 +1,21 @@
-# $NetBSD: buildlink3.mk,v 1.10 2018/11/14 22:22:51 kleink Exp $
+# $NetBSD: buildlink3.mk,v 1.18 2020/10/18 09:47:41 nia Exp $
 
 BUILDLINK_TREE+=	vte3
 
 .if !defined(VTE3_BUILDLINK3_MK)
 VTE3_BUILDLINK3_MK:=
 
+# for c++17
+GCC_REQD+=		7
+
 BUILDLINK_API_DEPENDS.vte3+=	vte3>=0.52.2
-BUILDLINK_ABI_DEPENDS.vte3+=	vte3>=0.52.2nb3
+BUILDLINK_ABI_DEPENDS.vte3+=	vte3>=0.60.3nb2
 BUILDLINK_PKGSRCDIR.vte3?=	../../x11/vte3
 
+.include "../../devel/glib2/buildlink3.mk"
+.include "../../devel/pango/buildlink3.mk"
 .include "../../devel/pcre2/buildlink3.mk"
-.include "../../security/gnutls/buildlink3.mk"
 .include "../../x11/gtk3/buildlink3.mk"
-.include "../../mk/termcap.buildlink3.mk"
 .endif # VTE3_BUILDLINK3_MK
 
 BUILDLINK_TREE+=	-vte3

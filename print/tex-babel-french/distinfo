@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.11 2019/05/12 03:32:04 markd Exp $
+$NetBSD: distinfo,v 1.13 2021/02/14 20:16:41 markd Exp $
 
-SHA1 (tex-babel-french-50711/babel-french.tar.xz) = 5852723086e5fe64fddb7742e81bf07ffb2ff4cf
-RMD160 (tex-babel-french-50711/babel-french.tar.xz) = 3ca9cf09e0704e45f41594777d083c95fe17f01f
-SHA512 (tex-babel-french-50711/babel-french.tar.xz) = 4b18d293334b94f74f43b4dcf2ff3e4b912a966d659071d0f0b1d0a86004133efc7265c1dddfa30fb6db9e565da09737f526b3b649e415de4f13d6dcbb67b075
-Size (tex-babel-french-50711/babel-french.tar.xz) = 15840 bytes
+SHA1 (babel-french.r56607.tar.xz) = c3b2744d328a2cc5987f1b7a259aca061769d17b
+RMD160 (babel-french.r56607.tar.xz) = 8cd832cd61f8647e2cd5a73dabc6cd69abbeb1d3
+SHA512 (babel-french.r56607.tar.xz) = eaf680b5828b069907c0edf2b62c49475648f973f1ed220e47f6c05907e4b813021b0b18f66b3926ddea4266654dc91055913f3d6be1a799ef0bb2ac8241b9e3
+Size (babel-french.r56607.tar.xz) = 15924 bytes

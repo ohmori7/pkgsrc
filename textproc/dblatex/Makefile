@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2019/04/26 14:12:46 maya Exp $
+# $NetBSD: Makefile,v 1.40 2020/12/04 20:45:44 nia Exp $
 
 DISTNAME=	dblatex-0.3.10
-PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=dblatex/}
 EXTRACT_SUFX=	.tar.bz2
@@ -16,9 +16,10 @@ DEPENDS+=	tex-latex-bin-[0-9]*:../../print/tex-latex-bin
 DEPENDS+=	makeindexk-[0-9]*:../../textproc/makeindexk
 DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
 DEPENDS+=	texlive-collection-latex-[0-9]*:../../meta-pkgs/texlive-collection-latex
-DEPENDS+=	tex-ifxetex-[0-9]*:../../print/tex-ifxetex
+DEPENDS+=	tex-iftex>=1.0d:../../print/tex-iftex
 DEPENDS+=	tex-anysize-[0-9]*:../../print/tex-anysize
 DEPENDS+=	tex-appendix-[0-9]*:../../print/tex-appendix
+DEPENDS+=	tex-bookmark-[0-9]*:../../print/tex-bookmark
 DEPENDS+=	tex-changebar-[0-9]*:../../print/tex-changebar
 DEPENDS+=	tex-fancybox-[0-9]*:../../print/tex-fancybox
 DEPENDS+=	tex-fancyvrb-[0-9]*:../../print/tex-fancyvrb
@@ -43,8 +44,8 @@ USE_TOOLS+=	gmake
 
 .include "options.mk"
 
-REPLACE_PYTHON+=	scripts/dblatex lib/dbtexmf/dblatex/xetex/*.py
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.3.2
+REPLACE_PYTHON+=		scripts/dblatex lib/dbtexmf/dblatex/xetex/*.py
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.3.2
 
 SUBST_CLASSES+=		man
 SUBST_MESSAGE.man=	Fixing man page installation path.

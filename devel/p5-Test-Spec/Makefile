@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.16 2018/08/22 09:44:50 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2020/08/31 18:09:07 wiz Exp $
 
 DISTNAME=		Test-Spec-0.54
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		1
+PKGREVISION=		3
 CATEGORIES=		devel perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Test/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Test-Spec/
+HOMEPAGE=		https://metacpan.org/release/Test-Spec
 COMMENT=		Perl5 module for writing tests in a declarative specification style
 LICENSE=		${PERL5_LICENSE}
 

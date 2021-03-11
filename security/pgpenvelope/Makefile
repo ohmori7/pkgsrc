@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2018/08/22 09:46:28 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2020/08/31 18:11:20 wiz Exp $
 #
 
 DISTNAME=		pgpenvelope-2.10.2
-PKGREVISION=		14
+PKGREVISION=		16
 CATEGORIES=		security mail
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=pgpenvelope/}
 

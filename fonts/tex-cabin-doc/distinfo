@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.6 2019/05/12 11:46:33 markd Exp $
+$NetBSD: distinfo,v 1.8 2021/02/20 00:06:06 markd Exp $
 
-SHA1 (tex-cabin-50936/cabin.doc.tar.xz) = 1c2317916a2f2f0f740f624ae6d2d59124974f57
-RMD160 (tex-cabin-50936/cabin.doc.tar.xz) = 35cdf860f65d266a71e65ed39e8faa378befd582
-SHA512 (tex-cabin-50936/cabin.doc.tar.xz) = 38bb0178aa48476963bae49428578bfa129c560f55f918cc55bb50f7e5f69722b52d4fc3e0d604105e6820504df7c1d987fa6151e84889a3356d5857c8f55d11
-Size (tex-cabin-50936/cabin.doc.tar.xz) = 43360 bytes
+SHA1 (cabin.doc.r55907.tar.xz) = 8199bcf7c196fb80d1c355a68972e5211522a8db
+RMD160 (cabin.doc.r55907.tar.xz) = 34604c7fd56c70810050f415cfbd51dec1492928
+SHA512 (cabin.doc.r55907.tar.xz) = cb6dd0b813c69536dc2bc5e0c2bdcf2c52d8ed31d144f359c42b3c00e5383969e6eaf1b8d6a77e19a0b4be1789c1ac7da9332099efa877524f27c8633d0c096d
+Size (cabin.doc.r55907.tar.xz) = 49180 bytes

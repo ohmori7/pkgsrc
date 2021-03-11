@@ -1,16 +1,17 @@
-# $NetBSD: Makefile,v 1.39 2018/12/13 19:52:00 adam Exp $
+# $NetBSD: Makefile,v 1.55 2021/02/07 06:30:27 ryoon Exp $
 
-DISTNAME=	kdegraphics-thumbnailers-${_KDE_VERSION}
-PKGREVISION=	12
+DISTNAME=	kdegraphics-thumbnailers-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	graphics
+
+HOMEPAGE=	https://kde.org/applications/graphics/
 COMMENT=	Graphics file format thumbnailers for KDE
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2 AND gnu-lgpl-v2
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+.include "../../meta-pkgs/kde/applications.mk"
 
-.include "../../meta-pkgs/kde4/kde4.mk"
-
+.include "../../devel/kio/buildlink3.mk"
 .include "../../graphics/libkdcraw/buildlink3.mk"
 .include "../../graphics/libkexiv2/buildlink3.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

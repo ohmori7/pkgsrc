@@ -1,18 +1,21 @@
-# $NetBSD: Makefile,v 1.22 2018/12/13 19:51:47 adam Exp $
+# $NetBSD: Makefile,v 1.38 2021/02/07 06:30:18 ryoon Exp $
 
-DISTNAME=	kapptemplate-${_KDE_VERSION}
-PKGREVISION=	12
+DISTNAME=	kapptemplate-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	devel
+
+HOMEPAGE=	https://kde.org/applications/development/kapptemplate/
 COMMENT=	KDE Template Generator
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+.include "../../meta-pkgs/kde/applications.mk"
 
-USE_TOOLS+=	gmake tar
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+USE_TOOLS+=	msgmerge
 
+.include "../../devel/kio/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

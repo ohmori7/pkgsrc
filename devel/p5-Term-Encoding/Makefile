@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.9 2019/04/19 23:49:46 wen Exp $
+# $NetBSD: Makefile,v 1.12 2020/08/31 18:08:56 wiz Exp $
 
 DISTNAME=		Term-Encoding-0.03
 PKGNAME=		p5-${DISTNAME}
+PKGREVISION=		2
 CATEGORIES=		textproc perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Term/}
 
 MAINTAINER=		hiramatu@boreas.dti.ne.jp
-HOMEPAGE=		http://search.cpan.org/dist/Term-Encoding/
+HOMEPAGE=		https://metacpan.org/release/Term-Encoding
 COMMENT=		Detect encoding of the current terminal
 LICENSE=		${PERL5_LICENSE}
 

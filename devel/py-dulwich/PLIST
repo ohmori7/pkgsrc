@@ -1,10 +1,11 @@
-@comment $NetBSD: PLIST,v 1.15 2019/01/15 11:48:00 adam Exp $
+@comment $NetBSD: PLIST,v 1.19 2021/03/03 18:06:09 adam Exp $
 bin/dul-receive-pack-${PYVERSSUFFIX}
 bin/dul-upload-pack-${PYVERSSUFFIX}
 bin/dulwich-${PYVERSSUFFIX}
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
 ${PYSITELIB}/${EGG_INFODIR}/dependency_links.txt
+${PYSITELIB}/${EGG_INFODIR}/entry_points.txt
 ${PYSITELIB}/${EGG_INFODIR}/requires.txt
 ${PYSITELIB}/${EGG_INFODIR}/top_level.txt
 ${PYSITELIB}/docs/tutorial/conclusion.txt
@@ -29,6 +30,12 @@ ${PYSITELIB}/dulwich/_pack.so
 ${PYSITELIB}/dulwich/archive.py
 ${PYSITELIB}/dulwich/archive.pyc
 ${PYSITELIB}/dulwich/archive.pyo
+${PYSITELIB}/dulwich/bundle.py
+${PYSITELIB}/dulwich/bundle.pyc
+${PYSITELIB}/dulwich/bundle.pyo
+${PYSITELIB}/dulwich/cli.py
+${PYSITELIB}/dulwich/cli.pyc
+${PYSITELIB}/dulwich/cli.pyo
 ${PYSITELIB}/dulwich/client.py
 ${PYSITELIB}/dulwich/client.pyc
 ${PYSITELIB}/dulwich/client.pyo
@@ -39,6 +46,9 @@ ${PYSITELIB}/dulwich/contrib/README.md
 ${PYSITELIB}/dulwich/contrib/__init__.py
 ${PYSITELIB}/dulwich/contrib/__init__.pyc
 ${PYSITELIB}/dulwich/contrib/__init__.pyo
+${PYSITELIB}/dulwich/contrib/diffstat.py
+${PYSITELIB}/dulwich/contrib/diffstat.pyc
+${PYSITELIB}/dulwich/contrib/diffstat.pyo
 ${PYSITELIB}/dulwich/contrib/paramiko_vendor.py
 ${PYSITELIB}/dulwich/contrib/paramiko_vendor.pyc
 ${PYSITELIB}/dulwich/contrib/paramiko_vendor.pyo
@@ -48,6 +58,9 @@ ${PYSITELIB}/dulwich/contrib/release_robot.pyo
 ${PYSITELIB}/dulwich/contrib/swift.py
 ${PYSITELIB}/dulwich/contrib/swift.pyc
 ${PYSITELIB}/dulwich/contrib/swift.pyo
+${PYSITELIB}/dulwich/contrib/test_paramiko_vendor.py
+${PYSITELIB}/dulwich/contrib/test_paramiko_vendor.pyc
+${PYSITELIB}/dulwich/contrib/test_paramiko_vendor.pyo
 ${PYSITELIB}/dulwich/contrib/test_release_robot.py
 ${PYSITELIB}/dulwich/contrib/test_release_robot.pyc
 ${PYSITELIB}/dulwich/contrib/test_release_robot.pyo
@@ -69,6 +82,9 @@ ${PYSITELIB}/dulwich/fastexport.pyo
 ${PYSITELIB}/dulwich/file.py
 ${PYSITELIB}/dulwich/file.pyc
 ${PYSITELIB}/dulwich/file.pyo
+${PYSITELIB}/dulwich/graph.py
+${PYSITELIB}/dulwich/graph.pyc
+${PYSITELIB}/dulwich/graph.pyo
 ${PYSITELIB}/dulwich/greenthreads.py
 ${PYSITELIB}/dulwich/greenthreads.pyc
 ${PYSITELIB}/dulwich/greenthreads.pyo
@@ -81,6 +97,9 @@ ${PYSITELIB}/dulwich/ignore.pyo
 ${PYSITELIB}/dulwich/index.py
 ${PYSITELIB}/dulwich/index.pyc
 ${PYSITELIB}/dulwich/index.pyo
+${PYSITELIB}/dulwich/lfs.py
+${PYSITELIB}/dulwich/lfs.pyc
+${PYSITELIB}/dulwich/lfs.pyo
 ${PYSITELIB}/dulwich/line_ending.py
 ${PYSITELIB}/dulwich/line_ending.pyc
 ${PYSITELIB}/dulwich/line_ending.pyo
@@ -114,6 +133,7 @@ ${PYSITELIB}/dulwich/porcelain.pyo
 ${PYSITELIB}/dulwich/protocol.py
 ${PYSITELIB}/dulwich/protocol.pyc
 ${PYSITELIB}/dulwich/protocol.pyo
+${PYSITELIB}/dulwich/py.typed
 ${PYSITELIB}/dulwich/reflog.py
 ${PYSITELIB}/dulwich/reflog.pyc
 ${PYSITELIB}/dulwich/reflog.pyo
@@ -145,6 +165,9 @@ ${PYSITELIB}/dulwich/tests/compat/test_client.pyo
 ${PYSITELIB}/dulwich/tests/compat/test_pack.py
 ${PYSITELIB}/dulwich/tests/compat/test_pack.pyc
 ${PYSITELIB}/dulwich/tests/compat/test_pack.pyo
+${PYSITELIB}/dulwich/tests/compat/test_patch.py
+${PYSITELIB}/dulwich/tests/compat/test_patch.pyc
+${PYSITELIB}/dulwich/tests/compat/test_patch.pyo
 ${PYSITELIB}/dulwich/tests/compat/test_repository.py
 ${PYSITELIB}/dulwich/tests/compat/test_repository.pyc
 ${PYSITELIB}/dulwich/tests/compat/test_repository.pyo
@@ -245,6 +268,9 @@ ${PYSITELIB}/dulwich/tests/test_archive.pyo
 ${PYSITELIB}/dulwich/tests/test_blackbox.py
 ${PYSITELIB}/dulwich/tests/test_blackbox.pyc
 ${PYSITELIB}/dulwich/tests/test_blackbox.pyo
+${PYSITELIB}/dulwich/tests/test_bundle.py
+${PYSITELIB}/dulwich/tests/test_bundle.pyc
+${PYSITELIB}/dulwich/tests/test_bundle.pyo
 ${PYSITELIB}/dulwich/tests/test_client.py
 ${PYSITELIB}/dulwich/tests/test_client.pyc
 ${PYSITELIB}/dulwich/tests/test_client.pyo
@@ -263,6 +289,9 @@ ${PYSITELIB}/dulwich/tests/test_file.pyo
 ${PYSITELIB}/dulwich/tests/test_grafts.py
 ${PYSITELIB}/dulwich/tests/test_grafts.pyc
 ${PYSITELIB}/dulwich/tests/test_grafts.pyo
+${PYSITELIB}/dulwich/tests/test_graph.py
+${PYSITELIB}/dulwich/tests/test_graph.pyc
+${PYSITELIB}/dulwich/tests/test_graph.pyo
 ${PYSITELIB}/dulwich/tests/test_greenthreads.py
 ${PYSITELIB}/dulwich/tests/test_greenthreads.pyc
 ${PYSITELIB}/dulwich/tests/test_greenthreads.pyo
@@ -275,6 +304,9 @@ ${PYSITELIB}/dulwich/tests/test_ignore.pyo
 ${PYSITELIB}/dulwich/tests/test_index.py
 ${PYSITELIB}/dulwich/tests/test_index.pyc
 ${PYSITELIB}/dulwich/tests/test_index.pyo
+${PYSITELIB}/dulwich/tests/test_lfs.py
+${PYSITELIB}/dulwich/tests/test_lfs.pyc
+${PYSITELIB}/dulwich/tests/test_lfs.pyo
 ${PYSITELIB}/dulwich/tests/test_line_ending.py
 ${PYSITELIB}/dulwich/tests/test_line_ending.pyc
 ${PYSITELIB}/dulwich/tests/test_line_ending.pyo

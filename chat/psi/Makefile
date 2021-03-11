@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.91 2019/04/03 00:32:27 ryoon Exp $
+# $NetBSD: Makefile,v 1.105 2021/02/07 06:30:16 ryoon Exp $
 
-DISTNAME=	psi-1.4
+DISTNAME=	psi-1.5
 PKGREVISION=	2
 CATEGORIES=	chat
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=psi/}
@@ -17,7 +17,7 @@ DIST_SUBDIR=	${DISTNAME}
 DISTFILES=	${DEFAULT_DISTFILES}
 
 USE_TOOLS+=	gmake unzip pkg-config
-USE_LANGUAGES=	c c++03
+USE_LANGUAGES=	c c++
 USE_LIBTOOL=	yes
 HAS_CONFIGURE=	yes
 
@@ -36,9 +36,9 @@ CONFIGURE_ARGS+=	--with-qca-inc=${BUILDLINK_PREFIX.qca2-qt5}/include
 # by the pkgsrc system.  But they all have the non-standard
 # "==" in them. (silly linux developers thinking [ bash = sh ].
 #
-CHECK_PORTABILITY_SKIP=	    admin/build/devconfig.sh \
-			    admin/build/build_package.sh \
-			    admin/build/prep_dist.sh
+CHECK_PORTABILITY_SKIP=	admin/build/devconfig.sh \
+			admin/build/build_package.sh \
+			admin/build/prep_dist.sh
 
 
 INSTALLATION_DIRS=	bin share/psi share/doc/psi

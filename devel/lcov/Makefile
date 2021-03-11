@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.11 2018/08/22 09:43:32 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:07:22 wiz Exp $
 #
 
 DISTNAME=	lcov-1.13
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ltp/}
 
@@ -17,7 +17,7 @@ USE_TOOLS+=		perl
 REPLACE_PERL=		bin/gendesc bin/genhtml bin/geninfo bin/genpng bin/lcov
 
 SUBST_CLASSES+=		egdir
-SUBST_STAGE.egdir=      pre-configure
+SUBST_STAGE.egdir=	pre-configure
 SUBST_FILES.egdir=	bin/genhtml
 SUBST_FILES.egdir+=	bin/geninfo
 SUBST_FILES.egdir+=	bin/lcov

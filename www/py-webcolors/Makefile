@@ -1,17 +1,18 @@
-# $NetBSD: Makefile,v 1.8 2017/09/04 18:01:04 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2020/02/19 17:49:24 adam Exp $
 
-DISTNAME=	webcolors-1.4
+DISTNAME=	webcolors-1.11.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-CATEGORIES=	www
-MASTER_SITES=	http://bitbucket.org/ubernostrum/webcolors/downloads/
-MASTER_SITES+=	http://pypi.python.org/packages/source/w/webcolors/
+CATEGORIES=	www python
+MASTER_SITES=	${MASTER_SITE_PYPI:=w/webcolors/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-#HOMEPAGE=	http://www.bitbucket.org/ubernostrum/webcolors/overview/
+HOMEPAGE=	https://github.com/ubernostrum/webcolors
 COMMENT=	Library for working with color specifications for HTML and CSS
 LICENSE=	modified-bsd
 
 USE_LANGUAGES=	# none
 
-.include "../../lang/python/distutils.mk"
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
+.include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

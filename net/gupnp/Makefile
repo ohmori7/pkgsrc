@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.59 2019/04/25 07:33:10 maya Exp $
+# $NetBSD: Makefile,v 1.66 2020/12/04 20:45:34 nia Exp $
 
 DISTNAME=	gupnp-1.0.3
-PKGREVISION=	4
+PKGREVISION=	9
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gupnp/1.0/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.gupnp.org/
-COMMENT=	Framework for UPnP devices
+COMMENT=	Framework for UPnP devices (1.0 branch)
 LICENSE=	gnu-lgpl-v2
 
 GNU_CONFIGURE=	yes
@@ -16,10 +16,10 @@ USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake pkg-config
 
 PKGCONFIG_OVERRIDE+=	gupnp-1.0.pc.in
-REPLACE_PYTHON=	tools/gupnp-binding-tool
+REPLACE_PYTHON=		tools/gupnp-binding-tool
 
-TEST_TARGET=	check
-#CFLAGS=-O0 -g
+TEST_TARGET=		check
+#CFLAGS=		-O0 -g
 #CONFIGURE_ARGS+=	CFLAGS=${CFLAGS:Q}
 #CONFIGURE_ARGS+=	--disable-shared
 #CONFIGURE_ARGS+=	--enable-static

@@ -1,25 +1,25 @@
-# $NetBSD: Makefile,v 1.3 2017/09/16 19:26:50 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2021/02/28 16:30:12 taca Exp $
 #
 
-PLUGIN_NAME=	redmine_work_time
-DISTNAME=	${PLUGIN_NAME}-0.3.3
-PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME}
-CATEGORIES=	devel
-MASTER_SITES=	https://bitbucket.org/tkusukawa/${PLUGIN_NAME}/downloads/
-EXTRACT_SUFX=	.zip
+DISTNAME=	${PLUGIN_NAME}-0.4.1
+PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/redmine_/redmine${RM_VER}-/}
+MASTER_SITES=	${MASTER_SITE_GITHUB:=tkusukawa/}
+GITHUB_PROJECT=	${PLUGIN_NAME}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.r-labs.org/projects/worktime/wiki/WorkTime
 COMMENT=	Redmine plugin to view and update Spent time by each user
 LICENSE=	gnu-gpl-v2
 
+PLUGIN_NAME=	redmine_work_time
+
 .include "../../meta-pkgs/ruby-redmine-plugins/Makefile.common"
 
-WRKSRC=		${WRKDIR}/${PLUGIN_NAME}
+WRKSRC=		${WRKDIR}/${DISTNAME}
 NO_CONFIGURE=	yes
 NO_BUILD=	yes
 
-WORK_TIME_PLUGIN_DIR=	${REDMINE_PLUGINDIR}/${PLUGIN_NAME}
+WORK_TIME_PLUGIN_DIR=	${RM_PLUGINDIR}/${PLUGIN_NAME}
 
 INSTALLATION_DIRS+=	${WORK_TIME_PLUGIN_DIR}/app/controllers
 INSTALLATION_DIRS+=	${WORK_TIME_PLUGIN_DIR}/app/helpers

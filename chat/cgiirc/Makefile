@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.27 2019/02/07 12:58:49 nia Exp $
+# $NetBSD: Makefile,v 1.30 2020/08/31 18:06:41 wiz Exp $
 
 DISTNAME=	cgiirc-0.5.12
+PKGREVISION=	2
 CATEGORIES=	chat
 MASTER_SITES=	http://cgiirc.org/releases/
 
@@ -53,18 +54,18 @@ do-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${CGIIRC}/modules/IRC/Channel
 
 	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/cgiirc
-.	for f in ${DOCFILES}
-		${INSTALL_DATA} ${WRKSRC}/docs/${f} \
+.for f in ${DOCFILES}
+	${INSTALL_DATA} ${WRKSRC}/docs/${f} \
 			${DESTDIR}${PREFIX}/share/examples/cgiirc/${f}
-.	endfor
+.endfor
 	${INSTALL_DATA} ${WRKSRC}/cgiirc.config \
 		${DESTDIR}${PREFIX}/share/examples/cgiirc
 	${INSTALL_DATA} ${WRKDIR}/cgiirc.conf \
 		${DESTDIR}${PREFIX}/share/examples/cgiirc
-.	for f in ${EGFILES}
-		${INSTALL_DATA} ${WRKSRC}/${f} \
+.for f in ${EGFILES}
+	${INSTALL_DATA} ${WRKSRC}/${f} \
 			${DESTDIR}${PREFIX}/share/examples/cgiirc/${f}
-.	endfor
+.endfor
 	${INSTALL_SCRIPT} ${WRKSRC}/*.cgi ${DESTDIR}${CGIIRC}
 	${INSTALL_DATA} ${WRKSRC}/formats/* ${DESTDIR}${CGIIRC}/formats/
 	${INSTALL_DATA} ${WRKSRC}/images/*.gif ${DESTDIR}${CGIIRC}/images/

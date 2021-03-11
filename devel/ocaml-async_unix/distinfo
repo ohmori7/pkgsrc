@@ -1,10 +1,10 @@
-$NetBSD: distinfo,v 1.1 2019/03/19 10:48:15 jaapb Exp $
+$NetBSD: distinfo,v 1.3 2020/12/11 09:42:41 jaapb Exp $
 
-SHA1 (async_unix-0.12.0.tar.gz) = a0fd135289dee62e929999c71795f008f1fdea7f
-RMD160 (async_unix-0.12.0.tar.gz) = b0e3f953e6167872dde188679e0b79527aa14ce5
-SHA512 (async_unix-0.12.0.tar.gz) = f1b427476295d7beec4e282ffac53dea8e003cc906d6e521280f0269c9057c822b517c551c40956a057c9adc630df0ae9c43932f0a76a756841be0953561e218
-Size (async_unix-0.12.0.tar.gz) = 161822 bytes
-SHA1 (patch-src_dune) = e2ad2651f4ceb6aec6f69bf79eb86cedf0aab65e
-SHA1 (patch-thread__pool_src_dune) = 680a475e3a747075ffa02de2e0978dc5e102759b
-SHA1 (patch-thread__safe__ivar_src_dune) = bea3776929788436cb5d30640070d4dbd874da44
-SHA1 (patch-thread__safe__pipe_src_dune) = 5d7971eb41581507b6af67d2ca49330d3effdbeb
+SHA1 (async_unix-0.13.1.tar.gz) = 60483b79b6fa864d438d0d4af3b6dd604fdec468
+RMD160 (async_unix-0.13.1.tar.gz) = ada45108d7ba20c6711d21e0143b6d387ef06d3a
+SHA512 (async_unix-0.13.1.tar.gz) = bd847acbb63a7c1d4c37b13831f0020640db94091b6d07d1b727c0a83aeccc35a1e60fe3dd96ae6fb6154a7da204885473e5abafae095205c2a6c705ec125810
+Size (async_unix-0.13.1.tar.gz) = 169271 bytes
+SHA1 (patch-src_dune) = 4b9b0b4f70f3de9d968b928549dec7de9b6c12f5
+SHA1 (patch-thread__pool_src_dune) = 49342110282b4d66258b706913ea8d768f00b311
+SHA1 (patch-thread__safe__ivar_src_dune) = 045c1a56270333b688ff63e820429e873da24c2a
+SHA1 (patch-thread__safe__pipe_src_dune) = 7d5810cdc22eec92dc428a663478ea25fe25e8fe

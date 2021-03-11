@@ -1,8 +1,8 @@
-# $NetBSD: options.mk,v 1.5 2019/06/02 09:48:29 adam Exp $
+# $NetBSD: options.mk,v 1.7 2020/07/06 07:16:00 he Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.llvm
 
-LLVM_TARGETS=	AArch64 AMDGPU ARM BPF Hexagon Lanai Mips MSP430 NVPTX PowerPC Sparc SystemZ WebAssembly X86 XCore
+LLVM_TARGETS=	AArch64 AMDGPU ARM BPF Hexagon Lanai Mips MSP430 NVPTX PowerPC RISCV Sparc SystemZ WebAssembly X86 XCore
 
 .for tgt in ${LLVM_TARGETS}
 PLIST_VARS+=			${tgt}
@@ -26,6 +26,9 @@ PKG_SUGGESTED_OPTIONS+=		terminfo
 PKG_SUGGESTED_OPTIONS+=		llvm-target-sparc
 .elif !empty(MACHINE_ARCH:Mpowerpc*)
 PKG_SUGGESTED_OPTIONS+=		llvm-target-powerpc
+# Needed to avoid "relocation truncated to fit: R_PPC_REL24"
+CFLAGS+=	-mlongcall
+CXXFLAGS+=	-mlongcall
 .elif !empty(MACHINE_ARCH:Mearm*)
 PKG_SUGGESTED_OPTIONS+=		llvm-target-arm
 .elif !empty(MACHINE_ARCH:M*mips*)

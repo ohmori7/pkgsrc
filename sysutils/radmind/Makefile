@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.41 2019/05/09 09:37:36 hauke Exp $
+# $NetBSD: Makefile,v 1.43 2020/01/18 21:50:56 jperkin Exp $
 #
 
 DISTNAME=	radmind-1.14.1
-PKGREVISION=	10
+PKGREVISION=	11
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=radmind/}
 
@@ -17,7 +17,7 @@ CONFIGURE_ARGS+=	--with-radminddir=${RADMINDDIR}
 CONFIGURE_ENV+=		diffpath=${TOOLS_DIFF:Q}
 # XXX configure script checks for path to echo, which pkgsrc does not
 # provide, so we need to side-step {echopath}.
-CONFIGURE_ENV+= 	ac_cv_path_echopath=${TOOLS_ECHO:Q}
+CONFIGURE_ENV+=		ac_cv_path_echopath=${TOOLS_ECHO:Q}
 
 MAKE_JOBS_SAFE=		no
 

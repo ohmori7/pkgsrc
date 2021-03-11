@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.26 2019/02/16 13:19:38 wiz Exp $
+@comment $NetBSD: PLIST,v 1.31 2020/11/20 19:08:06 wiz Exp $
 include/poppler/glib/poppler-action.h
 include/poppler/glib/poppler-annot.h
 include/poppler/glib/poppler-attachment.h
@@ -14,8 +14,9 @@ include/poppler/glib/poppler-movie.h
 include/poppler/glib/poppler-page.h
 include/poppler/glib/poppler-structure-element.h
 include/poppler/glib/poppler.h
+lib/girepository-1.0/Poppler-0.18.typelib
 lib/libpoppler-glib.so
 lib/libpoppler-glib.so.8
-lib/libpoppler-glib.so.8.12.0
-lib/pkgconfig/poppler-cairo.pc
+lib/libpoppler-glib.so.8.19.0
 lib/pkgconfig/poppler-glib.pc
+share/gir-1.0/Poppler-0.18.gir

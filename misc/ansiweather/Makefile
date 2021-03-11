@@ -1,25 +1,24 @@
-# $NetBSD: Makefile,v 1.9 2019/01/18 18:06:21 kamil Exp $
+# $NetBSD: Makefile,v 1.15 2020/12/20 12:41:27 nia Exp $
 
-DISTNAME=	ansiweather-1.13.0
+DISTNAME=	ansiweather-1.17.0
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_GITHUB:=fcambus/}
+GITHUB_RELEASE=	${PKGVERSION_NOREV}
 
-MAINTAINER=	fred@statdns.com
+MAINTAINER=	fcambus@NetBSD.org
 HOMEPAGE=	https://github.com/fcambus/ansiweather/
 COMMENT=	Display current weather conditions in your terminal
 LICENSE=	2-clause-bsd
 
 USE_LANGUAGES=	# none
 
-USE_TOOLS+=	awk:run date:run grep:run
+USE_TOOLS+=	cut:run date:run grep:run
 
 DEPENDS+=	curl-[0-9]*:../../www/curl
 DEPENDS+=	jq-[0-9]*:../../devel/jq
 
 NO_CONFIGURE=	yes
 NO_BUILD=	yes
-
-INSTALL_UNSTRIPPED=	yes
 
 DOCDIR=		share/doc/ansiweather
 EGDIR=		share/examples/ansiweather
@@ -35,7 +34,7 @@ AUTO_MKDIRS=		yes
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 
 do-install:
-	${RUN}${INSTALL_PROGRAM} ${WRKSRC}/ansiweather ${DESTDIR}${PREFIX}/bin
+	${RUN}${INSTALL_SCRIPT} ${WRKSRC}/ansiweather ${DESTDIR}${PREFIX}/bin
 .for f in AUTHORS ChangeLog README.md ansiweather.plugin.zsh
 	${RUN}${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${PREFIX}/${DOCDIR}
 .endfor

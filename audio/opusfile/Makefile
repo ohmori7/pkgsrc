@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.7 2018/05/13 09:44:03 maya Exp $
+# $NetBSD: Makefile,v 1.10 2020/07/07 12:12:56 nia Exp $
 
-DISTNAME=	opusfile-0.10
+DISTNAME=	opusfile-0.12
 CATEGORIES=	audio
-MASTER_SITES=	http://downloads.xiph.org/releases/opus/
+MASTER_SITES=	https://downloads.xiph.org/releases/opus/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://opus-codec.org/
+HOMEPAGE=	https://opus-codec.org/
 COMMENT=	Decoding and seeking API for opus files
 LICENSE=	modified-bsd
 

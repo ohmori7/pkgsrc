@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.17 2018/08/22 09:44:35 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2020/08/31 18:08:47 wiz Exp $
 
-DISTNAME=	SUPER-1.20141117
+DISTNAME=	SUPER-1.20190531
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=SUPER/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/SUPER/
+HOMEPAGE=	https://metacpan.org/release/SUPER
 COMMENT=	Perl 5 module to control superclass method dispatch
 LICENSE=	${PERL5_LICENSE}
 

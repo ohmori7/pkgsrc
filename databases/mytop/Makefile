@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.27 2018/08/22 09:43:12 wiz Exp $
+# $NetBSD: Makefile,v 1.30 2020/08/31 18:06:56 wiz Exp $
 
 DISTNAME=	mytop-1.6
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	databases
 MASTER_SITES=	http://jeremy.zawodny.com/mysql/mytop/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://jeremy.zawodny.com/mysql/mytop/
+HOMEPAGE=	https://jeremy.zawodny.com/mysql/mytop/
 COMMENT=	Console-based tool for monitoring the threads and performance of MySQL
 LICENSE=	gnu-gpl-v2
 

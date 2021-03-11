@@ -1,52 +1,48 @@
-# $NetBSD: options.mk,v 1.17 2017/01/03 20:54:22 roy Exp $
+# $NetBSD: options.mk,v 1.27 2020/07/26 23:10:21 nia Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.weechat
-PKG_SUPPORTED_OPTIONS=	gnutls python lua wide-curses perl ruby
-PKG_SUGGESTED_OPTIONS=	gnutls
+# mk/curses will handle wide-curses
+PKG_SUPPORTED_OPTIONS=	python lua wide-curses perl ruby
+PKG_SUGGESTED_OPTIONS=	python lua wide-curses perl ruby
 
 .include "../../mk/bsd.options.mk"
-# mk/curses will handle wide-curses
+.include "../../mk/bsd.fast.prefs.mk"
 
 PLIST_VARS+=		lua plugin python perl ruby
 
-.if !empty(PKG_OPTIONS:Mgnutls)
-.include "../../security/gnutls/buildlink3.mk"
-.endif
-
 .if !empty(PKG_OPTIONS:Mpython)
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 .include "../../lang/python/extension.mk"
-CMAKE_ARGS+=		-DENABLE_PYTHON:BOOL=ON
-CMAKE_ARGS.Darwin+=	-DPYTHON_LIBRARY:FILEPATH=${PREFIX}/lib/libpython${PYVERSSUFFIX}.dylib
-CMAKE_ARGS.*+=		-DPYTHON_LIBRARY:FILEPATH=${PREFIX}/lib/libpython${PYVERSSUFFIX}.so
-PLIST.python=		yes
+CMAKE_ARGS+=	-DENABLE_PYTHON=ON
+PLIST.python=	yes
 .else
-CMAKE_ARGS+=		-DENABLE_PYTHON:BOOL=OFF
+CMAKE_ARGS+=	-DENABLE_PYTHON=OFF
 .endif
 
 .if !empty(PKG_OPTIONS:Mlua)
-LUA_VERSIONS_INCOMPATIBLE=	52
+#LUA_VERSIONS_ACCEPTED=	53 52 51
 .include "../../lang/lua/buildlink3.mk"
-CMAKE_ARGS+=		-DENABLE_LUA:BOOL=ON
-PLIST.lua=		yes
+CMAKE_ARGS+=	-DENABLE_LUA=ON
+PLIST.lua=	yes
 .else
-CMAKE_ARGS+=		-DENABLE_LUA:BOOL=OFF
+CMAKE_ARGS+=	-DENABLE_LUA=OFF
 .endif
 
 .if !empty(PKG_OPTIONS:Mperl)
 .include "../../lang/perl5/buildlink3.mk"
-CMAKE_ARGS+=		-DENABLE_PERL:BOOL=ON
-USE_TOOLS+=		perl
-PLIST.perl=		yes
+CMAKE_ARGS+=	-DENABLE_PERL=ON
+USE_TOOLS+=	perl
+PLIST.perl=	yes
 .else
-CMAKE_ARGS+=		-DENABLE_PERL:BOOL=OFF
+CMAKE_ARGS+=	-DENABLE_PERL=OFF
 .endif
 
 .if !empty(PKG_OPTIONS:Mruby)
 .include "../../lang/ruby/buildlink3.mk"
-CMAKE_ARGS+=		-DENABLE_RUBY:BOOL=ON
-CMAKE_ARGS+=		-DRUBY_INCLUDE_DIRS:PATH=${PREFIX}/${RUBY_INC}
-CMAKE_ARGS+=		-DRUBY_LIB:FILEPATH=${PREFIX}/lib/libruby${RUBY_SHLIB}
-PLIST.ruby=		yes
+CMAKE_ARGS+=	-DENABLE_RUBY=ON
+CMAKE_ARGS+=	-DRUBY_INCLUDE_DIRS=${PREFIX}/${RUBY_INC}
+CMAKE_ARGS+=	-DRUBY_LIB=${PREFIX}/lib/libruby${RUBY_SHLIB}
+PLIST.ruby=	yes
 #BUILDLINK_INCDIRS.${RUBY_BASE}+=	${RUBY_INC}
 #BUILDLINK_INCDIRS.${RUBY_BASE}+=	${RUBY_ARCHINC}
 .else

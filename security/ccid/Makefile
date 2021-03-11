@@ -1,18 +1,13 @@
-# $NetBSD: Makefile,v 1.26 2018/08/22 09:46:17 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2021/01/24 19:06:10 gdt Exp $
 #
 
-DISTNAME=	ccid-1.4.26
-PKGREVISION=	2
+DISTNAME=	ccid-1.4.34
 CATEGORIES=	security
-# Note that the MASTER_SITES URL is not stable with version changes,
-# and one can end up with an old version if DISTNAME is changed but
-# not the magic number in MASTER_SITES.
-# https://alioth.debian.org/frs/?group_id=30105#title_ccid
-MASTER_SITES=	https://alioth.debian.org/frs/download.php/file/4205/
+MASTER_SITES=	https://ccid.apdu.fr/files/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	gdt@NetBSD.org
-HOMEPAGE=	http://pcsclite.alioth.debian.org/ccid.html
+HOMEPAGE=	https://ccid.apdu.fr/
 COMMENT=	Middleware to access a smart card using SCard API (PC/SC)
 LICENSE=	gnu-lgpl-v2.1
 
@@ -31,8 +26,8 @@ USE_LANGUAGES=	c c++
 # PTHREAD vars.  Not yet reported upstream.
 PTHREAD_AUTO_VARS=	yes
 
-CONFIGURE_ARGS+=        --sharedstatedir=${VARBASE:Q}
-CONFIGURE_ARGS+=        --sysconfdir=${PKG_SYSCONFDIR:Q}
+CONFIGURE_ARGS+=	--sharedstatedir=${VARBASE:Q}
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 
 REPLACE_PERL=		src/convert_version.pl src/create_Info_plist.pl
 
@@ -43,7 +38,7 @@ pre-configure:
 	cd ${WRKSRC} && ${SH} bootstrap
 
 post-install:
-	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/ccid/README
+	${INSTALL_DATA} ${WRKSRC}/README.md ${DESTDIR}${PREFIX}/share/doc/ccid/README.md
 	${INSTALL_DATA} ${WRKSRC}/contrib/RSA_SecurID/RSA_SecurID_getpasswd \
 	${DESTDIR}${PREFIX}/bin/RSA_SecurID_getpasswd
 	${INSTALL_DATA} ${WRKSRC}/contrib/RSA_SecurID/RSA_SecurID_getpasswd.1 \
@@ -56,6 +51,10 @@ post-install:
 	${DESTDIR}${PREFIX}/share/doc/ccid/README_Kobil_mIDentity_switch.txt
 
 .include "../../security/pcsc-lite/buildlink3.mk"
+.if ${OPSYS} == "Linux"
+BUILDLINK_DEPMETHOD.flex=	full
+.include "../../devel/flex/buildlink3.mk"
+.endif
 .include "../../devel/libusb1/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,37 +1,37 @@
-# $NetBSD: Makefile,v 1.47 2019/04/26 14:12:45 maya Exp $
+# $NetBSD: Makefile,v 1.52 2021/02/11 10:40:35 adam Exp $
 
-DISTNAME=	duplicity-0.7.17
-PKGREVISION=	1
-CATEGORIES=	sysutils net
-MASTER_SITES=	http://code.launchpad.net/duplicity/0.7-series/${PKGVERSION_NOREV}/+download/
+DISTNAME=	duplicity-0.8.18
+CATEGORIES=	sysutils net python
+MASTER_SITES=	${MASTER_SITE_PYPI:=d/duplicity/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.nongnu.org/duplicity/
+HOMEPAGE=	https://www.nongnu.org/duplicity/
 COMMENT=	Remote encrypting incremental backup utility
 LICENSE=	gnu-gpl-v2
 
 USE_PKGLOCALEDIR=	yes
 
-.include "options.mk"
+BUILD_DEPENDS+=	${PYPKGPREFIX}-setuptools_scm-[0-9]*:../../devel/py-setuptools_scm
+DEPENDS+=	${PYPKGPREFIX}-fasteners-[0-9]*:../../devel/py-fasteners
+DEPENDS+=	${PYPKGPREFIX}-future-[0-9]*:../../devel/py-future
 
+GPGPATH=	${PREFIX}/bin/gpg2
+DEPENDS+=	gnupg2-[0-9]*:../../security/gnupg2
 DEPENDS+=	lftp-[0-9]*:../../net/lftp
-DEPENDS+=	ncftp3-[0-9]*:../../net/ncftp3
-DEPENDS+=	rsync-[0-9]*:../../net/rsync
-DEPENDS+=	${PYPKGPREFIX}-boto-[0-9]*:../../net/py-boto
+DEPENDS+=	${PYPKGPREFIX}-boto3-[0-9]*:../../net/py-boto3
 DEPENDS+=	${PYPKGPREFIX}-dropbox-[0-9]*:../../net/py-dropbox
 DEPENDS+=	${PYPKGPREFIX}-paramiko-[0-9]*:../../security/py-paramiko
-DEPENDS+=	${PYPKGPREFIX}-pexpect-[0-9]*:../../devel/py-pexpect
 DEPENDS+=	${PYPKGPREFIX}-requests-oauthlib-[0-9]*:../../security/py-requests-oauthlib
-DEPENDS+=	${PYPKGPREFIX}-fasteners-[0-9]*:../../devel/py-fasteners
-DEPENDS+=	${PYPKGPREFIX}-cloudfiles-[0-9]*:../../www/py-cloudfiles
 DEPENDS+=	${PYPKGPREFIX}-swiftclient-[0-9]*:../../www/py-swiftclient
-DEPENDS+=	${PYPKGPREFIX}-gdata-[0-9]*:../../www/py-gdata
-.include "../../net/librsync/buildlink3.mk"
+TEST_DEPENDS+=	${PYPKGPREFIX}-mock-[0-9]*:../../devel/py-mock
+TEST_DEPENDS+=	${PYPKGPREFIX}-pexpect-[0-9]*:../../devel/py-pexpect
+TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
+TEST_DEPENDS+=	${PYPKGPREFIX}-test-runner-[0-9]*:../../devel/py-test-runner
 
-REPLACE_PYTHON+=	bin/duplicity \
-			bin/rdiffdir
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.6.22
-EGG_NAME=			${DISTNAME:S/09/9/}
+REPLACE_PYTHON+=	bin/duplicity
+REPLACE_PYTHON+=	bin/rdiffdir
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 SUBST_CLASSES+=			fix-paths
 SUBST_STAGE.fix-paths=		pre-configure
@@ -47,4 +47,5 @@ SUBST_VARS.gpgpath=		GPGPATH
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/egg.mk"
+.include "../../net/librsync/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

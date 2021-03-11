@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.104 2019/04/03 00:32:50 ryoon Exp $
+# $NetBSD: Makefile,v 1.114 2021/01/20 20:38:48 adam Exp $
 
 DISTNAME=	tcl${TCL_VERSION}-src
 PKGNAME=	tcl-${TCL_VERSION}
-PKGREVISION=	1
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=tcl/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.tcl.tk/
+HOMEPAGE=	https://www.tcl.tk/
 COMMENT=	Tool Command Language, a dynamic language
 LICENSE=	2-clause-bsd
 
@@ -18,9 +17,12 @@ WRKSRC=			${WRKDIR}/tcl${TCL_VERSION}
 USE_GCC_RUNTIME=	yes
 
 GNU_CONFIGURE=		yes
+GNU_CONFIGURE_STRICT=	no # because of the nested itcl4.1.2
 CONFIGURE_DIRS=		unix
 BUILD_DIRS=		${CONFIGURE_DIRS}
 INSTALL_TARGET=		install
+
+CONFIGURE_ARGS+=	--without-tzdata
 
 PKGCONFIG_OVERRIDE+=	unix/tcl.pc.in
 
@@ -37,6 +39,7 @@ CONFIGURE_ARGS+=	--enable-64bit
 .endif
 
 CONFIGURE_ARGS.NetBSD+=	ac_cv_func_gethostbyname_r=no
+CONFIGURE_ARGS.NetBSD+=	ac_cv_func_gethostbyaddr_r=no
 
 SUBST_CLASSES+=		tcl-config
 SUBST_STAGE.tcl-config=	post-build
@@ -72,6 +75,9 @@ post-build:
 	install_name_tool -id ${PREFIX}/lib/${lib} ${WRKSRC}/unix/pkgs/${lib}
 .  endfor
 .endif
+
+post-install:
+	cd ${DESTDIR}${PREFIX}/${PKGMANDIR}/man3 && mv Thread.3 Tcl_Thread.3
 
 BUILDLINK_API_DEPENDS.sqlite3+= sqlite3>=${SQLITE3_VERSION}
 .include "../../databases/sqlite3/buildlink3.mk"

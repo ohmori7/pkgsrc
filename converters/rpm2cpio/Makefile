@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.33 2018/08/22 09:43:09 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2020/08/31 18:06:51 wiz Exp $
 
 DISTNAME=	rpm2cpio-1.3
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	converters
 MASTER_SITES=	-https://svnweb.freebsd.org/ports/head/archivers/rpm2cpio/files/rpm2cpio?revision=340851&view=co
 EXTRACT_SUFX=	# none

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.13 2019/05/27 15:18:23 bsiegert Exp $
+# $NetBSD: Makefile,v 1.30 2021/01/23 14:23:00 bsiegert Exp $
 
 DISTNAME=	mapstructure-0.0.20160212
 PKGNAME=	go-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	26
 MASTER_SITES=	${MASTER_SITE_GITHUB:=mitchellh/}
 CATEGORIES=	devel
 GITHUB_TAG=	d2dd0262208475919e1a362f675cfc0e7c10e905
-GITHUB_PROJECT= ${PKGBASE:S/^go-//}
+GITHUB_PROJECT=	${PKGBASE:S/^go-//}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/mitchellh/mapstructure

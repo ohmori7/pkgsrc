@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2019/05/23 19:23:10 rillig Exp $
+# $NetBSD: Makefile,v 1.22 2020/08/31 18:10:38 wiz Exp $
 #
 VERS=			1.1.2.1
-PKGREVISION=		10
+PKGREVISION=		12
 DISTNAME=		Ocsinventory-Agent-${VERS}
 PKGNAME=		ocsinventory-agent-${VERS}
 CATEGORIES=		net
@@ -24,8 +24,8 @@ DEPENDS+=		dmidecode-[0-9]*:../../sysutils/dmidecode
 
 WRKSRC=			${WRKDIR}/Ocsinventory-Agent-${VERS}
 
-BUILD_DEFS+=		VARBASE
-AUTO_MKDIRS=yes
+BUILD_DEFS+=	VARBASE
+AUTO_MKDIRS=	yes
 
 .include "../../mk/bsd.prefs.mk"
 

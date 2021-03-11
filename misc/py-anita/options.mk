@@ -1,6 +1,6 @@
-# $NetBSD: options.mk,v 1.9 2017/05/28 12:48:53 gson Exp $
+# $NetBSD: options.mk,v 1.11 2020/11/07 11:11:24 gson Exp $
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.py-anita
+PKG_OPTIONS_VAR=		PKG_OPTIONS.py-anita
 PKG_SUPPORTED_OPTIONS=		xen
 PKG_OPTIONS_OPTIONAL_GROUPS=	qemu
 PKG_OPTIONS_GROUP.qemu=		qemu
@@ -25,6 +25,6 @@ DEPENDS+=	qemu>=1.0:../../emulators/qemu
 .endif
 
 .if !empty(PKG_OPTIONS:Mxen)
-DEPENDS+=	xenkernel42>=4.2:../../sysutils/xenkernel42
-DEPENDS+=	xentools42>=4.2:../../sysutils/xentools42
+DEPENDS+=	xenkernel413>=4.2:../../sysutils/xenkernel413
+DEPENDS+=	xentools413>=4.2:../../sysutils/xentools413
 .endif

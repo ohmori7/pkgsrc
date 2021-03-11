@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.9 2019/01/29 10:10:18 markd Exp $
+# $NetBSD: Makefile,v 1.11 2020/01/18 23:34:09 rillig Exp $
 
 DISTNAME=	fixme
 PKGNAME=	tex-${DISTNAME}-4.5
 TEXLIVE_REV=	49591
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/fixme
+HOMEPAGE=	https://ctan.org/pkg/fixme
 COMMENT=	Insert "fixme" notes into draft documents
 LICENSE=	lppl-1.3c
 
@@ -19,5 +19,6 @@ DEPENDS+=	tex-tools>=2010:../../print/tex-tools
 DEPENDS+=	tex-xcolor>=2.11:../../print/tex-xcolor
 DEPENDS+=	tex-xkeyval>=2.6a:../../print/tex-xkeyval
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

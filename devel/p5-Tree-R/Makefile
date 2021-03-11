@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.3 2018/08/22 09:44:53 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2020/08/31 18:09:12 wiz Exp $
 
 DISTNAME=	Tree-R-0.072
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Tree/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Tree-R/
+HOMEPAGE=	https://metacpan.org/release/Tree-R
 COMMENT=	Perl extension for the Rtree data structure and algorithms
 LICENSE=	${PERL5_LICENSE}
 

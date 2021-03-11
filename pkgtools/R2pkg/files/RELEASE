@@ -1,0 +1,77 @@
+$NetBSD: RELEASE,v 1.7 2020/01/13 18:06:47 rillig Exp $
+
+RELEASE
+=======
+
+R2pkg v.0.2 (2015-04-25)
+------------------------
+
+* Initial public release
+
+R2pkg v.0.3 (2017-07-18)
+------------------------
+
+* Add to packages conflicting with the base R package.
+
+* Add recursion (-r).
+
+* Add support for updating packages (-u).
+
+R2pkg v.0.4 (2019-06-24)
+------------------------
+
+* Fix recursion.
+
+* Add both c and c++ to USE_LANGUAGES.
+
+* Add maintainer email handling (-M).
+
+* Use buildlink3.mk files for dependencies when available.
+
+R2pkg v.0.5 (2019-07-31)
+------------------------
+
+* Improve support for updating packages.
+
+* Add explicit option to create packages (-c).
+
+* Relax comparisons for COMMENTS to allow case and some punctuation
+  differences.
+
+* Expand the list of licenses and base R packages checked for.
+
+* Improve support for recursion.
+
+R2pkg v.0.6 (2019-08-08)
+------------------------
+
+* Improve the canonical format of an R package Makefile:
+
+  - Place R_PKGNAME, R_PKGVER, and CATEGORIES in the first stanza.
+  - Simplify CATEGORIES by defining common ones in Makefile.extension.
+  - Use the default value of HOMEPAGE defined in Makefile.extension.
+
+* Annotate generated comments with [R2pkg] to make them easier to find.
+
+R2pkg v.0.6.1 (2019-10-13)
+--------------------------
+
+* Run properly even if TMPDIR is not set.
+
+* Quote variables to prevent unintended interpolation.
+
+* Write error messages to stderr instead of stdout.
+
+* Separate R source code from shell code.
+
+R2pkg v0.6.3 (2019-10-19)
+-------------------------
+
+* Fix comparison of articles (a, an) in comments.
+
+* Lots of refactorings.
+
+R2pkg v0.6.4 (2020-01-13)
+-------------------------
+
+* Fix hardcoded use of bmake.

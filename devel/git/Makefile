@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2015/07/10 17:32:57 khorben Exp $
+# $NetBSD: Makefile,v 1.6 2019/08/20 13:00:02 adam Exp $
 
 .include "../../devel/git/Makefile.version"
 
@@ -19,6 +19,5 @@ META_PACKAGE=	yes
 DEPENDS+=	git-base>=${GIT_VERSION}:../../devel/git-base
 DEPENDS+=	git-contrib>=${GIT_VERSION}:../../devel/git-contrib
 DEPENDS+=	git-docs>=${GIT_VERSION}:../../devel/git-docs
-DEPENDS+=	git-gitk>=${GIT_VERSION}:../../devel/git-gitk
 
 .include "../../mk/bsd.pkg.mk"

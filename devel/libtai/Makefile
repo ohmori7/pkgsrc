@@ -1,23 +1,22 @@
-# $NetBSD: Makefile,v 1.16 2019/01/10 03:12:46 schmonz Exp $
+# $NetBSD: Makefile,v 1.23 2020/11/19 09:35:38 schmonz Exp $
 #
 
 DISTNAME=		libtai-0.60
-PKGREVISION=		7
+PKGREVISION=		8
 CATEGORIES=		devel
 MASTER_SITES=		http://cr.yp.to/libtai/
 
 MAINTAINER=		schmonz@NetBSD.org
-HOMEPAGE=		http://cr.yp.to/libtai.html
+HOMEPAGE=		https://cr.yp.to/libtai.html
 COMMENT=		Library for storing and manipulating dates and times
 LICENSE=		public-domain
 
-CONFLICTS=		libowfat-[0-9]*
-
-DJB_RESTRICTED=		NO
+CONFLICTS=		libowfat<0.32nb1
 
 EGDIR=			share/examples/${PKGBASE}
 
-SUBST_FILES.djbware+=	leapsecs_read.c
+SUBST_CLASSES+=		djberrno
+SUBST_FILES.djberrno=	leapsecs_read.c
 
 SUBST_CLASSES+=		paths
 SUBST_STAGE.paths=	do-configure
@@ -26,6 +25,8 @@ SUBST_VARS.paths=	PKG_SYSCONFDIR
 
 INSTALLATION_DIRS=	bin include lib ${EGDIR}
 INSTALLATION_DIRS+=	${PKGMANDIR}/man3
+
+.include "options.mk"
 
 post-build:
 	cd ${WRKSRC} && ./leapsecs < leapsecs.txt > leapsecs.dat

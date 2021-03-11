@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.21 2018/12/13 19:52:20 adam Exp $
+# $NetBSD: Makefile,v 1.30 2020/10/23 09:21:00 tnn Exp $
 
 DISTNAME=	pam_yubico-2.17
 PKGNAME=	${DISTNAME:S/_/-/}
-PKGREVISION=	10
+PKGREVISION=	18
 CATEGORIES=	security
 MASTER_SITES=	http://opensource.yubico.com/yubico-pam/releases/
 
@@ -15,11 +15,6 @@ LICENSE=	modified-bsd
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		pkg-config
 USE_LIBTOOL=		yes
-
-# Workaround a bug with NetBSD's openpam
-# The bug is described in PR security/39313
-#
-CFLAGS.NetBSD+=		-DNO_STATIC_MODULES
 
 .include "../../security/libyubikey/buildlink3.mk"
 .include "../../security/ykclient/buildlink3.mk"

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.5 2019/05/15 11:42:53 markd Exp $
+# $NetBSD: Makefile,v 1.9 2021/02/14 22:02:44 markd Exp $
 
 DISTNAME=	collection-humanities
-PKGNAME=	texlive-${DISTNAME}-2019pre1
+PKGNAME=	texlive-${DISTNAME}-2020pre2
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	45363
+TEXLIVE_REV=	56575
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.tug.org/texlive/
+HOMEPAGE=	https://www.tug.org/texlive/
 COMMENT=	Graphics, pictures, diagrams TeX packages
 
 DEPENDS+=	texlive-collection-latex-[0-9]*:../../meta-pkgs/texlive-collection-latex
@@ -41,6 +41,7 @@ DEPENDS+=	texlive-collection-latex-[0-9]*:../../meta-pkgs/texlive-collection-lat
 # depend linguex
 # depend liturg
 # depend metrix
+# depend nnext
 # depend parallel
 # depend parrun
 # depend phonrule
@@ -59,10 +60,10 @@ DEPENDS+=	tex-qtree-[0-9]*:../../print/tex-qtree
 # depend sides
 # depend stage
 # depend textglos
-# depend theatre
 # depend thalie
+# depend theatre
 # depend tree-dvips
-# depend verse
+DEPENDS+=	tex-verse-[0-9]*:../../print/tex-verse
 # depend xyling
 
 META_PACKAGE=	yes

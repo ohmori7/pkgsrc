@@ -1,9 +1,6 @@
-$NetBSD: distinfo,v 1.23 2019/05/01 20:22:02 gdt Exp $
+$NetBSD: distinfo,v 1.27 2021/01/09 19:42:42 gdt Exp $
 
-SHA1 (gpsd-3.18.1.tar.gz) = e72402ce559932ad65ab5792b59ccfce34cb1160
-RMD160 (gpsd-3.18.1.tar.gz) = 08f95b51218f11f7b07c1a5046cead366216fdc8
-SHA512 (gpsd-3.18.1.tar.gz) = b381b177fcd29089a61aa11f5df2c67473720a6bbc5590ca1c4fda627331c407de01c62caceeddae780626b9a02392e9a770d52a143357e1babdcc2fbff0ed38
-Size (gpsd-3.18.1.tar.gz) = 9031595 bytes
-SHA1 (patch-SConstruct) = 9a0904c003f1883e188e277f9e45c324e09f9c9f
-SHA1 (patch-gpspipe.c) = 43d9e99867175418874adaaf210a429819c3ea9a
-SHA1 (patch-serial.c) = b28f1d209ecf27fcd7a98dcacb201632f3667d56
+SHA1 (gpsd-3.22.tar.gz) = 7e83fe4c1e978728cb9f35c2d7f5b234a707c82e
+RMD160 (gpsd-3.22.tar.gz) = 916829bad167ef8313ea348cfaac71201ab77cc1
+SHA512 (gpsd-3.22.tar.gz) = 4ed08e92b17f8f1bcef6be66f7bb232994d419d1638af0d435a5b03800dcde070accdecb707ea27cceebd333ab597fd0b3a77f405542b488626cb4f1efbe856b
+Size (gpsd-3.22.tar.gz) = 4758761 bytes

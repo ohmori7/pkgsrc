@@ -1,10 +1,12 @@
-@comment $NetBSD: PLIST,v 1.16 2019/03/09 17:39:01 gdt Exp $
-@comment $NetBSD: PLIST,v 1.16 2019/03/09 17:39:01 gdt Exp $
+@comment $NetBSD: PLIST,v 1.19 2021/03/01 19:07:51 gdt Exp $
+@pkgdir lib/gdalplugins
 bin/gdal-config
 bin/gdal_contour
+bin/gdal_create
 bin/gdal_grid
 bin/gdal_rasterize
 bin/gdal_translate
+bin/gdal_viewshed
 bin/gdaladdo
 bin/gdalbuildvrt
 bin/gdaldem
@@ -12,7 +14,8 @@ bin/gdalenhance
 bin/gdalinfo
 bin/gdallocationinfo
 bin/gdalmanage
-bin/gdalserver
+bin/gdalmdiminfo
+bin/gdalmdimtranslate
 bin/gdalsrsinfo
 bin/gdaltindex
 bin/gdaltransform
@@ -87,6 +90,7 @@ include/ogr_geometry.h
 include/ogr_p.h
 include/ogr_spatialref.h
 include/ogr_srs_api.h
+include/ogr_swq.h
 include/ogrsf_frmts.h
 include/rawdataset.h
 include/vrtdataset.h
@@ -97,25 +101,15 @@ share/gdal/GDALLogoColor.svg
 share/gdal/GDALLogoGS.svg
 share/gdal/LICENSE.TXT
 share/gdal/bag_template.xml
-share/gdal/compdcs.csv
-share/gdal/coordinate_axis.csv
 share/gdal/cubewerx_extra.wkt
-share/gdal/datum_shift.csv
 share/gdal/default.rsc
 share/gdal/ecw_cs.wkt
 share/gdal/eedaconf.json
-share/gdal/ellipsoid.csv
 share/gdal/epsg.wkt
 share/gdal/esri_StatePlane_extra.wkt
-share/gdal/esri_Wisconsin_extra.wkt
-share/gdal/esri_epsg.wkt
-share/gdal/esri_extra.wkt
-share/gdal/gcs.csv
-share/gdal/gcs.override.csv
-share/gdal/gdal_datum.csv
 share/gdal/gdalicon.png
+share/gdal/gdalmdiminfo_output.schema.json
 share/gdal/gdalvrt.xsd
-share/gdal/geoccs.csv
 share/gdal/gml_registry.xml
 share/gdal/gmlasconf.xml
 share/gdal/gmlasconf.xsd
@@ -162,12 +156,9 @@ share/gdal/ozi_datum.csv
 share/gdal/ozi_ellips.csv
 share/gdal/pci_datum.txt
 share/gdal/pci_ellips.txt
-share/gdal/pcs.csv
-share/gdal/pcs.override.csv
+share/gdal/pdfcomposition.xsd
 share/gdal/pds4_template.xml
 share/gdal/plscenesconf.json
-share/gdal/prime_meridian.csv
-share/gdal/projop_wparm.csv
 share/gdal/ruian_vf_ob_v1.gfs
 share/gdal/ruian_vf_st_uvoh_v1.gfs
 share/gdal/ruian_vf_st_v1.gfs
@@ -179,10 +170,12 @@ share/gdal/s57objectclasses.csv
 share/gdal/seed_2d.dgn
 share/gdal/seed_3d.dgn
 share/gdal/stateplane.csv
+share/gdal/template_tiles.mapml
+share/gdal/tms_LINZAntarticaMapTileGrid.json
+share/gdal/tms_MapML_APSTILE.json
+share/gdal/tms_MapML_CBMTILE.json
+share/gdal/tms_NZTM2000.json
 share/gdal/trailer.dxf
-share/gdal/unit_of_measure.csv
 share/gdal/vdv452.xml
 share/gdal/vdv452.xsd
-share/gdal/vertcs.csv
-share/gdal/vertcs.override.csv
-@pkgdir lib/gdalplugins
+share/gdal/vicar.json

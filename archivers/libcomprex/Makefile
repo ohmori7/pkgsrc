@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.40 2018/12/13 19:51:31 adam Exp $
+# $NetBSD: Makefile,v 1.51 2020/05/22 10:55:42 adam Exp $
 
 DISTNAME=	libcomprex-0.3.3
-PKGREVISION=	17
+PKGREVISION=	25
 CATEGORIES=	archivers
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gnupdate/}
 
@@ -9,14 +9,14 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gnupdate.sourceforge.net/components/libcomprex/index.xml
 COMMENT=	Library to handle (de)compression of files
 
-USE_LIBTOOL=		yes
-USE_TOOLS+=		pkg-config
-USE_PKGLOCALEDIR=	yes
-PKGCONFIG_OVERRIDE=	libcomprex.pc.in
-GNU_CONFIGURE=		yes
+USE_LIBTOOL=			yes
+USE_TOOLS+=			pkg-config
+USE_PKGLOCALEDIR=		yes
+PKGCONFIG_OVERRIDE=		libcomprex.pc.in
+GNU_CONFIGURE=			yes
 BROKEN_GETTEXT_DETECTION=	yes
-CONFIGURE_ENV+=		ac_cv_lib_curl_curl_formparse=yes
-REPLACE_SH=		comprex-config.in
+CONFIGURE_ENV+=			ac_cv_lib_curl_curl_formparse=yes
+REPLACE_SH=			comprex-config.in
 
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"

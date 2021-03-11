@@ -1,5 +1,6 @@
-@comment $NetBSD: PLIST,v 1.2 2019/06/16 16:05:21 tsutsui Exp $
+@comment $NetBSD: PLIST,v 1.4 2020/02/16 04:00:52 tsutsui Exp $
 ${GEM_HOME}/cache/${GEM_NAME}.gem
+${GEM_LIBDIR}/.circleci/config.yml
 ${GEM_LIBDIR}/.gitignore
 ${GEM_LIBDIR}/Gemfile
 ${GEM_LIBDIR}/LICENSE.txt
@@ -7,6 +8,7 @@ ${GEM_LIBDIR}/README.md
 ${GEM_LIBDIR}/Rakefile
 ${GEM_LIBDIR}/delayer.gemspec
 ${GEM_LIBDIR}/lib/delayer.rb
+${GEM_LIBDIR}/lib/delayer/delayed_procedure.rb
 ${GEM_LIBDIR}/lib/delayer/error.rb
 ${GEM_LIBDIR}/lib/delayer/extend.rb
 ${GEM_LIBDIR}/lib/delayer/procedure.rb

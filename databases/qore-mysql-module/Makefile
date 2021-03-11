@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2018/06/08 19:25:39 nros Exp $
+# $NetBSD: Makefile,v 1.9 2020/01/18 21:48:02 jperkin Exp $
 
 DISTNAME=	qore-mysql-module-2.0.2.1
+PKGREVISION=	1
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_GITHUB:=qorelanguage/}
 EXTRACT_SUFX=	.tar.bz2
@@ -18,7 +19,7 @@ USE_LANGUAGES=	c c++11
 USE_TOOLS+=	gmake pax
 PTHREAD_OPTS+=	native
 
-CONFIGURE_ARGS+=--with-libsuffix=""
+CONFIGURE_ARGS+=	--with-libsuffix=""
 
 #install docs
 INSTALLATION_DIRS+=	share/doc/${PKGBASE}

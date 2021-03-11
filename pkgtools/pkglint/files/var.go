@@ -7,12 +7,12 @@ package pkglint
 // analysis, such as:
 //
 // * Whether the variable value is constant, and if so, what the constant value
-// is (see Constant, ConstantValue).
+// is (see IsConstant, ConstantValue).
 //
 // * What its (approximated) value is, either including values from the pkgsrc
 // infrastructure (see ValueInfra) or excluding them (Value).
 //
-// * On which other variables this variable depends (see Conditional,
+// * On which other variables this variable depends (see IsConditional,
 // ConditionalVars).
 //
 // TODO: Decide how to handle OPSYS-specific variables, such as LDFLAGS.SunOS.
@@ -31,8 +31,8 @@ type Var struct {
 	value      string
 	valueInfra string
 
-	readLocations  []MkLine
-	writeLocations []MkLine
+	readLocations  []*MkLine
+	writeLocations []*MkLine
 
 	conditional     bool
 	conditionalVars StringSet
@@ -44,8 +44,8 @@ func NewVar(name string) *Var {
 	return &Var{name, 0, "", "", "", nil, nil, false, NewStringSet(), NewStringSet()}
 }
 
-// Conditional returns whether the variable value depends on other variables.
-func (v *Var) Conditional() bool {
+// IsConditional returns whether the variable value depends on other variables.
+func (v *Var) IsConditional() bool {
 	return v.conditional
 }
 
@@ -79,7 +79,7 @@ func (v *Var) AddRef(varname string) {
 	v.refs.Add(varname)
 }
 
-// Constant returns whether the variable's value is a constant.
+// IsConstant returns whether the variable's value is a constant.
 // It may reference other variables since these references are evaluated
 // lazily, when the variable value is actually needed.
 //
@@ -96,17 +96,17 @@ func (v *Var) AddRef(varname string) {
 //
 // Variable assignments in the pkgsrc infrastructure are taken into account
 // for determining whether a variable is constant.
-func (v *Var) Constant() bool {
+func (v *Var) IsConstant() bool {
 	return v.constantState == 1 || v.constantState == 2
 }
 
 // ConstantValue returns the constant value of the variable.
-// It is only allowed when Constant() returns true.
+// It is only allowed when IsConstant() returns true.
 //
 // Variable assignments in the pkgsrc infrastructure are taken into account
 // for determining the constant value.
 func (v *Var) ConstantValue() string {
-	assertf(v.Constant(), "Variable must be constant.")
+	assert(v.IsConstant())
 	return v.constantValue
 }
 
@@ -117,7 +117,7 @@ func (v *Var) ConstantValue() string {
 // returned value is not reliable. It may be the value from either branch, or
 // even the combined value of both branches.
 //
-// See Constant and ConstantValue for more reliable information.
+// See IsConstant and ConstantValue for more reliable information.
 func (v *Var) Value() string {
 	return v.value
 }
@@ -130,7 +130,7 @@ func (v *Var) Value() string {
 // returned value is not reliable. It may be the value from either branch, or
 // even the combined value of both branches.
 //
-// See Constant and ConstantValue for more reliable information, but these
+// See IsConstant and ConstantValue for more reliable information, but these
 // ignore assignments from the infrastructure.
 func (v *Var) ValueInfra() string {
 	return v.valueInfra
@@ -146,7 +146,7 @@ func (v *Var) ValueInfra() string {
 // are not listed.
 //
 // Variable uses in the pkgsrc infrastructure are taken into account.
-func (v *Var) ReadLocations() []MkLine {
+func (v *Var) ReadLocations() []*MkLine {
 	return v.readLocations
 }
 
@@ -156,11 +156,11 @@ func (v *Var) ReadLocations() []MkLine {
 // reachable in practice.
 //
 // Variable assignments in the pkgsrc infrastructure are taken into account.
-func (v *Var) WriteLocations() []MkLine {
+func (v *Var) WriteLocations() []*MkLine {
 	return v.writeLocations
 }
 
-func (v *Var) Read(mkline MkLine) {
+func (v *Var) Read(mkline *MkLine) {
 	v.readLocations = append(v.readLocations, mkline)
 	v.constantState = [...]uint8{3, 2, 2, 3}[v.constantState]
 }
@@ -169,8 +169,8 @@ func (v *Var) Read(mkline MkLine) {
 // Only standard assignments (VAR=value) are handled.
 // Side-effect assignments (${VAR::=value}) are not handled here since
 // they don't occur in practice.
-func (v *Var) Write(mkline MkLine, conditional bool, conditionVarnames ...string) {
-	assertf(mkline.Varname() == v.Name, "wrong variable name")
+func (v *Var) Write(mkline *MkLine, conditional bool, conditionVarnames ...string) {
+	assert(mkline.Varname() == v.Name)
 
 	v.writeLocations = append(v.writeLocations, mkline)
 
@@ -179,22 +179,22 @@ func (v *Var) Write(mkline MkLine, conditional bool, conditionVarnames ...string
 	}
 	v.conditionalVars.AddAll(conditionVarnames)
 
-	mkline.ForEachUsed(func(varUse *MkVarUse, time vucTime) {
+	mkline.ForEachUsed(func(varUse *MkVarUse, time VucTime) {
 		v.refs.Add(varUse.varname)
 	})
 	v.refs.AddAll(conditionVarnames)
 
 	v.update(mkline, &v.valueInfra)
-	if !G.Pkgsrc.IsInfra(mkline.Line.Filename) {
+	if !G.Pkgsrc.IsInfra(mkline.Line.Filename()) {
 		v.update(mkline, &v.value)
 	}
 
 	v.updateConstantValue(mkline)
 }
 
-func (v *Var) update(mkline MkLine, update *string) {
+func (v *Var) update(mkline *MkLine, update *string) {
 	firstWrite := len(v.writeLocations) == 1
-	if v.Conditional() && !firstWrite {
+	if v.IsConditional() && !firstWrite {
 		return
 	}
 
@@ -211,14 +211,14 @@ func (v *Var) update(mkline MkLine, update *string) {
 	case opAssignAppend:
 		*update += " " + value
 
-	case opAssignShell:
+	default:
 		// Ignore these for now.
 		// Later it might be useful to parse the shell commands to
 		// evaluate simple commands like "test && echo yes || echo no".
 	}
 }
 
-func (v *Var) updateConstantValue(mkline MkLine) {
+func (v *Var) updateConstantValue(mkline *MkLine) {
 	if v.constantState == 3 {
 		return
 	}
@@ -232,7 +232,7 @@ func (v *Var) updateConstantValue(mkline MkLine) {
 	// (And even after that, because of the ::= modifier. But luckily
 	// almost no one knows that modifier.)
 
-	if v.Conditional() {
+	if v.IsConditional() {
 		v.constantState = 3
 		v.constantValue = ""
 		return
@@ -267,12 +267,15 @@ func (v *Var) updateConstantValue(mkline MkLine) {
 		}
 
 	case opAssignAppend:
-		v.constantValue += " " + value
+		if v.constantState != 0 {
+			v.constantValue += " "
+		}
+		v.constantValue += value
 
-	case opAssignShell:
+	default:
 		v.constantState = 3
 		v.constantValue = ""
 	}
 
-	v.constantState = [...]uint8{1, 1, 3, 3}[v.constantState]
+	v.constantState |= 1
 }

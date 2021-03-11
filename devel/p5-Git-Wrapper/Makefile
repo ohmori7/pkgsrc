@@ -1,18 +1,18 @@
-# $NetBSD: Makefile,v 1.18 2018/08/22 09:44:05 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2020/08/31 18:08:07 wiz Exp $
 
 DISTNAME=		Git-Wrapper-0.048
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		1
+PKGREVISION=		3
 CATEGORIES=		devel perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Git/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Git-Wrapper/
+HOMEPAGE=		https://metacpan.org/release/Git-Wrapper
 COMMENT=		Wrap git(7) command-line interface
 LICENSE=		${PERL5_LICENSE}
 
 BUILD_DEPENDS+=		p5-Env-Path-[0-9]*:../../devel/p5-Env-Path
-#BUILD_DEPENDS+=		{perl>=5.001,p5-File-Path-[0-9]*}:../../devel/p5-File-Path
+#BUILD_DEPENDS+=	{perl>=5.001,p5-File-Path-[0-9]*}:../../devel/p5-File-Path
 BUILD_DEPENDS+=		p5-Test-Deep-[0-9]*:../../devel/p5-Test-Deep
 BUILD_DEPENDS+=		p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
 BUILD_DEPENDS+=		p5-Test-Most-[0-9]*:../../devel/p5-Test-Most

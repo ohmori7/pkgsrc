@@ -1,16 +1,13 @@
-$NetBSD: distinfo,v 1.51 2019/03/27 11:05:57 markd Exp $
+$NetBSD: distinfo,v 1.60 2020/09/05 11:40:58 ryoon Exp $
 
-SHA1 (blender-2.79b.tar.gz) = 4fd307ccfd1d6df5cc1898009712d4b1ae35430f
-RMD160 (blender-2.79b.tar.gz) = 787fc2ee718157aa95ffcced4935355d3086ca0d
-SHA512 (blender-2.79b.tar.gz) = 2db21ace446168dd683cdb5aad9dec001f8888ae4e9603a04ddb44fb78489ded827deb07e83712b0f1118a0e7bf66f2a5d935dc4ebb3a6703d72672ff414367f
-Size (blender-2.79b.tar.gz) = 50204270 bytes
-SHA1 (patch-doc_python__api_sphinx__doc__gen.sh) = 5300936c1f675346dbcd76bbd640dd3266065297
-SHA1 (patch-extern_glog_src_base_mutex.h) = 34a20264581a093a1686f1d13a6fccbd5cd9e674
-SHA1 (patch-extern_glog_src_config.h) = 9666c5d925cfeebeef2f178418c9fc2403831da1
-SHA1 (patch-extern_glog_src_config__netbsd.h) = be4727135b8fe1ddbcb5ad52f8230aec51a1a909
-SHA1 (patch-extern_glog_src_utilities.h) = c78ef191ab6ec7e65837b88468a7e1b8eaf325d3
-SHA1 (patch-intern_cycles_util_util_sseb.h) = 5d5bf8d71a443b63959ec79072e458f1a43cde94
-SHA1 (patch-intern_guardedalloc_intern_mallocn__intern.h) = c7bc89af1c03b50ae0bd8af5aacc25cd82dfcbfc
-SHA1 (patch-intern_itasc_kdl_tree.hpp) = b0c6640853ace08c07b443ff8f18290367f1d8da
-SHA1 (patch-source_blender_imbuf_intern_dds_DirectDrawSurface.cpp) = b38f61900aa30b02479c7397062d71d295932847
-SHA1 (patch-source_blender_python_intern_bpy_rna.c) = e287c41e0196bfa3650bfaa5d4263f5862467b80
+SHA1 (blender-2.90.0.tar.xz) = cbc234b048294ebec34a89116f05663be00f91f2
+RMD160 (blender-2.90.0.tar.xz) = 747c96c2453d8203c7df6d80ef246e4834d43984
+SHA512 (blender-2.90.0.tar.xz) = 9fc3e423bb13f3b983deba130febf8cc870a65c7d87fff8d9536a54ab606d097cccf46cdd518b15ab483fdf85551fde607b28801c3dbe681c841d7594fcbc57e
+Size (blender-2.90.0.tar.xz) = 38831704 bytes
+SHA1 (patch-extern_Eigen3_Eigen_src_Core_IO.h) = 791224b988da0383c306e76de5e93cb1cedc960e
+SHA1 (patch-extern_Eigen3_Eigen_src_Core_arch_CUDA_Half.h) = ee35286558e5590495f1c973ae99ede32048ac38
+SHA1 (patch-extern_glog_src_base_mutex.h) = 5fceceefe83400967a59080eeb930d0f3a4b8e88
+SHA1 (patch-extern_glog_src_config.h) = e445c911d4ebb1f7e378c3c46911b55f77ba5608
+SHA1 (patch-extern_glog_src_config__netbsd.h) = f96dd9d6afed38466e5765c604efebcd78537a54
+SHA1 (patch-intern_cycles_kernel_svm_svm__sky.h) = bc672c23ea5f7c837d6a1f34bae87b9ef093309e
+SHA1 (patch-intern_guardedalloc_intern_mallocn__intern.h) = 81fb0fd1b34d550168a4bdf63f28b4e199717921

@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.27 2018/08/22 09:46:55 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2020/08/31 18:11:55 wiz Exp $
 #
 
-DISTNAME=	String-CRC32-1.7
+DISTNAME=	String-CRC32-1.8
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=String/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/search?module=String::CRC32
+HOMEPAGE=	https://metacpan.org/search?q=module%3AString%3A%3ACRC32
 COMMENT=	Perl module to generate cksums from strings and from files
 LICENSE=	public-domain
 

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.37 2019/06/13 07:58:31 alnsn Exp $
+# $NetBSD: Makefile,v 1.43 2020/11/03 20:54:11 otis Exp $
 
-DISTNAME=		smartmontools-7.0
-PKGREVISION=		3
+DISTNAME=		smartmontools-7.1
 CATEGORIES=		sysutils
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=smartmontools/}
 
@@ -12,6 +11,8 @@ LICENSE=		gnu-gpl-v2
 
 ONLY_FOR_PLATFORM=	Darwin-*-* DragonFly-*-* FreeBSD-*-* Linux-*-*
 ONLY_FOR_PLATFORM+=	NetBSD-*-* OpenBSD-*-* SunOS-*-*
+
+CHECK_PORTABILITY_SKIP+=	os_darwin/pkg/root/usr/local/sbin/smart-pkg-uninstall
 
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		gmake
@@ -28,6 +29,7 @@ RCD_SCRIPTS=		smartd
 
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--docdir=${PREFIX}/share/doc/smartmontools
+CONFIGURE_ARGS+=	--with-scriptpath=${PREFIX}/bin:${PREFIX}/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 INSTALL_MAKE_FLAGS=	${MAKE_FLAGS} sysconfdir=${EGDIR}
 
 INSTALLATION_DIRS=	${EGDIR}

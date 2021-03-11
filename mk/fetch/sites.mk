@@ -1,4 +1,4 @@
-# $NetBSD: sites.mk,v 1.163 2019/05/05 18:36:05 rillig Exp $
+# $NetBSD: sites.mk,v 1.171 2021/02/14 11:46:13 wiz Exp $
 #
 # This Makefile fragment defines read-only MASTER_SITE_* variables
 # representing some well-known master distribution sites for software.
@@ -15,8 +15,8 @@ MASTER_SITE_GNU+=       \
 	https://ftp.nluug.nl/pub/gnu/ \
 	ftp://ftp.lip6.fr/pub/gnu/ \
 	http://mirrors.kernel.org/gnu/ \
-	ftp://ftp.funet.fi/pub/gnu/prep/ \
-	http://ftp.gnu.org/pub/gnu/
+	http://ftp.funet.fi/pub/gnu/prep/ \
+	https://ftp.gnu.org/pub/gnu/
 
 MASTER_SITE_GITHUB+=    \
 	https://github.com/
@@ -38,26 +38,31 @@ MASTER_SITE_OSDN+=	\
 
 MASTER_SITE_PERL_CPAN+= \
 	https://cpan.perl.org/CPAN/modules/by-module/ \
-	ftp://cpan.pair.com/modules/by-module/ \
-	ftp://ftp.funet.fi/pub/languages/perl/CPAN/modules/by-module/ \
+	http://cpan.pair.com/modules/by-module/ \
+	http://ftp.funet.fi/pub/languages/perl/CPAN/modules/by-module/ \
 	ftp://ftp.fi.muni.cz/pub/CPAN/modules/by-module/
 
 MASTER_SITE_R_CRAN+=    \
+	https://cran.r-project.org/src/ \
 	http://cran.r-project.org/src/ \
 	ftp://cran.r-project.org/pub/R/src/ \
 	http://cran.at.r-project.org/src/ \
 	ftp://cran.at.r-project.org/pub/R/src/ \
+	https://cran.ch.r-project.org/src/ \
 	http://cran.ch.r-project.org/src/ \
+	https://cran.uk.r-project.org/src/ \
 	http://cran.uk.r-project.org/src/ \
+	https://cran.us.r-project.org/src/ \
 	http://cran.us.r-project.org/src/ \
 	http://lib.stat.cmu.edu/R/CRAN/src/ \
 	ftp://ftp.u-aizu.ac.jp/pub/lang/R/CRAN/src/ \
+	https://stat.ethz.ch/CRAN/src/ \
 	http://stat.ethz.ch/CRAN/src/ \
+	https://www.stats.bris.ac.uk/R/src/ \
 	http://www.stats.bris.ac.uk/R/src/
 
 MASTER_SITE_TEX_CTAN+= \
-	ftp://ftp.funet.fi/pub/TeX/CTAN/ \
-	ftp://ftp.dante.de/tex-archive/ \
+	http://ftp.funet.fi/pub/TeX/CTAN/ \
 	ftp://www.dnsbalance.ring.gr.jp/pub/text/CTAN/ \
 	http://www.dnsbalance.ring.gr.jp/archives/text/CTAN/
 
@@ -67,10 +72,10 @@ MASTER_SITE_SUNSITE+=   \
 	ftp://ftp.lip6.fr/pub/linux/sunsite/
 
 MASTER_SITE_GNOME+=     \
-	http://ftp.gnome.org/pub/GNOME/ \
-	ftp://ftp.gnome.org/pub/GNOME/ \
-	ftp://ftp.cse.buffalo.edu/pub/Gnome/ \
-	https://download.gnome.org/
+	https://download.gnome.org/ \
+	https://www.mirrorservice.org/sites/ftp.gnome.org/pub/GNOME/ \
+	https://mirror.umd.edu/gnome/ \
+	https://mirrors.dotsrc.org/gnome/
 
 MASTER_SITE_KDE+=	\
 	http://download.kde.org/stable/ \
@@ -212,7 +217,7 @@ MASTER_SITE_CYGWIN+= \
 	http://mirrors.kernel.org/sources.redhat.com/cygwin/ \
 	http://mirrors.xmission.com/cygwin/ \
 	ftp://ftp.dnsbalance.ring.gr.jp/pub/pc/gnu-win32/ \
-	ftp://ftp.funet.fi/pub/mirrors/cygwin.com/pub/cygwin/
+	http://ftp.funet.fi/pub/mirrors/cygwin.com/pub/cygwin/
 
 MASTER_SITE_IFARCHIVE+= \
 	http://ifarchive.flavorplex.com/if-archive/ \

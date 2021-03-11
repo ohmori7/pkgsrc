@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.15 2019/01/26 07:50:00 markd Exp $
+# $NetBSD: Makefile,v 1.19 2020/08/31 18:09:45 wiz Exp $
 
 DISTNAME=	epstopdf
 PKGNAME=	tex-${DISTNAME}-2.28
+PKGREVISION=	2
 TEXLIVE_REV=	48684
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/epstopdf
+HOMEPAGE=	https://ctan.org/pkg/epstopdf
 COMMENT=	Convert EPS to 'encapsulated' PDF using Ghostscript
 LICENSE=	modified-bsd
 
@@ -25,6 +26,7 @@ SUBST_SED.paths+=	-e 's,@KPSEWHICH@,${LOCALBASE}/bin/kpsewhich,g'
 INSTALLATION_DIRS=	bin
 TEX_TEXMF_DIRS=		# empty
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 
 post-extract:

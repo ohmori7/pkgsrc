@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2019/04/27 03:20:32 ryoon Exp $
+# $NetBSD: Makefile,v 1.27 2020/11/05 09:08:30 ryoon Exp $
 #
 
 DISTNAME=		fcitx-4.2.9.6
-PKGREVISION=		4
+PKGREVISION=		11
 CATEGORIES=		inputmethod
 MASTER_SITES=		https://download.fcitx-im.org/fcitx/
 EXTRACT_SUFX=		.tar.xz
@@ -16,8 +16,6 @@ DATAFILES+=		py_table-20121124.tar.gz
 DATAFILES+=		table.tar.gz
 
 EXTRACT_ONLY=		${DEFAULT_DISTFILES}
-
-.include "options.mk"
 
 .for f in ${DATAFILES}
 SITES.${f}=		https://download.fcitx-im.org/data/
@@ -42,6 +40,9 @@ CMAKE_ARGS+=		-DENABLE_PRESAGE=OFF
 CMAKE_ARGS+=		-DENABLE_GIR=OFF
 CMAKE_ARGS+=		-DENABLE_GTK2_IM_MODULE=ON
 CMAKE_ARGS+=		-DENABLE_GTK3_IM_MODULE=ON
+CMAKE_ARGS+=		-DENABLE_QT=OFF
+CMAKE_ARGS+=		-DENABLE_QT_IM_MODULE=OFF
+CMAKE_ARGS+=		-DENABLE_QT_GUI=OFF
 
 BUILDLINK_DEPMETHOD.libXt?=	build
 
@@ -64,6 +65,7 @@ post-extract:
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../devel/libexecinfo/buildlink3.mk"
+.include "../../devel/libuuid/buildlink3.mk"
 .include "../../devel/gettext-tools/buildlink3.mk"
 .include "../../graphics/cairo/buildlink3.mk"
 .include "../../textproc/enchant2/buildlink3.mk"

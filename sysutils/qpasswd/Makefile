@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2018/12/15 16:51:36 schmonz Exp $
+# $NetBSD: Makefile,v 1.5 2020/11/19 09:35:43 schmonz Exp $
 
 DISTNAME=		qpasswd-0.5
 CATEGORIES=		sysutils
@@ -8,7 +8,9 @@ EXTRACT_SUFX=		.tar.bz2
 MAINTAINER=		schmonz@NetBSD.org
 HOMEPAGE=		https://mcmilk.de/projects/qpasswd/
 COMMENT=		Password-checking tools for many authentication schemes
-#LICENSE=		# TODO: (see mk/license.mk)
+LICENSE=		gnu-gpl-v2
+
+SUBST_CLASSES+=		djberrno
 
 SUBST_CLASSES+=		paths
 SUBST_STAGE.paths=	pre-build
@@ -16,8 +18,7 @@ SUBST_FILES.paths=	man/checkqpasswd.8 man/qpasswd.5
 SUBST_FILES.paths+=	qpasswd_gethome.c usage.c do_checkqpasswd.c params.h
 SUBST_FILES.paths+=	params.h do_checkqpasswd.c qpasswd_gethome.c usage.c
 SUBST_SED.paths=	-e 's|/etc/qpasswd|${PKG_SYSCONFDIR}/qpasswd|g'
-
-DJB_RESTRICTED=		no
+SUBST_NOOP_OK.paths=	yes	# PKG_SYSCONFDIR support
 
 LDFLAGS.FreeBSD+=	-lcrypt
 LDFLAGS.Linux+=		-lcrypt

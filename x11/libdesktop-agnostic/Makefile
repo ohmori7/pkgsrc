@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.45 2019/04/26 14:12:50 maya Exp $
+# $NetBSD: Makefile,v 1.56 2020/12/04 20:45:50 nia Exp $
 
 DISTNAME=	libdesktop-agnostic-0.3.92
-PKGREVISION=	32
+PKGREVISION=	42
 CATEGORIES=	x11
 MASTER_SITES=	https://launchpad.net/libdesktop-agnostic/0.4/0.3.92/+download/
 
@@ -19,7 +19,7 @@ CONFIGURE_ARGS=	--config-backends=keyfile,gconf	\
 		--desktop-entry-backends=glib
 
 PY_PATCHPLIST=	yes
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.3.92
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.3.92
 
 EGDIR=			${PREFIX}/share/examples/libdesktop-agnostic
 PKG_SYSCONFSUBDIR=	xdg

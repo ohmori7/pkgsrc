@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.46 2018/11/14 22:22:29 kleink Exp $
+# $NetBSD: Makefile,v 1.54 2020/08/31 18:11:38 wiz Exp $
 
-PKGREVISION= 7
+PKGREVISION= 4
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
-DISTNAME=	xfce4-fsguard-plugin-1.1.0
+DISTNAME=	xfce4-fsguard-plugin-1.1.1
 CATEGORIES=	sysutils
 MASTER_SITES=	http://archive.xfce.org/src/panel-plugins/xfce4-fsguard-plugin/1.1/
 
-HOMEPAGE=	http://goodies.xfce.org/projects/panel-plugins/xfce4-fsguard-plugin
+HOMEPAGE=	https://goodies.xfce.org/projects/panel-plugins/xfce4-fsguard-plugin
 COMMENT=	Xfce disk space plugin
 
 .include "../../x11/xfce4-panel/buildlink3.mk"

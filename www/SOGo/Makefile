@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.51 2019/04/03 00:33:10 ryoon Exp $
+# $NetBSD: Makefile,v 1.64 2020/11/05 09:09:18 ryoon Exp $
 #
 
 DISTNAME=	SOGo-2.3.23
-PKGREVISION=	7
+PKGREVISION=	18
 CATEGORIES=	www
 MASTER_SITES=	http://www.sogo.nu/files/downloads/SOGo/Sources/
 
@@ -12,11 +12,11 @@ COMMENT=	Groupware server supporting CalDAV, CardDAV and GroupDAV
 LICENSE=	gnu-gpl-v2
 
 HAS_CONFIGURE=	yes
-USE_TOOLS+=     bash gmake zip:run
+USE_TOOLS+=	bash gmake zip:run
 
 CONFIG_SHELL=	bash
-CONFIGURE_ARGS= --enable-debug --disable-strip
-MAKE_JOBS_SAFE=		no
+CONFIGURE_ARGS=	--enable-debug --disable-strip
+MAKE_JOBS_SAFE=	no
 
 SOGOUSER?=	sogo
 SOGOGROUP?=	sogo
@@ -25,18 +25,18 @@ SOGORUNDIR?=	${VARBASE}/sogo
 
 INSTALLATION_DIRS+=	share/examples/SOGo
 
-CONF_FILES+=	share/examples/SOGo/sogo-conf.sh \
-		${PKG_SYSCONFDIR}/sogo-conf.sh
-CONF_FILES+=	share/examples/SOGo/SOGo.conf \
-		${PKG_SYSCONFDIR}/SOGo.conf
-OWN_DIRS+=	${SOGOETCDIR}
-OWN_DIRS+=	${SOGORUNDIR}
+CONF_FILES+=		share/examples/SOGo/sogo-conf.sh \
+			${PKG_SYSCONFDIR}/sogo-conf.sh
+CONF_FILES+=		share/examples/SOGo/SOGo.conf \
+			${PKG_SYSCONFDIR}/SOGo.conf
+OWN_DIRS+=		${SOGOETCDIR}
+OWN_DIRS+=		${SOGORUNDIR}
 OWN_DIRS_PERMS+=	${SOGOETCDIR} ${SOGOUSER} ${SOGOGROUP} 0755
 OWN_DIRS_PERMS+=	${SOGORUNDIR} ${SOGOUSER} ${SOGOGROUP} 0755
-BUILD_DEFS+=	VARBASE
+BUILD_DEFS+=		VARBASE
 
-PKG_GROUPS+=	${SOGOGROUP}
-PKG_USERS+=	${SOGOUSER}:${SOGOGROUP}
+PKG_GROUPS+=		${SOGOGROUP}
+PKG_USERS+=		${SOGOUSER}:${SOGOGROUP}
 PKG_HOME.${SOGOUSER}=	${SOGOETCDIR}
 PKG_SHELL.${SOGOUSER}=	${SH}
 PKG_GECOS.${SOGOUSER}=	SOGo daemon user

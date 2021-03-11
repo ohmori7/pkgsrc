@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.134 2019/05/23 19:23:08 rillig Exp $
+# $NetBSD: Makefile,v 1.142 2020/08/31 18:10:09 wiz Exp $
 
-DISTNAME=	Mail-SpamAssassin-3.4.2
-PKGNAME=	spamassassin-3.4.2
+VERSION=	3.4.4
+DISTNAME=	Mail-SpamAssassin-${VERSION}
+PKGNAME=	spamassassin-${VERSION}
 PKGREVISION=	1
 CATEGORIES=	mail perl5
 MASTER_SITES=	${MASTER_SITE_APACHE:=spamassassin/source/}
@@ -12,7 +13,7 @@ DISTFILES+=	${RULESARCHIVE}
 EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://spamassassin.apache.org/
+HOMEPAGE=	https://spamassassin.apache.org/
 COMMENT=	Mail filter to identify spam
 LICENSE=	apache-2.0
 
@@ -20,13 +21,15 @@ LICENSE=	apache-2.0
 
 SMF_METHODS=	spamassassin
 
-RULESARCHIVE=	Mail-SpamAssassin-rules-3.4.2.r1840640.tgz
-#RULESARCHIVEASC=${RULESARCHIVE}.asc
-#RULESARCHIVESHA=${RULESARCHIVE}.sha1
-FILES_SUBST+=	RULESARCHIVE=${RULESDIR}/${RULESARCHIVE}
-PLIST_SUBST+=	RULESARCHIVE=${RULESARCHIVE:Q}
-#PLIST_SUBST+=	RULESARCHIVEASC=${RULESARCHIVEASC:Q}
-#PLIST_SUBST+=	RULESARCHIVESHA=${RULESARCHIVESHA:Q}
+# The RULESARCHIVE path is taken from the link on the Download page
+# reachable from $HOMEPAGE.
+RULESARCHIVE=		Mail-SpamAssassin-rules-3.4.4.r1873061.tgz
+#RULESARCHIVEASC=	${RULESARCHIVE}.asc
+#RULESARCHIVESHA=	${RULESARCHIVE}.sha1
+FILES_SUBST+=		RULESARCHIVE=${RULESDIR}/${RULESARCHIVE}
+PLIST_SUBST+=		RULESARCHIVE=${RULESARCHIVE:Q}
+#PLIST_SUBST+=		RULESARCHIVEASC=${RULESARCHIVEASC:Q}
+#PLIST_SUBST+=		RULESARCHIVESHA=${RULESARCHIVESHA:Q}
 
 #DEPENDS+=	{perl>=5.9.3,p5-Archive-Tar>=1.23}:../../archivers/p5-Archive-Tar
 #DEPENDS+=	{perl>=5,p5-DB_File-[0-9]*}:../../databases/p5-DB_File
@@ -173,7 +176,7 @@ SA_UPDATE_FETCH_CMD=	${TOOLS_PLATFORM.curl}
 SA_UPDATE_FETCH_PROG=	fetch
 SA_UPDATE_FETCH_CMD=	${TOOLS_PLATFORM.fetch}
 .else
-DEPENDS+=	wget-[0-9]*:../../net/wget
+DEPENDS+=		wget-[0-9]*:../../net/wget
 
 SA_UPDATE_FETCH_PROG=	wget
 SA_UPDATE_FETCH_CMD=	${PREFIX}/bin/wget

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.5 2018/11/09 18:12:27 adam Exp $
+# $NetBSD: Makefile,v 1.16 2021/02/15 18:58:41 adam Exp $
 
-PKGNAME=	${DISTNAME:C/-/96-contrib-/}
+PKGNAME=	${DISTNAME:S/-/96-contrib-/}
 COMMENT=	Contrib subtree of tools and plug-ins
 
 .include "../../databases/postgresql96/Makefile.common"
 
-DEPENDS+=       postgresql96-server>=${PKGVERSION_NOREV}:../../databases/postgresql96-server
+DEPENDS+=	postgresql96-server>=${PKGVERSION_NOREV}:../../databases/postgresql96-server
 
 BUILD_MAKE_FLAGS=	USE_PGXS=1
 
@@ -54,6 +54,7 @@ BUILD_DIRS+=		contrib/tsm_system_time
 BUILD_DIRS+=		contrib/unaccent
 BUILD_DIRS+=		contrib/vacuumlo
 
+TOOLS_BROKEN+=		perl
 CONFIGURE_ARGS+=	--with-openssl
 
 PLIST_VARS+=		uuid

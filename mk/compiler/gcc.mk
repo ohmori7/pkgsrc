@@ -1,4 +1,4 @@
-# $NetBSD: gcc.mk,v 1.198 2018/11/12 14:22:58 jperkin Exp $
+# $NetBSD: gcc.mk,v 1.220 2021/02/04 21:45:13 gdt Exp $
 #
 # This is the compiler definition for the GNU Compiler Collection.
 #
@@ -59,35 +59,78 @@
 COMPILER_GCC_MK=	defined
 
 _VARGROUPS+=	gcc
-_USER_VARS.gcc=	USE_NATIVE_GCC USE_PKGSRC_GCC
-_PKG_VARS.gcc=	GCC_REQD
-_SYS_VARS.gcc=	CC_VERSION CC_VERSION_STRING LANGUAGES.gcc
+_USER_VARS.gcc=	\
+	USE_NATIVE_GCC USE_PKGSRC_GCC USE_PKGSRC_GCC_RUNTIME \
+	GCCBASE GCC_VERSION_SUFFIX \
+	USE_CROSS_COMPILE \
+	PKGSRC_USE_FORTIFY PKGSRC_USE_RELRO PKGSRC_USE_SSP \
+	COMPILER_USE_SYMLINKS CC
+_PKG_VARS.gcc=	\
+	GCC_REQD USE_GCC_RUNTIME USE_LANGUAGES
+_SYS_VARS.gcc=	\
+	CC_VERSION CC_VERSION_STRING LANGUAGES.gcc \
+	CCPATH CPPPATH CXXPATH F77PATH FCPATH \
+	PKG_CC PKG_CPP PKG_CXX PKG_FC FC PKGSRC_FORTRAN \
+	ADAPATH GMKPATH GLKPATH GBDPATH CHPPATH GLSPATH GNTPATH PRPPATH
 _DEF_VARS.gcc=	\
-	CCPATH CPPPATH CXXPATH \
-	F77PATH FCPATH \
-	ADAPATH GMKPATH GLKPATH GDBPATH CHPPATH GLSPATH GNTPATH PRPPATH \
-	IMAKEOPTS \
-	LDFLAGS \
-	PKG_CC PKG_CPP PKG_CXX PKG_FC \
-	PKG_ADA PKG_GMK PKG_GLK PKG_GDB PKG_CHP PKG_GLK PKG_GNT PKG_PRP \
+	MAKEFLAGS IMAKEOPTS \
+	CFLAGS LDFLAGS \
+	PREPEND_PATH \
+	COMPILER_INCLUDE_DIRS COMPILER_LIB_DIRS \
+	CWRAPPERS_APPEND.cc CWRAPPERS_APPEND.cxx CWRAPPERS_APPEND.ld \
+	PKG_ADA PKG_GMK PKG_GLK PKG_GBD PKG_CHP PKG_GNT PKG_GLS PKG_PRP \
+	PKGSRC_ADA PKGSRC_GMK PKGSRC_GLK PKGSRC_GBD PKGSRC_CHP PKGSRC_GNT PKGSRC_GLS PKGSRC_PRP \
 	_CC _COMPILER_RPATH_FLAG _COMPILER_STRIP_VARS \
-	_GCCBINDIR _GCC_ARCHDIR _GCC_BIN_PREFIX _GCC_CC _GCC_CFLAGS \
-	_GCC_CPP _GCC_CXX _GCC_DEPENDENCY _GCC_DEPENDS \
+	_GCCBINDIR _GCC_ARCHDIR _GCC_BIN_PREFIX _GCC_CFLAGS \
+	_GCC_CC _GCC_CPP _GCC_CXX _GCC_DEPENDENCY _GCC_DEPENDS \
+	_GCC_DIST_NAME _GCC_DIST_VERSION \
 	_GCC_FC _GCC_LDFLAGS _GCC_LIBDIRS _GCC_PKG \
 	_GCC_PKGBASE _GCC_PKGSRCDIR _GCC_PKG_SATISFIES_DEP \
 	_GCC_PREFIX _GCC_REQD _GCC_STRICTEST_REQD _GCC_SUBPREFIX \
 	_GCC_TEST_DEPENDS _GCC_NEEDS_A_FORTRAN _GCC_VARS _GCC_VERSION \
 	_GCC_VERSION_STRING \
-	_GCC_ADA _GCC_GMK _GCC_GLK _GCC_GDB _GCC_CHP _GCC_GLS _GCC_GNT _GCC_PRP \
+	_GCC_ADA _GCC_GMK _GCC_GLK _GCC_GBD _GCC_CHP _GCC_GLS _GCC_GNT _GCC_PRP \
 	_IGNORE_GCC _IGNORE_GCC3CXX _IGNORE_GCC3F77 _IGNORE_GCC3OBJC \
 	_IS_BUILTIN_GCC \
 	_LANGUAGES.gcc \
 	_LINKER_RPATH_FLAG \
-	_NEED_GCC2 _NEED_GCC3 _NEED_GCC34 _NEED_GCC44 _NEED_NEWER_GCC \
+	_NEED_GCC2 _NEED_GCC3 _NEED_GCC34 _NEED_GCC44 \
+	_NEED_GCC6 _NEED_GCC7 _NEED_GCC8 _NEED_GCC9 \
+	_NEED_GCC10 \
+	_NEED_GCC_AUX _NEED_NEWER_GCC \
 	_PKGSRC_GCC_VERSION \
 	_USE_GCC_SHLIB _USE_PKGSRC_GCC \
-	_WRAP_EXTRA_ARGS.CC
-
+	_WRAP_EXTRA_ARGS.CC \
+	_EXTRA_CC_DIRS \
+	_CXX_STD_VERSIONS \
+	${_CXX_STD_VERSIONS:@std@_CXX_STD_FLAG.${std}@} \
+	_MKPIE_CFLAGS.gcc _MKPIE_LDFLAGS.gcc \
+	_FORTIFY_CFLAGS _RELRO_LDFLAGS _STACK_CHECK_CFLAGS \
+	_CTF_CFLAGS \
+	_GCC_DIR \
+	_ALIASES.CC _ALIASES.CPP _ALIASES.CXX _ALIASES.FC \
+	_ALIASES.ADA _ALIASES.GMK _ALIASES.GLK _ALIASES.GBD \
+	_ALIASES.CHP _ALIASES.PRP _ALIASES.GLS _ALIASES.GNT \
+	_COMPILER_ABI_FLAG.32 _COMPILER_ABI_FLAG.64 \
+	_COMPILER_ABI_FLAG.n32 _COMPILER_ABI_FLAG.o32 \
+	_SSP_CFLAGS \
+	_CXX_STD_FLAG.c++03 _CXX_STD_FLAG.gnu++03
+_USE_VARS.gcc=	\
+	MACHINE_ARCH PATH DRAGONFLY_CCVER OPSYS LOCALBASE \
+	USE_LIBTOOL \
+	LIBABISUFFIX \
+	COMPILER_RPATH_FLAG \
+	MACHINE_GNU_PLATFORM \
+	WRKDIR MACHINE_PLATFORM PKGPATH \
+	_PKGSRC_MKPIE _PKGSRC_MKREPRO _MKREPRO_CFLAGS.gcc \
+	_PKGSRC_USE_FORTIFY _PKGSRC_USE_RELRO _PKGSRC_USE_STACK_CHECK \
+	_OPSYS_INCLUDE_DIRS _OPSYS_LIB_DIRS
+_IGN_VARS.gcc=	\
+	_GCC2_PATTERNS _GCC3_PATTERNS _GCC34_PATTERNS _GCC44_PATTERNS \
+	_GCC6_PATTERNS _GCC7_PATTERNS _GCC8_PATTERNS _GCC9_PATTERNS \
+	_GCC10_PATTERNS _GCC_AUX_PATTERNS
+_LISTED_VARS.gcc= \
+	MAKEFLAGS IMAKEOPTS LDFLAGS PREPEND_PATH
 .include "../../mk/bsd.prefs.mk"
 
 USE_NATIVE_GCC?=	no
@@ -109,7 +152,7 @@ GCC_REQD+=	20120614
 
 # _GCC_DIST_VERSION is the highest version of GCC installed by the pkgsrc
 # without the PKGREVISIONs.
-_GCC_DIST_NAME:=	gcc8
+_GCC_DIST_NAME:=	gcc10
 .include "../../lang/${_GCC_DIST_NAME}/version.mk"
 _GCC_DIST_VERSION:=	${${_GCC_DIST_NAME:tu}_DIST_VERSION}
 
@@ -127,17 +170,8 @@ _GCC34_PATTERNS= 3.[4-9] 3.[4-9].* 3.[1-9][0-9]*
 # _GCC44_PATTERNS matches N s.t. 4.0 <= N < 4.5.
 _GCC44_PATTERNS= 4.[0-4] 4.[0-4].*
 
-# _GCC48_PATTERNS matches N s.t. 4.5 <= N < 4.9.
-_GCC48_PATTERNS= 4.[5-8] 4.[5-8].*
-
-# _GCC49_PATTERNS matches N s.t. 4.9 <= N < 4.10.
-_GCC49_PATTERNS= 4.9 4.9.*
-
-# _GCC5_PATTERNS matches N s.t. 5.0 <= N < 6.
-_GCC5_PATTERNS= 5 5.*
-
-# _GCC6_PATTERNS matches N s.t. 6.0 <= N < 7.
-_GCC6_PATTERNS= 6 6.*
+# _GCC6_PATTERNS matches N s.t. 4.5 <= N < 7.
+_GCC6_PATTERNS= 4.[5-9] 4.[5-9]* 5 5.* 6 6.*
 
 # _GCC7_PATTERNS matches N s.t. 7.0 <= N < 8.
 _GCC7_PATTERNS= 7 7.*
@@ -145,23 +179,38 @@ _GCC7_PATTERNS= 7 7.*
 # _GCC8_PATTERNS matches N s.t. 8.0 <= N < 9.
 _GCC8_PATTERNS= 8 8.*
 
+# _GCC9_PATTERNS matches N s.t. 9.0 <= N < 10.
+_GCC9_PATTERNS= 9 9.*
+
+# _GCC10_PATTERNS matches N s.t. 10.0 <= N < 11.
+_GCC10_PATTERNS= 10 10.*
+
 # _GCC_AUX_PATTERNS matches 8-digit date YYYYMMDD*
 _GCC_AUX_PATTERNS= 20[1-2][0-9][0-1][0-9][0-3][0-9]*
 
+# Override the default from sys.mk if necessary.
+.if ${CC} == cc && ${GCCBASE:U} && !exists(${GCCBASE}/bin/${CC}) && exists(${GCCBASE}/bin/gcc)
+CC=	gcc
+.endif
+
 # _CC is the full path to the compiler named by ${CC} if it can be found.
 .if !defined(_CC)
-_CC:=	${CC:C/^/_asdf_/1:M_asdf_*:S/^_asdf_//}
+_CC:=	${CC:[1]}
 .  if !empty(GCCBASE) && exists(${GCCBASE}/bin)
 _EXTRA_CC_DIRS=	${GCCBASE}/bin
 .  endif
 .  for _dir_ in ${_EXTRA_CC_DIRS} ${PATH:C/\:/ /g}
 .    if empty(_CC:M/*)
-.      if exists(${_dir_}/${CC:C/^/_asdf_/1:M_asdf_*:S/^_asdf_//})
-_CC:=	${_dir_}/${CC:C/^/_asdf_/1:M_asdf_*:S/^_asdf_//}
+.      if exists(${_dir_}/${CC:[1]})
+_CC:=	${_dir_}/${CC:[1]}
 .      endif
 .    endif
 .  endfor
+.  if empty(USE_CROSS_COMPILE:M[yY][eE][sS])
+# Pass along _CC only if we're working on native packages -- don't pass
+# the cross-compiler on to submakes for building native packages.
 MAKEFLAGS+=	_CC=${_CC:Q}
+.  endif
 .endif
 
 .if !defined(_GCC_VERSION)
@@ -184,6 +233,14 @@ _GCC_VERSION=	0
 .  endif
 .endif
 _GCC_PKG=	gcc-${_GCC_VERSION:C/-.*$//}
+
+.for _version_ in ${_CXX_STD_VERSIONS}
+_CXX_STD_FLAG.${_version_}?=	-std=${_version_}
+.  if !empty(_GCC_VERSION:M[34].[1234].*)
+_CXX_STD_FLAG.c++03=	-std=c++0x
+_CXX_STD_FLAG.gnu++03=	-std=gnu++0x
+.  endif
+.endfor
 
 .if !empty(_CC:M${LOCALBASE}/*)
 _IS_BUILTIN_GCC=	NO
@@ -255,24 +312,6 @@ _NEED_GCC44?=	no
 _NEED_GCC44=	yes
 .  endif
 .endfor
-_NEED_GCC48?=	no
-.for _pattern_ in ${_GCC48_PATTERNS}
-.  if !empty(_GCC_REQD:M${_pattern_})
-_NEED_GCC48=	yes
-.  endif
-.endfor
-_NEED_GCC49?=	no
-.for _pattern_ in ${_GCC49_PATTERNS}
-.  if !empty(_GCC_REQD:M${_pattern_})
-_NEED_GCC49=	yes
-.  endif
-.endfor
-_NEED_GCC5?=	no
-.for _pattern_ in ${_GCC5_PATTERNS}
-.  if !empty(_GCC_REQD:M${_pattern_})
-_NEED_GCC5=	yes
-.  endif
-.endfor
 _NEED_GCC6?=	no
 .for _pattern_ in ${_GCC6_PATTERNS}
 .  if !empty(_GCC_REQD:M${_pattern_})
@@ -291,6 +330,18 @@ _NEED_GCC8?=	no
 _NEED_GCC8=	yes
 .  endif
 .endfor
+_NEED_GCC9?=	no
+.for _pattern_ in ${_GCC9_PATTERNS}
+.  if !empty(_GCC_REQD:M${_pattern_})
+_NEED_GCC9=	yes
+.  endif
+.endfor
+_NEED_GCC10?=	no
+.for _pattern_ in ${_GCC10_PATTERNS}
+.  if !empty(_GCC_REQD:M${_pattern_})
+_NEED_GCC10=	yes
+.  endif
+.endfor
 _NEED_GCC_AUX?=	no
 .for _pattern_ in ${_GCC_AUX_PATTERNS}
 .  if !empty(_GCC_REQD:M${_pattern_})
@@ -300,9 +351,9 @@ _NEED_NEWER_GCC=NO
 .endfor
 .if !empty(_NEED_GCC2:M[nN][oO]) && !empty(_NEED_GCC3:M[nN][oO]) && \
     !empty(_NEED_GCC34:M[nN][oO]) && !empty(_NEED_GCC44:M[nN][oO]) && \
-    !empty(_NEED_GCC48:M[nN][oO]) && !empty(_NEED_GCC49:M[nN][oO]) && \
-    !empty(_NEED_GCC5:M[nN][oO]) && !empty(_NEED_GCC6:M[nN][oO]) && \
-    !empty(_NEED_GCC7:M[nN][oO]) && !empty(_NEED_GCC8:M[nN][oO]) && \
+    !empty(_NEED_GCC6:M[nN][oO]) && !empty(_NEED_GCC7:M[nN][oO]) && \
+    !empty(_NEED_GCC8:M[nN][oO]) && !empty(_NEED_GCC9:M[nN][oO]) && \
+    !empty(_NEED_GCC10:M[nN][oO]) && \
     !empty(_NEED_GCC_AUX:M[nN][oO])
 _NEED_GCC8=	yes
 .endif
@@ -317,17 +368,15 @@ LANGUAGES.gcc=	c c++ fortran77 java objc
 LANGUAGES.gcc=	c c++ fortran77 objc
 .elif !empty(_NEED_GCC44:M[yY][eE][sS])
 LANGUAGES.gcc=	c c++ fortran fortran77 java objc
-.elif !empty(_NEED_GCC48:M[yY][eE][sS])
-LANGUAGES.gcc=	c c++ fortran fortran77 go java objc obj-c++
-.elif !empty(_NEED_GCC49:M[yY][eE][sS])
-LANGUAGES.gcc=	c c++ fortran fortran77 go java objc obj-c++
-.elif !empty(_NEED_GCC5:M[yY][eE][sS])
-LANGUAGES.gcc=	c c++ fortran fortran77 go java objc obj-c++
 .elif !empty(_NEED_GCC6:M[yY][eE][sS])
 LANGUAGES.gcc=	c c++ fortran fortran77 go java objc obj-c++
 .elif !empty(_NEED_GCC7:M[yY][eE][sS])
 LANGUAGES.gcc=	c c++ fortran fortran77 go java objc obj-c++
 .elif !empty(_NEED_GCC8:M[yY][eE][sS])
+LANGUAGES.gcc=	c c++ fortran fortran77 go java objc obj-c++
+.elif !empty(_NEED_GCC9:M[yY][eE][sS])
+LANGUAGES.gcc=	c c++ fortran fortran77 go java objc obj-c++
+.elif !empty(_NEED_GCC10:M[yY][eE][sS])
 LANGUAGES.gcc=	c c++ fortran fortran77 go java objc obj-c++
 .elif !empty(_NEED_GCC_AUX:M[yY][eE][sS])
 LANGUAGES.gcc=	c c++ fortran fortran77 objc ada
@@ -336,6 +385,9 @@ _LANGUAGES.gcc=		# empty
 .for _lang_ in ${USE_LANGUAGES}
 _LANGUAGES.gcc+=	${LANGUAGES.gcc:M${_lang_}}
 .endfor
+
+_WRAP_EXTRA_ARGS.cc+=	-fcommon
+CWRAPPERS_PREPEND.cc+=	-fcommon
 
 .if !empty(USE_LANGUAGES:Mc99)
 _WRAP_EXTRA_ARGS.CC+=	-std=gnu99
@@ -414,7 +466,7 @@ CFLAGS+=	${_GCC_CFLAGS}
 # We require gcc-2.x in the lang/gcc2 directory.
 #
 _GCC_PKGBASE=		gcc2
-.  if !empty(PKGPATH:Mlang/gcc2)
+.  if ${PKGPATH} == lang/gcc2
 _IGNORE_GCC=		yes
 MAKEFLAGS+=		_IGNORE_GCC=yes
 .  endif
@@ -432,7 +484,7 @@ _USE_GCC_SHLIB?=	yes
 # We require gcc-3.x in the lang/gcc3-* directories.
 #
 _GCC_PKGBASE=		gcc3-c
-.  if !empty(PKGPATH:Mlang/gcc3-c)
+.  if ${PKGPATH} == lang/gcc3-c
 _IGNORE_GCC=		yes
 MAKEFLAGS+=		_IGNORE_GCC=yes
 .  endif
@@ -445,7 +497,7 @@ _GCC_DEPENDENCY=	gcc3-c>=${_GCC_REQD}:../../lang/gcc3-c
 # We require gcc-3.4.x in the lang/gcc34 directory.
 #
 _GCC_PKGBASE=		gcc34
-.  if !empty(PKGPATH:Mlang/gcc34)
+.  if ${PKGPATH} == lang/gcc34
 _IGNORE_GCC=		yes
 MAKEFLAGS+=		_IGNORE_GCC=yes
 .  endif
@@ -463,7 +515,7 @@ _USE_GCC_SHLIB?=	yes
 # We require gcc-4.4.x in the lang/gcc44 directory.
 #
 _GCC_PKGBASE=		gcc44
-.  if !empty(PKGPATH:Mlang/gcc44)
+.  if ${PKGPATH} == lang/gcc44
 _IGNORE_GCC=		yes
 MAKEFLAGS+=		_IGNORE_GCC=yes
 .  endif
@@ -477,75 +529,12 @@ _GCC_DEPENDENCY=	gcc44>=${_GCC_REQD}:../../lang/gcc44
 _USE_GCC_SHLIB?=	yes
 .    endif
 .  endif
-.elif !empty(_NEED_GCC48:M[yY][eE][sS])
-#
-# We require gcc-4.8.x in the lang/gcc48 directory.
-#
-_GCC_PKGBASE=		gcc48
-.  if !empty(PKGPATH:Mlang/gcc48)
-_IGNORE_GCC=		yes
-MAKEFLAGS+=		_IGNORE_GCC=yes
-.  endif
-.  if !defined(_IGNORE_GCC) && !empty(_LANGUAGES.gcc)
-_GCC_PKGSRCDIR=		../../lang/gcc48
-_GCC_DEPENDENCY=	gcc48>=${_GCC_REQD}:../../lang/gcc48
-.    if !empty(_LANGUAGES.gcc:Mc++) || \
-        !empty(_LANGUAGES.gcc:Mfortran) || \
-        !empty(_LANGUAGES.gcc:Mfortran77) || \
-        !empty(_LANGUAGES.gcc:Mgo) || \
-        !empty(_LANGUAGES.gcc:Mobjc) || \
-        !empty(_LANGUAGES.gcc:Mobj-c++)
-_USE_GCC_SHLIB?=	yes
-.    endif
-.  endif
-.elif !empty(_NEED_GCC49:M[yY][eE][sS])
-#
-# We require gcc-4.9.x in the lang/gcc49-* directory.
-#
-_GCC_PKGBASE=		gcc49
-.  if !empty(PKGPATH:Mlang/gcc49)
-_IGNORE_GCC=		yes
-MAKEFLAGS+=		_IGNORE_GCC=yes
-.  endif
-.  if !defined(_IGNORE_GCC) && !empty(_LANGUAGES.gcc)
-_GCC_PKGSRCDIR=		../../lang/gcc49
-_GCC_DEPENDENCY=	gcc49>=${_GCC_REQD}:../../lang/gcc49
-.    if !empty(_LANGUAGES.gcc:Mc++) || \
-        !empty(_LANGUAGES.gcc:Mfortran) || \
-        !empty(_LANGUAGES.gcc:Mfortran77) || \
-        !empty(_LANGUAGES.gcc:Mgo) || \
-        !empty(_LANGUAGES.gcc:Mobjc) || \
-        !empty(_LANGUAGES.gcc:Mobj-c++)
-_USE_GCC_SHLIB?=	yes
-.    endif
-.  endif
-.elif !empty(_NEED_GCC5:M[yY][eE][sS])
-#
-# We require gcc-5.x in the lang/gcc5-* directory.
-#
-_GCC_PKGBASE=		gcc5
-.  if !empty(PKGPATH:Mlang/gcc5)
-_IGNORE_GCC=		yes
-MAKEFLAGS+=		_IGNORE_GCC=yes
-.  endif
-.  if !defined(_IGNORE_GCC) && !empty(_LANGUAGES.gcc)
-_GCC_PKGSRCDIR=		../../lang/gcc5
-_GCC_DEPENDENCY=	gcc5>=${_GCC_REQD}:../../lang/gcc5
-.    if !empty(_LANGUAGES.gcc:Mc++) || \
-        !empty(_LANGUAGES.gcc:Mfortran) || \
-        !empty(_LANGUAGES.gcc:Mfortran77) || \
-        !empty(_LANGUAGES.gcc:Mgo) || \
-        !empty(_LANGUAGES.gcc:Mobjc) || \
-        !empty(_LANGUAGES.gcc:Mobj-c++)
-_USE_GCC_SHLIB?=	yes
-.    endif
-.  endif
 .elif !empty(_NEED_GCC6:M[yY][eE][sS])
 #
 # We require gcc-6.x in the lang/gcc6-* directory.
 #
 _GCC_PKGBASE=		gcc6
-.  if !empty(PKGPATH:Mlang/gcc6)
+.  if ${PKGPATH} == lang/gcc6
 _IGNORE_GCC=		yes
 MAKEFLAGS+=		_IGNORE_GCC=yes
 .  endif
@@ -566,7 +555,7 @@ _USE_GCC_SHLIB?=	yes
 # We require gcc-7.x in the lang/gcc7-* directory.
 #
 _GCC_PKGBASE=		gcc7
-.  if !empty(PKGPATH:Mlang/gcc7)
+.  if ${PKGPATH} == lang/gcc7
 _IGNORE_GCC=		yes
 MAKEFLAGS+=		_IGNORE_GCC=yes
 .  endif
@@ -587,7 +576,7 @@ _USE_GCC_SHLIB?=	yes
 # We require gcc-8.x in the lang/gcc8-* directory.
 #
 _GCC_PKGBASE=		gcc8
-.  if !empty(PKGPATH:Mlang/gcc8)
+.  if ${PKGPATH} == lang/gcc8
 _IGNORE_GCC=		yes
 MAKEFLAGS+=		_IGNORE_GCC=yes
 .  endif
@@ -603,12 +592,54 @@ _GCC_DEPENDENCY=	gcc8>=${_GCC_REQD}:../../lang/gcc8
 _USE_GCC_SHLIB?=	yes
 .    endif
 .  endif
+.elif !empty(_NEED_GCC9:M[yY][eE][sS])
+#
+# We require gcc-9.x in the lang/gcc9-* directory.
+#
+_GCC_PKGBASE=		gcc9
+.  if ${PKGPATH} == lang/gcc9
+_IGNORE_GCC=		yes
+MAKEFLAGS+=		_IGNORE_GCC=yes
+.  endif
+.  if !defined(_IGNORE_GCC) && !empty(_LANGUAGES.gcc)
+_GCC_PKGSRCDIR=		../../lang/gcc9
+_GCC_DEPENDENCY=	gcc9>=${_GCC_REQD}:../../lang/gcc9
+.    if !empty(_LANGUAGES.gcc:Mc++) || \
+        !empty(_LANGUAGES.gcc:Mfortran) || \
+        !empty(_LANGUAGES.gcc:Mfortran77) || \
+        !empty(_LANGUAGES.gcc:Mgo) || \
+        !empty(_LANGUAGES.gcc:Mobjc) || \
+        !empty(_LANGUAGES.gcc:Mobj-c++)
+_USE_GCC_SHLIB?=	yes
+.    endif
+.  endif
+.elif !empty(_NEED_GCC10:M[yY][eE][sS])
+#
+# We require gcc-10.x in the lang/gcc10-* directory.
+#
+_GCC_PKGBASE=		gcc10
+.  if ${PKGPATH} == lang/gcc10
+_IGNORE_GCC=		yes
+MAKEFLAGS+=		_IGNORE_GCC=yes
+.  endif
+.  if !defined(_IGNORE_GCC) && !empty(_LANGUAGES.gcc)
+_GCC_PKGSRCDIR=		../../lang/gcc10
+_GCC_DEPENDENCY=	gcc10>=${_GCC_REQD}:../../lang/gcc10
+.    if !empty(_LANGUAGES.gcc:Mc++) || \
+        !empty(_LANGUAGES.gcc:Mfortran) || \
+        !empty(_LANGUAGES.gcc:Mfortran77) || \
+        !empty(_LANGUAGES.gcc:Mgo) || \
+        !empty(_LANGUAGES.gcc:Mobjc) || \
+        !empty(_LANGUAGES.gcc:Mobj-c++)
+_USE_GCC_SHLIB?=	yes
+.    endif
+.  endif
 .elif !empty(_NEED_GCC_AUX:M[yY][eE][sS])
 #
 # We require Ada-capable compiler in the lang/gcc5-aux directory.
 #
 _GCC_PKGBASE=		gcc5-aux
-.  if !empty(PKGPATH:Mlang/gcc5-aux)
+.  if ${PKGPATH} == lang/gcc5-aux
 _IGNORE_GCC=		yes
 MAKEFLAGS+=		_IGNORE_GCC=yes
 .  endif
@@ -627,7 +658,7 @@ _USE_GCC_SHLIB?=	yes
 _GCC_DEPENDS=		${_GCC_PKGBASE}>=${_GCC_REQD}
 
 .if !empty(_NEED_GCC3:M[yY][eE][sS])
-.  if !empty(PKGPATH:Mlang/gcc3-c++)
+.  if ${PKGPATH} == "lang/gcc3-c++"
 _IGNORE_GCC3CXX=	yes
 MAKEFLAGS+=		_IGNORE_GCC3CXX=yes
 .  endif
@@ -636,7 +667,7 @@ _GCC_PKGSRCDIR+=	../../lang/gcc3-c++
 _GCC_DEPENDENCY+=	gcc3-c++>=${_GCC_REQD}:../../lang/gcc3-c++
 _USE_GCC_SHLIB?=	yes
 .  endif
-.  if !empty(PKGPATH:Mlang/gcc3-f77)
+.  if ${PKGPATH} == lang/gcc3-f77
 _IGNORE_GCC3F77=	yes
 MAKEFLAGS+=		_IGNORE_GCC3F77=yes
 .  endif
@@ -645,7 +676,7 @@ _GCC_PKGSRCDIR+=	../../lang/gcc3-f77
 _GCC_DEPENDENCY+=	gcc3-f77>=${_GCC_REQD}:../../lang/gcc3-f77
 _USE_GCC_SHLIB?=	yes
 .  endif
-.  if !empty(PKGPATH:Mlang/gcc3-objc)
+.  if ${PKGPATH} == lang/gcc3-objc
 _IGNORE_GCC3OBJC=	yes
 MAKEFLAGS+=		_IGNORE_GCC3OBJC=yes
 .  endif
@@ -783,6 +814,8 @@ _GCCBINDIR=	${_CC:H}
 .if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
 _GCC_BIN_PREFIX=	${MACHINE_GNU_PLATFORM}-
 .endif
+_GCC_BIN_PREFIX?=	# empty
+GCC_VERSION_SUFFIX?=	# empty
 .if exists(${_GCCBINDIR}/${_GCC_BIN_PREFIX}gcc${GCC_VERSION_SUFFIX})
 _GCC_VARS+=	CC
 _GCC_CC=	${_GCC_DIR}/bin/${_GCC_BIN_PREFIX}gcc${GCC_VERSION_SUFFIX}
@@ -889,6 +922,9 @@ _COMPILER_ABI_FLAG.32=	-mabi=n32	# ABI == "32" == "n32"
 _COMPILER_ABI_FLAG.n32=	-mabi=n32
 _COMPILER_ABI_FLAG.o32=	-mabi=32
 _COMPILER_ABI_FLAG.64=	-mabi=64
+.elif !empty(MACHINE_ARCH:Maarch64*)
+_COMPILER_ABI_FLAG.32=	-m32
+_COMPILER_ABI_FLAG.64=	# empty
 .else
 _COMPILER_ABI_FLAG.32=	-m32
 _COMPILER_ABI_FLAG.64=	-m64
@@ -914,7 +950,7 @@ CC_VERSION=		${_GCC_PKG}
 .endif
 
 # The user can choose the level of stack smashing protection.
-.if !empty(CC_VERSION:Mgcc-[4-9]*)
+.if empty(CC_VERSION:Mgcc-[1-3].*)
 .  if ${PKGSRC_USE_SSP} == "all"
 _SSP_CFLAGS=		-fstack-protector-all
 .  elif ${PKGSRC_USE_SSP} == "strong"
@@ -939,8 +975,9 @@ PREPEND_PATH+=	${_GCC_DIR}/bin
 # Add dependency on GCC libraries if requested.
 .if (defined(_USE_GCC_SHLIB) && !empty(_USE_GCC_SHLIB:M[Yy][Ee][Ss])) && !empty(USE_PKGSRC_GCC_RUNTIME:M[Yy][Ee][Ss])
 #  Special case packages which are themselves a dependency of gcc runtime.
-.  if empty(PKGPATH:Mdevel/libtool-base) && empty(PKGPATH:Mdevel/binutils) && \
-      empty(PKGPATH:Mlang/gcc4?) && empty(PKGPATH:Mlang/gcc[5-9])
+.  if ${PKGPATH} != devel/libtool-base && ${PKGPATH} != devel/binutils && \
+      empty(PKGPATH:Mlang/gcc4?) && empty(PKGPATH:Mlang/gcc[5-9]) && \
+      empty(PKGPATH:Mlang/gcc10)
 .    if !empty(_GCC_PKGBASE:Mgcc48)
 .      include "../../lang/gcc48-libs/buildlink3.mk"
 .    elif !empty(_GCC_PKGBASE:Mgcc49)
@@ -953,6 +990,10 @@ PREPEND_PATH+=	${_GCC_DIR}/bin
 .      include "../../lang/gcc7-libs/buildlink3.mk"
 .    elif !empty(_GCC_PKGBASE:Mgcc8)
 .      include "../../lang/gcc8-libs/buildlink3.mk"
+.    elif !empty(_GCC_PKGBASE:Mgcc9)
+.      include "../../lang/gcc9-libs/buildlink3.mk"
+.    elif !empty(_GCC_PKGBASE:Mgcc10)
+.      include "../../lang/gcc10-libs/buildlink3.mk"
 .    else
 PKG_FAIL_REASON+=	"No USE_PKGSRC_GCC_RUNTIME support for ${CC_VERSION}"
 .    endif
@@ -984,13 +1025,10 @@ ${_GCC_${_var_}}:
 .endfor
 
 # On systems without a Fortran compiler, pull one in if needed.
-# The default is g95 as it supports a modern dialect, but it can
-# be overridden in mk.conf to use only f2c.
-#
-PKGSRC_FORTRAN?=g95
+PKGSRC_FORTRAN?=gfortran
 
 _GCC_NEEDS_A_FORTRAN=	no
-.if empty(_USE_PKGSRC_GCC:M[yY][eE][sS]) && !exists(${FCPATH})
+.if empty(_USE_PKGSRC_GCC:M[yY][eE][sS]) && !(defined(FCPATH) && exists(${FCPATH}))
 _GCC_NEEDS_A_FORTRAN=	yes
 .else
 .  for _pattern_ in 0.* 1.[0-4] 1.[0-4].*
@@ -1007,5 +1045,8 @@ _GCC_NEEDS_A_FORTRAN=	yes
 COMPILER_INCLUDE_DIRS=	${_GCCBINDIR:H}/include ${_OPSYS_INCLUDE_DIRS}
 COMPILER_LIB_DIRS=	${_GCCBINDIR:H}/lib ${_OPSYS_LIB_DIRS}
 .endif
+
+#.READONLY: GCC_REQD
+_GCC_REQD_EFFECTIVE:=	${GCC_REQD}
 
 .endif	# COMPILER_GCC_MK

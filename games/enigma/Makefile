@@ -1,23 +1,26 @@
-# $NetBSD: Makefile,v 1.36 2018/03/12 20:51:30 bsiegert Exp $
+# $NetBSD: Makefile,v 1.44 2020/05/22 10:56:07 adam Exp $
 
-DISTNAME=	enigma-1.01-r1914
+DISTNAME=	enigma-1.21
 PKGNAME=	${DISTNAME:S/-r/./}
-PKGREVISION=	7
+PKGREVISION=	5
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=enigma-game/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.nongnu.org/enigma/
+HOMEPAGE=	https://www.nongnu.org/enigma/
 COMMENT=	Puzzle game similar to Oxyd/Rock'n'Roll/Marble Madness
 LICENSE=	gnu-gpl-v2
 
-DEPENDS+=		gettext-tools-[0-9]*:../../devel/gettext-tools
+DEPENDS+=	gettext-tools-[0-9]*:../../devel/gettext-tools
+TOOL_DEPENDS+=	ImageMagick-[0-9]*:../../graphics/ImageMagick
 
 WRKSRC=			${WRKDIR}/${DISTNAME:S/-r1914//}
 USE_LANGUAGES=		c c++11
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		gmake
 GNU_CONFIGURE=		yes
+
+CONFIGURE_ARGS.NetBSD+=	ac_cv_func_gethostbyname_r=no
 
 BUILDLINK_API_DEPENDS.SDL_mixer+=	SDL_mixer>=1.2.6
 BUILDLINK_API_DEPENDS.SDL+=		SDL>=1.2.9
@@ -32,6 +35,7 @@ BUILDLINK_API_DEPENDS.xerces-c+=	xerces-c>=2.7.0
 .include "../../devel/SDL_ttf/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
+.include "../../www/curl/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/SDL_image/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"

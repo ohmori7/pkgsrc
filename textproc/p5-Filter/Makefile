@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.42 2018/08/22 09:46:49 wiz Exp $
+# $NetBSD: Makefile,v 1.46 2020/09/02 12:36:38 mef Exp $
 
-DISTNAME=	Filter-1.59
+DISTNAME=	Filter-1.60
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Filter/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Filter/
+HOMEPAGE=	https://metacpan.org/release/Filter
 COMMENT=	Perl5 classes representing a number of source filters
 LICENSE=	${PERL5_LICENSE}
 

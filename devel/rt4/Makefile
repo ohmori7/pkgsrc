@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.28 2019/06/13 03:19:13 ryoon Exp $
+# $NetBSD: Makefile,v 1.38 2020/11/01 10:31:22 spz Exp $
 
 DISTNAME=	rt-4.2.16
 PKGNAME=	${DISTNAME:S/rt/rt4/}
-#PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	devel
 MASTER_SITES=	https://download.bestpractical.com/pub/rt/release/
 
@@ -19,10 +19,11 @@ DEPENDS+=	p5-CGI>=3.38:../../www/p5-CGI
 DEPENDS+=	p5-CGI-Emulate-PSGI-[0-9]*:../../www/p5-CGI-Emulate-PSGI
 DEPENDS+=	p5-CGI-PSGI-[0-9]*:../../www/p5-CGI-PSGI
 DEPENDS+=	p5-Class-Accessor>=0.34:../../devel/p5-Class-Accessor
+DEPENDS+=	p5-Class-Tiny-[0-9]*:../../devel/p5-Class-Tiny
 DEPENDS+=	p5-Crypt-Eksblowfish-[0-9]*:../../security/p5-Crypt-Eksblowfish
-DEPENDS+=	p5-Data-GUID-[0-9]*:../../devel/p5-Data-GUID
 DEPENDS+=	p5-CSS-Squish>=0.06:../../www/p5-CSS-Squish
 DEPENDS+=	p5-Date-Extract>=0.02:../../time/p5-Date-Extract
+DEPENDS+=	p5-Data-GUID-[0-9]*:../../devel/p5-Data-GUID
 DEPENDS+=	p5-Date-Manip-[0-9]*:../../devel/p5-Date-Manip
 DEPENDS+=	p5-Email-Address-List>=0.02:../../mail/p5-Email-Address-List
 DEPENDS+=	p5-DateTime>=0.44:../../time/p5-DateTime
@@ -32,12 +33,8 @@ DEPENDS+=	p5-DBI-[0-9]*:../../databases/p5-DBI
 DEPENDS+=	p5-DBIx-SearchBuilder>=1.65:../../databases/p5-DBIx-SearchBuilder
 DEPENDS+=	p5-Devel-GlobalDestruction-[0-9]*:../../devel/p5-Devel-GlobalDestruction
 DEPENDS+=	p5-Devel-StackTrace>=1.19:../../devel/p5-Devel-StackTrace
-# Digest::base is a part of perl base.
-#DEPENDS+=	{perl>=5.8.1,p5-Digest-MD5>=2.27}:../../security/p5-Digest-MD5
-DEPENDS+=	p5-Digest-SHA-[0-9]*:../../security/p5-Digest-SHA
 DEPENDS+=	p5-Email-Address>=1.897:../../mail/p5-Email-Address
 DEPENDS+=	p5-Email-Address-List-[0-9]*:../../mail/p5-Email-Address-List
-DEPENDS+=	p5-Encode>=2.64:../../textproc/p5-Encode
 # Errno is a part of perl base.
 # File::Glob is a part of perl base.
 DEPENDS+=	p5-File-ShareDir-[0-9]*:../../devel/p5-File-ShareDir
@@ -93,13 +90,13 @@ DEPENDS+=	p5-XML-RSS>=1.05:../../textproc/p5-XML-RSS
 DEPENDS+=	p5-HTML-Mason>=1.43:../../www/p5-HTML-Mason
 
 # Mailgate dependencies
+# Net::SSL is a part of p5-Crypt-SSLeay.
 DEPENDS+=	p5-Crypt-SSLeay-[0-9]*:../../security/p5-Crypt-SSLeay
 #DEPENDS+=	{perl>=5,p5-Getopt-Long-[0-9]*}:../../devel/p5-Getopt-Long
 DEPENDS+=	p5-LWP-Protocol-https-[0-9]*:../../www/p5-LWP-Protocol-https
 # LWP::UserAgent is a part of p5-libwww.
 DEPENDS+=	p5-libwww-[0-9]*:../../www/p5-libwww
 DEPENDS+=	p5-Mozilla-CA-[0-9]*:../../security/p5-Mozilla-CA
-# Net::SSL is a part of p5-Crypt-SSLeay.
 #DEPENDS+=	{perl>=5.6.0,p5-Pod-Usage-[0-9]*}:../../devel/p5-Pod-Usage
 
 # CLI dependencies
@@ -146,6 +143,11 @@ DEPENDS+=	p5-Crypt-X509-[0-9]*:../../security/p5-Crypt-X509
 DEPENDS+=	p5-Module-Pluggable-[0-9]*:../../devel/p5-Module-Pluggable
 DEPENDS+=	p5-Convert-Color-[0-9]*:../../converters/p5-Convert-Color
 
+DEPENDS+=	p5-Text-Reform-[0-9]*:../../textproc/p5-Text-Reform
+
+DEPENDS+=	p5-Sub-HandlesVia-[0-9]*:../../devel/p5-Sub-HandlesVia
+
+
 .include "dirs.mk"
 .include "options.mk"
 
@@ -177,10 +179,10 @@ SUBST_SED.egpath=	-e 's,@CONFIG_FILE_PATH_R@,${RT_EXAMPLE_DIR},'
 SUBST_SED.egpath+=	-e 's,@RT_ETC_PATH_R@,${RT4DIR}/etc,'
 SUBST_STAGE.egpath=	pre-configure
 
-GNU_CONFIGURE=	yes
-NO_BUILD=	yes
-USE_LANGUAGES=	c
-USE_TOOLS+=	perl:run
+GNU_CONFIGURE=		yes
+NO_BUILD=		yes
+USE_LANGUAGES=		c
+USE_TOOLS+=		perl:run
 PKG_SYSCONFSUBDIR=	rt4
 
 USE_PKGLOCALEDIR=	yes
@@ -194,12 +196,12 @@ RT_CONFIG_FILES=	RT_Config.pm RT_SiteConfig.pm
 CONF_FILES_PERMS+=	${RT_EXAMPLE_DIR}/${_file_} \
 			${PKG_SYSCONFDIR}/${_file_} \
 			${APACHE_USER} ${APACHE_GROUP} \
-			640
+			444
 .endfor
 
-OWN_DIRS+=              ${RT_VAR_DIR} ${RT_LOCAL_DIR} ${RT_LOCAL_DIR}/etc
-OWN_DIRS+=              ${RT_LOCAL_DIR}/lib ${RT_LOCAL_DIR}/po ${RT_LOCAL_DIR}/plugins
-OWN_DIRS+=              ${RT_LOCAL_DIR}/html ${RT_LOCAL_DIR}/static
+OWN_DIRS+=		${RT_VAR_DIR} ${RT_LOCAL_DIR} ${RT_LOCAL_DIR}/etc
+OWN_DIRS+=		${RT_LOCAL_DIR}/lib ${RT_LOCAL_DIR}/po ${RT_LOCAL_DIR}/plugins
+OWN_DIRS+=		${RT_LOCAL_DIR}/html ${RT_LOCAL_DIR}/static
 
 OWN_DIRS_PERMS+=	${RT_VAR_DIR}/mason_data	${APACHE_USER}	${APACHE_GROUP}	0770
 OWN_DIRS_PERMS+=	${RT_VAR_DIR}/mason_data/cache	${APACHE_USER}	${APACHE_GROUP}	0770

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.31 2018/08/22 09:45:19 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2020/10/20 11:33:10 nia Exp $
 
 DISTNAME=	g95_source
 PKGNAME=	g95-0.93
-PKGREVISION=	11
+PKGREVISION=	13
 CATEGORIES=	lang
 MASTER_SITES=	http://ftp.g95.org/v${PKGVERSION_NOREV}/
 EXTRACT_SUFX=	.tgz
@@ -10,11 +10,15 @@ DISTFILES=	${DEFAULT_DISTFILES} gcc-core-${GCC_VER}.tar.bz2
 SITES.gcc-core-4.1.2.tar.bz2=	${MASTER_SITE_GNU:=gcc/gcc-${GCC_VER}/}
 
 MAINTAINER=	wennmach@NetBSD.org
-HOMEPAGE=	http://www.g95.org/
+HOMEPAGE=	https://www.g95.org/
 COMMENT=	Fortran 95 compiler from g95.org
 LICENSE=	gnu-gpl-v2
 
+NOT_FOR_PLATFORM+=	*-*-aarch64
+NOT_FOR_PLATFORM+=	*-*-aarch64eb
+
 USE_TOOLS+=		gmake gtar automake autoconf
+TOOLS_BROKEN+=		perl
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-gcc-dir=${GCC_DIR}
@@ -37,10 +41,10 @@ LDFLAGS.Darwin+=	-Wl,-read_only_relocs,suppress
 
 .if ${OPSYS} == "Linux"
 .  if exists(/usr/lib/${MACHINE_ARCH}-linux-gnu)
-MAKE_ENV+=             LIBRARY_PATH=/usr/lib/${MACHINE_ARCH}-linux-gnu
+MAKE_ENV+=	LIBRARY_PATH=/usr/lib/${MACHINE_ARCH}-linux-gnu
 .  endif
-MAKE_ENV+=             ac_cv_have_decl_asprintf=yes
-USE_TOOLS+=            perl:build
+MAKE_ENV+=	ac_cv_have_decl_asprintf=yes
+USE_TOOLS+=	perl:build
 .endif
 
 .if ${OPSYS} == "SunOS"

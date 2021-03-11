@@ -1,23 +1,25 @@
-# $NetBSD: Makefile,v 1.6 2018/11/14 22:21:29 kleink Exp $
+# $NetBSD: Makefile,v 1.12 2020/08/17 20:18:44 leot Exp $
 
-DISTNAME=	gargoyle-2011.1
-PKGREVISION=	4
+DISTNAME=	gargoyle-2019.1
+PKGREVISION=	3
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_GITHUB:=garglk/}
 GITHUB_PROJECT=	garglk
-GITHUB_TAG=	stable-${PKGVERSION_NOREV}
+GITHUB_TAG=	${PKGVERSION_NOREV}
 
 MAINTAINER=	wes.frazier@members.fsf.org
 HOMEPAGE=	http://ccxvii.net/gargoyle/
 COMMENT=	Graphical player for Interactive Fiction games
 #LICENSE=	gnu-gpl-v2 AND mit AND original-bsd AND artistic-? AND some font licenses
 
-WRKSRC=		${WRKDIR}/garglk-stable-2011.1
+WRKSRC=		${WRKDIR}/garglk-${PKGVERSION_NOREV}
 
 BUILD_DEPENDS+=	jam-[0-9]*:../../devel/jam
 
 USE_TOOLS+=	pkg-config
 USE_LANGUAGES+=	c c++
+
+CHECK_PORTABILITY_SKIP+=	gargoyle_osx.sh
 
 INSTALLATION_DIRS=	bin libexec/gargoyle
 

@@ -1,6 +1,7 @@
-$NetBSD: distinfo,v 1.3 2017/08/03 11:30:45 he Exp $
+$NetBSD: distinfo,v 1.6 2020/04/20 00:43:28 joerg Exp $
 
-SHA1 (radsecproxy-1.6.9.tar.xz) = 4b61c446a3dfc7220ad379cd1919dddb33a61a2a
-RMD160 (radsecproxy-1.6.9.tar.xz) = 4a855970bbeb9262175c9d7a09be00b8da403761
-SHA512 (radsecproxy-1.6.9.tar.xz) = 89bb8d4903aa6525bc7e652809f9022643a58f9ca40277982c3cb2a08051f0ba9290432ca1e1fa4550b859913347ba6c45a256620cdce9869faa3cf5bd175951
-Size (radsecproxy-1.6.9.tar.xz) = 160336 bytes
+SHA1 (radsecproxy-1.8.1.tar.gz) = 4b62f3f7bbaeff11ca201f140f06d0b5664501bf
+RMD160 (radsecproxy-1.8.1.tar.gz) = ea252a220388ede6cd0a27c7961215a5c11ccd63
+SHA512 (radsecproxy-1.8.1.tar.gz) = 4bf19a1490f63ae790612e0f15dfe539ddfbf4e0a3f16ba97532c612a6ab877d1686169ceba75f100cf098c501a3abad30302383d2277f915eceeeee98ba6232
+Size (radsecproxy-1.8.1.tar.gz) = 326921 bytes
+SHA1 (patch-rewrite.c) = 2b8b8f450b6591d3c21c19748dc4656b3b3d2646

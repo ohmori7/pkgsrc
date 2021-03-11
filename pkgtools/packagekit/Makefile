@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.74 2019/04/26 14:12:44 maya Exp $
+# $NetBSD: Makefile,v 1.85 2020/12/04 20:45:37 nia Exp $
 
 DISTNAME=	PackageKit-0.4.0
-PKGREVISION=	53
+PKGREVISION=	62
 PKGNAME=	${DISTNAME:S/PackageKit/packagekit/}
 CATEGORIES=	pkgtools
 MASTER_SITES=	http://www.freedesktop.org/software/PackageKit/releases/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.freedesktop.org/software/PackageKit/
+HOMEPAGE=	https://www.freedesktop.org/software/PackageKit/
 COMMENT=	System activated daemon for managing software updates
 LICENSE=	gnu-gpl-v2
 
@@ -48,7 +48,7 @@ PKGCONFIG_OVERRIDE+=	data/packagekit-qt.pc.in
 PKGCONFIG_OVERRIDE+=	data/packagekit-glib.pc.in
 
 PY_PATCHPLIST=	yes
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.4.0
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.4.0
 
 REPLACE_PYTHON=	backends/test/helpers/PackageKitDbusTest.py	\
 		lib/python/packagekit/client.py		\

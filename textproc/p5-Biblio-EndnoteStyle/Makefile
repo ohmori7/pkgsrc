@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:46:47 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:11:45 wiz Exp $
 
 DISTNAME=	Biblio-EndnoteStyle-0.06
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Biblio/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Biblio-EndnoteStyle/
+HOMEPAGE=	https://metacpan.org/release/Biblio-EndnoteStyle
 COMMENT=	Reference formatting using Endnote-like templates
 LICENSE=	${PERL5_LICENSE}
 

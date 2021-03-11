@@ -1,10 +1,10 @@
-$NetBSD: patch-src_svg_svg-length.cpp,v 1.1 2018/06/28 11:18:59 jperkin Exp $
+$NetBSD: patch-src_svg_svg-length.cpp,v 1.3 2021/01/13 11:43:34 jperkin Exp $
 
-Avoid ambiguous function calls.
+Use correct pow().
 
---- src/svg/svg-length.cpp.orig	2017-08-06 20:44:00.000000000 +0000
+--- src/svg/svg-length.cpp.orig	2020-09-07 08:57:41.000000000 +0000
 +++ src/svg/svg-length.cpp
-@@ -20,6 +20,8 @@
+@@ -22,6 +22,8 @@
  #include "stringstream.h"
  #include "util/units.h"
  

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.35 2018/08/22 09:47:21 wiz Exp $
+# $NetBSD: Makefile,v 1.38 2020/08/31 18:12:28 wiz Exp $
 #
 
 DISTNAME=		titrax-1.98
-PKGREVISION=		13
+PKGREVISION=		15
 CATEGORIES=		x11 time
 MASTER_SITES=		${MASTER_SITE_XCONTRIB:=office/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.alvestrand.no/titrax/TimeTracker.html
+HOMEPAGE=		https://www.alvestrand.no/titrax/TimeTracker.html
 COMMENT=		Little X11 tool to track project times
 LICENSE=		titrax-license
 

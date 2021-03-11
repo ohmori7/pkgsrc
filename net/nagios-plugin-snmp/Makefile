@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2018/08/22 09:45:55 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2020/08/31 18:10:36 wiz Exp $
 #
 
 PKGNAME=	nagios-plugin-snmp-${PLUGINSVERSION}
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	net sysutils
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

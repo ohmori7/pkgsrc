@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:43:56 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:07:55 wiz Exp $
 
 DISTNAME=	Dist-Zooky-0.24
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Dist/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Dist-Zooky/
+HOMEPAGE=	https://metacpan.org/release/Dist-Zooky
 COMMENT=	Perl 5 module to convert a distribution to Dist::Zilla
 LICENSE=	${PERL5_LICENSE}
 

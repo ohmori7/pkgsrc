@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.44 2019/01/06 16:52:17 schmonz Exp $
+# $NetBSD: Makefile,v 1.50 2020/08/31 18:10:32 wiz Exp $
 
 DISTNAME=	ddclient-3.8.3
-PKGREVISION=	4
+PKGREVISION=	7
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ddclient/}
 EXTRACT_SUFX=	.tar.bz2
@@ -21,6 +21,8 @@ RCD_SCRIPTS=		ddclient
 CONF_FILES_PERMS=	${EGDIR}/sample-etc_ddclient.conf		\
 			${PKG_SYSCONFDIR}/ddclient.conf			\
 			${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 0600
+
+DEPENDS+=		p5-JSON-Any>=0.0:../../converters/p5-JSON-Any
 
 REPLACE_INTERPRETER+=	sh
 REPLACE.sh.old=		.*/bin/bash

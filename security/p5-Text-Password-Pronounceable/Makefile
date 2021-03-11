@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/12/09 21:05:35 adam Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:11:20 wiz Exp $
 
 DISTNAME=	Text-Password-Pronounceable-0.30
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	perl5 textproc security
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Text/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Text-Password-Pronounceable/
+HOMEPAGE=	https://metacpan.org/release/Text-Password-Pronounceable
 COMMENT=	Generate pronounceable passwords
 LICENSE=	${PERL5_LICENSE}
 

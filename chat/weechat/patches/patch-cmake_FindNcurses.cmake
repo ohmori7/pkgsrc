@@ -1,19 +1,10 @@
-$NetBSD: patch-cmake_FindNcurses.cmake,v 1.3 2019/03/23 14:54:13 nia Exp $
+$NetBSD: patch-cmake_FindNcurses.cmake,v 1.6 2020/04/01 14:58:50 nia Exp $
 
-Don't try to look for ncurses.h, so FAKE_NCURSES works for netbsd curses.
+Find NetBSD libcurses.
 
---- cmake/FindNcurses.cmake.orig	2019-02-17 07:20:07.000000000 +0000
+--- cmake/FindNcurses.cmake.orig	2020-03-29 07:39:36.000000000 +0000
 +++ cmake/FindNcurses.cmake
-@@ -22,7 +22,7 @@ if(NCURSES_FOUND)
- endif()
- 
- find_path(NCURSES_INCLUDE_PATH
--  NAMES ncurses.h curses.h
-+  NAMES curses.h
-   PATHS /usr/include/ncursesw /usr/include/ncurses /usr/include
-   /usr/local/include/ncursesw /usr/local/include/ncurses /usr/local/include
-   /usr/pkg/include/ncursesw /usr/pkg/include/ncurses /usr/pkg/include
-@@ -42,7 +42,7 @@ if(NCURSESW_LIBRARY)
+@@ -41,7 +41,7 @@ if(NCURSESW_LIBRARY)
    set(NCURSES_LIBRARY ${NCURSESW_LIBRARY})
  else()
    find_library(NCURSES_LIBRARY

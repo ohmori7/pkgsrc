@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.8 2018/12/16 04:48:51 wen Exp $
+$NetBSD: distinfo,v 1.10 2020/09/07 06:52:00 wiz Exp $
 
-SHA1 (IO-Pager-0.40.tgz) = 0d0df61630fe7faa6c98ec40f7d03014a2d14b28
-RMD160 (IO-Pager-0.40.tgz) = 2a58af83857ff977a0cfef71bfcf49881075d90b
-SHA512 (IO-Pager-0.40.tgz) = 7b2ef5c8a2a6b79030db2d7da8001b9dab64d9348a28dea29e8d6264385c2c73f1ba0d9a78ab60ef1d0ac6078e02bd917357c89ee4d002605acbe826a6b7faa8
-Size (IO-Pager-0.40.tgz) = 18847 bytes
+SHA1 (IO-Pager-1.03.tgz) = 7bd32b54827af26084e307a8f1a40b339ccf69f8
+RMD160 (IO-Pager-1.03.tgz) = 1a45b4ea5356f823e3274c6d271b02143576016a
+SHA512 (IO-Pager-1.03.tgz) = a4e759eb24ea4c48d5de7600c2974de1d1648ef1e7ac46041440dd95fef297f9c6901700b09698ef4755c3e7845f6dcd2d9805c0bc4649d331de6cc97dd6a4c3
+Size (IO-Pager-1.03.tgz) = 41635 bytes

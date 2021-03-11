@@ -1,15 +1,17 @@
-# $NetBSD: Makefile,v 1.1 2017/09/14 19:43:45 minskim Exp $
+# $NetBSD: Makefile,v 1.4 2021/02/03 14:55:02 taca Exp $
 
-DISTNAME=	metasploit-model-2.0.4
+DISTNAME=	metasploit-model-3.1.3
 CATEGORIES=	security
 
 MAINTAINER=	minskim@NetBSD.org
 HOMEPAGE=	https://github.com/rapid7/metasploit-model
 COMMENT=	Models shared between metasploit-framework and metasploit_data_models
+LICENSE=	modified-bsd
 
-DEPENDS+=	${RUBY_PKGPREFIX}-activemodel42>=4.2.6:../../devel/ruby-activemodel42
-DEPENDS+=	${RUBY_PKGPREFIX}-activesupport42>=4.2.6:../../devel/ruby-activesupport42
-DEPENDS+=	${RUBY_PKGPREFIX}-railties42>=4.2.6:../../devel/ruby-railties42
+DEPENDS+=	${RUBY_ACTIVEMODEL_DEPENDS}
+DEPENDS+=	${RUBY_RAILTIES_DEPENDS}
+
+RUBY_RAILS_ACCEPTED=	52
 
 .include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

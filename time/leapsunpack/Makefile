@@ -1,19 +1,19 @@
-# $NetBSD: Makefile,v 1.7 2019/05/23 19:23:18 rillig Exp $
+# $NetBSD: Makefile,v 1.10 2020/11/19 09:35:42 schmonz Exp $
 #
 
-DISTNAME=		leapsunpack-0.05
+DISTNAME=		leapsunpack-0.06
 CATEGORIES=		time
-MASTER_SITES=		${MASTER_SITE_BACKUP}
+MASTER_SITES=		https://su.bze.ro/software/
 
 MAINTAINER=		schmonz@NetBSD.org
-#HOMEPAGE=		http://su.bze.ro/software/
+HOMEPAGE=		https://su.bze.ro/software.html
 COMMENT=		Creates libtai leapsecs.dat from compressed table
 
 DEPENDS+=		libtai-[0-9]*:../../devel/libtai
 
-DJB_RESTRICTED=		no
-
 LDFLAGS.SunOS+=		-lsocket -lnsl
+
+SUBST_CLASSES+=		djberrno
 
 SUBST_CLASSES+=		files
 SUBST_STAGE.files=	do-configure
@@ -24,7 +24,9 @@ SUBST_MESSAGE.files=	Fixing configuration files.
 INSTALLATION_DIRS=	bin share/doc/${PKGBASE}
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/leapsunpack ${DESTDIR}${PREFIX}/bin
+	for i in leaps2zic leapsunpack; do \
+	  ${INSTALL_PROGRAM} ${WRKSRC}/$${i} ${DESTDIR}${PREFIX}/bin; \
+	done
 	${INSTALL_SCRIPT} ${WRKSRC}/leapsinstall ${DESTDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${WRKSRC}/INSTALL ${DESTDIR}${PREFIX}/share/doc/${PKGBASE}
 

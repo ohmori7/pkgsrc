@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.6 2019/05/20 11:10:29 adam Exp $
+# $NetBSD: Makefile,v 1.15 2020/10/03 06:27:18 adam Exp $
 
-DISTNAME=	yarn-v1.16.0
+DISTNAME=	yarn-v1.22.10
 PKGNAME=	${DISTNAME:S/-v/-/}
 CATEGORIES=	devel
-MASTER_SITES=	https://yarnpkg.com/downloads/${PKGVERSION_NOREV}/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=yarnpkg/}
+GITHUB_RELEASE=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://yarnpkg.com/
@@ -16,22 +17,20 @@ USE_LANGUAGES=	# none
 
 INSTALLATION_DIRS=	bin libexec/yarn/bin libexec/yarn/lib
 
-REPLACE_INTERPRETER+=	nodejs
-REPLACE.nodejs.old=	.*node
-REPLACE.nodejs.new=	${PREFIX}/bin/node
-REPLACE_FILES.nodejs=	bin/yarn.js
+REPLACE_NODEJS=	bin/yarn.js
 
 do-build:
 	${SED} ${FILES_SUBST_SED} ${FILESDIR}/yarn.sh >${WRKSRC}/yarn.sh
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/bin/yarn.js			\
-	    ${DESTDIR}${PREFIX}/libexec/yarn/bin/yarn.js
+		${DESTDIR}${PREFIX}/libexec/yarn/bin/yarn.js
 	${INSTALL_DATA} ${WRKSRC}/lib/*.js			\
-	    ${DESTDIR}${PREFIX}/libexec/yarn/lib/
+		${DESTDIR}${PREFIX}/libexec/yarn/lib/
 	${INSTALL_SCRIPT} ${WRKSRC}/yarn.sh			\
-	    ${DESTDIR}${PREFIX}/bin/yarn
+		${DESTDIR}${PREFIX}/bin/yarn
 	${INSTALL_SCRIPT} ${WRKSRC}/yarn.sh			\
-	    ${DESTDIR}${PREFIX}/bin/yarnpkg
+		${DESTDIR}${PREFIX}/bin/yarnpkg
 
+.include "../../lang/nodejs/application.mk"
 .include "../../mk/bsd.pkg.mk"

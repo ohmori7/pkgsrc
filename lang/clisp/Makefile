@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.111 2019/05/04 19:38:08 rillig Exp $
+# $NetBSD: Makefile,v 1.116 2020/03/08 16:50:19 wiz Exp $
 
 DISTNAME=		clisp-2.49
-PKGREVISION=		24
+PKGREVISION=		27
 CATEGORIES=		lang
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=clisp/}
 #EXTRACT_SUFX=		.tar.bz2
@@ -13,7 +13,7 @@ LICENSE=		gnu-gpl-v2
 
 # XXX: is this still current?
 BROKEN_ON_PLATFORM+=	*-*-arm
-
+BROKEN_ON_PLATFORM+=	*-*-aarch64
 # makes the bulk build hang under MirBSD
 BROKEN_ON_PLATFORM+=	MirBSD-*-*
 
@@ -45,11 +45,21 @@ TEST_TARGET=		check mod-check
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${MACHINE_ARCH:Malpha} || ${MACHINE_ARCH:Mamd64} || ${MACHINE_ARCH:Mx86_64} || ${OPSYS} == "DragonFly"
+.if ${MACHINE_ARCH} == alpha || ${MACHINE_ARCH} == amd64 || ${MACHINE_ARCH} == x86_64 || ${OPSYS} == DragonFly
 CONFIGURE_ARGS+=	--disable-mmap
 .endif
 
-.if $(MACHINE_ARCH:Mi386)
+# Try to make the built-in src/malloc/gmalloc.c work with modern GCC
+.if ${OPSYS} == "NetBSD"
+CFLAGS+=	-fno-builtin-calloc
+CFLAGS+=	-fno-builtin-malloc
+CFLAGS+=	-fno-builtin-memalign
+CFLAGS+=	-fno-builtin-realloc
+CFLAGS+=	-fno-builtin-valloc
+CFLAGS+=	-fno-builtin-free
+.endif
+
+.if ${MACHINE_ARCH} == i386
 CFLAGS+=		-falign-functions=4	# force the assumption
 .endif
 

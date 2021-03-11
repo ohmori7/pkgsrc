@@ -1,6 +1,6 @@
 #!@RCD_SCRIPTS_SHELL@
 #
-# $NetBSD: qmailofmipd.sh,v 1.25 2019/03/21 15:33:06 schmonz Exp $
+# $NetBSD: qmailofmipd.sh,v 1.27 2021/01/14 15:42:36 schmonz Exp $
 #
 # @PKGNAME@ script to control ofmipd (SMTP submission service).
 #
@@ -20,7 +20,7 @@ name="qmailofmipd"
 : ${qmailofmipd_tcpport:="587"}
 : ${qmailofmipd_tcprules:="@PKG_SYSCONFDIR@/control/tcprules/ofmip"}
 : ${qmailofmipd_autocdb:="YES"}
-: ${qmailofmipd_precheckpassword:="@PREFIX@/bin/reup -t 5 @PREFIX@/bin/authup smtp"}
+: ${qmailofmipd_precheckpassword:="@PREFIX@/bin/authup smtp"}
 : ${qmailofmipd_checkpassword:="@PREFIX@/bin/nbcheckpassword"}
 : ${qmailofmipd_preofmipd:="@PREFIX@/bin/checknotroot @PREFIX@/bin/fixsmtpio"}
 : ${qmailofmipd_ofmipdcmd:="@PREFIX@/bin/ofmipd-with-user-cdb"}
@@ -31,8 +31,7 @@ name="qmailofmipd"
 : ${qmailofmipd_tls:="auto"}
 : ${qmailofmipd_tls_dhparams:="@PKG_SYSCONFDIR@/control/dh2048.pem"}
 : ${qmailofmipd_tls_cert:="@PKG_SYSCONFDIR@/control/servercert.pem"}
-: ${qmailofmipd_tls_key:=""}
-: ${qmailofmipd_tls_ciphers:=""}
+: ${qmailofmipd_tls_key:="@PKG_SYSCONFDIR@/control/serverkey.pem"}
 
 if [ -f /etc/rc.subr ]; then
 	. /etc/rc.subr
@@ -57,7 +56,7 @@ reload_cmd=${cdb_cmd}
 
 qmailofmipd_configure_tls() {
 	if [ "auto" = "${qmailofmipd_tls}" ]; then
-		if [ -f "${qmailofmipd_tls_dhparams}" ] && [ -f "${qmailofmipd_tls_cert}" ]; then
+		if [ -f "${qmailofmipd_tls_cert}" ]; then
 			qmailofmipd_enable_tls
 		else
 			qmailofmipd_disable_tls
@@ -74,16 +73,16 @@ qmailofmipd_disable_tls() {
 }
 
 qmailofmipd_enable_tls() {
+	qmailofmipd_postenv="CADIR=@SSLDIR@/certs ${qmailofmipd_postenv}"
 	qmailofmipd_postenv="SSL_UID=$(@ID@ -u @UCSPI_SSL_USER@) ${qmailofmipd_postenv}"
 	qmailofmipd_postenv="SSL_GID=$(@ID@ -g @UCSPI_SSL_GROUP@) ${qmailofmipd_postenv}"
 	qmailofmipd_postenv="DHFILE=${qmailofmipd_tls_dhparams} ${qmailofmipd_postenv}"
 	qmailofmipd_postenv="CERTFILE=${qmailofmipd_tls_cert} ${qmailofmipd_postenv}"
-	if [ -f "${qmailofmipd_tls_key}" ]; then
-		qmailofmipd_postenv="KEYFILE=${qmailofmipd_tls_key} ${qmailofmipd_postenv}"
+	if [ -n "${qmailofmipd_tls_key}" -a ! -f "${qmailofmipd_tls_key}" ]; then
+		openssl rsa -in ${qmailofmipd_tls_cert} -out ${qmailofmipd_tls_key}
+		@CHMOD@ 640 ${qmailofmipd_tls_key}
 	fi
-	if [ -n "${qmailofmipd_tls_ciphers}" ]; then
-		qmailofmipd_postenv="CIPHERS=${qmailofmipd_tls_ciphers} ${qmailofmipd_postenv}"
-	fi
+	qmailofmipd_postenv="KEYFILE=${qmailofmipd_tls_key} ${qmailofmipd_postenv}"
 }
 
 qmailofmipd_precmd() {

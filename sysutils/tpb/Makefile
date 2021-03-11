@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2013/06/01 12:18:23 shattered Exp $
+# $NetBSD: Makefile,v 1.23 2020/01/18 23:35:22 rillig Exp $
 #
 
 DISTNAME=	tpb-0.6.4
@@ -7,14 +7,14 @@ CATEGORIES=	sysutils
 MASTER_SITES=	http://savannah.nongnu.org/download/tpb/
 
 MAINTAINER=	soren@NetBSD.org
-HOMEPAGE=	http://www.nongnu.org/tpb/
+HOMEPAGE=	https://www.nongnu.org/tpb/
 COMMENT=	Utility to enable the IBM ThinkPad(tm) special keys
 
-ONLY_FOR_PLATFORM= *-*-i386
+ONLY_FOR_PLATFORM=	*-*-i386
 
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		msgfmt
-GNU_CONFIGURE=	YES
+GNU_CONFIGURE=		YES
 
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.58 2019/04/26 13:14:25 maya Exp $
+# $NetBSD: Makefile,v 1.69 2020/12/04 20:45:51 nia Exp $
 
 DISTNAME=	rox-session-0.28
-PKGREVISION=	36
+PKGREVISION=	43
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=rox/}
 EXTRACT_SUFX=	.tar.bz2
@@ -18,7 +18,7 @@ DIST_SUBDIR=	rox
 NO_BUILD=	yes
 
 REPLACE_PYTHON=	AppRun tests/testutils.py
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-gtk2
+PYTHON_VERSIONS_ACCEPTED= 27 # py-gtk2
 
 INSTALLATION_DIRS=	share/rox/ROX-Session
 

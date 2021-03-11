@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.2 2019/05/06 08:55:20 sjmulder Exp $
+$NetBSD: distinfo,v 1.6 2021/01/12 00:01:38 sjmulder Exp $
 
-SHA1 (libxls-1.5.1.tar.gz) = e9863d0be50301d2b53f213f8c597c074614dc65
-RMD160 (libxls-1.5.1.tar.gz) = 77edcdbbc1851bbcf3b1038fcbf9032107e0c7fd
-SHA512 (libxls-1.5.1.tar.gz) = 80dbef099919248444592a6fd8a910513cffb9e00671009a543511b49a801cb3d4d06dd1413bb7107f87a76176dd3a09cfdb772bcf641a697f363b184152ceb2
-Size (libxls-1.5.1.tar.gz) = 442217 bytes
+SHA1 (libxls-1.6.2.tar.gz) = 5cdd84621f51dedfb2e5ce595aea89269496d5bc
+RMD160 (libxls-1.6.2.tar.gz) = 4b8c90cb74a5f42d4e7cb03d5f2e8a07f7c9c250
+SHA512 (libxls-1.6.2.tar.gz) = 55e5cb33ec63484063d0893eee7352b89f993363762cd5ef42b5f918b09d1eafcf933fba076255267d9413c963481eb07c7054a2495d2d529db2e1d626353d22
+Size (libxls-1.6.2.tar.gz) = 443736 bytes

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.7 2019/05/27 15:18:34 bsiegert Exp $
+# $NetBSD: Makefile,v 1.26 2021/01/23 14:23:14 bsiegert Exp $
 
-DISTNAME=	minify-2.3.8
+DISTNAME=	minify-2.7.3
 PKGNAME=	go-${DISTNAME}
-PKGREVISION=	6
+PKGREVISION=	9
 MASTER_SITES=	${MASTER_SITE_GITHUB:=tdewolff/}
 CATEGORIES=	www
 GITHUB_PROJECT=	minify
@@ -15,6 +15,9 @@ LICENSE=	mit
 
 GO_DIST_BASE=	${DISTNAME}
 GO_SRCPATH=	github.com/tdewolff/minify
+
+post-configure:
+	cd ${WRKSRC} && ${RM} cmd/minify/install.sh.orig
 
 .include "../../www/go-parse/buildlink3.mk"
 .include "../../devel/go-humanize/buildlink3.mk"

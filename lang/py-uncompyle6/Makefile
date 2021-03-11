@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.10 2019/06/13 07:55:07 adam Exp $
+# $NetBSD: Makefile,v 1.26 2020/09/10 09:27:26 adam Exp $
 
-DISTNAME=	uncompyle6-3.3.4
+DISTNAME=	uncompyle6-3.7.4
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	lang python
 MASTER_SITES=	${MASTER_SITE_PYPI:=u/uncompyle6/}
@@ -10,8 +10,10 @@ HOMEPAGE=	https://github.com/rocky/python-uncompyle6
 COMMENT=	Python cross-version byte-code decompiler
 LICENSE=	gnu-gpl-v3
 
-DEPENDS+=	${PYPKGPREFIX}-spark-parser>=1.8.7:../../lang/py-spark-parser
-DEPENDS+=	${PYPKGPREFIX}-xdis>=4.0.2:../../devel/py-xdis
+DEPENDS+=	${PYPKGPREFIX}-spark-parser>=1.8.9:../../lang/py-spark-parser
+DEPENDS+=	${PYPKGPREFIX}-xdis>=5.0.4:../../devel/py-xdis
+
+PYTHON_VERSIONED_DEPENDENCIES=	test:test
 
 USE_LANGUAGES=	# none
 
@@ -20,5 +22,9 @@ post-install:
 	${MV} pydisassemble pydisassemble-${PYVERSSUFFIX} && \
 	${MV} uncompyle6 uncompyle6-${PYVERSSUFFIX} || ${TRUE}
 
+do-test:
+	cd ${WRKSRC}/pytest && pytest-${PYVERSSUFFIX}
+
 .include "../../lang/python/egg.mk"
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

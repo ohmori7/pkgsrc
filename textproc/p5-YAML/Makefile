@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.54 2018/11/10 03:24:31 wen Exp $
+# $NetBSD: Makefile,v 1.59 2020/09/07 17:23:03 wiz Exp $
 
-DISTNAME=	YAML-1.27
+DISTNAME=	YAML-1.30
 PKGNAME=	p5-${DISTNAME}
-CATEGORIES=	perl5 textproc
+CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=YAML/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/YAML/
+HOMEPAGE=	https://metacpan.org/release/YAML
 COMMENT=	YAML implementation for Perl
 LICENSE=	${PERL5_LICENSE}
 

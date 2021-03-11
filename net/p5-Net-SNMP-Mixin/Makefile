@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:46:02 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:10:46 wiz Exp $
 #
 
 DISTNAME=	Net-SNMP-Mixin-0.14
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Net-SNMP-Mixin/
+HOMEPAGE=	https://metacpan.org/release/Net-SNMP-Mixin
 COMMENT=	Perl 5 module providing a mixin framework for Net::SNMP
 LICENSE=	${PERL5_LICENSE}
 

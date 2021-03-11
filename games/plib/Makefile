@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.29 2016/04/17 16:39:22 youri Exp $
+# $NetBSD: Makefile,v 1.35 2020/03/20 11:57:43 nia Exp $
 
 DISTNAME=	plib-1.8.5
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	games x11
 MASTER_SITES=	http://plib.sourceforge.net/dist/
 
@@ -23,13 +23,15 @@ CXXFLAGS+=	-fPIC
 PLIST_VARS+=	sl pw
 
 .if ${OPSYS} == "Darwin" && ${ABI} == "64"
-CONFIGURE_ARGS+=--disable-sl \
-				--disable-pw
+CONFIGURE_ARGS+=	--disable-sl \
+					--disable-pw
 .else
-PLIST.sl=	yes
-PLIST.pw=	yes
+PLIST.sl=		yes
+PLIST.pw=		yes
 .endif
 
-.include "../../graphics/Mesa/buildlink3.mk"
+.include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../mk/oss.buildlink3.mk"
+.include "../../x11/libXi/buildlink3.mk"
+.include "../../x11/libXmu/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

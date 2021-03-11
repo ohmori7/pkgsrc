@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.4 2019/06/14 15:59:32 bouyer Exp $
+# $NetBSD: Makefile,v 1.7 2021/02/21 18:56:36 bouyer Exp $
 #
 
-V=		5.1.2
+V=		5.1.9
 DISTNAME=	kicad-footprints-${V}
 CATEGORIES=	cad
-MASTER_SITES=	${MASTER_SITE_GITHUB:=KiCad/}
-GITHUB_TAG=	${PKGVERSION_NOREV}
-EXTRACT_USING=	bsdtar
+MASTER_SITES=	https://gitlab.com/kicad/libraries/kicad-footprints/-/archive/${V}/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://kicad-pcb.org/
+HOMEPAGE=	https://kicad-pcb.org/
 COMMENT=	components footprints for the PCB CAD software
 LICENSE=	cc-by-sa-v4.0
 

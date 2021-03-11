@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.39 2018/08/22 09:46:10 wiz Exp $
+# $NetBSD: Makefile,v 1.44 2020/11/05 09:07:05 ryoon Exp $
 
 DISTNAME=	openmpi-1.10.7
-PKGREVISION=	1
+PKGREVISION=	5
 CATEGORIES=	parallel
 MASTER_SITES=	http://www.open-mpi.org/software/ompi/v1.10/downloads/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	asau@inbox.ru
-HOMEPAGE=	http://www.open-mpi.org/
+HOMEPAGE=	https://www.open-mpi.org/
 COMMENT=	Open source MPI-3.1 implementation
 LICENSE=	modified-bsd
 

@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.18 2018/03/07 11:57:36 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2020/01/18 23:35:52 rillig Exp $
 
-DISTNAME=		libXpm-3.5.12
-PKGREVISION=		1
+DISTNAME=		libXpm-3.5.13
 CATEGORIES=		graphics x11
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		joerg@NetBSD.org
-HOMEPAGE=		http://xorg.freedesktop.org/
+HOMEPAGE=		https://xorg.freedesktop.org/
 COMMENT=		X PixMap Library from modular Xorg X11
 
 CONFLICTS+=		xpm-[0-9]*
@@ -30,10 +29,10 @@ MAKE_ENV+=		INTLLIBS=${BUILDLINK_LDADD.gettext:Q}
 
 .if ${X11_TYPE} == "native"
 XPM_CFLAGS=	-I${X11BASE}/include
-XPM_LIBS=	-Wl,-rpath,${X11BASE}/lib -L${X11BASE}/lib -lX11
+XPM_LIBS=	${COMPILER_RPATH_FLAG}${X11BASE}/lib -L${X11BASE}/lib -lX11
 
 SXPM_CFLAGS=	-I${X11BASE}/include
-SXPM_LIBS=	-Wl,-rpath,${X11BASE}/lib -L${X11BASE}/lib -lXt -lXext
+SXPM_LIBS=	${COMPILER_RPATH_FLAG}${X11BASE}/lib -L${X11BASE}/lib -lXt -lXext
 
 CONFIGURE_ARGS+=	XPM_CFLAGS=${XPM_CFLAGS:Q} \
 			XPM_LIBS=${XPM_LIBS:Q} \

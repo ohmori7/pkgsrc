@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.12 2019/03/03 12:17:05 adam Exp $
+# $NetBSD: Makefile,v 1.17 2020/10/06 10:51:21 wiz Exp $
 
-DISTNAME=	attrs-19.1.0
+DISTNAME=	attrs-19.3.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=a/attrs/}
@@ -13,9 +13,10 @@ LICENSE=	mit
 TEST_DEPENDS+=	${PYPKGPREFIX}-Pympler-[0-9]*:../../devel/py-Pympler
 TEST_DEPENDS+=	${PYPKGPREFIX}-ZopeInterface-[0-9]*:../../devel/py-ZopeInterface
 TEST_DEPENDS+=	${PYPKGPREFIX}-coverage-[0-9]*:../../devel/py-coverage
-TEST_DEPENDS+=	${PYPKGPREFIX}-hypothesis-[0-9]*:../../devel/py-hypothesis
-TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
 TEST_DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
+
+PYTHON_VERSIONED_DEPENDENCIES=	test:test
+PYTHON_VERSIONED_DEPENDENCIES+=	hypothesis:test
 
 USE_LANGUAGES=	# none
 
@@ -23,4 +24,5 @@ do-test:
 	cd ${WRKSRC} && pytest-${PYVERSSUFFIX}
 
 .include "../../lang/python/egg.mk"
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

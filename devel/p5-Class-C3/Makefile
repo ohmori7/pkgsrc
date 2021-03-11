@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.29 2018/08/22 09:43:42 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2021/02/11 00:42:48 wen Exp $
 
-DISTNAME=	Class-C3-0.34
+DISTNAME=	Class-C3-0.35
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Class/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Class-C3/
+HOMEPAGE=	https://metacpan.org/release/Class-C3
 COMMENT=	Pragma to use the C3 method resolution order algortihm
 LICENSE=	${PERL5_LICENSE}
 

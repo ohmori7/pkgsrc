@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.12 2019/03/05 15:20:32 leot Exp $
-#
+# $NetBSD: Makefile,v 1.14 2020/04/20 20:05:56 adam Exp $
 
-VERS=		2.7.16
+VERS=		2.7.18
 DISTNAME=	python-${VERS}-docs-html
 PKGNAME=	py27-html-docs-${VERS}
 CATEGORIES=	lang python
@@ -25,6 +24,6 @@ HTMLDIR=	share/doc/python2.7
 INSTALLATION_DIRS=	${HTMLDIR}
 
 do-install:
-	cd ${WRKSRC} && pax -rw -pp . ${DESTDIR}${PREFIX}/${HTMLDIR}
+	cd ${WRKSRC} && ${PAX} -rw -pp . ${DESTDIR}${PREFIX}/${HTMLDIR}
 
 .include "../../mk/bsd.pkg.mk"

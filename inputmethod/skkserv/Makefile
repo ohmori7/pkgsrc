@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.25 2017/09/04 18:00:56 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2020/05/13 04:14:48 rillig Exp $
 
 DISTNAME=	skk9.6
 PKGNAME=	skkserv-3.9.4
-PKGREVISION=	7
-CATEGORIES=	japanese inputmethod
+PKGREVISION=	8
+CATEGORIES=	inputmethod japanese
 MASTER_SITES=	ftp://skk.kuis.kyoto-u.ac.jp/skk/9.6/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -25,13 +25,13 @@ BUILD_DIRS=	skkserv
 .include "../../mk/bsd.prefs.mk"
 
 .if (${OPSYS} == "SunOS")
-.if exists(/usr/ccs)
+.  if exists(/usr/ccs)
 SKKSERV_UID?=	60002		# noaccess
 SKKSERV_GID?=	60002		# noaccess
-.else
+.  else
 SKKSERV_UID?=	65534		# nobody
 SKKSERV_GID?=	65534		# nogroup
-.endif
+.  endif
 .endif
 SKKSERV_UID?=	32767		# nobody
 SKKSERV_GID?=	32766		# nogroup
@@ -44,6 +44,7 @@ SUBST_STAGE.ver-num=	pre-configure
 SUBST_MESSAGE.ver-num=	Fixing version number and its comments.
 SUBST_FILES.ver-num=	skkserv/skkserv.c
 SUBST_SED.ver-num=	-e 's,"${PKGVERSION_NOREV} ","${PKGVERSION} (binary search) ",g'
+SUBST_NOOP_OK.ver-num=	no # to prevent this from appearing in the patch
 
 INSTALL_MAKE_FLAGS+=	prefix=${DESTDIR}${PREFIX}
 

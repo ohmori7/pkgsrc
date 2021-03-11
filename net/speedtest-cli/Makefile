@@ -1,26 +1,29 @@
-# $NetBSD: Makefile,v 1.5 2019/04/25 07:33:13 maya Exp $
+# $NetBSD: Makefile,v 1.9 2020/12/04 20:45:36 nia Exp $
 
-DISTNAME=	speedtest-cli-0.3.2
-MASTER_SITES=	${MASTER_SITE_GITHUB:=sivel/}
-GITHUB_TAG=	v${PKGVERSION_NOREV}
+DISTNAME=	speedtest-cli-2.1.2
 PKGREVISION=	1
 CATEGORIES=	net
+MASTER_SITES=	${MASTER_SITE_GITHUB:=sivel/}
+GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://github.com/sivel/speedtest-cli/
+HOMEPAGE=	https://github.com/sivel/speedtest-cli
 COMMENT=	Command line client for use with speedtest.net
 LICENSE=	apache-2.0
 
 DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
-DEPENDS+=	${PYPKGPREFIX}-setuptools-[0-9]*:../../devel/py-setuptools
 
 REPLACE_PYTHON=	*.py
 
+PYTHON_VERSIONED_DEPENDENCIES+=	setuptools
+
+INSTALLATION_DIRS+=	${PKGMANDIR}/man1
+
 post-install:
-	${INSTALL_MAN_DIR} ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 	${INSTALL_MAN} ${WRKSRC}/speedtest-cli.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 	${INSTALL_MAN} ${WRKSRC}/speedtest-cli.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/speedtest.1
 
 .include "../../lang/python/distutils.mk"
 .include "../../lang/python/application.mk"
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

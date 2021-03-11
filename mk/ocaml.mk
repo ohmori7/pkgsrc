@@ -1,4 +1,4 @@
-# $NetBSD: ocaml.mk,v 1.24 2019/05/14 15:35:19 jaapb Exp $
+# $NetBSD: ocaml.mk,v 1.28 2020/04/21 11:23:29 jaapb Exp $
 #
 # This Makefile fragment handles the common variables used by OCaml packages.
 #
@@ -23,7 +23,7 @@
 # OCAML_USE_OASIS_DYNRUN [implies OCAML_USE_OASIS]
 # package uses oasis.dynrun
 # OCAML_USE_OPAM
-# package uses OPAM installer
+# package uses OPAM installer [implies OCAML_USE_FINDLIB]
 # OCAML_USE_TOPKG
 # package uses topkg [implies OCAML_USE_FINDLIB]
 # OCAML_USE_JBUILDER
@@ -68,6 +68,7 @@ _PKG_VARS.ocaml=	\
 	DUNE_BUILD_PACKAGES \
 	DUNE_BUILD_TARGETS \
 	OCAML_BUILD_ARGS \
+	OPAM_INSTALL_DIR \
 	OPAM_INSTALL_FILES
 _DEF_VARS.ocaml=	\
 	OCAML_USE_OPT_COMPILER
@@ -150,6 +151,7 @@ OCAML_USE_OPAM?=	yes
 .elif ${OCAML_USE_DUNE} == "yes"
 .include "../../devel/ocaml-dune/buildlink3.mk"
 OCAML_USE_OPAM?=	yes
+OPAM_INSTALL_DIR?=	_build/default
 .else
 OCAML_USE_OPAM?=	no
 .endif
@@ -166,6 +168,9 @@ OCAML_USE_FINDLIB=	yes
 OCAML_USE_FINDLIB=	yes
 INSTALLATION_DIRS+=	${OCAML_SITELIBDIR}/${OCAML_TOPKG_NAME}
 .endif
+
+# Fallback value for OPAM_INSTALL_DIR
+OPAM_INSTALL_DIR?=	.
 
 # Value for OCAML_SITELIBDIR
 OCAML_SITELIBDIR=	lib/ocaml/site-lib
@@ -194,6 +199,9 @@ PLIST_VARS+=	ocaml-opt
 # The opt compiler needs the C compiler suite
 USE_LANGUAGES+=	c
 PLIST.ocaml-opt=	yes
+.else
+# If we're bytecode compiling, don't strip executables
+INSTALL_UNSTRIPPED=	yes
 .endif
 
 #
@@ -254,7 +262,7 @@ do-install:
 		-docdir ${OCAML_TOPKG_DOCDIR}/$$i \
 		-stublibsdir ${PREFIX}/${OCAML_SITELIBDIR}/stublibs \
 		-bindir ${PREFIX}/bin \
-		$$i.install; \
+		${OPAM_INSTALL_DIR}/$$i.install; \
 	done
 
 .endif # opam
@@ -267,12 +275,12 @@ do-install:
 do-build:
 .if !empty(JBUILDER_BUILD_PACKAGES)
 	${RUN} ${_ULIMIT_CMD} \
-		cd ${WRKSRC} && jbuilder build -j ${MAKE_JOBS} \
+		cd ${WRKSRC} && jbuilder build -j ${MAKE_JOBS:U1} \
 		${JBUILDER_BUILD_FLAGS} -p ${JBUILDER_BUILD_PACKAGES:ts,} \
 		${JBUILDER_BUILD_TARGETS}
 .else
 	${RUN} ${_ULIMIT_CMD} \
-		cd ${WRKSRC} && jbuilder build -j ${MAKE_JOBS} \
+		cd ${WRKSRC} && jbuilder build -j ${MAKE_JOBS:U1} \
 		${JBUILDER_BUILD_FLAGS} ${JBUILDER_BUILD_TARGETS}
 .endif
 
@@ -286,12 +294,13 @@ do-build:
 do-build:
 .if !empty(DUNE_BUILD_PACKAGES)
 	${RUN} ${_ULIMIT_CMD} \
-		cd ${WRKSRC} && dune build -j ${MAKE_JOBS} \
+		cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+		dune build -j ${MAKE_JOBS:U1} \
 		${DUNE_BUILD_FLAGS} -p ${DUNE_BUILD_PACKAGES:ts,} \
 		${DUNE_BUILD_TARGETS}
 .else
 	${RUN} ${_ULIMIT_CMD} \
-		cd ${WRKSRC} && dune build --profile release -j ${MAKE_JOBS} \
+		cd ${WRKSRC} && dune build --profile release -j ${MAKE_JOBS:U1} \
 		${DUNE_BUILD_FLAGS} ${DUNE_BUILD_TARGETS}
 .endif
 

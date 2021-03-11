@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.19 2019/02/13 16:05:48 adam Exp $
+# $NetBSD: Makefile,v 1.21 2020/12/03 12:06:40 adam Exp $
 
-DISTNAME=	libassuan-2.5.3
+DISTNAME=	libassuan-2.5.4
 CATEGORIES=	security
 MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/libassuan/
 MASTER_SITES+=	http://mirrors.dotsrc.org/gcrypt/libassuan/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://gnupg.org/related_software/libassuan/index.en.html
+HOMEPAGE=	https://gnupg.org/related_software/libassuan/index.en.html
 COMMENT=	IPC library used by some of the other GnuPG related packages
 LICENSE=	gnu-gpl-v3
 

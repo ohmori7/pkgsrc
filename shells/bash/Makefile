@@ -1,29 +1,27 @@
-# $NetBSD: Makefile,v 1.86 2019/04/24 14:04:27 kre Exp $
+# $NetBSD: Makefile,v 1.96 2021/01/04 10:39:23 wiz Exp $
 
-BASH_VERSION=		5.0
-BASH_PATCHLEVEL=	7
+BASH_VERSION=		5.1
+BASH_PATCHLEVEL=	4
 
 DISTNAME=	bash-${BASH_VERSION}
-PKGNAME=	bash-${BASH_VERSION:C/4\.4\..*/4.4/}.${BASH_PATCHLEVEL}
+PKGNAME=	bash-${BASH_VERSION}.${BASH_PATCHLEVEL}
 CATEGORIES=	shells
 MASTER_SITES=	${MASTER_SITE_GNU:=bash/}
 
-PATCH_SITES=	${MASTER_SITES:=bash-5.0-patches/}
-PATCHFILES+=	bash50-001 bash50-002 bash50-003 bash50-004 bash50-005
-PATCHFILES+=	bash50-006 bash50-007
+PATCH_SITES=	${MASTER_SITES:=bash-5.1-patches/}
+PATCHFILES+=	bash51-001 bash51-002 bash51-003 bash51-004
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnu.org/software/bash/bash.html
+HOMEPAGE=	https://www.gnu.org/software/bash/bash.html
 COMMENT=	The GNU Bourne Again Shell
 LICENSE=	gnu-gpl-v3
 
 USE_TOOLS+=		makeinfo bison
-USE_PKGLOCALEDIR=	yes
 TEXINFO_REQD=		4.1
 GNU_CONFIGURE=		yes
 MAKE_ENV+=		INSTALL_SCRIPT=${INSTALL_SCRIPT:Q}
 CONFIGURE_ARGS=		LOCAL_LDFLAGS=${EXPORT_SYMBOLS_LDFLAGS:M*:Q}
-CPPFLAGS+=		-DDEFAULT_PATH_VALUE="\"/usr/bin:/bin:${LOCALBASE}/bin:/usr/local/bin\""
+CPPFLAGS+=		-DDEFAULT_PATH_VALUE="\"/usr/bin:/bin:${PREFIX}/bin:/usr/local/bin\""
 TEST_TARGET=		test
 
 PKGCONFIG_OVERRIDE=	support/bash.pc.in
@@ -48,28 +46,18 @@ CONFIGURE_ARGS+=	--enable-brace-expansion
 CONFIGURE_ARGS+=	--enable-array-variables
 
 .include "../../mk/bsd.prefs.mk"
-
-PKG_OPTIONS_VAR=	PKG_OPTIONS.bash
-PKG_SUPPORTED_OPTIONS=	#static XXX 2017-11-20 broken
-
-.include "../../mk/bsd.options.mk"
-
-##
-## Static link
-##
-.if !empty(PKG_OPTIONS:Mstatic)
-CONFIGURE_ARGS+=		--enable-static-link
-BUILDLINK_DEPMETHOD.gettext=	build
-BUILDLINK_DEPMETHOD.readline=	build
-.endif
+.include "options.mk"
 
 # Minix lacks setpgid() which is needed for job control.
-# bash malloc() is also broken on Minix
 .if ${OPSYS} == "Minix"
 CONFIGURE_ARGS+=	--disable-job-control
-CONFIGURE_ARGS+=	--with-bash-malloc=no
 .else
 CONFIGURE_ARGS+=	--enable-job-control
+.endif
+
+# bash malloc() is broken on Minix and musl libc
+.if ${OPSYS} == "Minix" || (${OPSYS} == "Linux" && empty(GLIBC_VERSION))
+CONFIGURE_ARGS+=	--with-bash-malloc=no
 .endif
 
 # Use "readline" package on Darwin to avoid link erros.
@@ -103,5 +91,4 @@ post-install:
 	${INSTALL_MAN} ${WRKSRC}/doc/bashbug.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 
 .include "../../mk/termcap.buildlink3.mk"
-.include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

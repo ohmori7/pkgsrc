@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.33 2018/08/22 09:45:24 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2020/08/31 18:09:55 wiz Exp $
 
 DISTNAME=	distribute-2.1-pl19
 PKGNAME=	distribute-2.1.26
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.foretune.co.jp/pub/network/mail/distribute/
 # AWOL
@@ -22,8 +22,8 @@ INSTALLATION_DIRS=	libexec ${PKGMANDIR}/man1
 WRKSRC=		${WRKDIR}/distribute-pl19
 USE_TOOLS+=	perl:run
 
-MAN1=		distribute.1
-DIST_SUBDIR=	distribute
+MAN1=			distribute.1
+DIST_SUBDIR=		distribute
 PATCH_DIST_STRIP=	-p1
 
 # customize below if you would like to

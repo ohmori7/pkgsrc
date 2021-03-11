@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2018/08/22 09:46:41 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2020/08/31 18:11:36 wiz Exp $
 #
 
 DISTNAME=	tenshi-0.15
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	sysutils
 MASTER_SITES=	http://dev.inversepath.com/download/tenshi/
 
@@ -19,7 +19,7 @@ BUILD_DEFS+=		VARBASE
 
 DEPENDS+=	p5-IO-BufferedSelect>=1.0:../../sysutils/p5-IO-BufferedSelect
 
-SUBST_CLASSES+= 	tenshi
+SUBST_CLASSES+=		tenshi
 SUBST_STAGE.tenshi=	pre-build
 SUBST_FILES.tenshi=	tenshi tenshi.conf tenshi.8
 SUBST_SED.tenshi=	-e 's,/etc/tenshi/tenshi.conf,${PKG_SYSCONFDIR}/tenshi.conf,g'

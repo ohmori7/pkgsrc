@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.37 2019/05/23 19:23:01 rillig Exp $
+# $NetBSD: Makefile,v 1.44 2020/11/05 09:08:20 ryoon Exp $
 #
 
-DISTNAME=	frameworks-0.3.7
-PKGREVISION=	30
-CATEGORIES=	graphics
-MASTER_SITES=	http://frameworks.polycrystal.org/release/
+DISTNAME=		frameworks-0.3.7
+PKGREVISION=		36
+CATEGORIES=		graphics
+MASTER_SITES=		http://frameworks.polycrystal.org/release/
 SITES.frameworks.png=	http://frameworks.polycrystal.org/images/
-DISTFILES=	${DISTNAME}${EXTRACT_SUFX} frameworks.png
+DISTFILES=		${DISTNAME}${EXTRACT_SUFX} frameworks.png
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://frameworks.polycrystal.org/release/
@@ -20,7 +20,7 @@ SUBST_CLASSES=		xdg
 SUBST_STAGE.xdg=	pre-configure
 SUBST_MESSAGE.xdg=	Fixing paths in xdg menu entries.
 SUBST_FILES.xdg=	frameworks.desktop
-SUBST_VARS.xdg=	PREFIX
+SUBST_VARS.xdg=		PREFIX
 
 INSTALLATION_DIRS=	share/applications share/icons/hicolor/48x48/apps
 

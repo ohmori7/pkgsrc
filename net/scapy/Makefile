@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.27 2019/05/23 19:23:11 rillig Exp $
+# $NetBSD: Makefile,v 1.32 2020/12/04 20:45:36 nia Exp $
 
-DISTNAME=	scapy-2.3.2
-PKGREVISION=	1
+DISTNAME=	scapy-2.4.3
+PKGREVISION=	2
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GITHUB:=secdev/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -11,13 +11,9 @@ HOMEPAGE=	http://www.secdev.org/projects/scapy/
 COMMENT=	Interactive packet manipulation program
 LICENSE=	gnu-gpl-v2
 
-DEPENDS+=	${PYPKGPREFIX}-libpcap-[0-9]*:../../net/py-libpcap
-DEPENDS+=	${PYPKGPREFIX}-libdnet-[0-9]*:../../net/py-libdnet
-DEPENDS+=	${PYPKGPREFIX}-readline-[0-9]*:../../devel/py-readline
-
 NO_BUILD=	yes
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-libpcap, py-libdnet
+PYTHON_VERSIONS_ACCEPTED=	37 36 27 # 3.8 not officially supported yet
 
 INSTALLATION_DIRS+=	share/examples/scapy
 
@@ -43,5 +39,5 @@ do-test:
 	cd ${WRKSRC}/test && ${SETENV} PYTHON=${PYTHONBIN} ./run_tests
 
 .include "../../lang/python/application.mk"
-.include "../../lang/python/distutils.mk"
+.include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

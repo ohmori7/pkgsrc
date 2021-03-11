@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.14 2018/03/10 22:21:14 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/01/18 23:36:13 rillig Exp $
 
-DISTNAME=		xwininfo-1.1.4
+DISTNAME=		xwininfo-1.1.5
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_XORG:=app/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		joerg@NetBSD.org
-HOMEPAGE=		http://xorg.freedesktop.org/
+HOMEPAGE=		https://xorg.freedesktop.org/
 COMMENT=		Query information about X windows
 
 GNU_CONFIGURE=		yes

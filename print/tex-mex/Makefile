@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.2 2017/09/06 16:49:40 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2020/05/10 04:32:05 markd Exp $
 
 DISTNAME=	mex
 PKGNAME=	tex-${DISTNAME}-1.05
+PKGREVISION=	1
 TEXLIVE_REV=	40855
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/mex
+HOMEPAGE=	https://ctan.org/pkg/mex
 COMMENT=	Polish formats for TeX
 LICENSE=	public-domain
 
@@ -20,6 +21,7 @@ INSTALLATION_DIRS+=	bin
 TEX_FORMATS+=	"mex pdftex mexconf.tex -translate-file=cp227.tcx *mex.ini\\npdfmex pdftex mexconf.tex -translate-file=cp227.tcx *pdfmex.ini\\n"
 #utf8mex pdftex mexconf.tex -translate-file=cp227.tcx *utf8mex.ini\\n"
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 
 post-install:

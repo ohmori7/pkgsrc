@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.17 2018/08/05 12:40:53 adam Exp $
+@comment $NetBSD: PLIST,v 1.19 2020/02/19 17:50:25 adam Exp $
 bin/blockdiag-${PYVERSSUFFIX}
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
@@ -54,9 +54,6 @@ ${PYSITELIB}/blockdiag/imagedraw/utils/__init__.pyo
 ${PYSITELIB}/blockdiag/imagedraw/utils/ellipse.py
 ${PYSITELIB}/blockdiag/imagedraw/utils/ellipse.pyc
 ${PYSITELIB}/blockdiag/imagedraw/utils/ellipse.pyo
-${PYSITELIB}/blockdiag/imagedraw/utils/pillow.py
-${PYSITELIB}/blockdiag/imagedraw/utils/pillow.pyc
-${PYSITELIB}/blockdiag/imagedraw/utils/pillow.pyo
 ${PYSITELIB}/blockdiag/metrics.py
 ${PYSITELIB}/blockdiag/metrics.pyc
 ${PYSITELIB}/blockdiag/metrics.pyo

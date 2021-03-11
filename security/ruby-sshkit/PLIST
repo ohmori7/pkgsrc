@@ -1,6 +1,10 @@
-@comment $NetBSD: PLIST,v 1.7 2017/04/22 16:43:35 taca Exp $
+@comment $NetBSD: PLIST,v 1.9 2020/03/24 16:20:05 taca Exp $
 ${GEM_HOME}/cache/${GEM_NAME}.gem
+${GEM_LIBDIR}/.github/release-drafter.yml
+${GEM_LIBDIR}/.github/workflows/push.yml
 ${GEM_LIBDIR}/.gitignore
+${GEM_LIBDIR}/.rubocop.yml
+${GEM_LIBDIR}/.rubocop_todo.yml
 ${GEM_LIBDIR}/.travis.yml
 ${GEM_LIBDIR}/.yardopts
 ${GEM_LIBDIR}/BREAKING_API_WISHLIST.md
@@ -17,6 +21,7 @@ ${GEM_LIBDIR}/Rakefile
 ${GEM_LIBDIR}/Vagrantfile
 ${GEM_LIBDIR}/examples/images/example_output.png
 ${GEM_LIBDIR}/examples/images/logo.png
+${GEM_LIBDIR}/examples/simple_connection.rb
 ${GEM_LIBDIR}/lib/core_ext/array.rb
 ${GEM_LIBDIR}/lib/core_ext/hash.rb
 ${GEM_LIBDIR}/lib/sshkit.rb

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.5 2019/05/05 22:49:45 ryoon Exp $
+# $NetBSD: Makefile,v 1.10 2020/11/05 09:07:35 ryoon Exp $
 
 VERSION=	0.6.8
 DISTNAME=	lurch-${VERSION}-src
 PKGNAME=	lurch-purple-${VERSION}
-PKGREVISION=	2
+PKGREVISION=	6
 CATEGORIES=	chat security
 MASTER_SITES=	${MASTER_SITE_GITHUB:=gkdr/lurch/releases/download/v${VERSION}/}
 
-MAINTAINER=	nia@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/gkdr/lurch
 COMMENT=	XEP-0384: OMEMO Encryption for libpurple
 LICENSE=	gnu-gpl-v3

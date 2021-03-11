@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.4 2019/05/12 04:06:10 markd Exp $
+# $NetBSD: Makefile,v 1.8 2021/02/13 11:35:31 markd Exp $
 
 DISTNAME=	polyglossia.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-1.44
-TEXLIVE_REV=	50787
+PKGNAME=	tex-${DISTNAME:S/./-/}-1.51
+TEXLIVE_REV=	57098
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/polyglossia
+HOMEPAGE=	https://ctan.org/pkg/polyglossia
 COMMENT=	Documentation for tex-polyglossia
-LICENSE=	lppl-1.3c
+LICENSE=	mit AND lppl-1.3c AND cc0-1.0-universal
 
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,9 +1,9 @@
-$NetBSD: distinfo,v 1.3 2015/11/03 23:27:24 agc Exp $
+$NetBSD: distinfo,v 1.5 2019/10/22 03:55:12 mef Exp $
 
-SHA1 (wl-beta_2.15.9+0.20110420.orig.tar.gz) = af84474cf776847837886d86732d9eac79731fee
-RMD160 (wl-beta_2.15.9+0.20110420.orig.tar.gz) = 760cfc41f1da8e1edc48b6721fa69ecc35408b12
-SHA512 (wl-beta_2.15.9+0.20110420.orig.tar.gz) = 9b0bb50fb993a03635fc8e13166b1cb46eb55b5d06e77d0bf6f42034b48216180663ec9cb0a8af80d00555e2dd6918955d9d7c9f13506a7e414a16d03bca9429
-Size (wl-beta_2.15.9+0.20110420.orig.tar.gz) = 1156180 bytes
-SHA1 (patch-aa) = ede97cce8b2574737a91941a905e067c940fb50a
-SHA1 (patch-ab) = b68648a7e9a9fba1d3d204d12a3fe647edb30f41
-SHA1 (patch-ac) = e161bbf1d5034c28b5376075a0173bd8cf967a39
+SHA1 (wl-beta_2.15.9+0.20190919.orig.tar.gz) = 0b5ced6b17dbe66f0c167666508c167d31ce3dcf
+RMD160 (wl-beta_2.15.9+0.20190919.orig.tar.gz) = b004fccd8b2d322f830dc1147e1d8c0739ae3e7a
+SHA512 (wl-beta_2.15.9+0.20190919.orig.tar.gz) = f58c43d8b9f3496b1a01c3783a990e14d9bd7413216bcca8549092eab27171a6fa9179727b6606c53d710d173f980105f5f9cdfbe982720704381ed9fbe50629
+Size (wl-beta_2.15.9+0.20190919.orig.tar.gz) = 1209434 bytes
+SHA1 (patch-aa) = 954cd9662e89f41bad999d99e0f9e30b5279869f
+SHA1 (patch-ab) = caf907d44ad10d776807e1bc44fa12f8efc7eed7
+SHA1 (patch-ac) = 46192487a61f6f6793adf1e5c4a28b68076159d1

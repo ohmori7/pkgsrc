@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2018/03/12 11:15:57 wiz Exp $
+# $NetBSD: Makefile,v 1.39 2020/08/17 20:18:00 leot Exp $
 
 DISTNAME=	qwt-5.2.3
-PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=qwt/}
 EXTRACT_SUFX=	.tar.bz2
@@ -19,7 +19,7 @@ USE_TOOLS+=		gmake
 
 CONFLICTS=	qwtlib-[0-9]*
 
-AUTO_MKDIRS=			yes
+AUTO_MKDIRS=		yes
 INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR}
 
 do-configure:

@@ -1,16 +1,22 @@
-# $NetBSD: Makefile,v 1.39 2018/12/13 19:51:51 adam Exp $
+# $NetBSD: Makefile,v 1.55 2021/02/07 06:30:21 ryoon Exp $
 
-DISTNAME=	blinken-${_KDE_VERSION}
-PKGREVISION=	12
+DISTNAME=	blinken-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	games
+
+HOMEPAGE=	https://kde.org/applications/education/blinken/
 COMMENT=	Memory enhancement game
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+.include "../../meta-pkgs/kde/applications.mk"
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
+
+USE_TOOLS+=	msgmerge
 
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../multimedia/phonon-qt5/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/kxmlgui/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

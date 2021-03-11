@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.79 2018/11/14 22:21:41 kleink Exp $
+# $NetBSD: Makefile,v 1.89 2020/11/05 09:08:22 ryoon Exp $
 #
 
 DISTNAME=	gtkam-0.1.18
-PKGREVISION=	27
+PKGREVISION=	35
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gphoto/}
 

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.24 2019/05/15 10:05:27 markd Exp $
+# $NetBSD: Makefile,v 1.30 2021/02/12 03:03:18 markd Exp $
 
 DISTNAME=	collection-pictures
-PKGNAME=	texlive-${DISTNAME}-2019pre1
+PKGNAME=	texlive-${DISTNAME}-2020pre2
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	50810
+TEXLIVE_REV=	57485
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.tug.org/texlive/
+HOMEPAGE=	https://www.tug.org/texlive/
 COMMENT=	Graphics, pictures, diagrams TeX packages
 
 DEPENDS+=	texlive-collection-basic-[0-9]*:../../meta-pkgs/texlive-collection-basic
@@ -32,9 +32,10 @@ DEPENDS+=	tex-asyfig-[0-9]*:../../graphics/tex-asyfig
 # depend cachepic
 # depend callouts
 # depend celtic
-# depend chemfig
-# depend combinedgraphics
+DEPENDS+=	tex-chemfig-[0-9]*:../../graphics/tex-chemfig
+# depend circuit-macros
 DEPENDS+=	tex-circuitikz-[0-9]*:../../graphics/tex-circuitikz
+# depend combinedgraphics
 # depend curve
 # depend curve2e
 DEPENDS+=	tex-curves-[0-9]*:../../print/tex-curves
@@ -42,8 +43,9 @@ DEPENDS+=	tex-curves-[0-9]*:../../print/tex-curves
 # depend diagmac2
 # depend ditaa
 # depend doc-pictex
-# depend dottex
 # depend dot2texi
+# depend dottex
+# depend dpcircling
 # depend dratex
 # depend drs
 # depend duotenzor
@@ -77,6 +79,7 @@ DEPENDS+=	tex-here-[0-9]*:../../print/tex-here
 # depend hobby
 # depend hvfloat
 # depend istgame
+# depend kblocks
 # depend knitting
 # depend knittingpattern
 # depend ladder
@@ -89,6 +92,7 @@ DEPENDS+=	tex-here-[0-9]*:../../print/tex-here
 # depend maker
 # depend makeshape
 # depend mathspic
+# depend mercatormap
 # depend milsymb
 # depend miniplot
 # depend mkpic
@@ -101,6 +105,7 @@ DEPENDS+=	tex-pb-diagram-[0-9]*:../../print/tex-pb-diagram
 DEPENDS+=	tex-pgf-[0-9]*:../../print/tex-pgf
 # depend pgf-blur
 # depend pgf-cmykshadings
+# depend pgf-pie
 # depend pgf-soroban
 # depend pgf-spectra
 # depend pgf-umlcd
@@ -108,6 +113,7 @@ DEPENDS+=	tex-pgf-umlsd-[0-9]*:../../graphics/tex-pgf-umlsd
 DEPENDS+=	tex-pgfgantt-[0-9]*:../../graphics/tex-pgfgantt
 # depend pgfkeyx
 # depend pgfmolbio
+# depend pgfmorepages
 DEPENDS+=	tex-pgfopts-[0-9]*:../../devel/tex-pgfopts
 # depend pgfornament
 DEPENDS+=	tex-pgfplots-[0-9]*:../../print/tex-pgfplots
@@ -122,10 +128,12 @@ DEPENDS+=	tex-pictex-[0-9]*:../../graphics/tex-pictex
 # depend prerex
 # depend productbox
 # depend ptolemaicastronomy
+# depend puyotikz
 # depend pxpgfmark
+# depend pxpic
 # depend qcircuit
+DEPENDS+=	tex-qrcode-[0-9]*:../../graphics/tex-qrcode
 # depend quantikz
-# depend qrcode
 # depend randbild
 # depend randomwalk
 # depend realhats
@@ -133,21 +141,24 @@ DEPENDS+=	tex-pictex-[0-9]*:../../graphics/tex-pictex
 # depend rviewport
 # depend sa-tikz
 # depend schemabloc
-# depend scsnowman
 # depend scratch
 # depend scratch3
+# depend scsnowman
 # depend setdeck
 # depend signchart
+# depend simpleoptics
 # depend smartdiagram
 # depend spath3
 # depend spectralsequences
 # depend swimgraf
+# depend syntaxdi
 # depend table-fct
 DEPENDS+=	tex-texdraw-[0-9]*:../../graphics/tex-texdraw
 # depend ticollege
-# depend tipfr
 DEPENDS+=	tex-tikz-3dplot-[0-9]*:../../graphics/tex-tikz-3dplot
+# depend tikz-among-us
 # depend tikz-bayesnet
+# depend tikz-bbox
 DEPENDS+=	tex-tikz-cd-[0-9]*:../../graphics/tex-tikz-cd
 # depend tikz-dependency
 # depend tikz-dimline
@@ -158,6 +169,7 @@ DEPENDS+=	tex-tikz-cd-[0-9]*:../../graphics/tex-tikz-cd
 # depend tikz-kalender
 # depend tikz-karnaugh
 # depend tikz-ladder
+# depend tikz-lake-fig
 # depend tikz-layers
 # depend tikz-nef
 # depend tikz-network
@@ -165,10 +177,12 @@ DEPENDS+=	tex-tikz-cd-[0-9]*:../../graphics/tex-tikz-cd
 # depend tikz-optics
 # depend tikz-page
 # depend tikz-palattice
+# depend tikz-planets
 # depend tikz-qtree
 # depend tikz-relay
 # depend tikz-sfc
 # depend tikz-timing
+# depend tikz-trackschematic
 # depend tikz-truchet
 # depend tikzcodeblocks
 # depend tikzducks
@@ -177,26 +191,28 @@ DEPENDS+=	tex-tikzinclude-[0-9]*:../../graphics/tex-tikzinclude
 DEPENDS+=	tex-tikzmark-[0-9]*:../../graphics/tex-tikzmark
 # depend tikzmarmots
 DEPENDS+=	tex-tikzorbital-[0-9]*:../../graphics/tex-tikzorbital
+# depend tikzpackets
 DEPENDS+=	tex-tikzpagenodes-[0-9]*:../../graphics/tex-tikzpagenodes
-DEPENDS+=	tex-tikzpfeile-[0-9]*:../../graphics/tex-tikzpfeile
 # depend tikzpeople
+DEPENDS+=	tex-tikzpfeile-[0-9]*:../../graphics/tex-tikzpfeile
 DEPENDS+=	tex-tikzposter-[0-9]*:../../graphics/tex-tikzposter
 DEPENDS+=	tex-tikzscale-[0-9]*:../../graphics/tex-tikzscale
 DEPENDS+=	tex-tikzsymbols-[0-9]*:../../graphics/tex-tikzsymbols
-# depend timing-diagrams
-# depend tqft
+# depend tikztosvg
+# depend tile-graphic
+# depend tipfr
 DEPENDS+=	tex-tkz-base-[0-9]*:../../graphics/tex-tkz-base
 # depend tkz-berge
 # depend tkz-doc
 # depend tkz-euclide
 DEPENDS+=	tex-tkz-fct-[0-9]*:../../graphics/tex-tkz-fct
 # depend tkz-graph
-# depend tkz-kiviat
-# depend tkz-linknodes
 # depend tkz-orm
 # depend tkz-tab
+# depend tqft
 # depend tsemlines
 DEPENDS+=	tex-tufte-latex-[0-9]*:../../print/tex-tufte-latex
+# depend utfsym
 DEPENDS+=	tex-venndiagram-[0-9]*:../../graphics/tex-venndiagram
 # depend visualpstricks
 # depend xpicture

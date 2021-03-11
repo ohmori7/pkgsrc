@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.63 2018/08/22 09:45:48 wiz Exp $
+# $NetBSD: Makefile,v 1.66 2020/08/31 18:10:27 wiz Exp $
 
 DISTNAME=	dvdrip-0.98.11
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	multimedia x11 sysutils
 MASTER_SITES=	https://www.exit1.org/dvdrip/dist/
 
@@ -35,7 +35,7 @@ USE_TOOLS+=		perl
 MAKE_ENV+=		SKIP_UNPACK_REQUIRED_MODULES=1
 MAKE_JOBS_SAFE=		no
 
-PERL5_PACKLIST= auto/Video/DVDRip/.packlist
+PERL5_PACKLIST=	auto/Video/DVDRip/.packlist
 
 SUBST_CLASSES+=		fping
 SUBST_STAGE.fping=	pre-configure

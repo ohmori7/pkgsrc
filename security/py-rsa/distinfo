@@ -1,7 +1,6 @@
-$NetBSD: distinfo,v 1.9 2018/10/23 09:55:09 jperkin Exp $
+$NetBSD: distinfo,v 1.13 2021/02/24 19:14:38 adam Exp $
 
-SHA1 (rsa-4.0.tar.gz) = 8a68dcee7bd2a7727c253b9ed2820cd1b5b9241a
-RMD160 (rsa-4.0.tar.gz) = 806f139f5b69af170c7a04977665cdf8d4c046c7
-SHA512 (rsa-4.0.tar.gz) = e11106741cc4275246c986d39b3f028b5a4df6fbffdd08a78072ac3d3a9a7ade7a39789c504a2705f54d858a9bdbf03981251f32f9c45baba71e4a986e14b24e
-Size (rsa-4.0.tar.gz) = 37385 bytes
-SHA1 (patch-setup.py) = 8335daf31dd1acd8b47512b647f83196cfaa38d5
+SHA1 (rsa-4.7.2.tar.gz) = e8a53067e03fe1b6682fd99a40a7359396a06daa
+RMD160 (rsa-4.7.2.tar.gz) = ab0fdbce566057469379043cebadb434f7384750
+SHA512 (rsa-4.7.2.tar.gz) = 63f561774dbaa10511167cba31e0f852e32b3250f2803edaa2729dc2b28baa2c42cb79dfbd49e38eb42ce82f665ed4c3d9dcc810c37380401e2c62202b1c7948
+Size (rsa-4.7.2.tar.gz) = 39711 bytes

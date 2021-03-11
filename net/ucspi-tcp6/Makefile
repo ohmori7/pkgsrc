@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.11 2019/05/05 15:17:49 schmonz Exp $
+# $NetBSD: Makefile,v 1.29 2020/11/19 09:35:39 schmonz Exp $
 
-DISTNAME=		ucspi-tcp6-1.10.5
-CATEGORIES=		net
+DISTNAME=		ucspi-tcp6-1.11.6a
+CATEGORIES=		net sysutils
 MASTER_SITES=		https://www.fehcom.de/ipnet/ucspi-tcp6/
 EXTRACT_SUFX=		.tgz
 
@@ -14,13 +14,11 @@ CONFLICTS+=		ucspi-tcp-[0-9]*
 
 WRKSRC=			${WRKDIR}/net/${PKGBASE}/${DISTNAME}
 DJB_SLASHPACKAGE=	yes
-DJB_RESTRICTED=		no
 DJB_CONFIG_DIR=		${WRKSRC}
 
-CFLAGS+=		-I${PREFIX}/include/qlibs
-LDFLAGS+=		-L${PREFIX}/lib/qlibs
-
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 ${PKGMANDIR}/man5
+
+MAKE_JOBS_SAFE=		no
 
 post-configure:
 	${RUN}cd ${DJB_CONFIG_DIR};		\

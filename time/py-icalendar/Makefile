@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.31 2018/10/11 10:16:44 adam Exp $
+# $NetBSD: Makefile,v 1.35 2021/01/09 09:30:26 adam Exp $
 
-DISTNAME=	icalendar-4.0.3
+DISTNAME=	icalendar-4.0.7
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	time python
 MASTER_SITES=	${MASTER_SITE_PYPI:=i/icalendar/}
@@ -17,7 +17,7 @@ USE_LANGUAGES=	# none
 
 post-install:
 	cd ${DESTDIR}${PREFIX}/bin && \
-		${MV} icalendar icalendar-${PYVERSSUFFIX} || ${TRUE}
+	${MV} icalendar icalendar-${PYVERSSUFFIX} || ${TRUE}
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

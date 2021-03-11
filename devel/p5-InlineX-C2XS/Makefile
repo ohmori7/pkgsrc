@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.17 2019/01/26 08:38:01 wen Exp $
+# $NetBSD: Makefile,v 1.20 2020/08/31 18:08:15 wiz Exp $
 #
 
 DISTNAME=	InlineX-C2XS-0.26
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Inline/SISYPHUS/}
 
 MAINTAINER=	wenheping@gmail.com
-HOMEPAGE=	http://search.cpan.org/dist/InlineX-C2XS/
+HOMEPAGE=	https://metacpan.org/release/InlineX-C2XS
 COMMENT=	Convert from Inline C code to XS
 LICENSE=	${PERL5_LICENSE}
 

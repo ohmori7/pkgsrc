@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.13 2019/02/08 10:52:03 adam Exp $
+# $NetBSD: Makefile,v 1.18 2021/02/01 09:35:56 adam Exp $
 
-DISTNAME=	natsort-6.0.0
+DISTNAME=	natsort-7.1.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	textproc python
 MASTER_SITES=	${MASTER_SITE_PYPI:=n/natsort/}
@@ -10,11 +10,19 @@ HOMEPAGE=	https://github.com/SethMMorton/natsort
 COMMENT=	Natural sorting for python
 LICENSE=	mit
 
+TEST_DEPENDS+=	${PYPKGPREFIX}-hypothesis-[0-9]*:../../devel/py-hypothesis
+TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
+
 USE_LANGUAGES=	# none
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 post-install:
 	cd ${DESTDIR}${PREFIX}/bin && \
-		${MV} natsort natsort-${PYVERSSUFFIX} || ${TRUE}
+	${MV} natsort natsort-${PYVERSSUFFIX} || ${TRUE}
+
+do-test:
+	cd ${WRKSRC} && pytest-${PYVERSSUFFIX} tests
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

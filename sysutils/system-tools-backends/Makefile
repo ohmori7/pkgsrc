@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2018/08/22 09:46:41 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2020/12/04 04:56:15 riastradh Exp $
 #
 
 DISTNAME=		system-tools-backends-2.6.1
-PKGREVISION=		15
+PKGREVISION=		19
 CATEGORIES=		sysutils
 MASTER_SITES=		https://system-tools-backends.freedesktop.org/downloads/2.6/
 
@@ -46,7 +46,7 @@ DEPENDS+=	p5-URI>=1.37:../../www/p5-URI
 REPLACE_PERL+=	SystemToolsBackends.pl.in
 REPLACE_PERL+=	Utils/*.pm
 
-SUBST_CLASSES+= 		gettext-package
+SUBST_CLASSES+=			gettext-package
 SUBST_STAGE.gettext-package=	post-configure
 SUBST_FILES.gettext-package=	po/Makefile
 SUBST_SED.gettext-package=	-e 's|@GETTEXT_PACKAGE@|system-tools-backends|g'

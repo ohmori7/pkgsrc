@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.50 2019/03/20 12:13:21 wiz Exp $
+# $NetBSD: Makefile,v 1.62 2020/08/17 20:17:49 leot Exp $
 
-DISTNAME=	enlightenment-0.17.3
-PKGREVISION=	17
+DISTNAME=	enlightenment-0.17.6
+PKGREVISION=	3
 CATEGORIES=	x11
-MASTER_SITES=	http://download.enlightenment.org/releases/
+MASTER_SITES=	https://download.enlightenment.org/att/releases/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	joerg@NetBSD.org
-HOMEPAGE=	http://enlightenment.org/
+HOMEPAGE=	https://enlightenment.org/
 COMMENT=	Enlightenment Window Manager, Development Release
 LICENSE=	2-clause-bsd
 
@@ -53,9 +53,9 @@ pre-install:
 
 PKGCONFIG_OVERRIDE=	enlightenment.pc.in
 
-MODULE_ARCH=	${LOWER_OPSYS}-${MACHINE_ARCH}-${PKGVERSION_NOREV}
-PLIST_SUBST=	MODULE_ARCH=${MODULE_ARCH}
-PRINT_PLIST_AWK+=	 { gsub(/${MODULE_ARCH}/, "$${MODULE_ARCH}") }
+MODULE_ARCH=		${LOWER_OPSYS}-${MACHINE_ARCH}-${PKGVERSION_NOREV}
+PLIST_SUBST=		MODULE_ARCH=${MODULE_ARCH}
+PRINT_PLIST_AWK+=	{ gsub(/${MODULE_ARCH}/, "$${MODULE_ARCH}") }
 
 .include "../../devel/ecore/buildlink3.mk"
 .include "../../devel/eet/buildlink3.mk"

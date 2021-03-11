@@ -1,14 +1,15 @@
-#	$NetBSD: bsd.pkg.use.mk,v 1.67 2018/01/02 05:49:44 maya Exp $
+#	$NetBSD: bsd.pkg.use.mk,v 1.69 2020/03/12 00:12:23 rillig Exp $
 #
 # Turn USE_* macros into proper depedency logic.  Included near the top of
 # bsd.pkg.mk, after bsd.prefs.mk.
-#
+
 # Package-settable variables:
 #
 # USE_BSD_MAKEFILE
 #	Should be set to "yes" whenever a package uses a BSD-style
 #	Makefile. These Makefiles typically end with a line including
 #	<bsd.prog.mk>.
+# Keywords: bsd make bsd.prog.mk
 
 # USE_IMAKE
 #	When set to "yes", means that the package uses imake as the
@@ -86,8 +87,8 @@ BUILD_DEPENDS+=		libtool-fortran>=${_OPSYS_LIBTOOL_REQD:U${LIBTOOL_REQD}}:../../
 .  endif
 .else
 .  if !empty(USE_CROSS_COMPILE:M[yY][eE][sS])
-PKG_LIBTOOL?=		${CROSSBASE}/bin/libtool
-PKG_SHLIBTOOL?=		${CROSSBASE}/bin/shlibtool
+PKG_LIBTOOL?=		${LOCALBASE}/cross-${TARGET_ARCH:U${MACHINE_ARCH}}/bin/libtool
+PKG_SHLIBTOOL?=		${LOCALBASE}/cross-${TARGET_ARCH:U${MACHINE_ARCH}}/bin/shlibtool
 .  else
 PKG_LIBTOOL?=		${LOCALBASE}/bin/libtool
 PKG_SHLIBTOOL?=		${LOCALBASE}/bin/shlibtool

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.48 2019/05/23 19:23:16 rillig Exp $
+# $NetBSD: Makefile,v 1.54 2020/11/05 09:09:04 ryoon Exp $
 #
 
 DISTNAME=		prelude-manager-0.9.15
-PKGREVISION=		11
+PKGREVISION=		16
 CATEGORIES=		security
 MASTER_SITES=		http://www.prelude-ids.com/download/releases/prelude-manager/
 #MASTER_SITES+=		http://www.prelude-ids.org/download/releases/
@@ -24,13 +24,13 @@ CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE:Q}
 CONFIGURE_ARGS+=	--with-libpreludedb-prefix=${BUILDLINK_PREFIX.libpreludedb}
 
-RCD_SCRIPTS=		preludemanager
+RCD_SCRIPTS=			preludemanager
 PRELUDE_MANAGER_PID_DIR=	${VARBASE}/run/prelude-manager
-PRELUDE_USER?=		_prelude
-PRELUDE_GROUP?=		_prelude
-PRELUDE_HOME?=		${VARBASE}/spool/prelude-manager
-OWN_DIRS_PERMS+=	${PRELUDE_HOME} ${PRELUDE_USER} ${PRELUDE_GROUP} 750
-OWN_DIRS+=		${PKG_SYSCONFDIR}/prelude-manager
+PRELUDE_USER?=			_prelude
+PRELUDE_GROUP?=			_prelude
+PRELUDE_HOME?=			${VARBASE}/spool/prelude-manager
+OWN_DIRS_PERMS+=		${PRELUDE_HOME} ${PRELUDE_USER} ${PRELUDE_GROUP} 750
+OWN_DIRS+=			${PKG_SYSCONFDIR}/prelude-manager
 
 INSTALLATION_DIRS=	sbin
 

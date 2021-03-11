@@ -1,13 +1,14 @@
-@comment $NetBSD: PLIST,v 1.12 2018/01/07 15:08:50 leot Exp $
+@comment $NetBSD: PLIST,v 1.14 2021/02/04 16:29:14 wiz Exp $
 man/man1/privoxy.1
 sbin/privoxy
 share/doc/privoxy/AUTHORS
 share/doc/privoxy/ChangeLog
 share/doc/privoxy/LICENSE
+share/doc/privoxy/LICENSE.GPLv3
 share/doc/privoxy/README
 share/doc/privoxy/developer-manual/coding.html
-share/doc/privoxy/developer-manual/cvs.html
 share/doc/privoxy/developer-manual/documentation.html
+share/doc/privoxy/developer-manual/git.html
 share/doc/privoxy/developer-manual/index.html
 share/doc/privoxy/developer-manual/introduction.html
 share/doc/privoxy/developer-manual/newrelease.html
@@ -81,7 +82,6 @@ share/examples/privoxy/templates/show-request
 share/examples/privoxy/templates/show-status
 share/examples/privoxy/templates/show-status-file
 share/examples/privoxy/templates/show-url-info
-share/examples/privoxy/templates/show-version
 share/examples/privoxy/templates/toggle
 share/examples/privoxy/templates/toggle-mini
 share/examples/privoxy/templates/untrusted
@@ -89,3 +89,4 @@ share/examples/privoxy/templates/url-info-osd.xml
 share/examples/privoxy/trust
 share/examples/privoxy/user.action
 share/examples/privoxy/user.filter
+@pkgdir share/doc/privoxy/images

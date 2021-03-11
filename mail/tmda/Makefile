@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.62 2019/04/26 14:12:41 maya Exp $
+# $NetBSD: Makefile,v 1.65 2020/12/04 20:45:28 nia Exp $
 
 DISTNAME=	tmda-1.1.12
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	mail python
 MASTER_SITES=	http://tmda.sourceforge.net/ftp/releases/
 #MASTER_SITES+=	ftp://tmda.net/pub/tmda/releases/
@@ -12,8 +12,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Python-based SPAM reduction system
 
 REPLACE_PYTHON=	${TMDA_PROGRAMS}
-PY_PATCHPLIST=		yes
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 1.1.12
+PY_PATCHPLIST=	yes
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 1.1.12
 
 PKG_SYSCONFSUBDIR=	${PKGBASE}
 

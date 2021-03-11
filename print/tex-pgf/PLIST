@@ -1,4 +1,6 @@
-@comment $NetBSD: PLIST,v 1.9 2019/05/13 21:18:11 markd Exp $
+@comment $NetBSD: PLIST,v 1.12 2021/02/18 19:53:42 markd Exp $
+share/texmf-dist/scripts/pgf/Makefile.pgf_release
+share/texmf-dist/scripts/pgf/pgfrevisionfile.sh
 share/texmf-dist/tex/context/third/pgf/basiclayer/t-pgf.tex
 share/texmf-dist/tex/context/third/pgf/basiclayer/t-pgfbim.tex
 share/texmf-dist/tex/context/third/pgf/basiclayer/t-pgfbla.tex
@@ -377,6 +379,7 @@ share/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.cod
 share/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.symbols.code.tex
 share/texmf-dist/tex/generic/pgf/lua/pgf/manual.lua
 share/texmf-dist/tex/generic/pgf/lua/pgf/manual/DocumentParser.lua
+share/texmf-dist/tex/generic/pgf/math/pgfint.code.tex
 share/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
 share/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
 share/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
@@ -415,6 +418,7 @@ share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-dvipdfm.def
 share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-dvipdfmx.def
 share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-dvips.def
 share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-dvisvgm.def
+share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-dvisvgm4ht.def
 share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-luatex.def
 share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
 share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-tex4ht.def
@@ -461,6 +465,7 @@ share/texmf-dist/tex/latex/pgf/compatibility/pgflibrarytikzbackgrounds.sty
 share/texmf-dist/tex/latex/pgf/compatibility/pgflibrarytikztrees.sty
 share/texmf-dist/tex/latex/pgf/compatibility/pgfnodes.sty
 share/texmf-dist/tex/latex/pgf/compatibility/pgfshade.sty
+share/texmf-dist/tex/latex/pgf/doc/pgfmanual-en-macros.tex
 share/texmf-dist/tex/latex/pgf/doc/pgfmanual.code.tex
 share/texmf-dist/tex/latex/pgf/doc/pgfmanual.pdflinks.code.tex
 share/texmf-dist/tex/latex/pgf/doc/pgfmanual.prettyprinter.code.tex
@@ -474,6 +479,7 @@ share/texmf-dist/tex/latex/pgf/utilities/pgfcalendar.sty
 share/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
 share/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
 share/texmf-dist/tex/latex/pgf/utilities/pgfpages.sty
+share/texmf-dist/tex/latex/pgf/utilities/pgfparser.sty
 share/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
 share/texmf-dist/tex/latex/pgf/utilities/tikzexternal.sty
 share/texmf-dist/tex/latex/pgf/utilities/xxcolor.sty

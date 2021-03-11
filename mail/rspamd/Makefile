@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.52 2019/04/03 00:32:52 ryoon Exp $
+# $NetBSD: Makefile,v 1.74 2021/01/21 16:53:30 triaxx Exp $
 
-DISTNAME=	rspamd-1.8.0
-PKGREVISION=	3
+DISTNAME=	rspamd-2.7
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_GITHUB:=vstakhov/}
 
@@ -17,17 +16,17 @@ DEPENDS+=	ragel-[0-9]*:../../devel/ragel
 
 USE_CMAKE=	yes
 USE_TOOLS+=	perl pkg-config
-USE_LANGUAGES=	c99
+USE_LANGUAGES=	c99 c++
 BUILD_DEFS+=	VARBASE
 
 # Not really true, but difficult to avoid picking up 5.3
 LUA_VERSIONS_ACCEPTED=	53
 
-CPPFLAGS.SunOS+=	-D__EXTENSIONS__
-BUILDLINK_TRANSFORM.Darwin+=	rm:-lrt
+CPPFLAGS.SunOS+=			-D__EXTENSIONS__
 
-LDFLAGS+=	${COMPILER_RPATH_FLAG}${PREFIX}/lib/rspamd
-TEST_TARGET=	run-test
+CMAKE_INSTALL_NAME_DIR=	${PREFIX}/lib/rspamd
+LDFLAGS+=		${COMPILER_RPATH_FLAG}${PREFIX}/lib/rspamd
+TEST_TARGET=		run-test
 
 RSPAMD_USER?=	rspamd
 RSPAMD_GROUP?=	rspamd
@@ -50,12 +49,14 @@ FILES_SUBST+=	RSPAMD_USER=${RSPAMD_USER}
 FILES_SUBST+=	RSPAMD_GROUP=${RSPAMD_GROUP}
 
 RCD_SCRIPTS=	rspamd
+SMF_METHODS=	rspamd
 
 CMAKE_ARGS+=	-DMANDIR:PATH=${PREFIX}/${PKGMANDIR}
 CMAKE_ARGS+=	-DLOGDIR:PATH=${LOGDIR}
 CMAKE_ARGS+=	-DRUNDIR:PATH=${VARBASE}/run/rspamd
 CMAKE_ARGS+=	-DDBDIR:PATH=${DBDIR}
 CMAKE_ARGS+=	-DCONFDIR:PATH=${PKG_SYSCONFDIR}
+CMAKE_ARGS+=	-DEXAMPLESDIR:PATH=${EGDIR}
 CMAKE_ARGS+=	-DRSPAMD_USER=${RSPAMD_USER}
 CMAKE_ARGS+=	-DRSPAMD_GROUP=${RSPAMD_GROUP}
 CMAKE_ARGS+=	-DENABLE_SQLITE=ON
@@ -63,8 +64,12 @@ CMAKE_ARGS+=	-DENABLE_SQLITE=ON
 CMAKE_ARGS+=	-DENABLE_LUAJIT=OFF
 CMAKE_ARGS+=	-DENABLE_TORCH=OFF
 
+# Assumes inotify == Linux
+CMAKE_ARGS.SunOS+=	-DHAVE_INOTIFY_INIT=NO
+
 REPLACE_PERL+=	utils/rspamd_stats.pl
 
+MAKE_DIRS+=	${PKG_SYSCONFDIR}/maps.d
 MAKE_DIRS+=	${PKG_SYSCONFDIR}/modules.d
 MAKE_DIRS+=	${PKG_SYSCONFDIR}/scores.d
 
@@ -82,11 +87,13 @@ CONF_FILES+=	${EGDIR}/${file} ${PKG_SYSCONFDIR}/${file}
 ### Generate list of config files
 ###
 .PHONY: cfgfiles
-cfgfiles: do-extract
+cfgfiles:
+	${RUN} ${RECURSIVE_MAKE} extract
 	@${ECHO} "# \$$NetBSD\$$" > ${.CURDIR}/cfgfiles.mk
-	@${ECHO} "# Do not edit, regenerate post-extract using 'make cfgfiles'" >> ${.CURDIR}/cfgfiles.mk
-	@${ECHO} "CFGFILES= \\" >> ${.CURDIR}/cfgfiles.mk
-	cd ${WRKSRC}/conf && ${FIND} * -type f | ${SORT} | ${TR} '\n' ' ' >> ${.CURDIR}/cfgfiles.mk
+	@${ECHO} "# Do not edit, regenerate using 'make cfgfiles'" >> ${.CURDIR}/cfgfiles.mk
+	${RUN} cd ${WRKSRC}/conf && ${FIND} * -type f | ${SORT} \
+	| ${TR} '\n' ' ' | ${SED} 's, $$,,' \
+	| ${AWK} '{print("CFGFILES=\t" $$0)}' >> ${.CURDIR}/cfgfiles.mk
 	@${ECHO} >> ${.CURDIR}/cfgfiles.mk
 
 post-extract:
@@ -101,6 +108,7 @@ post-extract:
 .include "../../lang/lua/buildlink3.mk"
 .include "../../mail/gmime/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
+.include "../../security/libsodium/buildlink3.mk"
 .include "../../sysutils/file/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

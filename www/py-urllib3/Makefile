@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.16 2019/05/27 12:44:46 adam Exp $
+# $NetBSD: Makefile,v 1.27 2021/01/27 09:38:34 adam Exp $
 
-DISTNAME=	urllib3-1.25.3
+DISTNAME=	urllib3-1.26.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	www python
 MASTER_SITES=	${MASTER_SITE_PYPI:=u/urllib3/}
 
 MAINTAINER=	imil@NetBSD.org
-HOMEPAGE=	http://urllib3.readthedocs.io/
+HOMEPAGE=	https://urllib3.readthedocs.io/
 COMMENT=	HTTP library with thread-safe connection pooling
 LICENSE=	mit
 
@@ -22,10 +22,13 @@ DEPENDS+=	${PYPKGPREFIX}-ipaddress-[0-9]*:../../net/py-ipaddress
 .endif
 
 TEST_DEPENDS+=	${PYPKGPREFIX}-mock-[0-9]*:../../devel/py-mock
-TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
+TEST_DEPENDS+=	${PYPKGPREFIX}-test-runner-[0-9]*:../../devel/py-test-runner
 TEST_DEPENDS+=	${PYPKGPREFIX}-tornado-[0-9]*:../../www/py-tornado
+TEST_DEPENDS+=	${PYPKGPREFIX}-trustme-[0-9]*:../../security/py-trustme
 
 USE_LANGUAGES=	# none
+
+PYSETUPTESTTARGET=	pytest
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

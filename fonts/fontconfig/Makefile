@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.115 2018/09/17 06:56:22 maya Exp $
+# $NetBSD: Makefile,v 1.121 2020/11/05 17:41:28 nia Exp $
 
 DISTNAME=	fontconfig-2.13.1
+PKGREVISION=	4
 CATEGORIES=	fonts
 MASTER_SITES=	https://www.fontconfig.org/release/
 EXTRACT_SUFX=	.tar.bz2
@@ -8,10 +9,10 @@ EXTRACT_SUFX=	.tar.bz2
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.fontconfig.org/
 COMMENT=	Library for configuring and customizing font access
-#LICENSE=	x11?
+#LICENSE=	x11? AND modified-bsd # (for uuid.h)
 
 # https://bugs.freedesktop.org/show_bug.cgi?id=101280
-BUILD_DEPENDS+=	gperf-[0-9]*:../../devel/gperf
+TOOL_DEPENDS+=	gperf-[0-9]*:../../devel/gperf
 
 USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake pkg-config msgfmt
@@ -50,12 +51,12 @@ ADDFONTS:=	${LOCALBASE}/share/fonts/X11,${ADDFONTS}
 .endif
 
 .if ${OPSYS} == "Darwin"
-ADDFONTS:=	~/Library/Fonts,/Library/Fonts,/System/Library/Fonts,${ADDFONTS}
+ADDFONTS:=		~/Library/Fonts,/Library/Fonts,/System/Library/Fonts,${ADDFONTS}
 CONFIGURE_ARGS+=	--with-arch=${MACHINE_ARCH}
 .endif
 CONFIGURE_ARGS+=	--with-add-fonts=${ADDFONTS}
 
-SUBST_CLASSES+= prefix
+SUBST_CLASSES+=		prefix
 SUBST_STAGE.prefix=	post-build
 SUBST_FILES.prefix=	conf.d/README
 SUBST_VARS.prefix=	PREFIX
@@ -76,6 +77,7 @@ FC_STDCONF=	10-scale-bitmap-fonts.conf 10-hinting-full.conf \
 	80-delicious.conf 90-synthetic.conf
 # pkgsrc addition
 FC_STDCONF+=	30-pkgsrc-aliases.conf
+FC_STDCONF+=	70-no-bitmap-webfonts.conf
 .for f in ${FC_STDCONF}
 CONF_FILES+=	${TMPLDIR}/${f} ${PKG_SYSCONFDIR}/conf.d/${f}
 .endfor
@@ -89,17 +91,22 @@ TEST_TARGET=	check
 CONFIGURE_ENV+=	CC_FOR_BUILD=${NATIVE_CC:Q}
 .endif
 
+.if ${OPSYS} != "Darwin"
+CFLAGS+=	-I${WRKDIR}
+post-extract:
+	mkdir -p ${WRKDIR}/uuid
+	cp ${FILESDIR}/uuid.h ${WRKDIR}/uuid/.
+.endif
+
 pre-configure:
 	-cd ${BUILDLINK_X11_DIR:Q} && ${FIND} . -path "*fontconfig*" -type l -delete
 
 post-install:
 	${INSTALL_DATA} ${FILESDIR}/30-pkgsrc-aliases.conf ${DESTDIR}${TMPLDIR}
+	${INSTALL_DATA} ${FILESDIR}/70-no-bitmap-webfonts.conf ${DESTDIR}${TMPLDIR}
 
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
-.if ${OPSYS} != "Darwin"
-.include "../../devel/libuuid/buildlink3.mk"
-.endif
 .include "../../devel/zlib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.freetype2+=	freetype2>=2.8.1
 .include "../../graphics/freetype2/buildlink3.mk"

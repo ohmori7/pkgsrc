@@ -1,4 +1,4 @@
-# $NetBSD: NetBSD.mk,v 1.58 2019/01/09 13:19:03 wiz Exp $
+# $NetBSD: NetBSD.mk,v 1.64 2020/12/20 20:22:17 maya Exp $
 #
 # Variable definitions for the NetBSD operating system.
 
@@ -12,6 +12,9 @@ PKGLOCALEDIR?=	share
 PS?=		/bin/ps
 SU?=		/usr/bin/su
 TYPE?=		type				# Shell builtin
+
+# pax-as-tar, found on <=8, and optionally later, fails on many archives.
+EXTRACT_USING?=	bsdtar
 
 USERADD?=	/usr/sbin/useradd
 GROUPADD?=	/usr/sbin/groupadd
@@ -31,10 +34,11 @@ PKG_TOOLS_BIN?=		${PKG_TOOLS_BIN_cmd:sh}
 ROOT_CMD?=		${SU} - root -c
 ROOT_USER?=		root
 ROOT_GROUP?=	wheel
-ULIMIT_CMD_datasize?=	ulimit -d `ulimit -H -d`
-ULIMIT_CMD_stacksize?=	ulimit -s `ulimit -H -s`
-ULIMIT_CMD_memorysize?=	ulimit -m `ulimit -H -m`
-ULIMIT_CMD_cputime?=	ulimit -t `ulimit -H -t`
+ULIMIT_CMD_virtualsize?=	ulimit -v `ulimit -H -v`
+ULIMIT_CMD_datasize?=		ulimit -d `ulimit -H -d`
+ULIMIT_CMD_stacksize?=		ulimit -s `ulimit -H -s`
+ULIMIT_CMD_memorysize?=		ulimit -m `ulimit -H -m`
+ULIMIT_CMD_cputime?=		ulimit -t `ulimit -H -t`
 
 # Native X11 is only supported on NetBSD-5 and later.
 # On NetBSD-5, native X11 has enough issues that we default
@@ -132,13 +136,15 @@ _OPSYS_SUPPORTS_FORTIFY=yes
 
 # Register support for PIE on supported architectures (with GCC)
 .if (${MACHINE_ARCH} == "i386") || \
-    (${MACHINE_ARCH} == "x86_64")
+    (${MACHINE_ARCH} == "x86_64") || \
+    (${MACHINE_ARCH} == "aarch64")
 _OPSYS_SUPPORTS_MKPIE=	yes
 .endif
 
 # Register support for RELRO on supported architectures
 .if (${MACHINE_ARCH} == "i386") || \
-    (${MACHINE_ARCH} == "x86_64")
+    (${MACHINE_ARCH} == "x86_64") || \
+    (${MACHINE_ARCH} == "aarch64")
 _OPSYS_SUPPORTS_RELRO=	yes
 .endif
 
@@ -157,6 +163,12 @@ _OPSYS_SUPPORTS_SSP=	yes
 .if (${MACHINE_ARCH} == "i386") || \
     (${MACHINE_ARCH} == "x86_64")
 _OPSYS_SUPPORTS_STACK_CHECK=	yes
+.endif
+
+.if !defined(PKG_DBDIR) && exists(/var/db/pkg)
+PKG_DBDIR_ERROR=	Compatibility pkgdb location exists, but PKG_DBDIR not specified. \
+			This may cause unexpected issues. To avoid problems, add \
+			PKG_DBDIR=/var/db/pkg to /etc/mk.conf.
 .endif
 
 _OPSYS_SUPPORTS_CWRAPPERS=	yes

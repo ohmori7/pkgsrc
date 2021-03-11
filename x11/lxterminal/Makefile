@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.15 2019/01/16 19:37:10 youri Exp $
+# $NetBSD: Makefile,v 1.20 2021/03/09 02:03:27 gutteridge Exp $
 
-DISTNAME=	lxterminal-0.3.2
+DISTNAME=	lxterminal-0.4.0
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=lxde/}
 EXTRACT_SUFX=	.tar.xz

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.36 2019/04/03 00:32:25 ryoon Exp $
+# $NetBSD: Makefile,v 1.42 2020/11/05 09:07:24 ryoon Exp $
 #
 
 DISTNAME=	cdplayer-0.5.1
-PKGREVISION=	16
+PKGREVISION=	19
 CATEGORIES=	audio gnustep
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gsburn/}
 EXTRACT_SUFX=	.tar.bz2
@@ -21,7 +21,7 @@ MAKE_FILE=	GNUmakefile
 MAKE_ENV+=	ADDITIONAL_CPPFLAGS="-Wno-import"
 MAKE_ENV+=	GNUSTEP_LIB_DIR=${GNUSTEP_LIB_DIR:Q}
 
-INSTALLATION_DIRS+=include/CDPlayer
+INSTALLATION_DIRS+=	include/CDPlayer
 
 .include "../../x11/gnustep-back/buildlink3.mk"
 .include "../../x11/gnustep-preferences/buildlink3.mk"

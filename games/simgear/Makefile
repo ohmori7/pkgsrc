@@ -1,18 +1,16 @@
-# $NetBSD: Makefile,v 1.88 2019/05/09 13:57:48 ryoon Exp $
+# $NetBSD: Makefile,v 1.115 2021/02/25 10:22:14 nia Exp $
 
-DISTNAME=	simgear-2018.3.2
-PKGREVISION=	4
+DISTNAME=	simgear-2020.3.6
 CATEGORIES=	games devel
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=flightgear/release-2018.3/}
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=flightgear/release-${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://home.flightgear.org/
+HOMEPAGE=	https://www.flightgear.org/
 COMMENT=	Simulator Construction Tools
 LICENSE=	gnu-lgpl-v2
 
 USE_LANGUAGES=		c c++
-USE_PKGLOCALEDIR=	yes
 USE_CMAKE=		yes
 
 CONFIGURE_DIRS=		sgbuild
@@ -20,6 +18,9 @@ BUILD_DIRS=		sgbuild
 CMAKE_ARG_PATH=		..
 
 CMAKE_ARGS+=		-DCMAKE_BUILD_TYPE=Release
+CMAKE_ARGS+=		-DSIMGEAR_SHARED=ON
+CMAKE_ARGS+=		-DSYSTEM_EXPAT=ON
+CMAKE_ARGS+=		-DSYSTEM_UDNS=ON
 
 LDFLAGS.SunOS+=		-lsocket -lnsl
 
@@ -34,6 +35,8 @@ pre-configure:
 .include "../../graphics/MesaLib/buildlink3.mk"
 .include "../../graphics/glu/buildlink3.mk"
 .include "../../graphics/osg/buildlink3.mk"
+.include "../../net/udns/buildlink3.mk"
+.include "../../textproc/expat/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

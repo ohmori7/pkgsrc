@@ -1,18 +1,18 @@
-# $NetBSD: Makefile,v 1.10 2018/08/22 09:47:36 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2020/08/31 18:12:48 wiz Exp $
 
 DISTNAME=	Dancer-Session-Cookie-0.30
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Dancer/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Dancer-Session-Cookie/
+HOMEPAGE=	https://metacpan.org/release/Dancer-Session-Cookie
 COMMENT=	Encrypted cookie-based session backend for Dancer
 LICENSE=	${PERL5_LICENSE}
 
 USE_LANGUAGES=	# empty
-PERL5_PACKLIST= auto/Dancer/Session/Cookie/.packlist
+PERL5_PACKLIST=	auto/Dancer/Session/Cookie/.packlist
 
 DEPENDS+=	p5-Crypt-CBC-[0-9]*:../../security/p5-Crypt-CBC
 DEPENDS+=	p5-Crypt-Rijndael-[0-9]*:../../security/p5-Crypt-Rijndael

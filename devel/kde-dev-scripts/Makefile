@@ -1,11 +1,18 @@
-# $NetBSD: Makefile,v 1.24 2019/04/25 07:32:46 maya Exp $
+# $NetBSD: Makefile,v 1.38 2020/12/04 20:45:10 nia Exp $
 
-DISTNAME=	kde-dev-scripts-${_KDE_VERSION}
-PKGREVISION=	13
+DISTNAME=	kde-dev-scripts-${KAPPSVER}
+PKGREVISION=	4
 CATEGORIES=	devel
-COMMENT=	Scripts useful during development of KDE software
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+HOMEPAGE=	https://kde.org/applications/development/
+COMMENT=	Scripts useful during development of KDE software
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
+
+.include "../../meta-pkgs/kde/applications.mk"
+
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
+
+USE_TOOLS+=	msgmerge bash:run perl:run
 
 REPLACE_BASH+= \
 	create_makefile \
@@ -42,6 +49,7 @@ REPLACE_PERL+= \
 	svnlastchange
 
 REPLACE_PYTHON+= \
+	grantlee_strings_extractor.py \
 	kde-systemsettings-tree.py \
 	kde_generate_export_header \
 	kdelnk2desktop.py \
@@ -53,13 +61,6 @@ REPLACE_SH+= \
 	build-progress.sh \
 	cvsaddcurrentdir
 
-INSTALLATION_DIRS+=	${PKGMANDIR}/man1
-
-USE_TOOLS+=	gmake bash:run
-
-.include "../../meta-pkgs/kde4/kde4.mk"
-
 .include "../../lang/python/application.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

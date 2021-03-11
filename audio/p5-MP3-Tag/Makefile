@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.33 2018/08/22 09:42:56 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2020/09/06 19:28:06 wiz Exp $
 
-DISTNAME=	MP3-Tag-1.14
+DISTNAME=	MP3-Tag-1.15
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	audio perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MP3/}
+EXTRACT_SUFX=	.zip
 
 MAINTAINER=	damon@brodiefamily.org
-HOMEPAGE=	http://search.cpan.org/dist/MP3-Tag/
+HOMEPAGE=	https://metacpan.org/release/MP3-Tag
 COMMENT=	This is a perl module to read/write tags of mp3-files
 LICENSE=	${PERL5_LICENSE}
 

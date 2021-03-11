@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.45 2018/08/22 09:45:35 wiz Exp $
+# $NetBSD: Makefile,v 1.49 2020/08/31 18:10:09 wiz Exp $
 
 DISTNAME=	teapop-0.3.8
-PKGREVISION=	17
+PKGREVISION=	20
 CATEGORIES=	mail
 MASTER_SITES=	# ftp://ftp.toontown.org/pub/teapop/
 
@@ -13,7 +13,6 @@ USE_TOOLS+=	perl:run
 
 GNU_CONFIGURE=		YES
 
-CONFIGURE_ARGS+=	--enable-flock
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 CONFIGURE_ARGS+=	--enable-piddir=${VARBASE}/run
 

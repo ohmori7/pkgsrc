@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:45:02 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:09:24 wiz Exp $
 
 DISTNAME=	Padre-Plugin-Git-0.12
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	editors perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Padre/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Padre-Plugin-Git/
+HOMEPAGE=	https://metacpan.org/release/Padre-Plugin-Git
 COMMENT=	Simple Git interface for Padre
 LICENSE=	${PERL5_LICENSE}
 

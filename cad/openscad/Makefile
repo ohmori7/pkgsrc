@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.56 2019/06/08 11:04:29 rillig Exp $
-#
+# $NetBSD: Makefile,v 1.76 2021/02/07 06:30:16 ryoon Exp $
 
-DISTNAME=	openscad-2015.03-3.src
-PKGNAME=	openscad-2015.03p3
-PKGREVISION=	14
+VERSION=	2019.05
+DISTNAME=	openscad-${VERSION}
+PKGREVISION=	17
 CATEGORIES=	cad
-MASTER_SITES=	http://files.openscad.org/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=openscad/}
+GITHUB_TAG=	openscad-${VERSION}
 
 MAINTAINER=	reinoud@NetBSD.org
-HOMEPAGE=	http://www.openscad.org/
+HOMEPAGE=	https://www.openscad.org/
 COMMENT=	OpenSCAD - The Programmers Solid 3D CAD Modeller
 LICENSE=	gnu-gpl-v2
 
@@ -16,13 +16,10 @@ USE_LANGUAGES=	c c++
 USE_TOOLS+=	bison gettext pkg-config
 USE_LIBTOOL=	yes
 
-WRKSRC=		${WRKDIR}/${DISTNAME:R}
-
-MAKE_JOBS_SAFE=	no
+WRKSRC=		${WRKDIR}/${PKGBASE}-${DISTNAME}
 
 CHECK_PORTABILITY_SKIP+=	tests/compare-bitmaps.sh
 
-REPLACE_PYTHON=	libraries/MCAD/get_submodules.py
 .include "../../lang/python/application.mk"
 
 MAKE_ENV+=	INSTALL_ROOT=${DESTDIR}
@@ -46,8 +43,9 @@ do-configure:
 .include "../../math/eigen3/buildlink3.mk"
 .include "../../math/mpfr/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/qt4-libs/buildlink3.mk"
-.include "../../x11/qt4-tools/buildlink3.mk"
-.include "../../x11/qt4-qscintilla/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
+.include "../../x11/qt5-qtmultimedia/buildlink3.mk"
+.include "../../x11/qt5-qscintilla/buildlink3.mk"
+.include "../../textproc/libxml++/buildlink3.mk"
+.include "../../math/double-conversion/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

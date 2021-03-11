@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.6 2019/04/25 20:56:31 markd Exp $
+$NetBSD: distinfo,v 1.10 2020/06/07 11:37:47 markd Exp $
 
-SHA1 (kemoticons-5.57.0.tar.xz) = 870d83a700aa379e9cf36b01b1f59cf465952f6c
-RMD160 (kemoticons-5.57.0.tar.xz) = 9f52af9979526dd256f0b68db629f002df832797
-SHA512 (kemoticons-5.57.0.tar.xz) = 3bf3089fe10df6f91336838d7b0b87681e0b0feeb9bda89f719501accfc6a39b6392504e0179c4505209dd0df5d378dd9415678b56c21f073c953381661b0429
-Size (kemoticons-5.57.0.tar.xz) = 1696576 bytes
+SHA1 (kemoticons-5.70.0.tar.xz) = a98e2db524af7f5b5a832c9c9f3e314270719c6f
+RMD160 (kemoticons-5.70.0.tar.xz) = 950b36e13f6feaa9b9c190417343a6569ceb3435
+SHA512 (kemoticons-5.70.0.tar.xz) = 78d638bbe758506e2b1c66bb716a539b616350d1813383321ddd15fd02c557304a9bb406a94eccfd9f850209bdeb8098518e3b43e65d4b88fa803e23d6c3ee3b
+Size (kemoticons-5.70.0.tar.xz) = 1696704 bytes

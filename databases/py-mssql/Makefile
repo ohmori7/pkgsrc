@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.29 2019/04/26 14:12:34 maya Exp $
+# $NetBSD: Makefile,v 1.36 2020/05/22 10:56:01 adam Exp $
 
 DISTNAME=		pymssql-1.0.2
 PKGNAME=		${PYPKGPREFIX}-${DISTNAME:S/py//}
-PKGREVISION=		7
+PKGREVISION=		11
 CATEGORIES=		databases python
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=pymssql/}
 
@@ -19,7 +19,7 @@ SUBST_FILTER_CMD.crlf=	${TR} -d '\r'
 
 BUILDLINK_API_DEPENDS.freetds+=	freetds>=0.63
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 1.0.2; v2 might be better.
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 1.0.2; v2 might be better.
 
 .include "../../databases/freetds/buildlink3.mk"
 .include "../../lang/python/distutils.mk"

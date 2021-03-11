@@ -1,20 +1,21 @@
-# $NetBSD: Makefile,v 1.35 2018/11/14 22:22:10 kleink Exp $
+# $NetBSD: Makefile,v 1.52 2021/02/07 06:30:35 ryoon Exp $
 
 DISTNAME=	freerdp-1.0.2
-PKGREVISION=	33
+PKGREVISION=	46
 CATEGORIES=	net
 MASTER_SITES=	http://pub.freerdp.com/releases/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.freerdp.com/
-COMMENT=	Free implementation of the Remote Desktop Protocol
+COMMENT=	Free implementation of the Remote Desktop Protocol (major version 1)
 LICENSE=	apache-2.0
 
 TOOL_DEPENDS+=	xmlto-[0-9]*:../../textproc/xmlto
 
-USE_CMAKE=	yes
-USE_TOOLS+=	pkg-config
-USE_OLD_DES_API=yes
+BROKEN=		"Fails to build with OpenSSL 1.1"
+
+USE_CMAKE=		yes
+USE_TOOLS+=		pkg-config
 
 PKGCONFIG_OVERRIDE+=	freerdp.pc.in
 

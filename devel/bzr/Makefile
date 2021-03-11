@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.73 2019/04/26 13:13:48 maya Exp $
+# $NetBSD: Makefile,v 1.77 2020/12/04 20:45:06 nia Exp $
 
-DISTNAME=	bzr-2.6.0
-PKGREVISION=	2
+DISTNAME=	bzr-2.7.0
+PKGREVISION=	1
 CATEGORIES=	devel scm
 MASTER_SITES=	https://launchpad.net/bzr/${PKGVERSION_NOREV:R}/${PKGVERSION_NOREV}/+download/
 
@@ -18,12 +18,12 @@ USE_TOOLS+=		gmake msgfmt
 
 PY_PATCHPLIST=		yes
 PYDISTUTILSPKG=		yes
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-pyrex
+PYTHON_VERSIONS_ACCEPTED= 27 # py-pyrex
 
 REPLACE_PYTHON=		bzr bzrlib/weave.py
-REPLACE_PYTHON+=		bzrlib/patiencediff.py bzrlib/_patiencediff_py.py
-REPLACE_PYTHON+=		bzrlib/plugins/bash_completion/bashcomp.py
-REPLACE_PYTHON+=		bzrlib/tests/ssl_certs/create_ssls.py
+REPLACE_PYTHON+=	bzrlib/patiencediff.py bzrlib/_patiencediff_py.py
+REPLACE_PYTHON+=	bzrlib/plugins/bash_completion/bashcomp.py
+REPLACE_PYTHON+=	bzrlib/tests/ssl_certs/create_ssls.py
 
 .include "../../mk/bsd.prefs.mk"
 

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2018/05/13 11:38:40 markd Exp $
+# $NetBSD: Makefile,v 1.4 2021/02/13 11:37:34 markd Exp $
 
 DISTNAME=	translator
-PKGNAME=	tex-${DISTNAME}-1.12
-TEXLIVE_REV=	46231
+PKGNAME=	tex-${DISTNAME}-1.12c
+TEXLIVE_REV=	56052
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/translator
+HOMEPAGE=	https://ctan.org/pkg/translator
 COMMENT=	Easy translation of strings in LaTeX
 LICENSE=	gnu-gpl-v2 AND lppl-1.3c
 

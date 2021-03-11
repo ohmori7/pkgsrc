@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2019/05/11 08:13:00 tsutsui Exp $
+# $NetBSD: Makefile,v 1.6 2020/01/29 15:56:08 tsutsui Exp $
 
 DISTNAME=		libreoffice6-bin	# overridden below
 PKGNAME=		libreoffice6-bin-${OO_RELEASE}
@@ -23,7 +23,7 @@ CONFLICTS+=		libreoffice5-bin-[0-9]*
 
 OO_VER=			6
 OO_BASEVER=		${OO_VER}.2
-OO_RELEASE=		${OO_BASEVER}.3
+OO_RELEASE=		${OO_BASEVER}.8
 OO_RELEASEV=		${OO_RELEASE}.2
 PLIST_SUBST+=		VER=${OO_VER:Q} BASEVER=${OO_BASEVER:Q}
 MESSAGE_SUBST+=		VER=${OO_VER:Q}
@@ -66,7 +66,7 @@ MASTER_SITES=		http://download.documentfoundation.org/libreoffice/stable/${OO_RE
 
 .include "options.mk"
 
-INSTALLATION_DIRS= bin share/applications
+INSTALLATION_DIRS=	bin share/applications
 DESKTOP_FILESDIR=	${.CURDIR}/../../misc/libreoffice6-bin/files
 
 do-install:

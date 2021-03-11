@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.19 2018/08/22 09:45:16 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2020/08/31 18:09:44 wiz Exp $
 
 DISTNAME=	RRDTool-OO-0.36
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	graphics perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/M/MS/MSCHILLI/}
 
 MAINTAINER=	abs@absd.org
-HOMEPAGE=	http://search.cpan.org/~mschilli/RRDTool-OO/
+HOMEPAGE=	https://metacpan.org/release/RRDTool-OO
 COMMENT=	Object-oriented interface to RRDTool
 LICENSE=	${PERL5_LICENSE}
 

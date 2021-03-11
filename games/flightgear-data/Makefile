@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.8 2019/03/14 18:13:19 nia Exp $
+# $NetBSD: Makefile,v 1.11 2021/03/05 10:11:13 nia Exp $
 
-VERSION=	2018.3.2
+VERSION=	2020.3.6
 DISTNAME=	FlightGear-${VERSION}-data
 PKGNAME=	flightgear-data-${VERSION}
 CATEGORIES=	games
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=flightgear/release-2018.3/}
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=flightgear/release-${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.flightgear.org/
+HOMEPAGE=	https://www.flightgear.org/
 COMMENT=	FlightGear Simulator data files
 LICENSE=	gnu-gpl-v2
 

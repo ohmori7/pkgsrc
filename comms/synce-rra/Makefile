@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2012/10/03 11:24:44 asau Exp $
+# $NetBSD: Makefile,v 1.11 2020/03/20 11:57:24 nia Exp $
 #
 
 DISTNAME=		synce-rra-0.9.1
@@ -18,6 +18,8 @@ USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 
 CFLAGS.SunOS+=		-D__EXTENSIONS__
+
+BUILDLINK_TRANSFORM+=	rm:-Werror
 
 .include "../../comms/synce-librapi2/buildlink3.mk"
 .include "../../comms/synce-libsynce/buildlink3.mk"

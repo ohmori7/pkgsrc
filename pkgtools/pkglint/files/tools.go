@@ -33,6 +33,15 @@ type Tool struct {
 	MustUseVarForm bool
 	Validity       Validity
 	Aliases        []string
+
+	// The operating systems on which the tool is defined conditionally,
+	// usually by enclosing the tool definition in an ".if exists".
+	// See mk/tools/tools.*.mk.
+	conditionalOn []string
+
+	// The operating systems on which the tool is not defined at all.
+	// See mk/tools/tools.*.mk.
+	undefinedOn []string
 }
 
 func (tool *Tool) String() string {
@@ -41,7 +50,7 @@ func (tool *Tool) String() string {
 		aliases = ":" + strings.Join(tool.Aliases, ",")
 	}
 
-	varForm := ifelseStr(tool.MustUseVarForm, "var", "")
+	varForm := condStr(tool.MustUseVarForm, "var", "")
 
 	return sprintf("%s:%s:%s:%s%s",
 		tool.Name, tool.Varname, varForm, tool.Validity, aliases)
@@ -135,7 +144,7 @@ func NewTools() *Tools {
 //
 // After this tool is added to USE_TOOLS, it may be used by this name
 // (e.g. "awk") or by its variable (e.g. ${AWK}).
-func (tr *Tools) Define(name, varname string, mkline MkLine) *Tool {
+func (tr *Tools) Define(name, varname string, mkline *MkLine) *Tool {
 	if trace.Tracing {
 		trace.Stepf("Tools.Define: %q %q in %s", name, varname, mkline)
 	}
@@ -145,14 +154,14 @@ func (tr *Tools) Define(name, varname string, mkline MkLine) *Tool {
 		return nil
 	}
 
-	validity := tr.validity(mkline.Basename, false)
+	validity := tr.validity(mkline.Basename.String(), false)
 	return tr.def(name, varname, false, validity, nil)
 }
 
 func (tr *Tools) def(name, varname string, mustUseVarForm bool, validity Validity, aliases []string) *Tool {
-	assertf(tr.IsValidToolName(name), "Invalid tool name %q", name)
+	assert(tr.IsValidToolName(name))
 
-	fresh := Tool{name, varname, mustUseVarForm, validity, aliases}
+	fresh := Tool{name, varname, mustUseVarForm, validity, aliases, nil, nil}
 
 	tool := tr.byName[name]
 	if tool == nil {
@@ -225,7 +234,7 @@ func (tr *Tools) Trace() {
 //
 // If addToUseTools is true, a USE_TOOLS line makes a tool immediately
 // usable. This should only be done if the current line is unconditional.
-func (tr *Tools) ParseToolLine(mklines MkLines, mkline MkLine, fromInfrastructure bool, addToUseTools bool) {
+func (tr *Tools) ParseToolLine(mklines *MkLines, mkline *MkLine, fromInfrastructure bool, addToUseTools bool) {
 	switch {
 
 	case mkline.IsVarassign():
@@ -241,17 +250,17 @@ func (tr *Tools) ParseToolLine(mklines MkLines, mkline MkLine, fromInfrastructur
 			}
 
 		case "_TOOLS_VARNAME.*":
-			if !containsVarRef(varparam) {
+			if !containsVarUse(varparam) {
 				tr.Define(varparam, value, mkline)
 			}
 
 		case "TOOLS_PATH.*", "_TOOLS_DEPMETHOD.*":
-			if !containsVarRef(varparam) {
+			if !containsVarUse(varparam) {
 				tr.Define(varparam, "", mkline)
 			}
 
 		case "TOOLS_ALIASES.*":
-			if containsVarRef(varparam) {
+			if containsVarUse(varparam) {
 				break
 			}
 
@@ -273,7 +282,7 @@ func (tr *Tools) ParseToolLine(mklines MkLines, mkline MkLine, fromInfrastructur
 			}
 
 		case "_TOOLS.*":
-			if !containsVarRef(varparam) {
+			if !containsVarUse(varparam) {
 				tr.Define(varparam, "", mkline)
 				for _, tool := range mkline.ValueFields(value) {
 					tr.Define(tool, "", mkline)
@@ -285,7 +294,7 @@ func (tr *Tools) ParseToolLine(mklines MkLines, mkline MkLine, fromInfrastructur
 		}
 
 	case mkline.IsInclude():
-		if IsPrefs(mkline.IncludedFile()) {
+		if LoadsPrefs(mkline.IncludedFile()) {
 			tr.SeenPrefs = true
 		}
 	}
@@ -303,13 +312,13 @@ func (tr *Tools) addAlias(tool *Tool, alias string) {
 // This can be done only in the pkgsrc infrastructure files, where the
 // actual definition is assumed to be in some other file. In packages
 // though, this assumption cannot be made and pkglint needs to be strict.
-func (tr *Tools) parseUseTools(mkline MkLine, createIfAbsent bool, addToUseTools bool) {
+func (tr *Tools) parseUseTools(mkline *MkLine, createIfAbsent bool, addToUseTools bool) {
 	value := mkline.Value()
-	if containsVarRef(value) {
+	if containsVarUse(value) {
 		return
 	}
 
-	validity := tr.validity(mkline.Basename, addToUseTools)
+	validity := tr.validity(mkline.Basename.String(), addToUseTools)
 	for _, dep := range mkline.ValueFields(value) {
 		name := strings.Split(dep, ":")[0]
 		if createIfAbsent || tr.ByName(name) != nil {
@@ -345,7 +354,7 @@ func (tr *Tools) implicitTools(toolName string) []string {
 
 func (tr *Tools) validity(basename string, useTools bool) Validity {
 	switch {
-	case IsPrefs(basename): // IsPrefs is not 100% accurate here but good enough
+	case LoadsPrefs(NewRelPathString(basename)): // LoadsPrefs is not 100% accurate here but good enough
 		return AfterPrefsMk
 	case basename == "Makefile" && !tr.SeenPrefs:
 		return AfterPrefsMk
@@ -391,7 +400,7 @@ func (tr *Tools) Usable(tool *Tool, time ToolTime) bool {
 }
 
 func (tr *Tools) Fallback(other *Tools) {
-	assertf(tr.fallback == nil, "Tools.Fallback must only be called once.")
+	assert(tr.fallback == nil) // Must only be called once.
 	tr.fallback = other
 }
 
@@ -414,6 +423,8 @@ func (tr *Tools) adjustValidity(tool *Tool) {
 		tool.Validity = alias.Validity
 	}
 }
+
+func (tr *Tools) ExistsVar(varname string) bool { return tr.byVarname[varname] != nil }
 
 type Validity uint8
 

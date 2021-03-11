@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.38 2018/10/27 07:57:10 maya Exp $
+# $NetBSD: Makefile,v 1.44 2021/02/05 20:04:43 adam Exp $
 
-DISTNAME=	dnsmasq-2.80
+DISTNAME=	dnsmasq-2.84
 CATEGORIES=	net
 MASTER_SITES=	http://www.thekelleys.org.uk/dnsmasq/
 EXTRACT_SUFX=	.tar.xz
@@ -10,9 +10,9 @@ HOMEPAGE=	http://www.thekelleys.org.uk/dnsmasq/doc.html
 COMMENT=	Lightweight, easy to configure DNS forwarder
 LICENSE=	gnu-gpl-v3
 
-RCD_SCRIPTS=		dnsmasq
-EGDIR=			${PREFIX}/share/examples/dnsmasq
-CONF_FILES=		${EGDIR}/dnsmasq.conf.example ${PKG_SYSCONFDIR}/dnsmasq.conf
+RCD_SCRIPTS=	dnsmasq
+EGDIR=		${PREFIX}/share/examples/dnsmasq
+CONF_FILES=	${EGDIR}/dnsmasq.conf.example ${PKG_SYSCONFDIR}/dnsmasq.conf
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -25,7 +25,7 @@ DNSMASQ_GROUP?=		dnsmasq
 
 PKG_GROUPS=		${DNSMASQ_GROUP}
 PKG_USERS=		${DNSMASQ_USER}:${DNSMASQ_GROUP}
-PKG_GECOS.${DNSMASQ_USER}=DNS\ forwarder\ user
+PKG_GECOS.${DNSMASQ_USER}= DNS\ forwarder\ user
 
 .include "options.mk"
 

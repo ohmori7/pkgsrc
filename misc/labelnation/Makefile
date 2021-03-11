@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.4 2019/04/25 07:33:07 maya Exp $
+# $NetBSD: Makefile,v 1.6 2020/12/04 20:45:30 nia Exp $
 
 DISTNAME=		labelnation-1.212
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		misc
 MASTER_SITES=		https://www.red-bean.com/labelnation/
 
@@ -10,14 +10,14 @@ HOMEPAGE=		https://www.red-bean.com/labelnation/
 COMMENT=		Command-line label, business card printing program
 LICENSE=		gnu-gpl-v3
 
-REPLACE_PYTHON= 	labelnation csv_to_ln
+REPLACE_PYTHON=		labelnation csv_to_ln
 
 USE_LANGUAGES=		# none
-NO_BUILD= 		yes
+NO_BUILD=		yes
 
-DOCDIR=                 share/doc/labelnation
+DOCDIR=			share/doc/labelnation
 EXAMPLESDIR=		share/examples/labelnation
-INSTALLATION_DIRS=      bin ${DOCDIR} ${EXAMPLESDIR}
+INSTALLATION_DIRS=	bin ${DOCDIR} ${EXAMPLESDIR}
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/labelnation ${DESTDIR}${PREFIX}/bin

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.14 2019/05/23 19:23:14 rillig Exp $
+# $NetBSD: Makefile,v 1.20 2020/08/31 18:11:06 wiz Exp $
 #
 
 DISTNAME=	Bastille-3.0.9
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=bastille-linux/}
 EXTRACT_SUFX=	.tar.bz2
@@ -19,7 +19,7 @@ USE_LANGUAGES=		# none
 USE_TOOLS+=		bash:run perl:run
 NO_BUILD=		yes
 
-CHECK_INTERPRETER_SKIP+=share/Bastille/bastille-tmpdir.csh
+CHECK_INTERPRETER_SKIP+=	share/Bastille/bastille-tmpdir.csh
 
 BUILD_DEPENDS+=		checkperms>=1.4:../../sysutils/checkperms
 DEPENDS+=		p5-Tk-[0-9]*:../../x11/p5-Tk
@@ -42,6 +42,7 @@ SUBST_CLASSES+=		b3
 SUBST_STAGE.b3=		pre-configure
 SUBST_FILES.b3=		${REPLACE_PERL}
 SUBST_SED.b3=		-e 's,^use lib.*,use lib "${PREFIX}/lib";,'
+SUBST_NOOP_OK.b3=	yes # some of the files don't match
 
 REPLACE_PERL+=		AutomatedBastille BastilleBackEnd BastilleChooser
 REPLACE_PERL+=		InteractiveBastille RevertBastille *.pm

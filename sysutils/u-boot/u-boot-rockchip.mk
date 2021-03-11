@@ -1,6 +1,9 @@
-#	$NetBSD: u-boot-rockchip.mk,v 1.2 2019/06/10 01:50:34 mrg Exp $
-
+# $NetBSD: u-boot-rockchip.mk,v 1.9 2020/06/13 07:01:32 tnn Exp $
 #
+# should be used by sysutils/u-boot-rock64/Makefile
+# used by sysutils/u-boot-rockpro64/Makefile
+# used by sysutils/u-boot-pinebook-pro/Makefile
+
 # Common makefile fragment for rockchip based u-boot targets.
 #
 # Set these variables:
@@ -8,32 +11,25 @@
 #	U_BOOT_IMAGE_TYPE	("rk3399", "rk3328")
 #
 
-PKGREVISION=	3
-UBOOT_VERSION=	${GITHUB_TAG:C/-.*$//}
-MASTER_SITES=	${MASTER_SITE_GITHUB:=ayufan-rock64/}
-GITHUB_PROJECT=	linux-u-boot
-GITHUB_TAG=	2017.09-rockchip-ayufan-1060-g56bd958253
-DISTNAME=	${GITHUB_TAG}
-PATCHDIR=	${.CURDIR}/../../sysutils/u-boot-rockpro64/patches
-DISTFILES=	${DEFAULT_DISTFILES}
-EXTRACT_SUFX=	.tar.gz
+UBOOT_VERSION?=		2020.01-rc5
 
-# pkgsrc tries to run distfiles that end in .bin; handle manually
-EXTRACT_ONLY=	${DISTFILES:N*.bin}
+# Patches kept in pinebook-pro; first worked there.
+DISTINFO_FILE?=		${.CURDIR}/../../sysutils/u-boot-pinebook-pro/distinfo
+PATCHDIR?=		${.CURDIR}/../../sysutils/u-boot-pinebook-pro/patches
 
-USE_TOOLS+=	gawk
-MAKE_ENV+=	BL31=${WRKDIR}/${BL31}
-
-post-extract:
-	cp ${DISTDIR}/${DDR_BIN} ${WRKDIR}
+MAKE_ENV+=		BL31=${PREFIX}/share/arm-trusted-firmware/${U_BOOT_IMAGE_TYPE}/bl31.elf
 
 post-build:
-# build stage 3 package
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} u-boot.itb
-# build stage 1 loader
-	${WRKSRC}/tools/mkimage -n ${U_BOOT_IMAGE_TYPE} -T rksd -d ${WRKDIR}/${DDR_BIN} ${WRKSRC}/idbloader.img
-# append stage2 loader
-	cat ${WRKSRC}/spl/u-boot-spl.bin >> ${WRKSRC}/idbloader.img
 # wrap everything up into a single file that can be written to an SD card
 	cp ${WRKSRC}/idbloader.img ${WRKSRC}/rksd_loader.img
 	dd if=${WRKSRC}/u-boot.itb seek=448 conv=notrunc of=${WRKSRC}/rksd_loader.img
+# build SPI NOR flash image. See dev-ayufan/build.mk.
+	set -e; b=0; while [ "$$b" != 128 ]; do \
+		dd bs=2k count=1; \
+		dd if=/dev/zero bs=2k count=1; \
+		b=$$(expr $$b + 1); \
+	done < ${WRKSRC}/idbloader.img > ${WRKSRC}/rkspi_loader.img 2> /dev/null
+	dd if=${WRKSRC}/u-boot.itb seek=1024 conv=notrunc of=${WRKSRC}/rkspi_loader.img
+
+.include "../../sysutils/arm-trusted-firmware-${U_BOOT_IMAGE_TYPE}/buildlink3.mk"
+.include "../../sysutils/u-boot/u-boot-arm64.mk"

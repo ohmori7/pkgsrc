@@ -1,42 +1,40 @@
-# $NetBSD: Makefile,v 1.160 2019/05/31 20:52:00 adam Exp $
+# $NetBSD: Makefile,v 1.208 2021/02/24 11:06:12 adam Exp $
 
-DISTNAME=	node-v10.16.0
+DISTNAME=	node-v14.16.0
+EXTRACT_SUFX=	.tar.xz
 
 USE_LANGUAGES=	c gnu++14
-
-# Stated by the changelog as of 8.2.0
-GCC_REQD+=	4.9.4
-
-# Stated by the changelog
-BUILDLINK_API_DEPENDS.libuv+=	libuv>=1.23
-
-# Requires http_parser_set_max_header_size
-BUILDLINK_API_DEPENDS.http-parser+=	http-parser>=2.9.0
 
 .include "../../mk/bsd.prefs.mk"
 
 # XXX: figure out a way to add rpaths to torque
 MAKE_ENV+=	LD_LIBRARY_PATH=${PREFIX}/lib
 
-# Optional OpenSSL support in nghttp2 conflicts with OpenSSL 1.1.x
-# bundled and built by lang/nodejs.
-# Uncomment when we switch to openssl>=1.1
-# CONFIGURE_ARGS+=	--shared-nghttp2
+CONFIGURE_ARGS+=	--shared-nghttp2
 CONFIGURE_ARGS+=	--with-intl=system-icu
 
-CHECK_PORTABILITY_SKIP+=	deps/openssl/openssl/.travis-create-release.sh
+PYTHON_VERSIONS_ACCEPTED=	27
+
+CHECK_PORTABILITY_SKIP+=	tools/macos-installer/pkgbuild/npm/scripts/preinstall
 
 .if ${MACHINE_ARCH} == "i386"
-# 64 bit atomic ops are required
-CXXFLAGS+=	-march=i586
 # required for SSE2 code under i386.
 CXXFLAGS+=	-mstackrealign
 .endif
 
 .include "options.mk"
 
+# Node turns on -latomic for arm, mips and ppc.
+.if !empty(MACHINE_ARCH:M*arm*) || \
+    !empty(MACHINE_ARCH:M*powerpc*) || \
+    !empty(MACHINE_ARCH:M*mips*)
+.include "../../devel/libatomic/buildlink3.mk"
+.endif
+
 .include "../../lang/nodejs/Makefile.common"
 .include "../../textproc/icu/buildlink3.mk"
-# Uncomment when we switch to openssl>=1.1
-# .include "../../www/nghttp2/buildlink3.mk"
+# Requires nghttp2_option_set_max_settings
+BUILDLINK_API_DEPENDS.nghttp2+=	nghttp2>=1.41.0
+.include "../../www/nghttp2/buildlink3.mk"
+.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

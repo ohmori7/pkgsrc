@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.38 2019/04/03 00:32:34 ryoon Exp $
+# $NetBSD: Makefile,v 1.53 2021/01/01 08:24:39 ryoon Exp $
 
-DISTNAME=	gearmand-1.1.18
-PKGREVISION=	3
+DISTNAME=	gearmand-1.1.19.1
+PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=gearman/}
-GITHUB_PROJECT= gearmand
-GITHUB_RELEASE= ${PKGVERSION_NOREV}
+GITHUB_PROJECT=	gearmand
+GITHUB_RELEASE=	${PKGVERSION_NOREV}
 
-MAINTAINER=	fhajny@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gearman.org/
 COMMENT=	Gearman C Server and Library
 LICENSE=	modified-bsd
@@ -15,7 +15,7 @@ LICENSE=	modified-bsd
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	gmake pkg-config
 USE_LIBTOOL=	yes
-USE_LANGUAGES=	c gnu++03
+USE_LANGUAGES=	c c++
 
 CONFIGURE_ARGS+=	--enable-jobserver=no
 CONFIGURE_ARGS+=	--disable-libdrizzle
@@ -27,6 +27,8 @@ CONFIGURE_ENV.SunOS+=	ax_cv_check_cxxflags__Werror__pie=no
 .include "options.mk"
 
 PKGCONFIG_OVERRIDE+=	support/gearmand.pc.in
+
+BUILDLINK_TRANSFORM+=	opt:-std=c++0x:-std=gnu++0x
 
 .include "../../devel/boost-headers/buildlink3.mk"
 .include "../../devel/boost-libs/buildlink3.mk"

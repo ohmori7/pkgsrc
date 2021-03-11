@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.33 2016/03/05 11:28:48 jperkin Exp $
+# $NetBSD: Makefile,v 1.35 2020/12/04 04:56:00 riastradh Exp $
 
 DISTNAME=	imap-utils
 PKGNAME=	imap-uw-utils-20050108
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.cac.washington.edu/imap/
 EXTRACT_SUFX=	.tar.Z

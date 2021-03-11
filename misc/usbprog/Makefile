@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.43 2018/12/13 19:52:13 adam Exp $
+# $NetBSD: Makefile,v 1.57 2020/11/05 09:08:43 ryoon Exp $
 #
 
 DISTNAME=	usbprog-0.2.0
-PKGREVISION=	40
+PKGREVISION=	53
 CATEGORIES=	misc
 MASTER_SITES=	http://download.berlios.de/usbprog/
 EXTRACT_SUFX=	.tar.bz2
@@ -15,6 +15,9 @@ LICENSE=	gnu-gpl-v2
 GNU_CONFIGURE=	yes
 USE_LANGUAGES=	c c++
 USE_LIBTOOL=	yes
+
+# Patching configure already
+CHECK_PORTABILITY_SKIP+=	configure.in
 
 .include "../../www/curl/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

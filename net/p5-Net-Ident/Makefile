@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.22 2018/08/22 09:46:00 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2020/08/31 18:10:44 wiz Exp $
 #
 
-DISTNAME=		Net-Ident-1.24
+DISTNAME=		Net-Ident-1.25
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		4
+PKGREVISION=		1
 CATEGORIES=		net perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Net-Ident/
+HOMEPAGE=		https://metacpan.org/release/Net-Ident
 COMMENT=		Perl module implementing the client side of the ident protocol
 LICENSE=		${PERL5_LICENSE}
 

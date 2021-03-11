@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.3 2018/07/28 14:40:52 brook Exp $
+# $NetBSD: Makefile,v 1.5 2019/08/08 19:53:58 brook Exp $
 
+R_PKGNAME=	yaml
+R_PKGVER=	2.2.0
 CATEGORIES=	textproc
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	${R_HOMEPAGE_BASE}/yaml/
 COMMENT=	Methods to convert R data to YAML and back
 LICENSE=	modified-bsd
 
-R_PKGNAME=	yaml
-R_PKGVER=	2.1.14
+USE_LANGUAGES=	c
 
 .include "../../math/R/Makefile.extension"
 .include "../../mk/bsd.pkg.mk"

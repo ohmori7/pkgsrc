@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.7 2017/09/06 16:49:26 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2020/04/26 12:21:21 markd Exp $
 
 DISTNAME=	wasy
-PKGNAME=	tex-${DISTNAME}-2014
-TEXLIVE_REV=	35831
+PKGNAME=	tex-${DISTNAME}-2.5
+TEXLIVE_REV=	53533
 
 MAINTAINER=	minskim@NetBSD.org
-COMMENT=	Waldi's symbol fonts
+HOMEPAGE=	https://ctan.org/pkg/wasy
+COMMENT=	The wasy fonts (Waldi symbol fonts)
 LICENSE=	public-domain
 
 .include "../../print/texlive/package.mk"

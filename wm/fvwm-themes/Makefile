@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:47:22 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2020/09/14 18:21:36 joerg Exp $
 #
 
 DISTNAME=	fvwm-themes-${THEM_VER}
-PKGREVISION=	14
+PKGREVISION=	16
 CATEGORIES=	wm
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=fvwm-themes/}
 EXTRACT_SUFX=	.tar.bz2
@@ -30,7 +30,7 @@ REPLACE_PERL+=	themes/cde/modules/create-buttonbar-config
 #### 1 ####
 SUBST_CLASSES+=			Makefile
 SUBST_FILES.Makefile=		Makefile.am Makefile.in
-SUBST_SED.Makefile= 		-e 's|FT_DATADIR=@FT_DATADIR@|FT_DATADIR=${DESTDIR}@FT_DATADIR@|'
+SUBST_SED.Makefile=		-e 's|FT_DATADIR=@FT_DATADIR@|FT_DATADIR=${DESTDIR}@FT_DATADIR@|'
 SUBST_STAGE.Makefile=		pre-configure
 SUBST_MESSAGE.Makefile=		Modify shell script (Makefile)
 
@@ -48,8 +48,8 @@ SUBST_CLASSES+=			fvwm-menuapp
 SUBST_FILES.fvwm-menuapp=	bin/fvwm-themes-menuapp-destdir.in
 # -my $ftDir = "@FT_DATADIR@"
 # +my $ftDir = "${DESTDIR}@FT_DATADIR@"
-SUBST_SED.fvwm-menuapp= 	-e 's|$$userDir, $$ftDataDir|$$userDir, \"${DESTDIR}\".$$ftDataDir|'
-SUBST_SED.fvwm-menuapp= 	-e 's|my $$ftDir = "@FT_DATADIR@"|my $$ftDir = \"${DESTDIR}@FT_DATADIR@\"|'
+SUBST_SED.fvwm-menuapp=		-e 's|$$userDir, $$ftDataDir|$$userDir, \"${DESTDIR}\".$$ftDataDir|'
+SUBST_SED.fvwm-menuapp=		-e 's|my $$ftDir = "@FT_DATADIR@"|my $$ftDir = \"${DESTDIR}@FT_DATADIR@\"|'
 SUBST_STAGE.fvwm-menuapp=	pre-configure
 SUBST_MESSAGE.fvwm-menuapp=	Fixing FT_DATADIR (fvwm-themes-datadir)
 
@@ -66,13 +66,6 @@ SUBST_FILES.root_prefix=	bin/fvwm-themes-config-destdir.in
 SUBST_SED.root_prefix=		-e 's|\/^$$ROOT_PREFIX\/\/|\|\^${DESTDIR}\|\||'
 SUBST_STAGE.root_prefix=	pre-configure
 SUBST_MESSAGE.root_prefix=	root_prefix tweak implementing
-
-#### 6 ####
-SUBST_CLASSES+=			theme-cfg
-SUBST_FILES.theme-cfg=		${DESTDIR}${PREFIX}/share/fvwm2/themes/current/theme.cfg
-SUBST_SED.theme-cfg=		-e 's|${WRKDR}/.destdir||'
-SUBST_STAGE.theme-cfg=		post-install
-SUBST_MESSAGE.theme-cfg=	theme-cfg tweak implementing
 
 # Copied from bin/ and add -destdir onto its name.
 # See following two targets.

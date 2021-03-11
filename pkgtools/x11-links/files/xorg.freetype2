@@ -1,4 +1,4 @@
-# $NetBSD: xorg.freetype2,v 1.26 2018/06/06 03:13:49 snj Exp $
+# $NetBSD: xorg.freetype2,v 1.28 2020/10/21 15:18:30 maya Exp $
 #
 bin/freetype-config
 include/freetype2/config/ftconfig.h
@@ -14,6 +14,9 @@ include/freetype2/freetype/config/ftheader.h
 include/freetype2/freetype/config/ftmodule.h
 include/freetype2/freetype/config/ftoption.h
 include/freetype2/freetype/config/ftstdlib.h
+include/freetype2/freetype/config/integer-types.h
+include/freetype2/freetype/config/mac-support.h
+include/freetype2/freetype/config/public-macros.h
 include/freetype2/freetype/freetype.h
 include/freetype2/freetype/ftadvanc.h
 include/freetype2/freetype/ftautoh.h
@@ -25,6 +28,7 @@ include/freetype2/freetype/ftcache.h
 include/freetype2/freetype/ftcffdrv.h
 include/freetype2/freetype/ftchapters.h
 include/freetype2/freetype/ftcid.h
+include/freetype2/freetype/ftcolor.h
 include/freetype2/freetype/ftdriver.h
 include/freetype2/freetype/fterrdef.h
 include/freetype2/freetype/fterrors.h
@@ -125,6 +129,7 @@ lib/libfreetype.so.18.0.13
 lib/libfreetype.so.18.16.1
 lib/libfreetype.so.18.1
 lib/libfreetype.so.18.3
+lib/libfreetype.so.19.0
 lib/libfreetype.so.20.0
 lib/libfreetype.so.22.0
 lib/libfreetype.so.23.0

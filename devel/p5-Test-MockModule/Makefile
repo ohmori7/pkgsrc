@@ -1,20 +1,19 @@
-# $NetBSD: Makefile,v 1.22 2018/09/02 07:25:37 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2020/09/20 07:39:05 wiz Exp $
 
-DISTNAME=	Test-MockModule-v0.170.0
+DISTNAME=	Test-MockModule-v0.175.0
 PKGNAME=	p5-${DISTNAME:S/v0/0/}
 CATEGORIES=	devel perl5 net
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Test/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Test-MockModule/
+HOMEPAGE=	https://metacpan.org/release/Test-MockModule
 COMMENT=	Perl 5 module to override subroutines in a module for unit testing
 LICENSE=	gnu-gpl-v3
 
-# TEST_DEPENDS
-BUILD_DEPENDS+=	p5-Test-Pod-Coverage-[0-9]*:../../devel/p5-Test-Pod-Coverage
-BUILD_DEPENDS+=	p5-Test-Pod-[0-9]*:../../devel/p5-Test-Pod
-BUILD_DEPENDS+=	p5-Test-Warnings-[0-9]*:../../devel/p5-Test-Warnings
-BUILD_DEPENDS+=	p5-SUPER-[0-9]*:../../devel/p5-SUPER
+DEPENDS+=	p5-SUPER-[0-9]*:../../devel/p5-SUPER
+TEST_DEPENDS+=	p5-Test-Pod-Coverage-[0-9]*:../../devel/p5-Test-Pod-Coverage
+TEST_DEPENDS+=	p5-Test-Pod-[0-9]*:../../devel/p5-Test-Pod
+TEST_DEPENDS+=	p5-Test-Warnings-[0-9]*:../../devel/p5-Test-Warnings
 
 USE_LANGUAGES=		# empty
 PERL5_MODULE_TYPE=	Module::Build

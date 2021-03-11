@@ -1,18 +1,18 @@
-# $NetBSD: Makefile,v 1.5 2018/08/22 09:47:09 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2020/08/31 18:12:13 wiz Exp $
 
 DISTNAME=	XML-TokeParser-0.05
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=XML/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/XML-TokeParser/TokeParser.pm
+HOMEPAGE=	https://metacpan.org/pod/distribution/XML-TokeParser/TokeParser.pm
 COMMENT=	Simplified interface to XML::Parser
 
 DEPENDS+=	p5-XML-Parser>=2.44:../../textproc/p5-XML-Parser
 
-PERL5_PACKLIST= auto/XML/TokeParser/.packlist
+PERL5_PACKLIST=	auto/XML/TokeParser/.packlist
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

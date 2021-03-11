@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2019/04/26 14:12:46 maya Exp $
+# $NetBSD: Makefile,v 1.19 2020/05/02 10:28:42 rillig Exp $
 
 VER=		1.0.2
 DISTNAME=	4Suite-XML-${VER}
@@ -7,7 +7,7 @@ CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=foursuite/}
 
 MAINTAINER=	pettai@NetBSD.org
-HOMEPAGE=	http://4suite.org/
+HOMEPAGE=	https://4suite.org/
 COMMENT=	Open-source platform for XML and RDF processing
 LICENSE=	apache-1.1
 
@@ -18,14 +18,13 @@ SUBST_FILES.python=	build/scripts.*/4xml
 SUBST_FILES.python+=	build/scripts.*/4xpath
 SUBST_FILES.python+=	build/scripts.*/4xslt
 SUBST_FILES.python+=	build/scripts.*/4xupdate
-SUBST_FILES.python+=	test/Xml/XPath/Borrowed/*.py
 SUBST_FILES.python+=	test/Xml/XPath/Core/*.py
 SUBST_FILES.python+=	test/test.py
 SUBST_STAGE.python=	post-build
 SUBST_SED.python=	-e 's,\#![^ ]* python,\#! ${PYTHONBIN},'
 
-#PYTHON_SELF_CONFLICT=	yes
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 1.0.2
+#PYTHON_SELF_CONFLICT=		yes
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 1.0.2
 
 do-configure:
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} \

@@ -1,4 +1,4 @@
-# $NetBSD: extension.mk,v 1.56 2019/05/02 22:06:15 wiz Exp $
+# $NetBSD: extension.mk,v 1.58 2020/08/28 00:47:57 gutteridge Exp $
 
 .include "../../lang/python/pyversion.mk"
 
@@ -9,7 +9,7 @@
 # extensions to python, which by definition are those that place files
 # in ${PYSITELIB}.  Extensions can be implemented via setuptools as
 # eggs (see egg.mk), via distutils (confusing, with an egg-info file,
-# even though they are not eggs), or via more ad hocs methods.
+# even though they are not eggs), or via more ad hoc methods.
 
 .if defined(PYDISTUTILSPKG)
 .include "../../mk/bsd.prefs.mk"
@@ -74,10 +74,10 @@ FILES_SUBST+=	PYVERSSUFFIX=${PYVERSSUFFIX}
 .if empty(_PYTHON_VERSION:M2?)
 PLIST_AWK+=		-f ${PKGSRCDIR}/lang/python/plist-python.awk
 PLIST_AWK_ENV+=		PYVERS="${PYVERSSUFFIX:S/.//}"
-PRINT_PLIST_AWK+=	/^[^@]/ && /[^\/]+\.py[co]$$/ {
-PRINT_PLIST_AWK+=	gsub(/__pycache__\//, "")
-PRINT_PLIST_AWK+=	gsub(/opt-1\.pyc$$/, "pyo")
-PRINT_PLIST_AWK+=	gsub(/\.cpython-${_PYTHON_VERSION}/, "")}
+EARLY_PRINT_PLIST_AWK+=	/^[^@]/ && /[^\/]+\.py[co]$$/ {
+EARLY_PRINT_PLIST_AWK+=	gsub(/__pycache__\//, "")
+EARLY_PRINT_PLIST_AWK+=	gsub(/opt-1\.pyc$$/, "pyo")
+EARLY_PRINT_PLIST_AWK+=	gsub(/\.cpython-${_PYTHON_VERSION}/, "")}
 .endif
 
 DISTUTILS_BUILDDIR_IN_TEST_ENV?=	no

@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.36 2019/04/19 14:19:20 wen Exp $
+# $NetBSD: Makefile,v 1.39 2020/08/31 18:06:49 wiz Exp $
 
 DISTNAME=	JSON-XS-4.02
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=JSON/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/JSON-XS/
+HOMEPAGE=	https://metacpan.org/release/JSON-XS
 COMMENT=	JSON serialising/deserialising, done correctly and fast
 LICENSE=	${PERL5_LICENSE}
 

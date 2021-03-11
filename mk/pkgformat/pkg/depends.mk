@@ -1,4 +1,4 @@
-# $NetBSD: depends.mk,v 1.9 2019/04/03 18:38:16 rillig Exp $
+# $NetBSD: depends.mk,v 1.12 2020/12/02 10:22:39 wiz Exp $
 
 # This command prints out the dependency patterns for all full (run-time)
 # dependencies of the package.
@@ -11,7 +11,7 @@
 #
 #	<depends_type>	<pattern>	<directory>
 #
-# Valid dependency types are "bootstrap", "build", "test" and "full".
+# Valid dependency types are "bootstrap", "tool", "build", "test" and "full".
 #
 # ${_RDEPENDS_FILE} contains the resolved dependency information
 # for the package.  For each line in ${_DEPENDS_FILE}
@@ -97,7 +97,7 @@ _RESOLVE_DEPENDS_CMD=	\
 #	@param $dir The pkgsrc directory from which the package can be
 #		built.
 #	@param $type The dependency type. Can be one of bootstrap, tool,
-#		build, full.
+#		build, test, full.
 #
 _DEPENDS_INSTALL_CMD=							\
 	case $$type in							\
@@ -188,8 +188,12 @@ ${_RRDEPENDS_FILE}: ${_RDEPENDS_FILE}
 # _pkgformat-install-dependencies:
 #	Installs any missing dependencies.
 #
+# The ${TEST} at the beginning is for the default change for the
+# database directory from /var/db/pkg to ${PREFIX}/pkgdb in December 2020.
+#
 _pkgformat-install-dependencies: .PHONY ${_DEPENDS_FILE}
 	${RUN}								\
+	${TEST} -n "${PKG_DBDIR_ERROR}" && ${ERROR_MSG} ${PKG_DBDIR_ERROR:Q} && exit 1; \
 	exec 3<&0;							\
 	${CAT} ${_DEPENDS_FILE} | 					\
 	while read type pattern dir; do					\

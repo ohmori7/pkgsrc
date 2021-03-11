@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.15 2016/03/05 11:28:29 jperkin Exp $
+# $NetBSD: Makefile,v 1.19 2020/05/22 10:56:06 adam Exp $
 #
 
 DISTNAME=	wdfs-1.4.2
 PKGNAME=	fuse-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	13
 CATEGORIES=	filesystems
 MASTER_SITES=	http://noedler.de/projekte/wdfs/
 
@@ -14,7 +14,7 @@ COMMENT=	FUSE-based webdav filesystem
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config
 
-PTHREAD_AUTO_VARS= 	yes
+PTHREAD_AUTO_VARS=	yes
 
 .if exists(/usr/include/stdbool.h)
 CPPFLAGS+=	-DHAVE_STDBOOL_H

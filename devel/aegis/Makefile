@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.44 2018/12/13 19:51:46 adam Exp $
+# $NetBSD: Makefile,v 1.59 2020/11/05 09:07:51 ryoon Exp $
 #
 
 DISTNAME=	aegis-4.24.2
-PKGREVISION=	20
+PKGREVISION=	32
 CATEGORIES=	devel scm
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=aegis/}
 
@@ -23,7 +23,6 @@ AEGIS_USER_GID?=	3
 
 CONFIGURE_ARGS+=	--with-nlsdir=${_PKGLOCALEDIR}
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
-CONFIGURE_ARGS+=	--with-no-aegis-configured
 CONFIGURE_ARGS+=	--sharedstatedir=${PREFIX}/com/aegis
 CONFIGURE_ENV+=		PATCH=${PATCH:Q}
 CONFIGURE_ENV+=		AEGIS_UID=${AEGIS_USER_UID:Q}

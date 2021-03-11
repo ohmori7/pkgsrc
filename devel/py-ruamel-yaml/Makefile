@@ -1,20 +1,22 @@
-# $NetBSD: Makefile,v 1.10 2019/05/07 09:29:38 adam Exp $
+# $NetBSD: Makefile,v 1.16 2021/03/05 13:45:28 adam Exp $
 
-DISTNAME=	ruamel.yaml-0.15.94
+DISTNAME=	ruamel.yaml-0.16.13
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/./-/1}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=r/ruamel.yaml/}
 
-MAINTAINER=	gde@llew.me
-HOMEPAGE=	https://bitbucket.org/ruamel/yaml
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://sourceforge.net/p/ruamel-yaml/
 COMMENT=	YAML parser/emitter
 LICENSE=	mit
 
+DEPENDS+=	${PYPKGPREFIX}-ruamel-yaml-clib>=0.1.2:../../devel/py-ruamel-yaml-clib
 .include "../../lang/python/pyversion.mk"
 .if ${_PYTHON_VERSION} == 27
 DEPENDS+=	${PYPKGPREFIX}-ruamel-ordereddict>=0.4.9:../../devel/py-ruamel-ordereddict
-DEPENDS+=	${PYPKGPREFIX}-typing-[0-9]*:../../devel/py-typing
 .endif
+
+USE_LANGUAGES=	# none
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

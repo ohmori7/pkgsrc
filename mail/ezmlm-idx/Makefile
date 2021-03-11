@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.50 2019/05/07 14:24:03 schmonz Exp $
+# $NetBSD: Makefile,v 1.59 2021/01/28 12:46:55 schmonz Exp $
 #
 
 DISTNAME=		ezmlm-idx-${IDXVERSION}
-PKGREVISION=		9
+PKGREVISION=		14
 CATEGORIES=		mail
 IDXVERSION=		7.2.2
 MASTER_SITES=		http://untroubled.org/ezmlm/archive/${IDXVERSION}/
 
 MAINTAINER=		schmonz@NetBSD.org
-HOMEPAGE=		http://untroubled.org/ezmlm/
+HOMEPAGE=		https://untroubled.org/ezmlm/
 COMMENT=		Version of ezmlm with enhancements by third parties
 LICENSE=		gnu-gpl-v2
 
@@ -19,7 +19,6 @@ DEPENDS+=		qmail>=1.03:../../mail/qmail
 PLIST_SRC=		${PKGDIR}/../../mail/ezmlm/PLIST ${PKGDIR}/PLIST
 PLIST_SRC+=		${WRKDIR}/PLIST.idxcf
 
-DJB_RESTRICTED=		no
 DJB_CONFIG_CMDS+=	${ECHO} ${DESTDIR:Q} > conf-destdir;		\
 			${ECHO} ${PREFIX:Q}/libexec/cgi-bin > conf-cgibin; \
 			${ECHO} ${EGDIR:Q} > conf-egdir;		\
@@ -52,17 +51,19 @@ SPECIAL_PERMS+=		${PREFIX}/libexec/cgi-bin/ezmlm-cgi ${REAL_ROOT_USER} ${REAL_RO
 INSTALLATION_DIRS=	bin lib libexec/cgi-bin ${PKGMANDIR} ${PKGMANDIR}/man1 ${PKGMANDIR}/man5
 INSTALLATION_DIRS+=	share/doc/${PKGBASE} share/examples/${PKGBASE}
 
+.include "options.mk"
+
 post-extract:
 	${GREP} -v '^#' < cf-files.mk | ${CUT} -f2 | ${SED} -e 's|^|share/examples/ezmlm-idx/|g' > ${WRKDIR}/PLIST.idxcf
 
 .include "../../mk/bsd.prefs.mk"
 
 post-build:
-.	if ${OPSYS} == Darwin
+.if ${OPSYS} == Darwin
 	cd ${WRKSRC} && for lib in *.so; do \
-	  install_name_tool -id ${PREFIX}/lib/$${lib} $${lib}; \
+	  install_name_tool -id ${PREFIX}/lib/ezmlm/$${lib} $${lib}; \
 	done
-.	endif
+.endif
 
 do-test:
 	cd ${WRKSRC} && ./ezmlm-test
@@ -72,13 +73,13 @@ pre-install:
 
 post-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${DOCDIR}
-.	for file in BLURB CHANGES FAQ INSTALL README README.mysql README.pgsql README.std THANKS TODO UPGRADE DOWNGRADE
+.for file in BLURB CHANGES FAQ INSTALL README README.mysql README.pgsql README.std THANKS TODO UPGRADE DOWNGRADE
 	${INSTALL_DATA} ${WRKSRC}/${file} ${DESTDIR}${DOCDIR}/${file}
-.	endfor
+.endfor
 	${INSTALL_DATA_DIR} ${DESTDIR}${EGDIR}
-.	for file in ezcgi.css ezcgirc ezmlmglrc ezmlmrc ezmlmsubrc
+.for file in ezcgi.css ezcgirc ezmlmglrc ezmlmrc ezmlmsubrc
 	${INSTALL_DATA} ${WRKSRC}/${file} ${DESTDIR}${EGDIR}/${file}
-.	endfor
+.endfor
 
 .include "../../mk/djbware.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.21 2018/08/22 09:43:20 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2020/08/31 18:07:07 wiz Exp $
 
 DISTNAME=	Rose-DBx-Garden-Catalyst-0.180
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Rose/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Rose-DBx-Garden-Catalyst/
+HOMEPAGE=	https://metacpan.org/release/Rose-DBx-Garden-Catalyst
 COMMENT=	Create Catalyst components that use RDBO and RHTMLO
 LICENSE=	${PERL5_LICENSE}
 
@@ -36,17 +36,17 @@ DEPENDS+=	p5-Tree-Simple-VisitorFactory-[0-9]*:../../devel/p5-Tree-Simple-Visito
 #DEPENDS+=	{perl>=5.10,p5-Scalar-List-Utils>=0}:../../devel/p5-Scalar-List-Utils
 
 # For tests:
-BUILD_DEPENDS+=	sqlite3>=0:../../databases/sqlite3
+BUILD_DEPENDS+=		sqlite3>=0:../../databases/sqlite3
 #BUILD_DEPENDS+=	{perl>5.10,p5-IPC-Cmd>=0}:../../devel/p5-IPC-Cmd
 
-SUBST_CLASSES+=	sqlite3
+SUBST_CLASSES+=		sqlite3
 SUBST_MESSAGE.sqlite3=	Fixing sqlite3-using test
 SUBST_STAGE.sqlite3=	post-configure
 SUBST_FILES.sqlite3=	t/lib/MyDB.pm
 SUBST_SED.sqlite3=	-e "s!\"sqlite3!\"${PREFIX}/bin/sqlite3!"
 
 USE_LANGUAGES=	# empty
-PERL5_PACKLIST= auto/Rose/DBx/Garden/Catalyst/.packlist
+PERL5_PACKLIST=	auto/Rose/DBx/Garden/Catalyst/.packlist
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

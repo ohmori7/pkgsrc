@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.27 2017/09/06 09:03:03 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2020/01/18 21:50:27 jperkin Exp $
 #
 
 DISTNAME=	trickle-1.06
-PKGREVISION=	15
+PKGREVISION=	16
 CATEGORIES=	net
 MASTER_SITES=	https://monkey.org/~marius/trickle/
 
@@ -18,7 +18,7 @@ CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 EGDIR=		${PREFIX}/share/examples/trickle
 CONF_FILES=	${EGDIR}/trickled.conf ${PKG_SYSCONFDIR}/trickled.conf
 
-RCD_SCRIPTS=	trickled
+RCD_SCRIPTS=		trickled
 INSTALLATION_DIRS+=	${EGDIR}
 
 pre-install:

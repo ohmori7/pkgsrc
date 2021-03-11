@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# $NetBSD: pkg_rolling-replace.sh,v 1.38 2019/04/26 18:14:15 gdt Exp $
+# $NetBSD: pkg_rolling-replace.sh,v 1.42 2021/01/15 10:56:52 tnn Exp $
 #<license>
 # Copyright (c) 2006 BBN Technologies Corp.  All rights reserved.
 #
@@ -92,6 +92,7 @@ if [ -z "$PKGSRCDIR" ] ; then
 fi
 test -z "$PKGSRCDIR" && echo >&2 "Please set PKGSRCDIR" && exit 1
 test -z "$PKG_CHK" && PKG_CHK="@PKG_CHK@"
+test -z "$PKG_ADMIN" && PKG_ADMIN="@PKG_ADMIN_CMD@"
 test -z "$PKG_INFO" && PKG_INFO="@PKG_INFO_CMD@"
 
 export PKGSRCDIR
@@ -108,12 +109,12 @@ usage()
         -n         Don't actually do make replace
         -r         Just replace, don't create binary packages
         -s         Replace even if the ABIs are still compatible ("strict")
-        -u         Update outdated packages
+        -u         Update mismatched packages
         -v         Verbose
 	-D VAR=VAL Passes given variables and values to make
         -L <path>  Log to path (<path>/pkgdir/pkg)
         -X <pkg>   exclude <pkg> from being rebuilt
-        -x <pkg>   exclude <pkg> from outdated check
+        -x <pkg>   exclude <pkg> from mismatch check
 
 pkg_rolling-replace does 'make replace' on one package at a time,
 tsorting the packages being replaced according to their
@@ -126,14 +127,14 @@ pkg_rolling-replace can be used in one of two ways:
       'pkg_rolling-replace' (no arguments) to rebuild them against the
       new version.
 
-    - 'pkg_chk -u' will delete all your mismatched (outdated)
-      packages, then reinstall them one at a time, leaving you without
-      those packages in the meantime.  'pkg_rolling-replace -u' will
-      instead upgrade them in place, allowing you to keep using your
-      system in the meantime (maybe...if you're lucky...because
-      pkg_rolling-replace replaces the \"deepest\" dependency first,
-      things could still break if that happens to be a fundamental
-      library whose ABI has changed).
+    - 'pkg_chk -u' will delete all your mismatched packages (where the
+      package version does not match the pkgsrc version), then reinstall
+      them one at a time, leaving you without those packages in the
+      meantime.  'pkg_rolling-replace -u' will instead upgrade them in
+      place, allowing you to keep using your system in the meantime
+      (maybe...if you're lucky...because pkg_rolling-replace replaces
+      the \"deepest\" dependency first, things could still break if that
+      happens to be a fundamental library whose ABI has changed).
 "
     exit 1
 }
@@ -151,13 +152,16 @@ OPC='rr>' # continuation
 # supported.  Newer versions may or may not work (patches welcome).
 check_packages_mismatched()
 {
-    ${PKG_CHK} -u -q $opt_B | while read line; do
+    ${PKG_CHK} -u -q $opt_B | egrep -v missing | while read line; do
         # duplicate output of pkg_chk to stderr (bypass $(...) or `...`)
         echo "${OPC} $line" 1>&2
 	# Look for the first thing that looks like pkg-version rather
 	# than category/pkg and remove the version.
         for word in $line; do
             if [ "$(echo $word | egrep '^[^/]+-[0-9][^-/]*$')" ]; then
+		if [ -z "$opt_F" ]; then
+		    ${PKG_ADMIN} set mismatch=YES "$word" 1>&2
+		fi
                 echo $word | sed 's/-[0-9][^-]*$//'
                 break  #done with this line
             fi
@@ -374,13 +378,17 @@ SUCCEEDED=""
 FAILED=""
 
 MISMATCH_TODO=
-if [ -n "$opt_u" -o -n "$opt_F" ]; then
+if [ -n "$opt_u" ]; then
     echo "${OPI} Checking for mismatched installed packages using pkg_chk"
     MISMATCH_TODO=$(check_packages_mismatched)
-    echo "${OPI} Excluding the following mismatched packages:"
-    echo "${OPC} EXCLUDE=[$EXCLUDE]"
-    MISMATCH_TODO=$(exclude $EXCLUDE --from $MISMATCH_TODO)
+else
+    echo "${OPI} Checking for mismatched installed packages (mismatch=YES)"
+    MISMATCH_TODO=$(check_packages_w_flag 'mismatch')
 fi
+
+echo "${OPI} Excluding the following mismatched packages:"
+echo "${OPC} EXCLUDE=[$EXCLUDE]"
+MISMATCH_TODO=$(exclude $EXCLUDE --from $MISMATCH_TODO)
 
 if [ -z "$opt_F" ]; then
     echo "${OPI} Checking for rebuild-requested installed packages (rebuild=YES)"
@@ -419,8 +427,11 @@ while [ -n "$REPLACE_TODO" ]; do
     for pkg in $TSORTED; do
         if is_member $pkg $REPLACE_TODO; then
 	    pkgdir=$(${PKG_INFO} -Q PKGPATH $pkg)
-	    [ -n "$pkgdir" ] || error "Couldn't extract PKGPATH from installed package $pkg"
-            break;
+	    if [ -n "$pkgdir" ]; then
+		break;
+	    else
+		error "Couldn't extract PKGPATH from installed package $pkg"
+	    fi
         fi
     done
     # loop should never exit without selecting a package
@@ -546,6 +557,8 @@ while [ -n "$REPLACE_TODO" ]; do
 	    abort "package $pkg still has unsafe_depends."
 	[ -z "$(${PKG_INFO} -Q rebuild $pkg)" ] || \
 	    abort "package $pkg is still requested to be rebuilt."
+	[ -z "$(${PKG_INFO} -Q mismatch $pkg)" ] || \
+	    abort "package $pkg is still a mismatched version."
     fi
     # If -r not given, make a binary package.
     if [ -z "$opt_r" -a -z "$fail" -a -z "$opt_F" ]; then

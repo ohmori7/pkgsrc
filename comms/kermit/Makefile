@@ -1,18 +1,18 @@
-# $NetBSD: Makefile,v 1.90 2019/04/11 02:21:09 mrg Exp $
+# $NetBSD: Makefile,v 1.94 2020/10/04 13:40:48 gdt Exp $
 
 DISTNAME=	cku302
 PKGNAME=	kermit-9.0.302
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	comms
 MASTER_SITES=	ftp://ftp.kermitproject.org/kermit/archives/
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	gdt@NetBSD.org
 HOMEPAGE=	http://www.kermitproject.org/
 COMMENT=	Network and serial communication, file transfer, and scripting utility
 
 # UNIX C-Kermit 9.0 has been released with the Revised 3-Clause BSD License.
 # http://www.columbia.edu/kermit/licensing.html
-LICENSE= modified-bsd
+LICENSE=	modified-bsd
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -55,11 +55,11 @@ BUILD_TARGET_OPSYS=	macosx10
 .  endif
 .elif ${OPSYS} == "Linux"
 BUILD_TARGET_OPSYS=	linux
-MAKE_ENV+=	HAVE_LIBCURSES=-l${BUILDLINK_LIBNAME.curses}
+MAKE_ENV+=		HAVE_LIBCURSES=-l${BUILDLINK_LIBNAME.curses}
 .  if ${CURSES_TYPE} == "ncurses"
-MAKE_ENV+=	HAVE_CURSES=-DCK_NCURSES
+MAKE_ENV+=		HAVE_CURSES=-DCK_NCURSES
 .  else
-MAKE_ENV+=	HAVE_CURSES=-DCK_NCURSES
+MAKE_ENV+=		HAVE_CURSES=-DCK_NCURSES
 .  endif
 .elif ${OPSYS} == "SunOS"
 BUILD_TARGET_OPSYS=	solaris11g

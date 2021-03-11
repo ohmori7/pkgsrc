@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:43:50 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:07:47 wiz Exp $
 
 DISTNAME=	Data-Printer-0.40
 PKGNAME=	p5-${DISTNAME:S/_/./}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/G/GA/GARU/}
 #ASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Data/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Data-Printer/
+HOMEPAGE=	https://metacpan.org/release/Data-Printer
 COMMENT=	Colored pretty-print of Perl data structures and objects
 LICENSE=	${PERL5_LICENSE}
 

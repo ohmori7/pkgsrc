@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.3 2019/03/02 13:23:36 adam Exp $
+# $NetBSD: options.mk,v 1.5 2020/01/21 10:57:26 kamil Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.python37
 PKG_SUPPORTED_OPTIONS=	dtrace pymalloc x11
@@ -7,7 +7,7 @@ PKG_SUGGESTED_OPTIONS=	x11
 .include "../../mk/bsd.prefs.mk"
 .include "../../mk/bsd.options.mk"
 
-PLIST_VARS+=		dtrace pymalloc
+PLIST_VARS+=		dtrace
 
 .if !empty(PKG_OPTIONS:Mdtrace)
 CONFIGURE_ARGS+=	--with-dtrace
@@ -25,7 +25,7 @@ SUBST_SED.xfindlib=	-e "s!\('-Wl,-t'\)!'${COMPILER_RPATH_FLAG}${X11BASE}/lib', '
 
 # Required to get definition of X11BASE and retain X11 rpath paths for linker
 # We need to pass rpath to _ctypes.so to get functional dlopen(3) for X11 libs
-USE_X11=		yes
+USE_X11=		weak
 
 SUBST_CLASSES+=		cdlopen
 SUBST_MESSAGE.cdlopen=	Handle X11BASE paths in dlopen(3) calls of _ctypes.so
@@ -35,11 +35,7 @@ SUBST_SED.cdlopen=	-e "s!\(libraries=\[\],\)!\1 runtime_library_dirs=\['${X11BAS
 .endif
 
 .if !empty(PKG_OPTIONS:Mpymalloc)
-PLIST_SUBST+=		M=m
-PLIST.pymalloc=		yes
-PRINT_PLIST_AWK+=	{ gsub(/PY_VER_SUFFIX}m/, "PY_VER_SUFFIX}$${M}") }
-PRINT_PLIST_AWK+=	{ gsub(/config-${PY_VER_SUFFIX}m/, "config-$${PY_VER_SUFFIX}$${M}") }
+CONFIGURE_ARGS+=	--with-pymalloc
 .else
 CONFIGURE_ARGS+=	--without-pymalloc
-PLIST_SUBST+=		M=
 .endif

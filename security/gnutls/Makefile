@@ -1,26 +1,26 @@
-# $NetBSD: Makefile,v 1.195 2019/03/27 16:46:40 leot Exp $
+# $NetBSD: Makefile,v 1.218 2020/12/03 12:27:38 nia Exp $
 
-DISTNAME=	gnutls-3.6.7
+DISTNAME=	gnutls-3.7.0
 CATEGORIES=	security devel
-MASTER_SITES=	ftp://ftp.gnutls.org/gcrypt/gnutls/v3.6/
+MASTER_SITES=	https://www.gnupg.org/ftp/gcrypt/gnutls/v${PKGVERSION_NOREV:R}/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnutls.org/
-COMMENT=	GNU Transport Layer Security library
+HOMEPAGE=	https://www.gnutls.org/
+COMMENT=	Transport Layer Security library
 LICENSE=	gnu-gpl-v3 AND gnu-lgpl-v2.1
 
 DEPENDS+=	mozilla-rootcerts-[0-9]*:../../security/mozilla-rootcerts
 
+PLIST_SRC=	PLIST
+
 USE_LANGUAGES=			c c++
 USE_LIBTOOL=			yes
-USE_PKGLOCALEDIR=		yes
 USE_TOOLS+=			gmake gsed perl pkg-config bash
+USE_TOOLS+=			msgfmt msgmerge xgettext
 GNU_CONFIGURE=			yes
 # this library duplicates (and conflicts with) openssl
 CONFIGURE_ARGS+=		--disable-openssl-compatibility
-CONFIGURE_ARGS+=		--disable-guile
-CONFIGURE_ARGS+=		--disable-libdane
 CONFIGURE_ARGS+=		--without-idn
 CONFIGURE_ARGS+=		--without-tpm
 CONFIGURE_ARGS+=		--disable-valgrind-tests
@@ -30,6 +30,8 @@ CONFIGURE_ARGS+=		--enable-local-libopts
 # Assembler support is broken for SunOS in 3.2.9.
 CONFIGURE_ARGS.SunOS+=		--disable-hardware-acceleration
 CONFIGURE_ARGS.FreeBSD+=	ac_cv_type_max_align_t=yes
+
+.include "options.mk"
 
 TEST_TARGET=		check
 
@@ -42,9 +44,6 @@ REPLACE_BASH+=		tests/gnutls-cli-debug.sh
 REPLACE_BASH+=		tests/ocsp-tests/ocsp-must-staple-connection
 REPLACE_BASH+=		tests/ocsp-tests/ocsp-tls-connection
 REPLACE_BASH+=		tests/starttls.sh
-REPLACE_BASH+=		tests/suite/cbc-record-check.sh
-REPLACE_BASH+=		tests/suite/testcompat-main-openssl
-REPLACE_BASH+=		tests/suite/testcompat-main-polarssl
 REPLACE_BASH+=		tests/cert-tests/pkcs12-utf8
 
 REPLACE_PERL+=		doc/scripts/gdoc doc/scripts/sort2.pl
@@ -65,6 +64,34 @@ EGDIR=		${PREFIX}/share/examples/gnutls
 
 INSTALLATION_DIRS=	${EGDIR} include/gnutls
 
+.include "../../mk/bsd.prefs.mk"
+
+.if ${MACHINE_ARCH} == "x86_64"
+GNUTLS_GAS_VERSION!=	\
+	( env LC_ALL=C as --version 2>&1 | ${GREP} 'GNU assembler version' | ${AWK} '{print $$4}') 2>/dev/null || ${ECHO} 0
+.  if ${GNUTLS_GAS_VERSION} != 0
+GNUTLS_GAS_NEW_ENOUGH=	no
+# for ssse3, >=2.22
+# better to BUILD_DEPENDS on binutils's gas
+GNUTLS_GAS_ACCEPTABLE_PATTERNS=	\
+	2.2[2-9]		\
+	2.2[2-9].*		\
+	2.2[2-9]-[0-9]*.*	\
+	2.[3-9][0-9]		\
+	2.[3-9][0-9].*		\
+	2.[3-9][0-9]-[0-9]*.*	\
+	[3-9]*.*
+.    for gas_pattern in ${GNUTLS_GAS_ACCEPTABLE_PATTERNS}
+.      if !empty(GNUTLS_GAS_VERSION:M${gas_pattern})
+GNUTLS_GAS_NEW_ENOUGH=	yes
+.      endif
+.    endfor
+.    if !empty(GNUTLS_GAS_NEW_ENOUGH:M[nN][oO])
+CONFIGURE_ARGS+=	--disable-hardware-acceleration
+.    endif
+.  endif
+.endif
+
 post-install:
 	cd ${WRKSRC}/doc/examples && ${INSTALL_DATA} *.c ${DESTDIR}${EGDIR}
 
@@ -82,7 +109,7 @@ CHECK_BUILTIN.zlib:=yes
 #.include "../../lang/guile20/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libtasn1+=	libtasn1>=4.9
 .include "../../security/libtasn1/buildlink3.mk"
-BUILDLINK_API_DEPENDS.nettle+=		nettle>=3.4.1
+BUILDLINK_API_DEPENDS.nettle+=		nettle>=3.6
 .include "../../security/nettle/buildlink3.mk"
 BUILDLINK_API_DEPENDS.p11-kit+=	p11-kit>=0.23.1
 .include "../../security/p11-kit/buildlink3.mk"

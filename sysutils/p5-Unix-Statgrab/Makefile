@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.10 2018/08/22 09:46:39 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2020/08/31 18:11:34 wiz Exp $
 
 DISTNAME=	Unix-Statgrab-0.112
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/R/RE/REHSACK/}
 
@@ -17,7 +17,7 @@ BUILD_DEPENDS+=	p5-Test-LeakTrace-[0-9]*:../../devel/p5-Test-LeakTrace
 
 USE_LANGUAGES=	c
 USE_TOOLS+=	pkg-config
-PERL5_PACKLIST=		auto/Unix/Statgrab/.packlist
+PERL5_PACKLIST=	auto/Unix/Statgrab/.packlist
 PERL5_REQD+=	5.2	# File::Copy >= 0
 PERL5_REQD+=	5.10.1	# parent >= 0
 PERL5_REQD+=	5.11.2	# ExtUtils::CBuilder >= 0.27

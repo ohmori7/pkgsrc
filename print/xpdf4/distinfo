@@ -1,0 +1,10 @@
+$NetBSD: distinfo,v 1.3 2021/02/09 20:36:32 nia Exp $
+
+SHA1 (xpdf-4.03.tar.gz) = 3e71b44fc98460b0f97a18594feb0e3c4e4248d9
+RMD160 (xpdf-4.03.tar.gz) = a11136ebb97b14913d83fe87af0f75c8d8d4ca91
+SHA512 (xpdf-4.03.tar.gz) = 5f8478c2c4863a3c50f9b45a6fec73c7e67a74adbeaa651dd2e29982ea4cf050740874ee670672f985a323c12c28c968c16238c4238aeb52810a45e2728d622f
+Size (xpdf-4.03.tar.gz) = 936046 bytes
+SHA1 (patch-cmake-config.txt) = a2c25a258c8c72494c3b53854cabf2e51db0c32d
+SHA1 (patch-doc_sample-xpdfrc) = c16f4355efa279e79b9f27bc256e7569a348f13d
+SHA1 (patch-xpdf-qt_XpdfWidgetPrint.cc) = 8d05b6e95228f07cc571b176ec821f5b535424e8
+SHA1 (patch-xpdf_GlobalParams.cc) = c997a3c3da33c30d259f26fe37b407ab6f1f491f

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.18 2019/04/26 13:14:07 maya Exp $
+# $NetBSD: Makefile,v 1.22 2020/12/04 20:45:32 nia Exp $
 
 DISTNAME=	calypso-1.3
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	net time
 MASTER_SITES=	http://keithp.com/calypso/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://keithp.com/blogs/calypso/
+HOMEPAGE=	https://keithp.com/blogs/calypso/
 COMMENT=	CardDAV/CalDAV server
 LICENSE=	gnu-gpl-v3
 
@@ -16,7 +16,7 @@ DEPENDS+=	git-base-[0-9]*:../../devel/git-base
 INSTALLATION_DIRS=	share/examples/calypso
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # as of 1.3
+PYTHON_VERSIONS_ACCEPTED= 27 # as of 1.3
 REPLACE_PYTHON=	calypso.py
 
 post-install:

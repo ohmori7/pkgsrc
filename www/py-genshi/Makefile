@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.13 2019/03/04 12:04:22 adam Exp $
+# $NetBSD: Makefile,v 1.15 2020/01/26 17:32:23 rillig Exp $
 
-DISTNAME=	Genshi-0.7.1
+DISTNAME=	Genshi-0.7.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:tl}
 CATEGORIES=	www python
 MASTER_SITES=	${MASTER_SITE_PYPI:=G/Genshi/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://genshi.edgewall.org/
+HOMEPAGE=	https://genshi.edgewall.org/
 COMMENT=	Python toolkit for generation of output for the web
 LICENSE=	modified-bsd
 

@@ -1,21 +1,45 @@
-# $NetBSD: Makefile,v 1.42 2018/12/13 19:51:36 adam Exp $
+# $NetBSD: Makefile,v 1.63 2021/02/07 06:30:32 ryoon Exp $
 
-DISTNAME=	marble-${_KDE_VERSION}
-PKGREVISION=	12
+DISTNAME=	marble-${KAPPSVER}
+PKGREVISION=	9
 CATEGORIES=	misc
+
+HOMEPAGE=	https://kde.org/applications/system/marble/
 COMMENT=	KDE desktop globe
+LICENSE=	gnu-lgpl-v2 AND gnu-gpl-v3 AND gnu-fdl-v1.2
 
-# .../src/apps/marble-kde/marble_part.cpp:106:10: fatal error: 'settings.h' file not found
-MAKE_JOBS_SAFE=no
+.include "../../meta-pkgs/kde/applications.mk"
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
 
-CMAKE_ARGS+=	-DWITH_libgps:BOOL=OFF
+USE_TOOLS+=	msgmerge perl
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+SUBST_CLASSES+=		fix-moc
+SUBST_STAGE.fix-moc=	post-configure
+SUBST_MESSAGE.fix-moc=	Cleaning up MOC includes
+SUBST_FILES.fix-moc=	_KDE_build/src/apps/*/CMakeFiles/*_autogen.dir/AutogenInfo.json
+SUBST_NOOP_OK.fix-moc=	yes
+SUBST_SED.fix-moc=	-e 's;"${PREFIX}/include",;;g'
 
+SUBST_CLASSES+=		xdg
+SUBST_STAGE.xdg=	pre-configure
+SUBST_MESSAGE.xdg=	Install via examples dir.
+SUBST_FILES.xdg=	src/apps/marble-kde/CMakeLists.txt
+SUBST_SED.xdg=		-e 's:{KDE_INSTALL_CONFDIR}:{KDE_INSTALL_XDG_EX_DIR}:'
+
+MAKE_DIRS+=	${PKG_SYSCONFDIR}/xdg
+CONF_FILES+=	${PREFIX}/share/examples/kde-xdg/marble.knsrc \
+		${PKG_SYSCONFDIR}/xdg/marble.knsrc
+
+.include "../../devel/kparts/buildlink3.mk"
+.include "../../devel/krunner/buildlink3.mk"
+.include "../../geography/gpsd/buildlink3.mk"
+.include "../../geography/shapelib/buildlink3.mk"
+.include "../../net/knewstuff/buildlink3.mk"
+.include "../../multimedia/phonon-qt5/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
+.include "../../x11/qt5-qtserialport/buildlink3.mk"
+#.include "../../x11/qt5-qtwebengine/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

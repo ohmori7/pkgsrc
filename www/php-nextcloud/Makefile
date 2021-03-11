@@ -1,7 +1,16 @@
-# $NetBSD: Makefile,v 1.25 2019/05/18 17:55:10 ryoon Exp $
+# $NetBSD: Makefile,v 1.51 2021/03/07 13:21:58 taca Exp $
 #
 
-DISTNAME=	nextcloud-16.0.1
+# The nextcloud update process only works from one version to the
+# next; one cannot update e.g from 16 to 18.  It is a requirement for
+# stable branch users, if they update every stable branch, to have
+# automatic updates work.  Therefore a major update can only be
+# committed to pkgsrc-current if it is one higher than the major
+# version in the previous stable branch.  As an example, if 2020Q1
+# contained 18.0.2, then during April to June it is ok to update to
+# later 18.x.y, to 19.0.0, and to later 19.x.y, but it is not ok to
+# update to 20.
+DISTNAME=	nextcloud-21.0.0
 PKGNAME=	${PHP_PKG_PREFIX}-${DISTNAME}
 CATEGORIES=	www
 MASTER_SITES=	https://download.nextcloud.com/server/releases/
@@ -14,7 +23,6 @@ LICENSE=	gnu-agpl-v3
 
 DEPENDS+=	${PHP_PKG_PREFIX}-gd>=5.4.0:../../graphics/php-gd
 DEPENDS+=	${PHP_PKG_PREFIX}-iconv>=5.4.0:../../converters/php-iconv
-DEPENDS+=	${PHP_PKG_PREFIX}-json>=5.4.0:../../textproc/php-json
 DEPENDS+=	${PHP_PKG_PREFIX}-mbstring>=5.4.0:../../converters/php-mbstring
 DEPENDS+=	${PHP_PKG_PREFIX}-zip>=5.4.0:../../archivers/php-zip
 DEPENDS+=	${PHP_PKG_PREFIX}-zlib>=5.4.0:../../archivers/php-zlib
@@ -61,6 +69,6 @@ do-install:
 	cd ${WRKDIR} && ${FIND} nextcloud -type f \! -name '*.orig' -print | \
 		pax -rw -pmp ${DESTDIR}${PREFIX}/share
 
-.include "../../lang/php/phpversion.mk"
+.include "../../lang/php/json.mk"
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

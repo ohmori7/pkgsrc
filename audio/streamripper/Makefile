@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2016/04/20 12:10:32 nros Exp $
+# $NetBSD: Makefile,v 1.14 2020/03/08 16:48:50 wiz Exp $
 
 DISTNAME=	streamripper-1.64.6
+PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=streamripper/}
 
@@ -11,7 +12,7 @@ LICENSE=	gnu-gpl-v2
 
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--without-included-libmad
-USE_TOOLS+=	pkg-config
+USE_TOOLS+=		pkg-config
 
 PTHREAD_OPTS+=	require
 

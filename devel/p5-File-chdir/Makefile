@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.23 2018/08/22 09:44:03 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2020/08/31 18:08:05 wiz Exp $
 
 DISTNAME=	File-chdir-0.1010
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=File/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/File-chdir/
+HOMEPAGE=	https://metacpan.org/release/File-chdir
 COMMENT=	Perl module with a more sensible way to change directories
 LICENSE=	${PERL5_LICENSE}
 

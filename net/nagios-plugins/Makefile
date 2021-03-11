@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.48 2019/04/30 03:48:43 taca Exp $
+# $NetBSD: Makefile,v 1.52 2020/08/31 18:10:36 wiz Exp $
 #
 
-PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	net sysutils
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -17,10 +17,10 @@ USE_TOOLS+=	msgfmt msgmerge intltool perl:run xgettext
 
 PKG_GROUPS+=	${NAGIOS_GROUP}
 
-CONFIGURE_ARGS+= --without-pgsql --without-mysql \
-		--without-smbclient-command --without-snmpget-command \
-		--without-snmpgetnext-command --without-fping-command \
-		--without-apt-get-command
+CONFIGURE_ARGS+=	--without-pgsql --without-mysql \
+			--without-smbclient-command --without-snmpget-command \
+			--without-snmpgetnext-command --without-fping-command \
+			--without-apt-get-command
 
 SPECIAL_PERMS+=	${PREFIX}/libexec/nagios/check_icmp ${SETUID_ROOT_PERMS}
 SPECIAL_PERMS+=	${PREFIX}/libexec/nagios/check_dhcp ${SETUID_ROOT_PERMS}
@@ -42,8 +42,8 @@ SPECIAL_PERMS+=	${PREFIX}/libexec/nagios/check_ide_smart \
 
 # required to enable large file support on Solaris
 .if ${OPSYS} == "SunOS"
-CPPFLAGS_LFS!=		getconf LFS_CFLAGS
-MAKE_ENV+=		CPPFLAGS_LFS=${CPPFLAGS_LFS:Q}
+CPPFLAGS_LFS!=	getconf LFS_CFLAGS
+MAKE_ENV+=	CPPFLAGS_LFS=${CPPFLAGS_LFS:Q}
 .endif
 LIBS.SunOS+=	-lm
 

@@ -1,13 +1,13 @@
-$NetBSD: patch-autogen.sh,v 1.2 2018/02/03 00:39:50 ryoon Exp $
+$NetBSD: patch-autogen.sh,v 1.4 2021/02/06 06:47:24 ryoon Exp $
 
 * Run configure script with bash
 
---- autogen.sh.orig	2018-01-24 20:31:03.000000000 +0000
+--- autogen.sh.orig	2021-01-27 19:33:49.000000000 +0000
 +++ autogen.sh
-@@ -290,7 +290,7 @@ if (defined $ENV{NOCONFIGURE}) {
-     push @args, "--enable-option-checking=$option_checking";
+@@ -313,7 +313,7 @@ if (defined $ENV{NOCONFIGURE}) {
+         $ENV{"PROGRAMFILESX86"} = $ENV{"ProgramFiles(x86)"};
+     }
  
-     print "Running ./configure with '" . join (" ", @args), "'\n";
 -    system ("./configure", @args) && die "Error running configure";
 +    system ("@BASH@", "./configure", @args) && die "Error running configure";
  }

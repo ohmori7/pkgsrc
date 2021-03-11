@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.57 2019/04/26 14:12:41 maya Exp $
+# $NetBSD: Makefile,v 1.68 2020/10/12 21:52:02 bacon Exp $
 
 DISTNAME=	ScientificPython-2.8.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/Python//}
-PKGREVISION=	9
+PKGREVISION=	18
 CATEGORIES=	math python
 MASTER_SITES=	http://sourcesup.cru.fr/frs/download.php/4411/
 
@@ -15,12 +15,12 @@ CONFLICTS+=	py-Scientific-[0-9]*
 
 MAKE_ENV+=	NETCDF_PREFIX=${BUILDLINK_PREFIX.netcdf}
 
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 2.8.1
+
 .include "../../lang/python/pyversion.mk"
 
 PYPLAT_CMD=	${PYTHONBIN} -c "import sys; print sys.platform"
 PLIST_SUBST+=	PYPLAT=${PYPLAT_CMD:sh}
-
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 2.8.1
 
 INSTALLATION_DIRS=	bin
 

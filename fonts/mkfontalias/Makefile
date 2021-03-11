@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.17 2019/04/25 07:32:54 maya Exp $
+# $NetBSD: Makefile,v 1.19 2020/12/04 20:45:18 nia Exp $
 #
 
 DISTNAME=	mkfontalias.py
 PKGNAME=	mkfontalias-20000521
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	fonts
 MASTER_SITES=	http://home.c2i.net/dark/
 EXTRACT_SUFX=	# empty
@@ -16,7 +16,7 @@ WRKSRC=		${WRKDIR}
 EXTRACT_ONLY=	# empty
 NO_BUILD=	yes
 
-REPLACE_PYTHON=	${DISTNAME}
+REPLACE_PYTHON=		${DISTNAME}
 INSTALLATION_DIRS=	bin
 
 do-extract:

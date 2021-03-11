@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.8 2017/06/04 16:13:07 taca Exp $
+@comment $NetBSD: PLIST,v 1.10 2021/01/10 16:20:48 taca Exp $
 ${GEM_HOME}/cache/${GEM_NAME}.gem
 ${GEM_LIBDIR}/ChangeLog
 ${GEM_LIBDIR}/Gemfile
@@ -77,6 +77,7 @@ ${GEM_LIBDIR}/examples/north/g.12.8.graphml
 ${GEM_LIBDIR}/examples/north/g.14.9.graphml
 ${GEM_LIBDIR}/examples/north2.rb
 ${GEM_LIBDIR}/examples/rdep-rgl.rb
+${GEM_LIBDIR}/examples/unix.dot
 ${GEM_LIBDIR}/lib/rgl/adjacency.rb
 ${GEM_LIBDIR}/lib/rgl/base.rb
 ${GEM_LIBDIR}/lib/rgl/bellman_ford.rb
@@ -95,6 +96,7 @@ ${GEM_LIBDIR}/lib/rgl/graph_wrapper.rb
 ${GEM_LIBDIR}/lib/rgl/graphxml.rb
 ${GEM_LIBDIR}/lib/rgl/implicit.rb
 ${GEM_LIBDIR}/lib/rgl/mutable.rb
+${GEM_LIBDIR}/lib/rgl/path.rb
 ${GEM_LIBDIR}/lib/rgl/path_builder.rb
 ${GEM_LIBDIR}/lib/rgl/prim.rb
 ${GEM_LIBDIR}/lib/rgl/rdot.rb
@@ -117,6 +119,7 @@ ${GEM_LIBDIR}/test/edmonds_karp_test.rb
 ${GEM_LIBDIR}/test/graph_test.rb
 ${GEM_LIBDIR}/test/graph_xml_test.rb
 ${GEM_LIBDIR}/test/implicit_test.rb
+${GEM_LIBDIR}/test/path_test.rb
 ${GEM_LIBDIR}/test/prim_test.rb
 ${GEM_LIBDIR}/test/rdot_test.rb
 ${GEM_LIBDIR}/test/test_helper.rb

@@ -1,6 +1,8 @@
-# $NetBSD: Makefile,v 1.27 2019/04/25 21:17:15 markd Exp $
+# $NetBSD: Makefile,v 1.46 2021/02/07 06:30:11 ryoon Exp $
 
-DISTNAME=	plasma-framework-${KF5VER}
+DISTNAME=	plasma-framework-5.70.1
+#DISTNAME=	plasma-framework-${KF5VER}
+PKGREVISION=	6
 CATEGORIES=	x11
 
 HOMEPAGE=	https://community.kde.org/Frameworks
@@ -16,11 +18,12 @@ USE_TOOLS+=	msgmerge pkg-config
 SUBST_CLASSES+=		fix-moc
 SUBST_STAGE.fix-moc=	post-configure
 SUBST_MESSAGE.fix-moc=	Cleaning up MOC includes
-SUBST_FILES.fix-moc=	_KDE_build/src/scriptengines/qml/CMakeFiles/plasma_appletscript_declarative_autogen.dir/AutogenInfo.cmake
-SUBST_SED.fix-moc=	-e 's,;${PREFIX}/include;,;,g'
+SUBST_FILES.fix-moc=	_KDE_build/src/scriptengines/qml/CMakeFiles/plasma_appletscript_declarative_autogen.dir/AutogenInfo.json
+SUBST_NOOP_OK.fix-moc=	yes
+SUBST_SED.fix-moc=	-e 's;"${PREFIX}/include",;;g'
 
 .include "../../devel/kdeclarative/buildlink3.mk"
-#.include "../../wip/kwayland/buildlink3.mk"
+.include "../../devel/kwayland/buildlink3.mk"
 .include "../../x11/kactivities5/buildlink3.mk"
 .include "../../x11/kirigami2/buildlink3.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"

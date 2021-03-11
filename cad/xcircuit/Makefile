@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.49 2019/06/08 11:04:30 rillig Exp $
+# $NetBSD: Makefile,v 1.52 2020/08/17 20:18:15 leot Exp $
 
-DISTNAME=	xcircuit-3.9.72
-PKGREVISION=	3
+DISTNAME=	xcircuit-3.10.17
+PKGREVISION=	1
 CATEGORIES=	cad graphics
 MASTER_SITES=	http://opencircuitdesign.com/xcircuit/archive/
 EXTRACT_SUFX=	.tgz
@@ -31,6 +31,9 @@ CONFIGURE_ARGS+=	--with-tklibs=${BUILDLINK_PREFIX.tk}/lib
 BUILD_TARGET=		tcl
 INSTALL_TARGET=		install-tcl
 INSTALLATION_DIRS=	${PKGMANDIR}/man1 ${EGDIR}
+
+# 3.10.13 -> 3.10 etc
+PLIST_SUBST+=	PKGVERSION_MAJMIN=${PKGVERSION_NOREV:C/\.([0-9]*)$//}
 
 post-extract:
 	${MV} -f ${WRKSRC}/examples/.xcircuitrc ${WRKSRC}/examples/xcircuitrc

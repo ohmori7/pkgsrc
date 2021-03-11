@@ -1,4 +1,4 @@
-$NetBSD: distinfo,v 1.20 2019/06/15 08:21:32 adam Exp $
+$NetBSD: distinfo,v 1.22 2019/12/02 11:46:08 nia Exp $
 
 SHA1 (jack-audio-connection-kit-0.125.0.tar.gz) = 6b7516b442878ffd1ca875310084b33d0edee400
 RMD160 (jack-audio-connection-kit-0.125.0.tar.gz) = 25f1baa1d8f03f0bbfc0b48c300b63d89d4e881b
@@ -11,11 +11,12 @@ SHA1 (patch-drivers_coreaudio_Makefile.in) = 13f5e5914ae0304c93dca54518fecb19f5e
 SHA1 (patch-drivers_netjack_netjack__packet.c) = eb70ec5644e960e0cf0258a15d763be31c11bb02
 SHA1 (patch-drivers_oss_oss__driver.c) = 302f20e82abde4a5b1678d2c3e9cbc8a63fad5ad
 SHA1 (patch-drivers_oss_oss__driver.h) = f23595db3fe80cae36ce222d89cdfbc37916e325
+SHA1 (patch-drivers_sun_sun__driver.c) = 0842e34e6190b8877ab7ac3d4d764a0de4cbfca8
 SHA1 (patch-include_engine.h) = c58651bccc910131ffc9b263a75fa732a7a2b168
 SHA1 (patch-jack_control.h) = 8d6f07fd226b68cacf170501f557503cd674249a
 SHA1 (patch-jack_types.h) = a58fcdafab7e014760287d763c944c8a77281f7f
 SHA1 (patch-jackd_engine.c) = 703242e74bb6d0cae1274b5e4f2c477a689432d9
 SHA1 (patch-libjack_unlock.c) = 4e346eb5dc2bce74968b894158cb3871d5076149
-SHA1 (patch-tools_netsource.c) = 836550efb8c53e7f546c2708f8670496b78daec1
+SHA1 (patch-tools_netsource.c) = 9eb526fbcb020ce8262883e685f57b627a7621cb
 SHA1 (patch-tools_session__notify.c) = 6ab077be462993a054289803ffc3e8a6654c533e
 SHA1 (patch-tools_transport.c) = 2a40f3a51a088e62352d7cdcc27eb41f3064ae7e

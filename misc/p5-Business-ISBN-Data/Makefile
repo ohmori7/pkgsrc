@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.29 2018/08/22 09:45:44 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2020/09/07 12:00:25 wiz Exp $
 
-DISTNAME=	Business-ISBN-Data-20140910.003
+DISTNAME=	Business-ISBN-Data-20191107
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
 CATEGORIES=	misc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Business/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Business-ISBN-Data/
+HOMEPAGE=	https://metacpan.org/release/Business-ISBN-Data
 COMMENT=	Data for the p5-Business-ISBN package
 LICENSE=	${PERL5_LICENSE}
 

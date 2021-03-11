@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.5 2016/09/03 11:58:02 adam Exp $
+# $NetBSD: options.mk,v 1.9 2020/12/14 08:46:56 dbj Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.tk
 PKG_SUPPORTED_OPTIONS=	threads debug xft2
@@ -20,10 +20,14 @@ PKG_SUPPORTED_OPTIONS+=	aqua
 # Otherwise some X11 headers are installed and will break X11 compatibility.
 .if !empty(PKG_OPTIONS:Maqua)
 CONFIGURE_ARGS+=	--enable-aqua
+CONFIGURE_ARGS+=	--without-x
 PLIST.aqua=		yes
 .else
+CONFIGURE_ARGS+=	--x-includes=${X11BASE}/include
+CONFIGURE_ARGS+=	--x-libraries=${X11BASE}/lib${LIBABISUFFIX:Q}
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
+.include "../../x11/libXScrnSaver/buildlink3.mk"
 .endif
 
 .if !empty(PKG_OPTIONS:Mdebug)
@@ -32,6 +36,7 @@ CONFIGURE_ARGS+=	--enable-symbols
 
 .if !empty(PKG_OPTIONS:Mthreads)
 CONFIGURE_ARGS+=	--enable-threads
+PTHREAD_OPTS+=		require
 .include "../../mk/pthread.buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-threads

@@ -150,11 +150,11 @@ and
 functions. 
 == SEE ALSO == 
 [[ManPageBsdtar1]], 
-[[ManPageibarchive3]], 
 [[ManPagerchiveeadata3]], 
 [[ManPagerchiveeadilter3]], 
 [[ManPagerchiveeadetptions3]], 
 [[ManPagerchivetil3]], 
+[[ManPageibarchive3]], 
 [[ManPageTar5]] 
 == BUGS == 
 Many traditional archiver programs treat 

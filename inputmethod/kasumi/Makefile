@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.36 2018/11/14 22:21:51 kleink Exp $
+# $NetBSD: Makefile,v 1.41 2020/08/17 20:19:16 leot Exp $
 
 DISTNAME=	kasumi-2.5
-PKGREVISION=	27
+PKGREVISION=	31
 CATEGORIES=	inputmethod japanese
 MASTER_SITES=	${MASTER_SITE_OSDN:=kasumi/41436/}
 
@@ -10,11 +10,11 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Dictionary management tool for anthy
 LICENSE=	gnu-gpl-v2
 
-USE_TOOLS+=	pkg-config
-USE_X11=	yes
+USE_TOOLS+=		pkg-config
+USE_X11=		yes
 USE_PKGLOCALEDIR=	yes
-GNU_CONFIGURE=	yes
-USE_LANGUAGES=	c c++
+GNU_CONFIGURE=		yes
+USE_LANGUAGES=		c c++
 
 BUILDLINK_API_DEPENDS.anthy+=	anthy>=6520
 BUILDLINK_API_DEPENDS.gtk2+=	gtk2+>=2.6

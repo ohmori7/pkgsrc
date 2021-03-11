@@ -1,11 +1,11 @@
-$NetBSD: patch-setup.py,v 1.1 2018/11/20 18:44:03 adam Exp $
+$NetBSD: patch-setup.py,v 1.3 2021/01/16 09:57:09 adam Exp $
 
 Do not install tests.
 
---- setup.py.orig	2018-11-20 18:13:56.000000000 +0000
+--- setup.py.orig	2021-01-16 09:46:38.000000000 +0000
 +++ setup.py
-@@ -40,7 +40,7 @@ setup(
-     license='BSD',
+@@ -45,7 +45,7 @@ setup(
+     license='BSD-3-Clause',
      description='Adds Google Maps plugins to django CMS.',
      long_description=open('README.rst').read(),
 -    packages=find_packages(),

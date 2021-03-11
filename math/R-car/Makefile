@@ -1,21 +1,25 @@
-# $NetBSD: Makefile,v 1.5 2018/07/28 14:40:47 brook Exp $
-#
-
-CATEGORIES=	math
-
-MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	${R_HOMEPAGE_BASE}/car/
-COMMENT=	Accompanies An R Companion to Applied Regression, 2nd Edition
-LICENSE=	gnu-gpl-v2
+# $NetBSD: Makefile,v 1.9 2020/10/02 10:31:59 wen Exp $
 
 R_PKGNAME=	car
-R_PKGVER=	2.1-6
+R_PKGVER=	3.0-10
 
-WRKSRC=		${WRKDIR}/car
+MAINTAINER=	pkgsrc-users@NetBSD.org
+COMMENT=	Companion to 'Applied Regression'
+LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3
+
+DEPENDS+=	R-rio>=0.5.16:../../devel/R-rio
+DEPENDS+=	R-maptools>=0.9.5:../../geography/R-maptools
+DEPENDS+=	R-abind>=1.4.5:../../math/R-abind
+DEPENDS+=	R-carData>=3.0.0:../../math/R-carData
+DEPENDS+=	R-lme4>=1.1.21:../../math/R-lme4
+DEPENDS+=	R-pbkrtest>=0.4.4:../../math/R-pbkrtest
+DEPENDS+=	R-quantreg>=5.42.1:../../math/R-quantreg
+
+# Packages suggested but not available:
+#   'alr4', 'coxme', 'leaps', 'lmtest', 'rgl'
+TEST_DEPENDS+=	R-lmtest-[0-9]*:../../math/R-lmtest
+
 USE_LANGUAGES=	# none
-
-DEPENDS+=	R-quantreg>=0:../../math/R-quantreg \
-		R-pbkrtest>=0.4.4:../../math/R-pbkrtest
 
 .include "../../math/R/Makefile.extension"
 .include "../../mk/bsd.pkg.mk"

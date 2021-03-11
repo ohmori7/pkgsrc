@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.34 2015/04/25 14:22:55 tnn Exp $
+# $NetBSD: Makefile,v 1.37 2020/03/20 11:57:41 nia Exp $
 #
 
 DISTNAME=	gltron-0.70-source
@@ -11,10 +11,10 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gltron.sourceforge.net/
 COMMENT=	3D lightcycle game inspired by the movie Tron
 
-WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
-USE_LANGUAGES=	c c++
-GNU_CONFIGURE=	YES
-CONFIGURE_ARGS+= --disable-warn
+WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
+USE_LANGUAGES=		c c++
+GNU_CONFIGURE=		YES
+CONFIGURE_ARGS+=	--disable-warn
 
 LIBS.SunOS+=	-lm
 

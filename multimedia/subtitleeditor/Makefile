@@ -1,33 +1,31 @@
-# $NetBSD: Makefile,v 1.44 2018/12/02 19:17:33 bsiegert Exp $
+# $NetBSD: Makefile,v 1.53 2020/11/05 09:08:49 ryoon Exp $
 
-DISTNAME=		subtitleeditor-0.30.0
-PKGREVISION=		31
-CATEGORIES=		multimedia
-#MASTER_SITES=		http://download.gna.org/subtitleeditor/0.30/
+DISTNAME=	subtitleeditor-0.54.0
+PKGREVISION=	7
+CATEGORIES=	multimedia
+MASTER_SITES=	${MASTER_SITE_GITHUB:=kitone/}
+GITHUB_RELEASE=	${PKGVERSION_NOREV}
 
-MAINTAINER=		ccatrian@eml.cc
-#HOMEPAGE=		http://home.gna.org/subtitleeditor/
-COMMENT=		GTK+2 tool to edit movie subtitles
-LICENSE=		gnu-gpl-v2
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://kitone.github.io/subtitleeditor/
+COMMENT=	GTK+ tool to create or edit subtitles
+LICENSE=	gnu-gpl-v3
 
-USE_PKGLOCALEDIR=	yes
-USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake intltool pkg-config msgfmt
-GNU_CONFIGURE=		yes
-USE_LANGUAGES=		c c++11
+GNU_CONFIGURE=	yes
+USE_LIBTOOL=	yes
 
-BUILDLINK_API_DEPENDS.glibmm+=	glibmm>=2.16.3
-.include "../../devel/glibmm/buildlink3.mk"
-.include "../../devel/libglademm/buildlink3.mk"
+USE_TOOLS+=	pkg-config perl gmake
+USE_TOOLS+=	intltool msgfmt msgmerge xgettext
+USE_LANGUAGES=	c c++14
+
+# C++14
+GCC_REQD+=	5
+
+.include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../multimedia/gstreamer0.10/buildlink3.mk"
-.include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
-.include "../../multimedia/gst-plugins0.10-good/buildlink3.mk"
-.include "../../textproc/enchant2/buildlink3.mk"
-.include "../../textproc/iso-codes/buildlink3.mk"
-.include "../../textproc/libxml++/buildlink3.mk"
-BUILDLINK_API_DEPENDS.gtkmm+=	gtkmm>=2.12
-.include "../../x11/gtkmm/buildlink3.mk"
+.include "../../multimedia/gstreamermm1/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-
+.include "../../textproc/enchant2/buildlink3.mk"
+.include "../../textproc/libxml++/buildlink3.mk"
+.include "../../x11/gtkmm3/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

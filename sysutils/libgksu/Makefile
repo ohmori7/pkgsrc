@@ -1,20 +1,20 @@
-# $NetBSD: Makefile,v 1.43 2018/11/14 22:22:26 kleink Exp $
+# $NetBSD: Makefile,v 1.49 2020/08/17 20:17:44 leot Exp $
 
 DISTNAME=	libgksu-2.0.12
-PKGREVISION=	12
+PKGREVISION=	16
 CATEGORIES=	sysutils
 MASTER_SITES=	http://people.debian.org/~kov/gksu/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.nongnu.org/gksu/
+HOMEPAGE=	https://www.nongnu.org/gksu/
 COMMENT=	Library that provides a GTK+ frontend to su and sudo
 LICENSE=	gnu-lgpl-v2
 
 GNU_CONFIGURE=	yes
 
 CONFIGURE_ARGS+=	--disable-gtk-doc
-CONFIGURE_ENV+=	GCONF_SCHEMA_FILE_DIR=${PREFIX}/share/gconf/schemas/
-MAKE_ENV+=	GCONF_SCHEMA_FILE_DIR=${PREFIX}/share/gconf/schemas/
+CONFIGURE_ENV+=		GCONF_SCHEMA_FILE_DIR=${PREFIX}/share/gconf/schemas/
+MAKE_ENV+=		GCONF_SCHEMA_FILE_DIR=${PREFIX}/share/gconf/schemas/
 
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake intltool pkg-config msgfmt

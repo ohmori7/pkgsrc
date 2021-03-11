@@ -1,27 +1,26 @@
-# $NetBSD: Makefile,v 1.22 2018/12/13 19:51:37 adam Exp $
-#
+# $NetBSD: Makefile,v 1.33 2020/11/05 09:07:10 ryoon Exp $
 
-DISTNAME=	liblrdf-0.5.0
-PKGREVISION=	14
+DISTNAME=	liblrdf-0.6.1
+PKGREVISION=	4
 CATEGORIES=	textproc
-MASTER_SITES=	# github download sucks for packaging
+MASTER_SITES=	${MASTER_SITE_GITHUB:=swh/}
+GITHUB_PROJECT=	LRDF
+GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/swh/LRDF
 COMMENT=	Library for easy manipulation of LADSPA plugin RDF descriptions
 LICENSE=	gnu-gpl-v2
 
-WRKSRC=		${WRKDIR}/swh-LRDF-7ebc032
-
-GNU_CONFIGURE=		yes
-USE_LIBTOOL=		yes
-USE_TOOLS+=		autoreconf aclocal autoconf autoheader automake pkg-config
-USE_LANGUAGES=		c
+GNU_CONFIGURE=	yes
+USE_LIBTOOL=	yes
+USE_TOOLS+=	autoreconf autoconf automake
+USE_TOOLS+=	pkg-config
 
 PKGCONFIG_OVERRIDE+=	lrdf.pc.in
 
 pre-configure:
-	cd ${WRKSRC} && rm m4/* && autoreconf -fi
+	cd ${WRKSRC} && autoreconf -fi
 
 .include "../../audio/ladspa/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"

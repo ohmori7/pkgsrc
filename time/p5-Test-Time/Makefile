@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.10 2019/05/18 04:09:49 wen Exp $
+# $NetBSD: Makefile,v 1.13 2020/08/31 18:12:26 wiz Exp $
 
 DISTNAME=	Test-Time-0.08
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	time perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Test/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~satoh/Test-Time/
+HOMEPAGE=	https://metacpan.org/release/Test-Time
 COMMENT=	Override time()/sleep() core functions for testing
 LICENSE=	${PERL5_LICENSE}
 

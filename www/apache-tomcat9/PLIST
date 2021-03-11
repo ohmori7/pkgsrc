@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.2 2019/03/26 20:59:57 ryoon Exp $
+@comment $NetBSD: PLIST,v 1.8 2020/12/09 21:34:26 otis Exp $
 share/doc/tomcat/LICENSE
 share/doc/tomcat/NOTICE
 share/doc/tomcat/RELEASE-NOTES
@@ -36,10 +36,11 @@ share/tomcat/conf/tomcat-users.xsd
 share/tomcat/lib/annotations-api.jar
 share/tomcat/lib/catalina-ant.jar
 share/tomcat/lib/catalina-ha.jar
+share/tomcat/lib/catalina-ssi.jar
 share/tomcat/lib/catalina-storeconfig.jar
 share/tomcat/lib/catalina-tribes.jar
 share/tomcat/lib/catalina.jar
-share/tomcat/lib/ecj-4.9.jar
+share/tomcat/lib/ecj-4.17.jar
 share/tomcat/lib/el-api.jar
 share/tomcat/lib/jasper-el.jar
 share/tomcat/lib/jasper.jar
@@ -73,16 +74,14 @@ share/tomcat/webapps/ROOT/bg-nav.png
 share/tomcat/webapps/ROOT/bg-upper.png
 share/tomcat/webapps/ROOT/favicon.ico
 share/tomcat/webapps/ROOT/index.jsp
-share/tomcat/webapps/ROOT/tomcat-power.gif
 share/tomcat/webapps/ROOT/tomcat.css
-share/tomcat/webapps/ROOT/tomcat.gif
-share/tomcat/webapps/ROOT/tomcat.png
 share/tomcat/webapps/ROOT/tomcat.svg
 share/tomcat/webapps/docs/BUILDING.txt
 share/tomcat/webapps/docs/RELEASE-NOTES.txt
 share/tomcat/webapps/docs/RUNNING.txt
 share/tomcat/webapps/docs/WEB-INF/web.xml
 share/tomcat/webapps/docs/aio.html
+share/tomcat/webapps/docs/annotationapi/index.html
 share/tomcat/webapps/docs/api/index.html
 share/tomcat/webapps/docs/appdev/build.xml.txt
 share/tomcat/webapps/docs/appdev/deployment.html
@@ -96,8 +95,8 @@ share/tomcat/webapps/docs/appdev/sample/index.html
 share/tomcat/webapps/docs/appdev/sample/sample.war
 share/tomcat/webapps/docs/appdev/sample/src/mypackage/Hello.java
 share/tomcat/webapps/docs/appdev/sample/web/WEB-INF/web.xml
-share/tomcat/webapps/docs/appdev/sample/web/hello.jsp
 share/tomcat/webapps/docs/appdev/sample/web/images/tomcat.gif
+share/tomcat/webapps/docs/appdev/sample/web/hello.jsp
 share/tomcat/webapps/docs/appdev/sample/web/index.html
 share/tomcat/webapps/docs/appdev/source.html
 share/tomcat/webapps/docs/appdev/web.xml.txt
@@ -112,6 +111,7 @@ share/tomcat/webapps/docs/architecture/startup/serverStartup.pdf
 share/tomcat/webapps/docs/architecture/startup/serverStartup.txt
 share/tomcat/webapps/docs/balancer-howto.html
 share/tomcat/webapps/docs/building.html
+share/tomcat/webapps/docs/cdi.html
 share/tomcat/webapps/docs/cgi-howto.html
 share/tomcat/webapps/docs/changelog.html
 share/tomcat/webapps/docs/class-loader-howto.html
@@ -158,16 +158,7 @@ share/tomcat/webapps/docs/default-servlet.html
 share/tomcat/webapps/docs/deployer-howto.html
 share/tomcat/webapps/docs/developers.html
 share/tomcat/webapps/docs/elapi/index.html
-share/tomcat/webapps/docs/extras.html
-share/tomcat/webapps/docs/funcspecs/fs-admin-apps.html
-share/tomcat/webapps/docs/funcspecs/fs-admin-objects.html
-share/tomcat/webapps/docs/funcspecs/fs-admin-opers.html
-share/tomcat/webapps/docs/funcspecs/fs-default.html
-share/tomcat/webapps/docs/funcspecs/fs-jdbc-realm.html
-share/tomcat/webapps/docs/funcspecs/fs-jndi-realm.html
-share/tomcat/webapps/docs/funcspecs/fs-memory-realm.html
-share/tomcat/webapps/docs/funcspecs/index.html
-share/tomcat/webapps/docs/funcspecs/mbean-names.html
+share/tomcat/webapps/docs/graal.html
 share/tomcat/webapps/docs/host-manager-howto.html
 share/tomcat/webapps/docs/html-host-manager-howto.html
 share/tomcat/webapps/docs/html-manager-howto.html
@@ -193,6 +184,7 @@ share/tomcat/webapps/docs/images/void.gif
 share/tomcat/webapps/docs/index.html
 share/tomcat/webapps/docs/introduction.html
 share/tomcat/webapps/docs/jasper-howto.html
+share/tomcat/webapps/docs/jaspicapi/index.html
 share/tomcat/webapps/docs/jdbc-pool.html
 share/tomcat/webapps/docs/jndi-datasource-examples-howto.html
 share/tomcat/webapps/docs/jndi-resources-howto.html
@@ -225,6 +217,7 @@ share/tomcat/webapps/docs/web-socket-howto.html
 share/tomcat/webapps/docs/websocketapi/index.html
 share/tomcat/webapps/docs/windows-auth-howto.html
 share/tomcat/webapps/docs/windows-service-howto.html
+share/tomcat/webapps/examples/META-INF/context.xml
 share/tomcat/webapps/examples/WEB-INF/classes/CookieExample.class
 share/tomcat/webapps/examples/WEB-INF/classes/CookieExample.java
 share/tomcat/webapps/examples/WEB-INF/classes/HelloWorldExample.class
@@ -612,11 +605,12 @@ share/tomcat/webapps/host-manager/META-INF/context.xml
 share/tomcat/webapps/host-manager/WEB-INF/jsp/401.jsp
 share/tomcat/webapps/host-manager/WEB-INF/jsp/403.jsp
 share/tomcat/webapps/host-manager/WEB-INF/jsp/404.jsp
+share/tomcat/webapps/host-manager/WEB-INF/manager.xml
 share/tomcat/webapps/host-manager/WEB-INF/web.xml
+share/tomcat/webapps/host-manager/css/manager.css
 share/tomcat/webapps/host-manager/images/asf-logo.svg
-share/tomcat/webapps/host-manager/images/tomcat.gif
+share/tomcat/webapps/host-manager/images/tomcat.svg
 share/tomcat/webapps/host-manager/index.jsp
-share/tomcat/webapps/host-manager/manager.xml
 share/tomcat/webapps/manager/META-INF/context.xml
 share/tomcat/webapps/manager/WEB-INF/jsp/401.jsp
 share/tomcat/webapps/manager/WEB-INF/jsp/403.jsp
@@ -627,8 +621,9 @@ share/tomcat/webapps/manager/WEB-INF/jsp/connectorTrustedCerts.jsp
 share/tomcat/webapps/manager/WEB-INF/jsp/sessionDetail.jsp
 share/tomcat/webapps/manager/WEB-INF/jsp/sessionsList.jsp
 share/tomcat/webapps/manager/WEB-INF/web.xml
+share/tomcat/webapps/manager/css/manager.css
 share/tomcat/webapps/manager/images/asf-logo.svg
-share/tomcat/webapps/manager/images/tomcat.gif
+share/tomcat/webapps/manager/images/tomcat.svg
 share/tomcat/webapps/manager/index.jsp
 share/tomcat/webapps/manager/status.xsd
 share/tomcat/webapps/manager/xform.xsl

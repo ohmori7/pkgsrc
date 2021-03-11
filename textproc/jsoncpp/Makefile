@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.10 2019/04/09 07:08:18 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/09/29 16:49:15 adam Exp $
 
-DISTNAME=	jsoncpp-1.8.4
-PKGREVISION=	2
+DISTNAME=	jsoncpp-1.9.4
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GITHUB:=open-source-parsers/}
 
@@ -11,9 +10,10 @@ COMMENT=	JSON reader and writer in C++
 LICENSE=	public-domain OR mit
 
 USE_CMAKE=		yes
-CMAKE_ARGS+=		-DBUILD_SHARED_LIBS:BOOL=ON
-CMAKE_ARGS+=		-DJSONCPP_WITH_TESTS:BOOL=OFF
 USE_LANGUAGES=		c c++
+CMAKE_ARGS+=		-DBUILD_STATIC_LIBS=OFF
+CMAKE_ARGS+=		-DBUILD_OBJECT_LIBS=OFF
+CMAKE_ARGS+=		-DJSONCPP_WITH_TESTS=OFF
 PKGCONFIG_OVERRIDE=	pkg-config/jsoncpp.pc.in
 
 .include "../../mk/bsd.pkg.mk"

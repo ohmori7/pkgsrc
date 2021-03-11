@@ -1,7 +1,7 @@
-# $NetBSD: options.mk,v 1.16 2017/11/12 15:36:59 khorben Exp $
+# $NetBSD: options.mk,v 1.18 2019/11/03 09:14:08 rillig Exp $
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.gtk2
-PKG_SUPPORTED_OPTIONS=	cups debug
+PKG_OPTIONS_VAR=		PKG_OPTIONS.gtk2
+PKG_SUPPORTED_OPTIONS=		cups debug
 PKG_OPTIONS_REQUIRED_GROUPS=	gdk-target
 PKG_OPTIONS_GROUP.gdk-target=	x11
 .if exists(/System/Library/Frameworks/Quartz.framework)
@@ -41,6 +41,7 @@ BUILDLINK_API_DEPENDS.Xft2+=	Xft2>=2.1.2nb2
 
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXcursor/buildlink3.mk"
+.include "../../x11/libXdamage/buildlink3.mk"
 .include "../../x11/libXft/buildlink3.mk"
 .include "../../x11/libXfixes/buildlink3.mk"
 .include "../../x11/libXinerama/buildlink3.mk"

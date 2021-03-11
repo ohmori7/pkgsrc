@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.8 2018/08/22 09:46:20 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2020/08/31 18:11:10 wiz Exp $
 #
 
 DISTNAME=	Authen-Simple-0.5
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	security perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Authen/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Authen-Simple/
+HOMEPAGE=	https://metacpan.org/release/Authen-Simple
 COMMENT=	Simple and consistent framework for authentication
 LICENSE=	${PERL5_LICENSE}
 

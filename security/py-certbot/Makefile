@@ -1,25 +1,22 @@
-# $NetBSD: Makefile,v 1.16 2019/06/12 10:27:37 adam Exp $
+# $NetBSD: Makefile,v 1.29 2021/02/09 10:06:41 adam Exp $
+
+.include "../../security/py-certbot/Makefile.common"
 
 DISTNAME=	certbot-${CERTBOT_VERSION}
 MASTER_SITES=	${MASTER_SITE_PYPI:=c/certbot/}
 
-MAINTAINER=	fhajny@NetBSD.org
 COMMENT=	Client for the Let's Encrypt CA
 
-.include "../../security/py-certbot/Makefile.common"
-
-#EGG_NAME=	${DISTNAME}
-
-DEPENDS+=	${PYPKGPREFIX}-acme>=0.29.0:../../security/py-acme
+DEPENDS+=	${PYPKGPREFIX}-acme>=1.8.0:../../security/py-acme
 DEPENDS+=	${PYPKGPREFIX}-configargparse>=0.9.3:../../devel/py-configargparse
-DEPENDS+=	${PYPKGPREFIX}-configobj-[0-9]*:../../devel/py-configobj
-DEPENDS+=	${PYPKGPREFIX}-cryptography>=1.2.3:../../security/py-cryptography
+DEPENDS+=	${PYPKGPREFIX}-configobj>=5.0.6:../../devel/py-configobj
+DEPENDS+=	${PYPKGPREFIX}-cryptography>=2.1.4:../../security/py-cryptography
+DEPENDS+=	${PYPKGPREFIX}-distro>=1.0.1:../../devel/py-distro
 DEPENDS+=	${PYPKGPREFIX}-josepy>=1.1.0:../../security/py-josepy
-DEPENDS+=	${PYPKGPREFIX}-mock-[0-9]*:../../devel/py-mock
-DEPENDS+=	${PYPKGPREFIX}-parsedatetime>=2.0:../../time/py-parsedatetime
+DEPENDS+=	${PYPKGPREFIX}-parsedatetime>=2.4:../../time/py-parsedatetime
 DEPENDS+=	${PYPKGPREFIX}-pytz-[0-9]*:../../time/py-pytz
 DEPENDS+=	${PYPKGPREFIX}-rfc3339-[0-9]*:../../time/py-rfc3339
-DEPENDS+=	${PYPKGPREFIX}-setuptools-[0-9]*:../../devel/py-setuptools
+DEPENDS+=	${PYPKGPREFIX}-setuptools>=39.0.1:../../devel/py-setuptools
 DEPENDS+=	${PYPKGPREFIX}-ZopeComponent-[0-9]*:../../devel/py-ZopeComponent
 DEPENDS+=	${PYPKGPREFIX}-ZopeInterface-[0-9]*:../../devel/py-ZopeInterface
 # Needed for the test target
@@ -36,11 +33,9 @@ PKG_SYSCONFSUBDIR=	letsencrypt
 SUBST_CLASSES+=		path
 SUBST_STAGE.path=	pre-build
 SUBST_MESSAGE.path=	Fixing default paths
-SUBST_FILES.path+=	certbot/cert_manager.py
-SUBST_FILES.path+=	certbot/cli.py
-SUBST_FILES.path+=	certbot/compat/misc.py
-SUBST_FILES.path+=	certbot/tests/cli_test.py
-SUBST_SED.path+=	-e 's,/etc/letsencrypt,${PKG_SYSCONFDIR},g'
+SUBST_FILES.path=	certbot/compat/misc.py
+SUBST_FILES.path+=	tests/cli_test.py
+SUBST_SED.path=		-e 's,/etc/letsencrypt,${PKG_SYSCONFDIR},g'
 SUBST_SED.path+=	-e 's,/var/lib/letsencrypt,${VARBASE}/letsencrypt,g'
 SUBST_SED.path+=	-e 's,/var/log/letsencrypt,${VARBASE}/letsencrypt/log,g'
 

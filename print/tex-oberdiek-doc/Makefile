@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.14 2019/01/28 08:21:09 markd Exp $
+# $NetBSD: Makefile,v 1.18 2021/02/13 05:31:12 markd Exp $
 
 DISTNAME=	oberdiek.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-2018.49285
-TEXLIVE_REV=	49285
+PKGNAME=	tex-${DISTNAME:S/./-/}-2020.56291
+TEXLIVE_REV=	56291
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/oberdiek
+HOMEPAGE=	https://ctan.org/pkg/oberdiek
 COMMENT=	Documentation for tex-oberdiek
 LICENSE=	lppl-1.3c
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2019/04/25 07:33:21 maya Exp $
+# $NetBSD: Makefile,v 1.28 2020/12/04 20:45:43 nia Exp $
 #
 
 DISTNAME=	tdir-1.71
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	sysutils
 MASTER_SITES=	http://www.tundraware.com/Software/tdir/
 
@@ -11,7 +11,7 @@ COMMENT=	Display directories with files ordered by ending "extension"
 LICENSE=	tdir-license
 
 USE_TOOLS+=		gunzip
-REPLACE_PYTHON=	tdir
+REPLACE_PYTHON=		tdir
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 share/doc/tdir
 
 do-install:

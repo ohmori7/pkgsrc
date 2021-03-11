@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.36 2018/08/22 09:45:23 wiz Exp $
+# $NetBSD: Makefile,v 1.39 2020/08/31 18:09:53 wiz Exp $
 #
 
 DISTNAME=	anomy-sanitizer-1.76
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	mail
 MASTER_SITES=	http://mailtools.anomy.net/dist/
 
-MAINTAINER=	kim@tac.nyc.ny.us
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://mailtools.anomy.net/
 COMMENT=	Mail message filter and sanitizer
 

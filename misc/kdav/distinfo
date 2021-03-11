@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.3 2020/06/09 11:56:14 markd Exp $
+
+SHA1 (kdav-20.04.1.tar.xz) = d0017ef3cb7ef5522b2e65a5da99f66976441497
+RMD160 (kdav-20.04.1.tar.xz) = 1d118161cc5e2edb197d225c6a4444cd97c0f5f6
+SHA512 (kdav-20.04.1.tar.xz) = ba16d48f2f94e98c80e99ba15845e7c69802da36db6eb268db9ad2a0529f06a7f6eebf06b0098a0951e4d586aa98739ea66e3222a487a1dd4abc552e915997e8
+Size (kdav-20.04.1.tar.xz) = 58340 bytes

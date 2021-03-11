@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.29 2019/01/29 10:08:11 adam Exp $
+# $NetBSD: Makefile,v 1.33 2021/02/15 21:18:38 adam Exp $
 
-DISTNAME=	libwebp-1.0.2
+DISTNAME=	libwebp-1.2.0
 CATEGORIES=	graphics
-MASTER_SITES=	http://downloads.webmproject.org/releases/webp/
+MASTER_SITES=	https://storage.googleapis.com/downloads.webmproject.org/releases/webp/
 
 MAINTAINER=	ryoon@NetBSD.org
 HOMEPAGE=	https://developers.google.com/speed/webp/
@@ -12,6 +12,7 @@ LICENSE=	modified-bsd
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-gl
+CONFIGURE_ARGS+=	--disable-sdl
 CONFIGURE_ARGS+=	--enable-libwebpdecoder
 CONFIGURE_ARGS+=	--enable-libwebpextras
 CONFIGURE_ARGS+=	--enable-libwebpdemux

@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.12 2018/06/21 23:10:50 ryoon Exp $
+# $NetBSD: Makefile,v 1.16 2020/11/26 15:49:58 schmonz Exp $
 
 DISTNAME=	libressl-2.7.4
+PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_OPENBSD:=LibreSSL/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.libressl.org/
+HOMEPAGE=	https://www.libressl.org/
 COMMENT=	Secure Sockets Layer and cryptography libraries and tools
 LICENSE=	openssl
 
@@ -26,10 +27,10 @@ CONFIGURE_ARGS+=	--with-openssldir=${PKG_SYSCONFDIR}
 
 INSTALLATION_DIRS+=	${EGDIR} lib
 
-EGDIR= 			${PREFIX}/libressl/share/examples/${PKGBASE}
-CONFS= 			cert.pem openssl.cnf x509v3.cnf
+EGDIR=			${PREFIX}/libressl/share/examples/${PKGBASE}
+CONFS=			cert.pem openssl.cnf x509v3.cnf
 .for f in ${CONFS}
-CONF_FILES+= 		${EGDIR}/${f} ${PKG_SYSCONFDIR}/${f}
+CONF_FILES+=		${EGDIR}/${f} ${PKG_SYSCONFDIR}/${f}
 .endfor
 
 # Handle subprefix
@@ -48,7 +49,6 @@ PLIST.man=	yes
 
 post-install:
 	cd ${WRKSRC}/apps/openssl; ${INSTALL_DATA} ${CONFS} ${DESTDIR}${EGDIR}
-	mv ${DESTDIR}${PREFIX}/libressl/lib/pkgconfig ${DESTDIR}${PREFIX}/lib
-	${RM} -r ${DESTDIR}${PREFIX}/etc/libressl
+	${RM} -r ${DESTDIR}${PKG_SYSCONFDIR}
 
 .include "../../mk/bsd.pkg.mk"

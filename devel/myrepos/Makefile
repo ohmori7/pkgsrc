@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.2 2018/08/22 09:43:33 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2020/08/31 18:07:24 wiz Exp $
 #
 
 DISTNAME=		myrepos_1.20180726
 PKGNAME=		${DISTNAME:S/_/-/}
-PKGREVISION=		1
+PKGREVISION=		3
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_DEBIAN:=pool/main/m/myrepos/}
 EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		schmonz@NetBSD.org
-HOMEPAGE=		http://myrepos.branchable.com/
+HOMEPAGE=		https://myrepos.branchable.com/
 COMMENT=		Treat multiple repositories as one combined repository
 LICENSE=		gnu-gpl-v2
 
@@ -24,7 +24,7 @@ BUILD_TARGET+=		build
 TEST_TARGET+=		test
 USE_TOOLS+=		perl:run
 
-REPLACE_PERL+=  	mr webcheckout
+REPLACE_PERL+=		mr webcheckout
 
 EGDIR=			${PREFIX}/share/examples/mr
 INSTALLATION_DIRS=	bin ${PKGMANDIR} ${EGDIR}

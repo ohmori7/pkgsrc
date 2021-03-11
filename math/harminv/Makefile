@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2018/01/28 16:24:14 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2020/10/12 21:52:02 bacon Exp $
 
 DISTNAME=	harminv-1.3.1
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	math
 MASTER_SITES=	http://ab-initio.mit.edu/harminv/
 
@@ -13,13 +13,12 @@ LICENSE=	gnu-gpl-v2
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	pkg-config
-USE_LANGUAGES=  c c++ fortran77
+USE_LANGUAGES=	c c++ fortran77
 
 PKGCONFIG_OVERRIDE+=	harminv.pc.in
 
 TEST_TARGET=	check
 
-.include "../../math/blas/buildlink3.mk"
-.include "../../math/lapack/buildlink3.mk"
+.include "../../mk/blas.buildlink3.mk"
 .include "../../math/mpcomplex/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

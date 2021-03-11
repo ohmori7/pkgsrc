@@ -1,14 +1,12 @@
-# $NetBSD: Makefile,v 1.2 2018/07/28 14:40:52 brook Exp $
+# $NetBSD: Makefile,v 1.4 2019/08/08 19:53:58 brook Exp $
 
+R_PKGNAME=	timeDate
+R_PKGVER=	3043.102
 CATEGORIES=	time
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	https://www.rmetrics.org/
 COMMENT=	Chronological and calendar objects
-LICENSE=	gnu-gpl-v2
-
-R_PKGNAME=	timeDate
-R_PKGVER=	3042.101
+LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3
 
 USE_LANGUAGES=	# none
 

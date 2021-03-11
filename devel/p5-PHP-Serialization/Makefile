@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:44:27 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:08:36 wiz Exp $
 #
 
 DISTNAME=	PHP-Serialization-0.34
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=PHP/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/PHP-Serialization/
+HOMEPAGE=	https://metacpan.org/release/PHP-Serialization
 COMMENT=	Perl 5 module providing PHP-like (de)serialization
 LICENSE=	${PERL5_LICENSE}
 

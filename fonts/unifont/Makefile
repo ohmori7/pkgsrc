@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.15 2019/06/11 09:04:00 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2021/02/16 18:33:42 fcambus Exp $
 
-DISTNAME=	unifont-12.1.02
+DISTNAME=	unifont-13.0.06
 CATEGORIES=	fonts
-MASTER_SITES=	http://unifoundry.com/pub/unifont/${DISTNAME}/
+MASTER_SITES=	https://unifoundry.com/pub/unifont/${DISTNAME}/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://unifoundry.com/unifont/index.html
+HOMEPAGE=	https://unifoundry.com/unifont/
 COMMENT=	GNU Unifont - glyphs for all printable code points in Unicode 9.0 BMP
 LICENSE=	gnu-gpl-v2 # or later
 
@@ -18,8 +18,6 @@ MAKE_FLAGS+=	PKGMANDIR=${PKGMANDIR}
 
 FONTS_DIRS.ttf+=	${PREFIX}/share/fonts/truetype/unifont
 FONTS_DIRS.x11+=	${PREFIX}/share/fonts/X11/misc
-
-MAKE_JOBS_SAFE=	no
 
 REPLACE_PERL+=	src/bdfimplode
 REPLACE_PERL+=	src/hex2bdf

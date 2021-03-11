@@ -1,7 +1,7 @@
-# $NetBSD: options.mk,v 1.3 2019/03/02 13:23:36 adam Exp $
+# $NetBSD: options.mk,v 1.5 2020/01/21 10:57:26 kamil Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.python36
-PKG_SUPPORTED_OPTIONS=	dtrace x11
+PKG_SUPPORTED_OPTIONS=	dtrace pymalloc x11
 PKG_SUGGESTED_OPTIONS=	x11
 
 .include "../../mk/bsd.prefs.mk"
@@ -25,11 +25,17 @@ SUBST_SED.xfindlib=	-e "s!\('-Wl,-t'\)!'${COMPILER_RPATH_FLAG}${X11BASE}/lib', '
 
 # Required to get definition of X11BASE and retain X11 rpath paths for linker
 # We need to pass rpath to _ctypes.so to get functional dlopen(3) for X11 libs
-USE_X11=		yes
+USE_X11=		weak
 
 SUBST_CLASSES+=		cdlopen
 SUBST_MESSAGE.cdlopen=	Handle X11BASE paths in dlopen(3) calls of _ctypes.so
 SUBST_STAGE.cdlopen=	pre-configure
 SUBST_FILES.cdlopen=	setup.py
 SUBST_SED.cdlopen=	-e "s!\(libraries=\[\],\)!\1 runtime_library_dirs=\['${X11BASE}/lib'\],!"
+.endif
+
+.if !empty(PKG_OPTIONS:Mpymalloc)
+CONFIGURE_ARGS+=	--with-pymalloc
+.else
+CONFIGURE_ARGS+=	--without-pymalloc
 .endif

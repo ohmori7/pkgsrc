@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2019/04/25 07:32:41 maya Exp $
+# $NetBSD: Makefile,v 1.27 2020/12/04 20:45:04 nia Exp $
 
 DISTNAME=	oraedit-0.1.4
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_BACKUP}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,7 +11,7 @@ COMMENT=	Editor of PL/SQL source stored in Oracle database
 
 NO_BUILD=	yes
 
-REPLACE_PYTHON=	oraedit
+REPLACE_PYTHON=		oraedit
 INSTALLATION_DIRS=	bin
 
 do-configure:;

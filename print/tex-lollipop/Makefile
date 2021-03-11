@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.4 2018/06/03 01:27:21 markd Exp $
+# $NetBSD: Makefile,v 1.7 2020/05/10 04:32:05 markd Exp $
 
 DISTNAME=	lollipop
 PKGNAME=	tex-${DISTNAME}-1.07
-PKGREVISION=	1
+PKGREVISION=	2
 TEXLIVE_REV=	41438
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/lollipop
+HOMEPAGE=	https://ctan.org/pkg/lollipop
 COMMENT=	TeX made easy
 LICENSE=	gnu-gpl-v3
 
@@ -16,6 +16,7 @@ INSTALLATION_DIRS+=	bin
 
 TEX_FORMATS+=	"lollipop tex - lollipop.ini\\n"
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 
 post-install:

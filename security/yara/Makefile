@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.5 2017/11/01 19:29:30 minskim Exp $
+# $NetBSD: Makefile,v 1.9 2020/01/18 21:50:50 jperkin Exp $
 
 DISTNAME=	yara-${VERSION}
+PKGREVISION=	1
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_GITHUB:=VirusTotal/}
 
-COMMENT=        Pattern matching swiss knife for malware researchers
+COMMENT=	Pattern matching swiss knife for malware researchers
 
 USE_TOOLS+=	pkg-config automake autoreconf
 USE_LIBTOOL=	yes
-GNU_CONFIGURE=          yes
+GNU_CONFIGURE=	yes
+USE_FEATURES+=	strnlen
 
 PKGCONFIG_OVERRIDE+=	libyara/yara.pc.in
 

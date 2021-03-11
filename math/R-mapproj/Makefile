@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.10 2018/07/28 14:40:49 brook Exp $
+# $NetBSD: Makefile,v 1.12 2019/08/08 19:53:51 brook Exp $
 
+R_PKGNAME=	mapproj
+R_PKGVER=	1.2.6
 CATEGORIES=	math
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	${R_HOMEPAGE_BASE}/mapproj/
-COMMENT=	Converts latitude/longitude into projected coordinates
+COMMENT=	Map projections
 LICENSE=	lucent
 
-R_PKGNAME=	mapproj
-R_PKGVER=	1.2-2
-
 DEPENDS+=	R-maps>=2.3.0:../../math/R-maps
+
+USE_LANGUAGES=	c
 
 .include "../../math/R/Makefile.extension"
 .include "../../mk/bsd.pkg.mk"

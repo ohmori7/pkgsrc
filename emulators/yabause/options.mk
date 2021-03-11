@@ -1,7 +1,7 @@
-# $NetBSD: options.mk,v 1.6 2016/07/16 00:21:20 markd Exp $
+# $NetBSD: options.mk,v 1.9 2019/11/03 19:24:35 rillig Exp $
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.yabause
-PKG_SUPPORTED_OPTIONS=	openal opengl sdl
+PKG_OPTIONS_VAR=		PKG_OPTIONS.yabause
+PKG_SUPPORTED_OPTIONS=		openal opengl sdl
 PKG_OPTIONS_OPTIONAL_GROUPS=	GUI SDL
 PKG_OPTIONS_GROUP.GUI=		gtk qt
 PKG_OPTIONS_GROUP.SDL=		sdl sdl2
@@ -17,7 +17,8 @@ PKG_SUGGESTED_OPTIONS=	qt sdl2
 .if !empty(PKG_OPTIONS:Mqt)
 CONFIGURE_ENV+=	YAB_PORTS=qt
 CMAKE_ARGS+=	-DYAB_PORTS=qt
-.include "../../x11/qt4-tools/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
+.include "../../x11/qt5-qtmultimedia/buildlink3.mk"
 .elif !empty(PKG_OPTIONS:Mgtk)
 CONFIGURE_ENV+=	YAB_PORTS=gtk
 CMAKE_ARGS+=	-DYAB_PORTS=gtk
@@ -36,7 +37,7 @@ CMAKE_ARGS+=	-DYAB_WANT_OPENAL=OFF
 .endif
 
 .if !empty(PKG_OPTIONS:Mopengl)
-.include "../../graphics/glut/buildlink3.mk"
+.include "../../graphics/freeglut/buildlink3.mk"
 CMAKE_ARGS+=	-DYAB_WANT_OPENGL=ON
 .else
 CMAKE_ARGS+=	-DYAB_WANT_OPENGL=OFF

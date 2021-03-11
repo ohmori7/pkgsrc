@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.18 2019/04/25 07:33:08 maya Exp $
+# $NetBSD: Makefile,v 1.24 2020/12/06 10:40:33 wiz Exp $
 
-DISTNAME=	todoman-3.5.0
-PKGREVISION=	1
-CATEGORIES=	misc
-MASTER_SITES=	${MASTER_SITE_PYPI:=t/todoman/}
+DISTNAME=		todoman-3.9.0
+CATEGORIES=		misc
+MASTER_SITES=		${MASTER_SITE_PYPI:=t/todoman/}
+#MASTER_SITES=		${MASTER_SITE_GITHUB:=pimutils/}
+#GITHUB_RELEASE=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/pimutils/todoman
@@ -11,7 +12,7 @@ COMMENT=	Simple CalDav-based todo manager
 LICENSE=	mit
 
 DEPENDS+=	${PYPKGPREFIX}-atomicwrites-[0-9]*:../../devel/py-atomicwrites
-DEPENDS+=	${PYPKGPREFIX}-click>=6.0:../../devel/py-click
+DEPENDS+=	${PYPKGPREFIX}-click>=7.0:../../devel/py-click
 DEPENDS+=	${PYPKGPREFIX}-click-log-[0-9]*:../../devel/py-click-log
 DEPENDS+=	${PYPKGPREFIX}-configobj-[0-9]*:../../devel/py-configobj
 DEPENDS+=	${PYPKGPREFIX}-dateutil-[0-9]*:../../time/py-dateutil
@@ -34,8 +35,8 @@ BUILD_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
 BUILD_DEPENDS+=	${PYPKGPREFIX}-test-cov-[0-9]*:../../devel/py-test-cov
 
 PYTHON_VERSIONS_INCOMPATIBLE=	27
-REPLACE_PYTHON+=	bin/todo
-USE_LANGUAGES=	# none
+REPLACE_PYTHON+=		bin/todo
+USE_LANGUAGES=			# none
 
 # overwrite automatically generated file with recommended one, per
 # "Notes for Packagers" in documentation

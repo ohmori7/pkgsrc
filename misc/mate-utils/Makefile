@@ -1,21 +1,22 @@
-# $NetBSD: Makefile,v 1.19 2019/05/08 02:20:49 gutteridge Exp $
+# $NetBSD: Makefile,v 1.27 2020/08/24 04:41:40 gutteridge Exp $
 
+PKGREVISION= 2
 .include "../../meta-pkgs/mate/Makefile.common"
 
-DISTNAME=	mate-utils-${VERSION:R}.1
+DISTNAME=	mate-utils-${VERSION:R}.0
 CATEGORIES=	misc
 
 COMMENT=	Utilities for MATE Desktop
 
 USE_LANGUAGES=	c c++
 
-TOOL_DEPENDS+=	inkscape-[0-9]*:../../graphics/inkscape
 TOOL_DEPENDS+=	itstool-[0-9]*:../../textproc/itstool
 TOOL_DEPENDS+=	libxml2-[0-9]*:../../textproc/libxml2 # for xmllint
 
 PKGCONFIG_OVERRIDE+=	mate-dictionary/libgdict/mate-dict.pc.in
 
 CONFIGURE_ARGS+=	--with-grep=${GREP:Q}
+CONFIGURE_ARGS+=	--disable-disk-image-mounter
 
 .include "options.mk"
 

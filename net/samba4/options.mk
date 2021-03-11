@@ -1,12 +1,12 @@
-# $NetBSD: options.mk,v 1.7 2018/12/22 01:13:52 adam Exp $
+# $NetBSD: options.mk,v 1.12 2020/11/12 06:37:18 adam Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.samba4
-PKG_SUPPORTED_OPTIONS=	ads fam ldap pam winbind # cups # cups option is broken for me.
-PKG_SUGGESTED_OPTIONS=	ldap pam winbind
+PKG_SUPPORTED_OPTIONS=	ads avahi fam ldap pam winbind # cups # cups option is broken for me.
+PKG_SUGGESTED_OPTIONS=	avahi ldap pam winbind
 
 .include "../../mk/bsd.fast.prefs.mk"
 
-SAMBA_ACL_OPSYS=	AIX Darwin FreeBSD HPUX IRIX Linux OSF1 SunOS
+SAMBA_ACL_OPSYS=	AIX Darwin FreeBSD HPUX IRIX Linux NetBSD OSF1 SunOS
 .if !empty(SAMBA_ACL_OPSYS:M${OPSYS})
 PKG_SUPPORTED_OPTIONS+=	acl
 .endif
@@ -97,4 +97,14 @@ PLIST.winbind=		yes
 WINBINDD_RCD_SCRIPT=	winbindd
 .else
 CONFIGURE_ARGS+=	--without-winbind
+.endif
+
+###
+### Avahi DNS Service Discovery.
+###
+.if !empty(PKG_OPTIONS:Mavahi)
+.include "../../net/avahi/buildlink3.mk"
+CONFIGURE_ARGS+=	--enable-avahi
+.else
+CONFIGURE_ARGS+=	--disable-avahi
 .endif

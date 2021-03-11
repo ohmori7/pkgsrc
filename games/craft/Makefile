@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.33 2015/06/25 06:22:11 dholland Exp $
+# $NetBSD: Makefile,v 1.35 2020/11/29 03:11:54 dholland Exp $
 
 DISTNAME=	craftcc35
 PKGNAME=	craft-3.5
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	games x11
 MASTER_SITES=	http://ibiblio.org/pub/linux/games/strategy/
 EXTRACT_SUFX=	.tar.Z
 
-PATCH_SITES=	http://www.NetBSD.org/~dholland/patchkits/craft/
-PATCHFILES=	craft-jumbo-patch-20140913.gz
-PATCH_DIST_STRIP= -p1
+PATCH_SITES=		http://www.NetBSD.org/~dholland/patchkits/craft/
+PATCHFILES=		craft-jumbo-patch-20140913.gz
+PATCH_DIST_STRIP=	-p1
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 # Gone as of 20130120, no obvious replacement
@@ -38,6 +38,11 @@ SUBST_SED.buttons=	-e 's+buttons+${PREFIX}/share/craft/buttons+'
 
 INSTALLATION_DIRS=	bin
 
+.include "../../mk/compiler.mk"
+.if !empty(PKGSRC_COMPILER:Mclang) || !empty(PKGSRC_COMPILER:Mgcc)
+CFLAGS+=-Wno-return-type
+.endif
+
 post-extract:
 	find ${WRKSRC} -type f -name '*~' -print | xargs rm -f
 	for f in `find ${WRKSRC} -name "*.hc" -type f -print`; do	\
@@ -47,6 +52,7 @@ post-extract:
 	${CHMOD} a-x ${WRKSRC}/html/pic/craft.gif.old
 	${CHMOD} a-x ${WRKSRC}/html/craftcc.html
 	rm -f ${WRKSRC}/hcc/hcc
+	${CHMOD} -R go+rX ${WRKSRC}/hcraft ${WRKSRC}/buttons ${WRKSRC}/html 
 
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

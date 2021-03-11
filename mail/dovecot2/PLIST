@@ -1,6 +1,7 @@
-@comment $NetBSD: PLIST,v 1.65 2019/04/30 15:21:05 taca Exp $
+@comment $NetBSD: PLIST,v 1.72 2021/03/07 08:26:24 taca Exp $
 bin/doveadm
 bin/doveconf
+bin/dovecot-sysreport
 bin/dsync
 include/dovecot/access-lookup.h
 include/dovecot/acl-api-private.h
@@ -19,7 +20,6 @@ include/dovecot/auth-cache.h
 include/dovecot/auth-client-connection.h
 include/dovecot/auth-client-interface.h
 include/dovecot/auth-client-private.h
-include/dovecot/auth-client-request.h
 include/dovecot/auth-client.h
 include/dovecot/auth-common.h
 include/dovecot/auth-fields.h
@@ -27,12 +27,11 @@ include/dovecot/auth-master-connection.h
 include/dovecot/auth-master.h
 include/dovecot/auth-penalty.h
 include/dovecot/auth-policy.h
-include/dovecot/auth-postfix-connection.h
+include/dovecot/auth-request-handler-private.h
 include/dovecot/auth-request-handler.h
 include/dovecot/auth-request-stats.h
 include/dovecot/auth-request-var-expand.h
 include/dovecot/auth-request.h
-include/dovecot/auth-server-connection.h
 include/dovecot/auth-settings.h
 include/dovecot/auth-stats.h
 include/dovecot/auth-token.h
@@ -43,7 +42,6 @@ include/dovecot/backtrace-string.h
 include/dovecot/base32.h
 include/dovecot/base64.h
 include/dovecot/bits.h
-include/dovecot/bloomfilter.h
 include/dovecot/bsearch-insert-pos.h
 include/dovecot/buffer.h
 include/dovecot/byteorder.h
@@ -60,8 +58,6 @@ include/dovecot/config-request.h
 include/dovecot/config.h
 include/dovecot/connection.h
 include/dovecot/crc32.h
-include/dovecot/cydir-storage.h
-include/dovecot/cydir-sync.h
 include/dovecot/data-stack.h
 include/dovecot/db-checkpassword.h
 include/dovecot/db-dict.h
@@ -101,6 +97,8 @@ include/dovecot/dsync-brain.h
 include/dovecot/dsync-ibc.h
 include/dovecot/eacces-error.h
 include/dovecot/env-util.h
+include/dovecot/event-filter-parser.h
+include/dovecot/event-filter-private.h
 include/dovecot/event-filter.h
 include/dovecot/event-log.h
 include/dovecot/execv-const.h
@@ -140,6 +138,7 @@ include/dovecot/fts-tokenizer-generic-private.h
 include/dovecot/fts-tokenizer-private.h
 include/dovecot/fts-tokenizer.h
 include/dovecot/fts-user.h
+include/dovecot/fuzzer.h
 include/dovecot/guid.h
 include/dovecot/hash-decl.h
 include/dovecot/hash-format.h
@@ -298,6 +297,11 @@ include/dovecot/lib-event.h
 include/dovecot/lib-signals.h
 include/dovecot/lib.h
 include/dovecot/llist.h
+include/dovecot/lmtp-client.h
+include/dovecot/lmtp-commands.h
+include/dovecot/lmtp-common.h
+include/dovecot/lmtp-recipient.h
+include/dovecot/lmtp-settings.h
 include/dovecot/log-throttle.h
 include/dovecot/login-common.h
 include/dovecot/login-proxy-state.h
@@ -401,8 +405,10 @@ include/dovecot/mdbox-settings.h
 include/dovecot/mdbox-storage-rebuild.h
 include/dovecot/mdbox-storage.h
 include/dovecot/mdbox-sync.h
-include/dovecot/mech-otp-skey-common.h
+include/dovecot/mech-digest-md5-private.h
+include/dovecot/mech-otp-common.h
 include/dovecot/mech-plain-common.h
+include/dovecot/mech-scram.h
 include/dovecot/mech.h
 include/dovecot/memarea.h
 include/dovecot/mempool.h
@@ -427,7 +433,6 @@ include/dovecot/mmap-util.h
 include/dovecot/module-context.h
 include/dovecot/module-dir.h
 include/dovecot/mountpoint.h
-include/dovecot/murmurhash3.h
 include/dovecot/mycrypt.h
 include/dovecot/net.h
 include/dovecot/nfs-workarounds.h
@@ -447,6 +452,7 @@ include/dovecot/ostream-null.h
 include/dovecot/ostream-private.h
 include/dovecot/ostream-rawlog.h
 include/dovecot/ostream-unix.h
+include/dovecot/ostream-wrapper.h
 include/dovecot/ostream-zlib.h
 include/dovecot/ostream.h
 include/dovecot/passdb-blocking.h
@@ -522,6 +528,7 @@ include/dovecot/sha1.h
 include/dovecot/sha2.h
 include/dovecot/sha3.h
 include/dovecot/shared-storage.h
+include/dovecot/sleep.h
 include/dovecot/smtp-address.h
 include/dovecot/smtp-client-command.h
 include/dovecot/smtp-client-connection.h
@@ -566,6 +573,8 @@ include/dovecot/submission-settings.h
 include/dovecot/subscription-file.h
 include/dovecot/syslog-util.h
 include/dovecot/test-common.h
+include/dovecot/test-mail-storage-common.h
+include/dovecot/test-subprocess.h
 include/dovecot/time-util.h
 include/dovecot/unichar.h
 include/dovecot/unix-socket-create.h
@@ -574,7 +583,6 @@ include/dovecot/unlink-old-files.h
 include/dovecot/uri-util.h
 include/dovecot/userdb-blocking.h
 include/dovecot/userdb-template.h
-include/dovecot/userdb-vpopmail.h
 include/dovecot/userdb.h
 include/dovecot/utc-mktime.h
 include/dovecot/utc-offset.h
@@ -585,7 +593,6 @@ include/dovecot/write-full.h
 lib/dovecot/auth/lib20_auth_var_expand_crypt.la
 lib/dovecot/auth/libauthdb_imap.la
 lib/dovecot/doveadm/lib10_doveadm_acl_plugin.la
-lib/dovecot/doveadm/lib10_doveadm_expire_plugin.la
 lib/dovecot/doveadm/lib10_doveadm_quota_plugin.la
 lib/dovecot/doveadm/lib20_doveadm_fts_plugin.la
 lib/dovecot/doveadm/libdoveadm_mail_crypt_plugin.la
@@ -595,17 +602,13 @@ lib/dovecot/lib02_imap_acl_plugin.la
 lib/dovecot/lib02_lazy_expunge_plugin.la
 lib/dovecot/lib05_mail_crypt_acl_plugin.la
 lib/dovecot/lib05_pop3_migration_plugin.la
-lib/dovecot/lib05_snarf_plugin.la
 lib/dovecot/lib10_last_login_plugin.la
 lib/dovecot/lib10_mail_crypt_plugin.la
-lib/dovecot/lib10_mail_filter_plugin.la
 lib/dovecot/lib10_quota_plugin.la
 lib/dovecot/lib11_imap_quota_plugin.la
 lib/dovecot/lib11_trash_plugin.la
 lib/dovecot/lib15_notify_plugin.la
-lib/dovecot/lib20_autocreate_plugin.la
 lib/dovecot/lib20_charset_alias_plugin.la
-lib/dovecot/lib20_expire_plugin.la
 lib/dovecot/lib20_fts_plugin.la
 lib/dovecot/lib20_listescape_plugin.la
 lib/dovecot/lib20_mail_log_plugin.la
@@ -650,6 +653,7 @@ libexec/dovecot/dns-client
 libexec/dovecot/doveadm-server
 libexec/dovecot/dovecot-lda
 libexec/dovecot/gdbhelper
+libexec/dovecot/health-check.sh
 libexec/dovecot/imap
 libexec/dovecot/imap-hibernate
 libexec/dovecot/imap-login
@@ -720,6 +724,7 @@ man/man1/doveadm-who.1
 man/man1/doveadm.1
 man/man1/doveconf.1
 man/man1/dovecot-lda.1
+man/man1/dovecot-sysreport.1
 man/man1/dovecot.1
 man/man1/dsync.1
 man/man7/doveadm-search-query.7
@@ -1020,11 +1025,13 @@ share/dovecot/stopwords/stopwords_pt.txt
 share/dovecot/stopwords/stopwords_ro.txt
 share/dovecot/stopwords/stopwords_ru.txt
 share/dovecot/stopwords/stopwords_sv.txt
+share/dovecot/stopwords/stopwords_tr.txt
 share/examples/dovecot/conf.d/10-auth.conf
 share/examples/dovecot/conf.d/10-director.conf
 share/examples/dovecot/conf.d/10-logging.conf
 share/examples/dovecot/conf.d/10-mail.conf
 share/examples/dovecot/conf.d/10-master.conf
+share/examples/dovecot/conf.d/10-metrics.conf
 share/examples/dovecot/conf.d/10-ssl.conf
 share/examples/dovecot/conf.d/15-lda.conf
 share/examples/dovecot/conf.d/15-mailboxes.conf
@@ -1044,10 +1051,10 @@ share/examples/dovecot/conf.d/auth-passwdfile.conf.ext
 share/examples/dovecot/conf.d/auth-sql.conf.ext
 share/examples/dovecot/conf.d/auth-static.conf.ext
 share/examples/dovecot/conf.d/auth-system.conf.ext
-share/examples/dovecot/conf.d/auth-vpopmail.conf.ext
 share/examples/dovecot/dovecot-dict-auth.conf.ext
 share/examples/dovecot/dovecot-dict-sql.conf.ext
 share/examples/dovecot/dovecot-ldap.conf.ext
+share/examples/dovecot/dovecot-oauth2.conf.ext
 share/examples/dovecot/dovecot-openssl.cnf
 share/examples/dovecot/dovecot-sql.conf.ext
 share/examples/dovecot/dovecot.conf

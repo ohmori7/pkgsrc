@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.25 2016/07/10 10:32:57 rillig Exp $
+# $NetBSD: Makefile.common,v 1.27 2020/01/26 17:32:01 rillig Exp $
 #
 # used by print/pdflib/Makefile
 # used by print/tcl-pdflib/Makefile
@@ -8,7 +8,7 @@ CATEGORIES=		print
 MASTER_SITES=		${MASTER_SITE_BACKUP}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.pdflib.com/
+HOMEPAGE=		https://www.pdflib.com/
 
 # Version numbering scheme:
 #
@@ -21,7 +21,7 @@ PDFLIB_BASE_VERS=	4.0.3
 # Available only as a pdf, so it is not present in licenses/
 LICENSE=		pdflib-license
 RESTRICTED=		No permission to redistribute
-NO_SRC_ON_FTP=	${RESTRICTED}
+NO_SRC_ON_FTP=		${RESTRICTED}
 NO_SRC_ON_CDROM=	${RESTRICTED}
 NO_BIN_ON_FTP=		${RESTRICTED}
 NO_BIN_ON_CDROM=	${RESTRICTED}

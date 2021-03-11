@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.34 2018/08/22 09:46:20 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2020/08/31 18:11:11 wiz Exp $
 #
 
 DISTNAME=		Crypt-Blowfish-2.14
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		5
+PKGREVISION=		7
 CATEGORIES=		security perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Crypt/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Crypt-Blowfish/
+HOMEPAGE=		https://metacpan.org/release/Crypt-Blowfish
 COMMENT=		Perl5 Blowfish implementation
 # LICENSE=		unclear
 

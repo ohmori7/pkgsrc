@@ -1,9 +1,12 @@
-# $NetBSD: mozilla-common.mk,v 1.3 2018/10/23 12:33:04 jperkin Exp $
+# $NetBSD: mozilla-common.mk,v 1.13 2020/12/31 20:04:13 nia Exp $
 #
 # common Makefile fragment for mozilla packages based on gecko 2.0.
 #
 # used by www/firefox/Makefile
 # used by www/seamonkey/Makefile
+
+# GCC 4.6 is required to support nullptr.
+GCC_REQD+=		4.8
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -29,21 +32,17 @@ test:
 TOOLS_PLATFORM.tar=	${TOOLS_PATH.bsdtar}
 USE_TOOLS+=		bsdtar
 .endif
-# GCC 4.6 is required to support nullptr.
-GCC_REQD+=		4.8
 .if ${MACHINE_ARCH} == "i386"
-# Fix for PR pkg/48152.
-CXXFLAGS+=		-march=i586
 # This is required for SSE2 code under i386.
 CXXFLAGS+=		-mstackrealign
 .endif
 
-CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}security/nss/tests/libpkix/libpkix.sh
-CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}security/nss/tests/multinit/multinit.sh
-CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}js/src/tests/update-test262.sh
-CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}intl/icu/source/configure
-CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}browser/components/loop/run-all-loop-tests.sh
-CHECK_PORTABILITY_SKIP+=${MOZILLA_DIR}browser/extensions/loop/run-all-loop-tests.sh
+CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}security/nss/tests/libpkix/libpkix.sh
+CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}security/nss/tests/multinit/multinit.sh
+CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}js/src/tests/update-test262.sh
+CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}intl/icu/source/configure
+CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}browser/components/loop/run-all-loop-tests.sh
+CHECK_PORTABILITY_SKIP+=	${MOZILLA_DIR}browser/extensions/loop/run-all-loop-tests.sh
 
 .if ${OPSYS} != "SunOS"
 CONFIGURE_ARGS+=	--enable-pie
@@ -92,12 +91,7 @@ CONFIG_SUB_OVERRIDE+=		${MOZILLA_DIR}nsprpub/build/autoconf/config.sub
 CONFIG_SUB_OVERRIDE+=		${MOZILLA_DIR}/js/ctypes/libffi/config.sub
 
 CONFIGURE_ENV+=		CPP=${CPP}
-
-SUBST_CLASSES+=		python
-SUBST_STAGE.python=	pre-configure
-SUBST_MESSAGE.python=	Fixing path to python.
-SUBST_FILES.python+=	media/webrtc/trunk/build/common.gypi
-SUBST_SED.python+=	-e 's,<!(python,<!(${PYTHONBIN},'
+ALL_ENV+=		SHELL=${CONFIG_SHELL:Q}
 
 # Build outside ${WRKSRC}
 # Try to avoid conflict with config/makefiles/xpidl/Makefile.in
@@ -105,38 +99,10 @@ OBJDIR=			../build
 CONFIGURE_DIRS=		${OBJDIR}
 CONFIGURE_SCRIPT=	${WRKSRC}/configure
 
-PLIST_VARS+=	sps vorbis tremor glskia throwwrapper mozglue avx86
-
-.include "../../mk/endian.mk"
-.if ${MACHINE_ENDIAN} == "little"
-PLIST.glskia=	yes
-.endif
+PLIST_VARS+=	avx86
 
 .if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 PLIST.avx86=	yes	# see media/libav/README_MOZILLA: only used on x86
-.endif
-
-.if ${MACHINE_ARCH} != "sparc64"
-# For some reasons the configure test for GCC bug 26905 still triggers on
-# sparc64, which makes mozilla skip the installation of a few wrapper headers.
-# Other archs end up with one additional file in the SDK headers
-PLIST.throwwrapper=	yes
-.endif
-
-.if !empty(MACHINE_PLATFORM:S/i386/x86/:MLinux-*-x86*)
-PLIST.sps=	yes
-.endif
-
-.if !empty(MACHINE_PLATFORM:MLinux-*-arm*)
-PLIST.tremor=	yes
-.else
-PLIST.vorbis=	yes
-.endif
-
-# See ${WRKSRC}/mozglue/build/moz.build: libmozglue is built and
-# installed as a shared library on these platforms.
-.if ${OPSYS} == "Cygwin" || ${OPSYS} == "Darwin" # or Android
-PLIST.mozglue=	yes
 .endif
 
 # See ${WRKSRC}/security/sandbox/mac/Sandbox.mm: On Darwin, sandboxing
@@ -168,14 +134,11 @@ CONFIGURE_ENV.NetBSD+=	ac_cv_thread_keyword=no
 PREFER.bzip2?=	pkgsrc
 .endif
 
-.if ${OPSYS} == "OpenBSD"
-PLIST_SUBST+=	DLL_SUFFIX=".so.1.0"
-.elif ${OPSYS} == "Darwin"
-PLIST_SUBST+=	DLL_SUFFIX=".dylib"
-.else
-PLIST_SUBST+=	DLL_SUFFIX=".so"
-.endif
+PYTHON_VERSIONS_ACCEPTED=	27
+PYTHON_FOR_BUILD_ONLY=		tool
+TOOL_DEPENDS+=			${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 
+.include "../../mk/atomic64.mk"
 .include "../../archivers/bzip2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libevent+=	libevent>=1.1
 .include "../../devel/libevent/buildlink3.mk"
@@ -183,18 +146,17 @@ BUILDLINK_API_DEPENDS.libevent+=	libevent>=1.1
 BUILDLINK_API_DEPENDS.nspr+=	nspr>=4.12
 .include "../../devel/nspr/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"
-BUILDLINK_API_DEPENDS.nss+=	nss>=3.28.1
 .include "../../devel/nss/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"
 .include "../../graphics/MesaLib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.cairo+=	cairo>=1.10.2nb4
 .include "../../graphics/cairo/buildlink3.mk"
-BUILDLINK_API_DEPENDS.libvpx+=	libvpx>=1.3.0
+.include "../../lang/python/tool.mk"
 .include "../../multimedia/libvpx/buildlink3.mk"
 .include "../../net/libIDL/buildlink3.mk"
 .include "../../textproc/hunspell/buildlink3.mk"
-.include "../../multimedia/ffmpeg3/buildlink3.mk"
+.include "../../multimedia/ffmpeg4/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"
 BUILDLINK_API_DEPENDS.pixman+= pixman>=0.25.2
 .include "../../x11/pixman/buildlink3.mk"

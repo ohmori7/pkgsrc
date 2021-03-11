@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2015/04/25 05:28:37 markd Exp $
+# $NetBSD: Makefile,v 1.6 2021/02/13 11:40:09 markd Exp $
 
 DISTNAME=	xkeyval.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-2.7a
-TEXLIVE_REV=	35741
+PKGNAME=	tex-${DISTNAME:S/./-/}-2.8
+TEXLIVE_REV=	57006
 
-MAINTAINER=	minskim@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/xkeyval
 COMMENT=	Documentation for tex-xkeyval
 LICENSE=	lppl-1.3c
 

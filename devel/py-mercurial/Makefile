@@ -1,4 +1,6 @@
-# $NetBSD: Makefile,v 1.30 2019/06/17 05:33:10 wiz Exp $
+# $NetBSD: Makefile,v 1.50 2021/02/06 09:07:50 wiz Exp $
+#
+# Changelog sometimes at: https://www.mercurial-scm.org/wiki/WhatsNew
 
 DISTNAME=	mercurial-${VERSION}
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
@@ -15,6 +17,10 @@ LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3 # OR newer
 # https://bz.mercurial-scm.org/show_bug.cgi?id=4485
 BUILD_DEPENDS+=	unzip-[0-9]*:../../archivers/unzip
 DEPENDS+=	${PYPKGPREFIX}-curses-[0-9]*:../../devel/py-curses
+# via xmlrpc from python itself, used in mercurial/pycompat.py
+DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
+
+TEST_DEPENDS+=	${PYPKGPREFIX}-sqlite3-[0-9]*:../../databases/py-sqlite3
 
 USE_TOOLS+=	gmake msgfmt
 
@@ -22,14 +28,18 @@ INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 ${PKGMANDIR}/man5
 INSTALLATION_DIRS+=	share/doc/mercurial
 
 .include "version.mk"
+.include "options.mk"
 
-# Known test failures:
-# test-narrow-shallow:
-# https://bz.mercurial-scm.org/show_bug.cgi?id=6150
-# 12 timeouts:
-# https://bz.mercurial-scm.org/show_bug.cgi?id=6144
-do-test:
-	cd ${WRKSRC} && make tests PYTHON=${PYTHONBIN} TESTFLAGS=${_MAKE_JOBS:Q}
+# Known test failures as of 5.7
+# https://bz.mercurial-scm.org/show_bug.cgi?id=6429
+USE_TOOLS+=		bash:test
+# Two tests use "python":
+# https://bz.mercurial-scm.org/show_bug.cgi?id=6480
+#
+# Ran 868 tests, 80 skipped, 2 failed.
+
+TEST_TARGET=		tests
+TEST_MAKE_FLAGS+=	PYTHON=${PYTHONBIN} TESTFLAGS=${_MAKE_JOBS:Q}
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/*.1  ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1

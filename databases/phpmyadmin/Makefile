@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.159 2019/06/16 09:13:11 tm Exp $
+# $NetBSD: Makefile,v 1.166 2021/03/07 13:21:57 taca Exp $
 
-DISTNAME=	phpMyAdmin-4.9.0.1-all-languages
+DISTNAME=	phpMyAdmin-4.9.7-all-languages
 PKGNAME=	${PHP_PKG_PREFIX}-${DISTNAME:S/-all-languages//:tl}
 CATEGORIES=	databases www
 MASTER_SITES=	https://files.phpmyadmin.net/phpMyAdmin/${PKGVERSION_NOREV}/
@@ -18,7 +18,6 @@ DEPENDS+=	${PHP_PKG_PREFIX}-mbstring>=5.3.0:../../converters/php-mbstring
 DEPENDS+=	${PHP_PKG_PREFIX}-gettext>=5.3.0:../../devel/php-gettext
 DEPENDS+=	${PHP_PKG_PREFIX}-mysqli>=5.3.0:../../databases/php-mysqli
 DEPENDS+=	${PHP_PKG_PREFIX}-gd>=5.3.0:../../graphics/php-gd
-DEPENDS+=	${PHP_PKG_PREFIX}-json>=5.3.0:../../textproc/php-json
 
 .include "../../lang/php/phpversion.mk"
 
@@ -28,6 +27,7 @@ DEPENDS+=	${PHP_PKG_PREFIX}-mcrypt>=5.3.0:../../security/php-mcrypt
 DEPENDS+=	${PHP_PKG_PREFIX}-pecl-mcrypt>=1.0.1:../../security/php-pecl-mcrypt
 .endif
 
+USE_LANGUAGE=	# none
 USE_TOOLS+=	pax
 
 APACHE_USER?=	www
@@ -46,7 +46,7 @@ FILES_SUBST+=	APACHE_GROUP=${APACHE_GROUP} APACHE_USER=${APACHE_USER}
 FILES_SUBST+=	PMCONFDIR=${PMCONFDIR} PMVARDIR=${PMVARDIR}
 MESSAGE_SUBST+=	PMCONFDIR=${PMCONFDIR} PMCONFFILE=${PMCONFFILE}
 
-DOC_FILES=	ChangeLog CODE_OF_CONDUCT.md CONTRIBUTING.md DCO LICENSE \
+DOC_FILES=	ChangeLog CONTRIBUTING.md LICENSE \
 		README RELEASE-DATE-${PKGVERSION_NOREV}
 
 EXDIR=		${PREFIX}/share/examples/phpmyadmin
@@ -58,8 +58,7 @@ PMVARDIR=	${VARBASE}/phpmyadmin
 REPLACE_INTERPRETER+=	php
 REPLACE.php.old=	/usr/bin/env php
 REPLACE.php.new=	${PREFIX}/bin/php
-REPLACE_FILES.php=	vendor/bin/highlight-query vendor/bin/lint-query
-REPLACE_FILES.php+=	vendor/phpmyadmin/sql-parser/bin/highlight-query
+REPLACE_FILES.php=	vendor/phpmyadmin/sql-parser/bin/highlight-query
 REPLACE_FILES.php+=	vendor/phpmyadmin/sql-parser/bin/lint-query
 REPLACE_FILES.php+=	vendor/phpmyadmin/sql-parser/bin/tokenize-query
 
@@ -87,6 +86,7 @@ post-extract:
 	${CP} ${FILESDIR}/phpmyadmin.conf ${WRKDIR}
 
 do-install:
+	${RM} -f ${WRKSRC}/libraries/vendor_config.php.orig
 	cd ${WRKSRC} && pax -rw ${SRCS} ${DESTDIR}${PMDIR}
 	${INSTALL_DATA} ${WRKSRC}/config.sample.inc.php ${DESTDIR}${EXDIR}
 	${INSTALL_DATA} ${WRKSRC}/examples/* ${DESTDIR}${EXDIR}
@@ -96,5 +96,5 @@ do-install:
 			${DESTDIR}${PREFIX}/share/doc/phpmyadmin
 	${INSTALL_DATA} ${WRKDIR}/phpmyadmin.conf ${DESTDIR}${EXDIR}/apache.conf
 
-.include "../../lang/php/phpversion.mk"
+.include "../../lang/php/json.mk"
 .include "../../mk/bsd.pkg.mk"

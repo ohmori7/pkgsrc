@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.33 2019/04/25 07:32:35 maya Exp $
+# $NetBSD: Makefile,v 1.35 2020/12/04 20:44:58 nia Exp $
 #
 
 DISTNAME=	icecast-1.3.12
-PKGREVISION=	15
+PKGREVISION=	16
 CATEGORIES=	audio
 MASTER_SITES=	http://downloads.xiph.org/releases/icecast/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.icecast.org/
+HOMEPAGE=	https://www.icecast.org/
 COMMENT=	Internet broadcasting system using Mpeg Layer III streaming
 LICENSE=	gnu-gpl-v2
 

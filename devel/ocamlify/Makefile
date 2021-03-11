@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.12 2018/11/12 16:10:23 jaapb Exp $
+# $NetBSD: Makefile,v 1.14 2021/03/08 08:13:01 jaapb Exp $
 
 DISTNAME=	ocamlify-0.0.2
-PKGREVISION=	10
+PKGREVISION=	11
 CATEGORIES=	devel
 MASTER_SITES=	http://forge.ocamlcore.org/frs/download.php/1209/
 
 MAINTAINER=	jaapb@NetBSD.org
-HOMEPAGE=	http://forge.ocamlcore.org/projects/ocamlify/
+HOMEPAGE=	https://forge.ocamlcore.org/projects/ocamlify/
 COMMENT=	Allows embedding external resources as OCaml code
 LICENSE=	gnu-lgpl-v2.1
 

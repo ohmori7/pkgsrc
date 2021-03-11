@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2018/08/22 09:46:47 wiz Exp $
+# $NetBSD: Makefile,v 1.42 2020/11/28 01:29:08 gutteridge Exp $
 
 DISTNAME=	openjade-1.3.2
-PKGREVISION=	13
+PKGREVISION=	18
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=openjade/}
 
@@ -27,16 +27,32 @@ SGML_CATALOGS=		${PREFIX}/share/sgml/openjade/catalog
 OPENJADE_DATA_DIR=	${PREFIX}/share/sgml/openjade
 OPENJADE_DOC_DIR=	${PREFIX}/share/doc/openjade
 
-INSTALLATION_DIRS=	${OPENJADE_DATA_DIR}/pubtext \
-			${OPENJADE_DOC_DIR}/doc \
-			${OPENJADE_DOC_DIR}/jadedoc/images
+AUTO_MKDIRS=		yes
+INSTALL_TARGET=		install install-man
 
+
+# openjade has incorrect code:
+#   https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69534#c9
+#
+# Because of code in openjade that does not conform to standards, some
+# versions of gcc produce an openjade binary that segfaults.  Examples
+# are building postgresql95-docs (gcc version >=6) and building the
+# pkgsrc guide (gcc 7 and 8 on NetBSD/amd64).
+#
+# Bug report about openjade built with gcc crashing for postgresql
+#   https://bugzilla.redhat.com/show_bug.cgi?id=1306162
+#
+# Work around the openjade bug by asking gcc not to eliminate the dead
+# stores that openjade relies on.
+#
+# Similar problems are seen with clang, so also mark the variable as
+# volatile.
+#
 .include "../../mk/compiler.mk"
-# Segfaults building postgresql95-docs. see:
-# https://bugzilla.redhat.com/show_bug.cgi?id=1306162
-# https://gcc.gnu.org/bugzilla/show_bug.cgi?id=69534#c9
-.if ${PKGSRC_COMPILER} == "gcc"
+.if !empty(PKGSRC_COMPILER:Mgcc)
 CFLAGS+=	-fno-tree-dse
+.elif !empty(PKGSRC_COMPILER:Mclang)
+CFLAGS+=	-fno-delete-null-pointer-checks
 .endif
 
 post-install:

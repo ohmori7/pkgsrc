@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:46:02 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:10:47 wiz Exp $
 #
 
 DISTNAME=	Net-Server-SS-PreFork-0.05
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Net-Server-SS-PreFork/
+HOMEPAGE=	https://metacpan.org/release/Net-Server-SS-PreFork
 COMMENT=	Hot-deployable variant of Perl 5 module Net::Server::PreFork
 LICENSE=	${PERL5_LICENSE}
 

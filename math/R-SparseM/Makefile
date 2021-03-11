@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.3 2018/07/28 14:40:46 brook Exp $
-#
-
-CATEGORIES=	math
-
-MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	${R_HOMEPAGE_BASE}/SparseM/
-COMMENT=	Sparse Linear Algebra
-LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3
+# $NetBSD: Makefile,v 1.6 2021/01/03 10:49:31 mef Exp $
 
 R_PKGNAME=	SparseM
-R_PKGVER=	1.77
+R_PKGVER=	1.78
+
+MAINTAINER=	pkgsrc-users@NetBSD.org
+COMMENT=	Sparse linear algebra
+LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3
+
+TEST_DEPENDS+=	tex-ec-[0-9]*:../../fonts/tex-ec
 
 USE_LANGUAGES=	c fortran
 

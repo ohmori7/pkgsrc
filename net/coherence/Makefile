@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.18 2019/04/26 13:14:07 maya Exp $
+# $NetBSD: Makefile,v 1.21 2020/12/04 20:45:33 nia Exp $
 
 DISTNAME=	Coherence-0.6.6.2
 PKGNAME=	coherence-0.6.6.2
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	net
 #MASTER_SITES=	http://coherence.beebits.net/download/
 
@@ -12,9 +12,9 @@ COMMENT=	Media server framework
 
 USE_LANGUAGES=	# none
 
-DEPENDS+= ${PYPKGPREFIX}-twisted-[0-9]*:../../net/py-twisted
+DEPENDS+=	${PYPKGPREFIX}-twisted-[0-9]*:../../net/py-twisted
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # as of 0.6.6.2
+PYTHON_VERSIONS_ACCEPTED=	27 # as of 0.6.6.2
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

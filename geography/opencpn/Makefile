@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.31 2019/03/25 11:34:05 bouyer Exp $
+# $NetBSD: Makefile,v 1.47 2020/08/18 17:58:00 leot Exp $
 
 DISTNAME=	OpenCPN-5.0.0
 PKGNAME=	${DISTNAME:S/OpenCPN/opencpn/}
-#PKGREVISION=	1
+PKGREVISION=	13
 CATEGORIES=	geography
 MASTER_SITES=	${MASTER_SITE_GITHUB:=OpenCPN/}
 GITHUB_PROJECT=	OpenCPN
@@ -10,7 +10,7 @@ GITHUB_TAG=	v5.0.0
 EXTRACT_SUFX=	.zip
 
 MAINTAINER=	bouyer@NetBSD.org
-HOMEPAGE=	http://www.opencpn.org/
+HOMEPAGE=	https://www.opencpn.org/
 COMMENT=	Concise ChartPlotter/Navigator
 LICENSE=	gnu-gpl-v2
 
@@ -33,19 +33,22 @@ SUBST_STAGE.prefix=	pre-configure
 SUBST_MESSAGE.prefix=	replace /usr/local with ${PREFIX}
 SUBST_FILES.prefix=	src/mygdal/cpl_csv.cpp			\
 			src/mygdal/cpl_findfile.cpp		\
-			data/doc/help_en_US.html		\
-			Findgps.cmake
+			cmake/Findgps.cmake
 SUBST_SED.prefix=	-e s,"/usr/local,"${PREFIX},g
 
 # Ensure we export symbols in the linked shared object.
 LDFLAGS+=	${EXPORT_SYMBOLS_LDFLAGS}
+
+# hack so that pango find harfbuzz's headers
+CFLAGS+=	-I${PREFIX}/include/harfbuzz
+CXXFLAGS+=	-I${PREFIX}/include/harfbuzz
 
 .include "../../audio/libsndfile/buildlink3.mk"
 .include "../../devel/cmake/buildlink3.mk"
 .include "../../x11/wxGTK30/buildlink3.mk"
 .include "../../graphics/libexif/buildlink3.mk"
 .include "../../archivers/bzip2/buildlink3.mk"
-.include "../../audio/portaudio-devel/buildlink3.mk"
+.include "../../audio/portaudio/buildlink3.mk"
 .include "../../textproc/tinyxml/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

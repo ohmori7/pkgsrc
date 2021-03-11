@@ -1,20 +1,20 @@
-# $NetBSD: Makefile,v 1.50 2016/03/05 11:29:40 jperkin Exp $
+# $NetBSD: Makefile,v 1.57 2020/11/05 09:09:22 ryoon Exp $
 
 DISTNAME=		sitecopy-0.16.6
-PKGREVISION=		5
+PKGREVISION=		11
 CATEGORIES=		www
 MASTER_SITES=		http://www.manyfish.co.uk/sitecopy/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.manyfish.co.uk/sitecopy/
+HOMEPAGE=		https://www.manyfish.co.uk/sitecopy/
 COMMENT=		Utility for synchronizing remote and local web sites
+LICENSE=		gnu-gpl-v2
 
 USE_FEATURES=		getopt_long
 USE_TOOLS+=		gmake msgfmt
 USE_PKGLOCALEDIR=	yes
 
 GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--with-ssl
 #CONFIGURE_ARGS+=	--with-included-neon
 CONFIGURE_ARGS+=	--with-libxml2
 
@@ -25,8 +25,8 @@ CONFIGURE_ARGS+=	--with-libxml2
 CFLAGS+=		-I.
 
 pre-build:
-	${RM} -f ${WRKSRC:Q}/fnmatch.h
-	${LN} -sf ${WRKSRC:Q}/lib/fnmatch.h ${WRKSRC:Q}/fnmatch.h
+	${RM} -f ${WRKSRC}/fnmatch.h
+	${LN} -sf ${WRKSRC}/lib/fnmatch.h ${WRKSRC}/fnmatch.h
 
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"

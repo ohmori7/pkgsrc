@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.11 2018/08/22 09:46:58 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2020/08/31 18:11:59 wiz Exp $
 #
 
 DISTNAME=	Text-Brew-0.02
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Text/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Text-Brew
+HOMEPAGE=	https://metacpan.org/release/Text-Brew
 COMMENT=	Perl module for configurable and analyzable edit distances
 LICENSE=	${PERL5_LICENSE}
 

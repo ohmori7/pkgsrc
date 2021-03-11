@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.13 2019/05/27 15:18:22 bsiegert Exp $
+# $NetBSD: Makefile,v 1.30 2021/01/23 14:22:56 bsiegert Exp $
 
 DISTNAME=	fs-0.0.20131111
 PKGNAME=	go-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	26
 MASTER_SITES=	${MASTER_SITE_GITHUB:=kr/}
 CATEGORIES=	devel
 GITHUB_TAG=	2788f0dbd16903de03cb8186e5c7d97b69ad387b
-GITHUB_PROJECT= ${PKGBASE:S/^go-//}
+GITHUB_PROJECT=	${PKGBASE:S/^go-//}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/kr/fs

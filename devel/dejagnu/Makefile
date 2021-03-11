@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.21 2016/05/20 22:54:23 mef Exp $
+# $NetBSD: Makefile,v 1.23 2020/01/18 23:30:26 rillig Exp $
 #
 
-DISTNAME=	dejagnu-1.6
+DISTNAME=	dejagnu-1.6.2
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNU:=dejagnu/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnu.org/software/dejagnu/dejagnu.html
+HOMEPAGE=	https://www.gnu.org/software/dejagnu/dejagnu.html
 COMMENT=	TCL/Expect-based framework for regression testing
 LICENSE=	gnu-gpl-v3
 

@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.34 2018/08/22 09:46:28 wiz Exp $
+# $NetBSD: Makefile,v 1.41 2020/12/04 04:56:12 riastradh Exp $
 
 POLICYKIT_VER=		0.9
 DISTNAME=		PolicyKit-${POLICYKIT_VER}
 PKGNAME=		policykit-${POLICYKIT_VER}
-PKGREVISION=		21
+PKGREVISION=		27
 CATEGORIES=		security
 MASTER_SITES=		http://hal.freedesktop.org/releases/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://hal.freedesktop.org/
+HOMEPAGE=		https://hal.freedesktop.org/
 COMMENT=		Framework for managing admin policies and privileges
 LICENSE=		mit
 

@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.51 2019/06/06 13:02:29 maya Exp $
+# $NetBSD: Makefile,v 1.55 2020/08/18 17:57:47 leot Exp $
 
 DISTNAME=	simh-4.0.0
 PKGNAME=	simh-4.0.0.20180919
+PKGREVISION=	2
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_GITHUB:=simh/}
 GITHUB_PROJECT=	simh
@@ -10,6 +11,7 @@ GITHUB_TAG=	0fe4bf3281a4d1f9fd10bba07cf0f7e40da92fc3
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://simh.trailing-edge.com/
 COMMENT=	Bob Supniks historical computer simulator
+LICENSE=	mit
 
 DEPENDS+=	dejavu-ttf-[0-9]*:../../fonts/dejavu-ttf
 
@@ -34,7 +36,7 @@ CFLAGS+=	-fforce-addr
 CFLAGS.SunOS+=	-DBSD_COMP
 LDFLAGS.SunOS+=	-lm
 
-LDFLAGS.Linux+=	-lm -pthread
+LDFLAGS.Linux+=	-lm -pthread -lrt
 
 INSTALLATION_DIRS=	bin share/simh share/doc/simh
 

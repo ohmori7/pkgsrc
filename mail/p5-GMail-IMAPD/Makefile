@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:45:29 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:10:02 wiz Exp $
 
 DISTNAME=	GMail-IMAPD-0.94
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	mail perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=GMail/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~krs/GMail-IMAPD-0.93/
+HOMEPAGE=	https://metacpan.org/release/KRS/GMail-IMAPD-0.93
 COMMENT=	IMAP gateway for the GMail web service
 
 DEPENDS+=	p5-Crypt-SSLeay>=0.51:../../security/p5-Crypt-SSLeay

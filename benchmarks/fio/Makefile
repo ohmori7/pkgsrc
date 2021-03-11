@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.4 2019/04/25 07:32:37 maya Exp $
+# $NetBSD: Makefile,v 1.9 2020/12/04 20:44:59 nia Exp $
 
-DISTNAME=	fio-2.19
+DISTNAME=	fio-3.19
 PKGREVISION=	1
 CATEGORIES=	benchmarks
 MASTER_SITES=	http://brick.kernel.dk/snaps/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://git.kernel.dk/?p=fio.git;a=summary
+HOMEPAGE=	https://git.kernel.dk/?p=fio.git;a=summary
 COMMENT=	Flexible IO Tester
 LICENSE=	gnu-gpl-v2
 
@@ -19,7 +19,7 @@ EGDIR=		${PREFIX}/share/examples/fio
 CONFIGURE_ARGS+=	--prefix=${PREFIX}
 
 REPLACE_BASH+=		tools/genfio
-REPLACE_PYTHON+=	tools/fio_latency2csv.py
+REPLACE_PYTHON+=	tools/fio_jsonplus_clat2csv
 REPLACE_PYTHON+=	tools/fiologparser.py
 REPLACE_PYTHON+=	tools/hist/fiologparser_hist.py
 REPLACE_PYTHON+=	tools/plot/fio2gnuplot

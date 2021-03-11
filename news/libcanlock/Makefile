@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.3 2019/02/13 17:35:08 wiz Exp $
+# $NetBSD: Makefile,v 1.7 2021/01/11 12:16:36 micha Exp $
 
-DISTNAME=	libcanlock-3.1.0
+DISTNAME=	libcanlock-3.2.2
 CATEGORIES=	news
 MASTER_SITES=	http://micha.freeshell.org/libcanlock/src/
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	michael.baeuerle@gmx.net
+MAINTAINER=	micha@NetBSD.org
 HOMEPAGE=	http://micha.freeshell.org/libcanlock/
 COMMENT=	Standalone RFC 8315 Netnews Cancel-Lock implementation
 LICENSE=	mit AND modified-bsd
@@ -17,11 +17,10 @@ USE_LIBTOOL=	yes
 
 TEST_TARGET=	test
 
-# Recent NetBSD has a namespace clash with its implementation defined extensions
-CFLAGS+=	-D_POSIX_C_SOURCE=200112L
-
 CONFIGURE_ARGS+=	--disable-legacy-api
-# The header parsers in the separate news/canlock-hp package
+CONFIGURE_ARGS+=	--enable-pc-files
+CONFIGURE_ARGS+=	--with-pkgconfigdir=${PREFIX}/lib/pkgconfig
+# The header parsers are available as a separate package news/canlock-hp
 CONFIGURE_ARGS+=	--disable-hp
 
 .include "../../mk/bsd.pkg.mk"

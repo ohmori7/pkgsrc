@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.17 2017/10/08 07:53:05 sevan Exp $
+# $NetBSD: Makefile,v 1.19 2020/01/26 17:31:10 rillig Exp $
 
 DISTNAME=	openafs-1.6.21-src
 PKGNAME=	${DISTNAME:C/-src//}
@@ -7,7 +7,7 @@ MASTER_SITES=	http://www.openafs.org/dl/openafs/1.6.21/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	gendalia@NetBSD.org
-HOMEPAGE=	http://www.openafs.org/
+HOMEPAGE=	https://www.openafs.org/
 COMMENT=	File system for sharing, scalability and transparent data migration
 LICENSE=	ipl-1.0 AND mit AND modified-bsd # AND sun-rpc?
 
@@ -18,7 +18,7 @@ CONFLICTS+=	heimdal-[0-9]*
 CONFLICTS+=	lwp-[0-9]*
 CONFLICTS+=	rx-[0-9]*
 
-MAKE_JOBS_SAFE=no
+MAKE_JOBS_SAFE=	no
 
 GNU_CONFIGURE=		yes
 USE_TOOLS+=		lex
@@ -29,7 +29,7 @@ RCD_SCRIPTS+=		bosserver
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE:Q}
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 
-USE_GNU_CONFIGURE_HOST= no
+USE_GNU_CONFIGURE_HOST=	no
 
 WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
 
@@ -42,7 +42,7 @@ OWN_DIRS_PERMS+=	${VARBASE}/openafs/db ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 700
 
 FILES_SUBST+=		HOSTNAME_CMD=${HOSTNAME_CMD:Q}
 
-BUILD_DEFS+= VARBASE
+BUILD_DEFS+=	VARBASE
 
 # attempt to future-proof configuration
 pre-patch:
@@ -53,7 +53,7 @@ pre-patch:
 	done
 
 post-patch:
-	${CP} ${WRKSRC}/src/config/param.armv6_nbsd80.h ${WRKSRC}/src/config/param.armv7_nbsd80.h 
+	${CP} ${WRKSRC}/src/config/param.armv6_nbsd80.h ${WRKSRC}/src/config/param.armv7_nbsd80.h
 
 MAKE_ENV+=	LD_RUN_PATH=${PREFIX}/lib
 

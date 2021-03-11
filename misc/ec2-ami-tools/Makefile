@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.6 2016/03/13 09:36:58 taca Exp $
+# $NetBSD: Makefile,v 1.8 2020/05/09 08:49:12 rillig Exp $
 #
 
 PKGNAME=	ec2-ami-tools-1.3.57676
 DISTNAME=	ec2-ami-tools-1.3-57676
-PKGREVISION=	3
+PKGREVISION=	4
 
 .include "../../misc/ec2-api-tools/Makefile.common"
 
@@ -45,8 +45,7 @@ SUBST_MESSAGE.ruby=	Fixing ruby interpreter name.
 
 SUBST_CLASSES+=		ec2-rb
 SUBST_STAGE.ec2-rb=	pre-configure
-SUBST_FILES.ec2-rb+=	lib/ec2/common/curl.rb
-SUBST_FILES.ec2-rb+=	lib/ec2/platform/netbsd/constants.rb
+SUBST_FILES.ec2-rb=	lib/ec2/platform/netbsd/constants.rb
 SUBST_VARS.ec2-rb+=	EC2_HOME
 SUBST_MESSAGE.ec2-rb=	Setting EC2_HOME constant for EC2 Ruby modules.
 

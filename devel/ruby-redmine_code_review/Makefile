@@ -1,23 +1,25 @@
-# $NetBSD: Makefile,v 1.3 2017/09/16 19:26:50 wiz Exp $
+# $NetBSD: Makefile,v 1.6 2021/02/28 16:24:34 taca Exp $
 
-PLUGIN_NAME=	redmine_code_review
-DISTNAME=	0.8.0
-PKGNAME=	${RUBY_PKGPREFIX}-${PLUGIN_NAME}-${DISTNAME}
-MASTER_SITES=	https://bitbucket.org/haru_iida/${PLUGIN_NAME}/get/
+DISTNAME=	${GITHUB_TAG}
+PKGNAME=	${RUBY_PKGPREFIX}-${PLUGIN_NAME:S/redmine_/redmine${RM_VER}-/}-${DISTNAME}
+MASTER_SITES=	${MASTER_SITE_GITHUB:=haru/}
+GITHUB_PROJECT=	${PLUGIN_NAME}
+GITHUB_TAG=	1.0.0
 DIST_SUBDIR=	ruby-${PLUGIN_NAME}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.r-labs.org/projects/codereview
+HOMEPAGE=	https://www.r-labs.org/projects/codereview
 COMMENT=	Redmine plugin to annotate source code within the repo browser
 LICENSE=	gnu-gpl-v2 AND mit
 
+PLUGIN_NAME=	redmine_code_review
+
 .include "../../meta-pkgs/ruby-redmine-plugins/Makefile.common"
 
-WRKSRC=		${WRKDIR}/haru_iida-${PLUGIN_NAME}-b1e9c70a334d
 NO_CONFIGURE=	yes
 NO_BUILD=	yes
 
-CODE_REVIEW_PLUGIN_DIR=	${REDMINE_PLUGINDIR}/${PLUGIN_NAME}
+CODE_REVIEW_PLUGIN_DIR=	${RM_PLUGINDIR}/${PLUGIN_NAME}
 
 INSTALLATION_DIRS+=	${CODE_REVIEW_PLUGIN_DIR}/app/controllers
 INSTALLATION_DIRS+=	${CODE_REVIEW_PLUGIN_DIR}/app/helpers

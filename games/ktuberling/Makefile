@@ -1,17 +1,21 @@
-# $NetBSD: Makefile,v 1.28 2018/12/13 19:51:56 adam Exp $
+# $NetBSD: Makefile,v 1.45 2021/02/07 06:30:25 ryoon Exp $
 
-DISTNAME=	ktuberling-${_KDE_VERSION}
-PKGREVISION=	12
+DISTNAME=	ktuberling-${KAPPSVER}
+PKGREVISION=	7
 CATEGORIES=	games
-COMMENT=	kids game: make your own potato
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+HOMEPAGE=	https://kde.org/applications/games/ktuberling/
+COMMENT=	Kids game: make your own potato
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+.include "../../meta-pkgs/kde/applications.mk"
+
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
+
+USE_TOOLS+=	msgmerge perl
 
 .include "../../games/libkdegames/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

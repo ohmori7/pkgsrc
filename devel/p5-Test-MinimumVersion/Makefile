@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.18 2018/08/22 09:44:47 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.22 2020/09/04 13:45:15 wiz Exp $
 
 DISTNAME=		Test-MinimumVersion-0.101082
 PKGNAME=		p5-${DISTNAME:C/([0-9][0-9][0-9])([0-9][0-9][0-9])/\1.\2/}
-PKGREVISION=		3
+PKGREVISION=		5
 CATEGORIES=		devel perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Test/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Test-MinimumVersion/
+HOMEPAGE=		https://metacpan.org/release/Test-MinimumVersion
 COMMENT=		Test to prove a module requires newer perl than expected
 LICENSE=		${PERL5_LICENSE}
 
@@ -17,8 +16,6 @@ DEPENDS+=		p5-File-Find-Rule-Perl-[0-9]*:../../devel/p5-File-Find-Rule-Perl
 DEPENDS+=		p5-Perl-MinimumVersion>=1.20:../../devel/p5-Perl-MinimumVersion
 DEPENDS+=		p5-YAML-Tiny>=1.40:../../textproc/p5-YAML-Tiny
 #DEPENDS+=		{perl>=5.10.0,p5-version>=0.7000}:../../devel/p5-version
-
-BUILD_DEPENDS+=		p5-Test-Simple>=1.001010:../../devel/p5-Test-Simple
 
 USE_LANGUAGES=		# empty
 PERL5_PACKLIST=		auto/Test/MinimumVersion/.packlist

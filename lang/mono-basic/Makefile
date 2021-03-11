@@ -1,19 +1,17 @@
-# $NetBSD: Makefile,v 1.37 2019/04/03 00:32:49 ryoon Exp $
+# $NetBSD: Makefile,v 1.42 2021/03/08 11:00:42 nia Exp $
 
-DISTNAME=	mono-basic-4.0.1
-PKGREVISION=	10
+DISTNAME=	mono-basic-4.7
 CATEGORIES=	lang
-MASTER_SITES=	http://download.mono-project.com/sources/mono-basic/
+MASTER_SITES=	https://download.mono-project.com/sources/mono-basic/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	kefren@NetBSD.org
-HOMEPAGE=	http://www.mono-project.com/
+HOMEPAGE=	https://www.mono-project.com/
 COMMENT=	Visual Basic .NET support for mono
 LICENSE=	gnu-lgpl-v2 AND mit
 
 USE_TOOLS+=		gmake
 USE_LANGUAGES+=		# empty
-EXTRACT_USING=		gtar
 ALL_ENV+=		PLATFORM=
 
 GNU_CONFIGURE=		yes

@@ -1,23 +1,25 @@
-# $NetBSD: Makefile,v 1.4 2019/06/02 08:41:58 adam Exp $
+# $NetBSD: Makefile,v 1.10 2020/04/18 08:03:07 adam Exp $
 
-DISTNAME=	libcxxabi-8.0.0.src
+.include "../../lang/llvm/version.mk"
+
+DISTNAME=	libcxxabi-${LLVM_VERSION}.src
 PKGNAME=	${DISTNAME:S/.src//}
 CATEGORIES=	lang devel
-MASTER_SITES=	http://llvm.org/releases/${PKGVERSION_NOREV}/
-EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://libcxxabi.llvm.org/
+HOMEPAGE=	https://libcxxabi.llvm.org/
 COMMENT=	C++ Standard Library
-LICENSE=	modified-bsd OR mit
+LICENSE=	apache-2.0
 
 # libcxx requires libcxxabi's cxxabi.h to build, but libcxxabi requires
 # libcxx's includes to build, so we have this unholy extra distfiles thing
 # in both of them to get them to build against each other without causing
 # circular dependencies.  This must be kept in sync with libcxxabi/Makefile.
-#
-LIBCXX=		libcxx-${PKGVERSION_NOREV}.src
-DISTFILES=	${DEFAULT_DISTFILES} ${LIBCXX}${EXTRACT_SUFX}
+LIBCXX=			${DISTNAME:S/cxxabi/cxx/}
+_EXTRA_DIST=		${LIBCXX}${EXTRACT_SUFX}
+SITES.${_EXTRA_DIST}=	${MASTER_SITES:=${GITHUB_PROJECT}/releases/download/${GITHUB_RELEASE}/}
+
+DISTFILES=	${DEFAULT_DISTFILES} ${_EXTRA_DIST}
 
 CONFIGURE_DIRS=	${WRKDIR}/build
 CMAKE_ARG_PATH=	${WRKSRC}

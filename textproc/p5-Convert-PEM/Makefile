@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.32 2018/08/22 09:46:48 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2020/08/31 18:11:45 wiz Exp $
 #
 
 DISTNAME=		Convert-PEM-0.08
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		8
+PKGREVISION=		10
 CATEGORIES=		converters perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Convert/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Convert-PEM/
+HOMEPAGE=		https://metacpan.org/release/Convert-PEM
 COMMENT=		Perl5 module to read/write ASN.1-encoded PEM files
 LICENSE=		${PERL5_LICENSE}
 

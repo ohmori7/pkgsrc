@@ -1,52 +1,48 @@
 package pkglint
 
 type Toplevel struct {
-	dir            string
-	previousSubdir string
-	subdirs        []string
+	dir            CurrPath
+	previousSubdir RelPath
+	subdirs        []CurrPath
 }
 
-func CheckdirToplevel(dir string) {
+func CheckdirToplevel(dir CurrPath) {
 	if trace.Tracing {
-		defer trace.Call1(dir)()
+		defer trace.Call(dir)()
 	}
 
 	ctx := Toplevel{dir, "", nil}
-	filename := dir + "/Makefile"
+	filename := dir.JoinNoClean("Makefile")
 
-	mklines := LoadMk(filename, NotEmpty|LogErrors)
+	mklines := LoadMk(filename, nil, NotEmpty|LogErrors)
 	if mklines == nil {
 		return
 	}
 
 	for _, mkline := range mklines.mklines {
-		if (mkline.IsVarassign() || mkline.IsCommentedVarassign()) && mkline.Varname() == "SUBDIR" {
+		if mkline.IsVarassignMaybeCommented() && mkline.Varname() == "SUBDIR" {
 			ctx.checkSubdir(mkline)
 		}
 	}
 
 	mklines.Check()
 
-	if G.Opts.Recursive {
-		if G.Opts.CheckGlobal {
-			G.InterPackage.Enable()
-		}
-		G.Todo = append(append([]string(nil), ctx.subdirs...), G.Todo...)
+	if G.Recursive {
+		G.InterPackage.Enable()
+		G.Todo.PushFront(ctx.subdirs...)
 	}
 }
 
-func (ctx *Toplevel) checkSubdir(mkline MkLine) {
-	subdir := mkline.Value()
+func (ctx *Toplevel) checkSubdir(mkline *MkLine) {
+	subdir := NewRelPathString(mkline.Value())
 
-	if mkline.IsCommentedVarassign() && (mkline.VarassignComment() == "#" || mkline.VarassignComment() == "") {
-		mkline.Warnf("%q commented out without giving a reason.", subdir)
+	if mkline.IsCommentedVarassign() {
+		if !mkline.HasComment() || mkline.Comment() == "" {
+			mkline.Warnf("%q commented out without giving a reason.", subdir)
+		}
 	}
 
-	if !hasSuffix(mkline.ValueAlign(), "=\t") {
-		mkline.Warnf("Indentation should be a single tab character.")
-	}
-
-	if contains(subdir, "$") || !fileExists(ctx.dir+"/"+subdir+"/Makefile") {
+	if containsVarUse(subdir.String()) || !ctx.dir.JoinNoClean(subdir).JoinNoClean("Makefile").IsFile() {
 		return
 	}
 
@@ -64,6 +60,6 @@ func (ctx *Toplevel) checkSubdir(mkline MkLine) {
 	ctx.previousSubdir = subdir
 
 	if !mkline.IsCommentedVarassign() {
-		ctx.subdirs = append(ctx.subdirs, ctx.dir+"/"+subdir)
+		ctx.subdirs = append(ctx.subdirs, ctx.dir.JoinNoClean(subdir))
 	}
 }

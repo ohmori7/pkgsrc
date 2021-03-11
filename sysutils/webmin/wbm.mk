@@ -1,4 +1,4 @@
-# $NetBSD: wbm.mk,v 1.13 2017/02/01 13:00:44 mef Exp $
+# $NetBSD: wbm.mk,v 1.17 2020/09/06 02:38:53 mef Exp $
 #
 # Makefile fragment for Webmin modules
 #
@@ -19,24 +19,24 @@ LICENSE=	modified-bsd
 
 .include "version.mk"
 
-WBM_STD_MODULE?=YES
+WBM_STD_MODULE?=	YES
 
 .if defined(WBM_MOD_REV) && !empty(WBM_MOD_REV) || !empty(WBM_STD_MODULE:M[Nn][Oo])
-PKGNAME?=	wbm-${WBM_NAME}-${WBM_VERSION:S/0$/${WBM_MOD_REV}/}
-DISTNAME?=	${WBM_NAME}-${WBM_VERSION}-${WBM_MOD_REV}
-MASTER_SITES?=	http://www.webmin.com/updates/
-EXTRACT_SUFX?=	.wbm.gz
-EXTRACT_OPTS+=	-f tar
-WRKSRC?=	${WRKDIR}
-WBMSRC=		${WRKDIR}/${WBM_NAME}
+PKGNAME?=		wbm-${WBM_NAME}-${WBM_VERSION:S/0$/${WBM_MOD_REV}/}
+DISTNAME?=		${WBM_NAME}-${WBM_VERSION}-${WBM_MOD_REV}
+MASTER_SITES?=		http://www.webmin.com/updates/
+EXTRACT_SUFX?=		.wbm.gz
+EXTRACT_OPTS+=		-f tar
+WRKSRC?=		${WRKDIR}
+WBMSRC=			${WRKDIR}/${WBM_NAME}
 .else
-PKGNAME=	wbm-${WBM_NAME}-${WBM_VERSION}
-DISTNAME=	webmin-${WBM_VERSION}
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=webadmin/}
-WBMSRC=		${WRKSRC}/${WBM_NAME}
-EXTRACT_ELEMENTS=${DISTNAME}/${WBM_NAME}
+PKGNAME=		wbm-${WBM_NAME}-${WBM_VERSION}
+DISTNAME=		webmin-${WBM_VERSION}
+MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=webadmin/}
+WBMSRC=			${WRKSRC}/${WBM_NAME}
+EXTRACT_ELEMENTS=	${DISTNAME}/${WBM_NAME}
 .endif
-CATEGORIES+=	sysutils www
+CATEGORIES+=		sysutils www
 
 MAINTAINER?=	pkgsrc-users@NetBSD.org
 HOMEPAGE?=	http://www.webmin.com/standard.html
@@ -44,12 +44,14 @@ HOMEPAGE?=	http://www.webmin.com/standard.html
 USE_TOOLS+=	perl:run perl
 DEPENDS+=	webmin>=${WBM_VERSION}:../../sysutils/webmin
 
+DISTINFO_FILE?=	../../sysutils/webmin/distinfo
+
 .for m in ${WBM_DEPEND_MODULES}
 DEPENDS+=	wbm-${m}>=${WBM_VERSION}:../../sysutils/wbm-${m}
 .endfor
 
-WEBMIN_DIR=	${LOCALBASE}/share/webmin
-WEBMIN_EGDIR=	${LOCALBASE}/share/examples/webmin
+WEBMIN_DIR=	${PREFIX}/share/webmin
+WEBMIN_EGDIR=	${PREFIX}/share/examples/webmin
 WEBMIN_VARDIR=	${VARBASE}/webmin
 WBM_DIR=	${PREFIX}/share/webmin
 WBM_EGDIR=	${PREFIX}/share/examples/webmin
@@ -77,6 +79,12 @@ WEBMIN_OSVERSION_cmd=	${AWK} '/^os_version=/ {sub("os_version=",""); print}' \
 			${WEBMIN_EGDIR}/config
 
 .PHONY: wbm-configure wbm-build wbm-install
+
+post-patch:
+	${FIND} ${WBMSRC} -name "*.pl"   |xargs ${CHMOD} -x
+	${FIND} ${WBMSRC} -name "*.html" |xargs ${CHMOD} -x
+	${FIND} ${WBMSRC} -name "*.gif"  |xargs ${CHMOD} -x
+	${FIND} ${WBMSRC} -name "*.png"  |xargs ${CHMOD} -x
 
 wbm-configure:
 	${FIND} ${WBMSRC} -name "*.orig" -print | ${XARGS} ${RM} -f

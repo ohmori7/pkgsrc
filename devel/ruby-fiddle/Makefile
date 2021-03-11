@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.16 2019/04/14 15:31:55 taca Exp $
+# $NetBSD: Makefile,v 1.23 2021/02/14 14:34:54 taca Exp $
 #
 
 DISTNAME=		${RUBY_DISTNAME}
@@ -11,15 +11,18 @@ MAINTAINER=		taca@NetBSD.org
 HOMEPAGE=		${RUBY_HOMEPAGE}
 COMMENT=		Ruby fiddle library to wrap libffi
 
-RUBY_VERSIONS_ACCEPTED=	24 25 26 22
-
 USE_RUBY_EXTCONF=	yes
 EXTRACT_ELEMENTS=	${RUBY_DISTNAME}/ext/fiddle ${RUBY_DISTNAME}/include \
 			${RUBY_DISTNAME}/internal.h 
 WRKSRC=			${RUBY_WRKSRC}/ext/fiddle
 MAKE_ENV+=		top_srcdir=../..
 
+PLIST_VARS+=	fiddle
+
 .include "../../lang/ruby/modules.mk"
+.if ${RUBY_FIDDLE_VERSION} != "1.0.0"
+PLIST.fiddle=	yes
+.endif
 .include "../../lang/ruby/Makefile.common"
 .include "../../devel/libffi/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

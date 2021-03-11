@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.32 2018/08/22 09:46:02 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2020/08/31 18:10:46 wiz Exp $
 #
 
 DISTNAME=	Net-Pcap-0.18
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Net-Pcap/
+HOMEPAGE=	https://metacpan.org/release/Net-Pcap
 COMMENT=	Perl interface to pcap(3) LBL packet capture library
 LICENSE=	${PERL5_LICENSE}
 

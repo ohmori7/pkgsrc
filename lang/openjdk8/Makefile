@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.78 2019/05/23 19:23:03 rillig Exp $
+# $NetBSD: Makefile,v 1.105 2020/10/13 09:46:03 hauke Exp $
 
-DISTNAME=	openjdk-1.8.202-20190219
-PKGNAME=	openjdk8-1.8.202
-PKGREVISION=	1
+DISTNAME=	openjdk-jdk8u-${GITHUB_TAG}
+PKGNAME=	openjdk8-1.8.${GITHUB_TAG:C/.*u([0-9]+).*/\1/}
+PKGREVISION=	4
 CATEGORIES=	lang
-MASTER_SITES=	${MASTER_SITE_LOCAL:=openjdk7/}
-EXTRACT_SUFX=	.tar.xz
+MASTER_SITES=	${MASTER_SITE_GITHUB:=battleblow/}
+MASTER_SITES+=	${MASTER_SITE_LOCAL:=openjdk7/}	# for bootstrap kits
+GITHUB_PROJECT=	openjdk-jdk8u
+GITHUB_TAG=	jdk8u252-b09.1
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://openjdk.java.net/
+HOMEPAGE=	https://openjdk.java.net/
 COMMENT=	Open-source implementation of the Java Platform, Standard Edition
 LICENSE=	gnu-gpl-v2
 
@@ -20,12 +22,14 @@ DIST_SUBDIR=	openjdk7
 
 JAVA_NAME=	openjdk8
 JAVA_HOME=	${PREFIX}/java/${JAVA_NAME}
-JAVA_WRAPPERS=	jar java javac javadoc javah javap jcmd jhat jps jstack \
+JAVA_WRAPPERS=	jar java javac javadoc javah javap jcmd jhat jmap jps jstack \
 		keytool orbd policytool rmid rmiregistry servertool tnameserv
 
 BUILD_DEPENDS+=		mozilla-rootcerts>=1.0.20140820nb2:../../security/mozilla-rootcerts
 
 GNU_CONFIGURE=		yes
+GNU_CONFIGURE_STRICT=	no # not really GNU configure, only similar
+USE_GNU_CONFIGURE_HOST=	no
 CONFIGURE_SCRIPT=	configure
 CONFIG_SHELL=		bash
 CONFIG_SUB_OVERRIDE+=	common/autoconf/build-aux/config.sub
@@ -34,24 +38,25 @@ CONFIG_SUB_OVERRIDE+=	common/autoconf/build-aux/autoconf-config.sub
 CONFIG_GUESS_OVERRIDE+=	common/autoconf/build-aux/autoconf-config.guess
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		bash gmake pax pkg-config unzip:run zip:run
-UNLIMIT_RESOURCES=	datasize stacksize
-WRKSRC=			${WRKDIR}/openjdk
+UNLIMIT_RESOURCES=	datasize stacksize virtualsize cputime
 PLIST_SRC+=		${PLIST_SRC_DFLT}
-CHECK_SHLIBS_SKIP+=	java/openjdk8/jre/lib/${LIBDIR_ARCH}/libinstrument.so
+CHECK_SHLIBS_SKIP+=	java/${JAVA_NAME}/jre/lib/${LIBDIR_ARCH}/libinstrument.so
 
 BUILDLINK_PASSTHRU_DIRS+=	${ALT_BOOTDIR}
 PREPEND_PATH+=			${ALT_BOOTDIR}/bin
 
 BUILDLINK_TRANSFORM+=	rm:-Werror
 
+# hotspot/src/share/vm/adlc/dict2.cpp does that, but it's safe.
+BUILDLINK_TRANSFORM+=	rm:-Werror=char-subscripts
+
 CONFIGURE_ARGS+=	--disable-option-checking # for --with-libiconv-prefix
 CONFIGURE_ARGS+=	--prefix=${PREFIX:Q}
-CONFIGURE_ARGS+=	--build=${MACHINE_GNU_PLATFORM:Q}
-CONFIGURE_ARGS+=	--host=${MACHINE_GNU_PLATFORM:Q}
+CONFIGURE_ARGS+=	--openjdk-target=${MACHINE_GNU_PLATFORM:Q}
 CONFIGURE_ARGS+=	--with-boot-jdk=${ALT_BOOTDIR}
 CONFIGURE_ARGS+=	--with-zlib=system
 CONFIGURE_ARGS+=	--with-giflib=bundled
-CONFIGURE_ARGS+=	--with-cups-include=${BUILDLINK_PREFIX.cups-base}/include
+CONFIGURE_ARGS+=	--with-cups-include=${BUILDLINK_PREFIX.libcups}/include
 CONFIGURE_ARGS+=	--with-freetype-lib=${BUILDLINK_PREFIX.freetype2}/lib
 CONFIGURE_ARGS+=	--with-freetype-include=${BUILDLINK_PREFIX.freetype2}/include
 CONFIGURE_ARGS+=	--disable-freetype-bundling
@@ -65,28 +70,22 @@ CONFIGURE_ARGS+=	--with-update-version=${PKGVERSION_NOREV:S/1.8.//}
 CONFIGURE_ARGS+=	--with-extra-ldflags=${LDFLAGS:Q}
 
 CHECK_PORTABILITY_SKIP+=	hotspot/test/runtime/*/*.sh
-
-NOT_PAX_MPROTECT_SAFE+= java/openjdk8/bin/[a-ik-z]*
-NOT_PAX_MPROTECT_SAFE+= java/openjdk8/bin/j[b-z]*
-NOT_PAX_MPROTECT_SAFE+= java/openjdk8/bin/jar*
-NOT_PAX_MPROTECT_SAFE+= java/openjdk8/bin/java
-NOT_PAX_MPROTECT_SAFE+= java/openjdk8/bin/java[a-z]*
-NOT_PAX_MPROTECT_SAFE+= java/openjdk8/jre/bin/*
+CHECK_PORTABILITY_SKIP+=	hotspot/test/compiler/criticalnatives/argumentcorruption/Test8167409.sh
 
 # Avoid build errors when JAVA_HOME and CLASSPATH are defined by user.
 MAKE_ENV+=	JAVA_HOME=
 MAKE_ENV+=	CLASSPATH=
 
-BUILD_OPSYS=	${OPSYS:C/.*BSD/bsd/:S/DragonFly/bsd/:S/SunOS/solaris/:S/Linux/linux/}
-BUILD_ARCH=	${MACHINE_ARCH:S/i386/x86/:S/sparc64/sparcv9/:C/^e?arm.*$/arm/}
-LIBDIR_ARCH=	${MACHINE_ARCH:S/x86_64/amd64/:S/sparc64/sparcv9/:C/^e?arm.*$/arm/}
-BUILDDIR=	${WRKSRC}/build/${BUILD_OPSYS}-${BUILD_ARCH}-normal-${BUILD_VARIANT}-${BUILD_DEBUG_LEVEL}
-LD_LIBRARY_PATH=	${WRKDIR}/bootstrap/jre/lib/${LIBDIR_ARCH}:${WRKDIR}/bootstrap/jre/lib/${LIBDIR_ARCH}/jli:${WRKDIR}/bootstrap/jre/lib/${LIBDIR_ARCH}/server
-CONFIGURE_ENV+=	LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
-MAKE_ENV+=	LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
-CONFIGURE_ENV+=	LFLAGS=${LDFLAGS:Q}
-MAKE_ENV+=	LFLAGS=${LDFLAGS:Q}
-BUILDLINK_PASSTHRU_RPATHDIRS+=	${PREFIX}/java/openjdk8/jre/lib/${LIBDIR_ARCH}
+BUILD_OPSYS=			${OPSYS:C/.*BSD/bsd/:S/DragonFly/bsd/:S/SunOS/solaris/:S/Linux/linux/}
+BUILD_ARCH=			${MACHINE_ARCH:S/i386/x86/:S/sparc64/sparcv9/:C/^e?arm.*$/arm/}
+LIBDIR_ARCH=			${MACHINE_ARCH:S/x86_64/amd64/:S/sparc64/sparcv9/:C/^e?arm.*$/arm/}
+BUILDDIR=			${WRKSRC}/build/${BUILD_OPSYS}-${BUILD_ARCH}-normal-${BUILD_VARIANT}-${BUILD_DEBUG_LEVEL}
+LD_LIBRARY_PATH=		${WRKDIR}/bootstrap/jre/lib/${LIBDIR_ARCH}:${WRKDIR}/bootstrap/jre/lib/${LIBDIR_ARCH}/jli:${WRKDIR}/bootstrap/jre/lib/${LIBDIR_ARCH}/server
+CONFIGURE_ENV+=			LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
+MAKE_ENV+=			LD_LIBRARY_PATH=${LD_LIBRARY_PATH}
+CONFIGURE_ENV+=			LFLAGS=${LDFLAGS:Q}
+MAKE_ENV+=			LFLAGS=${LDFLAGS:Q}
+BUILDLINK_PASSTHRU_RPATHDIRS+=	${PREFIX}/java/${JAVA_NAME}/jre/lib/${LIBDIR_ARCH}
 
 PLIST_SUBST+=	ARCH=${LIBDIR_ARCH}
 PLIST_SUBST+=	LOWER_OPSYS=${LOWER_OPSYS:S/sunos/solaris/}
@@ -103,12 +102,6 @@ CXXFLAGS+=	-D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS
 
 CONFIGURE_ENV+=	CFLAGS_JDK=${CFLAGS:Q}
 CONFIGURE_ENV+=	CXXFLAGS_JDK=${CXXFLAGS:Q}
-
-# Fix segfault under NetBSD/amd64 8.99 with GCC 6.4.0
-.if !empty(CC_VERSION:Mgcc-[67].*)
-CFLAGS+=	-fno-lifetime-dse
-CFLAGS+=	-fno-delete-null-pointer-checks
-.endif
 
 .if ${OPSYS} == "SunOS" && !empty(PKGSRC_COMPILER:Mgcc)
 MAKE_ENV+=	USE_GCC=1
@@ -165,7 +158,7 @@ SUBST_VARS.fontpaths+=		BUILDLINK_PREFIX.fontconfig
 SUBST_CLASSES+=			zlibpath
 SUBST_STAGE.zlibpath=		pre-build
 SUBST_FILES.zlibpath=		jdk/make/CompileLaunchers.gmk jdk/make/lib/CoreLibraries.gmk
-SUBST_FILES.zlibpath+=		jdk/make/lib/Awt2dLibraries.gmk jdk/make/lib/ServiceabilityLibraries.gmk
+SUBST_FILES.zlibpath+=		jdk/make/lib/Awt2dLibraries.gmk
 SUBST_VARS.zlibpath=		COMPILER_RPATH_FLAG BUILDLINK_PREFIX.zlib
 SUBST_VARS.zlibpath+=		BUILDLINK_PREFIX.iconv
 
@@ -188,6 +181,7 @@ post-extract:
 .if exists(/usr/lib/libstdc++.so.7)
 	${RM} -f ${ALT_BOOTDIR}/jre/lib/${LIBDIR_ARCH}/libstdc++.so*
 .endif
+# This can be removed after bootstrap kits have been refreshed
 .if defined(TOOLS_PLATFORM.paxctl)
 	${PAXCTL} +m ${WRKDIR}/bootstrap/bin/[a-ik-z]*
 	${PAXCTL} +m ${WRKDIR}/bootstrap/bin/j[b-z]*
@@ -200,7 +194,7 @@ do-build: ${WRKDIR}/stage3-done
 
 # stage 1 builds a native JDK using the bootstrap binaries
 ${WRKDIR}/stage1-done:
-	${_ULIMIT_CMD} cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} images
+	${_ULIMIT_CMD} cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} ${BUILD_MAKE_FLAGS} images
 	rm -rf ${ALT_BOOTDIR}
 	cd ${BUILDDIR}/images && mv j2sdk-image ${ALT_BOOTDIR}
 .for d in corba hotspot jaxp jaxws langtools tmp
@@ -210,23 +204,13 @@ ${WRKDIR}/stage1-done:
 
 # stage 1.5 reconfigures, since the bootstrap JDK major version might have changed now
 ${WRKDIR}/stage1_5-done: ${WRKDIR}/stage1-done
-.if defined(TOOLS_PLATFORM.paxctl)
-	${PAXCTL} +m ${WRKDIR}/bootstrap/bin/[a-ik-z]*
-	${PAXCTL} +m ${WRKDIR}/bootstrap/bin/j[b-z]*
-	${PAXCTL} +m ${WRKDIR}/bootstrap/bin/jar*
-	${PAXCTL} +m ${WRKDIR}/bootstrap/bin/java
-	${PAXCTL} +m ${WRKDIR}/bootstrap/bin/java[a-z]*
-.endif
-.if defined(BATCH)
-	@${RECURSIVE_MAKE} ${MAKEFLAGS} apply-va-hack
-.endif
 	@${STEP_MSG} "Reconfiguring with newly built JDK"
 	@${RECURSIVE_MAKE} ${MAKEFLAGS} do-configure
 	touch ${.TARGET}
 
 # stage 2 rebuilds the JDK using native tools
 ${WRKDIR}/stage2-done: ${WRKDIR}/stage1_5-done
-	${_ULIMIT_CMD} cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} images
+	${_ULIMIT_CMD} cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} ${BUILD_MAKE_FLAGS} images
 	touch ${.TARGET}
 
 # stage 3 builds third party add-ons
@@ -255,7 +239,7 @@ do-install:
 	${INSTALL_DATA} ${WRKDIR}/cacerts.out				\
 	  ${DESTDIR}${JAVA_HOME}/jre/lib/security/cacerts
 	rm -f ${DESTDIR}${JAVA_HOME}/include/jni_md.h
-	ln -s ${LOWER_OPSYS:S/sunos/solaris/}/jni_md.h					\
+	ln -s ${LOWER_OPSYS:S/sunos/solaris/}/jni_md.h			\
 	  ${DESTDIR}${JAVA_HOME}/include/jni_md.h
 
 .if ${OPSYS} == "NetBSD"
@@ -263,7 +247,7 @@ TOOLS_PLATFORM.unzip=
 .endif
 
 # Include binutils for objcopy and GNU strip on SmartOS
-.if ${OS_VARIANT} == "SmartOS"
+.if ${OS_VARIANT} == "SmartOS" || ${OS_VARIANT} == "OmniOS"
 .include "../../devel/binutils/buildlink3.mk"
 BUILDLINK_DEPMETHOD.binutils?=	build
 MAKE_ENV+=	STRIP=${PREFIX}/bin/gstrip
@@ -279,7 +263,7 @@ MAKE_ENV+=	STRIP=${PREFIX}/bin/gstrip
 .include "../../graphics/freetype2/buildlink3.mk"
 # Headers from CUPS are required to build the native implementation of
 # sun.print.* which is used by java.awt.print.
-BUILDLINK_DEPMETHOD.cups-base?=	build
-.include "../../print/cups-base/buildlink3.mk"
+BUILDLINK_DEPMETHOD.libcups?=	build
+.include "../../print/libcups/buildlink3.mk"
 .include "../../mk/java-env.mk"
 .include "../../mk/bsd.pkg.mk"

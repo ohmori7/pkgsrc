@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.54 2018/11/14 22:21:49 kleink Exp $
+# $NetBSD: Makefile,v 1.59 2020/08/17 20:19:13 leot Exp $
 #
 
 DISTNAME=	xdx-2.5.0
-PKGREVISION=	7
+PKGREVISION=	11
 CATEGORIES=	ham
 MASTER_SITES=	https://sourceforge.net/projects/xdxclusterclient/files/latest/download
 
@@ -11,9 +11,9 @@ HOMEPAGE=	https://sourceforge.net/projects/xdxclusterclient/
 COMMENT=	Amateur Radio tcp/ip DX-cluster client
 LICENSE=	gnu-gpl-v2
 
-USE_TOOLS+=	gmake pkg-config
-GNU_CONFIGURE=	yes
-USE_PKGLOCALEDIR=yes
+USE_TOOLS+=		gmake pkg-config
+GNU_CONFIGURE=		yes
+USE_PKGLOCALEDIR=	yes
 
 LDFLAGS.SunOS+=	-lsocket -lnsl -lresolv
 

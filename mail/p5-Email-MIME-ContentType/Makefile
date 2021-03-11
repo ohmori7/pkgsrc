@@ -1,15 +1,16 @@
-# $NetBSD: Makefile,v 1.19 2018/08/22 09:45:28 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2020/09/07 11:29:07 wiz Exp $
 
-DISTNAME=		Email-MIME-ContentType-1.022
+DISTNAME=		Email-MIME-ContentType-1.024
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		1
 CATEGORIES=		mail perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Email/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Email-MIME-ContentType/
+HOMEPAGE=		https://metacpan.org/release/Email-MIME-ContentType
 COMMENT=		Perl module for parsing a MIME Content-Type header
 LICENSE=		${PERL5_LICENSE}
+
+DEPENDS+=		p5-Text-Unidecode-[0-9]*:../../textproc/p5-Text-Unidecode
 
 PERL5_PACKLIST=		auto/Email/MIME/ContentType/.packlist
 

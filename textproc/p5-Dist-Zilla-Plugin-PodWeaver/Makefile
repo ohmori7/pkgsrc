@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.14 2018/08/22 09:46:48 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:11:46 wiz Exp $
 
 DISTNAME=	Dist-Zilla-Plugin-PodWeaver-4.008
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Dist/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Dist-Zilla-Plugin-PodWeaver/
+HOMEPAGE=	https://metacpan.org/release/Dist-Zilla-Plugin-PodWeaver
 COMMENT=	Weave your Pod together from configuration and Dist::Zilla
 LICENSE=	${PERL5_LICENSE}
 
@@ -21,10 +21,10 @@ DEPENDS+=	p5-Pod-Elemental-PerlMunger-[0-9]*:../../textproc/p5-Pod-Elemental-Per
 DEPENDS+=	p5-Pod-Weaver>=4:../../textproc/p5-Pod-Weaver
 DEPENDS+=	p5-namespace-autoclean-[0-9]*:../../devel/p5-namespace-autoclean
 
-BUILD_DEPENDS+=	p5-File-Find-Rule-[0-9]*:../../devel/p5-File-Find-Rule
+BUILD_DEPENDS+=		p5-File-Find-Rule-[0-9]*:../../devel/p5-File-Find-Rule
 #BUILD_DEPENDS+=	{perl>=5.10.1,p5-Test-Simple-[0-9]*}:../../devel/p5-Test-Simple
 # for make test
-BUILD_DEPENDS+=	p5-Package-DeprecationManager-[0-9]*:../../devel/p5-Package-DeprecationManager
+BUILD_DEPENDS+=		p5-Package-DeprecationManager-[0-9]*:../../devel/p5-Package-DeprecationManager
 
 PERL5_PACKLIST=		auto/Dist/Zilla/Plugin/PodWeaver/.packlist
 

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.6 2019/04/26 13:14:21 maya Exp $
+# $NetBSD: Makefile,v 1.9 2020/09/03 15:46:06 wiz Exp $
 
 DISTNAME=	graphite-web-0.9.15
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	www
-GITHUB_PROJECT= graphite-web
+GITHUB_PROJECT=	graphite-web
 MASTER_SITES=	${MASTER_SITE_GITHUB:=graphite-project/}
 
 MAINTAINER=	riz@NetBSD.org
@@ -16,7 +16,7 @@ DEPENDS+=	${PYPKGPREFIX}-django>=1.3.1:../../www/py-django
 DEPENDS+=	${PYPKGPREFIX}-django-tagging>=0.3.1:../../www/py-django-tagging
 DEPENDS+=	${PYPKGPREFIX}-pytz-[0-9]*:../../time/py-pytz
 DEPENDS+=	${PYPKGPREFIX}-sqlite3-[0-9]*:../../databases/py-sqlite3
-DEPENDS+=	${PYPKGPREFIX}-cairo-[0-9]*:../../graphics/py-cairo
+DEPENDS+=	${PYPKGPREFIX}-cairo-[0-9]*:../../graphics/py-cairo118
 
 EGG_NAME=	${DISTNAME:S/graphite-/graphite_/}
 
@@ -28,8 +28,8 @@ BUILD_DEFS+=		VARBASE GRAPHITE_DIR
 
 REPLACE_SH+=		bin/build-index.sh
 
-OWN_DIRS_PERMS+= ${GRAPHITE_LOG_DIR} ${GRAPHITE_USER} ${GRAPHITE_GROUP} 0755
-OWN_DIRS_PERMS+= ${GRAPHITE_LOG_DIR}/webapp ${WWW_USER} ${GRAPHITE_GROUP} 0775
+OWN_DIRS_PERMS+=	${GRAPHITE_LOG_DIR} ${GRAPHITE_USER} ${GRAPHITE_GROUP} 0755
+OWN_DIRS_PERMS+=	${GRAPHITE_LOG_DIR}/webapp ${WWW_USER} ${GRAPHITE_GROUP} 0775
 
 SUBST_CLASSES+=		dirs
 SUBST_STAGE.dirs=	pre-configure
@@ -59,9 +59,9 @@ CONF_FILES+=		${GRAPHITE_EGDIR}/${file}.example	\
 			${PKG_SYSCONFDIR}/${file}
 .endfor
 
-PYSETUPINSTALLARGS=	--prefix=${PREFIX}			\
+PYSETUPINSTALLARGS=		--prefix=${PREFIX}			\
 			--install-lib=${PREFIX}/${PYSITELIB}
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-django-tagging
+PYTHON_VERSIONS_ACCEPTED=	27 # py-django-tagging
 
 INSTALLATION_DIRS+=	share/examples/graphite
 

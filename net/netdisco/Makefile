@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.44 2019/05/23 19:23:10 rillig Exp $
+# $NetBSD: Makefile,v 1.48 2020/08/31 18:10:37 wiz Exp $
 
-DISTNAME=		netdisco-${PKGVERSION}_with_mibs
-PKGNAME=		netdisco-${PKGVERSION}
-PKGVERSION=		1.3.3
-PKGREVISION=		3
+DISTNAME=		netdisco-1.3.3_with_mibs
+PKGNAME=		${DISTNAME:S/_with_mibs//}
+PKGREVISION=		5
 CATEGORIES=		net
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=netdisco/}
 SITES.oui.txt=		http://standards.ieee.org/regauth/oui/
@@ -71,7 +70,6 @@ SUBST_FILES.installdir+=	doc/README.pod
 SUBST_FILES.installdir+=	doc/UPGRADE.pod
 SUBST_FILES.installdir+=	INSTALL README UPGRADE
 SUBST_FILES.installdir+=	html/admin_reconfig.html
-SUBST_FILES.installdir+=	netdisco.crontab
 SUBST_FILES.installdir+=	mibs/snmp.conf
 SUBST_SED.installdir=		-e "s|/usr/local/netdisco|${PREFIX}/netdisco|g"
 SUBST_MESSAGE.installdir=	Fixing hardcoded install directory path.
@@ -127,7 +125,7 @@ SUBST_FILES.apachevers=		html/admin_user.html html/change_pw.html html/login.htm
 SUBST_FILES.apachevers+=	html/logout.html html/portcontrol.html
 SUBST_FILES.apachevers+=	html/public_debugging.html
 SUBST_SED.apachevers=		-e "s|connection->remote_ip|connection->client_ip|g"
-SUBST_MESSAGE.apachevers= 	Fixing perl files for apache > 2.2.
+SUBST_MESSAGE.apachevers=	Fixing perl files for apache > 2.2.
 
 do-build:
 	${RM} -f ${WRKSRC:Q}/html/doc/ChangeLog.txt

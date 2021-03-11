@@ -1,5 +1,5 @@
 #!@SH@
-# $NetBSD: pre-build,v 1.14 2015/09/12 23:04:30 joerg Exp $
+# $NetBSD: pre-build,v 1.16 2021/01/02 21:54:46 riastradh Exp $
 #
 # Copyright (c) 2007 Joerg Sonnenberger <joerg@NetBSD.org>.
 # All rights reserved.
@@ -84,7 +84,22 @@ fi
 
 mkdir -p "${bulklog}" "${loc}"
 
-@PREFIX@/libexec/pbulk/client-clean
+case "${master_mode}" in
+[nN][oO])
+	# Make sure the prefix is clean before we scan so any
+	# preinstalled packages don't affect the scanning process.
+	@PREFIX@/libexec/pbulk/client-clean
+	;;
+[yY][eE][sS])
+	# Scanning happens in a worker so we don't need to clean the
+	# prefix here; this way you can run pbulk on a system that has
+	# packages installed without disrupting those packages.
+	;;
+*)
+	echo "master_mode must be either yes or no."
+	exit 1
+	;;
+esac
 
 # Log common settings...
 opsys=`cd ${pkgsrc}/pkgtools/pkg_install && ${make} show-var VARNAME=OPSYS`
@@ -114,6 +129,7 @@ compiler=`cd ${pkgsrc}/pkgtools/pkg_install && ${make} show-var VARNAME=PKGSRC_C
 echo "PLATFORM=${opsys} ${opver}/${platform}" > ${loc}/status
 echo "COMPILER=${compiler}" >> ${loc}/status
 
-date '+%Y-%m-%d %H:%M|%Y%m%d.%H%M' | sed 's/^\(.*\)|\(.*\)$/BUILD_START_ISO=\1\
-BUILD_START_DIR=\2/' >> ${loc}/status
+date '+BUILD_START_ISO=%Y-%m-%d %H:%M
+BUILD_START_DIR=%Y%m%d.%H%M
+BUILD_START_EPOCHE=%s' >> ${loc}/status
 echo "BASE_URL=${base_url}" >> ${loc}/status

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.16 2019/04/25 07:33:11 maya Exp $
+# $NetBSD: Makefile,v 1.23 2020/08/24 04:41:40 gutteridge Exp $
 
-PKGREVISION= 1
+PKGREVISION= 2
 .include "../../meta-pkgs/mate/Makefile.common"
 
-DISTNAME=	mate-user-share-${VERSION}
+DISTNAME=	mate-user-share-${VERSION:R}.0
 CATEGORIES=	net
 
-COMMENT=	MATE user-leve file shareing
+COMMENT=	MATE user-level file sharing
 
 DEPENDS+=	${APACHE_PKG_PREFIX}-dnssd>=0.6:../../www/ap22-dnssd
 TOOL_DEPENDS+=	itstool-[0-9]*:../../textproc/itstool

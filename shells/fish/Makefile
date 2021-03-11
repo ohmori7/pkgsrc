@@ -1,29 +1,22 @@
-# $NetBSD: Makefile,v 1.20 2019/04/25 07:33:17 maya Exp $
+# $NetBSD: Makefile,v 1.28 2021/03/05 08:47:29 nia Exp $
 
-DISTNAME=		fish-3.0.0
-PKGREVISION=		2
+DISTNAME=		fish-3.2.0
 CATEGORIES=		shells
 MASTER_SITES=		${MASTER_SITE_GITHUB:=fish-shell/}
 GITHUB_PROJECT=		fish-shell
+GITHUB_RELEASE=		${PKGVERSION_NOREV}
+EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.fishshell.com/
 COMMENT=		User friendly command line shell for UNIX-like operating systems
 LICENSE=		gnu-gpl-v2
 
-EXTRACT_USING=		gtar
-
-WRKSRC=			${WRKDIR}/fish-shell-${PKGVERSION_NOREV}
-
-USE_LANGUAGES+=		c c++03
-USE_LIBTOOL=		yes
-GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
-CONFIGURE_ARGS+=	--without-xsel
-USE_TOOLS+=		gmake autoreconf autoconf automake
-
-EGDIR=			${PREFIX}/share/examples
-INSTALL_ENV+=		EGDIR=${EGDIR}
+USE_LANGUAGES+=		c c++
+USE_CMAKE=		yes
+USE_TOOLS+=		msgfmt
+CMAKE_ARGS+=		-DIntl_INCLUDE_DIR=${PREFIX}/include
+CMAKE_ARGS+=		-DCMAKE_INSTALL_SYSCONFDIR=${PKG_SYSCONFDIR}
 
 PKG_SHELL=		bin/fish
 
@@ -41,20 +34,25 @@ CXXFLAGS.NetBSD+=	-fpermissive
 LDFLAGS+=		-lexecinfo
 .endif
 
-# Upstream intentionally omits open.1 on Darwin
-PLIST_VARS+=	open
-.if ${OPSYS} != "Darwin"
+# Upstream intentionally omits open.1 on Darwin, but adds realpath.1
+PLIST_VARS+=	open realpath
+.if ${OPSYS} == "Darwin"
+PLIST.realpath=	yes
+.else
 PLIST.open=	yes
 .endif
 
-pre-configure:
-	${RUN} cd ${WRKSRC} && autoreconf -fiv
-
-.include "options.mk"
+EGDIR=		${PREFIX}/share/examples/fish
+CONF_FILES=	${EGDIR}/config.fish ${PKG_SYSCONFDIR}/fish/config.fish
+OWN_DIRS+=	${PKG_SYSCONFDIR}/fish/functions
+OWN_DIRS+=	${PKG_SYSCONFDIR}/fish/conf.d
+OWN_DIRS+=	${PKG_SYSCONFDIR}/fish/completions
 
 .include "../../devel/pcre2/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/gettext-tools/buildlink3.mk"
 .include "../../lang/python/application.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../mk/atomic64.mk"
 .include "../../mk/curses.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

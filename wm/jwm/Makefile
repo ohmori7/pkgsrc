@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.39 2018/12/31 22:15:16 tsutsui Exp $
+# $NetBSD: Makefile,v 1.47 2020/11/05 09:09:17 ryoon Exp $
 
 DISTNAME=		jwm-2.3.7
-PKGREVISION=		5
+PKGREVISION=		11
 CATEGORIES=		wm x11
 MASTER_SITES=		http://www.joewing.net/programs/jwm/releases/
 EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		tsutsui@NetBSD.org
-HOMEPAGE=		http://joewing.net/projects/jwm/
+HOMEPAGE=		https://joewing.net/projects/jwm/
 COMMENT=		Lightweight window manager with virtual desktops
 LICENSE=		mit
 
@@ -37,7 +37,7 @@ SUBST_SED.icondir+=	-e 's|/usr/local/share|${PREFIX}/share|g'
 
 PKG_SYSCONFSUBDIR=	jwm
 EGDIR=			${PREFIX}/share/examples/jwm
-CONF_FILES=	${EGDIR}/system.jwmrc ${PKG_SYSCONFDIR}/system.jwmrc
+CONF_FILES=		${EGDIR}/system.jwmrc ${PKG_SYSCONFDIR}/system.jwmrc
 
 INSTALLATION_DIRS=	bin
 

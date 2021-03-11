@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.7 2018/08/22 09:44:19 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2020/08/31 18:08:25 wiz Exp $
 
 DISTNAME=		Module-Runtime-Conflicts-0.003
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		2
+PKGREVISION=		4
 CATEGORIES=		devel perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Module/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Module-Runtime-Conflicts/
+HOMEPAGE=		https://metacpan.org/release/Module-Runtime-Conflicts
 COMMENT=		Provide information on conflicts for Module::Runtime
 LICENSE=		${PERL5_LICENSE}
 

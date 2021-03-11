@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:44:17 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:08:22 wiz Exp $
 
 DISTNAME=		Module-FromPerlVer-0.030000
-PKGNAME=        	p5-${DISTNAME}
-PKGREVISION=        	1
+PKGNAME=		p5-${DISTNAME}
+PKGREVISION=		3
 CATEGORIES=		devel perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Module/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Module-FromPerlVer/
+HOMEPAGE=		https://metacpan.org/release/Module-FromPerlVer
 COMMENT=		Install modules compatible with the running perl
 LICENSE=		${PERL5_LICENSE}
 

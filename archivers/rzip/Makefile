@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.12 2016/01/23 05:47:38 zafer Exp $
+# $NetBSD: Makefile,v 1.14 2020/01/26 17:30:41 rillig Exp $
 
 DISTNAME=	rzip-2.1
 CATEGORIES=	archivers
 MASTER_SITES=	https://rzip.samba.org/ftp/rzip/
 
 MAINTAINER=	carton@Ivy.NET
-HOMEPAGE=	http://rzip.samba.org/
+HOMEPAGE=	https://rzip.samba.org/
 COMMENT=	Create or extract .rz files, like gzip but smaller
 
-GNU_CONFIGURE=	yes
+GNU_CONFIGURE=		yes
 INSTALL_MAKE_FLAGS+=	INSTALL_BIN=${DESTDIR}${PREFIX}/bin \
 			INSTALL_MAN=${DESTDIR}${PREFIX}/${PKGMANDIR}
 

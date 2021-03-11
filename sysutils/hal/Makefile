@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.83 2019/05/01 19:51:45 maya Exp $
+# $NetBSD: Makefile,v 1.96 2021/01/17 08:14:12 wiz Exp $
 
 DISTNAME=		hal-0.5.14
-PKGREVISION=		21
+PKGREVISION=		26
 CATEGORIES=		sysutils
 MASTER_SITES=		http://hal.freedesktop.org/releases/
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://hal.freedesktop.org/
+HOMEPAGE=		https://www.freedesktop.org/wiki/Software/hal/
 COMMENT=		FreeDesktop hardware abstraction layer
 LICENSE=		gnu-gpl-v2
 
@@ -25,11 +25,17 @@ MAKE_DIRS+=		/media
 MAKE_DIRS+=		${VARBASE}/cache/hald
 SPECIAL_PERMS+=		${VARBASE}/cache/hald ${HAL_USER} ${HAL_GROUP} 0644
 
+# devinfo_mass.c: In function 'devinfo_mass_disklabel_add':
+# devinfo_mass.c:340:28: error: array subscript has type 'char'
+#   part = &label.d_partitions[unit];
+# Maybe fix this later.
+BUILDLINK_TRANSFORM+=	rm:-Werror=char-subscripts
+
 EGDIR=			${PREFIX}/share/examples/hal
 
 CONF_FILES=		${EGDIR}/hal.conf ${PKG_SYSCONFBASE}/dbus-1/system.d/hal.conf
 
-CONFIGURE_ARGS+=        --sysconfdir=${PKG_SYSCONFBASE}
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFBASE}
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
 CONFIGURE_ARGS+=	--with-pci-ids=${PREFIX}/share/pciids
 CONFIGURE_ARGS+=	--with-usb-ids=${PREFIX}/share/usbids
@@ -49,7 +55,7 @@ CONFIGURE_ARGS+=	--with-eject=/usr/sbin/cdcontrol
 CONFIGURE_ARGS+=	--with-backend=freebsd
 PLIST_SRC=		PLIST.FreeBSD PLIST
 
-.elif !empty(MACHINE_PLATFORM:MNetBSD-[5-9]*)
+.elif ${OPSYS} == "NetBSD"
 .include "../../devel/libvolume_id/buildlink3.mk"
 CONFIGURE_ARGS+=	--with-backend=netbsd
 HAL_GROUP=		operator
@@ -68,12 +74,12 @@ MAKE_DIRS+=		/etc/udev/rules.d
 CONF_FILES+=		${EGDIR}/90-hal.rules \
 			/etc/udev/rules.d/90-hal.rules
 PLIST_VARS+=	imac
-.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
+.  if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "x86_64"
 PLIST.imac=	yes
 CONFIGURE_ARGS+=	--with-imac
-.else
+.  else
 CONFIGURE_ARGS+=	--without-imac
-.endif
+.  endif
 .else	# Unsupported systems
 # Pull in the dummy backend
 .include "../../devel/libvolume_id/buildlink3.mk"
@@ -122,7 +128,6 @@ post-extract:
 pre-configure:
 	cd ${WRKSRC} && autoreconf -vi ${AUTORECONF_ARGS}
 
-.include "../../devel/GConf/schemas.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../misc/usbids/buildlink3.mk"
 .include "../../security/policykit/buildlink3.mk"

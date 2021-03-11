@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2021/02/20 10:21:56 markd Exp $
+
+SHA1 (latex-base-dev.doc.r57365.tar.xz) = e1b2220eba4333d12fec0e7778a9bb7c0d9083cf
+RMD160 (latex-base-dev.doc.r57365.tar.xz) = d613eef0eb0cb17c2b57b126a607f2940651b472
+SHA512 (latex-base-dev.doc.r57365.tar.xz) = cd6c5dfb2a06c6aff4c52235387fdb8a29d03a307c0083f97081b0e20887fcbe051e239ccf87659145c04705f10149b07d444c974331ccb92eea3245a7920005
+Size (latex-base-dev.doc.r57365.tar.xz) = 23325160 bytes

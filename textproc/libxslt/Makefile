@@ -1,6 +1,8 @@
-# $NetBSD: Makefile,v 1.108 2019/01/09 19:12:14 adam Exp $
+# $NetBSD: Makefile,v 1.114 2020/11/05 09:07:10 ryoon Exp $
 
 .include "Makefile.common"
+
+PKGREVISION=	4
 
 BUILD_DEPENDS+=	docbook-xml-[0-9]*:../../textproc/docbook-xml
 BUILD_DEPENDS+=	docbook-xsl-[0-9]*:../../textproc/docbook-xsl
@@ -16,10 +18,18 @@ PKGCONFIG_OVERRIDE=	libxslt.pc.in
 PKGCONFIG_OVERRIDE+=	libexslt.pc.in
 TEST_TARGET=		check
 
+# fix PR 55123 - leading whitespace breaks manpage
+SUBST_CLASSES+=		man
+SUBST_FILES.man=	doc/xsltproc.1
+SUBST_STAGE.man=	post-build
+SUBST_MESSAGE.man=	Clean up manpages.
+SUBST_SED.man+=		-e 's,^[	 ]*,,'
+SUBST_SED.man+=		-e '/^$$/d'
+
 BUILDLINK_TRANSFORM.SunOS+=	opt:-Wl,./libxslt.syms:-Wl,./libxslt_solaris.syms
 
 .include "../../mk/bsd.prefs.mk"
-.if !empty(MACHINE_PLATFORM:MIRIX-5*)
+.if !empty(MACHINE_PLATFORM:MIRIX-5.*)
 CPPFLAGS+=	-Dsocklen_t=int
 .endif
 

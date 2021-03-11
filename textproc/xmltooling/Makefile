@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.32 2019/01/24 16:46:21 perseant Exp $
+# $NetBSD: Makefile,v 1.42 2021/01/01 08:24:58 ryoon Exp $
 
-DISTNAME=	xmltooling-1.5.6
-PKGREVISION=	8
+DISTNAME=	xmltooling-3.1.0
+PKGREVISION=	
+PKGREVISION=	1
 CATEGORIES=	textproc
-MASTER_SITES=	http://www.shibboleth.net/downloads/c++-opensaml/2.5.5/
+MASTER_SITES=	http://shibboleth.net/downloads/c++-opensaml/3.1.0/
 
 MAINTAINER=	pettai@NetBSD.org
 HOMEPAGE=	http://shibboleth.net/
@@ -14,6 +15,7 @@ USE_LANGUAGES=		c c++11
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-doxygen-doc
+USE_TOOLS+=		pkg-config
 
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../devel/log4shib/buildlink3.mk"
@@ -21,3 +23,4 @@ CONFIGURE_ARGS+=	--disable-doxygen-doc
 .include "../../textproc/xerces-c/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"
+.include "../../mk/tools/replace.mk"

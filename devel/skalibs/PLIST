@@ -1,12 +1,15 @@
-@comment $NetBSD: PLIST,v 1.2 2018/08/26 19:35:42 schmonz Exp $
+@comment $NetBSD: PLIST,v 1.7 2021/01/11 18:11:32 schmonz Exp $
 include/skalibs/alarm.h
 include/skalibs/alloc.h
 include/skalibs/allreadwrite.h
+include/skalibs/ancil.h
 include/skalibs/avlnode.h
 include/skalibs/avltree.h
 include/skalibs/avltreen.h
+include/skalibs/bigkv.h
 include/skalibs/biguint.h
 include/skalibs/bitarray.h
+include/skalibs/bsdsnowflake.h
 include/skalibs/bufalloc.h
 include/skalibs/buffer.h
 include/skalibs/bytestr.h
@@ -25,6 +28,7 @@ include/skalibs/env.h
 include/skalibs/envalloc.h
 include/skalibs/environ.h
 include/skalibs/error.h
+include/skalibs/exec.h
 include/skalibs/fmtscan.h
 include/skalibs/functypes.h
 include/skalibs/gccattributes.h
@@ -43,6 +47,7 @@ include/skalibs/md5.h
 include/skalibs/netstring.h
 include/skalibs/nonposix.h
 include/skalibs/nsig.h
+include/skalibs/posixishard.h
 include/skalibs/posixplz.h
 include/skalibs/random.h
 include/skalibs/rc4.h
@@ -78,18 +83,12 @@ include/skalibs/unix-transactional.h
 include/skalibs/unixconnection.h
 include/skalibs/unixmessage.h
 include/skalibs/unixonacid.h
-include/skalibs/webipc.h
-${PLIST.include-shared-objects}lib/libskarnet.so
-${PLIST.include-shared-objects}lib/libskarnet.so.${PKGVERSION}
-${PLIST.include-shared-objects}lib/libskarnet.so.2.7
-${PLIST.include-shared-objects}lib/libskarnet.so.2.7.0
+lib/libskarnet.la
 lib/skalibs/libskarnet.a
 lib/skalibs/sysdeps/socket.lib
 lib/skalibs/sysdeps/spawn.lib
 lib/skalibs/sysdeps/sysclock.lib
 lib/skalibs/sysdeps/sysdeps
-lib/skalibs/sysdeps/sysdeps.h
-lib/skalibs/sysdeps/tainnow.lib
 lib/skalibs/sysdeps/target
 lib/skalibs/sysdeps/timer.lib
 lib/skalibs/sysdeps/util.lib

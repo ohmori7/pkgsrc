@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.5 2019/04/19 23:40:27 wen Exp $
+# $NetBSD: Makefile,v 1.8 2020/08/31 18:09:04 wiz Exp $
 
 DISTNAME=	Test-Needs-0.002006
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Test/}
 
 MAINTAINER=	wen@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Test-Needs/
+HOMEPAGE=	https://metacpan.org/release/Test-Needs
 COMMENT=	Skip tests when modules not available
 LICENSE=	${PERL5_LICENSE}
 

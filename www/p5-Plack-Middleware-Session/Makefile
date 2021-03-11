@@ -1,28 +1,28 @@
-# $NetBSD: Makefile,v 1.17 2018/08/22 09:47:50 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2020/08/31 18:13:07 wiz Exp $
 
-DISTNAME=	Plack-Middleware-Session-0.30
+DISTNAME=	Plack-Middleware-Session-0.33
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	1
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Plack/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Plack-Middleware-Session/
+HOMEPAGE=	https://metacpan.org/release/Plack-Middleware-Session
 COMMENT=	Plack middleware for session management
 LICENSE=	${PERL5_LICENSE}
 
 USE_LANGUAGES=	# empty
-PERL5_PACKLIST= auto/Plack/Middleware/Session/.packlist
+PERL5_PACKLIST=	auto/Plack/Middleware/Session/.packlist
 
 PERL5_MODULE_TYPE=	Module::Build::Tiny
 
-DEPENDS+=	p5-Digest-SHA1-[0-9]*:../../security/p5-Digest-SHA1
 DEPENDS+=	p5-Plack>=0.9910:../../www/p5-Plack
 DEPENDS+=	p5-Cookie-Baker>=0:../../www/p5-Cookie-Baker
 
-BUILD_DEPENDS+=	p5-Test-Fatal-[0-9]*:../../devel/p5-Test-Fatal
-BUILD_DEPENDS+=	p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
-BUILD_DEPENDS+=	p5-Test-Requires-[0-9]*:../../devel/p5-Test-Requires
+TEST_DEPENDS+=	p5-Test-Fatal-[0-9]*:../../devel/p5-Test-Fatal
+TEST_DEPENDS+=	p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
+TEST_DEPENDS+=	p5-Test-Requires-[0-9]*:../../devel/p5-Test-Requires
+TEST_DEPENDS+=	p5-DBD-SQLite-[0-9]*:../../databases/p5-DBD-SQLite
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

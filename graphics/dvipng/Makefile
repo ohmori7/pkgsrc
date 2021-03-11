@@ -1,17 +1,17 @@
-# $NetBSD: Makefile,v 1.30 2018/03/12 11:16:40 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2020/08/17 20:18:57 leot Exp $
 
 DISTNAME=	dvipng-1.15
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=dvipng/}
 MASTER_SITES+=	http://download.savannah.gnu.org/releases/dvipng/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://savannah.nongnu.org/projects/dvipng/
+HOMEPAGE=	https://savannah.nongnu.org/projects/dvipng/
 COMMENT=	Convert TeX DVI files to PNG or GIF
 LICENSE=	gnu-lgpl-v3
 
-GNU_CONFIGURE=		yes
+GNU_CONFIGURE=	yes
 CFLAGS+=	-I${BUILDLINK_PREFIX.kpathsea}/lib
 
 BUILD_TARGET=		dvipng

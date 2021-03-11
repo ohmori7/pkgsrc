@@ -1,19 +1,15 @@
-# $NetBSD: Makefile,v 1.10 2018/01/03 00:35:24 rillig Exp $
+# $NetBSD: Makefile,v 1.13 2021/01/30 08:57:02 mef Exp $
 #
 
-PKGNAME=		cal3d-${CAL3D_VERSION}
-PKGREVISION=	3
+PKGNAME=	cal3d-${CAL3D_VERSION}
 
 .include "../../graphics/cal3d/Makefile.common"
 
-COMMENT=	Skeletal based 3d character animation library in C++
 LICENSE=	gnu-lgpl-v2.1
 
 USE_TOOLS+=		automake
 
-pre-configure:
-	cd ${WRKSRC} && ./autogen.sh
-
-.include "../../graphics/Mesa/buildlink3.mk"
+#pre-configure:
+#	cd ${WRKSRC} && ./autogen.sh
 
 .include "../../mk/bsd.pkg.mk"

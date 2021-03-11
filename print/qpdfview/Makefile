@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.75 2019/05/09 13:57:50 ryoon Exp $
+# $NetBSD: Makefile,v 1.94 2020/11/21 09:34:57 wiz Exp $
 
-VER=		0.4.16
-DISTNAME=	qpdfview-${VER}
-PKGREVISION=	41
+DISTNAME=	qpdfview-0.4.18
+PKGREVISION=	12
 CATEGORIES=	print
-MASTER_SITES=	https://launchpad.net/qpdfview/trunk/${VER}/+download/
+MASTER_SITES=	https://launchpad.net/qpdfview/trunk/${PKGVERSION_NOREV}/+download/
 
 MAINTAINER=	ryoon@NetBSD.org
 HOMEPAGE=	https://launchpad.net/qpdfview
@@ -17,7 +16,7 @@ USE_LANGUAGES=	c c++
 USE_TOOLS+=	pkg-config
 USE_LIBTOOL=	yes
 
-INSTALL_MAKE_FLAGS+=    INSTALL_ROOT=${DESTDIR}
+INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR}
 
 do-configure:
 	cd ${WRKSRC} && env ${CONFIGURE_ENV} PKGMANDIR=${PKGMANDIR} \
@@ -26,7 +25,7 @@ do-configure:
 .include "../../graphics/djvulibre-lib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
-.include "../../print/cups-base/buildlink3.mk"
+.include "../../print/libcups/buildlink3.mk"
 .include "../../print/libspectre/buildlink3.mk"
 .include "../../print/poppler-qt5/buildlink3.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"

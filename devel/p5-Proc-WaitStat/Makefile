@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.11 2018/08/22 09:44:34 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2020/08/31 18:08:45 wiz Exp $
 #
 
 DISTNAME=		Proc-WaitStat-1.00
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		9
+PKGREVISION=		11
 CATEGORIES=		devel perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Proc/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Proc-WaitStat/
+HOMEPAGE=		https://metacpan.org/release/Proc-WaitStat
 COMMENT=		Perl5 extension to interpret wait status values
 LICENSE=		${PERL5_LICENSE}
 

@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.4 2018/08/22 09:46:32 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2020/10/24 22:39:47 wiz Exp $
 
 COLLECTD_PACKAGE=	notify-email
 
 COMMENT=		Statistics collection daemon - notify_email plugin
-PKGREVISION=		1
+
+.include "../../mail/libesmtp/buildlink3.mk"
+COLLECTD_LIB.esmtp=	${BUILDLINK_PREFIX.libesmtp}
 
 .include "../../sysutils/collectd/Makefile.common"
 
-CONFIGURE_ARGS+=	--with-libesmtp=${BUILDLINK_PREFIX.libesmtp}
-
-.include "../../mail/libesmtp/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

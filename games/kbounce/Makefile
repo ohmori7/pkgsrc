@@ -1,17 +1,21 @@
-# $NetBSD: Makefile,v 1.28 2018/12/13 19:51:53 adam Exp $
+# $NetBSD: Makefile,v 1.44 2021/02/07 06:30:22 ryoon Exp $
 
-DISTNAME=	kbounce-${_KDE_VERSION}
-PKGREVISION=	12
+DISTNAME=	kbounce-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	games
-COMMENT=	single player arcade game with the elements of puzzle
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+HOMEPAGE=	https://kde.org/applications/games/kbounce/
+COMMENT=	Single player arcade game with the elements of puzzle
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+.include "../../meta-pkgs/kde/applications.mk"
+
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
+
+USE_TOOLS+=	msgmerge
 
 .include "../../games/libkdegames/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

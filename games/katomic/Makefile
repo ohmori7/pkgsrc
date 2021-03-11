@@ -1,19 +1,33 @@
-# $NetBSD: Makefile,v 1.28 2018/12/13 19:51:53 adam Exp $
+# $NetBSD: Makefile,v 1.45 2021/02/07 06:30:22 ryoon Exp $
 
-DISTNAME=	katomic-${_KDE_VERSION}
-PKGREVISION=	12
+DISTNAME=	katomic-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	games
-COMMENT=	Build complex atoms with a minimal amount of moves
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+HOMEPAGE=	https://kde.org/applications/games/katomic/
+COMMENT=	Build complex atoms with a minimal amount of moves
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
+
+.include "../../meta-pkgs/kde/applications.mk"
+
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
+
+USE_TOOLS+=	msgmerge
 
 REPLACE_PERL+=	katomic-levelset-upd.pl
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+SUBST_CLASSES+=		xdg
+SUBST_STAGE.xdg=	pre-configure
+SUBST_MESSAGE.xdg=	Install via examples dir.
+SUBST_FILES.xdg=	CMakeLists.txt
+SUBST_SED.xdg=		-e 's:{KDE_INSTALL_CONFDIR}:{KDE_INSTALL_XDG_EX_DIR}:'
+
+MAKE_DIRS+=	${PKG_SYSCONFDIR}/xdg
+CONF_FILES+=	${PREFIX}/share/examples/kde-xdg/katomic.knsrc \
+		${PKG_SYSCONFDIR}/xdg/katomic.knsrc
 
 .include "../../games/libkdegames/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

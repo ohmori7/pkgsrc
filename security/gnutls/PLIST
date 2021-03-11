@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.63 2019/03/20 06:27:11 adam Exp $
+@comment $NetBSD: PLIST,v 1.72 2020/12/03 12:27:38 nia Exp $
 bin/certtool
 bin/gnutls-cli
 bin/gnutls-cli-debug
@@ -67,15 +67,18 @@ man/man3/dane_verify_crt.3
 man/man3/dane_verify_crt_raw.3
 man/man3/dane_verify_session_crt.3
 man/man3/gnutls_aead_cipher_decrypt.3
+man/man3/gnutls_aead_cipher_decryptv2.3
 man/man3/gnutls_aead_cipher_deinit.3
 man/man3/gnutls_aead_cipher_encrypt.3
 man/man3/gnutls_aead_cipher_encryptv.3
+man/man3/gnutls_aead_cipher_encryptv2.3
 man/man3/gnutls_aead_cipher_init.3
 man/man3/gnutls_alert_get.3
 man/man3/gnutls_alert_get_name.3
 man/man3/gnutls_alert_get_strname.3
 man/man3/gnutls_alert_send.3
 man/man3/gnutls_alert_send_appropriate.3
+man/man3/gnutls_alert_set_read_function.3
 man/man3/gnutls_alpn_get_selected_protocol.3
 man/man3/gnutls_alpn_set_protocols.3
 man/man3/gnutls_anon_allocate_client_credentials.3
@@ -160,6 +163,8 @@ man/man3/gnutls_certificate_type_get2.3
 man/man3/gnutls_certificate_type_get_id.3
 man/man3/gnutls_certificate_type_get_name.3
 man/man3/gnutls_certificate_type_list.3
+man/man3/gnutls_certificate_verification_profile_get_id.3
+man/man3/gnutls_certificate_verification_profile_get_name.3
 man/man3/gnutls_certificate_verification_status_print.3
 man/man3/gnutls_certificate_verify_peers.3
 man/man3/gnutls_certificate_verify_peers2.3
@@ -225,6 +230,7 @@ man/man3/gnutls_dh_params_import_dsa.3
 man/man3/gnutls_dh_params_import_pkcs3.3
 man/man3/gnutls_dh_params_import_raw.3
 man/man3/gnutls_dh_params_import_raw2.3
+man/man3/gnutls_dh_params_import_raw3.3
 man/man3/gnutls_dh_params_init.3
 man/man3/gnutls_dh_set_prime_bits.3
 man/man3/gnutls_digest_get_id.3
@@ -256,12 +262,14 @@ man/man3/gnutls_est_record_overhead_size.3
 man/man3/gnutls_ext_get_current_msg.3
 man/man3/gnutls_ext_get_data.3
 man/man3/gnutls_ext_get_name.3
+man/man3/gnutls_ext_get_name2.3
 man/man3/gnutls_ext_raw_parse.3
 man/man3/gnutls_ext_register.3
 man/man3/gnutls_ext_set_data.3
 man/man3/gnutls_fingerprint.3
 man/man3/gnutls_fips140_mode_enabled.3
 man/man3/gnutls_fips140_set_mode.3
+man/man3/gnutls_get_system_config_file.3
 man/man3/gnutls_global_deinit.3
 man/man3/gnutls_global_init.3
 man/man3/gnutls_global_set_audit_log_function.3
@@ -285,8 +293,12 @@ man/man3/gnutls_handshake_set_max_packet_length.3
 man/man3/gnutls_handshake_set_post_client_hello_function.3
 man/man3/gnutls_handshake_set_private_extensions.3
 man/man3/gnutls_handshake_set_random.3
+man/man3/gnutls_handshake_set_read_function.3
+man/man3/gnutls_handshake_set_secret_function.3
 man/man3/gnutls_handshake_set_timeout.3
+man/man3/gnutls_handshake_write.3
 man/man3/gnutls_hash.3
+man/man3/gnutls_hash_copy.3
 man/man3/gnutls_hash_deinit.3
 man/man3/gnutls_hash_fast.3
 man/man3/gnutls_hash_get_len.3
@@ -303,9 +315,13 @@ man/man3/gnutls_hex_decode.3
 man/man3/gnutls_hex_decode2.3
 man/man3/gnutls_hex_encode.3
 man/man3/gnutls_hex_encode2.3
+man/man3/gnutls_hkdf_expand.3
+man/man3/gnutls_hkdf_extract.3
 man/man3/gnutls_hmac.3
+man/man3/gnutls_hmac_copy.3
 man/man3/gnutls_hmac_deinit.3
 man/man3/gnutls_hmac_fast.3
+man/man3/gnutls_hmac_get_key_size.3
 man/man3/gnutls_hmac_get_len.3
 man/man3/gnutls_hmac_init.3
 man/man3/gnutls_hmac_output.3
@@ -379,6 +395,7 @@ man/man3/gnutls_openpgp_privkey_sign_hash.3
 man/man3/gnutls_openpgp_send_cert.3
 man/man3/gnutls_packet_deinit.3
 man/man3/gnutls_packet_get.3
+man/man3/gnutls_pbkdf2.3
 man/man3/gnutls_pcert_deinit.3
 man/man3/gnutls_pcert_export_openpgp.3
 man/man3/gnutls_pcert_export_x509.3
@@ -511,6 +528,7 @@ man/man3/gnutls_pkcs7_get_signature_info.3
 man/man3/gnutls_pkcs7_import.3
 man/man3/gnutls_pkcs7_init.3
 man/man3/gnutls_pkcs7_print.3
+man/man3/gnutls_pkcs7_print_signature_info.3
 man/man3/gnutls_pkcs7_set_crl.3
 man/man3/gnutls_pkcs7_set_crl_raw.3
 man/man3/gnutls_pkcs7_set_crt.3
@@ -523,6 +541,8 @@ man/man3/gnutls_pkcs8_info.3
 man/man3/gnutls_pkcs_schema_get_name.3
 man/man3/gnutls_pkcs_schema_get_oid.3
 man/man3/gnutls_prf.3
+man/man3/gnutls_prf_early.3
+man/man3/gnutls_prf_hash_get.3
 man/man3/gnutls_prf_raw.3
 man/man3/gnutls_prf_rfc5705.3
 man/man3/gnutls_priority_certificate_type_list.3
@@ -599,11 +619,15 @@ man/man3/gnutls_psk_client_get_hint.3
 man/man3/gnutls_psk_free_client_credentials.3
 man/man3/gnutls_psk_free_server_credentials.3
 man/man3/gnutls_psk_server_get_username.3
+man/man3/gnutls_psk_server_get_username2.3
 man/man3/gnutls_psk_set_client_credentials.3
+man/man3/gnutls_psk_set_client_credentials2.3
 man/man3/gnutls_psk_set_client_credentials_function.3
+man/man3/gnutls_psk_set_client_credentials_function2.3
 man/man3/gnutls_psk_set_params_function.3
 man/man3/gnutls_psk_set_server_credentials_file.3
 man/man3/gnutls_psk_set_server_credentials_function.3
+man/man3/gnutls_psk_set_server_credentials_function2.3
 man/man3/gnutls_psk_set_server_credentials_hint.3
 man/man3/gnutls_psk_set_server_dh_params.3
 man/man3/gnutls_psk_set_server_known_dh_params.3
@@ -674,6 +698,7 @@ man/man3/gnutls_record_send2.3
 man/man3/gnutls_record_send_early_data.3
 man/man3/gnutls_record_send_range.3
 man/man3/gnutls_record_set_max_early_data_size.3
+man/man3/gnutls_record_set_max_recv_size.3
 man/man3/gnutls_record_set_max_size.3
 man/man3/gnutls_record_set_state.3
 man/man3/gnutls_record_set_timeout.3
@@ -700,6 +725,7 @@ man/man3/gnutls_session_get_desc.3
 man/man3/gnutls_session_get_flags.3
 man/man3/gnutls_session_get_id.3
 man/man3/gnutls_session_get_id2.3
+man/man3/gnutls_session_get_keylog_function.3
 man/man3/gnutls_session_get_master_secret.3
 man/man3/gnutls_session_get_ptr.3
 man/man3/gnutls_session_get_random.3
@@ -709,11 +735,13 @@ man/man3/gnutls_session_key_update.3
 man/man3/gnutls_session_resumption_requested.3
 man/man3/gnutls_session_set_data.3
 man/man3/gnutls_session_set_id.3
+man/man3/gnutls_session_set_keylog_function.3
 man/man3/gnutls_session_set_premaster.3
 man/man3/gnutls_session_set_ptr.3
 man/man3/gnutls_session_set_verify_cert.3
 man/man3/gnutls_session_set_verify_cert2.3
 man/man3/gnutls_session_set_verify_function.3
+man/man3/gnutls_session_set_verify_output_function.3
 man/man3/gnutls_session_supplemental_register.3
 man/man3/gnutls_session_ticket_enable_client.3
 man/man3/gnutls_session_ticket_enable_server.3
@@ -1164,12 +1192,15 @@ man/man3/gnutls_x509_trust_list_deinit.3
 man/man3/gnutls_x509_trust_list_get_issuer.3
 man/man3/gnutls_x509_trust_list_get_issuer_by_dn.3
 man/man3/gnutls_x509_trust_list_get_issuer_by_subject_key_id.3
+man/man3/gnutls_x509_trust_list_get_ptr.3
 man/man3/gnutls_x509_trust_list_init.3
 man/man3/gnutls_x509_trust_list_iter_deinit.3
 man/man3/gnutls_x509_trust_list_iter_get_ca.3
 man/man3/gnutls_x509_trust_list_remove_cas.3
 man/man3/gnutls_x509_trust_list_remove_trust_file.3
 man/man3/gnutls_x509_trust_list_remove_trust_mem.3
+man/man3/gnutls_x509_trust_list_set_getissuer_function.3
+man/man3/gnutls_x509_trust_list_set_ptr.3
 man/man3/gnutls_x509_trust_list_verify_crt.3
 man/man3/gnutls_x509_trust_list_verify_crt2.3
 man/man3/gnutls_x509_trust_list_verify_named_crt.3

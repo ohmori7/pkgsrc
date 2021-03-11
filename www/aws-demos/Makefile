@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.23 2019/05/23 19:23:19 rillig Exp $
+# $NetBSD: Makefile,v 1.28 2020/05/22 10:56:44 adam Exp $
 
 DISTNAME=	aws-${AWS_VERSION}
 PKGNAME=	aws-demos-${AWS_VERSION}
-PKGREVISION=	9
+PKGREVISION=	13
 CATEGORIES=	www
 MASTER_SITES=	http://downloads.dragonlace.net/src/
 EXTRACT_SUFX=	.tar.bz2
@@ -31,7 +31,7 @@ MY_CONF_ENV+=		PATH=${PREFIX}/gcc5-aux/bin:${PATH}
 CONFIGURE_ARGS+=	LPATH=${BUILDLINK_PREFIX.openssl}/lib
 CONFIGURE_ARGS+=	ZPATH=${BUILDLINK_PREFIX.zlib}/lib
 
-SUBST_CLASSES+= 	lpath
+SUBST_CLASSES+=		lpath
 SUBST_STAGE.lpath=	pre-configure
 SUBST_MESSAGE.lpath=	Add library path for ldap
 SUBST_FILES.lpath=	demos/test_ldap/test_ldap.gpr

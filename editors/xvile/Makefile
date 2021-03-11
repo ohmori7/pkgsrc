@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.73 2019/02/15 19:50:52 wiz Exp $
+# $NetBSD: Makefile,v 1.77 2020/08/31 18:09:27 wiz Exp $
 
-DISTNAME=		vile-9.8t
+DISTNAME=		vile-9.8u
 PKGNAME=		x${DISTNAME}
+PKGREVISION=		1
 CATEGORIES=		editors
 MASTER_SITES=		ftp://ftp.invisible-island.net/vile/current/
 EXTRACT_SUFX=		.tgz
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://invisible-island.net/vile/
+HOMEPAGE=		https://invisible-island.net/vile/
 COMMENT=		VI Like Emacs, X11 version -- a fully "X aware" vi work-alike
 LICENSE=		gnu-gpl-v2
 
@@ -45,6 +46,7 @@ CONFIGURE_ARGS+=	--with-xpm
 post-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/perl/vileget 			\
 		${DESTDIR}${PREFIX}/bin/xvileget
+	${RM} -f ${DESTDIR}${PREFIX}/bin/vileget
 	${INSTALL_DATA_DIR} ${DESTDIR}${EGDIR}
 	set -e;								\
 	for f in filters/spell.rc filters/filters.rc			\

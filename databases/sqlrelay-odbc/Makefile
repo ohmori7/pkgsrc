@@ -1,22 +1,22 @@
-# $NetBSD: Makefile,v 1.17 2018/12/13 19:51:46 adam Exp $
+# $NetBSD: Makefile,v 1.29 2021/02/16 13:12:40 adam Exp $
 
-PKGNAME=		${DISTNAME:S/sqlrelay/sqlrelay-odbc/}
-PKGREVISION=		6
-COMMENT=		ODBC support for SQL Relay
+PKGNAME=	${DISTNAME:S/sqlrelay/sqlrelay-odbc/}
+COMMENT=	ODBC support for SQL Relay
 
 .include "../../databases/sqlrelay/Makefile.common"
 
-LICENSE=		gnu-lgpl-v2
+LICENSE=	gnu-lgpl-v2
 
 CONFIGURE_ARGS+=	--with-odbc-prefix=${BUILDLINK_PREFIX.unixodbc}
-CONFIGURE_ARGS+=        --disable-postgresql
-CONFIGURE_ARGS+=        --disable-sqlite
-CONFIGURE_ARGS+=        --disable-freetds
-CONFIGURE_ARGS+=        --disable-mysql
+CONFIGURE_ARGS+=	--disable-freetds
+CONFIGURE_ARGS+=	--disable-mysql
+CONFIGURE_ARGS+=	--disable-perl
+CONFIGURE_ARGS+=	--disable-postgresql
+CONFIGURE_ARGS+=	--disable-sqlite
 
-BUILD_DIRS=             src/connections
+BUILD_DIRS=		src/connections
 
-INSTALLATION_DIRS+=     libexec/sqlrelay
+INSTALLATION_DIRS+=	libexec/sqlrelay
 
 do-install:
 	${LIBTOOL} --mode=install ${INSTALL_LIB} \

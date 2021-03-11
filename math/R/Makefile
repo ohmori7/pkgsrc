@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.197 2019/06/14 10:37:04 jperkin Exp $
+# $NetBSD: Makefile,v 1.220 2021/01/09 02:14:06 mef Exp $
 
-DISTNAME=	R-3.6.0
+DISTNAME=	R-4.0.3
+PKGREVISION=	1
 CATEGORIES=	math
-MASTER_SITES=	${MASTER_SITE_R_CRAN:=base/R-3/}
+MASTER_SITES=	${MASTER_SITE_R_CRAN:=base/R-4/}
 
-MAINTAINER=	markd@NetBSD.org
-HOMEPAGE=	http://www.R-project.org/
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://www.R-project.org/
 COMMENT=	Statistical language for data analysis and graphics
 LICENSE=	gnu-gpl-v2
 
@@ -24,17 +25,13 @@ INFO_FILES=		yes
 PTHREAD_AUTO_VARS=	yes
 
 GNU_CONFIGURE=		yes
+GNU_CONFIGURE_ICONV=	no
 CONFIGURE_ARGS+=	--enable-R-shlib
 CONFIGURE_ARGS+=	--with-readline
 CONFIGURE_ARGS+=	--with-lapack
 CONFIGURE_ARGS+=	--with-tcltk
 CONFIGURE_ARGS+=	--with-tcl-config=${BUILDLINK_PREFIX.tcl}/lib/tclConfig.sh
 CONFIGURE_ARGS+=	--with-tk-config=${BUILDLINK_PREFIX.tk}/lib/tkConfig.sh
-CONFIGURE_ARGS+=	--without-gnome		# not yet stable
-CONFIGURE_ARGS+=	--with-system-zlib
-CONFIGURE_ARGS+=	--with-system-bzlib
-CONFIGURE_ARGS+=	--with-system-pcre
-CONFIGURE_ARGS+=	--with-system-xz
 
 .include "../../mk/bsd.prefs.mk"
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD"
@@ -62,12 +59,8 @@ PLIST.x11=		yes
 .if exists(/System/Library/Frameworks/Accelerate.framework)
 CONFIGURE_ARGS+=	--with-blas="-framework Accelerate"
 .else
-CONFIGURE_ARGS+=	--without-atlas
 CONFIGURE_ARGS+=	--disable-BLAS-shlib
 CONFIGURE_ARGS+=	--with-blas
-CONFIGURE_ARGS+=	--without-blas_risc
-CONFIGURE_ARGS+=	--without-dxml
-CONFIGURE_ARGS+=	--without-libmoto
 .endif
 
 # Work around missing MAIN__() definition used in -lF77 by AC_CHECK_LIB.
@@ -127,8 +120,7 @@ INSTALL_SCRIPT=		${INSTALL} ${COPY} -m ${BINMODE}
 #BUILD_DEPENDS+=		tex-fontname-[0-9]*:../../fonts/tex-fontname
 #BUILD_DEPENDS+=		tex-graphics-[0-9]*:../../print/tex-graphics
 #BUILD_DEPENDS+=		tex-hyperref-[0-9]*:../../print/tex-hyperref
-#BUILD_DEPENDS+=		tex-ifluatex-[0-9]*:../../print/tex-ifluatex
-#BUILD_DEPENDS+=		tex-ifxetex-[0-9]*:../../print/tex-ifxetex
+#BUILD_DEPENDS+=		tex-iftex>=1.0d:../../print/tex-iftex
 #BUILD_DEPENDS+=		tex-latex-[0-9]*:../../print/tex-latex
 #BUILD_DEPENDS+=		tex-latexconfig-[0-9]*:../../print/tex-latexconfig
 #BUILD_DEPENDS+=		tex-mptopdf-[0-9]*:../../graphics/tex-mptopdf
@@ -144,8 +136,11 @@ BUILDLINK_API_DEPENDS.bzip2+=	bzip2>=1.0.5
 # failed to convert strong functions and variables: Invalid type identifier
 CTF_FILES_SKIP+=	lib/R/library/mgcv/libs/mgcv.so
 
+# Exposes PKG_CONFIG_LIBDIR buildlink paths in a comment.
+CHECK_WRKREF_SKIP+=	lib/R/etc/Makeconf
+
 pre-configure:
-	${RUN} cd ${WRKSRC} && autoreconf -fvi
+	${RUN} cd ${WRKSRC} && autoreconf -fvi || echo Ignore the warnings from autoreconf
 
 # Fix library names.  Relies on build system using -headerpad_max_install_names.
 .if ${OPSYS} == "Darwin"
@@ -165,7 +160,7 @@ fix-darwin-install-name:
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/pango/buildlink3.mk"
-.include "../../devel/pcre/buildlink3.mk"
+.include "../../devel/pcre2/buildlink3.mk"
 # uses callback interface
 .include "../../devel/readline/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
@@ -174,8 +169,7 @@ fix-darwin-install-name:
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
 .if !exists(/System/Library/Frameworks/Accelerate.framework)
-.include "../../math/blas/buildlink3.mk"
-.include "../../math/lapack/buildlink3.mk"
+.include "../../mk/blas.buildlink3.mk"
 .endif
 .include "../../www/curl/buildlink3.mk"
 .include "../../x11/tk/buildlink3.mk"

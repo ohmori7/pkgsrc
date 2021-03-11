@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.24 2019/04/08 07:59:24 wiz Exp $
+# $NetBSD: Makefile,v 1.27 2020/11/06 18:04:26 maya Exp $
 
 DISTNAME=	# empty
 PKGNAME=	ms-ttf-20020306
@@ -25,6 +25,9 @@ NO_SRC_ON_CDROM=	${RESTRICTED}
 DIST_SUBDIR=	ms-ttf
 EXTRACT_CMD=	${LOCALBASE}/bin/cabextract -q $${extract_file}
 DOCDIR=		${PREFIX}/share/doc/ms-ttf
+
+NO_CONFIGURE=	yes
+NO_BUILD=	yes
 
 INSTALLATION_DIRS+=	${DOCDIR}
 

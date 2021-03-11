@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.15 2019/04/26 13:14:02 maya Exp $
+# $NetBSD: Makefile,v 1.18 2020/12/04 20:45:24 nia Exp $
 
 DISTNAME=	ibus-tegaki-0.3.1
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	inputmethod
 MASTER_SITES=	http://www.tegaki.org/releases/${PKGVERSION_NOREV}/
 
@@ -21,7 +21,7 @@ SUBST_STAGE.epython=	pre-configure
 SUBST_FILES.epython=	ibus-engine-tegaki.in
 SUBST_SED.epython=	-e 's;exec python;exec ${PYTHONBIN};g'
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-gtk2 via py-ibus-python
+PYTHON_VERSIONS_ACCEPTED=	27 # py-gtk2 via py-ibus-python
 
 .include "../../lang/python/distutils.mk"
 .include "../../lang/python/application.mk"

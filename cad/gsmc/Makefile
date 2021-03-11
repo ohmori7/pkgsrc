@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.44 2018/11/14 22:21:07 kleink Exp $
+# $NetBSD: Makefile,v 1.49 2020/08/17 20:18:14 leot Exp $
 #
 
 DISTNAME=	gsmc-1.1
-PKGREVISION=	32
+PKGREVISION=	36
 CATEGORIES=	cad
 MASTER_SITES=	http://www.qsl.net/ik5nax/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.qsl.net/ik5nax/
+HOMEPAGE=	https://www.qsl.net/ik5nax/
 COMMENT=	Smith charting program
 
 GNU_CONFIGURE=	YES

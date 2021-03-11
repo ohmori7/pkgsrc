@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.25 2019/04/18 09:59:34 adam Exp $
+@comment $NetBSD: PLIST,v 1.34 2021/01/07 10:02:01 adam Exp $
 bin/gtk-builder-tool
 bin/gtk-encode-symbolic-svg
 bin/gtk-launch
@@ -52,8 +52,10 @@ include/gtk-3.0/gdk/gdkthreads.h
 include/gtk-3.0/gdk/gdktypes.h
 include/gtk-3.0/gdk/gdkversionmacros.h
 include/gtk-3.0/gdk/gdkvisual.h
+${PLIST.wayland}include/gtk-3.0/gdk/gdkwayland.h
 include/gtk-3.0/gdk/gdkwindow.h
 ${PLIST.x11}include/gtk-3.0/gdk/gdkx.h
+${PLIST.quartz}include/gtk-3.0/gdk/quartz/gdkquartz-gtk-only.h
 ${PLIST.quartz}include/gtk-3.0/gdk/quartz/gdkquartzcursor.h
 ${PLIST.quartz}include/gtk-3.0/gdk/quartz/gdkquartzdevice-core.h
 ${PLIST.quartz}include/gtk-3.0/gdk/quartz/gdkquartzdevicemanager-core.h
@@ -67,6 +69,12 @@ ${PLIST.quartz}include/gtk-3.0/gdk/quartz/gdkquartzscreen.h
 ${PLIST.quartz}include/gtk-3.0/gdk/quartz/gdkquartzutils.h
 ${PLIST.quartz}include/gtk-3.0/gdk/quartz/gdkquartzvisual.h
 ${PLIST.quartz}include/gtk-3.0/gdk/quartz/gdkquartzwindow.h
+${PLIST.wayland}include/gtk-3.0/gdk/wayland/gdkwaylanddevice.h
+${PLIST.wayland}include/gtk-3.0/gdk/wayland/gdkwaylanddisplay.h
+${PLIST.wayland}include/gtk-3.0/gdk/wayland/gdkwaylandglcontext.h
+${PLIST.wayland}include/gtk-3.0/gdk/wayland/gdkwaylandmonitor.h
+${PLIST.wayland}include/gtk-3.0/gdk/wayland/gdkwaylandselection.h
+${PLIST.wayland}include/gtk-3.0/gdk/wayland/gdkwaylandwindow.h
 ${PLIST.x11}include/gtk-3.0/gdk/x11/gdkx-autocleanups.h
 ${PLIST.x11}include/gtk-3.0/gdk/x11/gdkx11applaunchcontext.h
 ${PLIST.x11}include/gtk-3.0/gdk/x11/gdkx11cursor.h
@@ -103,6 +111,7 @@ include/gtk-3.0/gtk/a11y/gtkexpanderaccessible.h
 include/gtk-3.0/gtk/a11y/gtkflowboxaccessible.h
 include/gtk-3.0/gtk/a11y/gtkflowboxchildaccessible.h
 include/gtk-3.0/gtk/a11y/gtkframeaccessible.h
+include/gtk-3.0/gtk/a11y/gtkheaderbaraccessible.h
 include/gtk-3.0/gtk/a11y/gtkiconviewaccessible.h
 include/gtk-3.0/gtk/a11y/gtkimageaccessible.h
 include/gtk-3.0/gtk/a11y/gtkimagecellaccessible.h
@@ -119,6 +128,7 @@ include/gtk-3.0/gtk/a11y/gtkmenushellaccessible.h
 include/gtk-3.0/gtk/a11y/gtknotebookaccessible.h
 include/gtk-3.0/gtk/a11y/gtknotebookpageaccessible.h
 include/gtk-3.0/gtk/a11y/gtkpanedaccessible.h
+include/gtk-3.0/gtk/a11y/gtkplugaccessible.h
 include/gtk-3.0/gtk/a11y/gtkpopoveraccessible.h
 include/gtk-3.0/gtk/a11y/gtkprogressbaraccessible.h
 include/gtk-3.0/gtk/a11y/gtkradiobuttonaccessible.h
@@ -128,6 +138,7 @@ include/gtk-3.0/gtk/a11y/gtkrenderercellaccessible.h
 include/gtk-3.0/gtk/a11y/gtkscaleaccessible.h
 include/gtk-3.0/gtk/a11y/gtkscalebuttonaccessible.h
 include/gtk-3.0/gtk/a11y/gtkscrolledwindowaccessible.h
+include/gtk-3.0/gtk/a11y/gtksocketaccessible.h
 include/gtk-3.0/gtk/a11y/gtkspinbuttonaccessible.h
 include/gtk-3.0/gtk/a11y/gtkspinneraccessible.h
 include/gtk-3.0/gtk/a11y/gtkstackaccessible.h
@@ -417,6 +428,7 @@ include/gtk-3.0/unix-print/gtk/gtkunixprint.h
 lib/girepository-1.0/Gdk-3.0.typelib
 ${PLIST.x11}lib/girepository-1.0/GdkX11-3.0.typelib
 lib/girepository-1.0/Gtk-3.0.typelib
+@pkgdir lib/gtk-3.0/3.0.0/filesystems
 lib/gtk-3.0/3.0.0/immodules/im-am-et.la
 lib/gtk-3.0/3.0.0/immodules/im-cedilla.la
 lib/gtk-3.0/3.0.0/immodules/im-cyrillic-translit.la
@@ -428,20 +440,26 @@ lib/gtk-3.0/3.0.0/immodules/im-thai.la
 lib/gtk-3.0/3.0.0/immodules/im-ti-er.la
 lib/gtk-3.0/3.0.0/immodules/im-ti-et.la
 lib/gtk-3.0/3.0.0/immodules/im-viqr.la
+${PLIST.wayland}lib/gtk-3.0/3.0.0/immodules/im-wayland.la
+${PLIST.wayland}lib/gtk-3.0/3.0.0/immodules/im-waylandgtk.la
 ${PLIST.x11}lib/gtk-3.0/3.0.0/immodules/im-xim.la
 ${PLIST.cups}lib/gtk-3.0/3.0.0/printbackends/libprintbackend-cups.la
 lib/gtk-3.0/3.0.0/printbackends/libprintbackend-file.la
 lib/gtk-3.0/3.0.0/printbackends/libprintbackend-lpr.la
+@pkgdir lib/gtk-3.0/immodules
+@pkgdir lib/gtk-3.0/modules
 lib/libgailutil-3.la
 lib/libgdk-3.la
 lib/libgtk-3.la
 lib/pkgconfig/gail-3.0.pc
 lib/pkgconfig/gdk-3.0.pc
 ${PLIST.quartz}lib/pkgconfig/gdk-quartz-3.0.pc
+${PLIST.wayland}lib/pkgconfig/gdk-wayland-3.0.pc
 ${PLIST.x11}lib/pkgconfig/gdk-x11-3.0.pc
 lib/pkgconfig/gtk+-3.0.pc
 ${PLIST.quartz}lib/pkgconfig/gtk+-quartz-3.0.pc
 lib/pkgconfig/gtk+-unix-print-3.0.pc
+${PLIST.wayland}lib/pkgconfig/gtk+-wayland-3.0.pc
 ${PLIST.x11}lib/pkgconfig/gtk+-x11-3.0.pc
 libdata/gtk-3.0/im-multipress.conf
 man/man1/broadwayd.1
@@ -470,6 +488,7 @@ share/glib-2.0/schemas/org.gtk.Settings.Debug.gschema.xml
 share/glib-2.0/schemas/org.gtk.Settings.EmojiChooser.gschema.xml
 share/glib-2.0/schemas/org.gtk.Settings.FileChooser.gschema.xml
 share/gtk-3.0/gtkbuilder.rng
+share/gtk-3.0/valgrind/gtk.supp
 share/gtk-doc/html/gail-libgail-util3/gail-libgail-util3-GailMisc.html
 share/gtk-doc/html/gail-libgail-util3/gail-libgail-util3-GailTextUtil.html
 share/gtk-doc/html/gail-libgail-util3/gail-libgail-util3.devhelp2
@@ -1007,7 +1026,6 @@ share/gtk-doc/html/gtk3/gtk-migrating-checklist.html
 share/gtk-doc/html/gtk3/gtk-migrating-smclient-GtkApplication.html
 share/gtk-doc/html/gtk3/gtk-migrating-theme-GtkStyleContext-engines.html
 share/gtk-doc/html/gtk3/gtk-migrating-unique-GtkApplication.html
-share/gtk-doc/html/gtk3/gtk-mir.html
 share/gtk-doc/html/gtk3/gtk-osx.html
 share/gtk-doc/html/gtk3/gtk-query-immodules-3.0.html
 share/gtk-doc/html/gtk3/gtk-query-settings.html
@@ -1096,6 +1114,7 @@ share/gtk-doc/html/gtk3/panes.png
 share/gtk-doc/html/gtk3/placessidebar.png
 share/gtk-doc/html/gtk3/platform-support.html
 share/gtk-doc/html/gtk3/popup-anchors.png
+share/gtk-doc/html/gtk3/popup-at.svg
 share/gtk-doc/html/gtk3/popup-flip.png
 share/gtk-doc/html/gtk3/popup-slide.png
 share/gtk-doc/html/gtk3/printdialog.png
@@ -1198,6 +1217,8 @@ share/locale/ca/LC_MESSAGES/gtk30-properties.mo
 share/locale/ca/LC_MESSAGES/gtk30.mo
 share/locale/ca@valencia/LC_MESSAGES/gtk30-properties.mo
 share/locale/ca@valencia/LC_MESSAGES/gtk30.mo
+share/locale/ckb/LC_MESSAGES/gtk30-properties.mo
+share/locale/ckb/LC_MESSAGES/gtk30.mo
 share/locale/crh/LC_MESSAGES/gtk30-properties.mo
 share/locale/crh/LC_MESSAGES/gtk30.mo
 share/locale/cs/LC_MESSAGES/gtk30-properties.mo
@@ -1395,6 +1416,3 @@ share/locale/zh_TW/LC_MESSAGES/gtk30.mo
 share/themes/Default/gtk-3.0/gtk-keys.css
 share/themes/Emacs/gtk-3.0/gtk-keys.css
 ${PLIST.quartz}share/themes/Mac/gtk-3.0/gtk-keys.css
-@pkgdir lib/gtk-3.0/modules
-@pkgdir lib/gtk-3.0/immodules
-@pkgdir lib/gtk-3.0/3.0.0/filesystems

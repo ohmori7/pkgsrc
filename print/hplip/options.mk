@@ -1,22 +1,20 @@
-# $NetBSD: options.mk,v 1.16 2019/04/26 13:14:11 maya Exp $
+# $NetBSD: options.mk,v 1.18 2019/10/27 15:20:22 kamil Exp $
 #
 # HPLIP dependencies are detailed in the following page:
 # http://hplipopensource.com/hplip-web/install/manual/distros/other.html
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.hplip
-PKG_SUPPORTED_OPTIONS=	fax sane
+PKG_SUPPORTED_OPTIONS=	fax sane qt5
 PKG_SUGGESTED_OPTIONS=	fax
-PKG_OPTIONS_GROUP.gui=	qt4 qt5
-PKG_OPTIONS_OPTIONAL_GROUPS += gui
 
 PKG_OPTIONS_LEGACY_OPTS+=	scan:sane
-PKG_OPTIONS_LEGACY_OPTS+=	gui:qt4
-PKG_OPTIONS_LEGACY_OPTS+=	qt:qt4
+PKG_OPTIONS_LEGACY_OPTS+=	gui:qt5
+PKG_OPTIONS_LEGACY_OPTS+=	qt:qt5
 
 .include "../../mk/bsd.options.mk"
 
-.if !empty(PKG_OPTIONS:Mqt4) || !empty(PKG_OPTIONS:Mqt5)
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-notify
+.if !empty(PKG_OPTIONS:Mqt5)
+PYTHON_VERSIONS_ACCEPTED=	 27 # py-notify
 CONFIGURE_ARGS+=	--enable-gui-build
 CONFIGURE_ARGS+=	--enable-policykit
 EGFILES+=		dbus-1/system.d/com.hp.hplip.conf
@@ -24,16 +22,10 @@ MAKE_DIRS+=		${PKG_SYSCONFDIR}/dbus-1/system.d
 .include "../../security/policykit/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 DEPENDS+=	${PYPKGPREFIX}-notify-[0-9]*:../../sysutils/py-notify
-. if !empty(PKG_OPTIONS:Mqt4)
-PLIST_SRC+=		PLIST.qt4
-CONFIGURE_ARGS+=	--enable-qt4
-.  include "../../x11/py-qt4/buildlink3.mk"
-. endif
-. if !empty(PKG_OPTIONS:Mqt5)
 PLIST_SRC+=		PLIST.qt5
+CONFIGURE_ARGS+=	--disable-qt4
 CONFIGURE_ARGS+=	--enable-qt5
-.  include "../../x11/py-qt5/buildlink3.mk"
-. endif
+.include "../../x11/py-qt5/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--disable-policykit
 CONFIGURE_ARGS+=	--disable-qt4

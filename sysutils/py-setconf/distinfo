@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.2 2017/03/23 17:07:00 joerg Exp $
+$NetBSD: distinfo,v 1.4 2020/07/27 20:23:01 adam Exp $
 
-SHA1 (setconf-0.6.7.tar.gz) = 0f15291341019ff74459f4067f832ceb42d0b06a
-RMD160 (setconf-0.6.7.tar.gz) = 0366b9d761b76083bf21f6512a69d8893e675394
-SHA512 (setconf-0.6.7.tar.gz) = 5bea541c3d365329905be4a5fe72ded644a52b47796a2aba8d60a203a2657053d8588739431298575dd2673fc8c17c4b40508c702677a04ec2e57da4add24b46
-Size (setconf-0.6.7.tar.gz) = 53756 bytes
+SHA1 (setconf-0.7.7.tar.gz) = 42743b69c828bcf29c4ea3692025cb9df3f5ae4f
+RMD160 (setconf-0.7.7.tar.gz) = 272da6b5fbd367b1c0d0a390ea1a9bb7f9b3ef01
+SHA512 (setconf-0.7.7.tar.gz) = 324fe0ae40e354f6d6afdf3e2be31888086922e4aeded44c5c36d6dbad4e697232cd3b18080498a3a9ea45c1409d29fc3c764a3cf0ea4d98ae758cba9973b74f
+Size (setconf-0.7.7.tar.gz) = 17902 bytes

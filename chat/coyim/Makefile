@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.3 2019/06/02 13:41:31 fox Exp $
+# $NetBSD: Makefile,v 1.24 2021/01/23 14:22:52 bsiegert Exp $
 
 DISTNAME=	coyim-0.3.11
 MASTER_SITES=	${MASTER_SITE_GITHUB:=coyim/}
-PKGREVISION=	2
+PKGREVISION=	22
 CATEGORIES=	chat
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 EXTRACT_USING=	bsdtar
 
-MAINTAINER=	support@coy.im
+MAINTAINER=	fox@NetBSD.org
 HOMEPAGE=	https://coy.im/
 COMMENT=	Safe and secure by default chat client
 LICENSE=	gnu-gpl-v3

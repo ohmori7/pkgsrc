@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2019/05/23 19:23:08 rillig Exp $
+# $NetBSD: Makefile,v 1.11 2020/11/19 09:35:42 schmonz Exp $
 #
 
 DISTNAME=		relay-ctrl-3.2
@@ -6,10 +6,9 @@ CATEGORIES=		mail
 MASTER_SITES=		${HOMEPAGE}
 
 MAINTAINER=		schmonz@NetBSD.org
-HOMEPAGE=		http://untroubled.org/relay-ctrl/
+HOMEPAGE=		https://untroubled.org/relay-ctrl/
 COMMENT=		Allows relaying via POP/IMAP-before-SMTP
 
-DJB_RESTRICTED=		NO
 DJB_MAKE_TARGETS=	NO
 
 DOCDIR=			share/doc/${PKGBASE}

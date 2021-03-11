@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.50 2015/09/08 11:57:50 jperkin Exp $
+# $NetBSD: Makefile,v 1.53 2020/10/20 12:00:26 nia Exp $
 
 DISTNAME=		nhc98src-1.22
 PKGNAME=		nhc98-1.22
@@ -7,7 +7,7 @@ CATEGORIES=		lang
 MASTER_SITES=		http://www.haskell.org/nhc98/
 
 MAINTAINER=		kristerw@NetBSD.org
-HOMEPAGE=		http://www.haskell.org/nhc98/
+HOMEPAGE=		https://www.haskell.org/nhc98/
 COMMENT=		Portable Haskell 98 compiler
 
 WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
@@ -23,13 +23,15 @@ CONFIGURE_ARGS+=	--buildwith=gcc --installdir=${PREFIX} \
 # These platforms cannot build 32-on-64 binaries.
 NOT_FOR_PLATFORM+=	*-*-alpha
 NOT_FOR_PLATFORM+=	DragonFly-*-x86_64
+NOT_FOR_PLATFORM+=	NetBSD-*-aarch64
+NOT_FOR_PLATFORM+=	NetBSD-*-aarch64eb
 
 # This package has LP64 issues, so must build as 32-bit binary.
 M32=
 .for P in ${LP64PLATFORMS}
-.if ${MACHINE_PLATFORM:M${P}}
+.  if ${MACHINE_PLATFORM:M${P}}
 M32=			-m32
-.endif
+.  endif
 .endfor
 BUILD_MAKE_FLAGS+=	PKGSRC_M32=${M32}
 

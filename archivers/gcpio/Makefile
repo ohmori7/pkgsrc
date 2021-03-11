@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.51 2016/09/18 11:20:14 wiz Exp $
+# $NetBSD: Makefile,v 1.54 2020/02/16 00:35:19 mef Exp $
 
-DISTNAME=	cpio-2.12
+DISTNAME=	cpio-2.13
 PKGNAME=	g${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	archivers
 MASTER_SITES=	${MASTER_SITE_GNU:=cpio/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnu.org/software/cpio/cpio.html
+HOMEPAGE=	https://www.gnu.org/software/cpio/cpio.html
 COMMENT=	GNU copy-in/out (cpio) with remote magnetic tape (rmt) support
 LICENSE=	gnu-gpl-v3
 
@@ -32,11 +31,11 @@ PLIST_VARS+=	rmt
 .include "../../mk/bsd.prefs.mk"
 
 # don't include rmt if gtar won't build it
+# macOS does not support rmt driver, so it won't be built
 .if ${OPSYS} != "Interix" && ${OPSYS} != "Darwin"
 PLIST.rmt=	yes
 .endif
 
-.include "../../mk/bsd.prefs.mk"
 
 post-install:
 	${LN} -sf ${PREFIX}/bin/gcpio ${DESTDIR}${PREFIX}/${PKGGNUDIR}bin/cpio

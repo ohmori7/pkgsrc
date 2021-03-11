@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.4 2017/09/06 16:49:31 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2021/02/26 21:06:43 markd Exp $
 
 DISTNAME=	booktabs
-PKGNAME=	tex-${DISTNAME}-1.618033
-TEXLIVE_REV=	40846
+PKGNAME=	tex-${DISTNAME}-1.61803398
+PKGREVISION=	1
+TEXLIVE_REV=	53402
 
 MAINTAINER=	minskim@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/booktabs
 COMMENT=	Publication quality tables in LaTeX
-LICENSE=	gnu-gpl-v2
-
-DEPENDS+=	tex-latex-bin-[0-9]*:../../print/tex-latex-bin
+LICENSE=	lppl-1.3c
 
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

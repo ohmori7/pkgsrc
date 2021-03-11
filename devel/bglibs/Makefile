@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.34 2018/08/22 09:43:28 wiz Exp $
+# $NetBSD: Makefile,v 1.40 2020/11/19 09:35:38 schmonz Exp $
 #
 
 DISTNAME=		bglibs-2.04
-PKGREVISION=		1
+PKGREVISION=		3
 CATEGORIES=		devel
 MASTER_SITES=		${HOMEPAGE}
 
 MAINTAINER=		schmonz@NetBSD.org
-HOMEPAGE=		http://untroubled.org/bglibs/
+HOMEPAGE=		https://untroubled.org/bglibs/
 COMMENT=		Collection of libraries by Bruce Guenter
 LICENSE=		gnu-gpl-v2
 
@@ -16,11 +16,10 @@ MAKE_ENV+=		PERL5=${TOOLS_PERL5:Q}
 INSTALL_ENV+=		install_prefix=${DESTDIR:Q}
 USE_LIBTOOL=		yes
 
-DJB_RESTRICTED=		NO
 DJB_MAKE_TARGETS=	NO
 TEST_TARGET=		selftests
 
-DJB_CONFIG_CMDS=						\
+DJB_CONFIG_CMDS= \
 	${ECHO} ${DJB_CONFIG_PREFIX:Q}/include > conf-include;	\
 	${ECHO} ${DJB_CONFIG_PREFIX:Q}/lib > conf-lib;
 

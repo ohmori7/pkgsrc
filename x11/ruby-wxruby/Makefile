@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.31 2019/05/23 19:23:23 rillig Exp $
+# $NetBSD: Makefile,v 1.37 2021/02/14 15:09:30 taca Exp $
 #
 
 DISTNAME=	wxruby-2.0.1
-PKGREVISION=	24
+PKGREVISION=	28
 CATEGORIES=	x11
 MASTER_SITES=	# http://rubyforge.org/frs/download.php/63379/
 
@@ -13,8 +13,9 @@ LICENSE=	mit
 
 BUILD_DEPENDS+=	${RUBY_PKGPREFIX}-redcloth>=4.2.0:../../textproc/ruby-redcloth
 
+RUBY_VERSIONS_INCOMPATIBLE=	30
+
 BUILD_TARGET=		default html_docs
-USE_RAKE=		YES
 RAKE=			${RAKE_NAME} -I "./lib"
 USE_LANGUAGES=		c++
 USE_TOOLS=		pax

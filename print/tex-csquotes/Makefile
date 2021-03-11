@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.8 2019/01/23 09:15:38 markd Exp $
+# $NetBSD: Makefile,v 1.12 2021/02/20 09:56:05 markd Exp $
 
 DISTNAME=	csquotes
-PKGNAME=	tex-${DISTNAME}-5.2d
-TEXLIVE_REV=	47564
+PKGNAME=	tex-${DISTNAME}-5.2k
+TEXLIVE_REV=	57332
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/csquotes
+HOMEPAGE=	https://ctan.org/pkg/csquotes
 COMMENT=	Context sensitive quotation facilities
 LICENSE=	lppl-1.3c
 

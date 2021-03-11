@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.3 2019/06/15 06:46:36 adam Exp $
+# $NetBSD: Makefile,v 1.7 2021/02/08 08:34:37 adam Exp $
 
-DISTNAME=	asteval-0.9.14
+DISTNAME=	asteval-0.9.21
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	math python
 MASTER_SITES=	${MASTER_SITE_PYPI:=a/asteval/}
@@ -11,9 +11,10 @@ COMMENT=	Safe, minimalistic expression evaluator using ast module
 LICENSE=	mit
 
 DEPENDS+=	${PYPKGPREFIX}-numpy>=1.6:../../math/py-numpy
-DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
 
 USE_LANGUAGES=	# none
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 do-test:
 	cd ${WRKSRC}/tests && ${PYTHONBIN} test_asteval.py

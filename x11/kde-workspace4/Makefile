@@ -1,18 +1,18 @@
-# $NetBSD: Makefile,v 1.74 2019/05/23 19:23:22 rillig Exp $
+# $NetBSD: Makefile,v 1.94 2021/01/01 08:24:59 ryoon Exp $
 
 DISTNAME=	kde-workspace-4.11.22
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	18
+PKGREVISION=	36
 CATEGORIES=	x11
 COMMENT=	Base workspace for the KDE 4 integrated X11 desktop
 MASTER_SITES=	${MASTER_SITE_KDE:=applications/15.08.0/src/}
 
 .include "../../meta-pkgs/kde4/Makefile.kde4"
 
-DISTFILES=	${DEFAULT_DISTFILES} Daemon.png Daemon.README
-DISTFILES+=	NetBSD-flag-1.0.png
-SITES.Daemon.png=	${MASTER_SITE_LOCAL}
-SITES.Daemon.README=	${MASTER_SITE_LOCAL}
+DISTFILES=			${DEFAULT_DISTFILES} Daemon.png Daemon.README
+DISTFILES+=			NetBSD-flag-1.0.png
+SITES.Daemon.png=		${MASTER_SITE_LOCAL}
+SITES.Daemon.README=		${MASTER_SITE_LOCAL}
 SITES.NetBSD-flag-1.0.png=	${MASTER_SITE_LOCAL}
 
 EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
@@ -20,6 +20,7 @@ EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX}
 CMAKE_ARGS+=	-DKDE4_BUILD_TESTS:BOOL=OFF
 CMAKE_ARGS+=	-DWITH_NepomukCore:BOOL=OFF
 CMAKE_ARGS+=	-DWITH_Soprano:BOOL=OFF
+CMAKE_ARGS+=	-DWITH_Wayland:BOOL=OFF
 CMAKE_ARGS+=	-DWITH_libgps:BOOL=OFF
 
 # BUILD_MAKE_FLAGS+= VERBOSE=1
@@ -58,7 +59,7 @@ PKG_GROUPS=		${KDM_GROUP}
 PKG_USERS=		${KDM_USER}:${KDM_GROUP}
 PKG_GECOS.${KDM_USER}=	kdm unprivileged user
 
-REPLACE_PERL+= \
+REPLACE_PERL+=		\
 	kcontrol/keys/convertShortcuts.pl \
 	kwin/clients/oxygen/data/update_oxygen.pl \
 	kwin/data/kwin3_plugin.pl \
@@ -70,7 +71,7 @@ PY_PATCHPLIST=	yes
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
 
-PLIST_VARS+=	gles utempter noutempter
+PLIST_VARS+=		gles utempter noutempter
 .if ${OPSYS} == "Linux" && exists(/usr/include/utempter.h)
 PLIST.utempter=		yes
 .elif ${OPSYS} == "FreeBSD" && exists(/usr/include/utempter.h)
@@ -111,7 +112,7 @@ CMAKE_ARGS+=	-DRT_LIB_SCHED=${RT_LIB_SCHED}
 CMAKE_ARGS+=	-DWITH_Xmms:BOOL=OFF
 
 # genkdmconf wont install faces if using destdir so do it ourselves
-INSTALLATION_DIRS+= share/kde/apps/kdm/faces
+INSTALLATION_DIRS+=	share/kde/apps/kdm/faces
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/kdm/kfrontend/pics/default1.png \
@@ -157,6 +158,7 @@ PLIST.gles=	yes
 .include "../../sysutils/pciutils/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/iso-codes/buildlink3.mk"
+.include "../../math/cln/buildlink3.mk"
 .include "../../math/qalculate/buildlink3.mk"
 .include "../../misc/kdepimlibs4/buildlink3.mk"
 #.include "../../misc/nepomuk-core/buildlink3.mk"
@@ -169,7 +171,6 @@ PLIST.gles=	yes
 .include "../../x11/libXdamage/buildlink3.mk"
 .include "../../x11/libXi/buildlink3.mk"
 .include "../../x11/libXres/buildlink3.mk"
-.include "../../x11/libXxf86misc/buildlink3.mk"
 .include "../../x11/libXScrnSaver/buildlink3.mk"
 .include "../../x11/xcb-util-image/buildlink3.mk"
 .include "../../x11/xcb-util-keysyms/buildlink3.mk"

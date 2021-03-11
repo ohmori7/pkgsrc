@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.57 2018/08/22 09:43:18 wiz Exp $
+# $NetBSD: Makefile,v 1.61 2020/09/06 21:30:58 wiz Exp $
 
-DISTNAME=	DBIx-SearchBuilder-1.67
+DISTNAME=	DBIx-SearchBuilder-1.68
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DBIx/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/DBIx-SearchBuilder/
+HOMEPAGE=	https://metacpan.org/release/DBIx-SearchBuilder
 COMMENT=	Extension for easy SQL SELECT Statement generation
 LICENSE=	${PERL5_LICENSE}
 

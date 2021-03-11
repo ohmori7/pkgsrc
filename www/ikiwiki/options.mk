@@ -1,10 +1,11 @@
-# $NetBSD: options.mk,v 1.19 2019/05/04 09:32:29 leot Exp $
+# $NetBSD: options.mk,v 1.22 2020/09/01 08:04:23 wiz Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.ikiwiki
 PKG_SUPPORTED_OPTIONS=		cgi imagemagick l10n python w3m
 PKG_SUPPORTED_OPTIONS+=		cvs git svn	# not mutually exclusive
 PKG_SUPPORTED_OPTIONS+=		ikiwiki-amazon-s3 ikiwiki-highlight ikiwiki-search
-PKG_SUGGESTED_OPTIONS=		cgi
+PKG_SUPPORTED_OPTIONS+=		ikiwiki-sudo
+PKG_SUGGESTED_OPTIONS=		cgi ikiwiki-sudo
 
 .include "../../mk/bsd.options.mk"
 
@@ -12,13 +13,13 @@ PKG_SUGGESTED_OPTIONS=		cgi
 DEPENDS+=	p5-CGI-[0-9]*:../../www/p5-CGI
 DEPENDS+=	p5-CGI-FormBuilder>=3.05:../../www/p5-CGI-FormBuilder
 DEPENDS+=	p5-CGI-Session-[0-9]*:../../www/p5-CGI-Session
-DEPENDS+=	p5-DB_File-[0-9]*:../../databases/p5-DB_File
+#DEPENDS+=	p5-DB_File-[0-9]*:../../databases/p5-DB_File
 .endif
 
 .if !empty(PKG_OPTIONS:Mcvs)
-. if !exists(/usr/bin/cvs)
+.  if !exists(/usr/bin/cvs)
 DEPENDS+=	cvs-[0-9]*:../../devel/scmcvs
-. endif
+.  endif
 DEPENDS+=	cvsps-[0-9]*:../../devel/cvsps
 DEPENDS+=	cvsweb-[0-9]*:../../www/cvsweb
 DEPENDS+=	p5-File-chdir-[0-9]*:../../devel/p5-File-chdir
@@ -43,6 +44,12 @@ DEPENDS+=	p5-Search-Xapian-[0-9]*:../../textproc/p5-Search-Xapian
 DEPENDS+=	xapian-omega-[0-9]*:../../textproc/xapian-omega
 .endif
 
+.if !empty(PKG_OPTIONS:Mikiwiki-sudo)
+.  if !exists(/usr/bin/sudo)
+DEPENDS+=	sudo-[0-9]*:../../security/sudo
+.  endif
+.endif
+
 .if !empty(PKG_OPTIONS:Mimagemagick)
 DEPENDS+=	p5-PerlMagick-[0-9]*:../../graphics/p5-PerlMagick
 # suggest ghostscript (required for PDF-to-PNG thumbnailing)
@@ -61,8 +68,8 @@ SUBST_SED.l10n+=	-e 's|\(Locale::Po4a::Common\)|\1::Iff::PKG_OPTIONS|'
 .endif
 
 .if !empty(PKG_OPTIONS:Mpython)
-DEPENDS+=	${PYPKGPREFIX}-docutils-[0-9]*:../../textproc/py-docutils
-DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
+DEPENDS+=		${PYPKGPREFIX}-docutils-[0-9]*:../../textproc/py-docutils
+DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 .else
 PYTHON_FOR_BUILD_ONLY=	yes
 .endif

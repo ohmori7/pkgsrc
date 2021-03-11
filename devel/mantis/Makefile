@@ -1,18 +1,14 @@
-# $NetBSD: Makefile,v 1.51 2019/05/23 19:22:58 rillig Exp $
+# $NetBSD: Makefile,v 1.58 2021/03/07 13:21:57 taca Exp $
 
-DISTNAME=	mantisbt-2.4.1
-PKGNAME=	${DISTNAME:S/mantisbt/mantis/}
+DISTNAME=	mantisbt-2.24.5
+PKGNAME=	${PHP_PKG_PREFIX}-${DISTNAME:S/mantisbt/mantis/}
 CATEGORIES=	devel www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mantisbt/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.mantisbt.org/
+HOMEPAGE=	https://www.mantisbt.org/
 COMMENT=	PHP/MySQL/web based bugtracking system
 LICENSE=	gnu-gpl-v2
-
-#PHP_VERSIONS_ACCEPTED=	56
-
-DEPENDS+=	${PHP_PKG_PREFIX}-json-[0-9]*:../../textproc/php-json
 
 NO_BUILD=	YES
 
@@ -54,21 +50,21 @@ post-extract:
 
 do-install:
 	cd ${WRKSRC}/doc && \
-		pax -rwpppm en-US ${DESTDIR}${PREFIX}/share/doc/mantis
+		pax -rwppm en-US ${DESTDIR}${PREFIX}/share/doc/mantis
 
 	${MV} ${WRKSRC}/config/config_inc.php.sample \
 		${WRKSRC}/config_inc.php
 
 .for f in ${MANTIS_EG}
-		${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${EGDIR}
-		${RM} ${WRKSRC}/${f}
+	${INSTALL_DATA} ${WRKSRC}/${f} ${DESTDIR}${EGDIR}
+	${RM} ${WRKSRC}/${f}
 .endfor
 
 	cd ${WRKSRC} && ${FIND} . -name .cvsignore -print | ${XARGS} ${RM} -f
-	cd ${WRKSRC} && pax -rwpppm . ${DESTDIR}${MANTIS_HOME}
+	cd ${WRKSRC} && pax -rwppm . ${DESTDIR}${MANTIS_HOME}
 
 	cd ${DESTDIR}${MANTIS_HOME} && \
 		${FIND} . -type f | ${XARGS} ${CHMOD} ${SHAREMODE}
 
-.include "../../lang/php/phpversion.mk"
+.include "../../lang/php/json.mk"
 .include "../../mk/bsd.pkg.mk"

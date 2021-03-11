@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.18 2018/08/22 09:44:56 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2020/08/31 18:09:16 wiz Exp $
 
 DISTNAME=	enum-1.11
 PKGNAME=	p5-${DISTNAME}0
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=enum/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/enum/
+HOMEPAGE=	https://metacpan.org/release/enum
 COMMENT=	Enumerations for Perl
 LICENSE=	${PERL5_LICENSE}
 

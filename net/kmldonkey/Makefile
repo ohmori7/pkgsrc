@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.49 2018/12/13 19:52:16 adam Exp $
+# $NetBSD: Makefile,v 1.62 2021/01/01 08:24:54 ryoon Exp $
 #
 
 DISTNAME=	kmldonkey-2.0.2-kde4.4.0
 PKGNAME=	${DISTNAME:S/-kde/./}
-PKGREVISION=	41
+PKGREVISION=	53
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_KDE:=4.4.0/src/extragear/}
 EXTRACT_SUFX=	.tar.bz2
@@ -18,6 +18,7 @@ BUILD_DEPENDS+=	automoc4>=0.9.87:../../devel/automoc4
 USE_LANGUAGES=	c c++
 USE_CMAKE=	yes
 USE_TOOLS+=	msgfmt
+TOOLS_BROKEN+=	perl
 
 .include "../../meta-pkgs/kde4/kde4.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

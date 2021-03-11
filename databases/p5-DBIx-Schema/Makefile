@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:43:18 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:07:03 wiz Exp $
 #
 
 DISTNAME=	DBIx-Schema-0.07
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DBIx/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/DBIx-Schema/
+HOMEPAGE=	https://metacpan.org/release/DBIx-Schema
 COMMENT=	Simpler SQL Join interface
 
 MAKE_PARAMS+=	--noprompt

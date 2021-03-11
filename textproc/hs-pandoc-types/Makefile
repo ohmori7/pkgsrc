@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.17 2016/01/10 11:49:11 szptvlfn Exp $
+# $NetBSD: Makefile,v 1.19 2020/01/11 10:05:46 pho Exp $
 
-DISTNAME=	pandoc-types-1.12.4.1
-PKGREVISION=	16
+DISTNAME=	pandoc-types-1.20
 CATEGORIES=	textproc
 
 MAINTAINER=	szptvlfn@NetBSD.org
@@ -10,6 +9,6 @@ LICENSE=	gnu-gpl-v2
 
 .include "../../mk/haskell.mk"
 .include "../../converters/hs-aeson/buildlink3.mk"
-.include "../../devel/hs-deepseq-generics/buildlink3.mk"
+.include "../../devel/hs-QuickCheck/buildlink3.mk"
 .include "../../devel/hs-syb/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

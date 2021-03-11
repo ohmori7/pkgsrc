@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.36 2019/06/15 08:21:32 adam Exp $
+# $NetBSD: Makefile,v 1.40 2020/08/18 17:57:24 leot Exp $
 
 DISTNAME=	jack-audio-connection-kit-0.125.0
+PKGREVISION=	3
 PKGNAME=	${DISTNAME:S/audio-connection-kit-//}
 CATEGORIES=	audio
 MASTER_SITES=	http://jackaudio.org/downloads/
@@ -67,11 +68,9 @@ PLIST.coreaudio=	yes
 .else
 CONFIGURE_ARGS+=	--disable-coreaudio
 .endif
-###
-### XXX The sun driver is buggy on NetBSD right now.  I hope to remedy
-###	this shortly.
-###
-.if ${OPSYS} == "NetBSD" || ${OPSYS} == "OpenBSD" || ${OPSYS} == "SunOS"
+
+.if ${OPSYS} == "NetBSD" || ${OPSYS} == "OpenBSD" || ${OPSYS} == "SunOS" || \
+    exists(/usr/include/sys/audioio.h)
 CONFIGURE_ARGS+=	--enable-sun
 PLIST.sunaudio=		yes
 .else
@@ -80,7 +79,7 @@ CONFIGURE_ARGS+=	--disable-sun
 
 .include "../../mk/oss.buildlink3.mk"
 
-.if ${OSS_TYPE} != "none"
+.if ${OSS_TYPE} != "none" && ${OPSYS} != "NetBSD" && ${OPSYS} != "SunOS"
 CONFIGURE_ARGS+=	--enable-oss
 PLIST.oss=		yes
 MAKE_ENV+=		LIBOSSAUDIO=${LIBOSSAUDIO}
@@ -113,7 +112,7 @@ CONFIGURE_ARGS+=	--disable-dynsimd
 .  endif
 .endif
 
-BDB_ACCEPTED=	db4 db5
+BDB_ACCEPTED=		db4 db5
 BUILDLINK_TRANSFORM+=	l:db:${BDB_TYPE}
 
 post-extract:
@@ -121,7 +120,6 @@ post-extract:
 	${CP} ${FILESDIR}/atomicity.h ${WRKSRC}/config/os/netbsd
 
 .include "../../audio/libsamplerate/buildlink3.mk"
-.include "../../devel/libuuid/buildlink3.mk"
 .include "../../mk/bdb.buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"

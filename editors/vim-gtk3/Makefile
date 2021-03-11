@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2019/06/08 10:40:59 rillig Exp $
+# $NetBSD: Makefile,v 1.21 2020/08/17 20:18:36 leot Exp $
 
 PKGNAME=	vim-gtk3-${VIM_VERSION}.${VIM_PATCHLEVEL}
-PKGREVISION=	2
+PKGREVISION=	3
 
 COMMENT=	Vim editor (vi clone) with X11 GTK3 GUI
 
@@ -21,7 +21,7 @@ CONFIGURE_ARGS+=	--enable-gui=gtk3
 USE_TOOLS+=		pkg-config
 
 BUILD_TARGET=		vim
-INSTALL_TARGET=		installvimbin
+INSTALL_TARGET=		installvimbin installvimdiff installtutorbin
 
 INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 

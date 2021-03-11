@@ -1,15 +1,17 @@
-# $NetBSD: Makefile,v 1.1 2015/05/08 11:27:51 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2020/05/10 04:31:51 markd Exp $
 
 DISTNAME=	opensans
-PKGNAME=	tex-${DISTNAME}-1.2
-TEXLIVE_REV=	24706
+PKGNAME=	tex-${DISTNAME}-2.2
+PKGREVISION=	1
+TEXLIVE_REV=	51458
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/opensans
+HOMEPAGE=	https://ctan.org/pkg/opensans
 COMMENT=	Open Sans font family, and LaTeX support
-LICENSE=	lppl-1.3c
+LICENSE=	apache-2.0 AND lppl-1.3c
 
 TEX_MAP_FILES+=	opensans.map
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

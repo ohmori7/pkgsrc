@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.32 2019/04/26 14:12:41 maya Exp $
+# $NetBSD: Makefile,v 1.34 2019/11/03 19:04:05 rillig Exp $
 
 DISTNAME=	Pyrex-0.9.9
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/P/p/}
@@ -13,8 +13,8 @@ LICENSE=	apache-2.0
 
 USE_TOOLS+=	pax
 
-PYTHON_SELF_CONFLICT=	yes
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.9.9
+PYTHON_SELF_CONFLICT=		yes
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.9.9
 
 .include "../../lang/python/distutils.mk"
 .include "../../mk/bsd.pkg.mk"

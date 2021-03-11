@@ -1,20 +1,20 @@
-# $NetBSD: Makefile,v 1.20 2018/08/22 09:43:22 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2020/08/31 18:07:08 wiz Exp $
 #
 
-PKGREVISION= 4
+PKGREVISION= 6
 .include "../../databases/qdbm/Makefile.common"
 
 PKGNAME=	p5-qdbm-1.0.0.${QDBM_VERSION}
 CATEGORIES=	databases perl5
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://fallabs.com/qdbm/plspex.html
+HOMEPAGE=	https://fallabs.com/qdbm/plspex.html
 COMMENT=	Perl interface of QDBM
 LICENSE=	gnu-lgpl-v2.1
 
 MAKE_JOBS_SAFE=		no
 
-MY_SUBDIR=perl
+MY_SUBDIR=	perl
 BUILD_DIRS=	${MY_SUBDIR}
 CONFIGURE_DIRS=	${MY_SUBDIR}
 
@@ -22,8 +22,9 @@ GNU_CONFIGURE=		yes
 USE_TOOLS+=		perl
 PERL5_CONFIGURE=	no
 TEST_TARGET=		check
+GNU_CONFIGURE_PTHREAD=	no
 
-PERL5_PACKLIST= auto/Curia/.packlist auto/Depot/.packlist auto/Villa/.packlist
+PERL5_PACKLIST=	auto/Curia/.packlist auto/Depot/.packlist auto/Villa/.packlist
 REPLACE_PERL=	${MY_SUBDIR}/curia/plcrtest ${MY_SUBDIR}/depot/pldptest \
 		${MY_SUBDIR}/villa/plvltest
 

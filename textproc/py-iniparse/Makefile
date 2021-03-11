@@ -1,21 +1,18 @@
-# $NetBSD: Makefile,v 1.11 2019/04/26 13:14:17 maya Exp $
+# $NetBSD: Makefile,v 1.14 2020/06/18 21:45:06 adam Exp $
 
-DISTNAME=	iniparse-0.4
+DISTNAME=	iniparse-0.5
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-CATEGORIES=	python textproc
-MASTER_SITES=	http://iniparse.googlecode.com/files/
+CATEGORIES=	textproc python
+MASTER_SITES=	${MASTER_SITE_PYPI:=i/iniparse/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://pypi.python.org/pypi/iniparse/
+HOMEPAGE=	https://github.com/candlepin/python-iniparse
 COMMENT=	Better INI parser for Python
 LICENSE=	mit AND python-software-foundation
 
+DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
+
 USE_LANGUAGES=	# none
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37
-
-post-install:
-	${CHMOD} -x ${DESTDIR}${PREFIX}/share/doc/iniparse-0.4/index.html
-
-.include "../../lang/python/distutils.mk"
+.include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

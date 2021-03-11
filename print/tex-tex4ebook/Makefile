@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2019/05/11 23:33:45 markd Exp $
+# $NetBSD: Makefile,v 1.8 2021/02/15 03:56:53 markd Exp $
 
 DISTNAME=	tex4ebook
-PKGNAME=	tex-${DISTNAME}-0.2c
-TEXLIVE_REV=	50512
+PKGNAME=	tex-${DISTNAME}-0.3c
+TEXLIVE_REV=	56878
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/tex4ebook
+HOMEPAGE=	https://ctan.org/pkg/tex4ebook
 COMMENT=	Convertor from LaTeX to ebook formats
 LICENSE=	lppl-1.3c
 

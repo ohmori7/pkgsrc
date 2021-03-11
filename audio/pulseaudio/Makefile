@@ -1,17 +1,27 @@
-# $NetBSD: Makefile,v 1.134 2019/04/25 07:32:36 maya Exp $
+# $NetBSD: Makefile,v 1.156 2021/02/20 22:10:39 ryoon Exp $
 
-DISTNAME=	pulseaudio-12.2
-PKGREVISION=	3
+DISTNAME=	pulseaudio-14.2
+PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	https://freedesktop.org/software/pulseaudio/releases/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.freedesktop.org/wiki/Software/PulseAudio
+HOMEPAGE=	https://www.freedesktop.org/wiki/Software/PulseAudio
 COMMENT=	Sound server for POSIX and Win32 systems
 LICENSE=	gnu-lgpl-v2.1 AND gnu-gpl-v2
 
 NOT_FOR_PLATFORM=	DragonFly-*-*
+
+SUBST_CLASSES+=		oss
+SUBST_STAGE.oss=	pre-configure
+SUBST_MESSAGE.oss=	Set OSS device node
+SUBST_FILES.oss+=	src/modules/oss/module-oss.c
+SUBST_FILES.oss+=	src/modules/module-detect.c
+SUBST_VARS.oss+=	DEVOSSAUDIO
+
+# Requires --desktop in msgfmt.
+_TOOLS_USE_PKGSRC.msgfmt=	yes
 
 LIBTOOL_REQD=	2.4
 GCC_REQD+=	4.8
@@ -19,17 +29,22 @@ GCC_REQD+=	4.8
 USE_LANGUAGES=		c c++
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		aclocal autoheader autoconf automake gmake gm4 intltool msgfmt pkg-config
+USE_TOOLS+=		aclocal autoheader autoconf automake bash:run gmake gm4
+USE_TOOLS+=		msgfmt perl:build pkg-config
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-tcpwrap
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFBASEDIR}
+CONFIGURE_ARGS+=	--without-fftw
 CONFIGURE_ENV+=		DATADIRNAME=${PKGLOCALEDIR}
 PKGCONFIG_OVERRIDE+=	libpulse-mainloop-glib.pc.in
 PKGCONFIG_OVERRIDE+=	libpulse-simple.pc.in
 PKGCONFIG_OVERRIDE+=	libpulse.pc.in
 
-REPLACE_BASH=	shell-completion/bash/pulseaudio git-version-gen
+TOOL_DEPENDS+=	p5-XML-Parser>=2.31nb1:../../textproc/p5-XML-Parser
+
+REPLACE_BASH+=	shell-completion/bash/pulseaudio git-version-gen
+REPLACE_BASH+=	src/utils/pa-info
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -62,7 +77,8 @@ CONFIGURE_ARGS+=	--disable-neon-opt
 .include "../../devel/libatomic_ops/buildlink3.mk"
 .endif
 
-PLIST_SUBST+=		PULSELIBVER=12.0
+# Version number in patch-configure.ac.must be changed too.
+PLIST_SUBST+=		PULSELIBVER=14.2
 PLIST_VARS+=		alsa bonjour coreaudio evdev oss sun
 
 # Build module-mmkbd-evdev.so under Linux
@@ -102,13 +118,13 @@ PULSE_GROUP_ACCESS?=	pulseacc
 BUILD_DEFS+=		VARBASE PKG_SYSCONFBASE
 
 PKG_SYSCONFSUBDIR=	pulse
-EGDIR=		${PREFIX}/share/examples/pulseaudio
-CONF_FILES=	${EGDIR}/client.conf ${PKG_SYSCONFDIR}/client.conf
-CONF_FILES+=	${EGDIR}/daemon.conf ${PKG_SYSCONFDIR}/daemon.conf
-CONF_FILES+=	${EGDIR}/default.pa ${PKG_SYSCONFDIR}/default.pa
-CONF_FILES+=	${EGDIR}/system.pa ${PKG_SYSCONFDIR}/system.pa
-CONF_FILES+=	${EGDIR}/pulseaudio-system.conf \
-		${PKG_SYSCONFBASE}/dbus-1/system.d/pulseaudio-system.conf
+EGDIR=			${PREFIX}/share/examples/pulseaudio
+CONF_FILES=		${EGDIR}/client.conf ${PKG_SYSCONFDIR}/client.conf
+CONF_FILES+=		${EGDIR}/daemon.conf ${PKG_SYSCONFDIR}/daemon.conf
+CONF_FILES+=		${EGDIR}/default.pa ${PKG_SYSCONFDIR}/default.pa
+CONF_FILES+=		${EGDIR}/system.pa ${PKG_SYSCONFDIR}/system.pa
+CONF_FILES+=		${EGDIR}/pulseaudio-system.conf \
+			${PKG_SYSCONFBASE}/dbus-1/system.d/pulseaudio-system.conf
 
 PKG_GROUPS=		${PULSE_GROUP}
 PKG_GROUPS+=		${PULSE_GROUP_REALTIME}

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2018/12/13 19:52:20 adam Exp $
+# $NetBSD: Makefile,v 1.31 2021/01/01 08:24:56 ryoon Exp $
 
 DISTNAME=	baloo-${_KDE_VERSION}
-PKGREVISION=	15
+PKGREVISION=	27
 CATEGORIES=	sysutils
 COMMENT=	KDE framework for searching and managing user metadata
 LICENSE=	gnu-gpl-v3
@@ -14,9 +14,9 @@ USE_TOOLS+=	gmake
 
 .include "../../mk/bsd.prefs.mk"
 
-PLIST_VARS+=	polkit
+PLIST_VARS+=		polkit
 .if ${OPSYS} != "Darwin"
-PLIST.polkit=	yes
+PLIST.polkit=		yes
 INSTALLATION_DIRS+=	share/PolicyKit/policy
 .endif
 INSTALLATION_DIRS+=	share/dbus-1/interfaces share/dbus-1/system-services

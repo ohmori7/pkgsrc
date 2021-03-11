@@ -1,18 +1,17 @@
-# $NetBSD: Makefile,v 1.43 2019/04/25 07:33:12 maya Exp $
+# $NetBSD: Makefile,v 1.52 2021/03/03 08:31:38 adam Exp $
 
-DISTNAME=		rabbitmq-server-3.7.7
-PKGNAME=		${DISTNAME:S/-server//}
-PKGREVISION=		1
-CATEGORIES=		net
-MASTER_SITES=		${MASTER_SITE_GITHUB:=rabbitmq/}
-EXTRACT_SUFX=		.tar.xz
-GITHUB_PROJECT=		rabbitmq-server
-GITHUB_RELEASE=		v${PKGVERSION_NOREV}
+DISTNAME=	rabbitmq-server-3.8.14
+PKGNAME=	${DISTNAME:S/-server//}
+CATEGORIES=	net
+MASTER_SITES=	${MASTER_SITE_GITHUB:=rabbitmq/}
+EXTRACT_SUFX=	.tar.xz
+GITHUB_PROJECT=	rabbitmq-server
+GITHUB_RELEASE=	v${PKGVERSION_NOREV}
 
-MAINTAINER=		fhajny@NetBSD.org
-HOMEPAGE=		http://www.rabbitmq.com/server.html
-COMMENT=		Implementation of AMQP that provides robust messaging for applications
-LICENSE=		mpl-1.1
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://www.rabbitmq.com/
+COMMENT=	Implementation of AMQP that provides robust messaging for applications
+LICENSE=	mpl-1.1
 
 USE_TOOLS+=		bash:run gmake unzip zip
 
@@ -29,7 +28,7 @@ BUILD_DEFS+=		VARBASE
 TOOLS_CREATE+=		mix
 TOOLS_SCRIPT.mix=	${PREFIX}/bin/elixir -r ${PREFIX}/bin/mix -- "$$@"
 
-.include		"../../mk/bsd.prefs.mk"
+.include "../../mk/bsd.prefs.mk"
 
 RMQ_USER?=		rabbitmq
 RMQ_GROUP?=		${RMQ_USER}
@@ -48,9 +47,9 @@ PKG_SHELL.${RMQ_USER}=	${RMQ_SHELL}
 
 PKG_SYSCONFSUBDIR=	${PKGBASE}
 CONF_FILES+=		share/examples/rabbitmq/rabbitmq-env.conf \
-			  ${PKG_SYSCONFDIR}/rabbitmq-env.conf
-CONF_FILES+=		share/examples/rabbitmq/rabbitmq.config.example \
-			  ${PKG_SYSCONFDIR}/rabbitmq.config
+			${PKG_SYSCONFDIR}/rabbitmq-env.conf
+CONF_FILES+=		share/examples/rabbitmq/rabbitmq.conf.example \
+			${PKG_SYSCONFDIR}/rabbitmq.conf
 
 FILES_SUBST+=		RMQ_USER=${RMQ_USER}
 FILES_SUBST+=		RMQ_GROUP=${RMQ_GROUP}
@@ -65,8 +64,8 @@ SCRIPTS_DIR=		${WRKSRC}/deps/rabbit/scripts
 SUBST_CLASSES+=		paths
 SUBST_MESSAGE.paths=	Setting standard paths
 SUBST_STAGE.paths=	pre-build
-SUBST_FILES.paths=	${SCRIPTS_DIR}/rabbitmqctl ${SCRIPTS_DIR}/rabbitmq-env
-SUBST_FILES.paths+=	${SCRIPTS_DIR}/rabbitmq-plugins ${SCRIPTS_DIR}/rabbitmq-server
+SUBST_FILES.paths=	${SCRIPTS_DIR}/rabbitmq-env
+SUBST_FILES.paths+=	${SCRIPTS_DIR}/rabbitmq-server
 SUBST_FILES.paths+=	${SCRIPTS_DIR}/rabbitmq-defaults
 SUBST_SED.paths=	-e 's|/etc/rabbitmq|${PKG_SYSCONFDIR}|g'
 SUBST_SED.paths+=	-e 's|/var/lib|${VARBASE}/db|g'
@@ -74,15 +73,27 @@ SUBST_SED.paths+=	-e 's|/var/log|${VARBASE}/log|g'
 SUBST_SED.paths+=	-e 's|erl|${PREFIX}/bin/erl|g'
 SUBST_SED.paths+=	-e 's|@RABBITMQ_HOME@|${PREFIX}/${RABBITMQ_HOME}|g'
 
+SUBST_CLASSES+=		prefix
+SUBST_MESSAGE.prefix=	Setting prefix path
+SUBST_STAGE.prefix=	pre-build
+SUBST_FILES.prefix=	deps/rabbit_common/src/rabbit_env.erl
+SUBST_VARS.prefix=	PREFIX
+
 REPLACE_BASH+=		${SCRIPTS_DIR}/rabbitmqctl
 REPLACE_BASH+=		${SCRIPTS_DIR}/rabbitmq-defaults
 REPLACE_BASH+=		${SCRIPTS_DIR}/rabbitmq-env
 REPLACE_BASH+=		${SCRIPTS_DIR}/rabbitmq-plugins
+REPLACE_BASH+=		${SCRIPTS_DIR}/rabbitmq-queues
 REPLACE_BASH+=		${SCRIPTS_DIR}/rabbitmq-server
+REPLACE_BASH+=		${SCRIPTS_DIR}/rabbitmq-upgrade
+
+CHECK_PORTABILITY_SKIP+=	scripts/rabbitmq-server-ha.ocf
 
 # Too much effort to replace the shebang on generated files
 CHECK_INTERPRETER_SKIP+=	${RABBITMQ_HOME}/escript/rabbitmq-diagnostics
 CHECK_INTERPRETER_SKIP+=	${RABBITMQ_HOME}/escript/rabbitmq-plugins
+CHECK_INTERPRETER_SKIP+=	${RABBITMQ_HOME}/escript/rabbitmq-queues
+CHECK_INTERPRETER_SKIP+=	${RABBITMQ_HOME}/escript/rabbitmq-upgrade
 CHECK_INTERPRETER_SKIP+=	${RABBITMQ_HOME}/escript/rabbitmqctl
 CHECK_INTERPRETER_SKIP+=	${RABBITMQ_HOME}/sbin/cuttlefish
 
@@ -96,9 +107,9 @@ INSTALL_TARGET=		install-erlapp install-scripts install-bin install-man
 TEST_TARGET=		check
 
 post-install:
-	${INSTALL_DATA} ${WRKSRC}/deps/rabbit/docs/rabbitmq.config.example		\
+	${INSTALL_DATA} ${WRKSRC}/deps/rabbit/docs/rabbitmq.conf.example \
 		${DESTDIR}${PREFIX}/share/examples/rabbitmq
-	${INSTALL_DATA} ${FILESDIR}/rabbitmq-env.conf 				\
+	${INSTALL_DATA} ${FILESDIR}/rabbitmq-env.conf \
 		${DESTDIR}${PREFIX}/share/examples/rabbitmq
 
 .include "../../lang/erlang/buildlink3.mk"

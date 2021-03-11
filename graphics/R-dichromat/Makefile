@@ -1,17 +1,14 @@
-# $NetBSD: Makefile,v 1.2 2018/07/28 14:40:44 brook Exp $
-
-CATEGORIES=	graphics
-
-MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	${R_HOMEPAGE_BASE}/dichromat/
-COMMENT=	Color schemes for dichromats
-LICENSE=	gnu-gpl-v2
+# $NetBSD: Makefile,v 1.4 2019/08/08 19:53:42 brook Exp $
 
 R_PKGNAME=	dichromat
 R_PKGVER=	2.0-0
+CATEGORIES=	graphics
+
+MAINTAINER=	minskim@NetBSD.org
+COMMENT=	Color schemes for dichromats
+LICENSE=	gnu-gpl-v2
 
 USE_LANGUAGES=	# none
 
-BUILDLINK_API_DEPENDS.R+=	R>=2.10
 .include "../../math/R/Makefile.extension"
 .include "../../mk/bsd.pkg.mk"

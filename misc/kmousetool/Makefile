@@ -1,17 +1,22 @@
-# $NetBSD: Makefile,v 1.40 2018/12/13 19:52:11 adam Exp $
+# $NetBSD: Makefile,v 1.56 2021/02/07 06:30:31 ryoon Exp $
 
-DISTNAME=	kmousetool-16.12.0
-PKGREVISION=	7
+DISTNAME=	kmousetool-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	misc
+
+HOMEPAGE=	https://kde.org/applications/utilities/kmousetool/
 COMMENT=	KDE mouse manipulation tool
-MASTER_SITES=	${MASTER_SITE_KDE:=applications/16.12.0/src/}
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+.include "../../meta-pkgs/kde/applications.mk"
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
 
+USE_TOOLS+=	msgmerge
+
+.include "../../devel/knotifications/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/kxmlgui/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

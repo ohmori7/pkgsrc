@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:43:56 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/08/31 18:07:55 wiz Exp $
 
 DISTNAME=	Devel-Trace-0.12
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Devel/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Devel-Trace/
+HOMEPAGE=	https://metacpan.org/release/Devel-Trace
 COMMENT=	Print out each line before it is executed (like sh -x)
 LICENSE=	${PERL5_LICENSE}
 

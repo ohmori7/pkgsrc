@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.21 2019/01/27 13:00:26 wen Exp $
+$NetBSD: distinfo,v 1.23 2020/02/22 12:44:14 mef Exp $
 
-SHA1 (App-perlbrew-0.86.tar.gz) = 521962b3a9016ab35a23c34625d01f548b052107
-RMD160 (App-perlbrew-0.86.tar.gz) = c946992a3af0bbcbe99aa0e7943f42ad80f1a82e
-SHA512 (App-perlbrew-0.86.tar.gz) = fca998e01cb24c8b08fd90738f4a4b665134647c003d490bed5c727153993fdf251866cab5a35133d429126d88c29b769ec91243b20b294c85964b67cde69db2
-Size (App-perlbrew-0.86.tar.gz) = 97571 bytes
+SHA1 (App-perlbrew-0.88.tar.gz) = 40771168bfa188d3f196535a574c1627dad5ef5e
+RMD160 (App-perlbrew-0.88.tar.gz) = 0e7fbf07a8005283a0aa3f6b75863a9e0f980a1d
+SHA512 (App-perlbrew-0.88.tar.gz) = 16a60637f9de4ca12b270b3a6946b15b0881af797e5f811be601895ed25db0eb98f6056a219025213f439ceb5f2253bb175e0efa5d3742fffd7820fcf0433115
+Size (App-perlbrew-0.88.tar.gz) = 92126 bytes

@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.32 2019/05/29 19:52:48 adam Exp $
+# $NetBSD: Makefile,v 1.37 2020/10/12 21:51:59 bacon Exp $
 
 DISTNAME=	pymol-v1.5.0.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/pymol-v/mol-/}
 EGG_NAME=	pymol-1.5.0.1
-PKGREVISION=	5
+PKGREVISION=	8
 CATEGORIES=	biology
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pymol/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,10 +12,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.pymol.org/
 COMMENT=	Molecular Visualization System
 
-DEPENDS+=	${PYPKGPREFIX}-numpy-[0-9]*:../../math/py-numpy
-
 PYTHON_VERSIONED_DEPENDENCIES=	Pmw
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 1.5.0.1
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 1.5.0.1
 
 WRKSRC=		${WRKDIR}/pymol
 
@@ -43,9 +41,10 @@ post-install:
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/glew/buildlink3.mk"
-.include "../../graphics/glut/buildlink3.mk"
+.include "../../graphics/freeglut/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../lang/python/application.mk"
 .include "../../lang/python/versioned_dependencies.mk"
 .include "../../lang/python/distutils.mk"
+.include "../../math/py-numpy/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

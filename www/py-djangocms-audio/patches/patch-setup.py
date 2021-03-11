@@ -1,11 +1,11 @@
-$NetBSD: patch-setup.py,v 1.1 2018/12/16 14:04:55 adam Exp $
+$NetBSD: patch-setup.py,v 1.3 2021/01/16 09:43:33 adam Exp $
 
-Exclude tests.
+Do not install tests.
 
---- setup.py.orig	2018-12-16 13:07:21.000000000 +0000
+--- setup.py.orig	2021-01-16 09:39:10.000000000 +0000
 +++ setup.py
-@@ -41,7 +41,7 @@ setup(
-     license='BSD',
+@@ -46,7 +46,7 @@ setup(
+     license='BSD-3-Clause',
      description='Adds audio plugin to django CMS.',
      long_description=open('README.rst').read(),
 -    packages=find_packages(),

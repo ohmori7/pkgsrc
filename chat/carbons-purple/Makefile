@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.2 2019/05/05 22:49:45 ryoon Exp $
+# $NetBSD: Makefile,v 1.6 2020/11/05 09:07:32 ryoon Exp $
 
 DISTNAME=	carbons-purple-0.2.1
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	chat
 MASTER_SITES=	${MASTER_SITE_GITHUB:=gkdr/}
 GITHUB_PROJECT=	carbons
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
-MAINTAINER=	nia@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/gkdr/carbons
 COMMENT=	XEP-0280: Message Carbons plugin for libpurple
 LICENSE=	gnu-gpl-v2

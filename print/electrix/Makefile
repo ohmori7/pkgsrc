@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.63 2019/05/09 13:57:50 ryoon Exp $
+# $NetBSD: Makefile,v 1.77 2020/11/21 09:34:56 wiz Exp $
 
 DISTNAME=	electrix-0.2.0
-PKGREVISION=	61
+PKGREVISION=	72
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=electrix/}
 EXTRACT_SUFX=	.tar.bz2
@@ -12,6 +12,7 @@ COMMENT=	Application to view PDF files
 LICENSE=	gnu-gpl-v2
 
 USE_TOOLS+=	intltool pkg-config
+PYTHON_VERSIONS_ACCEPTED=	27
 
 do-configure:
 	cd ${WRKSRC} && \

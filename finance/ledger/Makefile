@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.13 2019/04/25 07:32:54 maya Exp $
+# $NetBSD: Makefile,v 1.21 2021/01/01 08:24:42 ryoon Exp $
 
-DISTNAME=	ledger-3.1.3
+DISTNAME=	ledger-3.2.1
 PKGREVISION=	1
 CATEGORIES=	finance
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ledger/}
@@ -15,8 +15,6 @@ USE_CMAKE=	yes
 USE_LANGUAGES=	c++ c
 GCC_REQD+=	4.8
 
-CMAKE_ARGS+=	-DUSE_PYTHON27_COMPONENT=ON
-
 .include "options.mk"
 
 REPLACE_INTERPRETER+=	python
@@ -26,6 +24,9 @@ REPLACE_FILES.python+=	contrib/getquote-uk.py acprep python/demo.py
 REPLACE_FILES.python+=	test/DocTests.py test/LedgerHarness.py
 REPLACE_FILES.python+=	test/convert.py test/RegressTests.py test/convert.py
 REPLACE_FILES.python+=	tools/genuuid
+
+TEST_TARGET=	check
+TEST_ENV+=	LD_LIBRARY_PATH=${WRKSRC}
 
 .include "../../devel/boost-headers/buildlink3.mk"
 .include "../../devel/boost-libs/buildlink3.mk"

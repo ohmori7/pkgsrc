@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.7 2018/06/08 20:12:49 nros Exp $
+# $NetBSD: Makefile,v 1.9 2020/01/18 21:48:27 jperkin Exp $
 
 DISTNAME=	qore-yaml-module-0.6
+PKGREVISION=	1
 CATEGORIES=	textproc
-MASTER_SITES=   ${MASTER_SITE_GITHUB:=qorelanguage/}
-EXTRACT_SUFX=   .tar.bz2
+MASTER_SITES=	${MASTER_SITE_GITHUB:=qorelanguage/}
+EXTRACT_SUFX=	.tar.bz2
 GITHUB_PROJECT=	module-yaml
 GITHUB_RELEASE=	v${PKGVERSION_NOREV}
 
@@ -19,7 +20,7 @@ USE_TOOLS+=	gmake pax
 
 PTHREAD_OPTS+=	native
 
-CONFIGURE_ARGS+=--with-libsuffix=""
+CONFIGURE_ARGS+=	--with-libsuffix=""
 
 #This is needed in order to comply the with MIT license and binary distribution
 #Install docs.

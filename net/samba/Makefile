@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.273 2019/04/18 10:07:34 sborrill Exp $
+# $NetBSD: Makefile,v 1.286 2020/12/04 04:56:09 riastradh Exp $
 
 DISTNAME=	samba-${VERSION}
 CATEGORIES=	net
 MASTER_SITES=	${SAMBA_MIRRORS:=stable/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.samba.org/
+HOMEPAGE=	https://www.samba.org/
 COMMENT=	SMB/CIFS protocol server suite
 LICENSE=	gnu-gpl-v3
 
 VERSION=	3.6.25
-PKGREVISION=	16
+PKGREVISION=	26
 
 CONFLICTS+=	ja-samba-[0-9]* pam-smbpass-[0-9]* winbind-[0-9]*
 
@@ -52,26 +52,22 @@ FILES_SUBST+=		WINBINDD_RCD_SCRIPT=${WINBINDD_RCD_SCRIPT:Q}
 USE_TOOLS+=		gmake mktemp perl:run pkg-config
 REPLACE_PERL=		script/findsmb.in
 
-BROKEN_GETTEXT_DETECTION=yes
-GNU_CONFIGURE=		yes
-GNU_CONFIGURE_LIBDIR=	${SAMBA_LIBDIR}
-CONFIGURE_ARGS+=	--with-libiconv=${BUILDLINK_PREFIX.iconv}
-CONFIGURE_ARGS+=	--with-readline=${BUILDLINK_PREFIX.readline}
-CONFIGURE_ARGS+=	--with-configdir=${SAMBA_ETCDIR}
-CONFIGURE_ARGS+=	--with-lockdir=${SAMBA_LOCKDIR}
-CONFIGURE_ARGS+=	--with-logfilebase=${SAMBA_LOGDIR}
-CONFIGURE_ARGS+=	--with-modulesdir=${SAMBA_MODULESDIR}
-CONFIGURE_ARGS+=	--with-piddir=${SAMBA_PIDDIR}
-CONFIGURE_ARGS+=	--with-privatedir=${SAMBA_PRIVATE:Q}
-CONFIGURE_ARGS+=	--with-statedir=${SAMBA_STATEDIR}
-CONFIGURE_ARGS+=	--localstatedir=${SAMBA_VARDIR}
-CONFIGURE_ARGS+=	--with-mandir=${PREFIX}/${PKGMANDIR}
-CONFIGURE_ARGS+=	--with-swatdir=${PREFIX}/share/samba/swat
-CONFIGURE_ARGS+=	--enable-external-libtdb
-#
-# Explicitly disable samba4 merged-build option which is broken.
-#
-CONFIGURE_ARGS+=	--enable-merged-build=no
+BROKEN_GETTEXT_DETECTION=	yes
+GNU_CONFIGURE=			yes
+GNU_CONFIGURE_LIBDIR=		${SAMBA_LIBDIR}
+CONFIGURE_ARGS+=		--with-libiconv=${BUILDLINK_PREFIX.iconv}
+CONFIGURE_ARGS+=		--with-readline=${BUILDLINK_PREFIX.readline}
+CONFIGURE_ARGS+=		--with-configdir=${SAMBA_ETCDIR}
+CONFIGURE_ARGS+=		--with-lockdir=${SAMBA_LOCKDIR}
+CONFIGURE_ARGS+=		--with-logfilebase=${SAMBA_LOGDIR}
+CONFIGURE_ARGS+=		--with-modulesdir=${SAMBA_MODULESDIR}
+CONFIGURE_ARGS+=		--with-piddir=${SAMBA_PIDDIR}
+CONFIGURE_ARGS+=		--with-privatedir=${SAMBA_PRIVATE:Q}
+CONFIGURE_ARGS+=		--with-statedir=${SAMBA_STATEDIR}
+CONFIGURE_ARGS+=		--localstatedir=${SAMBA_VARDIR}
+CONFIGURE_ARGS+=		--with-mandir=${PREFIX}/${PKGMANDIR}
+CONFIGURE_ARGS+=		--with-swatdir=${PREFIX}/share/samba/swat
+CONFIGURE_ARGS+=		--enable-external-libtdb
 
 .include "../../net/samba/options.mk"
 

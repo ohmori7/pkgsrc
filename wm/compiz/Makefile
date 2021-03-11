@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.117 2019/05/23 19:23:18 rillig Exp $
+# $NetBSD: Makefile,v 1.133 2021/01/01 08:24:58 ryoon Exp $
 #
 
 PKGVER=		0.8.8
 DISTNAME=	compiz-${PKGVER}
-PKGREVISION=	49
+PKGREVISION=	64
 CATEGORIES=	wm x11
 MASTER_SITES=	http://releases.compiz.org/${PKGVER}/
 
@@ -82,6 +82,7 @@ BUILDLINK_DEPMETHOD.pango=	build
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"
 
+.include "../../x11/libxshmfence/buildlink3.mk"
 .include "../../audio/libcanberra/buildlink3.mk"
 .include "../../devel/GConf/schemas.mk"
 .include "../../graphics/png/buildlink3.mk"

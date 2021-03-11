@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2018/03/21 13:19:52 taca Exp $
+# $NetBSD: Makefile,v 1.4 2021/02/05 15:00:47 taca Exp $
 
-DISTNAME=	rex-arch-0.1.13
+DISTNAME=	rex-arch-0.1.14
 CATEGORIES=	security
 
 MAINTAINER=	minskim@NetBSD.org
@@ -9,6 +9,8 @@ COMMENT=	Rex Library which contains architecture specific information
 LICENSE=	modified-bsd
 
 DEPENDS+=	${RUBY_PKGPREFIX}-rex-text-[0-9]*:../../security/ruby-rex-text
+
+USE_LANGUAGES=	# none
 
 .include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

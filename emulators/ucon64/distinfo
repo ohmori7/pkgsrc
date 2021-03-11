@@ -1,16 +1,10 @@
-$NetBSD: distinfo,v 1.9 2018/03/07 12:34:55 wiz Exp $
+$NetBSD: distinfo,v 1.12 2020/12/20 15:15:01 fcambus Exp $
 
-SHA1 (ucon64-2.1.0-src.tar.gz) = 83506c965ba4ab6fa7122c9dcebbabe6c553cbc3
-RMD160 (ucon64-2.1.0-src.tar.gz) = b3b6b95a44cb50ac7e3634d07b1b50960fb971f8
-SHA512 (ucon64-2.1.0-src.tar.gz) = da2dbe8a573e7dc779f69859f4d3508d4818dcfd99b6b397a7b23a2038a1d8c85835fae9e237a1639ec6179e8ceabb95fd0d65f95f963de99bc61024f686580e
-Size (ucon64-2.1.0-src.tar.gz) = 1348408 bytes
-SHA1 (patch-Makefile) = 9cfc3c474562d5073099286a9659e4e5d4cf5d2f
-SHA1 (patch-backup_libcd64_Makefile) = b46127daa77cd9516954365897247c8f33088883
-SHA1 (patch-backup_libcd64_cd64io.c) = b47d14bb41708caa5a582444d5f4ef35cda973ea
-SHA1 (patch-backup_libcd64_cd64io.h) = 026c79ecc577e701b27113d369e6c8d977f01d53
-SHA1 (patch-config.mak.in) = 87db3e62bbd5fa94fa83878b227e3ed3ff8920e1
-SHA1 (patch-configure) = a4b89f6885abe731b75f6277bc563ec992f8d0c9
-SHA1 (patch-configure.in) = 3d5a3ecad1b50499b001eda39ec0100d0ed8ee16
-SHA1 (patch-libdiscmage_libdiscmage.h) = 7a5ced96ae619fd843d3b1acdcd28788937cc79a
-SHA1 (patch-misc_parallel.c) = 164137f352049698a2ff4758bd3dda72ab4dadec
-SHA1 (patch-misc_unzip.h) = 3a065530cd80c74985a997459ee67847b8f75864
+SHA1 (ucon64-2.2.1-src.tar.gz) = bfc6fad1b82cb0d5ffe734f46d088567e8d93126
+RMD160 (ucon64-2.2.1-src.tar.gz) = ca363e350be23fa2f083deb598efab307066b231
+SHA512 (ucon64-2.2.1-src.tar.gz) = 34453399151e5ed256fdcf387b9d32a052718b264e51b99a2be251b90589337d13cd317f8d1aa7d3c8e39c8e407b22797d4608ec6d14b99c8673ec74f349f6c2
+Size (ucon64-2.2.1-src.tar.gz) = 1476080 bytes
+SHA1 (patch-libdiscmage_ioapi.h) = a5857b1623a3180d09e19815e261f23491aaad96
+SHA1 (patch-libdiscmage_misc.c) = df3124b713b9db5379fa2bfd529c5637b6e8f6d0
+SHA1 (patch-misc_ioapi.h) = dc2939f8f404e25a7dcb841555024551f2962984
+SHA1 (patch-misc_misc.c) = 528e1f79df8c01841a95c0632becf8fcd1358255

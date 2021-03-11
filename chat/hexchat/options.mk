@@ -1,9 +1,9 @@
-# $NetBSD: options.mk,v 1.6 2018/03/17 11:56:15 tnn Exp $
+# $NetBSD: options.mk,v 1.9 2019/12/04 11:57:05 nia Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.hexchat
 PKG_SUPPORTED_OPTIONS=	dbus gtk2 libcanberra libnotify libpci libproxy
-PKG_SUPPORTED_OPTIONS+=	libsexy lua openssl perl python
-PKG_SUGGESTED_OPTIONS+=	gtk2 libproxy libsexy openssl
+PKG_SUPPORTED_OPTIONS+=	lua openssl perl python
+PKG_SUGGESTED_OPTIONS+=	gtk2 libproxy openssl
 
 PLIST_VARS+=		dbus gtk2 libpci lua perl python fishlim
 
@@ -45,11 +45,11 @@ MESON_ARGS+=		-Dwith-libnotify=false
 
 .if !empty(PKG_OPTIONS:Mlibpci)
 .include "../../sysutils/pciutils/buildlink3.mk"
-.if ${OPSYS} == "NetBSD"
+.  if ${OPSYS} == "NetBSD"
 LIBS+=			-lpciutils
-.else
+.  else
 LIBS+=			-lpci
-.endif
+.  endif
 PLIST.libpci=		yes
 MESON_ARGS+=		-Dwith-sysinfo=true
 .else
@@ -95,8 +95,5 @@ PLIST.python=		yes
 MESON_ARGS+=		-Dwith-python=python-${PYVERSSUFFIX}
 .else
 MESON_ARGS+=		-Dwith-python=false
-.endif
-
-.if !empty(PKG_OPTIONS:Mlibsexy)
-.include "../../devel/libsexy/buildlink3.mk"
+PYTHON_FOR_BUILD_ONLY=	tool
 .endif

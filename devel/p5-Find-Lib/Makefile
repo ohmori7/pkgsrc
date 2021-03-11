@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.5 2018/08/22 09:44:04 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2020/08/31 18:08:05 wiz Exp $
 
 DISTNAME=	Find-Lib-1.04
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Find/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~yannk/Find-Lib/
+HOMEPAGE=	https://metacpan.org/release/Find-Lib
 COMMENT=	Helper to smartly find libs to use in the filesystem tree
 LICENSE=	${PERL5_LICENSE}
 

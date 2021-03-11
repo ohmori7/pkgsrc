@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.1 2015/05/08 11:27:46 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2020/05/10 04:31:47 markd Exp $
 
 DISTNAME=	initials
 PKGNAME=	tex-${DISTNAME}-2014
+PKGREVISION=	1
 TEXLIVE_REV=	15878
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/initials
+HOMEPAGE=	https://ctan.org/pkg/initials
 COMMENT=	Adobe Type 1 decorative initial fonts
 LICENSE=	lppl-1.3c
 
@@ -33,5 +34,6 @@ TEX_MAP_FILES+=	Starburst.map
 TEX_MAP_FILES+=	Typocaps.map
 TEX_MAP_FILES+=	Zallman.map
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

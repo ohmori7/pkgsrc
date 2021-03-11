@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2018/07/04 13:40:13 jperkin Exp $
+# $NetBSD: Makefile,v 1.14 2020/01/18 21:48:00 jperkin Exp $
 #
 
 PKGNAME=	poco-data-mysql-${POCO_VERSION}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	databases
 
 COMMENT=	POCO C++ MySQL RDBMS Accessor libraries
@@ -33,8 +33,8 @@ SUBST_CLASSES+=		paths
 SUBST_MESSAGE.paths=	pkgsrc-izing paths
 SUBST_STAGE.paths=	pre-configure
 SUBST_FILES.paths=	Data/MySQL/Makefile
-SUBST_SED.paths=    -e 's,@MYSQLLIBDIR@,${BUILDLINK_DIR}/${BUILDLINK_LIBDIRS.mysql-client},g'
-SUBST_SED.paths+=    -e 's,@MYSQLINCDIR@,${BUILDLINK_DIR}/${BUILDLINK_INCDIRS.mysql-client},g'
+SUBST_SED.paths=	-e 's,@MYSQLLIBDIR@,${BUILDLINK_DIR}/${BUILDLINK_LIBDIRS.mysql-client},g'
+SUBST_SED.paths+=	-e 's,@MYSQLINCDIR@,${BUILDLINK_DIR}/${BUILDLINK_INCDIRS.mysql-client},g'
 
 .include "../../mk/mysql.buildlink3.mk"
 .include "../../databases/poco-data/buildlink3.mk"

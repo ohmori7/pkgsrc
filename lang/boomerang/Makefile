@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.19 2018/11/12 16:10:24 jaapb Exp $
+# $NetBSD: Makefile,v 1.21 2021/03/08 08:13:02 jaapb Exp $
 #
 
 DISTNAME=	boomerang-0.2-source
 PKGNAME=	${DISTNAME:S/-source//}
-PKGREVISION=	15
+PKGREVISION=	16
 CATEGORIES=	lang
 MASTER_SITES=	http://www.seas.upenn.edu/~harmony/download/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.seas.upenn.edu/~harmony/
+HOMEPAGE=	https://www.seas.upenn.edu/~harmony/
 COMMENT=	Bidirectional programming language for ad-hoc, textual data
 LICENSE=	gnu-lgpl-v2.1
 

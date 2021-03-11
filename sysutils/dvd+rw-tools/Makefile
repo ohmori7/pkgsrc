@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.33 2012/10/23 19:50:59 asau Exp $
+# $NetBSD: Makefile,v 1.36 2020/08/25 20:55:10 js Exp $
 #
 
 DISTNAME=	dvd+rw-tools-7.1
@@ -14,14 +14,14 @@ DEPENDS+=	{cdrtools-[1-9]*,cdrtools-ossdvd-[0-9]*}:../../sysutils/cdrtools
 
 WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
 
-USE_LANGUAGES=	c c++
+USE_LANGUAGES=	c c++03
 USE_TOOLS+=	m4 gmake
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 
 # These are the only platforms listed in growisofs.c
-ONLY_FOR_PLATFORM=Linux-*-* OpenBSD-*-* NetBSD-*-* FreeBSD-*-* \
-	DragonFly-*-* SunOS-*-* HP-UX-*-* IRIX-*-*
+ONLY_FOR_PLATFORM=	Linux-*-* OpenBSD-*-* NetBSD-*-* FreeBSD-*-* \
+			DragonFly-*-* SunOS-*-* HP-UX-*-* IRIX-*-* Darwin-*-*
 
 LDFLAGS.NetBSD+=	-lrt # sem_* functions
 

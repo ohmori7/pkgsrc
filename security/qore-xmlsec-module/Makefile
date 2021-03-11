@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2018/06/08 20:49:42 nros Exp $
+# $NetBSD: Makefile,v 1.9 2020/11/05 09:09:04 ryoon Exp $
 
 DISTNAME=	qore-xmlsec-module-0.0.2
-PKGREVISION=	8
+PKGREVISION=	11
 CATEGORIES=	security
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=qore/}
 
@@ -15,9 +15,9 @@ USE_LIBTOOL=	yes
 USE_LANGUAGES=	c c++11
 PTHREAD_OPTS+=	native
 
-CONFIGURE_ARGS+=--with-xmlsec-dir=${BUILDLINK_PREFIX.xmlsec1}
-CONFIGURE_ARGS+=--with-libxml2-dir=${BUILDLINK_PREFIX.libxml2}
-CONFIGURE_ARGS+=--with-qore-dir=${BUILDLINK_PREFIX.qore}
+CONFIGURE_ARGS+=	--with-xmlsec-dir=${BUILDLINK_PREFIX.xmlsec1}
+CONFIGURE_ARGS+=	--with-libxml2-dir=${BUILDLINK_PREFIX.libxml2}
+CONFIGURE_ARGS+=	--with-qore-dir=${BUILDLINK_PREFIX.qore}
 
 INSTALLATION_DIRS+=     share/doc/${PKGBASE}
 post-install:

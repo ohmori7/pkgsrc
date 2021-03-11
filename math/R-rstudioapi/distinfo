@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2020/09/20 14:50:51 mef Exp $
+
+SHA1 (R/rstudioapi_0.11.tar.gz) = 4899ac3f8705dbd138a65fe870a9fe00f2a751e3
+RMD160 (R/rstudioapi_0.11.tar.gz) = 0302a8d52010aac7c9aa8af8a5413baefeda68b1
+SHA512 (R/rstudioapi_0.11.tar.gz) = 90867658947935621ba7ebfeab07f88b62ab606a2221e868b9b8eaeb93e098fdc432d26e73a012e3f722ba353238010c60ae8db02ba4a998b973f5a3c02741aa
+Size (R/rstudioapi_0.11.tar.gz) = 98082 bytes

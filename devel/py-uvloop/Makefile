@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.18 2019/04/26 13:13:54 maya Exp $
+# $NetBSD: Makefile,v 1.24 2021/02/19 05:45:07 adam Exp $
 
-DISTNAME=	uvloop-0.12.2
+DISTNAME=	uvloop-0.15.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=u/uvloop/}
@@ -10,9 +10,11 @@ HOMEPAGE=	https://github.com/MagicStack/uvloop
 COMMENT=	Fast implementation of asyncio event loop on top of libuv
 LICENSE=	mit AND apache-2.0
 
-BUILD_DEPENDS+=	${PYPKGPREFIX}-cython-[0-9]*:../../devel/py-cython
+DEPENDS+=	libuv>=1.33.1:../../devel/libuv
+TEST_DEPENDS+=	${PYPKGPREFIX}-OpenSSL-[0-9]*:../../security/py-OpenSSL
+TEST_DEPENDS+=	${PYPKGPREFIX}-psutil-[0-9]*:../../sysutils/py-psutil
 
-PYTHON_VERSIONS_INCOMPATIBLE=	27
+PYTHON_VERSIONS_INCOMPATIBLE=	27 36
 
 .include "../../devel/libuv/buildlink3.mk"
 .include "../../lang/python/egg.mk"

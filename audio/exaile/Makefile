@@ -1,36 +1,65 @@
-# $NetBSD: Makefile,v 1.63 2019/04/28 07:01:53 wiz Exp $
+# $NetBSD: Makefile,v 1.71 2021/02/18 18:04:27 nia Exp $
 
-DISTNAME=	exaile_0.2.14
-PKGNAME=	${DISTNAME:S/_/-/1}
-PKGREVISION=	39
+DISTNAME=	exaile-4.1.0
 CATEGORIES=	audio
-MASTER_SITES=	http://www.exaile.org/files/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=exaile/}
+GITHUB_PROJECT=	exaile
+GITHUB_RELEASE=	${PKGVERSION_NOREV}
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.exaile.org/
-COMMENT=	Music player
+MAINTAINER=	nia@NetBSD.org
+HOMEPAGE=	https://www.exaile.org/
+COMMENT=	Music Player for GTK+
 LICENSE=	gnu-gpl-v2 # or later
 
+PY_PATCHPLIST=	yes
+
+USE_TOOLS+=	pkg-config gmake
+USE_TOOLS+=	msgfmt msgmerge xgettext
+
+MAKE_FLAGS+=	PYTHON3_CMD=${PYTHONBIN}
+MAKE_FLAGS+=	PREFIX=${PREFIX}
+MAKE_FLAGS+=	EXAILEMANDIR=${DESTDIR}${PREFIX}/${PKGMANDIR}
+MAKE_FLAGS+=	XDGCONFDIR=${EGDIR}
+
+MANCOMPRESSED=	yes
+
+DEPENDS+=	${PYPKGPREFIX}-gobject3-[0-9]*:../../devel/py-gobject3
+DEPENDS+=	${PYPKGPREFIX}-gstreamer1-[0-9]*:../../multimedia/py-gstreamer1
 DEPENDS+=	${PYPKGPREFIX}-mutagen-[0-9]*:../../audio/py-mutagen
-DEPENDS+=	${PYPKGPREFIX}-notify-python-[0-9]*:../../sysutils/py-notify-python
 
-WRKSRC=		${WRKDIR}/exaile-0.2.14
+DEPENDS+=	gst-plugins1-flac-[0-9]*:../../audio/gst-plugins1-flac
+DEPENDS+=	gst-plugins1-mpg123-[0-9]*:../../audio/gst-plugins1-mpg123
+DEPENDS+=	gst-plugins1-ogg-[0-9]*:../../multimedia/gst-plugins1-ogg
+DEPENDS+=	gst-plugins1-opus-[0-9]*:../../audio/gst-plugins1-opus
+DEPENDS+=	gst-plugins1-vorbis-[0-9]*:../../audio/gst-plugins1-vorbis
 
-USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		pkg-config gmake intltool msgfmt
+.include "../../mk/oss.buildlink3.mk"
 
-REPLACE_PYTHON=	exaile.py
-PYTHON_VERSIONS_ACCEPTED=	 27 # py-sqlite2, py-gtk2, py-gstreamer0.10
+.if ${OPSYS} == "Linux"
+DEPENDS+=	gst-plugins1-alsa-[0-9]*:../../audio/gst-plugins1-alsa
+.endif
 
-MAKE_ENV+=	PYTHONBIN=${PYTHONBIN}
-MAKE_FLAGS+=	PKGLOCALEDIR=${PKGLOCALEDIR}
+.if ${OPSYS} != "Linux" && ${OSS_TYPE} != "none"
+DEPENDS+=	gst-plugins1-oss-[0-9]*:../../audio/gst-plugins1-oss
+.endif
 
-.include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../lang/python/application.mk"
-.include "../../x11/py-gtk2/buildlink3.mk"
+TOOL_DEPENDS+=	help2man-[0-9]*:../../converters/help2man
+
+EGDIR=		${PREFIX}/share/examples/xdg
+
+OWN_DIRS+=	${PKG_SYSCONFDIR}/xdg/exaile
+CONF_FILES+=	${EGDIR}/exaile/settings.ini ${PKG_SYSCONFDIR}/xdg/exaile/settings.ini
+
+.include "../../lang/python/extension.mk"
+
+SUBST_CLASSES+=		py
+SUBST_STAGE.py=		pre-configure
+SUBST_MESSAGE.py=	Set path to python interpreter.
+SUBST_FILES.py+=	exaile
+SUBST_VARS.py+=		PYTHONBIN
+
+.include "../../databases/py-bsddb3/buildlink3.mk"
+.include "../../multimedia/gst-plugins1-good/buildlink3.mk"
 .include "../../sysutils/py-dbus/buildlink3.mk"
-.include "../../multimedia/py-gstreamer0.10/buildlink3.mk"
-.include "../../textproc/py-elementtree/buildlink3.mk"
-.include "../../databases/py-sqlite2/buildlink3.mk"
-.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../x11/gtk3/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

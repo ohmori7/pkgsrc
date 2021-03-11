@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.8 2018/12/13 19:51:44 adam Exp $
+# $NetBSD: Makefile,v 1.16 2021/01/01 08:24:37 ryoon Exp $
 
-DISTNAME=	libstaroffice-0.0.2
-PKGREVISION=	6
+DISTNAME=	libstaroffice-0.0.7
+PKGREVISION=	2
 CATEGORIES=	converters
-MASTER_SITES=	http://dev-www.libreoffice.org/src/
-EXTRACT_SUFX=	.tar.bz2
+MASTER_SITES=	https://dev-www.libreoffice.org/src/
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	ryoon@NetBSD.org
-HOMEPAGE=	http://dev-www.libreoffice.org/src/
+HOMEPAGE=	https://dev-www.libreoffice.org/src/
 COMMENT=	Library to import StarOffice documents
 LICENSE=	mpl-2.0 OR gnu-lgpl-v2.1
 
@@ -15,6 +15,9 @@ GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	pkg-config
 USE_LANGUAGES=	c c++
+
+# C++11
+GCC_REQD+=	4.7
 
 CONFIGURE_ARGS+=	--without-docs
 CONFIGURE_ARGS+=	--disable-werror

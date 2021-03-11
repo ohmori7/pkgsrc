@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.47 2019/01/26 07:48:24 wen Exp $
+# $NetBSD: Makefile,v 1.51 2020/09/07 09:32:09 wiz Exp $
 
-DISTNAME=	Module-ScanDeps-1.27
+DISTNAME=	Module-ScanDeps-1.29
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Module/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Module-ScanDeps/
+HOMEPAGE=	https://metacpan.org/release/Module-ScanDeps
 COMMENT=	Perl 5 module to recursively scan Perl code for dependencies
 LICENSE=	${PERL5_LICENSE}
 

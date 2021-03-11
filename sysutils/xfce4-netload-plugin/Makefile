@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.54 2018/11/14 22:22:29 kleink Exp $
+# $NetBSD: Makefile,v 1.62 2020/08/31 18:11:38 wiz Exp $
 
-PKGREVISION= 6
+PKGREVISION= 4
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
-DISTNAME=	xfce4-netload-plugin-1.3.1
+DISTNAME=	xfce4-netload-plugin-1.3.2
 CATEGORIES=	sysutils
 MASTER_SITES=	http://archive.xfce.org/src/panel-plugins/xfce4-netload-plugin/1.3/
 
-HOMEPAGE=	http://goodies.xfce.org/projects/panel-plugins/xfce4-netload-plugin
+HOMEPAGE=	https://goodies.xfce.org/projects/panel-plugins/xfce4-netload-plugin
 COMMENT=	Xfce network load plugin
 
 LDFLAGS.SunOS+=	-lnsl

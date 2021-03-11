@@ -1,14 +1,15 @@
-$NetBSD: distinfo,v 1.92 2019/04/30 15:21:06 taca Exp $
+$NetBSD: distinfo,v 1.109 2021/03/07 08:26:24 taca Exp $
 
-SHA1 (dovecot-2.3.6.tar.gz) = 7b939bb83bca6d2bbc932d33d5b450bd66d9d124
-RMD160 (dovecot-2.3.6.tar.gz) = 584e72ed6d8901960aa2ba48c0d3716db4222e95
-SHA512 (dovecot-2.3.6.tar.gz) = ec28af2efcbd4ab534298c3342709251074dcdb0f0f4bcad0d24b996b273387e2ce557d7ab54abafb69be3ed7dd61f25c82b9710d78156932e2eff7f941c9eb2
-Size (dovecot-2.3.6.tar.gz) = 6980135 bytes
-SHA1 (patch-aa) = ea185011f0c1ee3aa1ff528e61f6f356fe385666
+SHA1 (dovecot-2.3.14.tar.gz) = b908db7ce0ae234fa62c7bb60127152034b72732
+RMD160 (dovecot-2.3.14.tar.gz) = dcbb7bbfa77f3e9002df64c67cbdf8d730c68424
+SHA512 (dovecot-2.3.14.tar.gz) = 69df234cb739c7ee7ae3acfb9756bc22481e94c95463d32bfac315c7ec4b1ba0dfbff552b769f2ab7ee554087ca2ebbe331aa008d3af26417016612dc7cad103
+Size (dovecot-2.3.14.tar.gz) = 7483769 bytes
+SHA1 (patch-aa) = 3af01aa4a8cea1a3fb840b6243a744de77069611
 SHA1 (patch-ab) = 9db15fd853ba47ef4bf04f2adc9ab24f71ee4d1e
 SHA1 (patch-ae) = c795585df9f415ceabb28eec1ff691ee26168d3b
 SHA1 (patch-af) = c066e94dd6593d16eec3e66f5f4d26f021918498
 SHA1 (patch-src_imap_imap-client.h) = 1a2bf95ab6af57d88862a1512624bf263f4c2ce7
 SHA1 (patch-src_lib-ldap_ldap-private.h) = 2d5ce32330ad4164cc75f8d209ba499d37ed01fc
 SHA1 (patch-src_lib_connection.h) = c147511f4ff50e4b5a048c3a363f0af90ee4c6ad
+SHA1 (patch-src_lib_test-file-cache.c) = 7eb5cf9d3a44be141ab1597b270f20bf36547b6c
 SHA1 (patch-src_old-stats_mail-stats.h) = 0d40c618445c089af2646a6864c3e909812282af

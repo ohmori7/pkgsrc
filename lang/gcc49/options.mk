@@ -1,16 +1,21 @@
-# $NetBSD: options.mk,v 1.3 2016/09/30 13:17:00 sevan Exp $
+# $NetBSD: options.mk,v 1.5 2019/11/03 19:03:59 rillig Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.${GCC_PKGNAME}
 PKG_SUPPORTED_OPTIONS=	nls gcc-inplace-math gcc-c++ gcc-fortran gcc-java \
-			gcc-go gcc-objc gcc-objc++
+			gcc-go gcc-objc gcc-objc++ always-libgcc
 PKG_SUGGESTED_OPTIONS=	gcc-c++ gcc-fortran gcc-objc gcc-objc++
 
 PKG_SUGGESTED_OPTIONS.DragonFly+=	nls
 PKG_SUGGESTED_OPTIONS.Linux+=		nls
-PKG_SUGGESTED_OPTIONS.NetBSD+=	nls
-PKG_SUGGESTED_OPTIONS.SunOS+=		gcc-go gcc-inplace-math
+PKG_SUGGESTED_OPTIONS.NetBSD+=		nls
+PKG_SUGGESTED_OPTIONS.SunOS+=		gcc-go gcc-inplace-math always-libgcc
 # gcc-java was dropped from PKG_SUGGESTED_OPTIONS to spare legacy systems attempting bulkbuilds
 # For example on Darwin/PowerPC this option adds another 24 hours to build time on a G4.
+
+.include "../../mk/compiler.mk"
+.if empty(PKGSRC_COMPILER:Mgcc)
+PKG_SUGGESTED_OPTIONS+=		always-libgcc
+.endif
 
 ###
 ### Determine if multilib is avalible.
@@ -19,9 +24,9 @@ MULTILIB_SUPPORTED?=	unknown
 .if !empty(MACHINE_PLATFORM:MLinux-*-x86_64)
 .  if exists(/usr/include/gnu/stubs-64.h) && \
      !exists(/usr/include/gnu/stubs-32.h)
-MULTILIB_SUPPORTED=No
+MULTILIB_SUPPORTED=	No
 .  else
-MULTILIB_SUPPORTED=Yes
+MULTILIB_SUPPORTED=	Yes
 .  endif
 .endif
 .if !empty(MULTILIB_SUPPORTED:M[Yy][Ee][Ss])
@@ -52,6 +57,32 @@ CONFIGURE_ARGS+=	--disable-nls
       empty(PKG_OPTIONS:Mgcc-multilib) ) || \
     !empty(MULTILIB_SUPPORTED:M[Nn][Oo])
 CONFIGURE_ARGS+=	--disable-multilib
+.endif
+
+###
+### Don't install libgcc if it's older than the system one
+###
+.if empty(PKG_OPTIONS:Malways-libgcc)
+
+.  for _libdir_ in ${_OPSYS_LIB_DIRS}
+.    if exists(${_libdir_})
+BASE_LIBGCC!=			find ${_libdir_} -name libgcc_s.so
+BASE_LIBGCC_MATCH_STRING!=	${ECHO} ${BASE_LIBGCC} ${GCC49_DIST_VERSION} | \
+				${AWK} -f ../../mk/scripts/larger_symbol_version.awk
+.      if ${BASE_LIBGCC_MATCH_STRING:Mnewer}
+DELETE_INSTALLED_LIBGCC=	yes
+.      endif
+.    endif
+.  endfor
+
+.  if ${DELETE_INSTALLED_LIBGCC:Uno}
+post-install:	delete-installed-libgcc
+
+delete-installed-libgcc:
+	${FIND} ${DESTDIR} -name 'libgcc_s.so*' -delete
+
+.  endif
+
 .endif
 
 ###
@@ -158,9 +189,9 @@ LANGS+=			fortran
 .if !empty(PKG_OPTIONS:Mgcc-c++)
 LANGS+=			c++
 USE_TOOLS+=		perl
-.if ${OPSYS} != "SunOS"
+.  if ${OPSYS} != "SunOS"
 CONFIGURE_ARGS+=	--enable-__cxa_atexit
-.endif
+.  endif
 CONFIGURE_ARGS+=	--with-gxx-include-dir=${GCC_PREFIX}/include/c++/
 .else
 CONFIGURE_ARGS+=	--disable-build-with-cxx

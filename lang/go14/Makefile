@@ -1,21 +1,21 @@
-# $NetBSD: Makefile,v 1.18 2019/04/13 23:09:40 maya Exp $
+# $NetBSD: Makefile,v 1.24 2021/02/20 13:54:46 bsiegert Exp $
 
 .include "../../lang/go/version.mk"
 
 DISTNAME=	go${GO14_VERSION}.src
 PKGNAME=	go14-${GO14_VERSION}
-PKGREVISION=	9
+PKGREVISION=	12
 CATEGORIES=	lang
 MASTER_SITES=	https://storage.googleapis.com/golang/
 PATCH_SITES=	https://codereview.appspot.com/download/
 
 MAINTAINER=	bsiegert@NetBSD.org
-HOMEPAGE=	http://golang.org/
+HOMEPAGE=	https://golang.org/
 COMMENT=	The Go programming language
 LICENSE=	modified-bsd
 
 WRKSRC=		${WRKDIR}/go
-USE_TOOLS+=	bash:run perl:run pax
+USE_TOOLS+=	bash:run perl:run pax touch
 
 # uses ulimit -T
 BUILD_DEPENDS+=	bash>=4.2nb3:../../shells/bash
@@ -24,8 +24,8 @@ BUILD_DEPENDS+=	bash>=4.2nb3:../../shells/bash
 TMPDIR?=	/tmp
 BUILDLINK_PASSTHRU_DIRS+= ${TMPDIR}
 
-GOROOT_FINAL=	${PREFIX}/go14
-INSTALLATION_DIRS= go14
+GOROOT_FINAL=		${PREFIX}/go14
+INSTALLATION_DIRS=	go14
 
 MAKE_ENV+=	GOROOT_FINAL=${GOROOT_FINAL:Q}
 MAKE_ENV+=	CGO_ENABLED=0
@@ -67,6 +67,9 @@ REPLACE_PERL+=	src/regexp/syntax/make_perl_groups.pl
 REPLACE_PERL+=	src/syscall/*.pl
 REPLACE_PERL+=	test/errchk
 
+NOT_FOR_PLATFORM+=	*-*-aarch64
+NOT_FOR_PLATFORM+=	*-*-aarch64eb
+
 # uses its own linker which does not support relro in 1.4.x
 CHECK_RELRO_SKIP=	go14/bin/go
 CHECK_RELRO_SKIP+=	go14/bin/gofmt
@@ -85,5 +88,7 @@ do-install:
 	cd ${WRKSRC} && rm -rf .hgignore .hgtags pkg/obj
 	cd ${WRKDIR}/go && pax -rw * ${DESTDIR}${GOROOT_FINAL}
 	find ${DESTDIR}${GOROOT_FINAL} -name \*.orig -exec rm {} \;
+	find ${DESTDIR}${GOROOT_FINAL} -type f -exec ${TOUCH} -r ${DESTDIR}${GOROOT_FINAL} {} \;
+
 
 .include "../../mk/bsd.pkg.mk"

@@ -16,6 +16,7 @@ package pkglint
 type RedundantScope struct {
 	vars        map[string]*redundantScopeVarinfo
 	includePath includePath
+	IsRelevant  func(mkline *MkLine) bool
 }
 type redundantScopeVarinfo struct {
 	vari         *Var
@@ -24,16 +25,16 @@ type redundantScopeVarinfo struct {
 }
 
 func NewRedundantScope() *RedundantScope {
-	return &RedundantScope{vars: make(map[string]*redundantScopeVarinfo)}
+	return &RedundantScope{make(map[string]*redundantScopeVarinfo), includePath{}, nil}
 }
 
-func (s *RedundantScope) Check(mklines MkLines) {
-	mklines.ForEach(func(mkline MkLine) {
+func (s *RedundantScope) Check(mklines *MkLines) {
+	mklines.ForEach(func(mkline *MkLine) {
 		s.checkLine(mklines, mkline)
 	})
 }
 
-func (s *RedundantScope) checkLine(mklines MkLines, mkline MkLine) {
+func (s *RedundantScope) checkLine(mklines *MkLines, mkline *MkLine) {
 	s.updateIncludePath(mkline)
 
 	switch {
@@ -44,15 +45,15 @@ func (s *RedundantScope) checkLine(mklines MkLines, mkline MkLine) {
 	s.handleVarUse(mkline)
 }
 
-func (s *RedundantScope) updateIncludePath(mkline MkLine) {
-	if mkline.firstLine == 1 {
-		s.includePath.push(mkline.Location.Filename)
+func (s *RedundantScope) updateIncludePath(mkline *MkLine) {
+	if mkline.Location.lineno == 1 {
+		s.includePath.push(mkline.Filename())
 	} else {
-		s.includePath.popUntil(mkline.Location.Filename)
+		s.includePath.popUntil(mkline.Filename())
 	}
 }
 
-func (s *RedundantScope) handleVarassign(mkline MkLine, ind *Indentation) {
+func (s *RedundantScope) handleVarassign(mkline *MkLine, ind *Indentation) {
 	varname := mkline.Varname()
 	info := s.get(varname)
 
@@ -73,7 +74,7 @@ func (s *RedundantScope) handleVarassign(mkline MkLine, ind *Indentation) {
 	//  this variable assignment and the/any? previous one.
 	//  See Test_RedundantScope__overwrite_inside_conditional.
 	//  Anyway, too few warnings are better than wrong warnings.
-	if info.vari.Conditional() || ind.Depth("") > 0 {
+	if info.vari.IsConditional() || ind.Depth("") > 0 {
 		return
 	}
 
@@ -86,11 +87,6 @@ func (s *RedundantScope) handleVarassign(mkline MkLine, ind *Indentation) {
 	effOp := mkline.Op()
 	value := mkline.Value()
 
-	// FIXME: Skip the whole redundancy check if the value is not known to be constant.
-	if effOp == opAssign && info.vari.Value() == value {
-		effOp = opAssignDefault
-	}
-
 	if effOp == opAssignEval && value == mkline.WithoutMakeVariables(value) {
 		// Maybe add support for VAR:= ${OTHER} later. This involves evaluating
 		// the OTHER variable though using the appropriate scope. Oh, wait,
@@ -99,6 +95,11 @@ func (s *RedundantScope) handleVarassign(mkline MkLine, ind *Indentation) {
 		//
 		// TODO: The above idea seems possible and useful.
 		effOp = opAssign
+	}
+
+	// TODO: Skip the whole redundancy check if the value is not known to be constant.
+	if effOp == opAssign && info.vari.Value() == value {
+		effOp = opAssignDefault
 	}
 
 	switch effOp {
@@ -147,17 +148,79 @@ func (s *RedundantScope) handleVarassign(mkline MkLine, ind *Indentation) {
 			//
 			// Except when this line has the same value as the guaranteed
 			// current value of the variable. Then it is redundant.
-			if info.vari.Constant() && info.vari.ConstantValue() == mkline.Value() {
+			if info.vari.IsConstant() && info.vari.ConstantValue() == mkline.Value() {
+				s.onRedundant(prevWrites[len(prevWrites)-1], mkline)
+			}
+		}
+
+	case opAssignAppend:
+		s.checkAppendUnique(mkline, info)
+
+	case opAssignShell:
+		if s.includePath.includedByOrEqualsAll(info.includePaths) {
+
+			// The situation is:
+			//
+			//   including.mk: VAR=  value
+			//   included.mk:  VAR!= value   <-- you are here
+			//
+			// A variable has been defined in an including file and
+			// has never been read.
+			// The current line has a shell command assignment,
+			// overwriting the previously assigned value.
+			if info.vari.IsConstant() {
 				s.onRedundant(prevWrites[len(prevWrites)-1], mkline)
 			}
 		}
 	}
 }
 
-func (s *RedundantScope) handleVarUse(mkline MkLine) {
+// checkAppendUnique checks whether a redundant value is appended to a
+// variable that doesn't need repeated values, such as CATEGORIES.
+func (s *RedundantScope) checkAppendUnique(mkline *MkLine, info *redundantScopeVarinfo) {
+	if !info.vari.IsConstant() {
+		return
+	}
+
+	vartype := G.Pkgsrc.VariableType(nil, info.vari.Name)
+	if !(vartype != nil && vartype.IsUnique()) {
+		return
+	}
+
+	checkRedundantAppend := func(redundant *MkLine, because *MkLine) {
+		reds := redundant.ValueFieldsLiteral()
+		becs := because.ValueFieldsLiteral()
+		for _, red := range reds {
+			for _, bec := range becs {
+				if red != bec {
+					continue
+				}
+				if redundant == mkline {
+					redundant.Notef("Appending %q to %s is redundant because it is already added in %s.",
+						red, info.vari.Name, redundant.RelMkLine(because))
+				} else {
+					redundant.Notef("Adding %q to %s is redundant because it will later be appended in %s.",
+						red, info.vari.Name, redundant.RelMkLine(because))
+				}
+			}
+		}
+	}
+
+	if s.includePath.includesOrEqualsAll(info.includePaths) {
+		for _, prev := range info.vari.WriteLocations() {
+			checkRedundantAppend(mkline, prev)
+		}
+	} else if s.includePath.includedByOrEqualsAll(info.includePaths) {
+		for _, prev := range info.vari.WriteLocations() {
+			checkRedundantAppend(prev, mkline)
+		}
+	}
+}
+
+func (s *RedundantScope) handleVarUse(mkline *MkLine) {
 	switch {
 	case mkline.IsVarassign():
-		mkline.ForEachUsed(func(varUse *MkVarUse, time vucTime) {
+		mkline.ForEachUsed(func(varUse *MkVarUse, time VucTime) {
 			varname := varUse.varname
 			info := s.get(varname)
 			info.vari.Read(mkline)
@@ -195,19 +258,25 @@ func (s *RedundantScope) access(varname string) {
 	info.includePaths = append(info.includePaths, s.includePath.copy())
 }
 
-func (s *RedundantScope) onRedundant(redundant MkLine, because MkLine) {
+func (s *RedundantScope) onRedundant(redundant *MkLine, because *MkLine) {
+	if s.IsRelevant != nil && !s.IsRelevant(redundant) {
+		return
+	}
 	if redundant.Op() == opAssignDefault {
 		redundant.Notef("Default assignment of %s has no effect because of %s.",
-			because.Varname(), redundant.RefTo(because))
+			because.Varname(), redundant.RelMkLine(because))
 	} else {
 		redundant.Notef("Definition of %s is redundant because of %s.",
-			because.Varname(), redundant.RefTo(because))
+			because.Varname(), redundant.RelMkLine(because))
 	}
 }
 
-func (s *RedundantScope) onOverwrite(overwritten MkLine, by MkLine) {
+func (s *RedundantScope) onOverwrite(overwritten *MkLine, by *MkLine) {
+	if s.IsRelevant != nil && !s.IsRelevant(overwritten) {
+		return
+	}
 	overwritten.Warnf("Variable %s is overwritten in %s.",
-		overwritten.Varname(), overwritten.RefTo(by))
+		overwritten.Varname(), overwritten.RelMkLine(by))
 	overwritten.Explain(
 		"The variable definition in this line does not have an effect since",
 		"it is overwritten elsewhere.",
@@ -223,14 +292,14 @@ func (s *RedundantScope) onOverwrite(overwritten MkLine, by MkLine) {
 // one of two variable assignments is redundant. Two assignments can
 // only be redundant if one location includes the other.
 type includePath struct {
-	files []string
+	files []CurrPath
 }
 
-func (p *includePath) push(filename string) {
+func (p *includePath) push(filename CurrPath) {
 	p.files = append(p.files, filename)
 }
 
-func (p *includePath) popUntil(filename string) {
+func (p *includePath) popUntil(filename CurrPath) {
 	for p.files[len(p.files)-1] != filename {
 		p.files = p.files[:len(p.files)-1]
 	}
@@ -276,5 +345,5 @@ func (p *includePath) equals(other includePath) bool {
 }
 
 func (p *includePath) copy() includePath {
-	return includePath{append([]string(nil), p.files...)}
+	return includePath{append([]CurrPath(nil), p.files...)}
 }

@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.84 2019/04/03 00:33:02 ryoon Exp $
+# $NetBSD: Makefile,v 1.93 2021/01/04 15:30:46 micha Exp $
 
-DISTNAME=	tin-2.4.3
-PKGREVISION=	1
+DISTNAME=	tin-2.4.5
 CATEGORIES=	news
 MASTER_SITES=	ftp://ftp.tin.org/pub/news/clients/tin/stable/
-MASTER_SITES+=	ftp://ftp.funet.fi/pub/unix/news/tin-unoff/
+MASTER_SITES+=	http://ftp.funet.fi/pub/unix/news/tin-unoff/
 MASTER_SITES+=	ftp://ftp.lip6.fr/pub/unix/news/readers/tin-unoff/
 MASTER_SITES+=	ftp://ftp.cuhk.edu.hk/pub/packages/news/tin/stable/
 MASTER_SITES+=	ftp://sunsite.icm.edu.pl/pub/unix/news/tin/stable/
@@ -20,13 +19,13 @@ RESTRICTED=		Profit from use, sale, trade, or reproduction disallowed
 NO_BIN_ON_CDROM=	${RESTRICTED}
 NO_SRC_ON_CDROM=	${RESTRICTED}
 
-GNU_CONFIGURE=	yes
-USE_PKGLOCALEDIR=yes
+GNU_CONFIGURE=		yes
+USE_PKGLOCALEDIR=	yes
 
 INSTALLATION_DIRS=	share/doc/tin
 
 # for tinews.pl
-USE_TOOLS+=	msgfmt perl:run yacc
+USE_TOOLS+=	msgfmt perl:run pkg-config yacc
 REPLACE_PERL=	tools/*.pl
 BUILD_TARGET=	build
 

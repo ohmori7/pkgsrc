@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.88 2019/04/26 13:14:01 maya Exp $
+# $NetBSD: Makefile,v 1.98 2020/12/04 20:45:23 nia Exp $
 
 DISTNAME=	scigraphica-2.1.0
-PKGREVISION=	34
+PKGREVISION=	41
 CATEGORIES=	graphics math
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=scigraphica/}
 
@@ -9,9 +9,9 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://scigraphica.sourceforge.net/
 COMMENT=	Data analysis and technical graphics
 
+USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake intltool pkg-config
-
-GNU_CONFIGURE=		YES
+GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--without-gnome
 CONFIGURE_ARGS+=	--with-readline-include-path=${BUILDLINK_PREFIX.readline}/include
 CONFIGURE_ARGS+=	--with-readline-path=${BUILDLINK_PREFIX.readline}/lib
@@ -19,16 +19,14 @@ CONFIGURE_ARGS+=	--with-termcap-include-path=${BUILDLINK_PREFIX.readline}/includ
 CONFIGURE_ARGS+=	--with-termcap-path=${BUILDLINK_PREFIX.readline}/lib
 CONFIGURE_ENV+=		PYTHONBIN=${PYTHONBIN:Q}
 
-USE_LIBTOOL=		YES
 PTHREAD_AUTO_VARS=	yes
 
-PYTHON_VERSIONS_INCOMPATIBLE=   36 37 # py-numarray via libscigraphica
+PYTHON_VERSIONS_ACCEPTED=	27 # py-numarray via libscigraphica
 
 pre-configure:
-	ln -s ${PYTHONBIN} ${TOOLS_DIR}/bin/python
+	${LN} -s ${PYTHONBIN} ${TOOLS_DIR}/bin/python
 
 .include "../../devel/readline/buildlink3.mk"
-.include "../../lang/python/application.mk"
 .include "../../graphics/libscigraphica/buildlink3.mk"
-
+.include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

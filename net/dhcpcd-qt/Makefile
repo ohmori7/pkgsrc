@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.5 2018/03/12 11:17:18 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/11/05 09:08:51 ryoon Exp $
 #
 
 PKGNAME=		dhcpcd-qt-${DHCPCD_UI_VERSION}
-PKGREVISION=		3
+PKGREVISION=		12
 CATEGORIES=		net
 
 COMMENT=		Qt system tray monitor for dhcpcd
@@ -14,15 +14,17 @@ DEPENDS+=	dhcpcd-icons>=${DHCPCD_UI_VERSION}:../../net/dhcpcd-icons
 
 USE_LANGUAGES=		c99 c++
 CONFIGURE_ARGS+=	--with-qt
-# Until I can get KDE4 to install...
 CONFIGURE_ARGS+=	--disable-notification
 
 INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR:Q}
+EGDIR=                  ${PREFIX}/share/examples/${PKGBASE}
+MAKEFLAGS+=             SYSCONFDIR=${EGDIR}
 
-BUILDLINK_DEPMETHOD.qt4-tools=	build
+CONF_FILES=             ${EGDIR}/xdg/autostart/${PKGBASE}.desktop \
+                        ${PKG_SYSCONFDIR}/xdg/autostart/${PKGBASE}.desktop
+MAKE_DIRS+=             ${PKG_SYSCONFDIR}/xdg/autostart
 
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-.include "../../x11/qt4-libs/buildlink3.mk"
-.include "../../x11/qt4-tools/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../mk/bsd.pkg.mk"

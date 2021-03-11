@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2019/05/27 15:18:20 bsiegert Exp $
+# $NetBSD: Makefile,v 1.40 2021/01/23 14:23:01 bsiegert Exp $
 
-DISTNAME=		go-protobuf-1.3.1
-PKGREVISION=		3
+DISTNAME=		go-protobuf-1.3.3
+PKGREVISION=		12
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_GITHUB:=golang/}
 GITHUB_PROJECT=		protobuf
@@ -18,7 +18,8 @@ GO_SRCPATH=		github.com/golang/protobuf
 GO_BUILD_PATTERN+=	${GO_SRCPATH}/${godir}/...
 .endfor
 
-REPLACE_SH+=		regenerate.sh
+USE_TOOLS+=		bash:run
+REPLACE_BASH+=		regenerate.sh
 
 .include "../../lang/go/go-package.mk"
 .include "../../mk/bsd.pkg.mk"

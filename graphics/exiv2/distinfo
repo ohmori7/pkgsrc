@@ -1,14 +1,12 @@
-$NetBSD: distinfo,v 1.29 2018/02/01 16:45:57 he Exp $
+$NetBSD: distinfo,v 1.35 2020/10/20 07:07:23 tnn Exp $
 
-SHA1 (exiv2-0.26-trunk.tar.gz) = e68404958ebfbee39354f5aaaa895ac6abf127a2
-RMD160 (exiv2-0.26-trunk.tar.gz) = 5cec04536df26797c56eceef7ac8d5937b811473
-SHA512 (exiv2-0.26-trunk.tar.gz) = d1e9cab886e279b045768dd9ec781f07d2d36d573119403d0b76dc571442173aae6972f86ec55c3ea53fb3ee9ca3571eb8fd63a2a6643a970852813e88634a86
-Size (exiv2-0.26-trunk.tar.gz) = 5677925 bytes
-SHA1 (patch-aa) = 947061d168d5db0d9969fa91ef837b364c641fcb
+SHA1 (exiv2-0.27.3-Source.tar.gz) = f31a74793ce2cd0161915ed1fbec8e79c31cd54d
+RMD160 (exiv2-0.27.3-Source.tar.gz) = 7e3ce6de75aaf87b46d419f86b4b0fc55f133234
+SHA512 (exiv2-0.27.3-Source.tar.gz) = 3f5758ee862b811eeb89cc75fc2bbd8bf10329efa2ce1e68555cdc7729faa6cfd1603e0cc859fbdbe6d8fd5e53bd9b9e6d869d8a20ed17497bf87ce78c005de9
+Size (exiv2-0.27.3-Source.tar.gz) = 26447901 bytes
+SHA1 (patch-cmake_compilerFlags.cmake) = 5b33099de101b47ac6750bb3e62d2169a13f0a8c
+SHA1 (patch-cmake_config.h.cmake) = b7e0336e5ca55a9df08958a05d8ac2a2c800e836
 SHA1 (patch-contrib_organize_Makefile) = 27348fdb0f80092b6e16f27e3ac1dca988eefe70
 SHA1 (patch-contrib_organize_helpers.cpp) = ec003c826d463b3e7e571ab4c41baffaca1240e9
 SHA1 (patch-include_exiv2_types.hpp) = 829e101c1c5f06de0a497b8c6a052b0a4e667d25
-SHA1 (patch-src_Makefile) = d0f145ac851eed22ff3a7ad263fac0af42fd1318
-SHA1 (patch-src_actions.cpp) = b796cafb028eb921803617a617344a81e9124bb6
-SHA1 (patch-src_http.cpp) = 75a64b80c37c54c0f65cc8455bd730ae01df0bae
-SHA1 (patch-src_svn_version.sh) = 41ac5ce78b6b7e78c489ab9ffeaa953e93299e5e
+SHA1 (patch-src_convert.cpp) = b600c1f6f6bf3ac6323ef51203603b248f9c0432

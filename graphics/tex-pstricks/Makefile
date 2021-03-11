@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.15 2019/05/07 12:02:31 markd Exp $
+# $NetBSD: Makefile,v 1.18 2021/02/15 11:07:27 markd Exp $
 
 DISTNAME=	pstricks
-PKGNAME=	tex-${DISTNAME}-2.96
-TEXLIVE_REV=	50101
+PKGNAME=	tex-${DISTNAME}-3.01
+TEXLIVE_REV=	56385
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/pstricks-base
+HOMEPAGE=	https://ctan.org/pkg/pstricks-base
 COMMENT=	PostScript macros for TeX
 LICENSE=	lppl-1.3c
 

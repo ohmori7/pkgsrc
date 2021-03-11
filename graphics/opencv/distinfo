@@ -1,18 +1,26 @@
-$NetBSD: distinfo,v 1.42 2019/04/29 06:59:17 wiz Exp $
+$NetBSD: distinfo,v 1.49 2020/09/09 11:50:50 nia Exp $
 
-SHA1 (opencv-3.4.6.tar.gz) = c445fe9f0a07a95837d2f39c0637da71158129c5
-RMD160 (opencv-3.4.6.tar.gz) = 9fba797c535a7c4366cbf8018ee61ccd396b6c51
-SHA512 (opencv-3.4.6.tar.gz) = 86870788cbe36062b8fdb359d516714df887b0bb894d82bc65d33f7c5e8435371908cf21cee57137a60334187c74f4dabd358a20e9f13bbb36308acec51260cc
-Size (opencv-3.4.6.tar.gz) = 88174475 bytes
+SHA1 (opencv-3.4.9.tar.gz) = bcd0fafc9f1a240d92af9007c9f8098da601d7a5
+RMD160 (opencv-3.4.9.tar.gz) = 2ab36f669a70c876e739736e6b9daacabc5933fe
+SHA512 (opencv-3.4.9.tar.gz) = f445970ca39794fc5fbcaed8b506c6b332cbce911ed8487f490bca9a565c8ed3071816261a1803a8f4b43f58d66ca5eaab30be478c4b7ee973a6b6fc2b370869
+Size (opencv-3.4.9.tar.gz) = 87342965 bytes
 SHA1 (patch-3rdparty_ippicv_ippicv.cmake) = 14ce5de382084793ace32f43c6dfaf01f7ffb390
 SHA1 (patch-3rdparty_protobuf_src_google_protobuf_message__lite.cc) = f1b77384ea8110d2bf3a30ff3fe9f2fa39608caf
-SHA1 (patch-CMakeLists.txt) = d7b434783aca4d0999c6d888eb8e160142a3aa1b
-SHA1 (patch-cmake_OpenCVDetectCXXCompiler.cmake) = 221b0551d0f29d7e79afe3da8a33b1b3a4f7bf20
+SHA1 (patch-CMakeLists.txt) = 029368ab14163640d1651f572810eb8eb0c043d9
+SHA1 (patch-apps_visualisation_opencv__visualisation.cpp) = b62c32172049c6369fd62a5c72325eef995fd1d0
+SHA1 (patch-cmake_OpenCVDetectCXXCompiler.cmake) = ac7deccedcc5071d3785c7827a06419713ba0529
+SHA1 (patch-cmake_OpenCVDetectPython.cmake) = 4f3bfe574edf083ebc7e78d347355c58461b2c6b
+SHA1 (patch-modules_core_include_opencv2_core_bindings__utils.hpp) = 9018a6124fb840be5213450b1bbe353078b37029
+SHA1 (patch-modules_core_include_opencv2_core_opencl_opencl__info.hpp) = f0cff24b2a760086f54ab66536bdfee4f4f1a6d7
 SHA1 (patch-modules_core_include_opencv2_core_types_c.h) = 75444e65677be99af8167f9060419d7970a7adaa
+SHA1 (patch-modules_core_src_check.cpp) = c8dac4e0fb6fa4a0dca6a2794bd598ba114e78b6
 SHA1 (patch-modules_core_src_downhill__simplex.cpp) = 1ad7c2fa126d15050b87785e8eec20dbe796b471
+SHA1 (patch-modules_core_src_rand.cpp) = aa87ee5a538deb1a2ed3e89dd3dd4ee9b86ae0de
 SHA1 (patch-modules_core_src_system.cpp) = 3b7ac545585a430d28c7077f360357079f127580
+SHA1 (patch-modules_dnn_src_tensorflow_tf__importer.cpp) = 9b3628d91c2217c4b1ed77413efd4c0bf85758c4
+SHA1 (patch-modules_dnn_src_torch_torch__importer.cpp) = 814a3cc929569b691d01e34252dbd185f31161c2
 SHA1 (patch-modules_dnn_test__precomp.hpp) = 9bf15d32394f36b92e5fc5d57fd576b3860233ae
 SHA1 (patch-modules_flann_include_opencv2_flann_defines.h) = ab848e67c4e03219670598ac2d21071a617a5c33
-SHA1 (patch-modules_highgui_src_window__cocoa.mm) = 03a35cdbb32f40f7a234c406ddf0e4991873ae37
+SHA1 (patch-modules_imgproc_src_resize.cpp) = e842d5960c4c00162a34f46cb45cf69d0e9f21ce
 SHA1 (patch-modules_ts_src_ts.cpp) = b9a3992014b02dbd89d46375a2476385e91dc24c
-SHA1 (patch-modules_videoio_src_cap__v4l.cpp) = 20e572d04a15b08180ad7d6671ab3d124b73b748
+SHA1 (patch-modules_videoio_src_cap__v4l.cpp) = 275e72e3c146cf15845fbb7272b28e21f51d6fb4

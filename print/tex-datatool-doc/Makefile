@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.7 2019/01/28 10:12:44 markd Exp $
+# $NetBSD: Makefile,v 1.10 2020/05/01 00:15:13 markd Exp $
 
 DISTNAME=	datatool.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-2.31
-TEXLIVE_REV=	49344
+PKGNAME=	tex-${DISTNAME:S/./-/}-2.32
+TEXLIVE_REV=	52663
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/datatool
+HOMEPAGE=	https://ctan.org/pkg/datatool
 COMMENT=	Documentation for tex-datatool
 LICENSE=	lppl-1.3c
 

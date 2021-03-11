@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2017/01/20 21:43:59 markd Exp $
+# $NetBSD: Makefile,v 1.4 2021/02/20 10:17:23 markd Exp $
 
 DISTNAME=	fontaxes
-PKGNAME=	tex-${DISTNAME}-1.0d
-TEXLIVE_REV=	33276
+PKGNAME=	tex-${DISTNAME}-1.0e
+TEXLIVE_REV=	55920
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/fontaxes
+HOMEPAGE=	https://ctan.org/pkg/fontaxes
 COMMENT=	Additional font axes for LaTeX
 LICENSE=	lppl-1.3c
 

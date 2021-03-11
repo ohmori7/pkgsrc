@@ -1,6 +1,5 @@
-# $NetBSD: Makefile,v 1.24 2018/11/23 08:06:33 ryoon Exp $
+# $NetBSD: Makefile,v 1.30 2020/12/18 23:33:06 nia Exp $
 
-PKGREVISION= 1
 .include "../../multimedia/xine-lib/Makefile.common"
 
 PKGNAME=	${XINE_PKGNAME:S/lib/v4l/}
@@ -12,7 +11,7 @@ NOT_FOR_PLATFORM=	NetBSD-*-*
 
 DEPENDS+=	xine-lib>=1rc3a:../../multimedia/xine-lib
 
-BUILD_DIRS=	src/input
+BUILD_DIRS=		src/input
 CONFIGURE_ARGS+=	--without-x --disable-xinerama
 CONFIGURE_ARGS+=	--disable-vcd
 

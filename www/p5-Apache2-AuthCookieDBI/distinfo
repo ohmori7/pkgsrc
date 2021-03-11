@@ -1,7 +1,6 @@
-$NetBSD: distinfo,v 1.7 2015/11/04 02:47:01 agc Exp $
+$NetBSD: distinfo,v 1.9 2020/09/07 20:33:57 wiz Exp $
 
-SHA1 (Apache2-AuthCookieDBI-2.17.tar.gz) = 9c99dc4aef039c949a1984aa9f35ae6d2c0e0e5d
-RMD160 (Apache2-AuthCookieDBI-2.17.tar.gz) = 834ee7de6c48ddb23082719503db796b6e00c188
-SHA512 (Apache2-AuthCookieDBI-2.17.tar.gz) = 7c5a8895877602ff24f4b8842fbd36f786db349c8cb96771e1895fa138c0720991efda7206274bdf2a00282df4e6047f839e3db2360ff0f86060700c2836673e
-Size (Apache2-AuthCookieDBI-2.17.tar.gz) = 41911 bytes
-SHA1 (patch-lib_Apache2_AuthCookieDBI.pm) = c2971f36a873de59a13a8cc413fbe243f86b16ea
+SHA1 (Apache2-AuthCookieDBI-2.19.tar.gz) = 8f3249ab33f8ed8cfa82ed99b130bf1bb32c5101
+RMD160 (Apache2-AuthCookieDBI-2.19.tar.gz) = 2b4044a637d222a91030236730054dc2c3f12437
+SHA512 (Apache2-AuthCookieDBI-2.19.tar.gz) = 94244afc9387b1ca91c4085ff26dbc9f9f77f3f18e9e659cb41cf3f40e094d62e094e7b1617dea3178c2340199a00dd1b531704f26e3e8f39ab9d3bb26eac4dc
+Size (Apache2-AuthCookieDBI-2.19.tar.gz) = 48370 bytes

@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.8 2015/10/13 18:02:10 shattered Exp $
+# $NetBSD: Makefile,v 1.11 2020/11/26 15:56:07 nia Exp $
 #
 
 DISTNAME=		ezstream-0.6.0
+PKGREVISION=		2
 CATEGORIES=		audio
 MASTER_SITES=		http://downloads.us.xiph.org/releases/ezstream/
-LICENSE=		gnu-gpl-v2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.icecast.org/ezstream.php
-COMMENT=		Streamming client of mp3 and oggvorbis for icecast
+HOMEPAGE=		https://www.icecast.org/ezstream/
+COMMENT=		Streaming client for Icecast
+LICENSE=		gnu-gpl-v2
 
 USE_PKGLOCALEDIR=	yes
 USE_LIBTOOL=		yes

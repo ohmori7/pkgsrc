@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.1 2019/01/07 02:33:17 bacon Exp $
+# $NetBSD: Makefile,v 1.11 2021/01/01 08:24:34 ryoon Exp $
 
 DISTNAME=	canu-1.8
+PKGREVISION=	8
 CATEGORIES=	biology java
 MASTER_SITES=	${MASTER_SITE_GITHUB:=marbl/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	bacon@NetBSD.org
-HOMEPAGE=	http://canu.readthedocs.io/
+HOMEPAGE=	https://canu.readthedocs.io/
 COMMENT=	Single molecule sequence assembler for genomes large and small
 LICENSE=	gnu-gpl-v2
 
@@ -21,29 +22,19 @@ SUBST_SED.optimize+=	-e 's|-O4||g'
 SUBST_SED.optimize+=	-e 's|-funroll-loops||g'
 SUBST_SED.optimize+=	-e 's|-fexpensive-optimizations||g'
 SUBST_SED.optimize+=	-e 's|-finline-functions||g'
-SUBST_FILES.optimize+=	${WRKSRC}/Makefile
+SUBST_FILES.optimize+=	Makefile
 
 SUBST_CLASSES+=		jar
 SUBST_STAGE.jar=	pre-configure
-SUBST_SED.jar+=		-e 's|\\$$bin/mhap-|${PREFIX}/${JAVAJARDIR}/mhap-|g'
-SUBST_FILES.jar+=	${WRKSRC}/pipelines/canu/OverlapMhap.pm
+SUBST_SED.jar+=		-e 's|\\$$bin/\.\./share/java/classes/mhap-|${PREFIX}/${JAVAJARDIR}/mhap-|g'
+SUBST_FILES.jar+=	pipelines/canu/OverlapMhap.pm
 
 SUBST_CLASSES+=		perl
 SUBST_STAGE.perl=	pre-configure
 SUBST_SED.perl+=	-e 's|$$FindBin::RealBin/../lib/site_perl|${PREFIX}/${SITE_PERL_REL}|g'
-SUBST_FILES.perl+=	${WRKSRC}/pipelines/canu.pl
+SUBST_FILES.perl+=	pipelines/canu.pl
 
-REPLACE_PERL+=	bogart/*.pl
-REPLACE_PERL+=	pipelines/*.pl
-REPLACE_PERL+=	bogus/*.pl
-REPLACE_PERL+=	bogart-analysis/*.pl
-REPLACE_PERL+=	overlapBasedTrimming/*.pl
-REPLACE_PERL+=	overlapInCore-analysis/*.pl
-REPLACE_PERL+=	merTrim/*.pl
-REPLACE_PERL+=	erateEstimate/*.pl
-REPLACE_PERL+=	meryl/.pl
-REPLACE_PERL+=	fastq-utilities/*.pl
-REPLACE_PERL+=	*.pl
+REPLACE_PERL+=		*.pl */*.pl
 
 # May work on other 64-bit processors, but untested
 ONLY_FOR_PLATFORM=	*-*-x86_64
@@ -63,7 +54,7 @@ JAVAJARDIR=		share/java/classes
 INSTALLATION_DIRS=	bin ${JAVAJARDIR}
 
 post-extract:
-	${CHMOD} -R g-w ${WRKDIR}
+	${CHMOD} -R g-w ${WRKDIR}/${DISTNAME}
 
 post-build:
 	${MKDIR} ${TMP_INST}/lib/perl5

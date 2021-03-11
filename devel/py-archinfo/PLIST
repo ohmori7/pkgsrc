@@ -1,8 +1,7 @@
-@comment $NetBSD: PLIST,v 1.2 2018/07/24 10:00:08 adam Exp $
+@comment $NetBSD: PLIST,v 1.4 2020/08/18 20:24:57 riastradh Exp $
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
 ${PYSITELIB}/${EGG_INFODIR}/dependency_links.txt
-${PYSITELIB}/${EGG_INFODIR}/requires.txt
 ${PYSITELIB}/${EGG_INFODIR}/top_level.txt
 ${PYSITELIB}/archinfo/__init__.py
 ${PYSITELIB}/archinfo/__init__.pyc
@@ -31,6 +30,9 @@ ${PYSITELIB}/archinfo/arch_ppc32.pyo
 ${PYSITELIB}/archinfo/arch_ppc64.py
 ${PYSITELIB}/archinfo/arch_ppc64.pyc
 ${PYSITELIB}/archinfo/arch_ppc64.pyo
+${PYSITELIB}/archinfo/arch_s390x.py
+${PYSITELIB}/archinfo/arch_s390x.pyc
+${PYSITELIB}/archinfo/arch_s390x.pyo
 ${PYSITELIB}/archinfo/arch_soot.py
 ${PYSITELIB}/archinfo/arch_soot.pyc
 ${PYSITELIB}/archinfo/arch_soot.pyo
@@ -43,6 +45,7 @@ ${PYSITELIB}/archinfo/archerror.pyo
 ${PYSITELIB}/archinfo/defines.py
 ${PYSITELIB}/archinfo/defines.pyc
 ${PYSITELIB}/archinfo/defines.pyo
+${PYSITELIB}/archinfo/py.typed
 ${PYSITELIB}/archinfo/tls.py
 ${PYSITELIB}/archinfo/tls.pyc
 ${PYSITELIB}/archinfo/tls.pyo

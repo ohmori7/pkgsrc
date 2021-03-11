@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.51 2019/04/26 14:12:45 maya Exp $
+# $NetBSD: Makefile,v 1.53 2020/12/04 20:45:41 nia Exp $
 
 VERSION=		1.12.0
 DISTNAME=		Fabric-${VERSION}
 PKGNAME=		${DISTNAME:S/F/f/}
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		sysutils net
 MASTER_SITES=		${MASTER_SITE_PYPI:=F/Fabric/}
 
@@ -14,7 +14,7 @@ LICENSE=		2-clause-bsd
 
 DEPENDS+=		${PYPKGPREFIX}-paramiko>=1.10.0:../../security/py-paramiko
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # no support yet
+PYTHON_VERSIONS_ACCEPTED=	27 # no support yet
 
 USE_TOOLS+=		pax
 

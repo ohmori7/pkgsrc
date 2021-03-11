@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.35 2018/11/14 22:21:00 kleink Exp $
+# $NetBSD: Makefile,v 1.40 2020/12/03 13:24:03 zafer Exp $
 #
 
 DISTNAME=	bmp-mac-0.1.1
-PKGREVISION=	28
+PKGREVISION=	32
 CATEGORIES=	audio
-MASTER_SITES=	http://distfiles.aydogan.net/audio/
+MASTER_SITES=	https://www.aydogan.net/distfiles/audio/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 #HOMEPAGE=	http://sourceforge.net/projects/mac-port/

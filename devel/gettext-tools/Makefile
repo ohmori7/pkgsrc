@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.38 2019/06/04 17:22:22 nia Exp $
+# $NetBSD: Makefile,v 1.41 2020/08/12 23:31:10 joerg Exp $
 
 .include "../../devel/gettext/Makefile.common"
 
 PKGNAME=	${DISTNAME:S/-/-tools-/}
 COMMENT=	Tools for providing messages in different languages
+PKGREVISION=	1
 
 DISTINFO_FILE=	${.CURDIR}/../../devel/gettext/distinfo
 PATCHDIR=	${.CURDIR}/../../devel/gettext/patches
@@ -30,7 +31,7 @@ SHLIBTOOL_OVERRIDE=	# empty
 INFO_FILES=		yes
 
 BROKEN_GETTEXT_DETECTION=	yes
-USE_BUILTIN.gettext=	no # force use of pkgsrc gettext-lib
+USE_BUILTIN.gettext=		no # force use of pkgsrc gettext-lib
 
 BUILDLINK_TRANSFORM.Cygwin+=	rm:-Wl,--disable-auto-import
 
@@ -41,7 +42,7 @@ PLIST_VARS+=	glibc
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${OPSYS} == "Linux"
+.if !empty(GLIBC_VERSION)
 PLIST.glibc=	yes
 .endif
 

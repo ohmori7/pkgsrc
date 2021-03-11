@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2014/10/14 13:53:00 taca Exp $
+# $NetBSD: Makefile,v 1.14 2020/01/23 08:11:27 taca Exp $
 
 PKGNAME=	isc-dhclient-${DHVER}
 COMMENT=	ISC Dynamic Host Configuration Protocol (DHCP) Client
@@ -10,7 +10,7 @@ CONF_FILES+=	${EGDIR}/dhclient.conf ${PKG_SYSCONFDIR}/dhclient.conf
 RCD_SCRIPTS=	isc_dhclient
 FILES_SUBST+=	DHCP_HOME=${DHCP_HOME}
 
-.include "${.CURDIR}/../isc-dhcp4/options.mk"
+.include "../../net/isc-dhcp4/options.mk"
 
 INSTALLATION_DIRS+=	${EGDIR}
 

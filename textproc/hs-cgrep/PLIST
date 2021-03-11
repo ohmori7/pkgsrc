@@ -1,3 +1,4 @@
-@comment $NetBSD: PLIST,v 1.1 2014/08/03 21:32:37 szptvlfn Exp $
+@comment $NetBSD: PLIST,v 1.5 2020/08/24 15:31:12 pho Exp $
 bin/cgrep
-share/doc/cgrep-${PKGVERSION}/LICENSE
+@pkgdir share
+@pkgdir lib/cgrep-${PKGVERSION}/ghc-8.8.4

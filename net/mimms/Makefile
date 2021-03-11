@@ -1,22 +1,22 @@
-# $NetBSD: Makefile,v 1.11 2019/04/26 14:12:42 maya Exp $
+# $NetBSD: Makefile,v 1.15 2020/12/04 20:45:34 nia Exp $
 
 DISTNAME=	mimms-3.2.1
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	net multimedia
 MASTER_SITES=	http://download.savannah.gnu.org/releases/mimms/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://savannah.nongnu.org/projects/mimms/
+HOMEPAGE=	https://savannah.nongnu.org/projects/mimms/
 COMMENT=	MMS (e.g. mms://) stream downloader
 LICENSE=	gnu-gpl-v3
 
 # default is at lang/python/distutils.mk, but
 # drop the third digit from DISTNAME. Is it too tricky ?
-EGG_NAME?=       ${DISTNAME:C/-([^0-9])/_\1/gC/([0-9])\.([0-9])\.([0-9])/\1.\2/}
+EGG_NAME?=	${DISTNAME:C/-([^0-9])/_\1/gC/([0-9])\.([0-9])\.([0-9])/\1.\2/}
 
 USE_LANGUAGES=	# none
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 3.2
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 3.2
 
 SUBST_CLASSES+=		man
 SUBST_FILES.man+=	setup.py

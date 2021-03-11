@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.3 2018/05/08 11:11:25 markd Exp $
+# $NetBSD: Makefile,v 1.6 2021/02/15 00:37:02 markd Exp $
 
 DISTNAME=	revtex4
-PKGNAME=	tex-${DISTNAME}-4.0.45873
-TEXLIVE_REV=	45873
+PKGNAME=	tex-${DISTNAME}-4.0a
+TEXLIVE_REV=	56589
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/revtex4-0
+HOMEPAGE=	https://ctan.org/pkg/revtex4-0
 COMMENT=	Styles for various Physics Journals (old version)
 LICENSE=	lppl-1.3c
 

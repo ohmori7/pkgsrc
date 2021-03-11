@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.20 2018/08/22 09:44:15 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2020/08/31 18:08:20 wiz Exp $
 
 DISTNAME=	MetaCPAN-API-0.51
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/H/HA/HAARG/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/MetaCPAN-API/
+HOMEPAGE=	https://metacpan.org/release/MetaCPAN-API
 COMMENT=	Comprehensive, DWIM-featured API to MetaCPAN for Perl5
 LICENSE=	${PERL5_LICENSE}
 

@@ -1,72 +1,93 @@
-# $NetBSD: Makefile,v 1.218 2018/11/27 18:28:48 maya Exp $
+# $NetBSD: Makefile,v 1.247 2021/02/11 14:50:38 ryoon Exp $
 
-# (Intended to be upgraded to vlc3 when dependencies resolved)
-DISTNAME=		vlc-${VLC_VERSION}
-PKGREVISION=		12
+DISTNAME=		vlc-3.0.12
+PKGREVISION=		2
 CATEGORIES=		multimedia
-MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=vlc/}
-MASTER_SITES+=		http://download.videolan.org/pub/videolan/vlc/${VLC_VERSION}/
+MASTER_SITES=		https://download.videolan.org/pub/videolan/vlc/${PKGVERSION_NOREV}/
 EXTRACT_SUFX=		.tar.xz
 
-VLC_VERSION=		2.2.6
-
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.videolan.org/
-COMMENT=		VLC media player and streaming server
+HOMEPAGE=		https://www.videolan.org/
+COMMENT=		VideoLAN media player and streaming server
 LICENSE=		gnu-gpl-v2
 
 CONFLICTS=		vlc07-[0-9]* vlc08-[0-9]*
 
 USE_LIBTOOL=		yes
-USE_TOOLS+=		gmake perl pkg-config
+USE_TOOLS+=		bash gmake perl pkg-config
+USE_TOOLS+=		autoreconf autoconf automake bison
+USE_TOOLS+=		autopoint realpath msgfmt msgmerge xgettext
 
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-kde-solid=${PREFIX}/share/kde/apps/solid/actions
 PTHREAD_OPTS+=		require
 USE_LANGUAGES=		c99 c++
-PLIST_VARS+=		altivec cdrom oss v4l2 x86simd
+PLIST_VARS+=		altivec cdrom egl oss v4l2 x86simd
 
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
 
 BUILDLINK_API_DEPENDS.zlib+=		zlib>=1.2.0
+BUILDLINK_API_DEPENDS.vcdimager+=	vcdimager>=0.7.20nb1
 
-CONFIGURE_ARGS+=	--enable-dvdread
-CONFIGURE_ARGS+=	--enable-flac
-CONFIGURE_ARGS+=	--enable-theora
-CONFIGURE_ARGS+=	--disable-bluray
-CONFIGURE_ARGS+=	--disable-bonjour
+CONFIGURE_ENV=		LUAC=${PREFIX}/bin/luac5.2
+
+# Avoid codec duplication with ffmpeg, etc
+
+CONFIGURE_ARGS+=	--disable-aom
+CONFIGURE_ARGS+=	--disable-archive
+CONFIGURE_ARGS+=	--disable-aribsub
+CONFIGURE_ARGS+=	--disable-aribb25
 CONFIGURE_ARGS+=	--disable-caca
 CONFIGURE_ARGS+=	--disable-chromaprint
+CONFIGURE_ARGS+=	--disable-dav1d
 CONFIGURE_ARGS+=	--disable-dc1394
-CONFIGURE_ARGS+=	--disable-decklink
 CONFIGURE_ARGS+=	--disable-dv1394
+CONFIGURE_ARGS+=	--disable-decklink
+CONFIGURE_ARGS+=	--disable-dsm
+CONFIGURE_ARGS+=	--disable-faad
 CONFIGURE_ARGS+=	--disable-freerdp
+CONFIGURE_ARGS+=	--disable-fluidlite
 CONFIGURE_ARGS+=	--disable-goom
 CONFIGURE_ARGS+=	--disable-gst-decode
-CONFIGURE_ARGS+=	--disable-lua
+CONFIGURE_ARGS+=	--disable-libplacebo
+CONFIGURE_ARGS+=	--disable-libmpeg2
+CONFIGURE_ARGS+=	--disable-live555
+CONFIGURE_ARGS+=	--disable-mad
 CONFIGURE_ARGS+=	--disable-mfx
-CONFIGURE_ARGS+=	--disable-mmal-codec
+CONFIGURE_ARGS+=	--disable-mmal
+CONFIGURE_ARGS+=	--disable-ncurses
+CONFIGURE_ARGS+=	--disable-nfs
 CONFIGURE_ARGS+=	--disable-notify
 CONFIGURE_ARGS+=	--disable-opencv
 CONFIGURE_ARGS+=	--disable-projectm
-CONFIGURE_ARGS+=	--disable-samplerate
+CONFIGURE_ARGS+=	--disable-sdl-image
+CONFIGURE_ARGS+=	--disable-secret
 CONFIGURE_ARGS+=	--disable-sftp
 CONFIGURE_ARGS+=	--disable-shine
 CONFIGURE_ARGS+=	--disable-sid
 CONFIGURE_ARGS+=	--disable-smbclient
+CONFIGURE_ARGS+=	--disable-sndio
+CONFIGURE_ARGS+=	--disable-soxr
+CONFIGURE_ARGS+=	--disable-spatialaudio
+CONFIGURE_ARGS+=	--disable-speex
+CONFIGURE_ARGS+=	--disable-srt
+CONFIGURE_ARGS+=	--disable-svg
+CONFIGURE_ARGS+=	--disable-svgdec
+CONFIGURE_ARGS+=	--disable-tiger
 CONFIGURE_ARGS+=	--disable-twolame
 CONFIGURE_ARGS+=	--disable-udev
+CONFIGURE_ARGS+=	--disable-vpx
 CONFIGURE_ARGS+=	--disable-vnc
 CONFIGURE_ARGS+=	--disable-vsxu
+CONFIGURE_ARGS+=	--disable-x264
+CONFIGURE_ARGS+=	--disable-x26410b
+CONFIGURE_ARGS+=	--disable-x265
 CONFIGURE_ARGS+=	--disable-zvbi
 
-CFLAGS+=		-fPIC
-CXXFLAGS+=		-fPIC
-
 # which platforms support OSSv4?
-.if ${MACHINE_PLATFORM:MNetBSD-*-*}
+.if ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD" || ${OPSYS} == "SunOS"
 PLIST.oss=		yes
 .include "../../mk/oss.buildlink3.mk"
 .else
@@ -79,9 +100,18 @@ PLIST.x86simd=		yes
 CONFIGURE_ARGS+=	--enable-mmx \
 			--enable-sse
 .endif
+
 .if ${MACHINE_ARCH} == "powerpc"
 PLIST.altivec=		yes
 CONFIGURE_ARGS+=	--enable-altivec
+.endif
+
+PLIST_VARS+=		neon
+.if ${MACHINE_ARCH} == "earmv7hf"
+PLIST.neon=		yes
+CONFIGURE_ARGS+=	--enable-neon
+.else
+CONFIGURE_ARGS+=	--disable-neon
 .endif
 
 # SunOS cdio interface is unsupported
@@ -95,6 +125,11 @@ CONFIGURE_ARGS+=	--enable-v4l2
 PLIST.v4l2=		yes
 .else
 CONFIGURE_ARGS+=	--disable-v4l2
+.endif
+
+.include "../../graphics/MesaLib/features.mk"
+.if ${MESALIB_SUPPORTS_EGL} == "yes"
+PLIST.egl=		yes
 .endif
 
 INSTALLATION_DIRS+=	share/vlc/http/dialogs share/vlc/http/images \
@@ -134,66 +169,62 @@ SUBST_CLASSES+=		fnt
 SUBST_STAGE.fnt=	pre-configure
 SUBST_SED.fnt=		-e "s,${ORIGFNT},${DEFAULT_FONT},"
 SUBST_SED.fnt+=		-e "s,${ORIGMONOFNT},${DEFAULT_MONO_FONT},"
-SUBST_FILES.fnt=	modules/text_renderer/platform_fonts.h
+SUBST_FILES.fnt=	modules/text_renderer/freetype/platform_fonts.h
 SUBST_MESSAGE.fnt=	Fixing hardcoded font paths.
 
 # VLC embeds the build environment info to help debuging.
 CHECK_WRKREF_SKIP=	lib/libvlccore.a \
 			lib/libvlccore.so*
 
-.include "../../audio/fluidsynth/buildlink3.mk"
+MAKE_FLAGS+=	BUILDCC=${CC:Q}
+
+pre-configure:
+	${RUN} cd ${WRKSRC} && ${SH} ./bootstrap
+
 .include "../../audio/flac/buildlink3.mk"
-.include "../../multimedia/libkate/buildlink3.mk"
-.include "../../audio/libmad/buildlink3.mk"
-.include "../../audio/libmodplug/buildlink3.mk"
-.include "../../audio/libopus/buildlink3.mk"
-.include "../../audio/libshout/buildlink3.mk"
-.include "../../audio/libvorbis/buildlink3.mk"
+.include "../../audio/fluidsynth/buildlink3.mk"
 .include "../../audio/liba52/buildlink3.mk"
 .include "../../audio/libcddb/buildlink3.mk"
-.include "../../audio/libid3tag/buildlink3.mk"
+.include "../../audio/libmodplug/buildlink3.mk"
+.include "../../audio/libopus/buildlink3.mk"
+.include "../../audio/libsamplerate/buildlink3.mk"
+.include "../../audio/libshout/buildlink3.mk"
+.include "../../audio/libvorbis/buildlink3.mk"
+.include "../../audio/mpg123/buildlink3.mk"
 .include "../../audio/musepack/buildlink3.mk"
-.include "../../audio/speexdsp/buildlink3.mk"
 .include "../../audio/taglib/buildlink3.mk"
+.include "../../converters/fribidi/buildlink3.mk"
+.include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../devel/libebml/buildlink3.mk"
 .include "../../devel/libmtp/buildlink3.mk"
-.include "../../misc/libcdio/buildlink3.mk"
-.include "../../multimedia/libass/buildlink3.mk"
-.include "../../graphics/librsvg/buildlink3.mk"
-
-.include "../../mk/jpeg.buildlink3.mk"
+.include "../../devel/pcre/buildlink3.mk"
+.include "../../devel/protobuf/buildlink3.mk"
+.include "../../devel/zlib/buildlink3.mk"
+.include "../../fonts/fontconfig/buildlink3.mk"
+.include "../../fonts/harfbuzz/buildlink3.mk"
+.include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
-.include "../../converters/fribidi/buildlink3.mk"
-.include "../../devel/libebml/buildlink3.mk"
-.include "../../devel/gettext-lib/buildlink3.mk"
-.include "../../devel/pcre/buildlink3.mk"
-.include "../../devel/zlib/buildlink3.mk"
-.include "../../textproc/libxml2/buildlink3.mk"
-.include "../../security/libgcrypt/buildlink3.mk"
-.include "../../security/gnutls/buildlink3.mk"
-
-.include "../../multimedia/ffmpeg2/buildlink3.mk"
+.include "../../lang/lua52/buildlink3.mk"
+.include "../../misc/libcdio/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
+.include "../../multimedia/ffmpeg4/buildlink3.mk"
+.include "../../multimedia/libass/buildlink3.mk"
+.include "../../multimedia/libbluray/buildlink3.mk"
 .include "../../multimedia/libdvdplay/buildlink3.mk"
 .include "../../multimedia/libdvbpsi0/buildlink3.mk"
 .include "../../multimedia/libdvdnav/buildlink3.mk"
 .include "../../multimedia/libdvdread/buildlink3.mk"
+.include "../../multimedia/libkate/buildlink3.mk"
 .include "../../multimedia/libmatroska/buildlink3.mk"
-.include "../../multimedia/libmpeg2/buildlink3.mk"
 .include "../../multimedia/libogg/buildlink3.mk"
 .include "../../multimedia/libtheora/buildlink3.mk"
 .include "../../multimedia/schroedinger/buildlink3.mk"
-# libX11 should be built with xcb enabled
-BUILDLINK_API_DEPENDS.libX11+=	libX11>=1.3.5
-.include "../../x11/libX11/buildlink3.mk"
-# needs x264_encoder_delayed_frames
-BUILDLINK_API_DEPENDS.x264-devel+= x264-devel>=20100201
-.include "../../multimedia/x264-devel/buildlink3.mk"
-#.include "../../lang/lua/buildlink3.mk"
+.include "../../net/libmicrodns/buildlink3.mk"
 .include "../../net/libupnp/buildlink3.mk"
-
+.include "../../security/gnutls/buildlink3.mk"
+.include "../../security/libgcrypt/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.if "${OPSYS}" == "Linux"
-.  include "../../audio/alsa-lib/buildlink3.mk"
-.endif
+.include "../../textproc/libxml2/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

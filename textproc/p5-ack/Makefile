@@ -1,17 +1,16 @@
-# $NetBSD: Makefile,v 1.30 2018/08/22 09:47:11 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2020/09/07 17:31:44 wiz Exp $
 
-DISTNAME=	ack-2.24
-PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+DISTNAME=	ack-v3.4.0
+PKGNAME=	p5-${DISTNAME:S/-v/-/}
 CATEGORIES=	textproc perl5
-MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=App/}
+MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/P/PE/PETDANCE/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/ack/
+HOMEPAGE=	https://metacpan.org/release/ack
 COMMENT=	Grep-like text finder
 LICENSE=	${PERL5_LICENSE}
 
-DEPENDS+=	p5-File-Next>=0.4:../../devel/p5-File-Next
+DEPENDS+=	p5-File-Next>=1.18:../../devel/p5-File-Next
 #DEPENDS+=	p5-Term-ANSIColor-[0-9]*:../../devel/p5-Term-ANSIColor
 
 USE_TOOLS+=		perl

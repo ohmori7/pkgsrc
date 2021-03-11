@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.3 2017/09/06 16:49:44 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2021/02/15 02:04:10 markd Exp $
 
 DISTNAME=	soul
-PKGNAME=	tex-${DISTNAME}-2.4
-TEXLIVE_REV=	15878
+PKGNAME=	tex-${DISTNAME}-2.4.56495
+TEXLIVE_REV=	56495
 
 MAINTAINER=	minskim@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/soul
 COMMENT=	Hyphenation for letterspacing, underlining, and more
 LICENSE=	lppl-1.3c
 

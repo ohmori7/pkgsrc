@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.45 2018/12/09 18:52:48 adam Exp $
+# $NetBSD: Makefile,v 1.49 2021/03/07 13:45:38 taca Exp $
 
 PKGNAME=		${APACHE_PKG_PREFIX}-${PHP_PKG_PREFIX}-${PHP_VERSION}
-PKGREVISION=		2
+PKGREVISION=		5
 COMMENT=		Apache (${PKG_APACHE}) module for ${PKG_PHP}
 
 CONFLICTS=		ap-php-[0-9]*
@@ -29,6 +29,9 @@ do-install:
 			${DESTDIR}${PREFIX}/lib/httpd/mod_php${PKG_PHP_MAJOR_VERS}.so;   \
 	elif [ -f ${WRKSRC}/libs/libphp${PKG_PHP_MAJOR_VERS}.so ]; then	\
 		${INSTALL_DATA} ${WRKSRC}/libs/libphp${PKG_PHP_MAJOR_VERS}.so  \
+			${DESTDIR}${PREFIX}/lib/httpd/mod_php${PKG_PHP_MAJOR_VERS}.so;   \
+	elif [ -f ${WRKSRC}/.libs/libphp.so ]; then \
+		${INSTALL_DATA} ${WRKSRC}/.libs/libphp.so \
 			${DESTDIR}${PREFIX}/lib/httpd/mod_php${PKG_PHP_MAJOR_VERS}.so;   \
 	fi
 

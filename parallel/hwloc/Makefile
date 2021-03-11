@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.24 2018/12/13 19:11:28 adam Exp $
+# $NetBSD: Makefile,v 1.28 2020/11/05 09:07:05 ryoon Exp $
 
-DISTNAME=	hwloc-1.11.12
+DISTNAME=	hwloc-1.11.13
+PKGREVISION=	2
 CATEGORIES=	parallel
 MASTER_SITES=	http://www.open-mpi.org/software/hwloc/v${PKGVERSION_NOREV:R}/downloads/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	asau@inbox.ru
-HOMEPAGE=	http://www.open-mpi.org/projects/hwloc/
+HOMEPAGE=	https://www.open-mpi.org/projects/hwloc/
 COMMENT=	Portable Hardware Locality
 LICENSE=	modified-bsd
 

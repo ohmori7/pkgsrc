@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:44:20 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/08/31 18:08:26 wiz Exp $
 
 DISTNAME=	MooX-ConfigFromFile-0.009
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/R/RE/REHSACK/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~rehsack/MooX-ConfigFromFile/
+HOMEPAGE=	https://metacpan.org/release/MooX-ConfigFromFile
 COMMENT=	Moo eXtension for initializing objects from config file
 LICENSE=	${PERL5_LICENSE}
 

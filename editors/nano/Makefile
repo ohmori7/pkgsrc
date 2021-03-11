@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.81 2019/04/29 12:04:33 wiedi Exp $
+# $NetBSD: Makefile,v 1.95 2021/03/03 23:35:57 schwarz Exp $
 
-DISTNAME=	nano-4.2
+DISTNAME=	nano-5.6.1
 CATEGORIES=	editors
-MASTER_SITES=	https://www.nano-editor.org/dist/v${PKGVERSION_NOREV:R}/
+MASTER_SITES=	https://www.nano-editor.org/dist/v${PKGVERSION_NOREV:C/\..*$//}/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	wiedi@frubar.net
@@ -11,7 +11,7 @@ COMMENT=	Small and friendly text editor (a free replacement for Pico)
 LICENSE=	gnu-gpl-v3
 
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		msgfmt gmake
+USE_TOOLS+=		msgfmt msgmerge xgettext gmake
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-color
 CONFIGURE_ARGS+=	--enable-multibuffer
@@ -33,8 +33,15 @@ INFO_FILES=		yes
 INSTALLATION_DIRS+=	share/examples/nano
 CONF_FILES+=		share/examples/nano/nanorc ${PKG_SYSCONFDIR}/nanorc
 
+SUBST_CLASSES+=		man
+SUBST_STAGE.man=	pre-configure
+SUBST_MESSAGE.man=	Fixing paths in manpages.
+SUBST_FILES.man=	doc/nano.1 doc/nanorc.5
+SUBST_VARS.man=		PKG_SYSCONFDIR PREFIX
+
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/doc/sample.nanorc ${DESTDIR}${PREFIX}/share/examples/nano/nanorc
 
 .include "../../devel/gettext-lib/buildlink3.mk"
+.include "../../mk/curses.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

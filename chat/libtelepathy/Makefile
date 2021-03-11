@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.25 2019/04/26 14:12:32 maya Exp $
+# $NetBSD: Makefile,v 1.30 2020/12/04 20:45:02 nia Exp $
 
 DISTNAME=	libtelepathy-0.3.3
-PKGREVISION=	10
+PKGREVISION=	14
 CATEGORIES=	chat
 MASTER_SITES=	http://telepathy.freedesktop.org/releases/libtelepathy/
 
@@ -18,7 +18,7 @@ USE_TOOLS+=	gmake pkg-config
 
 PKGCONFIG_OVERRIDE+=	libtelepathy.pc.in
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.3.3
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.3.3
 
 .include "../../lang/python/pyversion.mk"
 CONFIGURE_ENV+=		ac_cv_prog_PYTHON=${PYTHONBIN}

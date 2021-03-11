@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.14 2019/04/26 14:12:37 maya Exp $
+# $NetBSD: options.mk,v 1.17 2020/12/09 01:46:07 gutteridge Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.py-trytond
 PKG_SUPPORTED_OPTIONS=	cdecimal mysql pydot psycopg pytz simplejson sphinx
@@ -6,16 +6,15 @@ PKG_SUGGESTED_OPTIONS+=	psycopg pytz simplejson sphinx
 
 .include "../../mk/bsd.options.mk"
 
-# XXX: Supports unoconv http://dag.wieers.com/home-made/unoconv/) option and
-# XXX: python-Levenshtein (http://github.com/miohtama/python-Levenshtein) option
+# XXX Also supports converters/unoconv and textproc/py-Levenshtein options.
 
 .if !empty(PKG_OPTIONS:Mcdecimal)
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # py-cdecimal is obsolete for that version and thus not available
+PYTHON_VERSIONS_ACCEPTED=	27 # py-cdecimal is obsolete for that version and thus not available
 DEPENDS+=		${PYPKGPREFIX}-cdecimal-[0-9]*:../../math/py-cdecimal
 .endif
 
 .if !empty(PKG_OPTIONS:Mmysql)
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # py-mysqldb
+PYTHON_VERSIONS_ACCEPTED=	27 # py-mysqldb
 DEPENDS+=		${PYPKGPREFIX}-mysqldb-[0-9]*:../../databases/py-mysqldb
 .endif
 
@@ -36,5 +35,6 @@ DEPENDS+=		${PYPKGPREFIX}-simplejson-[0-9]*:../../converters/py-simplejson
 .endif
 
 .if !empty(PKG_OPTIONS:Msphinx)
-DEPENDS+=		${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
+PYTHON_VERSIONED_DEPENDENCIES=	sphinx
+.include "../../lang/python/versioned_dependencies.mk"
 .endif

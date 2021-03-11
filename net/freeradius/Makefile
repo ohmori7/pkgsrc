@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.99 2018/10/08 15:50:39 jperkin Exp $
+# $NetBSD: Makefile,v 1.109 2020/12/31 20:04:13 nia Exp $
 
 .include "Makefile.common"
 
-PKGNAME=		${DISTNAME:S/-server//}
-COMMENT=		Free RADIUS server implementation
+PKGNAME=	${DISTNAME:S/-server//}
+PKGREVISION=	2
+COMMENT=	Free RADIUS server implementation
 
 BUILD_DEFS+=		VARBASE
 CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
@@ -29,11 +30,12 @@ CONFIGURE_ARGS+=	--without-rlm_sql_postgresql
 CONFIGURE_ARGS+=	--without-rlm_sql_unixodbc
 
 RCD_SCRIPTS=		radiusd
+SMF_METHODS=		radiusd
 RADIUS_GROUP?=		radiusd
 RADIUS_USER?=		radiusd
 PKG_GROUPS=		${RADIUS_GROUP}
 PKG_USERS=		${RADIUS_USER}:${RADIUS_GROUP}
-PKG_HOME.${RADIUS_USER}=${VARBASE}/log/radiusd
+PKG_HOME.${RADIUS_USER}= ${VARBASE}/log/radiusd
 
 OWN_DIRS_PERMS+=	${VARBASE}/log/radiusd \
 			${RADIUS_USER} ${RADIUS_GROUP} 0750
@@ -42,14 +44,14 @@ OWN_DIRS_PERMS+=	${VARBASE}/run/radiusd \
 
 PKG_SYSCONFSUBDIR=	raddb
 
-OPSYSVARS+=		SOEXT
-SOEXT.Darwin=		dylib
-SOEXT.*=		so
-PLIST_SUBST+=		SOEXT=${SOEXT}
-PRINT_PLIST_AWK+=	{gsub(/\.${SOEXT}$$/, ".$${SOEXT}");}
+SUBST_CLASSES+=		secconf
+SUBST_STAGE.secconf=	post-configure
+SUBST_MESSAGE.secconf=	Substituting user and group in radiusd.conf
+SUBST_FILES.secconf=	raddb/radiusd.conf
+SUBST_VARS.secconf=	RADIUS_USER RADIUS_GROUP
 
 FILES_SUBST+=		RADIUS_USER=${RADIUS_USER} RADIUS_GROUP=${RADIUS_GROUP}
-MESSAGE_SUBST+=		BOOTSTRAP=${PKG_SYSCONFDIR:Q}/certs/bootstrap
+MESSAGE_SUBST+=		BOOTSTRAP=${PKG_SYSCONFDIR}/certs/bootstrap
 
 EGDIR=			${PREFIX}/share/examples/freeradius
 
@@ -121,7 +123,6 @@ EGFILES=		certs/ca.cnf certs/client.cnf certs/inner-server.cnf \
 			mods-config/sql/cui/sqlite/schema.sql \
 			mods-config/sql/ippool/mysql/queries.conf \
 			mods-config/sql/ippool/mysql/schema.sql \
-			mods-config/sql/ippool/oracle/procedures.sql \
 			mods-config/sql/ippool/oracle/queries.conf \
 			mods-config/sql/ippool/oracle/schema.sql \
 			mods-config/sql/ippool/postgresql/queries.conf \
@@ -181,20 +182,20 @@ EGFILES=		certs/ca.cnf certs/client.cnf certs/inner-server.cnf \
 			sites-available/virtual.example.com \
 			users templates.conf trigger.conf
 
-EGDIRS= 		certs mods-available mods-config mods-config/attr_filter mods-config/files \
-			mods-config/perl mods-config/preprocess mods-config/sql mods-config/sql/counter  \
-			mods-config/sql/counter/mysql mods-config/sql/counter/postgresql  \
-			mods-config/sql/counter/sqlite mods-config/sql/cui mods-config/sql/cui/mysql  \
-			mods-config/sql/cui/postgresql mods-config/sql/cui/sqlite mods-config/sql/ippool  \
-			mods-config/sql/ippool-dhcp mods-config/sql/ippool-dhcp/mysql  \
-			mods-config/sql/ippool-dhcp/oracle mods-config/sql/ippool-dhcp/sqlite  \
-			mods-config/sql/ippool/mysql mods-config/sql/ippool/oracle  \
-			mods-config/sql/ippool/postgresql mods-config/sql/ippool/sqlite  \
-			mods-config/sql/main mods-config/sql/main/mssql mods-config/sql/main/mysql  \
-			mods-config/sql/main/mysql/extras mods-config/sql/main/mysql/extras/wimax  \
-			mods-config/sql/main/ndb mods-config/sql/main/oracle  \
-			mods-config/sql/main/postgresql mods-config/sql/main/postgresql/extras  \
-			mods-config/sql/main/sqlite mods-config/unbound mods-enabled  \
+EGDIRS=			certs mods-available mods-config mods-config/attr_filter mods-config/files \
+			mods-config/perl mods-config/preprocess mods-config/sql mods-config/sql/counter \
+			mods-config/sql/counter/mysql mods-config/sql/counter/postgresql \
+			mods-config/sql/counter/sqlite mods-config/sql/cui mods-config/sql/cui/mysql \
+			mods-config/sql/cui/postgresql mods-config/sql/cui/sqlite mods-config/sql/ippool \
+			mods-config/sql/ippool-dhcp mods-config/sql/ippool-dhcp/mysql \
+			mods-config/sql/ippool-dhcp/oracle mods-config/sql/ippool-dhcp/sqlite \
+			mods-config/sql/ippool/mysql mods-config/sql/ippool/oracle \
+			mods-config/sql/ippool/postgresql mods-config/sql/ippool/sqlite \
+			mods-config/sql/main mods-config/sql/main/mssql mods-config/sql/main/mysql \
+			mods-config/sql/main/mysql/extras mods-config/sql/main/mysql/extras/wimax \
+			mods-config/sql/main/ndb mods-config/sql/main/oracle \
+			mods-config/sql/main/postgresql mods-config/sql/main/postgresql/extras \
+			mods-config/sql/main/sqlite mods-config/unbound mods-enabled \
 			policy.d sites-available sites-enabled
 
 REPLACE_PERL+=		scripts/sql/radsqlrelay \
@@ -219,4 +220,6 @@ TEST_MAKE_FLAGS+=	EAPOL_TEST=""
 post-install:
 	${RM} -f ${DESTDIR}${PREFIX}/lib/*.a ${DESTDIR}${PREFIX}/lib/*.la
 
+.include "../../mk/pam.buildlink3.mk"
+.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

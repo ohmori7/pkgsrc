@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2020/07/31 21:49:29 brook Exp $
+
+SHA1 (R/tidyr_1.0.2.tar.gz) = 0d786d320de376ac001a72b4ab6c03ef8c54deaa
+RMD160 (R/tidyr_1.0.2.tar.gz) = c6cb918d7791ef797f12456a79c0b18c93112259
+SHA512 (R/tidyr_1.0.2.tar.gz) = 75c93ae85a20c43de8111acfe56e93793ff850fb6d3f0704d02121644f1ebad0895a37fb1dce1f02d839a8f835e32bf3b5196db87158ce9c6e9a9ef07ec9cf30
+Size (R/tidyr_1.0.2.tar.gz) = 812005 bytes

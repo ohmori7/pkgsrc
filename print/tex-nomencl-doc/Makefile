@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.8 2019/05/14 09:54:13 markd Exp $
+# $NetBSD: Makefile,v 1.12 2021/02/20 10:34:47 markd Exp $
 
 DISTNAME=	nomencl.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-5.2
-TEXLIVE_REV=	51025
+PKGNAME=	tex-${DISTNAME:S/./-/}-5.5
+TEXLIVE_REV=	57263
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/nomencl
+HOMEPAGE=	https://ctan.org/pkg/nomencl
 COMMENT=	Documentation for tex-nomencl
 LICENSE=	lppl-1.3c
 

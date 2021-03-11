@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1 2019/05/31 17:19:25 leot Exp $
+# $NetBSD: Makefile,v 1.4 2020/09/04 13:35:41 wiz Exp $
 
 DISTNAME=	rt-4.4.4
 PKGNAME=	${DISTNAME:S/rt/rt4-cli/}
+PKGREVISION=	3
 CATEGORIES=	net
 MASTER_SITES=	https://download.bestpractical.com/pub/rt/release/
 
@@ -14,7 +15,6 @@ CONFLICTS+=	rt<4.0
 
 DEPENDS+=	p5-HTTP-Message-[0-9]*:../../www/p5-HTTP-Message
 DEPENDS+=	p5-Term-ReadKey-[0-9]*:../../devel/p5-Term-ReadKey
-DEPENDS+=	p5-Term-ReadLine-[0-9]*:../../devel/p5-Term-ReadLine
 DEPENDS+=	p5-libwww-[0-9]*:../../www/p5-libwww
 
 USE_TOOLS+=	perl:run

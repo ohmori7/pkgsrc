@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2018/12/13 19:51:58 adam Exp $
+# $NetBSD: Makefile,v 1.27 2021/01/01 08:24:44 ryoon Exp $
 
-DISTNAME=	osm2pgsql-0.96.0
-PKGREVISION=	2
+DISTNAME=	osm2pgsql-1.2.1
+PKGREVISION=	5
 CATEGORIES=	geography
 MASTER_SITES=	${MASTER_SITE_GITHUB:=openstreetmap/}
 GITHUB_TAG=	${PKGVERSION_NOREV}
@@ -15,11 +15,11 @@ WRKSRC=		${WRKDIR}/osm2pgsql-${PKGVERSION_NOREV}
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
 
-CONFIGURE_DIRS=	${WRKDIR}/build
-CMAKE_ARG_PATH=	${WRKSRC}
-
+# osm2pgsql does not allow srcdir builds (and separate is better anyway)
 post-extract:
-	${RUN} mkdir -p ${WRKDIR}/build
+	${RUN} mkdir -p ${WRKSRC}/build
+CONFIGURE_DIRS=	build
+CMAKE_ARG_PATH=	${WRKSRC}
 
 .include "../../geography/proj/buildlink3.mk"
 .include "../../archivers/bzip2/buildlink3.mk"

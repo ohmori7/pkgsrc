@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.13 2019/04/03 00:32:36 ryoon Exp $
+# $NetBSD: buildlink3.mk,v 1.25 2021/02/07 06:30:07 ryoon Exp $
 
 BUILDLINK_TREE+=	knotifications
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	knotifications
 KNOTIFICATIONS_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.knotifications+=	knotifications>=5.19.0
-BUILDLINK_ABI_DEPENDS.knotifications?=	knotifications>=5.47.0nb5
+BUILDLINK_ABI_DEPENDS.knotifications?=	knotifications>=5.70.0nb5
 BUILDLINK_PKGSRCDIR.knotifications?=	../../devel/knotifications
 
 .include "../../devel/kconfig/buildlink3.mk"
@@ -16,6 +16,7 @@ BUILDLINK_PKGSRCDIR.knotifications?=	../../devel/knotifications
 .include "../../textproc/kcodecs/buildlink3.mk"
 .include "../../x11/kwindowsystem/buildlink3.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"
+.include "../../x11/qt5-qtspeech/buildlink3.mk"
 .endif	# KNOTIFICATIONS_BUILDLINK3_MK
 
 BUILDLINK_TREE+=	-knotifications

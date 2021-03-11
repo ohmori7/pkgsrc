@@ -1,16 +1,13 @@
-# $NetBSD: Makefile,v 1.72 2018/12/13 19:51:41 adam Exp $
+# $NetBSD: Makefile,v 1.82 2021/02/09 20:26:28 nia Exp $
 
-DISTNAME=	vorbis-tools-1.4.0
-PKGREVISION=	15
+DISTNAME=	vorbis-tools-1.4.2
 CATEGORIES=	audio
-MASTER_SITES=	http://downloads.xiph.org/releases/vorbis/
+MASTER_SITES=	https://ftp.osuosl.org/pub/xiph/releases/vorbis/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.vorbis.com/
 COMMENT=	Ogg Vorbis encoder and player
 LICENSE=	gnu-gpl-v2
-
-BUILD_DEFS+=	IPV6_READY
 
 CONFLICTS=	vorbis-[0-9]*
 
@@ -18,8 +15,6 @@ USE_TOOLS+=		pkg-config
 USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--with-ogg-prefix=${BUILDLINK_PREFIX.libogg}
-CONFIGURE_ARGS+=	--with-vorbis-prefix=${BUILDLINK_PREFIX.libvorbis}
 
 PLIST_SUBST+=	DISTNAME=${DISTNAME}
 

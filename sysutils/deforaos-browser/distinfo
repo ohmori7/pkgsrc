@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.13 2016/04/14 23:37:33 khorben Exp $
+$NetBSD: distinfo,v 1.15 2020/04/11 03:07:42 khorben Exp $
 
-SHA1 (Browser-0.5.1.tar.gz) = 0a1b7c1a215ba30aafd63dedc7844c6315b853e0
-RMD160 (Browser-0.5.1.tar.gz) = 65fd9ca5372ad72b81f967766cce62755e062d09
-SHA512 (Browser-0.5.1.tar.gz) = caf98ff82e55709d0c5487ea3a872a814742634ce206290ec896ad3a8e15e5055d4b524fcd70dc1e37578e9fa573e462591ef5d6313efa725882c556c6f4cb5d
-Size (Browser-0.5.1.tar.gz) = 155403 bytes
+SHA1 (Browser-0.5.4.tar.gz) = 9e28f3b72493800fce183f7f2837666eaf239d98
+RMD160 (Browser-0.5.4.tar.gz) = aa863dd306a1c7cc07a5686582ce96b8fb4462bb
+SHA512 (Browser-0.5.4.tar.gz) = da5363481c7ef35bf5a12aa21e8203640bc005db49599139593579d362e7164cbf0ac3aebc4fc618d850cef805404f89ac1693f087dd3fce648bb2f49ca43474
+Size (Browser-0.5.4.tar.gz) = 176341 bytes

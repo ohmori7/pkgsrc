@@ -1,11 +1,10 @@
-# $NetBSD: Makefile,v 1.32 2018/12/13 19:51:49 adam Exp $
+# $NetBSD: Makefile,v 1.40 2021/03/08 14:33:44 nia Exp $
 
-DISTNAME=		xsd-3.2.0+dep
-EXTRACT_SUFX=		.tar.bz2
-PKGNAME=		xsd-3.2.0
-PKGREVISION=		20
+DISTNAME=		xsd-4.0.0+dep
+PKGNAME=		${DISTNAME:S/+dep//1}
 CATEGORIES=		devel textproc
-MASTER_SITES=		https://www.codesynthesis.com/download/xsd/3.2/
+MASTER_SITES=		https://www.codesynthesis.com/download/xsd/${PKGVERSION_NOREV:R}/
+EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		https://www.codesynthesis.com/products/xsd/
@@ -13,20 +12,22 @@ COMMENT=		W3C XML Schema to C++ data binding compiler
 LICENSE=		gnu-gpl-v2
 
 USE_TOOLS+=		bash gmake gm4
-USE_LANGUAGES+=		gnu++03
+USE_LANGUAGES=		c c++11
 
-SUBST_CLASSES+=		rpath
-SUBST_STAGE.rpath=	post-configure
-SUBST_FILES.rpath=	*/*/*/configuration-dynamic.make
-SUBST_SED.rpath=	-e 's|cxx_rpath[ ]*:=[ ]*n|cxx_rpath := y|g'
+GCC_REQD+=		4.7 # C++11
 
-do-build:
-	# XXX: rpath needs a better hack. TODO: add optimization
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} LDFLAGS="-Wl,-rpath,${PREFIX}/lib" ./build.sh
+MAKE_FILE=		makefile
 
-do-install:
-	cd ${WRKSRC} && MAKEFLAGS="install_prefix=${DESTDIR}${PREFIX} \
-	install_man_dir=${DESTDIR}${PREFIX}/${PKGMANDIR}" ./build.sh install
+BUILD_TARGET=		# no default target should be passed to gmake.
+
+MAKE_FLAGS+=		verbose=1
+MAKE_FLAGS+=		install_prefix=${DESTDIR}${PREFIX}
+MAKE_FLAGS+=		install_man_dir=${DESTDIR}${PREFIX}/${PKGMANDIR}
+
+post-patch:
+	# Avoid conflict with C++20 <version>
+	${RM} -f ${WRKSRC}/version
+	${RM} -f ${WRKSRC}/build/import/lib*/version
 
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../textproc/xerces-c/buildlink3.mk"

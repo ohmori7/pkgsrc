@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.8 2018/08/22 09:45:38 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2020/08/31 18:10:14 wiz Exp $
 
 DISTNAME=	Math-Derivative-1.01
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	math perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Math/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Math-Derivative
+HOMEPAGE=	https://metacpan.org/release/Math-Derivative
 COMMENT=	Numeric 1st and 2nd order differentiation
 LICENSE=	${PERL5_LICENSE}
 

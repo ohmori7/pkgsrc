@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.43 2018/02/25 12:25:48 taca Exp $
+# $NetBSD: Makefile,v 1.49 2021/02/14 15:33:02 taca Exp $
 #
 
-DISTNAME=	milter-manager-2.0.5
-PKGREVISION=	2
+DISTNAME=	milter-manager-${VERSION}
 CATEGORIES=	mail
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=milter-manager/}
+MASTER_SITES=	${MASTER_SITE_GITHUB:=milter-manager/}
+GITHUB_RELEASE=	${VERSION}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://milter-manager.sourceforge.net/
 COMMENT=	Milter to use milters effectively
+
+VERSION=	2.1.5
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	pkg-config intltool msgfmt
@@ -27,11 +29,11 @@ CONFIGURE_ARGS+=	--with-ruby=${RUBY}
 CONFIGURE_ARGS+=	--enable-ruby-milter=${PREFIX}/${RUBY_VENDORLIB}
 CONFIGURE_ARGS+=	--with-bundled-ruby-glib2=no
 
-SUBST_CLASSES+=		libev_inc
-SUBST_STAGE.libev_inc=	pre-configure
-SUBST_MESSAGE.libev_inc=Adjust include path for libevent from pkgsrc.
-SUBST_FILES.libev_inc=	configure
-SUBST_SED.libev_inc=	's,/include/ev.h,/include/ev/ev.h,g'
+SUBST_CLASSES+=			libev_inc
+SUBST_STAGE.libev_inc=		pre-configure
+SUBST_MESSAGE.libev_inc=	Adjust include path for libevent from pkgsrc.
+SUBST_FILES.libev_inc=		configure
+SUBST_SED.libev_inc=		-e 's,/include/ev.h,/include/ev/ev.h,g'
 
 PKG_SYSCONFSUBDIR=	${PKGBASE}
 
@@ -48,14 +50,14 @@ PKGCONFIG_OVERRIDE+=	ruby-milter-client.pc.in
 PKGCONFIG_OVERRIDE+=	ruby-milter-core.pc.in
 PKGCONFIG_OVERRIDE+=	ruby-milter-server.pc.in
 
-MILTER_MANAGER_USER?=	_milter
-MILTER_MANAGER_GROUP?=	_milter
-MILTER_MANAGER_SOCKET_GROUP?=	mail
-PKG_GROUPS=		${MILTER_MANAGER_GROUP} ${MILTER_MANAGER_SOCKET_GROUP}
-PKG_USERS=		${MILTER_MANAGER_USER}:${MILTER_MANAGER_GROUP}
+MILTER_MANAGER_USER?=			_milter
+MILTER_MANAGER_GROUP?=			_milter
+MILTER_MANAGER_SOCKET_GROUP?=		mail
+PKG_GROUPS=				${MILTER_MANAGER_GROUP} ${MILTER_MANAGER_SOCKET_GROUP}
+PKG_USERS=				${MILTER_MANAGER_USER}:${MILTER_MANAGER_GROUP}
 PKG_GECOS.${MILTER_MANAGER_USER}=	Milter Manager
-PKG_GROUPS_VARS+=	MILTER_MANAGER_GROUP MILTER_MANAGER_SOCKET_GROUP
-PKG_USERS_VARS=		MILTER_MANAGER_USER
+PKG_GROUPS_VARS+=			MILTER_MANAGER_GROUP MILTER_MANAGER_SOCKET_GROUP
+PKG_USERS_VARS=				MILTER_MANAGER_USER
 
 FILES_SUBST+=		MILTER_MANAGER_USER=${MILTER_MANAGER_USER:Q}
 FILES_SUBST+=		MILTER_MANAGER_GROUP=${MILTER_MANAGER_GROUP:Q}
@@ -67,6 +69,7 @@ OWN_DIRS_PERMS+=	${VARBASE}/run/milter-manager \
 
 .for conf in milter-manager.conf \
 	applicable-conditions/authentication.conf \
+	applicable-conditions/dnsbl.conf \
 	applicable-conditions/remote-network.conf \
 	applicable-conditions/restrict-accounts.conf \
 	applicable-conditions/s25r.conf \
@@ -90,9 +93,8 @@ REPLACE_RUBY+=		tool/milter-performance-check
 REPLACE_RUBY+=		tool/milter-report-statistics
 .include "../../lang/ruby/replace.mk"
 
+.include "../../devel/ruby-glib2/buildlink3.mk"
 .include "../../lang/ruby/buildlink3.mk"
-BUILDLINK_API_DEPENDS.ruby-gnome2-glib+=	${RUBY_PKGPREFIX}-gnome2-glib>=0.90.5
-.include "../../devel/ruby-gnome2-glib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.glib2+=	glib2>=2.12.3
 .include "../../devel/glib2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libev+=	libev>=4.01

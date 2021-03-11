@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.25 2018/03/07 11:57:37 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2021/01/24 15:54:00 wiz Exp $
 
-DISTNAME=		libXt-1.1.5
-PKGREVISION=		1
+DISTNAME=		libXt-1.2.1
 CATEGORIES=		x11 devel
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		joerg@NetBSD.org
-HOMEPAGE=		http://xorg.freedesktop.org/
+HOMEPAGE=		https://xorg.freedesktop.org/
 COMMENT=		X Toolkit Intrinsics library
 LICENSE=		mit
 

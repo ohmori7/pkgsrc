@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.8 2018/05/02 11:45:42 markd Exp $
+# $NetBSD: Makefile,v 1.11 2021/02/13 04:11:52 markd Exp $
 
 DISTNAME=	amscls.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-2018
-TEXLIVE_REV=	46099
+PKGNAME=	tex-${DISTNAME:S/./-/}-2020	# actually 2.20.6
+TEXLIVE_REV=	55378
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/amscls
+HOMEPAGE=	https://ctan.org/pkg/amscls
 COMMENT=	Documentation for tex-amscls
 LICENSE=	lppl-1.3c
 

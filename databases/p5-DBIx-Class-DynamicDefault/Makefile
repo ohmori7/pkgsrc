@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:43:16 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:07:01 wiz Exp $
 
 DISTNAME=	DBIx-Class-DynamicDefault-0.04
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DBIx/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/DBIx-Class-DynamicDefault/
+HOMEPAGE=	https://metacpan.org/release/DBIx-Class-DynamicDefault
 COMMENT=	DBIx::Class component to automatically set and update fields
 LICENSE=	${PERL5_LICENSE}
 

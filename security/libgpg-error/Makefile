@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.71 2019/03/20 05:43:20 adam Exp $
+# $NetBSD: Makefile,v 1.80 2021/01/23 08:58:31 wiz Exp $
 
-DISTNAME=	libgpg-error-1.36
+DISTNAME=	libgpg-error-1.41
 CATEGORIES=	security
-MASTER_SITES=	ftp://ftp.gnupg.org/gcrypt/libgpg-error/
+MASTER_SITES=	https://www.gnupg.org/ftp/gcrypt/libgpg-error/
+MASTER_SITES+=	ftp://ftp.gnupg.org/gcrypt/libgpg-error/
 MASTER_SITES+=	ftp://ftp.ring.gr.jp/pub/net/gnupg/libgpg-error/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://www.gnupg.org/
+HOMEPAGE=	https://www.gnupg.org/software/libgpg-error/index.html
 COMMENT=	Definitions of common error values for all GnuPG components
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1
 
@@ -24,6 +25,10 @@ TEST_TARGET=		check
 CONFIGURE_ENV+=		CC_FOR_BUILD=${NATIVE_CC:Q}
 .else
 CONFIGURE_ENV+=		CC_FOR_BUILD=${CC:Q}\ ${CFLAGS:M*:Q}
+.endif
+
+.if !empty(MACHINE_PLATFORM:MDarwin-8.*-powerpc)
+CFLAGS+=	-D__DARWIN_UNIX03
 .endif
 
 .if !empty(MACHINE_PLATFORM:MSunOS-5.10-*)

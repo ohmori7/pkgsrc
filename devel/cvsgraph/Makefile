@@ -1,18 +1,18 @@
-# $NetBSD: Makefile,v 1.50 2018/08/28 10:20:36 schmonz Exp $
+# $NetBSD: Makefile,v 1.54 2021/01/25 08:48:07 fcambus Exp $
 #
 
-DISTNAME=	cvsgraph-1.7.0
+DISTNAME=	cvsgraph-1.7.1
 CATEGORIES=	devel scm
-MASTER_SITES=	${HOMEPAGE}release/
+MASTER_SITES=	https://www.vagrearg.org/cvsgraph/release/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.akhphd.au.dk/~bertho/cvsgraph/
+HOMEPAGE=	https://www.vagrearg.org/content/cvsgraph
 COMMENT=	Graphically represents CVS/RCS branches and file revisions
 LICENSE=	gnu-gpl-v2
 
 MAKE_JOBS_SAFE=	no
 
-USE_TOOLS+=		bison lex
+USE_TOOLS+=		bison lex pkg-config
 GNU_CONFIGURE=		YES
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 
@@ -23,13 +23,9 @@ PLIST_SUBST+=	PKGBASE=${PKGBASE:Q}
 
 BUILD_TARGET=	cvsgraph
 
-SUBST_CLASSES+=		man
-SUBST_STAGE.man=	pre-install
-SUBST_FILES.man=	cvsgraph.1
-SUBST_SED.man=		-e "s|/usr/local/etc|${PKG_SYSCONFDIR}|g"
-SUBST_MESSAGE.man=	Fixing man page paths.
-
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 ${PKGMANDIR}/man5
+
+CHECK_PORTABILITY_SKIP=	cvsgraph.conf.5.in
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/cvsgraph ${DESTDIR}${PREFIX}/bin

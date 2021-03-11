@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.6 2019/04/25 20:50:23 markd Exp $
+@comment $NetBSD: PLIST,v 1.11 2020/06/09 06:44:05 markd Exp $
 bin/kcookiejar5
 bin/ktelnetservice5
 bin/ktrash5
@@ -60,6 +60,7 @@ include/KF5/KIOCore/KSSLSettings
 include/KF5/KIOCore/KSambaShare
 include/KF5/KIOCore/KSambaShareData
 include/KF5/KIOCore/KSslCertificateManager
+include/KF5/KIOCore/KSslErrorUiData
 include/KF5/KIOCore/KTcpSocket
 include/KF5/KIOCore/KUrlAuthorized
 include/KF5/KIOCore/kacl.h
@@ -124,6 +125,7 @@ include/KF5/KIOCore/ksambashare.h
 include/KF5/KIOCore/ksambasharedata.h
 include/KF5/KIOCore/ksslcertificatemanager.h
 include/KF5/KIOCore/ksslcertificatemanager_p.h
+include/KF5/KIOCore/ksslerroruidata.h
 include/KF5/KIOCore/ksslsettings.h
 include/KF5/KIOCore/ktcpsocket.h
 include/KF5/KIOCore/kurlauthorized.h
@@ -132,6 +134,7 @@ include/KF5/KIOFileWidgets/KDirOperator
 include/KF5/KIOFileWidgets/KDirSortFilterProxyModel
 include/KF5/KIOFileWidgets/KEncodingFileDialog
 include/KF5/KIOFileWidgets/KFileCopyToMenu
+include/KF5/KIOFileWidgets/KFileCustomDialog
 include/KF5/KIOFileWidgets/KFileFilterCombo
 include/KF5/KIOFileWidgets/KFilePlaceEditDialog
 include/KF5/KIOFileWidgets/KFilePlacesModel
@@ -150,6 +153,7 @@ include/KF5/KIOFileWidgets/kdiroperator.h
 include/KF5/KIOFileWidgets/kdirsortfilterproxymodel.h
 include/KF5/KIOFileWidgets/kencodingfiledialog.h
 include/KF5/KIOFileWidgets/kfilecopytomenu.h
+include/KF5/KIOFileWidgets/kfilecustomdialog.h
 include/KF5/KIOFileWidgets/kfilefiltercombo.h
 include/KF5/KIOFileWidgets/kfileplaceeditdialog.h
 include/KF5/KIOFileWidgets/kfileplacesmodel.h
@@ -164,7 +168,11 @@ include/KF5/KIOFileWidgets/kpreviewwidgetbase.h
 include/KF5/KIOFileWidgets/krecentdirs.h
 include/KF5/KIOFileWidgets/kstatusbarofflineindicator.h
 include/KF5/KIOFileWidgets/kurlnavigator.h
+include/KF5/KIOGui/KIO/ApplicationLauncherJob
+include/KF5/KIOGui/KIO/CommandLauncherJob
 include/KF5/KIOGui/KIO/FavIconRequestJob
+include/KF5/KIOGui/kio/applicationlauncherjob.h
+include/KF5/KIOGui/kio/commandlauncherjob.h
 include/KF5/KIOGui/kio/faviconrequestjob.h
 include/KF5/KIOGui/kiogui_export.h
 include/KF5/KIOWidgets/KAbstractFileItemActionPlugin
@@ -188,6 +196,7 @@ include/KF5/KIOWidgets/KIO/PasteJob
 include/KF5/KIOWidgets/KIO/PixmapLoader
 include/KF5/KIOWidgets/KIO/PreviewJob
 include/KF5/KIOWidgets/KIO/RenameDialog
+include/KF5/KIOWidgets/KIO/RenameFileDialog
 include/KF5/KIOWidgets/KIO/SkipDialog
 include/KF5/KIOWidgets/KIO/SslUi
 include/KF5/KIOWidgets/KIO/ThumbCreator
@@ -226,6 +235,7 @@ include/KF5/KIOWidgets/kio/pastejob.h
 include/KF5/KIOWidgets/kio/pixmaploader.h
 include/KF5/KIOWidgets/kio/previewjob.h
 include/KF5/KIOWidgets/kio/renamedialog.h
+include/KF5/KIOWidgets/kio/renamefiledialog.h
 include/KF5/KIOWidgets/kio/skipdialog.h
 include/KF5/KIOWidgets/kio/sslui.h
 include/KF5/KIOWidgets/kio/thumbcreator.h
@@ -253,23 +263,23 @@ lib/cmake/KF5KIO/KF5KIOTargets-noconfig.cmake
 lib/cmake/KF5KIO/KF5KIOTargets.cmake
 lib/libKF5KIOCore.so
 lib/libKF5KIOCore.so.5
-lib/libKF5KIOCore.so.${PKGVERSION}
+lib/libKF5KIOCore.so.5.70.0
 lib/libKF5KIOFileWidgets.so
 lib/libKF5KIOFileWidgets.so.5
-lib/libKF5KIOFileWidgets.so.${PKGVERSION}
+lib/libKF5KIOFileWidgets.so.5.70.0
 lib/libKF5KIOGui.so
 lib/libKF5KIOGui.so.5
-lib/libKF5KIOGui.so.${PKGVERSION}
+lib/libKF5KIOGui.so.5.70.0
 lib/libKF5KIONTLM.so
 lib/libKF5KIONTLM.so.5
-lib/libKF5KIONTLM.so.${PKGVERSION}
+lib/libKF5KIONTLM.so.5.70.0
 lib/libKF5KIOWidgets.so
 lib/libKF5KIOWidgets.so.5
-lib/libKF5KIOWidgets.so.${PKGVERSION}
+lib/libKF5KIOWidgets.so.5.70.0
 libexec/kf5/kio_http_cache_cleaner
 libexec/kf5/kiod5
 libexec/kf5/kioexec
-libexec/kf5/kioslave
+libexec/kf5/kioslave5
 libexec/kf5/kpac_dhcp_helper
 man/ca/man8/kcookiejar5.8
 man/de/man8/kcookiejar5.8
@@ -286,6 +296,7 @@ qt5/mkspecs/modules/qt_KIOFileWidgets.pri
 qt5/mkspecs/modules/qt_KIOGui.pri
 qt5/mkspecs/modules/qt_KIOWidgets.pri
 qt5/mkspecs/modules/qt_KNTLM.pri
+qt5/plugins/designer/kio5widgets.so
 qt5/plugins/kcm_kio.so
 qt5/plugins/kcm_trash.so
 qt5/plugins/kcm_webshortcuts.so
@@ -470,6 +481,18 @@ share/doc/HTML/et/kioslave5/telnet/index.cache.bz2
 share/doc/HTML/et/kioslave5/telnet/index.docbook
 share/doc/HTML/et/kioslave5/webdav/index.cache.bz2
 share/doc/HTML/et/kioslave5/webdav/index.docbook
+share/doc/HTML/fr/kioslave5/file/index.cache.bz2
+share/doc/HTML/fr/kioslave5/file/index.docbook
+share/doc/HTML/fr/kioslave5/ftp/index.cache.bz2
+share/doc/HTML/fr/kioslave5/ftp/index.docbook
+share/doc/HTML/fr/kioslave5/help/index.cache.bz2
+share/doc/HTML/fr/kioslave5/help/index.docbook
+share/doc/HTML/fr/kioslave5/http/index.cache.bz2
+share/doc/HTML/fr/kioslave5/http/index.docbook
+share/doc/HTML/fr/kioslave5/telnet/index.cache.bz2
+share/doc/HTML/fr/kioslave5/telnet/index.docbook
+share/doc/HTML/fr/kioslave5/webdav/index.cache.bz2
+share/doc/HTML/fr/kioslave5/webdav/index.docbook
 share/doc/HTML/it/kcontrol5/cache/index.cache.bz2
 share/doc/HTML/it/kcontrol5/cache/index.docbook
 share/doc/HTML/it/kcontrol5/cookies/index.cache.bz2
@@ -608,6 +631,8 @@ share/doc/HTML/pt_BR/kioslave5/telnet/index.cache.bz2
 share/doc/HTML/pt_BR/kioslave5/telnet/index.docbook
 share/doc/HTML/pt_BR/kioslave5/webdav/index.cache.bz2
 share/doc/HTML/pt_BR/kioslave5/webdav/index.docbook
+share/doc/HTML/ru/kcontrol5/cookies/index.cache.bz2
+share/doc/HTML/ru/kcontrol5/cookies/index.docbook
 share/doc/HTML/ru/kcontrol5/proxy/index.cache.bz2
 share/doc/HTML/ru/kcontrol5/proxy/index.docbook
 share/doc/HTML/ru/kioslave5/data/index.cache.bz2
@@ -757,7 +782,6 @@ share/doc/HTML/uk/kioslave5/telnet/index.docbook
 share/doc/HTML/uk/kioslave5/webdav/index.cache.bz2
 share/doc/HTML/uk/kioslave5/webdav/index.docbook
 share/examples/kde-xdg/accept-languages.codes
-share/examples/kde-xdg/kio.categories
 share/examples/kde-xdg/kshorturifilterrc
 share/kconf_update/filepicker.upd
 share/kf5/kcookiejar/domain_info
@@ -954,6 +978,7 @@ share/kservicetypes5/searchprovider.desktop
 share/kservicetypes5/uasprovider.desktop
 share/locale/af/LC_MESSAGES/kio5.mo
 share/locale/ar/LC_MESSAGES/kio5.mo
+share/locale/ast/LC_MESSAGES/kio5.mo
 share/locale/be/LC_MESSAGES/kio5.mo
 share/locale/be@latin/LC_MESSAGES/kio5.mo
 share/locale/bg/LC_MESSAGES/kio5.mo
@@ -1035,3 +1060,4 @@ share/locale/wa/LC_MESSAGES/kio5.mo
 share/locale/xh/LC_MESSAGES/kio5.mo
 share/locale/zh_CN/LC_MESSAGES/kio5.mo
 share/locale/zh_TW/LC_MESSAGES/kio5.mo
+share/qlogging-categories5/kio.categories

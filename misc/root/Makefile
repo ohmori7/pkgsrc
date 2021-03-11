@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.62 2018/08/19 20:16:41 wiz Exp $
+# $NetBSD: Makefile,v 1.66 2020/08/17 20:19:34 leot Exp $
 
 DISTNAME=		root_v5.26.00b.source
 PKGNAME=		root-5.26
-PKGREVISION=		18
+PKGREVISION=		21
 CATEGORIES=		misc
 MASTER_SITES=		ftp://root.cern.ch/root/
 
@@ -21,7 +21,8 @@ BUILD_TARGET=
 .include "../../mk/bsd.prefs.mk"
 
 .if (${MACHINE_ARCH} == "arm")
-BROKEN=	Compilation stops due to internal compiler error
+# from 2002. 17 years later, it's time to try it again.
+#BROKEN=	"Compilation stops due to internal compiler error"
 .endif
 
 ROOT_OPSYS=		${LOWER_OPSYS}

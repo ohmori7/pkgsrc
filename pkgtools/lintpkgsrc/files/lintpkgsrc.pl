@@ -1,6 +1,6 @@
 #!@PERL5@
 
-# $NetBSD: lintpkgsrc.pl,v 1.15 2017/12/15 10:54:59 adam Exp $
+# $NetBSD: lintpkgsrc.pl,v 1.20 2020/12/17 16:17:45 rillig Exp $
 
 # Written by David Brownlee <abs@netbsd.org>.
 #
@@ -131,7 +131,7 @@ sub main() {
 
 	# list the installed packages and the directory they live in
 	foreach my $pkgname (sort @pkgs)
- 	    {	
+ 	    {
 	    if ($pkgname =~ /^([^*?[]+)-([\d*?[].*)/)
 	        {
 		foreach my $pkgver ($pkglist->pkgver($1))
@@ -146,7 +146,7 @@ sub main() {
 	# distfiles belonging to the currently installed packages
 	foreach my $pkgver (sort @installed)
 	    {
-	    if (open(DISTINFO, "$pkgsrcdir/" .$pkgver->var('dir'). "/distinfo")) 
+	    if (open(DISTINFO, "$pkgsrcdir/" .$pkgver->var('dir'). "/distinfo"))
 		{
 		while( <DISTINFO> )
 		    {
@@ -169,7 +169,7 @@ sub main() {
 		close(DISTINFO);
 		}
 	    }
-	
+
 	# distfiles downloaded on the current system
 	@tmpdistfiles = listdir("$pkgdistdir");
 	foreach my $tmppkg (@tmpdistfiles)
@@ -195,8 +195,8 @@ sub main() {
 		        { $found = 1; }
 		    }
 		    if ($found != 1)
-		        { 
-			push (@orphan, $dldf); 
+		        {
+			push (@orphan, $dldf);
 		        print "Orphaned file: $dldf\n";
 			}
 	            $found = 0;
@@ -224,8 +224,8 @@ sub main() {
 			{ $found = 1; }
 		    }
 		    if ($found == 1)
-			{ 
-			push (@parent, $pkgdf); 
+			{
+			push (@parent, $pkgdf);
 		        print "Parented file: $pkgdf\n";
 			}
 		    $found = 0;
@@ -263,7 +263,7 @@ sub main() {
         }
 
         if ( $opt{r} ) {
-            verbose("Unlinking listed prebuiltpackages\n");
+            verbose("Unlinking listed prebuilt packages\n");
             foreach my $pkgfile (@matched_prebuiltpackages) {
                 unlink($pkgfile);
             }
@@ -776,7 +776,7 @@ sub list_pkgsrc_pkgdirs($$) {
           && $_ ne 'CVS'
           && substr( $_, 0, 1 ) ne '.',
         readdir(CAT) );
-    close(CAT);
+    closedir(CAT);
     @pkgdirs;
 }
 
@@ -996,7 +996,10 @@ sub parse_makefile_pkgsrc($) {
         if ( defined $vars->{PKGREVISION}
             and not $vars->{PKGREVISION} =~ /^\s*$/ )
         {
-            if ( $vars->{PKGREVISION} =~ /\D/ ) {
+            if ( $vars->{PKGREVISION} =~ /^\$\{(_(CVS|GIT|HG|SVN)_PKGVERSION):.*\}$/ ) {
+                # See wip/mk/*-package.mk.
+            }
+            elsif ( $vars->{PKGREVISION} =~ /\D/ ) {
                 print
                   "\nBogus: PKGREVISION $vars->{PKGREVISION} (from $file)\n";
 
@@ -1648,9 +1651,17 @@ sub scan_pkgsrc_distfiles_vs_distinfo($$$$) {
                 next;
             }
 
-            open( DIGEST, "digest $sum @{$sumfiles{$sum}}|" )
-              || fail("Run digest: $!");
-            while (<DIGEST>) {
+            my $pid = open3(my $in, my $out, undef, "xargs", "digest", $sum);
+            defined($pid) || fail "fork";
+            my $pid2 = fork();
+            defined($pid2) || fail "fork";
+            if ($pid2) {
+                close($in);
+            } else {
+                print $in "@{$sumfiles{$sum}}";
+                exit 0;
+            }
+            while (<$out>) {
                 if (m/^$sum ?\(([^\)]+)\) = (\S+)/) {
                     if ( $distfiles{$1}{sum} ne $2 ) {
                         print $1, " ($sum)\n";
@@ -1658,7 +1669,9 @@ sub scan_pkgsrc_distfiles_vs_distinfo($$$$) {
                     }
                 }
             }
-            close(DIGEST);
+            close($out);
+            waitpid( $pid, 0 ) || fail "xargs digest $sum";
+            waitpid( $pid2, 0 ) || fail "pipe write to xargs";
         }
         safe_chdir('/');    # Do not want to stay in $pkgdistdir
     }

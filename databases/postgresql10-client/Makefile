@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.5 2018/11/09 18:12:24 adam Exp $
+# $NetBSD: Makefile,v 1.16 2021/02/19 13:47:03 joerg Exp $
 
-PKGNAME=	${DISTNAME:C/-/10-client-/}
+PKGNAME=	${DISTNAME:S/-/10-client-/}
 COMMENT=	PostgreSQL database client programs
 
 .include "../../databases/postgresql10/Makefile.common"
 
-USE_TOOLS+=		gzip tar
+USE_TOOLS+=		gzip msgfmt tar
+TOOLS_BROKEN+=		perl
 CONFIGURE_ARGS+=	--with-openssl
 CONFIGURE_ARGS+=	--with-zlib
 
@@ -38,12 +39,13 @@ CONFIGURE_ARGS+=	--enable-thread-safety
 CONFIGURE_ARGS+=	--disable-thread-safety
 .endif
 
+BUILD_DIRS+=	src/fe_utils
 INSTALL_DIRS=	src/include
 INSTALL_DIRS+=	src/common
 INSTALL_DIRS+=	src/interfaces
 INSTALL_DIRS+=	src/bin
 INSTALL_DIRS+=	src/port
-BUILD_DIRS=	${INSTALL_DIRS}
+BUILD_DIRS+=	${INSTALL_DIRS}
 # Without this, the Darwin build fails (related to -bundle_loader).
 BUILD_DIRS+=	src/backend
 

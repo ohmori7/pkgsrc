@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.58 2018/03/12 11:17:58 wiz Exp $
+# $NetBSD: Makefile,v 1.63 2020/08/17 20:20:37 leot Exp $
 
 DISTNAME=	wterm-6.2.9
-PKGREVISION=	25
+PKGREVISION=	27
 CATEGORIES=	x11 windowmaker
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=wterm/}
 
@@ -13,11 +13,11 @@ MAKE_JOBS_SAFE=	no
 
 GNU_CONFIGURE=	YES
 
-CONFIGURE_ARGS+= --enable-utmp --enable-wtmp
-CONFIGURE_ARGS+= --enable-xpm-background --enable-transparency
-CONFIGURE_ARGS+= --enable-menubar --enable-graphics --enable-next-scroll
-CONFIGURE_ARGS+= --enable-half-shadow
-CONFIGURE_ARGS+= --with-xpm-library=${BUILDLINK_PREFIX.libXpm}
+CONFIGURE_ARGS+=	--enable-utmp --enable-wtmp
+CONFIGURE_ARGS+=	--enable-xpm-background --enable-transparency
+CONFIGURE_ARGS+=	--enable-menubar --enable-graphics --enable-next-scroll
+CONFIGURE_ARGS+=	--enable-half-shadow
+CONFIGURE_ARGS+=	--with-xpm-library=${BUILDLINK_PREFIX.libXpm}
 
 INSTALLATION_DIRS+=	share/WindowMaker/Icons
 

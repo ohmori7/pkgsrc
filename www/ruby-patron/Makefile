@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.34 2018/12/13 19:52:26 adam Exp $
+# $NetBSD: Makefile,v 1.43 2020/05/22 10:56:46 adam Exp $
 
-DISTNAME=	patron-0.13.1
+DISTNAME=	patron-0.13.3
 PKGREVISION=	2
 CATEGORIES=	www
 

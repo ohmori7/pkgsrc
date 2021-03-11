@@ -1,9 +1,15 @@
-# $NetBSD: test.mk,v 1.21 2019/05/07 19:36:43 rillig Exp $
+# $NetBSD: test.mk,v 1.24 2020/03/23 00:33:48 riastradh Exp $
 #
 # After the "build" phase, many packages provide some sort of self-test
 # that can be run on the not-yet installed package. To enable these
 # tests, the package must define TEST_TARGET or override the do-test
 # target. Additionally, the pkgsrc user must define PKGSRC_RUN_TEST.
+#
+# Public targets for developers:
+#
+# test-env:
+#	Runs an interactive shell (TEST_ENV_SHELL) in the environment
+#	that is used for testing the package.
 #
 # User-settable variables:
 #
@@ -39,8 +45,11 @@
 #
 
 _VARGROUPS+=		test
-_USER_VARS.test=	PKGSRC_RUN_TEST
-_PKG_VARS.test=		TEST_DIRS TEST_ENV TEST_MAKE_FLAGS MAKE_FILE TEST_TARGET
+_USER_VARS.test=	PKGSRC_RUN_TEST TEST_ENV_SHELL
+_PKG_VARS.test=		TEST_TARGET TEST_DIRS TEST_ENV TEST_MAKE_FLAGS
+_USE_VARS.test=		BUILD_DIRS MAKE_ENV MAKE_FLAGS MAKEFLAGS MAKE_FILE \
+			RECURSIVE_MAKE INTERACTIVE_STAGE BATCH WRKSRC
+_IGN_VARS.test=		_* PKGNAME .CURDIR
 _SORTED_VARS.test=	*_ENV
 _LISTED_VARS.test=	*_DIRS *_FLAGS
 
@@ -124,7 +133,7 @@ test-message:
 ### test-check-interactive checks whether we must do an interactive
 ### test or not.
 ###
-test-check-interactive:
+test-check-interactive: .PHONY
 .if !empty(INTERACTIVE_STAGE:Mtest) && defined(BATCH)
 	@${ERROR_MSG} "The test stage of this package requires user interaction"
 	@${ERROR_MSG} "Please test manually with:"
@@ -145,10 +154,9 @@ test-check-interactive:
 .if !target(do-test)
 .  if defined(TEST_TARGET) && !empty(TEST_TARGET)
 do-test:
-.    for _dir_ in ${TEST_DIRS}
-	${RUN}${_ULIMIT_CMD}			\
-	cd ${WRKSRC} && cd ${_dir_} &&					\
-	${TEST_MAKE_CMD} ${TEST_TARGET}
+.    for dir in ${TEST_DIRS}
+	${RUN}${_ULIMIT_CMD} cd ${WRKSRC} && cd ${dir} \
+	&& ${TEST_MAKE_CMD} ${TEST_TARGET}
 .    endfor
 .  else
 do-test:
@@ -186,3 +194,30 @@ test-cookie:
 .PHONY: test-clean
 test-clean:
 	${RUN} ${RM} -f ${_COOKIE.test}
+
+# test-env:
+#	Runs an interactive shell in the same environment that is
+#	also used for the tests.
+#
+#	This is only used during development and testing of a package
+#	to work in the same environment as the actual test.
+#
+# User-settable variables:
+#
+# TEST_ENV_SHELL
+#	The shell to start.
+#
+#	Default: ${SH}
+#
+# Keywords: debug test
+
+TEST_ENV_SHELL?=	${SH}
+test-env: .PHONY ${_PKGSRC_BARRIER:Ubarrier:D_test-env}
+_test-env: .PHONY wrapper
+	@${STEP_MSG} "Entering the test environment for ${PKGNAME}"
+.if ${TEST_DIRS:[#]} > 1 || ${TEST_DIRS} != ${WRKSRC}
+	@${ECHO_MSG} "The TEST_DIRS are:" \
+		${TEST_DIRS:S,^${WRKSRC}$,.,:S,^${WRKSRC}/,,:Q}
+.endif
+	${RUN} cd ${WRKSRC} \
+	&& ${PKGSRC_SETENV} ${TEST_ENV} ${TEST_ENV_SHELL}

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.163 2019/06/08 10:40:59 rillig Exp $
+# $NetBSD: Makefile.common,v 1.165 2020/02/06 21:52:58 nia Exp $
 # used by editors/vim/Makefile
 # used by editors/vim-gtk2/Makefile
 # used by editors/vim-gtk3/Makefile
@@ -14,11 +14,14 @@ GITHUB_PROJECT=		vim
 GITHUB_TAG=		v${VIM_VERSION}.${VIM_PATCHLEVEL}
 MASTER_SITES=		${MASTER_SITE_GITHUB:=vim/}
 
+# vim disables it, sometimes unsuccessfully.
+FORTIFY_SUPPORTED=	no
+
 .include "../../mk/bsd.prefs.mk"
 
 MAINTAINER=		morr@NetBSD.org
 HOMEPAGE=		https://www.vim.org/
-LICENSE=		vim-license
+LICENSE=		vim-license OR gnu-gpl-v2
 
 CONFLICTS+=		vim-kde-[0-9]*
 

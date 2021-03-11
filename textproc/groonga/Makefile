@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.64 2018/02/25 12:25:48 taca Exp $
+# $NetBSD: Makefile,v 1.68 2020/03/26 02:27:21 joerg Exp $
 #
 
 DISTNAME=	groonga-7.0.6
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	textproc
 MASTER_SITES=	http://packages.groonga.org/source/groonga/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://groonga.org/
+HOMEPAGE=	https://groonga.org/
 COMMENT=	Fulltext search engine and column store
 LICENSE=	gnu-lgpl-v2.1
 
@@ -53,6 +53,9 @@ REPLACE_RUBY+=	data/munin/groonga_n_records_
 REPLACE_RUBY+=	data/munin/groonga_query_performance_
 REPLACE_RUBY+=	data/munin/groonga_status_
 REPLACE_RUBY+=	data/munin/groonga_throughput_
+
+post-extract:
+	rm ${WRKSRC}/version
 
 .include "../../lang/ruby/replace.mk"
 .include "../../devel/editline/buildlink3.mk"

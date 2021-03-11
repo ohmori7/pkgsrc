@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2015/09/01 21:17:54 markd Exp $
+# $NetBSD: Makefile,v 1.4 2021/02/20 10:44:00 markd Exp $
 
 DISTNAME=	stringstrings.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-1.23
-TEXLIVE_REV=	36203
+PKGNAME=	tex-${DISTNAME:S/./-/}-1.24
+TEXLIVE_REV=	57097
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/stringstrings
+HOMEPAGE=	https://ctan.org/pkg/stringstrings
 COMMENT=	Documentation for tex-stringstrings
 LICENSE=	lppl-1.3c
 

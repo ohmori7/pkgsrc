@@ -1,18 +1,17 @@
-# $NetBSD: buildlink3.mk,v 1.34 2018/12/13 19:51:35 adam Exp $
+# $NetBSD: buildlink3.mk,v 1.40 2021/01/01 08:24:49 ryoon Exp $
 
 BUILDLINK_TREE+=	cgal
 
 .if !defined(CGAL_BUILDLINK3_MK)
 CGAL_BUILDLINK3_MK:=
 
-BUILDLINK_API_DEPENDS.cgal+=	cgal>=3.9
-BUILDLINK_ABI_DEPENDS.cgal+=	cgal>=3.9nb36
+BUILDLINK_API_DEPENDS.cgal+=	cgal>=4.11
+BUILDLINK_ABI_DEPENDS.cgal+=	cgal>=4.14nb15
 BUILDLINK_PKGSRCDIR.cgal?=	../../math/cgal
 
 .include "../../devel/boost-headers/buildlink3.mk"
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../math/mpfr/buildlink3.mk"
-.include "../../x11/qt4-libs/buildlink3.mk"
 
 .endif	# CGAL_BUILDLINK3_MK
 

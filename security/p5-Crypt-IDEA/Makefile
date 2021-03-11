@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.31 2018/08/22 09:46:22 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2020/08/31 18:11:13 wiz Exp $
 
 DISTNAME=		Crypt-IDEA-1.10
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		5
+PKGREVISION=		7
 CATEGORIES=		security perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Crypt/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Crypt-IDEA/
+HOMEPAGE=		https://metacpan.org/release/Crypt-IDEA
 COMMENT=		Perl5 module for the IDEA symmetric key algorithm
 LICENSE=		original-bsd
 

@@ -1,7 +1,7 @@
 PKGLINT(1)                  General Commands Manual                 PKGLINT(1)
 
 NNAAMMEE
-     ppkkgglliinntt - static analyzer for pkgsrc packages
+     ppkkgglliinntt – static analyzer for pkgsrc packages
 
 SSYYNNOOPPSSIISS
      ppkkgglliinntt [--ooppttiioonnss] [_d_i_r _._._.]
@@ -29,12 +29,16 @@ DDEESSCCRRIIPPTTIIOONN
      --hh|----hheellpp           Show the summary of command line options, then exit.
 
      --II                  Show the _M_a_k_e_f_i_l_e that is constructed by including
-                         all the files that are slurped in via `.include'
+                         all the files that are slurped in via ‘.include’
                          directives.  This flag is mainly for debugging.
 
      --ii|----iimmppoorrtt         Check if a package is ready to be imported into
                          pkgsrc.  This is especially useful for packages from
                          the pkgsrc-wip project.
+
+     --nn|----nneettwwoorrkk        Enable checks that require network access, for
+                         example to check whether the package homepage is
+                         reachable.
 
      --oo|----oonnllyy _s_u_b_s_t_r_i_n_g
                          Only handle those diagnostics that have _s_u_b_s_t_r_i_n_g in
@@ -42,11 +46,11 @@ DDEESSCCRRIIPPTTIIOONN
                          ----aauuttooffiixx and ----rreeccuurrssiivvee,, to fix only a single kind
                          of warning in a large number of files.
 
-     --qq|----qquuiieett          Don't print the errors and warnings summary before
-                         terminating.
+     --qq|----qquuiieett          Don't print the errors and warnings summary at the
+                         end.
 
      --rr|----rreeccuurrssiivvee      Check subdirectories, too.  The subdirectories are
-                         those that are mentioned in a `SUBDIR+=' line.
+                         those that are mentioned in a ‘SUBDIR+=’ line.
 
      --ss|----ssoouurrccee         For all diagnostics having file and line number
                          information, show the source code along with the
@@ -62,8 +66,6 @@ DDEESSCCRRIIPPTTIIOONN
      aallll                 Enable all checks.
 
      nnoonnee                Disable all checks.
-
-     [[nnoo--]]eexxttrraa          Check remaining files in the package directory.
 
      [[nnoo--]]gglloobbaall         Check inter-package consistency for distfile hashes
                          and used licenses.
@@ -82,14 +84,9 @@ DDEESSCCRRIIPPTTIIOONN
      [[nnoo--]]qquuoottiinngg        Warn for possibly invalid quoting of make variables
                          in shell programs and shell variables themselves.
 
-     [[nnoo--]]ssppaaccee          Emit notes for inconsistent use of whitespace.
-
-     [[nnoo--]]ssttyyllee          Warn for stylistic issues that don't affect the build
-                         process.
-
    OOtthheerr aarrgguummeennttss
-           _d_i_r _._._.             The pkgsrc directories to be checked.  If
-                               omitted, the current directory is checked.
+     _d_i_r _._._.             The pkgsrc directories to be checked.  If omitted,
+                         the current directory is checked.
 
 FFIILLEESS
      _p_k_g_s_r_c_/_m_k_/_*  Files from the pkgsrc infrastructure.
@@ -115,6 +112,6 @@ AAUUTTHHOORRSS
 
 BBUUGGSS
      If you don't understand the messages, feel free to ask the author or on
-     the <pkgsrc-users@pkgsrc.org> mailing list.
+     the ⟨pkgsrc-users@pkgsrc.org⟩ mailing list.
 
-NetBSD 8.0                     January 14, 2018                     NetBSD 8.0
+NetBSD 8.0                     January 26, 2020                     NetBSD 8.0

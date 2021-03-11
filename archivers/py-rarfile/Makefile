@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.1 2017/04/14 14:01:02 leot Exp $
+# $NetBSD: Makefile,v 1.3 2020/07/29 12:10:46 adam Exp $
 
-DISTNAME=	rarfile-3.0
+DISTNAME=	rarfile-3.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
-CATEGORIES=	archivers
+CATEGORIES=	archivers python
 MASTER_SITES=	${MASTER_SITE_PYPI:=r/rarfile/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

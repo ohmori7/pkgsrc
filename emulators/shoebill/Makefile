@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.9 2019/02/19 15:59:36 hauke Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:09:28 wiz Exp $
 
 DISTNAME=	shoebill-0.0.5
-PKGREVISION=	3
+PKGREVISION=	8
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_GITHUB:=pruten/}
 
@@ -9,9 +9,6 @@ MAINTAINER=	hauke@NetBSD.org
 HOMEPAGE=	https://github.com/pruten/shoebill/
 COMMENT=	Macintosh II emulator that runs A/UX
 LICENSE=	2-clause-bsd
-
-# Missing long double math functions
-NOT_FOR_PLATFORM=	NetBSD-[0-6]*-*
 
 USE_TOOLS+=	perl gtar
 EXTRACT_USING=	gtar
@@ -21,8 +18,8 @@ REPLACE_PERL+=	core/macro.pl
 DOCDIR=		share/doc/shoebill
 INSTALLATION_DIRS= bin ${DOCDIR}
 
-CFLAGS+=	-g3
-INSTALL_UNSTRIPPED= yes
+CFLAGS+=		-g3
+INSTALL_UNSTRIPPED=	yes
 
 do-build:
 	( cd ${WRKSRC}/sdl-gui && \

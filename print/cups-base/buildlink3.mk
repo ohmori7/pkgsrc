@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.9 2018/11/14 22:22:16 kleink Exp $
+# $NetBSD: buildlink3.mk,v 1.19 2020/12/04 04:56:09 riastradh Exp $
 
 BUILDLINK_TREE+=	cups-base
 
@@ -6,27 +6,28 @@ BUILDLINK_TREE+=	cups-base
 CUPS_BASE_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.cups-base+=	cups-base>=1.1.19nb3
-BUILDLINK_ABI_DEPENDS.cups-base+=	cups-base>=2.2.9nb2
+BUILDLINK_ABI_DEPENDS.cups-base+=	cups-base>=2.3.3nb8
 BUILDLINK_PKGSRCDIR.cups-base?=		../../print/cups-base
 
 pkgbase := cups-base
 .include "../../mk/pkg-build-options.mk"
 
-.if !empty(PKG_BUILD_OPTIONS.cups-base:Mkerberos)
+.if ${PKG_BUILD_OPTIONS.cups-base:Mkerberos}
 .include "../../mk/krb5.buildlink3.mk"
 .endif
 
-.if !empty(PKG_BUILD_OPTIONS.cups-base:Mdnssd)
+.if ${PKG_BUILD_OPTIONS.cups-base:Mdnssd}
 .include "../../net/mDNSResponder/buildlink3.mk"
 .endif
 
-.if ${OPSYS} != "Darwin" && !empty(PKG_BUILD_OPTIONS.cups-base:Mavahi)
+.if ${OPSYS} != "Darwin" && ${PKG_BUILD_OPTIONS.cups-base:Mavahi}
 .include "../../net/avahi/buildlink3.mk"
 .endif
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../graphics/tiff/buildlink3.mk"
+.include "../../print/libcups/buildlink3.mk"
 .include "../../security/gnutls/buildlink3.mk"
 .endif # CUPS_BASE_BUILDLINK3_MK
 

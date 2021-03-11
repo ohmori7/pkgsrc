@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.4 2015/11/03 03:27:36 agc Exp $
+$NetBSD: distinfo,v 1.7 2020/06/09 11:56:05 markd Exp $
 
-SHA1 (kapptemplate-4.14.3.tar.xz) = 2ef0adee51e1522c39bb6b6dafbc20ebad21836f
-RMD160 (kapptemplate-4.14.3.tar.xz) = b89401366382566fc153011a9c724e9e1a5cabf6
-SHA512 (kapptemplate-4.14.3.tar.xz) = 85dfba8b7582a2adb9a61b98afa782e58e5c5bc0d61595f7effd468e14a19e08251789917ccafac7396bdc1beb5897efd9042b4ed700ad875274b39fe266a441
-Size (kapptemplate-4.14.3.tar.xz) = 709680 bytes
+SHA1 (kapptemplate-20.04.1.tar.xz) = c92edb77a6707c932f4ada09ee3898ad64b562a4
+RMD160 (kapptemplate-20.04.1.tar.xz) = 16b01b6b3c5f23a3972dc4a41d9a11297376bca3
+SHA512 (kapptemplate-20.04.1.tar.xz) = 0ade84bd88eaac09a4ce5eaaec97ab2bb30ed8f37653452977cdcb0d37d33f16dd07134132a684345e3c0a45930a4647c353c2e405de4968b08e9da39ca3275b
+Size (kapptemplate-20.04.1.tar.xz) = 325440 bytes

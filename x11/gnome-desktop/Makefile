@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.143 2019/04/25 07:33:29 maya Exp $
+# $NetBSD: Makefile,v 1.152 2020/12/04 20:45:50 nia Exp $
 #
 
 DISTNAME=		gnome-desktop-2.32.1
-PKGREVISION=		35
+PKGREVISION=		44
 CATEGORIES=		x11 gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gnome-desktop/2.32/}
 EXTRACT_SUFX=		.tar.bz2

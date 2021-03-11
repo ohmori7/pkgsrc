@@ -1,12 +1,12 @@
-$NetBSD: patch-setup.py,v 1.1 2018/11/20 18:48:56 adam Exp $
+$NetBSD: patch-setup.py,v 1.3 2021/01/16 10:12:50 adam Exp $
 
 Do not install tests.
 
---- setup.py.orig	2018-11-08 08:19:23.000000000 +0000
+--- setup.py.orig	2021-01-16 10:02:35.000000000 +0000
 +++ setup.py
-@@ -40,7 +40,7 @@ setup(
-     url='https://github.com/divio/djangocms-style',
-     license='BSD',
+@@ -45,7 +45,7 @@ setup(
+     license='BSD-3-Clause',
+     description='Adds style plugin to django CMS',
      long_description=open('README.rst').read(),
 -    packages=find_packages(),
 +    packages=find_packages(exclude=['tests']),

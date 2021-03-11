@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.21 2018/07/28 14:01:21 tsutsui Exp $
+$NetBSD: distinfo,v 1.25 2020/01/15 15:01:23 tsutsui Exp $
 
-SHA1 (libsixel-1.8.2.tar.gz) = f0a150461904d4217617009249c63150182588f7
-RMD160 (libsixel-1.8.2.tar.gz) = 1f1a6f5a46fa36ecab2563a96c4913d96a61713e
-SHA512 (libsixel-1.8.2.tar.gz) = f0287b7b7a190f0f964e27fc65aa816a78c09de5e50045a25eb05f9b430c74f779a7d5eb591b3430a82a06621d53719bf115bcdd0b99acc9afe3cb9ab6fde271
-Size (libsixel-1.8.2.tar.gz) = 4778776 bytes
+SHA1 (libsixel-1.8.6.tar.gz) = 3f3bfd8c643eae84189efde78438641b1df2ce1e
+RMD160 (libsixel-1.8.6.tar.gz) = 51df506633d2b402c0854914671e8e8ed1585cb7
+SHA512 (libsixel-1.8.6.tar.gz) = 460a5d46bada705b4a7ec2e250e2bde7f4b8ba155281fa5a102d1121f79c1c79145f042cd1f4bf93a2fc29e784e89afd539e963470663fc659d4fe72ea49fdaf
+Size (libsixel-1.8.6.tar.gz) = 4791628 bytes

@@ -1,4 +1,4 @@
-/*	$NetBSD: license.c,v 1.54 2019/02/10 21:35:01 wiz Exp $	*/
+/*	$NetBSD: license.c,v 1.58 2021/03/06 04:37:28 ryoon Exp $	*/
 
 /*-
  * Copyright (c) 2009 Joerg Sonnenberger <joerg@NetBSD.org>.
@@ -46,6 +46,7 @@
 #define	HASH_SIZE	521
 
 const char *default_acceptable_licenses =
+    "afl-3.0 "
     "apache-1.1 apache-2.0 "
     "arphic-public "
     "artistic artistic-2.0 "
@@ -56,6 +57,7 @@ const char *default_acceptable_licenses =
     "cc0-1.0-universal "
     "cddl-1.0 "
     "cecill-2.1 "
+    "cecill-b-v1 "
     "cpl-1.0 "
     "epl-v1.0 "
     "eupl-v1.1 "
@@ -76,6 +78,7 @@ const char *default_acceptable_licenses =
     "mit "
     "mpl-1.0 mpl-1.1 mpl-2.0 "
     "mplusfont "
+    "odbl-v1 "
     "ofl-v1.0 ofl-v1.1 "
     "openssl "
     "original-bsd modified-bsd 2-clause-bsd "

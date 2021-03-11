@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.4 2017/12/06 12:21:02 adam Exp $
+# $NetBSD: Makefile,v 1.6 2020/05/12 18:20:07 adam Exp $
 
-DISTNAME=	tzlocal-1.5.1
+DISTNAME=	tzlocal-2.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	time python
 MASTER_SITES=	${MASTER_SITE_PYPI:=t/tzlocal/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://pypi.python.org/pypi/tzlocal
+HOMEPAGE=	https://github.com/regebro/tzlocal
 COMMENT=	Python tzinfo object for the local timezone
 LICENSE=	mit
 

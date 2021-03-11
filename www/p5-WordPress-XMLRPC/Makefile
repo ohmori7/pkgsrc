@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.14 2018/08/22 09:47:57 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:13:15 wiz Exp $
 
 DISTNAME=		WordPress-XMLRPC-2.12
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		1
+PKGREVISION=		3
 CATEGORIES=		www net
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=WordPress/}
 
 MAINTAINER=		imil@gcu.info
-HOMEPAGE=		http://search.cpan.org/dist/WordPress-XMLRPC/
+HOMEPAGE=		https://metacpan.org/release/WordPress-XMLRPC
 COMMENT=		Perl 5 API to WordPress XML-RPC services
 LICENSE=		${PERL5_LICENSE}
 

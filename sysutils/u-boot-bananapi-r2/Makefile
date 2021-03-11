@@ -1,29 +1,31 @@
-# $NetBSD: Makefile,v 1.4 2019/05/08 05:06:48 thorpej Exp $
+# $NetBSD: Makefile,v 1.8 2020/06/20 17:42:34 thorpej Exp $
 
 UBOOT_TARGET=		bananapi-r2
 UBOOT_CONFIG=		mt7623n_bpir2_defconfig
 UBOOT_BIN=		bpi-r2-sdmmc.img u-boot.bin
 
-UBOOT_INSTALLBOOT_PLIST=installboot.plist
+UBOOT_INSTALLBOOT_PLIST=	installboot.plist
 
-PKGREVISION=		3
-
-UBOOT_VERSION=		2019.04-rc4
+UBOOT_VERSION=		2020.04
 
 DISTINFO_FILE=		${.CURDIR}/../../sysutils/u-boot-bananapi-r2/distinfo
 PATCHDIR=		${.CURDIR}/../../sysutils/u-boot-bananapi-r2/patches
 DISTFILES=		${DEFAULT_DISTFILES}
 
+# This could be moved to u-boot.mk as long as we don't have support for
+# any imx8 boards.
+CHECK_PORTABILITY_SKIP+=	tools/imx8m_image.sh
+
 # SDMMC_BOOT-signature
 SDMMC_BOOT_IMG=		BPI-R2-HEAD440-0k.img
 DISTFILES+=		${SDMMC_BOOT_IMG}
 UBOOT_BIN+=		${SDMMC_BOOT_IMG}
-SITES.${SDMMC_BOOT_IMG}=${MASTER_SITE_GITHUB:=BPI-SINOVOIP/BPI-R2-bsp/raw/v1.2.1/mt-pack/mtk/bpi-r2/bin/}
+SITES.${SDMMC_BOOT_IMG}= ${MASTER_SITE_GITHUB:=BPI-SINOVOIP/BPI-R2-bsp/raw/v1.2.1/mt-pack/mtk/bpi-r2/bin/}
 
 # BRLYT-signature
 BRLYT_IMG=		BPI-R2-HEAD1-512b.img
 DISTFILES+=		${BRLYT_IMG}
-UBOOT_BIN+= 		${BRLYT_IMG}
+UBOOT_BIN+=		${BRLYT_IMG}
 SITES.${BRLYT_IMG}=	${MASTER_SITE_GITHUB:=BPI-SINOVOIP/BPI-R2-bsp/raw/v1.2.1/mt-pack/mtk/bpi-r2/bin/}
 
 # Preloader

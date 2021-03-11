@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.25 2019/05/05 22:49:53 ryoon Exp $
+# $NetBSD: Makefile,v 1.40 2021/02/07 06:30:42 ryoon Exp $
 
-PKGREVISION= 2
+PKGREVISION= 9
 .include "../../meta-pkgs/mate/Makefile.common"
 
-DISTNAME=	mate-settings-daemon-${VERSION}
+DISTNAME=	mate-settings-daemon-${VERSION:R}.0
 CATEGORIES=	x11
 
 COMMENT=	MATE settings daemon
@@ -39,7 +39,6 @@ CONF_FILES+=	${PREFIX}/share/examples/mate-settings-daemon/xdg/autostart/mate-se
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/dconf/buildlink3.mk"
 .include "../../fonts/fontconfig/buildlink3.mk"
-.include "../../security/gnome-keyring/buildlink3.mk"
 .include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/libnotify/buildlink3.mk"
 .include "../../x11/xorgproto/buildlink3.mk"

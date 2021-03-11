@@ -31,7 +31,7 @@
 
 PROGRAM=libtool
 PACKAGE=libtool
-VERSION="2.4.6 Debian-2.4.6-1"
+VERSION=2.4.6
 package_revision=2.4.6
 
 
@@ -309,6 +309,9 @@ test -z "$GREP" && {
 # uses them if a suitable command of that name is not already available
 # in the command search PATH.
 
+unset CP
+unset MV
+unset RM
 : ${CP="cp -f"}
 : ${ECHO="printf %s\n"}
 : ${EGREP="$GREP -E"}
@@ -1977,7 +1980,7 @@ func_version ()
 # End:
 
 # Set a version string.
-scriptversion='(GNU libtool) 2.4.6 Debian-2.4.6-1'
+scriptversion='(GNU libtool) 2.4.6'
 
 
 # func_echo ARG...
@@ -2068,7 +2071,7 @@ include the following information:
        compiler:       $LTCC
        compiler flags: $LTCFLAGS
        linker:         $LD (gnu? $with_gnu_ld)
-       version:        $progname $scriptversion
+       version:        $progname (GNU libtool) 2.4.6
        automake:       `($AUTOMAKE --version) 2>/dev/null |$SED 1q`
        autoconf:       `($AUTOCONF --version) 2>/dev/null |$SED 1q`
 
@@ -7272,13 +7275,10 @@ func_mode_link ()
       # -tp=*                Portland pgcc target processor selection
       # --sysroot=*          for sysroot support
       # -O*, -g*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
-      # -specs=*             GCC specs files
       # -stdlib=*            select c++ std lib with clang
-      # -fsanitize=*         Clang/GCC memory and address sanitizer
       -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
       -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
-      -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*| \
-      -specs=*|-fsanitize=*)
+      -O*|-g*|-flto*|-fwhopr*|-fuse-linker-plugin|-fstack-protector*|-stdlib=*)
         func_quote_for_eval "$arg"
 	arg=$func_quote_for_eval_result
         func_append compile_command " $arg"
@@ -7571,10 +7571,7 @@ func_mode_link ()
 	case $pass in
 	dlopen) libs=$dlfiles ;;
 	dlpreopen) libs=$dlprefiles ;;
-	link)
-	  libs="$deplibs %DEPLIBS%"
-	  test "X$link_all_deplibs" != Xno && libs="$libs $dependency_libs"
-	  ;;
+	link) libs="$deplibs %DEPLIBS% $dependency_libs" ;;
 	esac
       fi
       if test lib,dlpreopen = "$linkmode,$pass"; then
@@ -7893,19 +7890,19 @@ func_mode_link ()
 	    # It is a libtool convenience library, so add in its objects.
 	    func_append convenience " $ladir/$objdir/$old_library"
 	    func_append old_convenience " $ladir/$objdir/$old_library"
-	    tmp_libs=
-	    for deplib in $dependency_libs; do
-	      deplibs="$deplib $deplibs"
-	      if $opt_preserve_dup_deps; then
-		case "$tmp_libs " in
-		*" $deplib "*) func_append specialdeplibs " $deplib" ;;
-		esac
-	      fi
-	      func_append tmp_libs " $deplib"
-	    done
 	  elif test prog != "$linkmode" && test lib != "$linkmode"; then
 	    func_fatal_error "'$lib' is not a convenience library"
 	  fi
+	  tmp_libs=
+	  for deplib in $dependency_libs; do
+	    deplibs="$deplib $deplibs"
+	    if $opt_preserve_dup_deps; then
+	      case "$tmp_libs " in
+	      *" $deplib "*) func_append specialdeplibs " $deplib" ;;
+	      esac
+	    fi
+	    func_append tmp_libs " $deplib"
+	  done
 	  continue
 	fi # $pass = conv
 
@@ -8348,7 +8345,11 @@ func_mode_link ()
 	    # Finalize command for both is simple: just hardcode it.
 	    if test yes = "$hardcode_direct" &&
 	       test no = "$hardcode_direct_absolute"; then
-	      add=$libdir/$linklib
+	      if test -f "$inst_prefix_dir$libdir/$linklib"; then
+		add="$inst_prefix_dir$libdir/$linklib"
+	      else
+		add="$libdir/$linklib"
+	      fi
 	    elif test yes = "$hardcode_minus_L"; then
 	      add_dir=-L$libdir
 	      add=-l$name
@@ -8829,9 +8830,6 @@ func_mode_link ()
 	    revision=$number_minor
 	    lt_irix_increment=no
 	    ;;
-	  *)
-	    func_fatal_configuration "$modename: unknown library version type '$version_type'"
-	    ;;
 	  esac
 	  ;;
 	no)
@@ -8874,6 +8872,7 @@ func_mode_link ()
 	# Calculate the version variables.
 	major=
 	versuffix=
+	versuffix2=
 	verstring=
 	case $version_type in
 	none) ;;
@@ -8944,6 +8943,7 @@ func_mode_link ()
 	  func_arith $current - $age
 	  major=.$func_arith_result
 	  versuffix=$major.$age.$revision
+	  versuffix2=$major.$age
 	  ;;
 
 	osf)
@@ -9009,8 +9009,10 @@ func_mode_link ()
 	  esac
 	  if test no = "$need_version"; then
 	    versuffix=
+	    versuffix2=
 	  else
 	    versuffix=.0.0
+	    versuffix2=.0.0
 	  fi
 	fi
 
@@ -9018,6 +9020,7 @@ func_mode_link ()
 	if test yes,no = "$avoid_version,$need_version"; then
 	  major=
 	  versuffix=
+	  versuffix2=
 	  verstring=
 	fi
 
@@ -9131,7 +9134,7 @@ func_mode_link ()
 	  *-*-netbsd*)
 	    # Don't link with libc until the a.out ld.so is fixed.
 	    ;;
-	  *-*-openbsd* | *-*-freebsd* | *-*-dragonfly*)
+	  *-*-openbsd* | *-*-freebsd* | *-*-dragonfly* | *-*-mirbsd*)
 	    # Do not include libc due to us having libc/libc_r.
 	    ;;
 	  *-*-sco3.2v5* | *-*-sco5v6*)
@@ -9154,12 +9157,14 @@ func_mode_link ()
 	libname_save=$libname
 	release_save=$release
 	versuffix_save=$versuffix
+	versuffix2_save=$versuffix2
 	major_save=$major
 	# I'm not sure if I'm treating the release correctly.  I think
 	# release should show up in the -l (ie -lgmp5) so we don't want to
 	# add it in twice.  Is that correct?
 	release=
 	versuffix=
+	versuffix2=
 	major=
 	newdeplibs=
 	droppeddeps=no
@@ -9436,6 +9441,7 @@ EOF
 	  ;;
 	esac
 	versuffix=$versuffix_save
+	versuffix2=$versuffix2_save
 	major=$major_save
 	release=$release_save
 	libname=$libname_save
@@ -10921,7 +10927,7 @@ dlpreopen='$dlprefiles'
 
 # Directory that this library needs to be installed in:
 libdir='$install_libdir'"
-	  if test no,yes = "$installed,$need_relink"; then
+	  if test no,yes = "$installed,$need_relink" && test -n "$relink_command"; then
 	    $ECHO >> $output "\
 relink_command=\"$relink_command\""
 	  fi

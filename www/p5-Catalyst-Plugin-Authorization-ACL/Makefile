@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:47:33 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/08/31 18:12:44 wiz Exp $
 
 DISTNAME=	Catalyst-Plugin-Authorization-ACL-0.16
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Catalyst/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Catalyst-Plugin-Authorization-ACL/
+HOMEPAGE=	https://metacpan.org/release/Catalyst-Plugin-Authorization-ACL
 COMMENT=	ACL support for Catalyst applications
 LICENSE=	${PERL5_LICENSE}
 

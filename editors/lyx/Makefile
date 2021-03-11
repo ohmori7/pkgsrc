@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.77 2019/04/26 14:12:38 maya Exp $
+# $NetBSD: Makefile,v 1.98 2021/01/01 08:24:41 ryoon Exp $
 
-DISTNAME=		lyx-2.3.2
-PKGREVISION=		2
+DISTNAME=		lyx-2.3.5.2
+PKGREVISION=		5
 CATEGORIES=		editors
 MASTER_SITES=		ftp://ftp.lyx.org/pub/lyx/stable/2.3.x/
 MASTER_SITES+=		ftp://ftp.sdsc.edu/pub/other/lyx/stable/2.3.x/
@@ -10,19 +10,19 @@ MASTER_SITES+=		ftp://ftp.ntua.gr/pub/X11/LyX/stable/2.3.x/
 EXTRACT_SUFX=		.tar.xz
 
 MAINTAINER=		reed@reedmedia.net
-HOMEPAGE=		http://www.lyx.org/
+HOMEPAGE=		https://www.lyx.org/
 COMMENT=		Document processor and graphical frontend for LaTeX
 LICENSE=		gnu-gpl-v2
 
 CONFLICTS+=		lyx-xforms-[0-9]* lyx-qt-[0-9]*
 SUPERSEDES=		lyx-xforms-[0-9]* lyx-qt-[0-9]*
 DEPENDS+=		makeindexk-[0-9]*:../../textproc/makeindexk
+DEPENDS+=		tex-accents-[0-9]*:../../print/tex-accents
 DEPENDS+=		tex-ae-[0-9]*:../../fonts/tex-ae
 DEPENDS+=		tex-amsfonts-[0-9]*:../../fonts/tex-amsfonts
 DEPENDS+=		tex-amsmath-[0-9]*:../../print/tex-amsmath
 DEPENDS+=		tex-babel-[0-9]*:../../print/tex-babel
 DEPENDS+=		tex-bera-[0-9]*:../../fonts/tex-bera
-DEPENDS+=		tex-bezos-[0-9]*:../../print/tex-bezos
 DEPENDS+=		tex-bibtex-[0-9]*:../../print/tex-bibtex
 DEPENDS+=		tex-bibtopic-[0-9]*:../../print/tex-bibtopic
 DEPENDS+=		tex-eco-[0-9]*:../../fonts/tex-eco
@@ -63,7 +63,7 @@ GNU_CONFIGURE=			YES
 USE_TOOLS+=			gmake perl:run pkg-config xgettext
 USE_LIBTOOL=			YES
 USE_PKGLOCALEDIR=		YES
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 1.6.10
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 1.6.10
 
 CXXFLAGS.Linux+=	-fpermissive
 LDFLAGS.SunOS+=		-liconv
@@ -104,12 +104,10 @@ PRINT_PLIST_AWK+=	{ sub(/bin\//, "$${BIN_DIR}/"); \
 REPLACE_PYTHON=	development/autotests/keytest.py \
 			development/cmake/doc/ReplaceValues.py \
 			development/cmake/po/cat.py \
-			development/cmake/po/dos2unix.py \
 			development/cmake/po/unix2dos.py \
 			development/keystest/cache-bisect.py \
 			development/keystest/make_screenshot_html.py \
 			development/keystest/keytest.py \
-			development/tools/convert_kmap.py \
 			development/tools/gen_lfuns.py \
 			development/tools/generate_symbols_images.py \
 			development/tools/generate_symbols_list.py \
@@ -123,6 +121,8 @@ REPLACE_PYTHON=	development/autotests/keytest.py \
 			po/postats.py \
 			src/tex2lyx/test/runtests.py
 
+# Replacing plain "python " with PYTHONBIN replaces a few instances too
+# many, but nothing critical. Set SUBST_SHOW_DIFF=yes to see them.
 SUBST_CLASSES+=		python
 SUBST_STAGE.python=	pre-configure
 SUBST_FILES.python=	lib/configure.py

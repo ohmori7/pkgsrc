@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2015/01/04 05:43:31 dholland Exp $
+# $NetBSD: Makefile,v 1.8 2019/09/15 15:17:06 fox Exp $
 
 DISTNAME=	py-sysctl-0.1
 PKGNAME=	${PYPKGPREFIX}-sysctl-0.1
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel python
 MASTER_SITES=	ftp://ftp.NetBSD.org/pub/NetBSD/misc/cherry/
 

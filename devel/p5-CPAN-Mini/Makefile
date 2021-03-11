@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.7 2018/08/22 09:43:39 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2020/08/31 18:07:32 wiz Exp $
 
 DISTNAME=	CPAN-Mini-1.111016
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=CPAN/}
 
 MAINTAINER=	wen@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/CPAN-Mini/
+HOMEPAGE=	https://metacpan.org/release/CPAN-Mini
 COMMENT=	Create a minimal mirror of CPAN
 LICENSE=	${PERL5_LICENSE}
 

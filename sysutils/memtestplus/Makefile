@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.27 2019/02/09 09:13:24 maya Exp $
+# $NetBSD: Makefile,v 1.30 2020/01/26 17:32:10 rillig Exp $
 #
 
 # Note -- version number also in the do-install rule
-MAJVER=5
-MINVER=01
+MAJVER=	5
+MINVER=	01
 
 DISTNAME=		memtest86+-${MAJVER}.${MINVER}
 PKGNAME=		memtestplus-${MAJVER}.${MINVER}
@@ -12,7 +12,7 @@ CATEGORIES=		sysutils
 MASTER_SITES=		http://www.memtest.org/download/${MAJVER}.${MINVER}/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.memtest.org/
+HOMEPAGE=		https://www.memtest.org/
 COMMENT=		Thorough, stand alone memory test for x86 arch
 LICENSE=		gnu-gpl-v2
 
@@ -35,7 +35,7 @@ SUBST_SED.delcr=	-e 's/.$$//g'
 .include "../../mk/compiler.mk"
 
 .if !empty(PKGSRC_COMPILER:Mclang)
-BROKEN+=	${PKGNAME} does not produce a working binary with clang
+BROKEN+=	"Does not produce a working binary with clang."
 .endif
 
 pre-configure:

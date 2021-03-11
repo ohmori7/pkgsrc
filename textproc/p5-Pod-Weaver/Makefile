@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.16 2018/08/22 09:46:54 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2020/08/31 18:11:54 wiz Exp $
 
 DISTNAME=	Pod-Weaver-4.015
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Pod/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Pod-Weaver/
+HOMEPAGE=	https://metacpan.org/release/Pod-Weaver
 COMMENT=	Weave together a Pod document from an outline
 LICENSE=	${PERL5_LICENSE}
 
@@ -26,9 +26,9 @@ DEPENDS+=	p5-String-RewritePrefix-[0-9]*:../../textproc/p5-String-RewritePrefix
 DEPENDS+=	p5-namespace-autoclean-[0-9]*:../../devel/p5-namespace-autoclean
 
 #BUILD_DEPENDS+=	{perl>=5.10.1,p5-File-Temp-[0-9]*}:../../devel/p5-File-Temp
-BUILD_DEPENDS+=	p5-PPI-[0-9]*:../../devel/p5-PPI
-BUILD_DEPENDS+=	p5-Software-License-[0-9]*:../../devel/p5-Software-License
-BUILD_DEPENDS+=	p5-Test-Differences-[0-9]*:../../devel/p5-Test-Differences
+BUILD_DEPENDS+=		p5-PPI-[0-9]*:../../devel/p5-PPI
+BUILD_DEPENDS+=		p5-Software-License-[0-9]*:../../devel/p5-Software-License
+BUILD_DEPENDS+=		p5-Test-Differences-[0-9]*:../../devel/p5-Test-Differences
 #BUILD_DEPENDS+=	{perl>=5.10.1,p5-Test-Simple>=0.96}:../../devel/p5-Test-Simple
 
 PERL5_PACKLIST=		auto/Pod/Weaver/.packlist

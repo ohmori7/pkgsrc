@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2018/07/18 00:06:20 joerg Exp $
+# $NetBSD: Makefile,v 1.18 2020/05/13 04:17:26 rillig Exp $
 #
 
 DISTNAME=	gambc-${GAMBC_DIST_VERSION}
@@ -8,7 +8,7 @@ MASTER_SITES=	http://www.iro.umontreal.ca/~gambit/download/gambit/v4.6/source/
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.iro.umontreal.ca/~gambit/
+HOMEPAGE=	https://www.iro.umontreal.ca/~gambit/
 COMMENT=	GambitC Scheme System
 
 # bin/scheme-r5rs
@@ -36,8 +36,8 @@ MAKE_FILE=		makefile
 BUILD_TARGET+=		bootstrap
 TEST_TARGET=		check
 
-CHECK_PORTABILITY_SKIP=	prebuilt/*/*
-DLOPEN_REQUIRE_PTHREADS=no
+CHECK_PORTABILITY_SKIP=		prebuilt/*/*
+DLOPEN_REQUIRE_PTHREADS=	no
 
 TEST_TARGET=		check
 
@@ -56,14 +56,12 @@ GAMBC_MAKE_FLAGS+=	emacsdir=${PREFIX}/share/emacs/site-lisp
 MAKE_FLAGS+=		${GAMBC_MAKE_FLAGS}
 
 SUBST_CLASSES+=		build
-SUBST_FILES.build=	configure
-SUBST_FILES.build+=	makefile.in */makefile.in */*/makefile.in
+SUBST_FILES.build=	makefile.in */makefile.in */*/makefile.in
 SUBST_MESSAGE.build=	Preparing build-time and installation configuration.
 SUBST_SED.build=	-e 's|v${GAMBC_DIST_VERSION}||'
 SUBST_SED.build+=	-e 's|@target_vendor@|The NetBSD Foundation, Inc.|g'
 SUBST_STAGE.build=	pre-configure
-SUBST_VARS.build+=	PACKAGE_SUBDIR PACKAGE_VERSION
-SUBST_VARS.build+=	PACKAGE_STRING
+SUBST_VARS.build+=	PACKAGE_SUBDIR PACKAGE_VERSION PACKAGE_STRING
 
 PACKAGE_SUBDIR=		# empty
 PACKAGE_VERSION=	${PKGVERSION}

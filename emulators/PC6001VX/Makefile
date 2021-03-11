@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.33 2019/05/06 04:51:55 tsutsui Exp $
+# $NetBSD: Makefile,v 1.54 2021/02/12 22:56:11 tsutsui Exp $
 
-VERSION=		3.1.3
+VERSION=		3.7.0
 DISTNAME=		PC6001VX_${VERSION}_src
 PKGNAME=		${DISTNAME:S/_src//:S/_/-/}
-#PKGREVISION=		
 CATEGORIES=		emulators
 MASTER_SITES=		http://eighttails.up.seesaa.net/bin/
 
@@ -16,7 +15,7 @@ USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config
 USE_LANGUAGES=		c c++
 
-INSTALLATION_DIRS+=	bin share/doc/PC6001VX
+INSTALLATION_DIRS+=	bin
 
 .include "options.mk"
 
@@ -27,8 +26,6 @@ do-configure:
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/PC6001VX \
 	    ${DESTDIR}${PREFIX}/bin
-	${INSTALL_DATA} ${WRKSRC}/README.html \
-	    ${DESTDIR}${PREFIX}/share/doc/PC6001VX
 
 .include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../x11/qt5-qtmultimedia/buildlink3.mk"

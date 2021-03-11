@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.22 2018/08/22 09:46:21 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2020/08/31 18:11:11 wiz Exp $
 #
 
 DISTNAME=		Crypt-CAST5_PP-1.04
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		10
+PKGREVISION=		12
 CATEGORIES=		security perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Crypt/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Crypt-CAST5_PP/
+HOMEPAGE=		https://metacpan.org/release/Crypt-CAST5_PP
 COMMENT=		The CAST5 block cipher, implemented in pure Perl
 
 USE_LANGUAGES=		# empty

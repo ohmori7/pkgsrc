@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.26 2018/08/22 09:46:30 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2020/08/31 18:11:23 wiz Exp $
 
 DISTNAME=	XML-XSH-1.8.2
 PKGNAME=	${DISTNAME:S/XML-XSH/xsh/}
-PKGREVISION=	16
+PKGREVISION=	18
 CATEGORIES=	shells
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xsh/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://xsh.sourceforge.net/
+HOMEPAGE=	https://xsh.sourceforge.io/
 COMMENT=	XML Editing Shell
 
 DEPENDS+=	p5-Parse-RecDescent>=1.94:../../devel/p5-Parse-RecDescent
@@ -19,7 +19,7 @@ DEPENDS+=	p5-XML-NodeFilter-[0-9]*:../../textproc/p5-XML-NodeFilter
 USE_TOOLS+=	gmake
 PKG_SHELL=	bin/xsh
 
-PERL5_PACKLIST= auto/XML/XSH/.packlist
+PERL5_PACKLIST=	auto/XML/XSH/.packlist
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

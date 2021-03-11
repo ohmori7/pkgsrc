@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.31 2014/09/17 10:50:15 wiz Exp $
+# $NetBSD: Makefile,v 1.37 2021/03/07 13:09:37 taca Exp $
 
 DISTNAME=	phpPgAdmin-5.1
-PKGNAME=	${DISTNAME:S/PgAdmin/pgadmin/}
-PKGREVISION=	1
+PKGNAME=	${PHP_PKG_PREFIX}-${DISTNAME:S/PgAdmin/pgadmin/}
 CATEGORIES=	databases www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=phppgadmin/}
 EXTRACT_SUFX=	.tar.bz2
@@ -24,11 +23,6 @@ DOCDIR=		${PREFIX}/share/doc/phppgadmin
 CONF_FILES=	${EGDIR}/config.inc.php-dist ${PHPPGBASE}/conf/config.inc.php
 DOC_FILES=	CREDITS DEVELOPERS FAQ HISTORY INSTALL LICENSE TODO \
 		TRANSLATORS
-
-REPLACE_INTERPRETER+=	pkgsrc-php
-REPLACE.pkgsrc-php.old=	.*php
-REPLACE.pkgsrc-php.new=	${PREFIX}/bin/php
-REPLACE_FILES.pkgsrc-php=	build_tests.php
 
 do-configure:
 	${SED} -e "s#/usr/bin/pg#${PREFIX}/bin/pg#" \

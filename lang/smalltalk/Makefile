@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.108 2019/04/03 00:32:50 ryoon Exp $
+# $NetBSD: Makefile,v 1.120 2020/11/05 09:08:34 ryoon Exp $
 
 DISTNAME=	smalltalk-3.2.5
-PKGREVISION=	9
+PKGREVISION=	17
 CATEGORIES=	lang
 MASTER_SITES=	${MASTER_SITE_GNU:=smalltalk/}
 
@@ -22,11 +22,19 @@ CONFIGURE_ARGS+=	--with-system-libffi=${BUILDLINK_PREFIX.libffi}/lib
 CONFIGURE_ARGS+=	--with-gmp=${BUILDLINK_PREFIX.gmp}/lib
 CONFIGURE_ARGS+=	--with-lispdir=${PREFIX}/share/emacs/site-lisp
 CONFIGURE_ARGS+=	--without-emacs
-#CONFIGURE_ENV+=		CFLAGS="-O2 -fsigned-char"
+#CONFIGURE_ENV+=	CFLAGS="-O2 -fsigned-char"
 
 IGNORE_LIBTOOLIZE=	lib/smalltalk/libc.la
 INFO_FILES=		YES
 TEST_TARGET=		check
+
+USE_TOOLS+=		perl:run
+
+SUBST_CLASSES+=		paxctl
+SUBST_FILES.paxctl=	Makefile.in
+SUBST_STAGE.paxctl=	pre-configure
+SUBST_MESSAGE.paxctl=	Give paxctl path to Makefile.in after patch
+SUBST_SED.paxctl=	-e 's,@PAXCTL@,${TOOLS_PLATFORM.paxctl},'
 
 REPLACE_PERL=		packages/vfs/deb packages/vfs/mailfs
 REPLACE_SED=		examples/pepe.sed examples/xml.sed

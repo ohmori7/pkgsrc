@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.21 2017/09/28 10:40:35 spz Exp $
+# $NetBSD: Makefile,v 1.25 2020/10/14 10:53:44 hauke Exp $
 #
 
-DISTNAME=		xymon-4.3.28
-PKGNAME=		xymonclient-4.3.28
+DISTNAME=		xymon-4.3.29
+PKGNAME=		xymonclient-4.3.29
+PKGREVISION=		1
 CATEGORIES=		net
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=xymon/}
 
 MAINTAINER=		spz@NetBSD.org
-HOMEPAGE=		http://xymon.sourceforge.net/
+HOMEPAGE=		https://xymon.sourceforge.io/
 COMMENT=		Network services monitor a la Big Brother
 
 LICENSE=		gnu-gpl-v2
@@ -39,6 +40,7 @@ PKG_USERS_VARS+=	XYMONUSER
 # startup and config
 
 RCD_SCRIPTS+=		xymonclient
+SMF_INSTANCES+=		xymonclient
 PKG_SYSCONFDIR.xymon=	${PREFIX}/etc/xymon
 EXAMPLEDIR=		${PREFIX}/share/examples/xymon
 

@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.5 2019/05/10 19:39:27 ryoon Exp $
+$NetBSD: distinfo,v 1.13 2021/02/08 10:12:54 ryoon Exp $
 
-SHA1 (keepassxc-2.4.1-src.tar.xz) = 9d0ad34d68a1d9ae2790f986d81fba4aa2391d7c
-RMD160 (keepassxc-2.4.1-src.tar.xz) = 2e6e64c37e6c415cebfe7d20005f0a34a4ed526d
-SHA512 (keepassxc-2.4.1-src.tar.xz) = 4369043700d3de4fece0a1dd0f8aab3f621df379bc9d0214b4c70ab72d081f978104aa09fd39c4b4bf8b8df8f78266835dc206c31e7174bdf872a977c0d79502
-Size (keepassxc-2.4.1-src.tar.xz) = 3277856 bytes
+SHA1 (keepassxc-2.6.4-src.tar.xz) = cac7a10a06cb6129f7a2467cfee1fd9bc6186cbe
+RMD160 (keepassxc-2.6.4-src.tar.xz) = cfc515bfcda0c54c132ea44f6a2374aa2b1e0b37
+SHA512 (keepassxc-2.6.4-src.tar.xz) = 3bde0c8670ba14be80c6f3676bd447b0855a2af2915a395ee236c2d4c6e4b859936351643d679480aae1fcf55ed4315447ae927ac9bdedeb0332593cb4e9fedb
+Size (keepassxc-2.6.4-src.tar.xz) = 7575164 bytes

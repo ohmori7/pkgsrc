@@ -1,10 +1,9 @@
-$NetBSD: distinfo,v 1.11 2018/10/31 14:56:40 jperkin Exp $
+$NetBSD: distinfo,v 1.14 2021/02/01 11:19:16 mef Exp $
 
-SHA1 (w3m-el-snapshot_1.4.625+0.20180518.orig.tar.gz) = 0480c9ed27d5a7868620e974e0ad45aed2ce5f70
-RMD160 (w3m-el-snapshot_1.4.625+0.20180518.orig.tar.gz) = 1e1b5e432363cdb0936a5e5bdc9be3f469c2d3b4
-SHA512 (w3m-el-snapshot_1.4.625+0.20180518.orig.tar.gz) = 096af0ba934759cf45ab6003c23efc6e94965c445de15315bdaa83850c62f1a2073dfa81d63f6c313d945350e9451a11002b19d20686f34502bac81526b9dd1f
-Size (w3m-el-snapshot_1.4.625+0.20180518.orig.tar.gz) = 1090189 bytes
-SHA1 (patch-Makefile.in) = 32cb48754433fc10ad598352c697b3df31d7d11c
-SHA1 (patch-aclocal.m4) = b89d7c2457a0190f4e4439b3dc2fe8832dfde21b
+SHA1 (w3m-el-snapshot_1.4.632+0.20210106.2144.f29aada.orig.tar.gz) = 6bc1c3d01ac1f1a41a6f5c724535fd92f7c152c4
+RMD160 (w3m-el-snapshot_1.4.632+0.20210106.2144.f29aada.orig.tar.gz) = 71f828c04302322019c9e8f0be7ce1c73f34f9a0
+SHA512 (w3m-el-snapshot_1.4.632+0.20210106.2144.f29aada.orig.tar.gz) = 01c1932a1df084f8f43c47866c499b747f244dd136afba743991b763d4d1c8e631967eb5d131e41eafbd6bcc618af238510b434a74f100ba47b5575c9958b0b8
+Size (w3m-el-snapshot_1.4.632+0.20210106.2144.f29aada.orig.tar.gz) = 1069670 bytes
+SHA1 (patch-Makefile.in) = 5e3c1d6335c72c2644f3b6136dace3358a6ba347
 SHA1 (patch-w3m.el) = a4c14deed274e984f854255513ce49dbd320eb83
-SHA1 (patch-w3mhack.el) = ecb7448d7f79b37e2b3229e11f9079062728ebf7
+SHA1 (patch-w3mhack.el) = 1716431b4201ab9f672b900946dc874b928bd713

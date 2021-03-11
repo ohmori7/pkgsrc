@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.4 2016/10/10 23:16:32 tnn Exp $
+$NetBSD: distinfo,v 1.7 2021/02/24 12:26:22 wiz Exp $
 
-SHA1 (libebur128-1.1.0.tar.gz) = bff8e1b2014f20b4fce2f67c6445a9e1c0a4d4e3
-RMD160 (libebur128-1.1.0.tar.gz) = 2eb66acfd34557f66961e34b21fefa126fabb889
-SHA512 (libebur128-1.1.0.tar.gz) = 13a0d92eae8d991a15cb090e5f3ca34fbe285bf7e8e01e10b5ccc8be4f066e8bbff6920370d4506284f02dbfca3a5189ddfe9135f195179d356257055768c08a
-Size (libebur128-1.1.0.tar.gz) = 19318 bytes
+SHA1 (libebur128-1.2.6.tar.gz) = 4e0eabdfbd12e731843ece5229af93e3655ba71f
+RMD160 (libebur128-1.2.6.tar.gz) = b150df3e8d25f014174b35033a626f26b2395fcf
+SHA512 (libebur128-1.2.6.tar.gz) = ab188c6d32cd14613119258313a8a3fb1167b55501c9f5b6d3ba738d674bc58f24ac3034c23d9730ed8dc3e95a23619bfb81719e4c79807a9a16c1a5b3423582
+Size (libebur128-1.2.6.tar.gz) = 25890 bytes

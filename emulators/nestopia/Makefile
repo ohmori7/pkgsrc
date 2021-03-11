@@ -1,23 +1,16 @@
-# $NetBSD: Makefile,v 1.35 2019/01/01 18:36:09 nia Exp $
-#
+# $NetBSD: Makefile,v 1.42 2020/08/18 17:57:47 leot Exp $
 
-DISTNAME=	nestopia-1.49
-CATEGORIES=	emulators
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=nestopiaue/}
-EXTRACT_SUFX=	.tgz
+PKGREVISION= 4
+.include "Makefile.common"
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://0ldsk00l.ca/nestopia/
 COMMENT=	Portable, very accurate NES emulator
-LICENSE=	gnu-gpl-v2
 
-USE_LANGUAGES=	c c++
-USE_TOOLS+=	autoreconf autoconf automake gawk pkg-config
-HAS_CONFIGURE=	yes
 GNU_CONFIGURE=	yes
 
-AUTOCONF_REQD=	2.69
-AUTOMAKE_REQD=	1.15
+USE_TOOLS+=	autoreconf autoconf automake
+USE_TOOLS+=	pkg-config
 
 BUILD_DEPENDS+=	autoconf-archive-[0-9]*:../../devel/autoconf-archive
 

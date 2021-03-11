@@ -78,7 +78,7 @@ func (t *Tracer) Call(args ...interface{}) func() {
 	return t.traceCall(args...)
 }
 
-// http://stackoverflow.com/questions/13476349/check-for-nil-and-nil-interface-in-go
+// https://stackoverflow.com/questions/13476349/check-for-nil-and-nil-interface-in-go
 func isNil(a interface{}) bool {
 	defer func() {
 		_ = recover()
@@ -92,7 +92,9 @@ func argsStr(args []interface{}) string {
 		if rv.Len() > 0 {
 			rv.WriteString(", ")
 		}
-		if str, ok := arg.(fmt.Stringer); ok && !isNil(str) {
+		if str, ok := arg.(fmt.GoStringer); ok && !isNil(str) {
+			rv.WriteString(str.GoString())
+		} else if str, ok := arg.(fmt.Stringer); ok && !isNil(str) {
 			rv.WriteString(str.String())
 		} else {
 			_, _ = fmt.Fprintf(&rv, "%#v", arg)

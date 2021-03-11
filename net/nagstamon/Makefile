@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.55 2019/05/23 19:23:10 rillig Exp $
+# $NetBSD: Makefile,v 1.65 2020/12/04 20:45:35 nia Exp $
 
 VERSION=	1.0.1
 DISTNAME=	Nagstamon-${VERSION}
 PKGNAME=	${DISTNAME:S/N/n/}
-PKGREVISION=	11
+PKGREVISION=	19
 CATEGORIES=	net python
 MASTER_SITES=	https://nagstamon.ifw-dresden.de/files-nagstamon/stable/
 
 MAINTAINER=	imil@gcu.info
-HOMEPAGE=	http://nagstamon.ifw-dresden.de/
+HOMEPAGE=	https://nagstamon.ifw-dresden.de/
 COMMENT=	Nagios status monitor which takes place in systray or on desktop
 LICENSE=	gnu-gpl-v2
 
@@ -25,7 +25,7 @@ INSTALLATION_DIRS+=	${PKGMANDIR}/man1
 REPLACE_PYTHON=		${WRKSRC}/*.py
 REPLACE_PYTHON+=	${WRKSRC}/Nagstamon/Server/Multisite.py
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # py-libxslt, py-ORBit via py-gnome2, py-gtk2
+PYTHON_VERSIONS_ACCEPTED=	27 # py-libxslt, py-ORBit via py-gnome2, py-gtk2
 
 SUBST_CLASSES+=		mandir
 SUBST_STAGE.mandir=	pre-configure

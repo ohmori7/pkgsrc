@@ -1,5 +1,8 @@
-@comment $NetBSD: PLIST,v 1.2 2019/01/21 12:03:41 wiz Exp $
+@comment $NetBSD: PLIST,v 1.4 2020/11/09 12:02:25 micha Exp $
 bin/flnews
-man/man1/flnews.1
-share/flnews/license.txt
 ${PLIST.nls}lib/flnews/nls/de_DE.cat
+man/man1/flnews.1
+${PLIST.xdg}share/applications/flnews.desktop
+share/flnews/license.txt
+${PLIST.xdg}share/icons/hicolor/48x48/apps/flnews.png
+${PLIST.xdg}share/icons/hicolor/64x64/apps/flnews.png

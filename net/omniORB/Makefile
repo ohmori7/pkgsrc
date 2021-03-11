@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.19 2019/04/26 14:12:43 maya Exp $
+# $NetBSD: Makefile,v 1.24 2020/12/04 20:45:35 nia Exp $
 
 DISTNAME=		omniORB-4.1.7
-PKGREVISION=		2
+PKGREVISION=		3
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=omniorb/}
 EXTRACT_SUFX=		.tar.bz2
@@ -16,19 +16,19 @@ GNU_CONFIGURE=	YES
 USE_LANGUAGES=	c c++03
 USE_TOOLS+=	gmake
 
-PKGCONFIG_OVERRIDE+= contrib/pkgconfig/omniCOS4.pc.in
-PKGCONFIG_OVERRIDE+= contrib/pkgconfig/omniCOSDynamic4.pc.in
-PKGCONFIG_OVERRIDE+= contrib/pkgconfig/omniConnectionMgmt4.pc.in
-PKGCONFIG_OVERRIDE+= contrib/pkgconfig/omniDynamic4.pc.in
-PKGCONFIG_OVERRIDE+= contrib/pkgconfig/omniORB4.pc.in
-PKGCONFIG_OVERRIDE+= contrib/pkgconfig/omnithread3.pc.in
+PKGCONFIG_OVERRIDE+=	contrib/pkgconfig/omniCOS4.pc.in
+PKGCONFIG_OVERRIDE+=	contrib/pkgconfig/omniCOSDynamic4.pc.in
+PKGCONFIG_OVERRIDE+=	contrib/pkgconfig/omniConnectionMgmt4.pc.in
+PKGCONFIG_OVERRIDE+=	contrib/pkgconfig/omniDynamic4.pc.in
+PKGCONFIG_OVERRIDE+=	contrib/pkgconfig/omniORB4.pc.in
+PKGCONFIG_OVERRIDE+=	contrib/pkgconfig/omnithread3.pc.in
 
 # omniORB requires native threads support
 PTHREAD_OPTS=	require native
-RCD_SCRIPTS= 	omninames
+RCD_SCRIPTS=	omninames
 
-OMNIORB_ETCDIR?= ${PKG_SYSCONFDIR}
-OMNIORB_CONFIG=	${OMNIORB_ETCDIR}/omniORB.cfg
+OMNIORB_ETCDIR?=	${PKG_SYSCONFDIR}
+OMNIORB_CONFIG=		${OMNIORB_ETCDIR}/omniORB.cfg
 
 CONFIGURE_ARGS+=	--with-omniORB-config=${OMNIORB_CONFIG:Q}
 #CONFIGURE_ARGS+=	--with-omniNames-logdir=
@@ -43,9 +43,9 @@ PKG_SUGGESTED_OPTIONS=	inet6
 CONFIGURE_ARGS+=--disable-ipv6
 .endif
 
-PY_PATCHPLIST=		yes
-REPLACE_PYTHON+=	src/tool/omniidl/python/scripts/omniidlrun.py
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 4.1.7
+PY_PATCHPLIST=			yes
+REPLACE_PYTHON+=		src/tool/omniidl/python/scripts/omniidlrun.py
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 4.1.7
 
 post-install:
 	${INSTALL_DATA_DIR} ${DESTDIR}${PREFIX}/share/examples/omniORB/

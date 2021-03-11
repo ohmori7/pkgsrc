@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:43:46 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:07:42 wiz Exp $
 
 DISTNAME=	Config-Auto-0.44
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	devel perl5
 #MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/B/BI/BINGOS/}
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Config/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Config-Auto/
+HOMEPAGE=	https://metacpan.org/release/Config-Auto
 COMMENT=	Perl 5 module providing a magical config file parser
 LICENSE=	${PERL5_LICENSE}
 

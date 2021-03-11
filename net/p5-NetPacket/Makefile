@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.25 2019/01/27 13:33:04 wen Exp $
+# $NetBSD: Makefile,v 1.30 2020/08/31 18:10:49 wiz Exp $
 
-DISTNAME=	NetPacket-1.7.0
+DISTNAME=	NetPacket-1.7.2
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=NetPacket/}
 
-MAINTAINER=	david@silicium.ath.cx
+MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Modules to assemble/disassemble network packets
-HOMEPAGE=	http://search.cpan.org/dist/NetPacket/
+HOMEPAGE=	https://metacpan.org/release/NetPacket
 LICENSE=	${PERL5_LICENSE} # source doc wins over changelog
 
 USE_LANGUAGES=	c

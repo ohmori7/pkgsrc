@@ -1,33 +1,35 @@
-# $NetBSD: Makefile,v 1.77 2019/06/15 01:19:02 ryoon Exp $
+# $NetBSD: Makefile,v 1.105 2021/02/26 15:36:25 ryoon Exp $
 #
 
-TB_VER=		60.7.1
+TB_VER=		78.8.0
 PKGNAME=	thunderbird-l10n-${TB_VER}
 DISTNAME=	# empty
 CATEGORIES=	mail
-MASTER_SITES=	${MASTER_SITE_MOZILLA:=thunderbird/releases/${TB_VER}/linux-i686/xpi/}
+MASTER_SITES=	${MASTER_SITE_MOZILLA:=thunderbird/releases/${TB_VER}/linux-x86_64/xpi/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.mozillamessaging.com/en-US/thunderbird/
 COMMENT=	Language packs for mail/thunderbird
+
+DEPENDS+=	thunderbird>=${PKGVERSION_NOREV}:../../mail/thunderbird
 
 DIST_SUBDIR=	${PKGNAME_NOREV}
 DISTFILES=	${XPI_FILES}
 
 NO_BUILD=	yes
 
-INSTALLATION_DIRS=	lib/thunderbird/extensions
+INSTALLATION_DIRS=	lib/thunderbird/distribution/extensions
 
-TB_LOCALES=	        ar ast be bg br ca cs cy		\
-                        da de dsb el en-GB en-US es-AR es-ES et	\
+TB_LOCALES=		ar af ast be bg br ca cak cs cy		\
+                        da de dsb el en-CA en-GB en-US es-AR es-ES et	\
                         eu fi fr fy-NL ga-IE gd gl he hr hsb	\
-                        hy-AM hu id is it ja ko			\
-                        lt nb-NO nl nn-NO pl 			\
+                        hu hy-AM id is it ja ka kab kk ko	\
+                        lt nb-NO nl nn-NO pa-IN pl 		\
                         pt-BR pt-PT rm ro ru si sk		\
-                        sl sq sr sv-SE tr uk vi			\
+                        sl sq sr sv-SE tr uk uz vi		\
                         zh-CN zh-TW
 
-EXTENSIONS_DIR=		${PREFIX}/lib/thunderbird/extensions
+EXTENSIONS_DIR=		${PREFIX}/lib/thunderbird/distribution/extensions
 XPI_FILES=		${TB_LOCALES:=.xpi}
 
 do-install:

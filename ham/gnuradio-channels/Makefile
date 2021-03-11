@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.13 2018/12/13 19:52:02 adam Exp $
+# $NetBSD: Makefile,v 1.22 2021/01/01 08:24:46 ryoon Exp $
 
 PKGNAME=	gnuradio-channels-${VERSION}
 PKGREVISION=	2
@@ -9,5 +9,8 @@ COMMENT=	Signal processing blocks to simulate channel models of GNU Radio
 
 CMAKE_ARGS+=	-DENABLE_DEFAULT=OFF
 CMAKE_ARGS+=	-DENABLE_GR_CHANNELS=ON
+CMAKE_ARGS+=	-DENABLE_GRC=ON
+
+PLIST_MINUS+=	companion
 
 .include	"../../mk/bsd.pkg.mk"

@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.19 2019/05/23 02:02:53 gutteridge Exp $
+# $NetBSD: Makefile,v 1.28 2020/08/31 18:13:21 wiz Exp $
 
+PKGREVISION= 4
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
-DISTNAME=	libxfce4ui-4.13.5
+DISTNAME=	libxfce4ui-4.14.1
 CATEGORIES=	x11
-MASTER_SITES+=	http://archive.xfce.org/src/xfce/libxfce4ui/4.13/
+MASTER_SITES+=	http://archive.xfce.org/src/xfce/libxfce4ui/4.14/
 
 COMMENT=	Xfce widget library
 
@@ -26,6 +27,8 @@ CONF_FILES=	${XFCE4_EGBASE}/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.
 
 MAKE_DIRS+=	${XFCE4_EGBASE}/xfconf/xfce-perchannel-xml \
 		${PKG_SYSCONFDIR}/xfce4/xfconf/xfce-perchannel-xml
+
+USE_LANGUAGES=	c99
 
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../devel/xfce4-conf/buildlink3.mk"

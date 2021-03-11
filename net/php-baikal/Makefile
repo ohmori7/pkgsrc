@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2017/04/05 12:33:48 fhajny Exp $
+# $NetBSD: Makefile,v 1.18 2021/03/07 13:21:58 taca Exp $
 
-DISTNAME=	baikal-0.4.6
+DISTNAME=	baikal-0.7.2
 PKGNAME=	${PHP_PKG_PREFIX}-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GITHUB:=fruux/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -10,12 +9,16 @@ GITHUB_PROJECT=	baikal
 EXTRACT_SUFX=	.zip
 
 MAINTAINER=	wiz@NetBSD.org
-HOMEPAGE=	http://baikal-server.com/
+HOMEPAGE=	https://sabre.io/baikal/
 COMMENT=	Lightweight CalDAV+CardDAV server
 LICENSE=	gnu-gpl-v3
 
 DEPENDS+=	${PHP_PKG_PREFIX}-pdo>=5.3.1:../../databases/php-pdo
 DEPENDS+=	${PHP_PKG_PREFIX}-pdo_sqlite>=5.3.1:../../databases/php-pdo_sqlite
+
+REPLACE_SH+=	vendor/twig/twig/drupal_test.sh
+
+PHP_VERSIONS_INCOMPATIBLE=	56 # as of 0.6.0
 
 WRKSRC=		${WRKDIR}/baikal
 
@@ -45,6 +48,7 @@ CHECK_INTERPRETER_SKIP+=	share/baikal/vendor/sabre/dav/bin/migrateto17.php
 CHECK_INTERPRETER_SKIP+=	share/baikal/vendor/sabre/dav/bin/migrateto20.php
 CHECK_INTERPRETER_SKIP+=	share/baikal/vendor/sabre/dav/bin/migrateto21.php
 CHECK_INTERPRETER_SKIP+=	share/baikal/vendor/sabre/dav/bin/migrateto30.php
+CHECK_INTERPRETER_SKIP+=	share/baikal/vendor/sabre/dav/bin/migrateto32.php
 CHECK_INTERPRETER_SKIP+=	share/baikal/vendor/sabre/dav/bin/naturalselection
 CHECK_INTERPRETER_SKIP+=	share/baikal/vendor/sabre/dav/bin/naturalselection.py
 CHECK_INTERPRETER_SKIP+=	share/baikal/vendor/sabre/event/examples/promise.php
@@ -59,8 +63,6 @@ CHECK_INTERPRETER_SKIP+=	share/baikal/vendor/sabre/vobject/bin/vobjectvalidate.p
 
 .include "../../mk/bsd.prefs.mk"
 
-APACHE_USER?=	www
-APACHE_GROUP?=	www
 PKG_GROUPS=	${APACHE_GROUP}
 PKG_USERS=	${APACHE_USER}:${APACHE_GROUP}
 
@@ -70,11 +72,14 @@ PKG_GROUPS_VARS=	APACHE_GROUP
 FILES_SUBST+=	WWWGRP=${APACHE_GROUP} WWWOWN=${APACHE_USER} \
 		BAIKALDIR=${BAIKALDIR}
 
+post-extract:
+	${CHMOD} -x ${WRKSRC}/vendor/sabre/dav/bin/sabredav.php
+
 do-install:
 	${RM} -f ${WRKSRC}/*orig
 	${RM} -f ${WRKSRC}/*/*/*/*/*orig
 	cd ${WRKSRC} && pax -rw -pmp * \
 		${DESTDIR}${PREFIX}/${BAIKALDIR}
 
-.include "../../lang/php/phpversion.mk"
+.include "../../lang/php/json.mk"
 .include "../../mk/bsd.pkg.mk"

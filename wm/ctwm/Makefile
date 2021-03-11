@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.37 2018/10/23 16:53:37 jperkin Exp $
+# $NetBSD: Makefile,v 1.39 2019/11/04 21:50:15 rillig Exp $
 #
 
-DISTNAME=	ctwm-4.0.2
+DISTNAME=	ctwm-4.0.3
 CATEGORIES=	x11 wm
 MASTER_SITES=	http://ctwm.org/dist/
 EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=	rhialto@falu.nl
+MAINTAINER=	rhialto@NetBSD.org
 HOMEPAGE=	http://ctwm.org/
 COMMENT=	Window manager with support for multiple virtual screens and EWMH
 LICENSE=	mit
@@ -47,10 +47,10 @@ pre-install:
 	    ${DESTDIR}${PREFIX}/share/xsessions/ctwm.desktop
 
 # The build optionally uses these, if found:
-#BUILD_DEPENDS+=    asciidoc-[0-9]*:../../textproc/asciidoc
-#BUILD_DEPENDS+=    xmlto-[0-9]*:../../textproc/xmlto
-#BUILD_DEPENDS+=    doxygen-[0-9]*:../../devel/doxygen
-#BUILD_DEPENDS+=    dblatex-[0-9]*:../../textproc/dblatex
+#BUILD_DEPENDS+=	asciidoc-[0-9]*:../../textproc/asciidoc
+#BUILD_DEPENDS+=	xmlto-[0-9]*:../../textproc/xmlto
+#BUILD_DEPENDS+=	doxygen-[0-9]*:../../devel/doxygen
+#BUILD_DEPENDS+=	dblatex-[0-9]*:../../textproc/dblatex
 
 # but for consistent builds, we disable them entirely.
 CMAKE_ARGS+=		-DASCIIDOCTOR=

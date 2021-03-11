@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.16 2018/08/22 09:47:18 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.20 2020/09/04 13:45:16 wiz Exp $
 
 DISTNAME=	MooseX-Types-DateTimeX-0.10
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MooseX/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/MooseX-Types-DateTimeX/
+HOMEPAGE=	https://metacpan.org/release/MooseX-Types-DateTimeX
 COMMENT=	Extensions to MooseX::Types::DateTime::ButMaintained
 LICENSE=	${PERL5_LICENSE}
 
@@ -20,7 +19,6 @@ DEPENDS+=	p5-Time-Duration-Parse>=0.06:../../time/p5-Time-Duration-Parse
 DEPENDS+=	p5-namespace-clean>=0.08:../../devel/p5-namespace-clean
 
 BUILD_DEPENDS+=	p5-Test-Exception>=0.27:../../devel/p5-Test-Exception
-BUILD_DEPENDS+=	p5-Test-Simple>=1.001010:../../devel/p5-Test-Simple
 
 USE_LANGUAGES=		# empty
 PERL5_PACKLIST=		auto/MooseX/Types/DateTimeX/.packlist

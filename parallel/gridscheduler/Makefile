@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.24 2018/08/22 09:46:10 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2020/11/05 09:08:58 ryoon Exp $
 
 PKGNAME=	gridscheduler-2011.11.1
-PKGREVISION=	3
+PKGREVISION=	8
 DISTNAME=	GE2011.11p1
 CATEGORIES=	parallel sysutils
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gridscheduler/}
@@ -36,9 +36,9 @@ PKG_USERS_VARS+=	SGE_USER
 AIMK=	${SETENV} ${MAKE_ENV} tcsh -fb ${WRKSRC}/source/aimk
 
 CONFIG_GUESS_OVERRIDE=	source/3rdparty/qmake/config.guess \
-		source/3rdparty/qtcsh/config.guess
+			source/3rdparty/qtcsh/config.guess
 CONFIG_SUB_OVERRIDE=	source/3rdparty/qmake/config.sub \
-		source/3rdparty/qtcsh/config.sub
+			source/3rdparty/qtcsh/config.sub
 
 REPLACE_INTERPRETER+=	tclsh
 REPLACE.tclsh.old=	.*tclsh

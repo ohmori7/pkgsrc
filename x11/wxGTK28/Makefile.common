@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.18 2019/05/23 19:23:23 rillig Exp $
+# $NetBSD: Makefile.common,v 1.21 2020/08/01 17:19:46 tnn Exp $
 #
 # used by x11/wxGTK28/Makefile
 # used by x11/wxGTK28-contrib/Makefile
@@ -9,7 +9,7 @@ MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=wxwindows/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		joerg@NetBSD.org
-HOMEPAGE=		http://www.wxwidgets.org/
+HOMEPAGE=		https://www.wxwidgets.org/
 
 PATCHDIR=		${.CURDIR}/../../x11/wxGTK28/patches
 DISTINFO_FILE=		${.CURDIR}/../../x11/wxGTK28/distinfo
@@ -41,7 +41,7 @@ DOCDIR=			${PREFIX}/share/wx-2.8/doc/wxGTK
 CONFIGURE_DIRS=	build-non-unicode build-unicode
 
 #CONFIGURE_ARGS+=	--enable-debug
-#PLIST_SUBST+=	DEBUG_LIB=d DEBUG_CONFIG=-config
+#PLIST_SUBST+=		DEBUG_LIB=d DEBUG_CONFIG=-config
 
 PLIST_SUBST+=	DEBUG_LIB= DEBUG_CONFIG=-release
 
@@ -50,8 +50,10 @@ SUBST_STAGE.fix-paths=		pre-configure
 SUBST_MESSAGE.fix-paths=	Fixing absolute paths.
 SUBST_FILES.fix-paths=		configure
 SUBST_SED.fix-paths=		-e 's,/usr/pkg/include,${PREFIX}/include,g'
-SUBST_VARS.fix-paths=	PREFIX
+SUBST_VARS.fix-paths=		PREFIX
 SUBST_SED.fix-paths+=		-e 's,/usr/X11/,${X11BASE}/,g'
+
+.include "../../x11/wxGTK28/options.mk"
 
 pre-configure:
 	mkdir ${WRKSRC}/build-non-unicode ${WRKSRC}/build-unicode
@@ -60,9 +62,6 @@ pre-configure:
 	printf '#!%s\n../configure --disable-unicode "$$@"' ${SH} \
 	    > ${WRKSRC}/build-non-unicode/configure
 
-.include "../../multimedia/gstreamer0.10/buildlink3.mk"
-.include "../../multimedia/gst-plugins0.10-base/buildlink3.mk"
-.include "../../devel/GConf/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/MesaLib/buildlink3.mk"

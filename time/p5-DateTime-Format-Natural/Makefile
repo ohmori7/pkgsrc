@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.28 2019/04/07 12:21:59 wen Exp $
+# $NetBSD: Makefile,v 1.34 2020/11/08 14:58:11 wen Exp $
 
-DISTNAME=	DateTime-Format-Natural-1.07
+DISTNAME=	DateTime-Format-Natural-1.11
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	time perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DateTime/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/DateTime-Format-Natural/
+HOMEPAGE=	https://metacpan.org/release/DateTime-Format-Natural
 COMMENT=	Create machine readable date/time with natural parsing logic
 LICENSE=	${PERL5_LICENSE}
 
@@ -21,8 +21,8 @@ DEPENDS+=	p5-Date-Calc-[0-9]*:../../devel/p5-Date-Calc
 
 TEST_DEPENDS+=	p5-Test-MockTime-[0-9]*:../../time/p5-Test-MockTime
 
-PERL5_MODULE_TYPE=  	Module::Build
-USE_LANGUAGES=	#
+PERL5_MODULE_TYPE=	Module::Build
+USE_LANGUAGES=		#
 
 PERL5_PACKLIST=	auto/DateTime/Format/Natural/.packlist
 

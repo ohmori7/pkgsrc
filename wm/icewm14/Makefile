@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2018/11/28 16:24:54 jperkin Exp $
+# $NetBSD: Makefile,v 1.7 2020/10/06 10:16:37 triaxx Exp $
 
 DISTNAME=	icewm-1.4.2
+PKGREVISION=	4
 CATEGORIES=	wm
 MASTER_SITES=	${MASTER_SITE_GITHUB:=bbidulock/}
 GITHUB_RELEASE=	${PKGVERSION_NOREV}
@@ -8,7 +9,7 @@ EXTRACT_SUFX=	.tar.bz2
 EXTRACT_USING=	gtar
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.icewm.org/
+HOMEPAGE=	https://www.ice-wm.org/
 COMMENT=	Small, fast and light-weight window manager
 LICENSE=	gnu-gpl-v2
 
@@ -21,6 +22,8 @@ USE_LANGUAGES=	c c++03
 USE_TOOLS+=	msgfmt pkg-config
 
 LDFLAGS.SunOS+=	-lsocket -lnsl
+
+CMAKE_ARGS.NetBSD+=	-DCMAKE_CXX_FLAGS="-DHAVE_SYSCTL_CP_TIME"
 
 post-extract:
 	cp ${FILESDIR}/bsd-daemon.xpm ${WRKSRC}/lib/taskbar

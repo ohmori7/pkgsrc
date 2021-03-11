@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:46:07 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/11/04 18:32:26 otis Exp $
 #
 
-DISTNAME=		snmptt_1.3
-EXTRACT_SUFX=		.tgz
-PKGNAME=		snmptt-1.3
-PKGREVISION=		9
+DISTNAME=		snmptt_1.4.2
+PKGNAME=		snmptt-1.4.2
 CATEGORIES=		net
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=snmptt/}
+EXTRACT_SUFX=		.tgz
 
 MAINTAINER=		bouyer@NetBSD.org
 HOMEPAGE=		http://www.snmptt.org/
@@ -23,7 +22,7 @@ WRKSRC=			${WRKDIR}/${DISTNAME}
 
 PKG_SYSCONFSUBDIR=	snmptt
 
-INSTALLATION_DIRS+= sbin
+INSTALLATION_DIRS+=	sbin
 
 RCD_SCRIPTS=		snmptt
 
@@ -33,9 +32,9 @@ BUILD_DEFS+=	VARBASE
 EGDIR=		${PREFIX}/share/examples/snmptt
 CONF_FILES=	${EGDIR}/snmptt.ini ${PKG_SYSCONFDIR}/snmptt.ini
 
-DOCDIR=		${PREFIX}/share/doc/html/snmptt
+DOCDIR=		${PREFIX}/share/doc/snmptt
 
-MAKE_DIRS_PERMS+= ${VARBASE}/spool/snmptt ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 0755
+MAKE_DIRS_PERMS+=	${VARBASE}/spool/snmptt ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 0755
 
 USE_TOOLS+=	perl:run
 REPLACE_PERL+=	snmptt
@@ -45,7 +44,7 @@ REPLACE_PERL+=	snmptthandler
 REPLACE_PERL+=	snmptthandler-embedded
 REPLACE_PERL+=	snmpttconvertmib
 
-SUBST_CLASSES+=			installdir etcdir vardir log
+SUBST_CLASSES+=			installdir
 SUBST_STAGE.installdir=		pre-configure
 SUBST_FILES.installdir=		snmptt
 SUBST_FILES.installdir+=	snmptthandler
@@ -53,6 +52,7 @@ SUBST_FILES.installdir+=	snmptthandler-embedded
 SUBST_SED.installdir=		-e "s|/sbin|${PREFIX}/sbin|g"
 SUBST_MESSAGE.installdir=	Fixing hardcoded install directory path.
 
+SUBST_CLASSES+=		etcdir
 SUBST_STAGE.etcdir=	pre-configure
 SUBST_FILES.etcdir=	snmptt
 SUBST_FILES.etcdir+=	snmptt.ini
@@ -64,11 +64,13 @@ SUBST_FILES.etcdir+=	snmptthandler-embedded
 SUBST_SED.etcdir=	-e "s|/etc|${PKG_SYSCONFDIR}|g"
 SUBST_MESSAGE.etcdir=	Fixing hardcoded /etc path.
 
+SUBST_CLASSES+=		vardir
 SUBST_STAGE.vardir=	pre-configure
 SUBST_FILES.vardir=	snmptt snmptt.ini
 SUBST_SED.vardir=	-e "s|/var|${VARBASE}|g"
 SUBST_MESSAGE.vardir=	Fixing hardcoded /var path.
 
+SUBST_CLASSES+=		log
 SUBST_STAGE.log=	pre-configure
 SUBST_FILES.log=	snmptt.ini
 SUBST_SED.log=		-e "s|/log/snmptt/|/log/|g"

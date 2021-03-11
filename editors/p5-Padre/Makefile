@@ -1,21 +1,19 @@
-# $NetBSD: Makefile,v 1.55 2019/06/08 10:40:57 rillig Exp $
+# $NetBSD: Makefile,v 1.64 2020/08/31 18:09:24 wiz Exp $
 
 DISTNAME=	Padre-1.00
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	6
+PKGREVISION=	12
 CATEGORIES=	editors perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Padre/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Padre/
+HOMEPAGE=	https://metacpan.org/release/Padre
 COMMENT=	Perl Application Development and Refactoring Environment
 LICENSE=	${PERL5_LICENSE}
 
 MAKE_JOBS_SAFE=	no
 
 USE_LANGUAGES+=	c c++
-REPLACE_PERL+=	share/templates/*.t
-REPLACE_PERL+=	share/templates/*.pl
 REPLACE_PERL+=	share/examples/wx/*.pl
 REPLACE_PERL+=	share/examples/absolute_beginner/*.pl
 

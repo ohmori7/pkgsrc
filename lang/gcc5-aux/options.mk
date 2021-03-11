@@ -1,8 +1,15 @@
-# $NetBSD: options.mk,v 1.5 2017/07/09 23:17:39 maya Exp $
+# $NetBSD: options.mk,v 1.7 2019/11/03 19:03:59 rillig Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.gcc5-aux
-PKG_SUPPORTED_OPTIONS=  fortran objc testsuite static bootstrap allstages
-PKG_SUGGESTED_OPTIONS=  #fortran objc 
+PKG_SUPPORTED_OPTIONS=	fortran objc testsuite static bootstrap allstages always-libgcc
+PKG_SUGGESTED_OPTIONS=	#fortran objc 
+
+.include "../../mk/compiler.mk"
+.if empty(PKGSRC_COMPILER:Mgcc)
+PKG_SUGGESTED_OPTIONS+=		always-libgcc
+.endif
+
+PKG_SUGGESTED_OPTIONS.SunOS+=	always-libgcc
 
 # disable nls for now (build error involving iconv)
 # disable fortran, breaks during build on NetBSD 7.0-beta
@@ -19,15 +26,28 @@ PKG_SUGGESTED_OPTIONS=  #fortran objc
 #############################
 
 .if empty(PKG_OPTIONS:Mfortran) || !empty(PKG_OPTIONS:Mbootstrap)
-EXTRA_CONFARGS+= --disable-libquadmath
+EXTRA_CONFARGS+=	--disable-libquadmath
 .else
-LANGS+= fortran
-APPLY_DIFFS+= fortran
-.if ${OPSYS} == NetBSD
-EXTRA_CONFARGS+= --disable-libquadmath
-.else
-EXTRA_CONFARGS+= --enable-libquadmath
+LANGS+=			fortran
+APPLY_DIFFS+=		fortran
+.  if ${OPSYS} == NetBSD
+EXTRA_CONFARGS+=	--disable-libquadmath
+.  else
+EXTRA_CONFARGS+=	--enable-libquadmath
+.  endif
 .endif
+
+
+#############################
+##  Don't install libgcc   ##
+#############################
+
+.if empty(PKG_OPTIONS:Malways-libgcc)
+post-install:	delete-installed-libgcc
+
+delete-installed-libgcc:
+	${FIND} ${DESTDIR} -name 'libgcc_s.so*' -delete
+
 .endif
 
 
@@ -36,7 +56,7 @@ EXTRA_CONFARGS+= --enable-libquadmath
 #################################
 
 .if !empty(PKG_OPTIONS:Mobjc) && empty(PKG_OPTIONS:Mbootstrap)
-LANGS+= objc
+LANGS+=	objc
 .endif
 
 
@@ -45,10 +65,10 @@ LANGS+= objc
 #########################
 
 .if !empty(PKG_OPTIONS:Mtestsuite) && empty(PKG_OPTIONS:Mbootstrap)
-BUILD_DEPENDS+= dejagnu>=1.4:../../devel/dejagnu
-APPLY_DIFFS+= ada-testsuite
-APPLY_DIFFS+= cxx-testsuite
-APPLY_DIFFS+= gcc-testsuite
+BUILD_DEPENDS+=	dejagnu>=1.4:../../devel/dejagnu
+APPLY_DIFFS+=	ada-testsuite
+APPLY_DIFFS+=	cxx-testsuite
+APPLY_DIFFS+=	gcc-testsuite
 .endif
 
 
@@ -56,7 +76,7 @@ APPLY_DIFFS+= gcc-testsuite
 ##  NATIONAL LANGUAGE SUPPORT  ##
 #################################
 
-EXTRA_CONFARGS+= --disable-nls
+EXTRA_CONFARGS+=	--disable-nls
 
 
 ###############################
@@ -64,14 +84,14 @@ EXTRA_CONFARGS+= --disable-nls
 ###############################
 
 .if !empty(PKG_OPTIONS:Mstatic)
-STATIC_BUILD = yes
+STATIC_BUILD =	yes
 .endif
 
 .if defined(STATIC_BUILD) && empty(PKG_OPTIONS:Mbootstrap)
 .  if ${OPSYS} == SunOS
-PKG_FAIL_REASON+= SunOS does not support static builds
+PKG_FAIL_REASON+=	SunOS does not support static builds
 .  else
-EXTRA_CONFARGS+= --with-stage1-ldflags=-static
+EXTRA_CONFARGS+=	--with-stage1-ldflags=-static
 .  endif
 .endif
 
@@ -102,16 +122,16 @@ EXTRA_CONFARGS+= --with-mpc=${BUILDLINK_PREFIX.mpcomplex}
 .endif
 
 .if !empty(PKG_OPTIONS:Mbootstrap)
-EXTRA_CONFARGS+= --disable-shared --disable-lto
+EXTRA_CONFARGS+=	--disable-shared --disable-lto
 .  if ${OPSYS} != SunOS
-EXTRA_CONFARGS+= --with-stage1-ldflags=-static
-EXTRA_CONFARGS+= --with-boot-ldflags=-static
-EXTRA_CONFARGS+= --with-system-zlib
+EXTRA_CONFARGS+=	--with-stage1-ldflags=-static
+EXTRA_CONFARGS+=	--with-boot-ldflags=-static
+EXTRA_CONFARGS+=	--with-system-zlib
 .  endif
 .else
 .  if empty(PKG_OPTIONS:Mallstages)
-EXTRA_CONFARGS+= --disable-bootstrap
-EXTRA_CONFARGS+= --disable-libcc1
+EXTRA_CONFARGS+=	--disable-bootstrap
+EXTRA_CONFARGS+=	--disable-libcc1
 .  endif
-EXTRA_CONFARGS+= --enable-shared
+EXTRA_CONFARGS+=	--enable-shared
 .endif

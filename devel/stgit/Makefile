@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2019/04/26 14:12:38 maya Exp $
+# $NetBSD: Makefile,v 1.44 2020/12/04 20:45:13 nia Exp $
 
 DISTNAME=	stgit-0.17.1
-PKGREVISION=	13
+PKGREVISION=	16
 CATEGORIES=	devel
 MASTER_SITES=	http://download.gna.org/stgit/
 
@@ -12,7 +12,7 @@ LICENSE=	gnu-gpl-v2
 
 BUILD_DEPENDS+=	asciidoc>=8:../../textproc/asciidoc
 BUILD_DEPENDS+=	docbook-xsl>=1.72:../../textproc/docbook-xsl
-BUILD_DEPENDS+= xmlto-[0-9]*:../../textproc/xmlto
+BUILD_DEPENDS+=	xmlto-[0-9]*:../../textproc/xmlto
 DEPENDS+=	git-base>=1.5.2:../../devel/git-base
 
 AUTO_MKDIRS=	yes
@@ -22,9 +22,9 @@ USE_LANGUAGES=	#none
 REPLACE_PERL=	Documentation/build-docdep.perl
 REPLACE_BASH=	contrib/stg-*
 
-REPLACE_PYTHON=	*.py stgit/*.py stg
-PYSETUPINSTALLARGS=	--prefix=${PREFIX}
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.17.1
+REPLACE_PYTHON=			*.py stgit/*.py stg
+PYSETUPINSTALLARGS=		--prefix=${PREFIX}
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.17.1
 
 MAKE_ENV+=	ASCIIDOC=${PREFIX}/bin/asciidoc
 

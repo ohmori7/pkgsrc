@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2018/12/13 19:52:16 adam Exp $
+# $NetBSD: Makefile,v 1.26 2021/01/01 08:24:53 ryoon Exp $
 
 DISTNAME=	${GHNAME}-${GHDATE}-${GHCOMMIT}
 PKGNAME=	${GHNAME}-0.3.0.${GHDATE}
-PKGREVISION=	12
+PKGREVISION=	22
 CATEGORIES=	net
 MASTER_SITES=	https://github.com/${GHACCOUNT}/${GHNAME}/archive/${GHCOMMIT}/
 
@@ -20,11 +20,11 @@ WRKSRC=		${WRKDIR}/grive-${GHCOMMIT}
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++11
 
-SUBST_CLASSES+=		disableqt
-SUBST_MESSAGE.disableqt=Disable QT frontend
-SUBST_STAGE.disableqt=	pre-configure
-SUBST_FILES.disableqt=	CMakeLists.txt
-SUBST_SED.disableqt=	-e '/ bgrive/d'
+SUBST_CLASSES+=			disableqt
+SUBST_MESSAGE.disableqt=	Disable QT frontend
+SUBST_STAGE.disableqt=		pre-configure
+SUBST_FILES.disableqt=		CMakeLists.txt
+SUBST_SED.disableqt=		-e '/ bgrive/d'
 
 SUBST_CLASSES+=		manpath
 SUBST_MESSAGE.manpath=	Fix manpath

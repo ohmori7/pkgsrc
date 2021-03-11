@@ -1,21 +1,22 @@
-# $NetBSD: Makefile,v 1.5 2018/08/22 09:44:20 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2020/08/31 18:08:27 wiz Exp $
 
-DISTNAME=	MooX-late-0.015
+DISTNAME=	MooX-late-0.100
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	2
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/T/TO/TOBYINK/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/MooX-late/
+HOMEPAGE=	https://metacpan.org/release/MooX-late
 COMMENT=	Easily translate Moose code to Moo
 LICENSE=	gnu-gpl-v1 OR artistic
 
 DEPENDS+=	p5-Moo-[0-9]*:../../devel/p5-Moo
+DEPENDS+=	p5-Sub-HandlesVia-[0-9]*:../../devel/p5-Sub-HandlesVia
 DEPENDS+=	p5-Type-Tiny-[0-9]*:../../devel/p5-Type-Tiny
 
-BUILD_DEPENDS+=	p5-Test-Fatal-[0-9]*:../../devel/p5-Test-Fatal
-BUILD_DEPENDS+=	p5-Test-Requires-[0-9]*:../../devel/p5-Test-Requires
+TEST_DEPENDS+=	p5-Test-Fatal-[0-9]*:../../devel/p5-Test-Fatal
+TEST_DEPENDS+=	p5-Test-Requires-[0-9]*:../../devel/p5-Test-Requires
 
 PERL5_PACKLIST=	auto/MooX/late/.packlist
 

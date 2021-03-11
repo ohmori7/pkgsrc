@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.23 2018/08/22 09:42:55 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2020/08/31 18:06:34 wiz Exp $
 #
 
 DISTNAME=	mstream-1.3
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	audio
-MASTER_SITES=	http://oss.gw.com/people/kim/
+MASTER_SITES=	http://software.kimmo.suominen.com/
 
-MAINTAINER=	kim@tac.nyc.ny.us
-#HOMEPAGE=	http://kimmo.suominen.com/gwradio/
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://kimmo.suominen.com/gwradio/
 COMMENT=	Mserv player package to queue tracks to IceS
 
 DEPENDS+=	ices-mp3>=0.3:../../audio/ices-mp3

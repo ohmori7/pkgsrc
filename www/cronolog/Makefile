@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.25 2018/08/22 09:47:23 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2020/08/31 18:12:32 wiz Exp $
 #
 
 DISTNAME=	cronolog-1.6.2
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	www
 MASTER_SITES=	http://cronolog.org/download/
 
@@ -11,9 +11,9 @@ HOMEPAGE=	https://github.com/fordmason/cronolog/
 COMMENT=	Web log rotation utility that provides datestamp filenames
 LICENSE=	gnu-gpl-v2
 
-GNU_CONFIGURE=	YES
-INFO_FILES=	yes
-USE_TOOLS+=	perl:run
+GNU_CONFIGURE=		YES
+INFO_FILES=		yes
+USE_TOOLS+=		perl:run
 INSTALLATION_DIRS=	${PKGMANDIR}/man1 ${PKGMANDIR}/man8
 
 SUBST_CLASSES+=	cl

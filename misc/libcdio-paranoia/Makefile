@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.8 2019/04/30 11:36:10 adam Exp $
+# $NetBSD: Makefile,v 1.12 2020/08/31 18:10:21 wiz Exp $
 
-DISTNAME=	libcdio-paranoia-10.2+2.0.0
-PKGNAME=	libcdio-paranoia-2.0.0
+DISTNAME=	libcdio-paranoia-10.2+2.0.1
+PKGNAME=	libcdio-paranoia-2.0.1
+PKGREVISION=	1
 CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_GNU:=libcdio/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnu.org/software/libcdio/
+HOMEPAGE=	https://www.gnu.org/software/libcdio/
 COMMENT=	CD-ROM access library: CDDA support
 LICENSE=	gnu-gpl-v3
 

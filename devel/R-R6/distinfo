@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.2 2018/12/21 06:25:09 wen Exp $
+$NetBSD: distinfo,v 1.4 2020/07/31 18:15:23 brook Exp $
 
-SHA1 (R/R6_2.3.0.tar.gz) = 43b4c18c2a1cfdf1188056a085d6d71db160dc3a
-RMD160 (R/R6_2.3.0.tar.gz) = 6018b794e1319a0c1d59c659b990193a62de5b09
-SHA512 (R/R6_2.3.0.tar.gz) = 47aef4bbb80b43f0f4836d51211aa861208d58e5ad63c96ead7f47a34566bf61f86b97849e77f3ffe4153aa9eff3553d9e309a797987d833c6eba54c365adb8d
-Size (R/R6_2.3.0.tar.gz) = 30968 bytes
+SHA1 (R/R6_2.4.1.tar.gz) = be38b1e429d2fc076a60a364b6f1b7be4404c799
+RMD160 (R/R6_2.4.1.tar.gz) = a169b91b0a65eb8fa2db92a988e01839f2385592
+SHA512 (R/R6_2.4.1.tar.gz) = bf165edf15f4fb3a4ad94b80bcf96f255b6889649b40c7f27af10841a55d81d02f8a42707fc08a5bcadfa94d77d67f4617739a75b3e7d99ba57bb9100dde98b0
+Size (R/R6_2.4.1.tar.gz) = 35536 bytes

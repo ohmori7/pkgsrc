@@ -1,17 +1,20 @@
-# $NetBSD: Makefile,v 1.12 2019/05/23 19:23:06 rillig Exp $
+# $NetBSD: Makefile,v 1.16 2020/04/24 11:23:08 nia Exp $
 
 VERSION=	5.7.3p2
 DISTNAME=	opensmtpd-${VERSION}
+PKGREVISION=	1
 CATEGORIES=	mail net
 MASTER_SITES=	https://www.opensmtpd.org/archives/
 
-MAINTAINER=	ftigeot@wolfpond.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.opensmtpd.org/
 COMMENT=	The OpenSMTPD mail transfer agent, a replacement for sendmail
 LICENSE=	isc AND modified-bsd AND 2-clause-bsd
 
-CONFLICTS+=	courier-mta-[0-9]* fastforward>=0.51nb2 sendmail-[0-9]*
-CONFLICTS+=	esmtp>=1.2 nullmailer-[0-9]* postfix-[0-9]*
+BROKEN=		"Fails to build with OpenSSL 1.1"
+
+CONFLICTS+=		courier-mta-[0-9]* fastforward>=0.51nb2 sendmail-[0-9]*
+CONFLICTS+=		esmtp>=1.2 nullmailer-[0-9]* postfix-[0-9]*
 BROKEN_FOR_PLATFORM=	OpenBSD-*-*
 
 BUILD_DEFS+=	VARBASE
@@ -31,8 +34,8 @@ PKG_HOME._smtpd=	${SMTPD_HOME}
 PKG_GECOS._smtpq=	OpenSMTPD pseudo-user
 PKG_HOME._smtpq=	${SMTPD_HOME}
 
-GNU_CONFIGURE=	yes
-USE_DB185=	yes
+GNU_CONFIGURE=		yes
+USE_DB185=		yes
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 CONFIGURE_ARGS+=	--with-mantype=man
 CONFIGURE_ARGS+=	--with-privsep-path=${SMTPD_HOME}

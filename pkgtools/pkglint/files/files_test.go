@@ -4,19 +4,81 @@ import (
 	"gopkg.in/check.v1"
 )
 
+func (s *Suite) Test_Load(c *check.C) {
+	t := s.Init(c)
+
+	nonexistent := t.File("nonexistent")
+	empty := t.CreateFileLines("empty")
+	oneLiner := t.CreateFileLines("one-liner",
+		"hello, world")
+
+	t.Check(Load(nonexistent, 0), check.IsNil)
+	t.Check(Load(empty, 0).Lines, check.HasLen, 0)
+	t.CheckEquals(Load(oneLiner, 0).Lines[0].Text, "hello, world")
+
+	t.CheckOutputEmpty()
+
+	t.Check(Load(nonexistent, LogErrors), check.IsNil)
+	t.Check(Load(empty, LogErrors).Lines, check.HasLen, 0)
+	t.CheckEquals(Load(oneLiner, LogErrors).Lines[0].Text, "hello, world")
+
+	t.CheckOutputLines(
+		"ERROR: ~/nonexistent: Cannot be read.")
+
+	t.Check(Load(nonexistent, NotEmpty), check.IsNil)
+	t.Check(Load(empty, NotEmpty), check.IsNil)
+	t.CheckEquals(Load(oneLiner, NotEmpty).Lines[0].Text, "hello, world")
+
+	t.CheckOutputEmpty()
+
+	t.Check(Load(nonexistent, NotEmpty|LogErrors), check.IsNil)
+	t.Check(Load(empty, NotEmpty|LogErrors), check.IsNil)
+	t.CheckEquals(Load(oneLiner, NotEmpty|LogErrors).Lines[0].Text, "hello, world")
+
+	t.CheckOutputLines(
+		"ERROR: ~/nonexistent: Cannot be read.",
+		"ERROR: ~/empty: Must not be empty.")
+
+	t.ExpectFatal(
+		func() { Load(t.File("does-not-exist"), MustSucceed) },
+		"FATAL: ~/does-not-exist: Cannot be read.")
+
+	t.ExpectFatal(
+		func() { Load(t.File("empty"), MustSucceed|NotEmpty) },
+		"FATAL: ~/empty: Must not be empty.")
+}
+
+// Up to 2019-12-04, pkglint suppressed fatal errors when it was started
+// with the --autofix option. This was another case where the clear
+// separation between diagnostics and technical errors had been confused.
+func (s *Suite) Test_Load__not_found_in_autofix_mode(c *check.C) {
+	t := s.Init(c)
+
+	t.SetUpCommandLine("--autofix")
+	t.Chdir(".")
+
+	t.ExpectFatal(
+		func() { Load("nonexistent", MustSucceed) },
+		"FATAL: nonexistent: Cannot be read.")
+}
+
 func (s *Suite) Test_convertToLogicalLines__no_continuation(c *check.C) {
+	t := s.Init(c)
+
 	rawText := "" +
 		"first line\n" +
 		"second line\n"
 
 	lines := convertToLogicalLines("filename", rawText, false)
 
-	c.Check(lines.Len(), equals, 2)
-	c.Check(lines.Lines[0].String(), equals, "filename:1: first line")
-	c.Check(lines.Lines[1].String(), equals, "filename:2: second line")
+	t.CheckEquals(lines.Len(), 2)
+	t.CheckEquals(lines.Lines[0].String(), "filename:1: first line")
+	t.CheckEquals(lines.Lines[1].String(), "filename:2: second line")
 }
 
 func (s *Suite) Test_convertToLogicalLines__continuation(c *check.C) {
+	t := s.Init(c)
+
 	rawText := "" +
 		"first line, \\\n" +
 		"still first line\n" +
@@ -24,9 +86,31 @@ func (s *Suite) Test_convertToLogicalLines__continuation(c *check.C) {
 
 	lines := convertToLogicalLines("filename", rawText, true)
 
-	c.Check(lines.Len(), equals, 2)
-	c.Check(lines.Lines[0].String(), equals, "filename:1--2: first line, still first line")
-	c.Check(lines.Lines[1].String(), equals, "filename:3: second line")
+	t.CheckEquals(lines.Len(), 2)
+	t.CheckEquals(lines.Lines[0].String(), "filename:1--2: first line, still first line")
+	t.CheckEquals(lines.Lines[1].String(), "filename:3: second line")
+}
+
+// This test demonstrates that pkglint deviates from bmake.
+// Bmake keeps all the trailing whitespace from the line and replaces the
+// backslash plus any indentation with a single space. This results in:
+//  "\tprintf '%s\\n' 'none none  space  space  tab\t tab'"
+// This is another of the edge cases probably no-one relies on.
+func (s *Suite) Test_convertToLogicalLines__continuation_spacing(c *check.C) {
+	t := s.Init(c)
+
+	rawText := "" +
+		"\tprintf '%s\\n' 'none\\\n" +
+		"none\\\n" +
+		"space \\\n" +
+		" space \\\n" +
+		"tab\t\\\n" +
+		"\ttab'\n"
+
+	lines := convertToLogicalLines("filename", rawText, true)
+
+	t.CheckEquals(lines.Lines[0].Text,
+		"\tprintf '%s\\n' 'none none space space tab tab'")
 }
 
 func (s *Suite) Test_convertToLogicalLines__continuation_in_last_line(c *check.C) {
@@ -37,8 +121,8 @@ func (s *Suite) Test_convertToLogicalLines__continuation_in_last_line(c *check.C
 
 	lines := convertToLogicalLines("filename", rawText, true)
 
-	c.Check(lines.Len(), equals, 1)
-	c.Check(lines.Lines[0].String(), equals, "filename:1: last line\\")
+	t.CheckEquals(lines.Len(), 1)
+	t.CheckEquals(lines.Lines[0].String(), "filename:1: last line\\")
 	t.CheckOutputEmpty()
 }
 
@@ -77,39 +161,25 @@ func (s *Suite) Test_convertToLogicalLines__comments(c *check.C) {
 		texts = append(texts, line.Text)
 	}
 
-	c.Check(texts, deepEquals, []string{
+	t.CheckDeepEquals(texts, []string{
 		"# This is a comment",
 		"",
 		"# Multiline comment",
 		"# Another escaped comment that goes on and on",
-		"# This is NOT an escaped comment due to the double backslashes \\",
+		"# This is NOT an escaped comment due to the double backslashes \\\\",
 		"VAR=\tThis is not a comment",
 		"",
 		"# This is a comment",
-		"#\\",
-		"\tThis is no comment",
-		"#\\ This is a comment",
 		"#\\\\",
 		"\tThis is no comment",
 		"#\\\\ This is a comment",
-		"#\\\\\\",
+		"#\\\\\\\\",
+		"\tThis is no comment",
+		"#\\\\\\\\ This is a comment",
+		"#\\\\\\\\\\\\",
 		"\tThis is no comment"})
 
 	t.CheckOutputEmpty()
-}
-
-func (s *Suite) Test_nextLogicalLine__commented_multi(c *check.C) {
-	t := s.Init(c)
-
-	mklines := t.SetUpFileMkLines("filename.mk",
-		"#COMMENTED= \\",
-		"#\tcontinuation 1 \\",
-		"#\tcontinuation 2")
-	mkline := mklines.mklines[0]
-
-	// The leading comments are stripped from the continuation lines as well.
-	t.Check(mkline.Value(), equals, "continuation 1 \tcontinuation 2")
-	t.Check(mkline.VarassignComment(), equals, "")
 }
 
 func (s *Suite) Test_convertToLogicalLines__missing_newline_at_eof(c *check.C) {
@@ -121,8 +191,8 @@ func (s *Suite) Test_convertToLogicalLines__missing_newline_at_eof(c *check.C) {
 
 	lines := convertToLogicalLines("DESCR", rawText, true)
 
-	c.Check(lines.Len(), equals, 2)
-	c.Check(lines.Lines[1].String(), equals, "DESCR:2: takes 2 lines")
+	t.CheckEquals(lines.Len(), 2)
+	t.CheckEquals(lines.Lines[1].String(), "DESCR:2: takes 2 lines")
 	t.CheckOutputLines(
 		"ERROR: DESCR:2: File must end with a newline.")
 }
@@ -135,8 +205,8 @@ func (s *Suite) Test_convertToLogicalLines__missing_newline_at_eof_in_continuati
 
 	lines := convertToLogicalLines("filename", rawText, true)
 
-	c.Check(lines.Len(), equals, 1)
-	c.Check(lines.Lines[0].String(), equals, "filename:1: last line\\")
+	t.CheckEquals(lines.Len(), 1)
+	t.CheckEquals(lines.Lines[0].String(), "filename:1: last line\\")
 	t.CheckOutputLines(
 		"ERROR: filename:1: File must end with a newline.")
 }
@@ -150,39 +220,41 @@ func (s *Suite) Test_convertToLogicalLines__missing_newline_at_eof_with_source(c
 
 	lines := convertToLogicalLines("filename", rawText, true)
 
-	c.Check(lines.Len(), equals, 1)
-	c.Check(lines.Lines[0].String(), equals, "filename:1: last line\\")
+	t.CheckEquals(lines.Len(), 1)
+	t.CheckEquals(lines.Lines[0].String(), "filename:1: last line\\")
 	t.CheckOutputLines(
 		">\tlast line\\",
 		"ERROR: filename:1: File must end with a newline.")
 }
 
-func (s *Suite) Test_matchContinuationLine(c *check.C) {
-	leadingWhitespace, text, trailingWhitespace, continuation := matchContinuationLine("\n")
-
-	c.Check(leadingWhitespace, equals, "")
-	c.Check(text, equals, "")
-	c.Check(trailingWhitespace, equals, "")
-	c.Check(continuation, equals, "")
-
-	leadingWhitespace, text, trailingWhitespace, continuation = matchContinuationLine("\tword   \\\n")
-
-	c.Check(leadingWhitespace, equals, "\t")
-	c.Check(text, equals, "word")
-	c.Check(trailingWhitespace, equals, "   ")
-	c.Check(continuation, equals, "\\")
-}
-
-func (s *Suite) Test_Load__errors(c *check.C) {
+func (s *Suite) Test_nextLogicalLine__commented_multi(c *check.C) {
 	t := s.Init(c)
 
-	t.CreateFileLines("empty")
+	mklines := t.NewMkLines("filename.mk",
+		"#COMMENTED= \\",
+		"#\tcontinuation 1 \\",
+		"#\tcontinuation 2")
+	mkline := mklines.mklines[0]
 
-	t.ExpectFatal(
-		func() { Load(t.File("does-not-exist"), MustSucceed) },
-		"FATAL: ~/does-not-exist: Cannot be read.")
+	// The leading comments are stripped from the continuation lines as well.
+	t.CheckEquals(mkline.Value(), "continuation 1 \tcontinuation 2")
+	t.CheckEquals(mkline.HasComment(), false)
+}
 
-	t.ExpectFatal(
-		func() { Load(t.File("empty"), MustSucceed|NotEmpty) },
-		"FATAL: ~/empty: Must not be empty.")
+func (s *Suite) Test_matchContinuationLine(c *check.C) {
+	t := s.Init(c)
+
+	leadingWhitespace, text, trailingWhitespace, continuation := matchContinuationLine("")
+
+	t.CheckEquals(leadingWhitespace, "")
+	t.CheckEquals(text, "")
+	t.CheckEquals(trailingWhitespace, "")
+	t.CheckEquals(continuation, "")
+
+	leadingWhitespace, text, trailingWhitespace, continuation = matchContinuationLine("\tword   \\")
+
+	t.CheckEquals(leadingWhitespace, "\t")
+	t.CheckEquals(text, "word")
+	t.CheckEquals(trailingWhitespace, "   ")
+	t.CheckEquals(continuation, "\\")
 }

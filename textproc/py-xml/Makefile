@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.32 2019/04/26 13:14:18 maya Exp $
+# $NetBSD: Makefile,v 1.34 2019/11/04 21:43:46 rillig Exp $
 
 DISTNAME=	PyXML-0.8.4
 PKGNAME=	${PYPKGPREFIX}-xml-0.8.4
@@ -13,12 +13,12 @@ COMMENT=	Collection of libraries to process XML with Python
 CONFLICTS+=	PyXML-[0-9]*
 
 BUILDLINK_API_DEPENDS.expat+=	expat>=1.95.6
-PYSETUPBUILDARGS+=	--with-libexpat=${BUILDLINK_DIR}
-PYSETUPBUILDARGS+=	--ldflags="${EXPAT_LDFLAGS}"
-EXPAT_LDFLAGS=		${COMPILER_RPATH_FLAG}${BUILDLINK_PREFIX.expat}/lib
-FIX_RPATH+=		EXPAT_LDFLAGS
+PYSETUPBUILDARGS+=		--with-libexpat=${BUILDLINK_DIR}
+PYSETUPBUILDARGS+=		--ldflags="${EXPAT_LDFLAGS}"
+EXPAT_LDFLAGS=			${COMPILER_RPATH_FLAG}${BUILDLINK_PREFIX.expat}/lib
+FIX_RPATH+=			EXPAT_LDFLAGS
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # dead upstream, no plans of porting
+PYTHON_VERSIONS_ACCEPTED=	27 # dead upstream, no plans of porting
 
 PYXML_SCRIPTS=	scripts/xmlproc_parse \
 		scripts/xmlproc_val

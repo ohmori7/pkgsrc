@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.89 2019/05/24 16:14:44 ryoon Exp $
+# $NetBSD: Makefile,v 1.95 2020/08/31 18:11:42 wiz Exp $
 
 DISTNAME=	groff-1.22.4
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GNU:=groff/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnu.org/software/groff/groff.html
+HOMEPAGE=	https://www.gnu.org/software/groff/groff.html
 COMMENT=	GNU roff text processing suite
 LICENSE=	gnu-gpl-v3
 
@@ -22,7 +22,7 @@ USE_LANGUAGES=		c c++
 GNU_CONFIGURE=		YES
 CONFIGURE_ENV+=		PERLPATH=${PERL5:Q}
 TEXINFO_REQD+=		4.8
-USE_TOOLS+=		perl sed:run awk:run gmake makeinfo
+USE_TOOLS+=		perl sed:run awk:run gmake makeinfo yacc
 EXTRACT_USING=		bsdtar
 USE_FEATURES=		getopt_long
 CONFIGURE_ARGS+=	--with-urw-fonts-dir=${PREFIX}/share/fonts/urw
@@ -72,10 +72,10 @@ post-patch:
 # It also installs wrappers around the system macros for a variety of
 # other traditional macro packages, if those macros don't have an FSF
 # copyright.
-SYMLINK_FILES=	chem diffmk eqn grn indxbib lookbib neqn nroff pic refer \
-		soelim tbl troff
+SYMLINK_FILES=		chem diffmk eqn grn indxbib lookbib neqn nroff pic refer \
+			soelim tbl troff
 SYMLINK_MANFILES=	chem.1 eqn.1 grn.1 indxbib.1 lookbib.1 neqn.1 nroff.1 \
-		pic.1 refer.1 soelim.1 tbl.1 troff.1
+			pic.1 refer.1 soelim.1 tbl.1 troff.1
 
 INSTALLATION_DIRS=	${PKGGNUDIR}bin ${PKGGNUDIR}${PKGMANDIR}/man1
 

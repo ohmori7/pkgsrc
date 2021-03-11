@@ -1,14 +1,12 @@
-# $NetBSD: Makefile,v 1.9 2018/07/28 14:40:50 brook Exp $
+# $NetBSD: Makefile,v 1.11 2019/08/08 19:53:53 brook Exp $
 
+R_PKGNAME=	randomForest
+R_PKGVER=	4.6-14
 CATEGORIES=	math
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	${R_HOMEPAGE_BASE}/genetics/
-COMMENT=	Classification and regression based on a forest of trees
-LICENSE=	gnu-gpl-v2
-
-R_PKGNAME=	randomForest
-R_PKGVER=	4.6-10
+COMMENT=	Breiman and Cutler's Random Forests for Classification and Regression
+LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3
 
 USE_LANGUAGES=	c fortran
 

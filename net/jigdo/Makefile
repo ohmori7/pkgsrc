@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.66 2018/12/13 19:52:16 adam Exp $
+# $NetBSD: Makefile,v 1.78 2020/08/17 20:19:46 leot Exp $
 
 DISTNAME=		jigdo-0.7.3
-PKGREVISION=		43
+PKGREVISION=		54
 CATEGORIES=		net
 MASTER_SITES=		http://atterer.org/sites/atterer/files/2009-08/jigdo/
 EXTRACT_SUFX=		.tar.bz2
@@ -13,10 +13,10 @@ LICENSE=		gnu-gpl-v2
 
 MAKE_JOBS_SAFE=		no
 
-USE_TOOLS+=		pkg-config wget:run
-USE_LANGUAGES=		c c++
-GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--without-libdb
+USE_TOOLS+=			pkg-config wget:run
+USE_LANGUAGES=			c c++
+GNU_CONFIGURE=			yes
+CONFIGURE_ARGS+=		--without-libdb
 BROKEN_GETTEXT_DETECTION=	yes
 
 #.include "../../databases/db3/buildlink3.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: applications.mk,v 1.2 2018/04/14 03:33:19 markd Exp $
+# $NetBSD: applications.mk,v 1.6 2020/06/09 06:51:46 markd Exp $
 
-KAPPSVER?=	18.04.0
+KAPPSVER?=	20.04.1
 CATEGORIES+=	kde
-MASTER_SITES?=	${MASTER_SITE_KDE:=applications/${KAPPSVER}/src/}
+MASTER_SITES?=	${MASTER_SITE_KDE:=release-service/${KAPPSVER}/src/}
 EXTRACT_SUFX?=	.tar.xz
 
 .include "../../meta-pkgs/kde/Makefile.common"

@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2019/06/13 19:12:44 nia Exp $
+# $NetBSD: Makefile,v 1.22 2020/12/03 14:47:25 nia Exp $
 
-DISTNAME=	mgba-0.7.2
-PKGREVISION=	1
+DISTNAME=	mgba-0.8.4
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_GITHUB:=mgba-emu/}
 
@@ -10,13 +9,14 @@ HOMEPAGE=	https://mgba.io/
 COMMENT=	Emulator for running Game Boy Advance games
 LICENSE=	mpl-2.0
 
-EXTRACT_USING=	bsdtar
 USE_TOOLS+=	pkg-config
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
 
-# using libzip
-CMAKE_ARGS+=	-DUSE_MINIZIP=OFF
+# C++14
+GCC_REQD+=	5
+
+CMAKE_ARGS+=	-DUSE_DISCORD_RPC=OFF
 
 .include "options.mk"
 .include "../../archivers/libzip/buildlink3.mk"

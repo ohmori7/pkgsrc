@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.38 2019/04/26 13:14:18 maya Exp $
+# $NetBSD: Makefile,v 1.41 2020/12/04 20:45:46 nia Exp $
 
 DISTNAME=	etm-877
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	time
 MASTER_SITES=	http://www.duke.edu/~dgraham/ETM/
 
@@ -14,7 +14,7 @@ DEPENDS+=	${PYPKGPREFIX}-dateutil-[0-9]*:../../time/py-dateutil
 DEPENDS+=	${PYPKGPREFIX}-wxWidgets>=2.8.7:../../x11/py-wxWidgets
 DEPENDS+=	${PYPKGPREFIX}-icalendar>=2.0.1:../../time/py-icalendar
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-wxWidgets
+PYTHON_VERSIONS_ACCEPTED=	27 # py-wxWidgets
 
 USE_LANGUAGES=	# none
 

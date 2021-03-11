@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.36 2018/08/22 09:43:22 wiz Exp $
+# $NetBSD: Makefile,v 1.39 2020/08/31 18:07:09 wiz Exp $
 #
 
 DISTNAME=	tokyocabinet-perl-1.34
 PKGNAME=	p5-${DISTNAME:S/-perl-/-/}
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	databases
 MASTER_SITES=	${HOMEPAGE:S/perldoc/perlpkg/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://fallabs.com/tokyocabinet/perldoc/
+HOMEPAGE=	https://fallabs.com/tokyocabinet/perldoc/
 COMMENT=	Perl binding of Tokyo Cabinet
 LICENSE=	gnu-lgpl-v2.1
 

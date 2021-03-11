@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.7 2019/05/13 23:20:10 leot Exp $
+# $NetBSD: Makefile,v 1.18 2021/01/27 16:59:13 leot Exp $
 
-DISTNAME=	sfeed-0.9.11
+DISTNAME=	sfeed-0.9.21
 CATEGORIES=	news
-MASTER_SITES=	http://codemadness.org/releases/sfeed/
+MASTER_SITES=	https://codemadness.org/releases/sfeed/
 
 MAINTAINER=	leot@NetBSD.org
-HOMEPAGE=	http://codemadness.org/git/sfeed/file/README.html
+HOMEPAGE=	https://codemadness.org/git/sfeed/file/README.html
 COMMENT=	RSS and Atom parser
 LICENSE=	isc
 

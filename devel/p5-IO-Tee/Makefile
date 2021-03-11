@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.22 2018/08/22 09:44:09 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2020/09/07 06:52:42 wiz Exp $
 
-DISTNAME=	IO-Tee-0.65
+DISTNAME=	IO-Tee-0.66
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=IO/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/search?module=IO::Tee
+HOMEPAGE=	https://metacpan.org/search?q=module%3AIO%3A%3ATee
 COMMENT=	Multiplex output to multiple output handles
 LICENSE=	${PERL5_LICENSE}
 

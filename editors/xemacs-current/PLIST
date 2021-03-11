@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.24 2017/11/17 14:17:17 hauke Exp $
+@comment $NetBSD: PLIST,v 1.26 2020/11/29 19:52:26 nia Exp $
 bin/ellcc
 bin/gnuattach
 bin/gnuclient
@@ -229,6 +229,7 @@ lib/${DISTNAME}/${MACHINE_GNU_PLATFORM}/mmencode
 lib/${DISTNAME}/${MACHINE_GNU_PLATFORM}/modules/auto-autoloads.el
 lib/${DISTNAME}/${MACHINE_GNU_PLATFORM}/modules/auto-autoloads.elc
 ${PLIST.canna}lib/${DISTNAME}/${MACHINE_GNU_PLATFORM}/modules/canna_api.ell
+${PLIST.ldap}lib/${DISTNAME}/${MACHINE_GNU_PLATFORM}/modules/eldap.ell
 lib/${DISTNAME}/${MACHINE_GNU_PLATFORM}/movemail
 lib/${DISTNAME}/${MACHINE_GNU_PLATFORM}/profile
 lib/${DISTNAME}/${MACHINE_GNU_PLATFORM}/rcs2log
@@ -694,6 +695,7 @@ lib/${DISTNAME}/etc/xemacs-icon2.xbm
 lib/${DISTNAME}/etc/xemacs-icon2.xpm
 lib/${DISTNAME}/etc/xemacs-icon3.xpm
 lib/${DISTNAME}/etc/xemacs.1
+${PLIST.x11}lib/${DISTNAME}/etc/xemacs.desktop
 lib/${DISTNAME}/etc/xemacs.xbm
 lib/${DISTNAME}/etc/xemacs.xpm
 lib/${DISTNAME}/lisp/ChangeLog
@@ -1252,5 +1254,6 @@ lib/${DISTNAME}/lisp/x-win-sun.el
 lib/${DISTNAME}/lisp/x-win-sun.elc
 lib/${DISTNAME}/lisp/x-win-xfree86.el
 lib/${DISTNAME}/lisp/x-win-xfree86.elc
+${PLIST.x11}share/applications/xemacs.desktop
 @pkgdir lib/xemacs/site-lisp
 @pkgdir lib/xemacs/site-modules

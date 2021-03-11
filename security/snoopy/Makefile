@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2017/09/23 20:30:30 wiedi Exp $
+# $NetBSD: Makefile,v 1.4 2019/11/04 21:13:02 rillig Exp $
 
 DISTNAME=	snoopy-2.1.0
 CATEGORIES=	security
@@ -16,10 +16,12 @@ USE_LIBTOOL=	yes
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	aclocal autoheader autoconf automake gmake
 
+BUILDLINK_TRANSFORM+=	rm:-Werror
+
 CPPFLAGS.SunOS+=	-D_POSIX_PTHREAD_SEMANTICS
 
 pre-configure:
-		set -e; cd ${WRKSRC}; \
-		aclocal; autoheader; automake -a --foreign -i; autoconf
+	set -e; cd ${WRKSRC}; \
+	aclocal; autoheader; automake -a --foreign -i; autoconf
 
 .include "../../mk/bsd.pkg.mk"

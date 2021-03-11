@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.11 2018/12/10 08:53:10 adam Exp $
+$NetBSD: distinfo,v 1.14 2020/05/27 12:14:31 adam Exp $
 
-SHA1 (six-1.12.0.tar.gz) = 1957b44942be21822414f4dde936e6c40b687565
-RMD160 (six-1.12.0.tar.gz) = a23af7c96557f8a654def4c3d07e3bdff09ee30a
-SHA512 (six-1.12.0.tar.gz) = 937728372edf1e0ac13bbd706723d0de35e015c30d0ae41f789c5ed2e3669bb0db70cdc6e036ec2d437a6c4aa0d5d1e727b6d09ac34cca7e4e92e5d3b4775151
-Size (six-1.12.0.tar.gz) = 32725 bytes
+SHA1 (six-1.15.0.tar.gz) = a785c20658b3676333c749436f088394c12b0c26
+RMD160 (six-1.15.0.tar.gz) = cee285cfd4f91cff80a7b6fd3f3eb0e544f038fc
+SHA512 (six-1.15.0.tar.gz) = eb840ac17f433f1fc4af56de75cfbfe0b54e6a737bb23c453bf09a4a13d768d153e46064880dc763f4c5cc2785b78ea6d3d3b4a41fed181cb9064837e3f699a9
+Size (six-1.15.0.tar.gz) = 33917 bytes

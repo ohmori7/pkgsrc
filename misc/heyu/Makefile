@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2009/12/23 17:54:54 joerg Exp $
+# $NetBSD: Makefile,v 1.17 2020/01/26 17:31:43 rillig Exp $
 #
 
 DISTNAME=	heyu-1.35
@@ -8,7 +8,7 @@ MASTER_SITES=	http://heyu.tanj.com/
 DISTFILES=	x10_heyu.tgz
 
 MAINTAINER=	damon@brodiefamily.org
-HOMEPAGE=	http://www.heyu.org/
+HOMEPAGE=	https://www.heyu.org/
 COMMENT=	Home Automation Software for the X10 CM11A
 
 PKG_DESTDIR_SUPPORT=	destdir
@@ -17,7 +17,7 @@ DIST_SUBDIR=	${PKGNAME_NOREV}
 WRKSRC=		${WRKDIR}/heyu.dir
 
 CONFIGURE_SCRIPT=	./Configure
-MAKE_ENV+=	DEFAULT_SERIAL_DEVICE=${DEFAULT_SERIAL_DEVICE:Q}
+MAKE_ENV+=		DEFAULT_SERIAL_DEVICE=${DEFAULT_SERIAL_DEVICE:Q}
 INSTALL_MAKE_FLAGS+=	BIN=${DESTDIR}${PREFIX}/bin
 INSTALL_MAKE_FLAGS+=	MAN=${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 INSTALL_MAKE_FLAGS+=	MAN5=${DESTDIR}${PREFIX}/${PKGMANDIR}/man5

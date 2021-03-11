@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.47 2018/01/25 13:31:51 jperkin Exp $
+# $NetBSD: Makefile.common,v 1.53 2020/05/02 13:53:09 rillig Exp $
 # used by x11/qt4-docs/Makefile
 # used by x11/qt4-libs/Makefile
 # used by x11/qt4-mng/Makefile
@@ -10,7 +10,7 @@
 
 DISTNAME=	qt-everywhere-opensource-src-${QTVERSION}
 CATEGORIES=	x11
-MASTER_SITES=	http://download.qt-project.org/official_releases/qt/${QTVERSION:R}/${QTVERSION}/
+MASTER_SITES=	http://download.qt.io/archive/qt/${QTVERSION:R}/${QTVERSION}/
 EXTRACT_USING=	bsdtar
 
 .include "../../x11/qt4/Makefile.common"
@@ -49,14 +49,14 @@ LIBQT?=			-lQtCore -lQtGui
 
 MAKE_ENV+=		QTPREFIX=${QTPREFIX:Q}
 MAKE_ENV+=		QTDIR=${WRKSRC}
-PLIST_VARS+=		mac unix
+PLIST_VARS+=		mac notdarwin
 .if ${OPSYS} == "Darwin"
 CFLAGS+=		-D__ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES=1
 PLIST.mac=		yes
 QMAKE_CONF=		qmake.conf.mac
 QMAKE_RANLIB=		${RANLIB}
 .else
-PLIST.unix=		yes
+PLIST.notdarwin=	yes
 QMAKE_CONF=		qmake.conf
 QMAKE_RANLIB=		${TRUE}
 .endif
@@ -78,43 +78,44 @@ CXXFLAGS+=	-D_GLIBCXX_USE_C99_FP_MACROS_DYNAMIC=1
 .elif !empty(PKGSRC_COMPILER:Mgcc)
 CXXFLAGS+=	-std=c++98
 .endif
+CXXFLAGS+=	-Wno-expansion-to-defined
 
 .if ${OPSYS} == "SunOS"
 .  if !empty(PKGSRC_COMPILER:Mgcc) || !empty(PKGSRC_COMPILER:Mclang)
 .    if ${ABI:U} == "64"
-CONFIGURE_ARGS+=	-platform solaris-g++-64
+CONFIGURE_ARGS+=		-platform solaris-g++-64
 .    else
-CONFIGURE_ARGS+=	-platform solaris-g++
+CONFIGURE_ARGS+=		-platform solaris-g++
 .    endif
 .  else
 .    if ${ABI:U} == "64"
-CONFIGURE_ARGS+=	-platform solaris-cc-64
+CONFIGURE_ARGS+=		-platform solaris-cc-64
 .    else
-CONFIGURE_ARGS+=	-platform solaris-cc
+CONFIGURE_ARGS+=		-platform solaris-cc
 .    endif
 .  endif
-SYS_LIBS=		-lresolv -lsocket -lnsl -lrt
+SYS_LIBS=			-lresolv -lsocket -lnsl -lrt
 .elif ${OPSYS} == "Interix"
-CONFIGURE_ARGS+=	-platform interix-g++
-CFLAGS+=		-I/usr/local/include/bind
-LDFLAGS+=		-L/usr/local/lib/bind -lbind
-BUILDLINK_PASSTHRU_DIRS+=/usr/local/include/bind /usr/local/lib/bind
-SYS_LIBS=		-lbind -ldb -ldl
+CONFIGURE_ARGS+=		-platform interix-g++
+CFLAGS+=			-I/usr/local/include/bind
+LDFLAGS+=			-L/usr/local/lib/bind -lbind
+BUILDLINK_PASSTHRU_DIRS+=	/usr/local/include/bind /usr/local/lib/bind
+SYS_LIBS=			-lbind -ldb -ldl
 .elif ${OPSYS} == "DragonFly"
-CONFIGURE_ARGS+=	-platform freebsd-g++
+CONFIGURE_ARGS+=		-platform freebsd-g++
 .elif ${OPSYS} == "Darwin"
 .  if !empty(PKGSRC_COMPILER:Mclang)
-CONFIGURE_ARGS+=	-platform macx-llvm
+CONFIGURE_ARGS+=		-platform macx-llvm
 .  else
-CONFIGURE_ARGS+=	-platform macx-g++
+CONFIGURE_ARGS+=		-platform macx-g++
 .  endif
-CONFIGURE_ARGS+=	-no-dwarf2
-CONFIGURE_ARGS+=	-no-framework
+CONFIGURE_ARGS+=		-no-dwarf2
+CONFIGURE_ARGS+=		-no-framework
 .  if exists(/usr/lib/libresolv.dylib)
-LDFLAGS+=		-lresolv
+LDFLAGS+=			-lresolv
 .  endif
 .elif ${OPSYS} == "Linux"
-LDFLAGS+=		-ldl
+LDFLAGS+=			-ldl
 .endif
 
 .if ${OPSYS} != "Darwin" && ${X11_TYPE} != "native"
@@ -129,12 +130,6 @@ SUBST_MESSAGE.dnr=	Disabling debug_and_release.
 SUBST_STAGE.dnr=	pre-configure
 SUBST_FILES.dnr=	mkspecs/features/debug_and_release.prf
 SUBST_SED.dnr=		-e 's,^,\#\#\#,'
-
-SUBST_CLASSES+=		nib
-SUBST_MESSAGE.nib=	Fixing nib loading on Mac OS X.
-SUBST_STAGE.nib=	pre-configure
-SUBST_FILES.nib=	src/gui/kernel/qapplication_mac.mm
-SUBST_VARS.nib=		QTPREFIX
 
 SUBST_CLASSES+=		lt
 SUBST_MESSAGE.lt=	Enabling libtool.
@@ -152,6 +147,11 @@ SUBST_SED.lt+=		-e 's,$$$${first(QMAKE_EXT_OBJ)},.lo,'
 .if !empty(CC_VERSION:Mgcc-2.8*)
 CXXFLAGS+=		-DQ_INLINE_TEMPLATES=inline
 .endif
+
+# Remove files with portability issues, thereby ~proving they are not used in the build.
+post-extract:
+	rm ${WRKSRC}/src/3rdparty/webkit/Source/JavaScriptCore/gyp/generate-dtrace-header.sh
+	rm ${WRKSRC}/src/3rdparty/webkit/Source/WebCore/gyp/streamline-inspector-source.sh
 
 pre-configure:
 	sed	-e 's:@LOCALBASE@:${LOCALBASE}:g' \

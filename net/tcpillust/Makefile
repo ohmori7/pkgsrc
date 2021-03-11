@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.30 2018/03/12 11:17:23 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2020/08/17 20:19:51 leot Exp $
 
 DISTNAME=	tcpillust-1.0a
-PKGREVISION=	11
+PKGREVISION=	12
 CATEGORIES=	net
 MASTER_SITES=	ftp://ftp.sonycsl.co.jp/CSL/nishida/
 
@@ -12,10 +12,10 @@ COMMENT=	Graphical TCP connection analysis tool
 USE_IMAKE=	yes
 GNU_CONFIGURE=	yes
 
-CONFIGURE_ARGS+=--with-tcl-include=${BUILDLINK_PREFIX.tcl}/include
-CONFIGURE_ARGS+=--with-tcl-lib=${BUILDLINK_PREFIX.tcl}/lib
-CONFIGURE_ARGS+=--with-tk-include=${BUILDLINK_PREFIX.tk}/include
-CONFIGURE_ARGS+=--with-tk-lib=${BUILDLINK_PREFIX.tk}/lib
+CONFIGURE_ARGS+=	--with-tcl-include=${BUILDLINK_PREFIX.tcl}/include
+CONFIGURE_ARGS+=	--with-tcl-lib=${BUILDLINK_PREFIX.tcl}/lib
+CONFIGURE_ARGS+=	--with-tk-include=${BUILDLINK_PREFIX.tk}/include
+CONFIGURE_ARGS+=	--with-tk-lib=${BUILDLINK_PREFIX.tk}/lib
 
 DOCS=		README
 SAMPLES=	tcpclient.log tcpserver.log

@@ -1,9 +1,7 @@
-# $NetBSD: options.mk,v 1.11 2018/11/30 18:43:09 adam Exp $
+# $NetBSD: options.mk,v 1.13 2020/01/25 10:45:11 jperkin Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.dovecot
-PKG_SUPPORTED_OPTIONS=	kqueue pam tcpwrappers
-PKG_OPTIONS_OPTIONAL_GROUPS=ssl
-PKG_OPTIONS_GROUP.ssl=	gnutls ssl
+PKG_SUPPORTED_OPTIONS=	kqueue pam ssl tcpwrappers
 PKG_SUGGESTED_OPTIONS=	pam ssl tcpwrappers
 
 .if defined(PKG_HAVE_KQUEUE)
@@ -14,20 +12,14 @@ PLIST_VARS+=		ssl tcpwrappers
 .include "../../mk/bsd.options.mk"
 
 ###
-### Build with OpenSSL or GNU TLS as the underlying crypto library
+### Build with OpenSSL as the underlying crypto library
 ###
 .if !empty(PKG_OPTIONS:Mssl)
 CONFIGURE_ARGS+=	--with-ssl=openssl
 CONFIGURE_ENV+=		SSL_CFLAGS="-I${BUILDLINK_PREFIX.openssl}/include"
 CONFIGURE_ENV+=		SSL_LIBS="-lssl -lcrypto"
-BUILDLINK_API_DEPENDS.openssl+=openssl>=0.9.8a
 .  include "../../security/openssl/buildlink3.mk"
 PLIST.ssl=		yes
-.elif !empty(PKG_OPTIONS:Mgnutls)
-CONFIGURE_ARGS+=	--with-ssl=gnutls
-.  include "../../security/gnutls/buildlink3.mk"
-.else
-CONFIGURE_ARGS+=	--without-ssl
 .endif
 
 ###

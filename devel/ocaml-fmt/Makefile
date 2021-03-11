@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.4 2019/06/17 09:19:57 jaapb Exp $
+# $NetBSD: Makefile,v 1.6 2021/03/08 08:12:52 jaapb Exp $
 
 DISTNAME=	fmt-0.8.5
 PKGNAME=	ocaml-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	https://erratique.ch/software/fmt/releases/
 EXTRACT_SUFX=	.tbz
@@ -15,7 +15,7 @@ LICENSE=	isc
 USE_LANGUAGES=	# none
 
 OCAML_USE_TOPKG=	yes
-OCAML_USE_OPAM=	yes
+OCAML_USE_OPAM=		yes
 
 .include "../../mk/ocaml.mk"
 .include "../../devel/ocamlbuild/buildlink3.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.3 2019/06/08 10:53:26 rillig Exp $
+# $NetBSD: options.mk,v 1.6 2020/04/04 03:22:02 mef Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.avr-libc
 PKG_SUPPORTED_OPTIONS+=		doc
@@ -18,7 +18,9 @@ BUILD_DEPENDS+=		tex-adjustbox-[0-9]*:../../print/tex-adjustbox
 BUILD_DEPENDS+=		tex-caption-[0-9]*:../../print/tex-caption
 BUILD_DEPENDS+=		tex-collectbox-[0-9]*:../../print/tex-collectbox
 BUILD_DEPENDS+=		tex-colortbl-[0-9]*:../../print/tex-colortbl
+BUILD_DEPENDS+=		tex-ec-[0-9]*:../../fonts/tex-ec
 BUILD_DEPENDS+=		tex-fancyhdr-[0-9]*:../../print/tex-fancyhdr
+BUILD_DEPENDS+=		tex-fancyvrb-[0-9]*:../../print/tex-fancyvrb
 BUILD_DEPENDS+=		tex-float-[0-9]*:../../print/tex-float
 BUILD_DEPENDS+=		tex-geometry-[0-9]*:../../print/tex-geometry
 BUILD_DEPENDS+=		tex-graphics-cfg-[0-9]*:../../print/tex-graphics-cfg
@@ -30,6 +32,7 @@ BUILD_DEPENDS+=		tex-pgf-[0-9]*:../../print/tex-pgf
 BUILD_DEPENDS+=		tex-sectsty-[0-9]*:../../print/tex-sectsty
 BUILD_DEPENDS+=		tex-tabu-[0-9]*:../../print/tex-tabu
 BUILD_DEPENDS+=		tex-tocloft-[0-9]*:../../print/tex-tocloft
+BUILD_DEPENDS+=		tex-ulem-[0-9]*:../../print/tex-ulem
 BUILD_DEPENDS+=		tex-xcolor-[0-9]*:../../print/tex-xcolor
 BUILD_DEPENDS+=		tex-xkeyval-[0-9]*:../../print/tex-xkeyval
 BUILD_DEPENDS+=		fig2dev-[0-9]*:../../print/fig2dev
@@ -49,12 +52,21 @@ post-install:
                 ${DESTDIR}${PREFIX}/share/doc/avr-libc
 	## delete following or similar files, which includes PATH at build time.
 	##_usr_pkgsrc_cross_avr-libc_work_avr-libc-1.8.0_libc_string_.3
-	${RM} ${DESTDIR}${PREFIX}/share/doc/avr-libc/man/man3/*${PKGVERSION_NOREV}*
+	${RM} -f ${DESTDIR}${PREFIX}/share/doc/avr-libc/man/man3/*${PKGVERSION_NOREV}*
 .  for f in Makefile demo.c demo.bin demo.hex demo.pdf demo.srec
 	${INSTALL_DATA} ${WRKSRC}/doc/examples/demo/${f} \
 		${DESTDIR}${PREFIX}/share/doc/avr-libc/examples/demo
 .  endfor
 
+.  for f in largedemo-setup.jpg largedemo-wiring.jpg largedemo-wiring2.jpg  stdiodemo-setup.jpg
+	${INSTALL_DATA} ${WRKSRC}/doc/api/latex_src/${f} \
+		${DESTDIR}${PREFIX}/share/doc/avr-libc/avr-libc-user-manual
+.  endfor
+
+.  for f in malloc-std.png malloc-x1.png releases.png malloc-x2.png
+	${INSTALL_DATA} ${WRKSRC}/doc/api/${f} \
+		${DESTDIR}${PREFIX}/share/doc/avr-libc/avr-libc-user-manual
+.  endfor
 
 PLIST.doc=		yes
 

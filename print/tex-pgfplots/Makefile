@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.8 2018/05/12 01:19:48 markd Exp $
+# $NetBSD: Makefile,v 1.11 2020/05/03 11:57:34 markd Exp $
 
 DISTNAME=	pgfplots
-PKGNAME=	tex-${DISTNAME}-1.16
-TEXLIVE_REV=	47373
+PKGNAME=	tex-${DISTNAME}-1.17
+TEXLIVE_REV=	54080
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/pgfplots
+HOMEPAGE=	https://ctan.org/pkg/pgfplots
 COMMENT=	LaTeX package to create normal/logarithmic plots
 LICENSE=	gnu-gpl-v3
 

@@ -1,19 +1,25 @@
-# $NetBSD: Makefile,v 1.40 2019/04/25 07:33:07 maya Exp $
+# $NetBSD: Makefile,v 1.57 2021/02/07 06:30:30 ryoon Exp $
 
-DISTNAME=	kig-${_KDE_VERSION}
-PKGREVISION=	13
+DISTNAME=	kig-${KAPPSVER}
+PKGREVISION=	7
 CATEGORIES=	misc
-COMMENT=	KDE interactive geometry
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+HOMEPAGE=	https://kde.org/applications/education/kig/
+COMMENT=	KDE interactive geometry
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
+
+.include "../../meta-pkgs/kde/applications.mk"
+
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
+
+USE_TOOLS+=	msgmerge
 
 REPLACE_PYTHON+=	pykig/pykig.py
 
-.include "../../meta-pkgs/kde4/kde4.mk"
-
+.include "../../devel/ktexteditor/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/python/application.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
+.include "../../x11/qt5-qtxmlpatterns/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

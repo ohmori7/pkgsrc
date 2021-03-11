@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:47:16 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:12:22 wiz Exp $
 
 DISTNAME=		DateTime-Format-ICal-0.09
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		10
+PKGREVISION=		12
 CATEGORIES=		time perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=DateTime/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/DateTime-Format-ICal/
+HOMEPAGE=		https://metacpan.org/release/DateTime-Format-ICal
 COMMENT=		Parse and format iCal datetime and duration strings
 
 DEPENDS+=		p5-DateTime>=0.17:../../time/p5-DateTime

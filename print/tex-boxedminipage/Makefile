@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.2 2016/01/30 03:26:09 markd Exp $
-# TeX Live Revision 17087
+# $NetBSD: Makefile,v 1.4 2020/05/21 10:18:45 markd Exp $
 
 DISTNAME=	boxedminipage
-PKGNAME=	tex-${DISTNAME}-2009
+PKGNAME=	tex-${DISTNAME}-1.1
+TEXLIVE_REV=	54827
 
 MAINTAINER=	minskim@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/boxedminipage
 COMMENT=	LaTeX package for producing framed minipages
-LICENSE=	public-domain
+LICENSE=	lppl-1.3c
 
 CONFLICTS+=	tex-ltxmisc<2009
 

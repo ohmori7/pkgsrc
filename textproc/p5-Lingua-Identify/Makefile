@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.10 2018/08/22 09:46:50 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2020/08/31 18:11:49 wiz Exp $
 #
 
 DISTNAME=	Lingua-Identify-0.56
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Lingua/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Lingua-Identify/
+HOMEPAGE=	https://metacpan.org/release/Lingua-Identify
 COMMENT=	Language identification
 LICENSE=	${PERL5_LICENSE}
 

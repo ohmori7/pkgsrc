@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.15 2019/04/03 00:32:27 ryoon Exp $
+# $NetBSD: Makefile,v 1.23 2020/11/05 09:07:33 ryoon Exp $
 
-DISTNAME=	farstream-0.2.8
-PKGREVISION=	12
+DISTNAME=	farstream-0.2.9
+PKGREVISION=	4
 CATEGORIES=	chat multimedia
 MASTER_SITES=	http://freedesktop.org/software/farstream/releases/farstream/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.freedesktop.org/wiki/Software/Farstream/
+HOMEPAGE=	https://www.freedesktop.org/wiki/Software/Farstream/
 COMMENT=	Audio/video communications framework
 LICENSE=	gnu-lgpl-v2.1
 

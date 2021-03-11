@@ -1,10 +1,12 @@
-$NetBSD: distinfo,v 1.58 2019/06/02 08:39:28 adam Exp $
+$NetBSD: distinfo,v 1.66 2020/07/26 19:20:13 adam Exp $
 
-SHA1 (cfe-8.0.0.src.tar.xz) = 3cb1e10af3955174a3ca5e560f674f24fac2a02f
-RMD160 (cfe-8.0.0.src.tar.xz) = bd4dd523edcde136156b773cc66bfad1fc52dbc4
-SHA512 (cfe-8.0.0.src.tar.xz) = 98e540222719716985e5d8439116e47469cb01201ea91d1da7e46cb6633da099688d9352c3b65e5c5f660cbbae353b3d79bb803fc66b3be663f2b04b1feed1c3
-Size (cfe-8.0.0.src.tar.xz) = 12868468 bytes
-SHA1 (patch-lib_Basic_Targets_OSTargets.h) = 2a00f6de42c67d8c8aca0153339aba1adc455280
-SHA1 (patch-lib_Driver_ToolChains_Solaris.cpp) = 7e951a4c82f47ec0c9c18054d9622984ffb9f751
+SHA1 (clang-10.0.1.src.tar.xz) = 0e61e92b22a620fe7f833fa8b2a56f2db96f7335
+RMD160 (clang-10.0.1.src.tar.xz) = 15b8a3b6c6f1a2896146006b30fbcf104be7c2b6
+SHA512 (clang-10.0.1.src.tar.xz) = c6712d491ce5e166ef72724cf855d742d88da825ffc25585612d7f2eb7770343e3ae48fa78e0af3e5d5efdde3a9686a7361dac3b546a4378de22448ea6e4026c
+Size (clang-10.0.1.src.tar.xz) = 14046188 bytes
+SHA1 (patch-lib_Basic_Targets_OSTargets.h) = 02533d1de2c92a431d9c5d4567f348deff056b99
+SHA1 (patch-lib_Driver_ToolChain.cpp) = b49a6032d75e33ffe2606012addd826e9fdbb1db
+SHA1 (patch-lib_Driver_ToolChains_Solaris.cpp) = 222d157f44444eeef33ac97e0ed072a55b666690
 SHA1 (patch-lib_Driver_ToolChains_Solaris.h) = 94968d0de0972ff832727822fbdc02442be74ab8
 SHA1 (patch-lib_Frontend_InitHeaderSearch.cpp) = 497ddbe1eac8726d736bed58557a795dce207d1a
+SHA1 (patch-tools_libclang_FatalErrorHandler.cpp) = 5761b54b493587272667d3f79388e98e37a4b1fb

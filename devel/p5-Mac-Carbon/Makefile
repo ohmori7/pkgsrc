@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.16 2018/08/22 09:44:14 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2020/08/31 18:08:19 wiz Exp $
 #
 
 DISTNAME=	Mac-Carbon-0.82
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Mac/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Mac-Carbon/
+HOMEPAGE=	https://metacpan.org/release/Mac-Carbon
 COMMENT=	Carbon API for perl on Mac OS X
 
 ONLY_FOR_PLATFORM=	Darwin-*-i386 Darwin-*-powerpc

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.19 2019/04/25 07:33:08 maya Exp $
+# $NetBSD: Makefile,v 1.21 2020/12/04 20:45:30 nia Exp $
 #
 
 DISTNAME=	mtail-1.1.1
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	misc
 MASTER_SITES=	http://matt.immute.net/src/mtail/
 EXTRACT_SUFX=	.tgz
@@ -13,7 +13,7 @@ COMMENT=	Small tail workalike that performs output coloring
 
 NO_BUILD=	yes
 
-REPLACE_PYTHON=	mtail
+REPLACE_PYTHON=		mtail
 INSTALLATION_DIRS=	bin share/doc share/examples
 
 do-install:

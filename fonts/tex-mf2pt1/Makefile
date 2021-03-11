@@ -1,12 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2018/08/22 09:45:07 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2021/02/14 02:10:57 markd Exp $
 
 DISTNAME=	mf2pt1
-PKGNAME=	tex-${DISTNAME}-2.5a
-PKGREVISION=	3
-TEXLIVE_REV=	33802
+PKGNAME=	tex-${DISTNAME}-2.6
+TEXLIVE_REV=	57018
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/mf2pt1
+HOMEPAGE=	https://ctan.org/pkg/mf2pt1
 COMMENT=	Produce PostScript Type 1 fonts from Metafont source
 LICENSE=	lppl-1.3c
 

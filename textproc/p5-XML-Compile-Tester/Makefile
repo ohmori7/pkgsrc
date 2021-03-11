@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.5 2018/08/22 09:47:05 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2020/08/31 18:12:08 wiz Exp $
 
 DISTNAME=	XML-Compile-Tester-0.91
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel textproc
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/M/MA/MARKOV/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/XML-Compile-Tester/
+HOMEPAGE=	https://metacpan.org/release/XML-Compile-Tester
 COMMENT=	Perl module for testing compilation based XML processing
 LICENSE=	${PERL5_LICENSE}
 

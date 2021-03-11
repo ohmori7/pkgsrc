@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.3 2019/01/23 10:04:24 markd Exp $
+# $NetBSD: Makefile,v 1.6 2020/05/05 12:01:07 markd Exp $
 
 DISTNAME=	zxjafont.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-0.4
-TEXLIVE_REV=	47613
+PKGNAME=	tex-${DISTNAME:S/./-/}-1.2
+TEXLIVE_REV=	53884
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/zxjafont
+HOMEPAGE=	https://ctan.org/pkg/zxjafont
 COMMENT=	Documentation for tex-zxjafont
 LICENSE=	mit
 

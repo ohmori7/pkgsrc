@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.2 2015/11/03 23:49:55 agc Exp $
+$NetBSD: distinfo,v 1.6 2021/03/02 03:56:09 gutteridge Exp $
 
-SHA1 (xfce4-time-out-plugin-1.0.2.tar.bz2) = c311374d47792feba5682d329aeae82c7cccc993
-RMD160 (xfce4-time-out-plugin-1.0.2.tar.bz2) = 3511d02baacd84ffd994477e06332bab2d627fdf
-SHA512 (xfce4-time-out-plugin-1.0.2.tar.bz2) = 3f49664fc8fd947627e40de0338e3a115806045c97fa08fd678fdbb831947bcfe14c02e9961d671ce7546d4913fd9319322476df590a70458bdf86fa3bd43464
-Size (xfce4-time-out-plugin-1.0.2.tar.bz2) = 337382 bytes
+SHA1 (xfce4-time-out-plugin-1.1.2.tar.bz2) = 93e50f651678fe36b77dd420ed2a958538b56ac6
+RMD160 (xfce4-time-out-plugin-1.1.2.tar.bz2) = 76d43150714e01aeea0884aee0d6596535b92282
+SHA512 (xfce4-time-out-plugin-1.1.2.tar.bz2) = 08e50db9daafd9a2ba60e9d5767cddba83df34d8a261df71b7bb9ae632576f4dfd6252c2a83ec8f9a037284b0adc65751ba36d54ea9d14b85906fdc85d5b86ff
+Size (xfce4-time-out-plugin-1.1.2.tar.bz2) = 409221 bytes

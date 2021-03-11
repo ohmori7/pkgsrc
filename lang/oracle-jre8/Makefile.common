@@ -1,4 +1,4 @@
-# $NetBSD: Makefile.common,v 1.16 2019/01/22 03:51:41 ryoon Exp $
+# $NetBSD: Makefile.common,v 1.18 2019/11/03 19:04:04 rillig Exp $
 # used by lang/oracle-jre8/Makefile
 # used by lang/oracle-jdk8/Makefile
 
@@ -6,15 +6,15 @@ CATEGORIES=	lang java
 COMMENT=	Oracle Java(tm) 2 Standard Edition, ${DOWNLOAD_NAME}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.oracle.com/technetwork/java/index.html
-DOWNLOAD=	http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html
-ARCHIVE=	http://www.oracle.com/technetwork/java/javase/archive-139210.html
+HOMEPAGE=	https://www.oracle.com/technetwork/java/index.html
+DOWNLOAD=	https://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html
+ARCHIVE=	https://www.oracle.com/technetwork/java/javase/archive-139210.html
 
-RESTRICTED=	Redistribution of repackaged binaries not permitted
-NO_SRC_ON_CDROM=${RESTRICTED}
-NO_SRC_ON_FTP=	${RESTRICTED}
-NO_BIN_ON_CDROM=${RESTRICTED}
-NO_BIN_ON_FTP=	${RESTRICTED}
+RESTRICTED=		Redistribution of repackaged binaries not permitted
+NO_SRC_ON_CDROM=	${RESTRICTED}
+NO_SRC_ON_FTP=		${RESTRICTED}
+NO_BIN_ON_CDROM=	${RESTRICTED}
+NO_BIN_ON_FTP=		${RESTRICTED}
 
 EMUL_PLATFORMS=		darwin-x86_64 linux-i386 linux-x86_64 solaris-x86_64
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2015/04/25 14:23:15 tnn Exp $
+# $NetBSD: Makefile,v 1.22 2020/03/20 11:57:49 nia Exp $
 
 DISTNAME=	lib3ds-1.2.0
-PKGREVISION=	7
+PKGREVISION=	8
 CATEGORIES=	graphics devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=lib3ds/}
 
@@ -17,5 +17,7 @@ pre-configure:
 	cd ${WRKSRC} && libtoolize --force
 	cd ${WRKSRC} && autoreconf -i --force
 
-.include "../../graphics/Mesa/buildlink3.mk"
+.include "../../graphics/MesaLib/buildlink3.mk"
+.include "../../graphics/freeglut/buildlink3.mk"
+.include "../../graphics/glu/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.31 2017/09/04 18:01:01 wiz Exp $
+# $NetBSD: Makefile,v 1.33 2020/01/18 21:50:48 jperkin Exp $
 #
 
 DISTNAME=	ssldump-0.9b3
-PKGREVISION=	15
+PKGREVISION=	16
 CATEGORIES=	security
 #MASTER_SITES=	http://www.rtfm.com/ssldump/
 
@@ -13,10 +13,10 @@ COMMENT=	SSLv3/TLS network protocol analyzer
 GNU_CONFIGURE=	YES
 USE_TOOLS+=	gmake
 
-CONFIGURE_ARGS+=--with-pcap-inc=${BUILDLINK_PREFIX.libpcap}/include \
-		--with-pcap-lib=${BUILDLINK_PREFIX.libpcap}/lib \
-		--with-openssl-inc=${BUILDLINK_PREFIX.openssl}/include \
-		--with-openssl-lib=${BUILDLINK_PREFIX.openssl}/lib
+CONFIGURE_ARGS+=	--with-pcap-inc=${BUILDLINK_PREFIX.libpcap}/include \
+			--with-pcap-lib=${BUILDLINK_PREFIX.libpcap}/lib \
+			--with-openssl-inc=${BUILDLINK_PREFIX.openssl}/include \
+			--with-openssl-lib=${BUILDLINK_PREFIX.openssl}/lib
 
 INSTALL_MAKE_FLAGS+=	BINDIR=${DESTDIR}${PREFIX}/sbin \
 			MANDIR=${DESTDIR}${PREFIX}/${PKGMANDIR}

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.24 2018/08/22 09:46:54 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2020/08/31 18:11:54 wiz Exp $
 
 DISTNAME=	Pod-Spell-1.20
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Pod/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Pod-Spell/
+HOMEPAGE=	https://metacpan.org/release/Pod-Spell
 COMMENT=	Formatter for spellchecking Pod
 LICENSE=	artistic-2.0
 
@@ -21,12 +21,6 @@ DEPENDS+=	p5-File-ShareDir-Install>=0:../../devel/p5-File-ShareDir-Install
 BUILD_DEPENDS+=	p5-Test-Deep-[0-9]*:../../devel/p5-Test-Deep
 
 PERL5_PACKLIST=		auto/Pod/Spell/.packlist
-
-SUBST_CLASSES+=		perl
-SUBST_STAGE.perl=	pre-configure
-SUBST_MESSAGE.perl=	Fixing path to perl
-SUBST_FILES.perl+=	bin/podspell
-SUBST_SED.perl=		-e "s|/usr/bin/env perl|${PERL5}|"
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.64 2018/12/13 19:52:13 adam Exp $
+# $NetBSD: Makefile,v 1.79 2021/02/07 06:30:33 ryoon Exp $
 
-DISTNAME=	gpac-0.7.1
-PKGREVISION=	11
+DISTNAME=	gpac-0.8.1
+PKGREVISION=	2
 CATEGORIES=	multimedia
 MASTER_SITES=	${MASTER_SITE_GITHUB:=gpac/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -20,8 +20,6 @@ CONFIGURE_ARGS+=	--enable-pic
 CONFIGURE_ARGS+=	--extra-cflags="${CFLAGS}"
 CONFIGURE_ARGS+=	--extra-ldflags="${LDFLAGS}"
 CFLAGS+=		-I${BUILDLINK_PREFIX.faad2}/${BUILDLINK_INCDIRS.faad2}
-
-PLIST_VARS+=		oss x11
 
 .include "options.mk"
 
@@ -52,12 +50,13 @@ PLIST_SUBST+=	LIBEXT=so
 .include "../../graphics/png/buildlink3.mk"
 # doesn't work yet
 #.include "../../lang/spidermonkey/buildlink3.mk"
-.include "../../multimedia/ffmpeg3/buildlink3.mk"
+.include "../../multimedia/ffmpeg4/buildlink3.mk"
 .include "../../multimedia/libogg/buildlink3.mk"
 .include "../../multimedia/libtheora/buildlink3.mk"
 .include "../../multimedia/xvidcore/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../textproc/xmlrpc-c/buildlink3.mk"
+PLIST_VARS+=		oss
 .if ${OPSYS} != "Darwin"
 .include "../../mk/oss.buildlink3.mk"
 PLIST.oss=	yes

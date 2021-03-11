@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.6 2019/04/25 07:33:22 maya Exp $
+# $NetBSD: Makefile,v 1.20 2021/02/04 11:41:38 bouyer Exp $
 
-VERSION=	4.11.1
-PKGREVISION=	3
+VERSION=	4.11.4
+#keep >= 1 if we have security patches
+PKGREVISION=	6
 DISTNAME=	xen-${VERSION}
 PKGNAME=	xenkernel411-${VERSION}
 CATEGORIES=	sysutils
@@ -9,7 +10,7 @@ MASTER_SITES=	https://downloads.xenproject.org/release/xen/${VERSION}/
 DIST_SUBDIR=	xen411
 
 MAINTAINER=	bouyer@NetBSD.org
-HOMEPAGE=	http://xenproject.org/
+HOMEPAGE=	https://xenproject.org/
 COMMENT=	Xen 4.11.x Kernel
 
 LICENSE=	gnu-gpl-v2

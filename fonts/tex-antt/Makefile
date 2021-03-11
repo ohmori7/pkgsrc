@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.1 2015/05/02 13:32:37 wiz Exp $
+# $NetBSD: Makefile,v 1.3 2020/05/10 04:31:37 markd Exp $
 
 DISTNAME=	antt
 PKGNAME=	tex-${DISTNAME}-2.08
+PKGREVISION=	1
 TEXLIVE_REV=	18651
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -10,5 +11,6 @@ LICENSE=	gfsl
 
 TEX_MAP_FILES+=	antt.map
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

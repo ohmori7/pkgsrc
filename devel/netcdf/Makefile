@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.51 2018/12/13 19:51:34 adam Exp $
+# $NetBSD: Makefile,v 1.60 2021/01/05 17:05:41 wiz Exp $
 
 DISTNAME=	netcdf-4.6.1
-PKGREVISION=	2
+PKGREVISION=	11
 CATEGORIES=	devel
 MASTER_SITES=	https://www.unidata.ucar.edu/downloads/netcdf/ftp/
 
@@ -16,10 +16,14 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-doxygen
 CONFIGURE_ARGS+=	--disable-examples
 
+post-install:
+	rm ${DESTDIR}${PREFIX}/lib/libbzip2.*
+
 .include "../../mk/dlopen.buildlink3.mk"
 
 BUILDLINK_TRANSFORM+=	opt:-ldl:${BUILDLINK_LDADD.dl:M*}
 
+.include "../../archivers/bzip2/buildlink3.mk"
 .include "../../devel/hdf5/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

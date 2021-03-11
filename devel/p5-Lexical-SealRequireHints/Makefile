@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.17 2018/08/22 09:44:11 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2020/09/08 13:16:36 wiz Exp $
 
 DISTNAME=	Lexical-SealRequireHints-0.011
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel perl5
-MASTER_SITES=	http://search.cpan.org/CPAN/authors/id/Z/ZE/ZEFRAM/
+MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/Z/ZE/ZEFRAM/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Lexical-SealRequireHints/
+HOMEPAGE=	https://metacpan.org/release/Lexical-SealRequireHints
 COMMENT=	Perl5 module to prevent leakage of lexical hints
 LICENSE=	${PERL5_LICENSE}
 

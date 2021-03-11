@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.43 2019/04/26 15:28:17 gavan Exp $
+# $NetBSD: Makefile,v 1.59 2020/09/13 14:16:30 leot Exp $
 
 DISTNAME=	ghostscript-${GS_VERSION}
 PKGNAME=	${DISTNAME:S/ghostscript/ghostscript-agpl/}
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ArtifexSoftware/}
 GITHUB_PROJECT=	ghostpdl-downloads
-GITHUB_RELEASE=	gs${GS_VERSION:S/.//}
+GITHUB_RELEASE=	gs${GS_VERSION:S/.//g}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -90,6 +90,7 @@ post-extract:
 	${RM} -rf ${WRKSRC}/jbig2dec
 	${RM} -rf ${WRKSRC}/jpeg
 	${RM} -rf ${WRKSRC}/lcms2
+	${RM} -rf ${WRKSRC}/lcms2mt
 	${RM} -rf ${WRKSRC}/libpng
 	${RM} -rf ${WRKSRC}/openjpeg
 	${RM} -rf ${WRKSRC}/tiff
@@ -103,11 +104,13 @@ post-extract:
 
 post-install:
 	${LN} -sf gsc ${DESTDIR}${PREFIX}/bin/gs
+	${RM} -f  ${DESTDIR}${PREFIX}/share/ghostscript/${PKGVERSION_NOREV}/Resource/Init/gs_ttf.ps.orig
 
 .include "../../devel/libidn/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 BUILDLINK_API_DEPENDS.freetype2+=	freetype2>=2.10.0
 .include "../../graphics/freetype2/buildlink3.mk"
+BUILDLINK_API_DEPENDS.jbig2dec+=	jbig2dec>=0.19
 .include "../../graphics/jbig2dec/buildlink3.mk"
 .include "../../graphics/lcms2/buildlink3.mk"
 .include "../../graphics/openjpeg/buildlink3.mk"

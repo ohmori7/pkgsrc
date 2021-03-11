@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2012/10/23 19:51:15 asau Exp $
+# $NetBSD: Makefile,v 1.13 2020/01/26 17:32:10 rillig Exp $
 #
 
 PKGNAME=		nvnet-20050620nb1
@@ -11,7 +11,7 @@ MASTER_SITES+=		http://download.nvidia.com/XFree86/nforce/1.0-0310/
 EXTRACT_SUFX=
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.morgart.com/NetBSD/nVidia/nvnet/
+HOMEPAGE=		https://www.morgart.com/NetBSD/nVidia/nvnet/
 COMMENT=		Driver for nVidia ethernet
 LICENSE=		nvidia-license
 
@@ -27,7 +27,7 @@ ONLY_FOR_PLATFORM=	NetBSD-*-i386
 
 INSTALLATION_DIRS=	lkm ${PKGMANDIR}/man4
 
-MESSAGE_SUBST+=  PREFIX=${PREFIX:Q}
+MESSAGE_SUBST+=	PREFIX=${PREFIX:Q}
 
 do-extract:
 	${TAR} -xzf ${DISTDIR}/nvnet-netbsd-src-20050620.tgz -C ${WRKDIR}

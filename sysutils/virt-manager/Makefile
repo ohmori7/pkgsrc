@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.37 2019/04/26 14:12:46 maya Exp $
+# $NetBSD: Makefile,v 1.48 2020/12/04 20:45:43 nia Exp $
 
 DISTNAME=	virt-manager-0.9.4
-PKGREVISION=	26
+PKGREVISION=	34
 CATEGORIES=	sysutils
 MASTER_SITES=	http://virt-manager.org/download/sources/virt-manager/
 
 MAINTAINER=	gls@NetBSD.org
-HOMEPAGE=	http://virt-manager.org/
+HOMEPAGE=	https://virt-manager.org/
 COMMENT=	GUI to manage virtual machines
 LICENSE=	gnu-gpl-v2
 
@@ -18,7 +18,7 @@ DEPENDS+=	urlgrabber>=3.1.0:../../www/urlgrabber
 DEPENDS+=	${PYPKGPREFIX}-dbus>=1.1.1:../../sysutils/py-dbus
 DEPENDS+=	gtk-vnc>=0.5.1:../../net/gtk-vnc
 
-GNU_CONFIGURE=	yes
+GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-libvirt-package-names=libvirt
 
 USE_TOOLS+=		gmake intltool msgfmt
@@ -26,7 +26,7 @@ USE_PKGLOCALEDIR=	yes
 
 GCONF_SCHEMAS+=	virt-manager.schemas
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # py-ORBit via py-gnome2, py-gtk2
+PYTHON_VERSIONS_ACCEPTED=	27 # py-ORBit via py-gnome2, py-gtk2
 
 SUBST_CLASSES+=		python
 SUBST_STAGE.python=	pre-configure

@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.2 2019/01/31 08:21:09 adam Exp $
+@comment $NetBSD: PLIST,v 1.4 2020/01/15 09:03:39 adam Exp $
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
 ${PYSITELIB}/${EGG_INFODIR}/dependency_links.txt
@@ -7,6 +7,9 @@ ${PYSITELIB}/${EGG_INFODIR}/top_level.txt
 ${PYSITELIB}/anytree/__init__.py
 ${PYSITELIB}/anytree/__init__.pyc
 ${PYSITELIB}/anytree/__init__.pyo
+${PYSITELIB}/anytree/cachedsearch.py
+${PYSITELIB}/anytree/cachedsearch.pyc
+${PYSITELIB}/anytree/cachedsearch.pyo
 ${PYSITELIB}/anytree/dotexport.py
 ${PYSITELIB}/anytree/dotexport.pyc
 ${PYSITELIB}/anytree/dotexport.pyo
@@ -67,6 +70,12 @@ ${PYSITELIB}/anytree/node/node.pyo
 ${PYSITELIB}/anytree/node/nodemixin.py
 ${PYSITELIB}/anytree/node/nodemixin.pyc
 ${PYSITELIB}/anytree/node/nodemixin.pyo
+${PYSITELIB}/anytree/node/symlinknode.py
+${PYSITELIB}/anytree/node/symlinknode.pyc
+${PYSITELIB}/anytree/node/symlinknode.pyo
+${PYSITELIB}/anytree/node/symlinknodemixin.py
+${PYSITELIB}/anytree/node/symlinknodemixin.pyc
+${PYSITELIB}/anytree/node/symlinknodemixin.pyo
 ${PYSITELIB}/anytree/node/util.py
 ${PYSITELIB}/anytree/node/util.pyc
 ${PYSITELIB}/anytree/node/util.pyo

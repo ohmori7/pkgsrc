@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.72 2018/12/13 19:52:10 adam Exp $
+# $NetBSD: Makefile,v 1.85 2021/01/01 08:24:50 ryoon Exp $
 
 DISTNAME=	kdepim-runtime-4.14.10
 PKGNAME=	${DISTNAME:S/-4/4-4/}
-PKGREVISION=	11
+PKGREVISION=	23
 CATEGORIES=	misc
 COMMENT=	Runtime requirements for the KDE PIM tools
 MASTER_SITES=	${MASTER_SITE_KDE:=applications/15.04.3/src/}
@@ -11,7 +11,7 @@ MASTER_SITES=	${MASTER_SITE_KDE:=applications/15.04.3/src/}
 
 # BUILD_MAKE_FLAGS+= VERBOSE=1
 
-BUILDLINK_DEPMETHOD.qt4-tools=full
+BUILDLINK_DEPMETHOD.qt4-tools=	full
 
 .include "../../meta-pkgs/kde4/kde4.mk"
 

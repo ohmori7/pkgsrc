@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.17 2019/04/26 13:13:47 maya Exp $
+# $NetBSD: Makefile,v 1.19 2019/11/02 15:38:09 rillig Exp $
 
 DISTNAME=	datapkg-0.9
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
@@ -13,7 +13,7 @@ LICENSE=	mit
 DEPENDS+=	${PYPKGPREFIX}-ckanclient>=0.3:../../databases/py-ckanclient
 
 CONFLICTS=	datapkg-[0-9]*
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-ckanclient
+PYTHON_VERSIONS_ACCEPTED= 27 # py-ckanclient
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,6 +1,5 @@
-# $NetBSD: Makefile,v 1.9 2019/04/26 13:13:56 maya Exp $
+# $NetBSD: Makefile,v 1.16 2021/02/25 19:51:29 leot Exp $
 
-PKGREVISION= 1
 .include "Makefile.common"
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -9,11 +8,10 @@ LICENSE=	gnu-gpl-v2
 
 USE_TOOLS+=	gmake pkg-config
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # as of 1.0.1
-
 .include "../../lang/python/application.mk"
 
 MAKE_ENV+=	UNICORN_QEMU_FLAGS=--python=${PYTHONBIN:Q}
+MAKE_ENV+=	UNICORN_QEMU_FLAGS=--extra-ldflags=\"${LDFLAGS:Q}\"
 
 ALL_ENV+=	USE_GENERIC_LIBDATADIR=yes
 

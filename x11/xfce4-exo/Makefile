@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.60 2019/06/15 04:49:09 gutteridge Exp $
+# $NetBSD: Makefile,v 1.70 2020/08/31 18:13:26 wiz Exp $
 
+PKGREVISION= 4
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
-VERSION=	0.12.6
+VERSION=	0.12.11
 DISTNAME=	exo-${VERSION}
 PKGNAME=	xfce4-exo-${VERSION}
 CATEGORIES=	x11
 MASTER_SITES=	http://archive.xfce.org/src/xfce/exo/${VERSION:R}/
 
-HOMEPAGE=	http://docs.xfce.org/xfce/exo/start
+HOMEPAGE=	https://docs.xfce.org/xfce/exo/start
 COMMENT=	Xfce extension library
 
 USE_TOOLS+=	perl:run

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.56 2019/06/06 09:33:30 adam Exp $
+# $NetBSD: Makefile,v 1.65 2021/01/01 08:24:57 ryoon Exp $
 
-DISTNAME=	source-highlight-3.1.8
-PKGREVISION=	8
+DISTNAME=	source-highlight-3.1.9
+PKGREVISION=	1
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_GNU:=src-highlite/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnu.org/software/src-highlite/
+HOMEPAGE=	https://www.gnu.org/software/src-highlite/
 COMMENT=	Highlight syntax of various languages source into HTML document
 LICENSE=	gnu-gpl-v3
 
@@ -25,9 +25,17 @@ PKGCONFIG_OVERRIDE=	source-highlight.pc.in
 
 INFO_FILES=	YES
 
-# this is only really needed for the 'test' target
-USE_TOOLS+=	gmake gsed
+# gmake and gsed are necessary for testing only,
+# but the tools handling is somewhat broken in that regard
+USE_TOOLS+=	gsed gmake bash:test
 TEST_TARGET=	check
+
+# bash scripts
+CHECK_PORTABILITY_SKIP+= \
+	lib/tests/valgrind_test.sh.in \
+	tests/valgrind_suppressions.sh.in \
+	tests/valgrind_test.sh.in \
+	tests/valgrind_tests.sh.in
 
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

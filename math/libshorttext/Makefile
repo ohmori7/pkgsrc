@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.3 2019/04/25 07:33:05 maya Exp $
+# $NetBSD: Makefile,v 1.5 2020/12/04 20:45:29 nia Exp $
 
 DISTNAME=	libshorttext-1.1
-PKGREVISION=	1
+PKGREVISION=	2
 CATEGORIES=	math textproc
 MASTER_SITES=	https://www.csie.ntu.edu.tw/~cjlin/libshorttext/
 
@@ -15,8 +15,8 @@ DEPENDS+=	liblinear-[0-9]*:../../math/liblinear \
 
 USE_LANGUAGES=	c c++
 
-REPLACE_PYTHON=	*.py demo/*.py ${PYUTILS}
-PLIST_SUBST+=	PYSITELIB=${PYSITELIB}
+REPLACE_PYTHON=		*.py demo/*.py ${PYUTILS}
+PLIST_SUBST+=		PYSITELIB=${PYSITELIB}
 INSTALLATION_DIRS=	bin share/examples/libshorttext/demo \
 	share/doc/libshorttext ${ADDITIONAL_FILES:H:S,^,${PYSITELIB}/,:O:u}
 

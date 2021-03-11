@@ -1,18 +1,16 @@
-# $NetBSD: Makefile,v 1.78 2019/04/03 00:32:56 ryoon Exp $
+# $NetBSD: Makefile,v 1.87 2020/11/05 09:08:50 ryoon Exp $
 
-DISTNAME=	aria2-1.32.0
-PKGREVISION=	8
+DISTNAME=	aria2-1.35.0
+PKGREVISION=	6
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_GITHUB:=aria2/}
+GITHUB_RELEASE=	release-${PKGVERSION_NOREV}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://aria2.github.io/
 COMMENT=	Multi-threaded, multi-protocol, flexible download accelerator
 LICENSE=	gnu-gpl-v2
-
-GITHUB_PROJECT=	aria2
-GITHUB_RELEASE=	release-${PKGVERSION_NOREV}
 
 # Minimum requirement is 4.8.3
 GCC_REQD+=	4.8
@@ -22,9 +20,9 @@ USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
 USE_TOOLS+=		bison msgfmt msgmerge xgettext
 GNU_CONFIGURE=		yes
+GNU_CONFIGURE_STRICT=	no # has sub-configures
 CONFIGURE_ARGS+=	--enable-bittorrent
 CONFIGURE_ARGS+=	--enable-metalink
-CONFIGURE_ARGS+=	--with-included-gettext=no
 CONFIGURE_ARGS+=	--with-libexpat
 CONFIGURE_ARGS+=	--without-libxml2
 CONFIGURE_ARGS.SunOS+=	--disable-epoll
@@ -39,8 +37,6 @@ USE_FEATURES=		getopt_long snprintf
 BUILDLINK_DEPMETHOD.cppunit=	build
 BUILDLINK_API_DEPENDS.cppunit+=	cppunit>=1.10.2
 .  include "../../devel/cppunit/buildlink3.mk"
-.else
-CONFIGURE_ARGS+=	--disable-xmltest
 .endif
 
 .include "options.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.8 2018/08/22 09:43:11 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2020/08/31 18:06:55 wiz Exp $
 
 PKGNAME=	${DISTNAME:S/-/-server-/}
-PKGREVISION=	1
+PKGREVISION=	4
 COMMENT=	MariaDB 5.5, a free SQL database (server)
 
 CONFLICTS=	mysql3-server-[0-9]*
@@ -11,6 +11,8 @@ CONFLICTS=	mysql-server-[0-9]*
 
 CMAKE_ARGS+=		-DWITH_LIBWRAP=ON
 CMAKE_ARGS+=		-DINSTALL_INFODIR=${PKGINFODIR}
+# MariaDB uses internal OpenSSL structure made opaque with later versions
+CMAKE_ARGS+=		-DWITH_SSL=bundled
 # Avoid build error on NetBSD/amd64 7.99.9
 # and TokuDB is available only on amd64.
 CMAKE_ARGS+=		-DWITHOUT_TOKUDB=1
@@ -62,10 +64,8 @@ MESSAGE_SUBST+=		MYSQL_DATADIR=${MYSQL_DATADIR}
 MESSAGE_SUBST+=		MYSQL_USER=${MYSQL_USER} MYSQL_GROUP=${MYSQL_GROUP}
 BUILD_DEFS+=		MYSQL_DATADIR
 
-REPLACE_PERL+=		mysql-test/lib/My/SafeProcess/safe_process.pl
 REPLACE_PERL+=		mysql-test/lib/process-purecov-annotations.pl
 REPLACE_PERL+=		mysql-test/lib/v1/mysql-test-run.pl
-REPLACE_PERL+=		mysql-test/mtr
 REPLACE_PERL+=		mysql-test/mysql-stress-test.pl
 REPLACE_PERL+=		mysql-test/mysql-test-run.pl
 REPLACE_PERL+=		mysql-test/std_data/checkDBI_DBD-mysql.pl
@@ -80,6 +80,9 @@ REPLACE_SH+=		mysql-test/t/long_tmpdir-master.sh
 REPLACE_SH+=		mysql-test/t/lowercase_mixed_tmpdir-master.sh
 
 INSTALLATION_DIRS+=	bin
+
+post-extract:
+	${CHMOD} -R g-w ${WRKSRC}
 
 .include "../../mk/compiler.mk"
 

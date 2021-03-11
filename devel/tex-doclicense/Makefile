@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2019/05/12 11:16:37 markd Exp $
+# $NetBSD: Makefile,v 1.8 2021/02/20 10:05:02 markd Exp $
 
 DISTNAME=	doclicense
-PKGNAME=	tex-${DISTNAME}-1.9.0
-TEXLIVE_REV=	50871
+PKGNAME=	tex-${DISTNAME}-2.2.1
+TEXLIVE_REV=	56445
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/doclicense
+HOMEPAGE=	https://ctan.org/pkg/doclicense
 COMMENT=	Support for putting documents under a license
 LICENSE=	lppl-1.3c
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.137 2019/04/25 07:32:44 maya Exp $
+# $NetBSD: Makefile,v 1.152 2020/11/05 09:07:53 ryoon Exp $
 
-DISTNAME=	doxygen-1.8.15.src
+DISTNAME=	doxygen-1.8.20.src
 PKGNAME=	${DISTNAME:S/.src//}
-PKGREVISION=	2
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	http://doxygen.nl/files/
 
@@ -17,23 +17,20 @@ WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
 UNLIMIT_RESOURCES+=	datasize
 # doxygen upstream uses this version of flex
 FLEX_REQD=		2.5.35
-USE_TOOLS+=		gmake gs:run perl:run bison flex
+# Uses -std=c++14
+GCC_REQD+=		5
 USE_CMAKE=		yes
-USE_LANGUAGES=		c c++11
+USE_LANGUAGES=		c c++
+USE_TOOLS+=		gmake gs:run perl:run bison flex
 MAKE_ENV+=		PKGSRC_CFLAGS=${CFLAGS:Q}
 MAKE_FLAGS+=		MAN1DIR=${PKGMANDIR}/man1
 
-CMAKE_ARGS+=		-DDOC_INSTALL_DIR:STRING=share/doc/doxygen
+CMAKE_ARGS+=		-DDOC_INSTALL_DIR=share/doc/doxygen
+CMAKE_ARGS+=		-DGIT_EXECUTABLE=git # avoid searching for git executable
 TEST_TARGET=		tests
 
 # Case Insensitive or Case Sensitive File System
 PLIST_VARS+=		ci cs
-
-SUBST_CLASSES+=		perlbin
-SUBST_STAGE.perlbin=	pre-configure
-SUBST_MESSAGE.perlbin=	Fixing hardcoded path to the Perl interpreter
-SUBST_FILES.perlbin=	examples/tag.cfg
-SUBST_SED.perlbin=	-e 's,^PERL_PATH.*,PERL_PATH = ${PERL5},'
 
 SUBST_CLASSES+=		epstopdf
 SUBST_STAGE.epstopdf=	pre-configure
@@ -44,13 +41,13 @@ SUBST_SED.epstopdf=	-e 's,"epstopdf","${PREFIX}/bin/epstopdf",g'
 # Fixing $PWD / $(PWD) / $(HOME) for documentation
 # The dollar sign should be inserted literally in the documentation
 # doxygen always inserted the path => Completely remove dollar sign
-SUBST_CLASSES+=		changelog
-SUBST_STAGE.changelog=	pre-configure
-SUBST_MESSAGE.changelog=Fixing dollar sign for documentation
-SUBST_FILES.changelog=	doc/changelog.doc
-SUBST_SED.changelog=	-e 's,$$PWD,PWD,g'
-SUBST_SED.changelog+=	-e 's,$$(PWD,(PWD,g'
-SUBST_SED.changelog+=	-e 's,$$(HOME,(HOME,g'
+SUBST_CLASSES+=			changelog
+SUBST_STAGE.changelog=		pre-configure
+SUBST_MESSAGE.changelog=	Fixing dollar sign for documentation
+SUBST_FILES.changelog=		doc/changelog.doc
+SUBST_SED.changelog=		-e 's,$$PWD,PWD,g'
+SUBST_SED.changelog+=		-e 's,$$(PWD,(PWD,g'
+SUBST_SED.changelog+=		-e 's,$$(HOME,(HOME,g'
 
 .include "../../mk/bsd.prefs.mk"
 
@@ -64,15 +61,17 @@ CONFIGURE_ARGS.DragonFly+=	-platform freebsd-g++
 
 LDFLAGS+=		${BUILDLINK_LDADD.iconv}
 
+.include "options.mk"
+
 post-install:
 	${RM} -f ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/doxyindexer.1
 	${RM} -f ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/doxysearch.1
+.if empty(PKG_OPTIONS:Mqt)
 	${RM} -f ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/doxywizard.1
-
-.include "options.mk"
+.endif
 
 .include "../../converters/libiconv/buildlink3.mk"
 BUILDLINK_API_DEPENDS.graphviz+=	graphviz>=2.12nb1
 .include "../../graphics/graphviz/buildlink3.mk"
-.include "../../lang/python/application.mk"
+.include "../../lang/python/pyversion.mk"
 .include "../../mk/bsd.pkg.mk"

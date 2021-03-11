@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.56 2018/08/22 09:44:59 wiz Exp $
+# $NetBSD: Makefile,v 1.62 2020/08/31 18:09:19 wiz Exp $
 
 DISTNAME=		prcs-1.3.3
-PKGREVISION=		13
+PKGREVISION=		15
 CATEGORIES=		devel scm
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=prcs/}
 
@@ -13,7 +13,7 @@ LICENSE=		gnu-gpl-v2
 GNU_CONFIGURE=		yes
 CONFIGURE_ENV+=		lispdir=${PREFIX}/share/examples/prcs
 INFO_FILES=		yes
-USE_LANGUAGES=		c c++
+USE_LANGUAGES=		c c++03
 BUILD_DEFS+=		VARBASE
 CONFIGURE_ENV+=		EMACS=no
 CONFIGURE_ENV+=		PRCS_REPOSITORY=${VARBASE:Q}/PRCS
@@ -27,5 +27,15 @@ REPLACE_INTERPRETER+=	perl5
 REPLACE.perl5.old=	.*perl[^[:space:]]*
 REPLACE.perl5.new=	${PERL5}
 REPLACE_FILES.perl5=	emacs/prcs-ediff emacs/prcs-emerge
+
+# attrs.cc: In function 'int is_file_attribute_hash(const char*, int)':
+# attrs.cc:36:39: error: array subscript has type 'char' [-Werror=char-subscripts]
+#    return len + hash_table[str[len - 1]] + hash_table[str[0]];
+#                                        ^
+# attrs.cc:36:60: error: array subscript has type 'char' [-Werror=char-subscripts]
+#    return len + hash_table[str[len - 1]] + hash_table[str[0]];
+#                                                             ^
+# Maybe fix this later.
+BUILDLINK_TRANSFORM+=	rm:-Werror=char-subscripts
 
 .include "../../mk/bsd.pkg.mk"

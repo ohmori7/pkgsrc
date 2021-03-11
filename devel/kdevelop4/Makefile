@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.80 2019/04/03 00:32:36 ryoon Exp $
+# $NetBSD: Makefile,v 1.96 2021/01/01 08:24:40 ryoon Exp $
 #
 
 DISTNAME=	kdevelop-4.7.0
 PKGNAME=	kdevelop4-4.7.0
-PKGREVISION=	27
+PKGREVISION=	42
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_KDE:=kdevelop/4.7.0/src/}
 EXTRACT_SUFX=	.tar.xz
@@ -19,7 +19,7 @@ USE_TOOLS+=	pkg-config perl msgfmt
 USE_LANGUAGES=	c c++
 
 # because of some expansion to ${PKGDIRNAME}.kdev4 which is done wrong by bmake
-USE_TOOLS+=     gmake
+USE_TOOLS+=	gmake
 
 CMAKE_ARGS+=	-DWITH_KDE4Workspace:BOOL=OFF
 

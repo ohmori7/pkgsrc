@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:45:32 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:10:06 wiz Exp $
 
 DISTNAME=		Net-SMTP-SSL-1.04
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		2
+PKGREVISION=		4
 CATEGORIES=		mail perl5 security
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Net-SMTP-SSL/
+HOMEPAGE=		https://metacpan.org/release/Net-SMTP-SSL
 COMMENT=		Perl5 module providing SSL support for Net::SMTP
 LICENSE=		${PERL5_LICENSE}
 

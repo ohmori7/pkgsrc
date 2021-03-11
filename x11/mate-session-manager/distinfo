@@ -1,6 +1,9 @@
-$NetBSD: distinfo,v 1.8 2019/05/08 01:29:50 gutteridge Exp $
+$NetBSD: distinfo,v 1.10 2020/04/05 16:05:44 bsiegert Exp $
 
-SHA1 (mate-session-manager-1.22.1.tar.xz) = 187300b99c2685a0bf422c84b3a7e912a821e84a
-RMD160 (mate-session-manager-1.22.1.tar.xz) = 177b1c6978d1f42e79b0c9d3fc91a9f2282b82a5
-SHA512 (mate-session-manager-1.22.1.tar.xz) = 1c47134813d24abef7b2f5df098120a2cd138f822ea3d687a1a2566224bbde21482bf40ac47ba08a39ed0899ff35eeac3c3690c83c006774c47f22189688990b
-Size (mate-session-manager-1.22.1.tar.xz) = 580992 bytes
+SHA1 (mate-session-manager-1.24.0.tar.xz) = 1dbe592fb0cf89bb40d2ae37a43bd87293da8700
+RMD160 (mate-session-manager-1.24.0.tar.xz) = a255a2f899fd5875d3d214c26e7bd7b81d280bb0
+SHA512 (mate-session-manager-1.24.0.tar.xz) = ee519c8ded1f2df26e62a1384439e8929942d19560c258c91010f8d34bcc7518975406fbc0a5b76d4e73e954cdc2ea106d71476e446573d4a77d2704f6cc9e37
+Size (mate-session-manager-1.24.0.tar.xz) = 709712 bytes
+SHA1 (patch-configure.ac) = eda3d9633c6b4f8d2eb0740a638e7f72a7c6d596
+SHA1 (patch-tools_Makefile.am) = b0f40141c77be3c95b87ae1def4b613e523ea6be
+SHA1 (patch-tools_mate-session-check-accelerated.c) = f3e8940162f663612df477f0eca6dd892d0b146c

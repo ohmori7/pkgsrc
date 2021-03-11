@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.80 2019/04/25 15:59:54 roy Exp $
+# $NetBSD: Makefile,v 1.93 2020/12/07 13:14:38 nia Exp $
 
 .include "dist.mk"
 
 PKGNAME=	python27-${PY_DISTVERSION}
+PKGREVISION=	3
 CATEGORIES=	lang python
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -179,6 +180,13 @@ SUBST_FILES.findlib+=	Lib/ctypes/util.py
 SUBST_FILES.findlib+=	Lib/distutils/unixccompiler.py
 SUBST_SED.findlib=	-e 's,/usr/local,${PREFIX},'
 SUBST_SED.findlib+=	-e 's!\(-Wl,-t -o\)!${COMPILER_RPATH_FLAG}${PREFIX}/lib -L${PREFIX}/lib \1!'
+SUBST_NOOP_OK.findlib=	yes
+
+SUBST_CLASSES+=		pkgversion
+SUBST_STAGE.pkgversion=	pre-configure
+SUBST_FILES.pkgversion=	Lib/lib2to3/pgen2/driver.py
+SUBST_FILES.pkgversion+=Lib/distutils/command/install_egg_info.py
+SUBST_VARS.pkgversion=	PKGVERSION_NOREV
 
 .include "options.mk"
 
@@ -211,6 +219,7 @@ post-install:
 CONFIGURE_ENV+=		ac_cv_type_socklen_t=yes
 .endif
 
+# needed to make devel/py-readline pick up the correct readline implementation
 BUILDLINK_DEPMETHOD.readline=		build
 
 .include "../../archivers/bzip2/buildlink3.mk"

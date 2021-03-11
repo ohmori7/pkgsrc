@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.32 2018/12/05 18:42:06 scole Exp $
+# $NetBSD: Makefile,v 1.34 2020/08/17 20:18:18 leot Exp $
 #
 
 DISTNAME=	quirc-0.9.84
-PKGREVISION=	10
+PKGREVISION=	11
 CATEGORIES=	chat
 #MASTER_SITES=	http://quirc.org/
 
@@ -16,7 +16,7 @@ USE_TOOLS+=	gmake automake autoconf autoreconf wish
 
 CONFIGURE_ARGS+=	--with-tcl=${BUILDLINK_PREFIX.tcl}
 CONFIGURE_ARGS+=	--with-wish=${TOOLS_PATH.wish}
-MAKE_FLAGS+=	docdir=${PREFIX}/share/doc/quirc
+MAKE_FLAGS+=		docdir=${PREFIX}/share/doc/quirc
 
 SUBST_CLASSES+=		T86
 SUBST_STAGE.T86=	pre-configure

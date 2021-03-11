@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.17 2018/08/22 09:47:18 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2020/08/31 18:12:24 wiz Exp $
 
 DISTNAME=	DateTimeX-Easy-0.089
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	time perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DateTimeX/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/perldoc?DateTimeX::Easy
+HOMEPAGE=	https://metacpan.org/pod/DateTimeX::Easy
 COMMENT=	Parse a date/time string using the best method available
 LICENSE=	${PERL5_LICENSE}
 
@@ -21,7 +21,7 @@ DEPENDS+=	p5-TimeDate-[0-9]*:../../time/p5-TimeDate
 BUILD_DEPENDS+=	p5-Test-Most>0:../../devel/p5-Test-Most
 
 PERL5_MODULE_TYPE=	Module::Install::Bundled
-USE_LANGUAGES=	#
+USE_LANGUAGES=		#
 
 PERL5_PACKLIST=	auto/DateTimeX/Easy/.packlist
 

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.32 2019/05/15 14:23:15 leot Exp $
+# $NetBSD: Makefile,v 1.38 2020/12/04 20:45:24 nia Exp $
 
 DISTNAME=	ibus-array-0.1.0
-PKGREVISION=	13
+PKGREVISION=	18
 CATEGORIES=	inputmethod chinese
 MASTER_SITES=	http://ibus-array.googlecode.com/svn/tarballs/
 EXTRACT_SUFX=	.tgz
@@ -13,10 +13,10 @@ LICENSE=	gnu-gpl-v3
 
 DEPENDS+=	${PYPKGPREFIX}-gobject3-[0-9]*:../../devel/py-gobject3
 
-GNU_CONFIGURE=	yes
-USE_LIBTOOL=	yes
+GNU_CONFIGURE=		yes
+USE_LIBTOOL=		yes
 USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=	gmake pkg-config automake autoconf autopoint msgfmt msgmerge
+USE_TOOLS+=		gmake pkg-config automake autoconf autopoint msgfmt msgmerge
 
 WRKSRC=		${WRKDIR}
 

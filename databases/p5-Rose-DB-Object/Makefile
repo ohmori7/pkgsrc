@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.25 2018/08/22 09:43:20 wiz Exp $
+# $NetBSD: Makefile,v 1.30 2020/09/06 21:43:49 wiz Exp $
 
-DISTNAME=	Rose-DB-Object-0.815
+DISTNAME=	Rose-DB-Object-0.819
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Rose/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~jsiracusa/Rose-DB-Object/
+HOMEPAGE=	https://metacpan.org/release/Rose-DB-Object
 COMMENT=	Extensible, high performance RDBMS-OO mapper
 LICENSE=	${PERL5_LICENSE}
 
@@ -21,7 +20,7 @@ DEPENDS+=	p5-Rose-Object>=0.854:../../devel/p5-Rose-Object
 DEPENDS+=	p5-Time-Clock-[0-9]*:../../time/p5-Time-Clock
 
 USE_LANGUAGES=	# empty
-PERL5_PACKLIST= auto/Rose/DB/Object/.packlist
+PERL5_PACKLIST=	auto/Rose/DB/Object/.packlist
 
 post-extract:
 	${FIND} ${WRKSRC} -name "*.pm" -type f -exec ${CHMOD} -x {} \;

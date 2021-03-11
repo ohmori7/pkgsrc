@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.34 2019/04/29 16:32:38 adam Exp $
+# $NetBSD: Makefile,v 1.36 2020/12/04 20:45:22 nia Exp $
 
 DISTNAME=	lensfun-0.3.2
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=lensfun/}
 

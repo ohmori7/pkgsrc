@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.24 2018/07/18 00:06:21 joerg Exp $
+# $NetBSD: Makefile,v 1.27 2020/08/17 20:19:28 leot Exp $
 
 DISTNAME=	vic-2.8ucl1.4.0beta-4337
 PKGNAME=	vic-devel-2.8.1.4.0beta.4337
-PKGREVISION=	18
+PKGREVISION=	19
 CATEGORIES=	mbone tk
 MASTER_SITES=	http://www.NetBSD.org/~sborrill/snapshots/
 
@@ -11,7 +11,7 @@ MAKE_JOBS_SAFE=	no
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
 
-.if !empty(MACHINE_PLATFORM:MNetBSD-1.6*) || !empty(MACHINE_PLATFORM:MNetBSD-[2-9]*)
+.if ${OPSYS} == "NetBSD"
 PATCH_SITES=	${MASTER_SITES}
 PATCHFILES=	vic-2.8ucl1.4.0_ov511.diff.gz
 .endif
@@ -24,7 +24,7 @@ EXTRACT_SUFX=	.tgz
 WRKSRC=		${WRKDIR}/vic-mpeg4
 GNU_CONFIGURE=	yes
 
-USE_LANGUAGES=	c gnu++03
+USE_LANGUAGES=		c gnu++03
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 
 CONFIGURE_ARGS+=	--with-tcl=${BUILDLINK_PREFIX.tcl}/lib

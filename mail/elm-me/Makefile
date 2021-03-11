@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.36 2018/07/04 13:40:23 jperkin Exp $
+# $NetBSD: Makefile,v 1.39 2020/09/02 22:16:48 kim Exp $
 
 DISTNAME=		elm-2.4ME+93
 PKGNAME=		elm-me-2.4.93
 PKGREVISION=		6
 CATEGORIES=		mail
-MASTER_SITES=		ftp://ftp.funet.fi/pub/unix/mail/elm/elm-2.4ME+/
+MASTER_SITES=		http://ftp.funet.fi/pub/unix/mail/elm/elm-2.4ME+/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		http://www.instinct.org/elm/
@@ -27,7 +27,7 @@ INSTALLATION_DIRS=	share/nls/C
 CONF_FILES=		${PREFIX}/lib/elm.mimetypes-dist		\
 			${PREFIX}/lib/elm.mimetypes
 
-USE_TOOLS+=	ksh
+USE_TOOLS+=		ksh
 
 SUBST_CLASSES+=		errno
 SUBST_STAGE.errno=	pre-configure
@@ -35,9 +35,13 @@ SUBST_MESSAGE.errno=	Fixing declaration of errno.
 SUBST_FILES.errno=	*/*.c
 SUBST_SED.errno=	-e 's,^extern int errno;,\#include <errno.h>,'
 
+# occurs in elmlib.h and is properly protected code:
+#  #define hex(c) ((((c) > 0) && ((c) < 127)) ? index_hex[ (c) ] : -1)
+BUILDLINK_TRANSFORM+=	rm:-Werror=char-subscripts
+
 # currently not set in files/config.sh
 # (should probably be a package option)
-#SPECIAL_PERMS+= 	bin/elm ${ROOT_USER} mail 2755
+#SPECIAL_PERMS+=	bin/elm ${ROOT_USER} mail 2755
 
 pre-configure:
 	${CP} ${FILESDIR}/config.sh ${WRKSRC}/

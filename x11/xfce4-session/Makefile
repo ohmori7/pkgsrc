@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.72 2019/05/23 02:56:07 gutteridge Exp $
+# $NetBSD: Makefile,v 1.90 2020/12/04 04:56:20 riastradh Exp $
 
+PKGREVISION= 5
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
-DISTNAME=		xfce4-session-4.13.2
+DISTNAME=		xfce4-session-4.14.2
 CATEGORIES=		x11
-MASTER_SITES+=		http://archive.xfce.org/src/xfce/xfce4-session/4.13/
+MASTER_SITES+=		https://archive.xfce.org/src/xfce/xfce4-session/4.14/
 
-HOMEPAGE=		http://docs.xfce.org/xfce/xfce4-session/start
+HOMEPAGE=		https://docs.xfce.org/xfce/xfce4-session/start
 COMMENT=		Xfce session manager
 
 PKGCONFIG_OVERRIDE+=	libxfsm/xfce4-session-2.0.pc.in
@@ -17,12 +18,6 @@ CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFBASE}
 CONFIGURE_ARGS+=	ICEAUTH=${TOOLS_PATH.iceauth}
 
 USE_TOOLS+=		iceauth:run
-
-SUBST_CLASSES+=		xflock4
-SUBST_STAGE.xflock4=	pre-build
-SUBST_MESSAGE.xflock4=	Updating path in xflock4
-SUBST_FILES.xflock4=	scripts/xflock4
-SUBST_SED.xflock4=	-e 's,/bin:/usr/bin,${PREFIX}/bin,g'
 
 EGDIR=			${XFCE4_EGBASE}
 PKG_SYSCONFSUBDIR=	xdg
@@ -40,7 +35,7 @@ CONF_FILES=	${EGDIR}/autostart/xscreensaver.desktop					\
 		${EGDIR}/xinitrc							\
 		${PKG_SYSCONFDIR}/xfce4/xinitrc
 
-.if !empty(Darwin-*-*)
+.if ${OPSYS} == Darwin
 .include "../../sysutils/consolekit/buildlink3.mk"
 .endif
 

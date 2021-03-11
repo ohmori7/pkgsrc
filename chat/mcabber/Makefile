@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.11 2018/11/18 12:06:23 bsiegert Exp $
+# $NetBSD: Makefile,v 1.16 2021/01/24 16:54:15 nia Exp $
 
-DISTNAME=	mcabber-1.1.0
-PKGREVISION=	1
+DISTNAME=	mcabber-1.1.2
 CATEGORIES=	chat
-MASTER_SITES=	http://www.lilotux.net/~mikael/mcabber/files/
+MASTER_SITES=	https://www.lilotux.net/~mikael/mcabber/files/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	degroote@NetBSD.org
-HOMEPAGE=	http://www.lilotux.net/~mikael/mcabber/
-COMMENT=	Jabber console client
+HOMEPAGE=	https://www.lilotux.net/~mikael/mcabber/
+COMMENT=	Small XMPP (Jabber) console client
 LICENSE=	gnu-gpl-v2
 
 CHECK_PORTABILITY_SKIP+=	contrib/events/eventcmd.pastebin
@@ -16,9 +15,10 @@ CHECK_PORTABILITY_SKIP+=	contrib/events/eventcmd.pastebin
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
 USE_TOOLS+=	gmake xgettext pkg-config
-USE_NCURSES=	yes
+FAKE_NCURSES=	yes
+USE_CURSES=	wide
 
-INSTALLATION_DIRS+= 	share/examples/mcabber
+INSTALLATION_DIRS+=	share/examples/mcabber
 CONFIGURE_ARGS+=	--disable-hgcset
 
 post-install:
@@ -29,6 +29,6 @@ post-install:
 .include "../../chat/loudmouth/buildlink3.mk"
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/libidn/buildlink3.mk"
-.include "../../devel/ncursesw/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../mk/curses.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

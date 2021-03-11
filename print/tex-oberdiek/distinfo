@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.13 2019/01/28 08:21:09 markd Exp $
+$NetBSD: distinfo,v 1.16 2021/02/13 05:31:12 markd Exp $
 
-SHA1 (tex-oberdiek-49285/oberdiek.tar.xz) = e22c0971b324f37abef91f07b1a2e9bca91f62a2
-RMD160 (tex-oberdiek-49285/oberdiek.tar.xz) = ad6bf12069b815cbc6e0d0b363e413bcf297d346
-SHA512 (tex-oberdiek-49285/oberdiek.tar.xz) = c1a54805a5f25290110d6074af3c4de6a7261809f11dda3a1605220c159e7461fcffe1d2870706468207a158c73e9ddbb50827a07f81cdeb2f732fd0a935abb2
-Size (tex-oberdiek-49285/oberdiek.tar.xz) = 226648 bytes
+SHA1 (oberdiek.r56291.tar.xz) = 6492ad5c67dabd82b2f526efc81de5401165a2e2
+RMD160 (oberdiek.r56291.tar.xz) = 5c9411baf169583050967f489b335603c35f3337
+SHA512 (oberdiek.r56291.tar.xz) = a110b9f65989da3cb73bf37e09d92a89352177c45ac2b60a98341829e833e9ae3055e979f9bce5fea57f44e751efd70cac0eb5eadbb7efe512d0277f3696dd00
+Size (oberdiek.r56291.tar.xz) = 45104 bytes

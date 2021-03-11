@@ -1,11 +1,13 @@
-# $NetBSD: Makefile.common,v 1.13 2019/02/13 17:42:07 wiz Exp $
+# $NetBSD: Makefile.common,v 1.15 2021/02/06 10:26:53 wiz Exp $
 # -*- Makefile -*-
+#
 # used by security/pinentry/Makefile
 # used by security/pinentry-fltk/Makefile
+# used by security/pinentry-gnome3/Makefile
 # used by security/pinentry-gtk2/Makefile
-# used by security/pinentry-qt4/Makefile
+# used by security/pinentry-qt5/Makefile
 
-PINENTRY_VERSION=	1.1.0
+PINENTRY_VERSION=	1.1.1
 DISTNAME=		pinentry-${PINENTRY_VERSION}
 
 CATEGORIES=		security
@@ -13,7 +15,7 @@ MASTER_SITES=		ftp://ftp.gnupg.org/gcrypt/pinentry/
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		ftp://ftp.gnupg.org/gcrypt/pinentry/
+HOMEPAGE=		https://gnupg.org/related_software/pinentry/index.html
 LICENSE=		gnu-gpl-v2
 
 #PATCHDIR=		${.CURDIR}/../../security/pinentry/patches
@@ -24,7 +26,6 @@ CONFIGURE_ARGS+=	--with-libiconv-prefix=${BUILDLINK_PREFIX.iconv}
 
 INFO_FILES=		yes
 
-BUILDLINK_API_DEPENDS.libassuan+=       libassuan>=2.1.0
 .include "../../security/libassuan2/buildlink3.mk"
 BUILDLINK_API_DEPENDS.libgpg-error+=	libgpg-error>=1.16
 .include "../../security/libgpg-error/buildlink3.mk"

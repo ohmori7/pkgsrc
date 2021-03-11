@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.45 2019/06/08 03:21:22 wen Exp $
+# $NetBSD: Makefile,v 1.48 2020/08/31 18:07:54 wiz Exp $
 
 DISTNAME=	Devel-StackTrace-2.04
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Devel/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Devel-StackTrace/
+HOMEPAGE=	https://metacpan.org/release/Devel-StackTrace
 COMMENT=	Perl5 module for stack trace and stack trace frame objects
 LICENSE=	artistic-2.0
 

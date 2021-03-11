@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.6 2017/09/06 16:49:41 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2021/02/13 11:19:04 markd Exp $
 
 DISTNAME=	ms
-PKGNAME=	tex-${DISTNAME}-2014
-TEXLIVE_REV=	29849
+PKGNAME=	tex-${DISTNAME}-2020
+TEXLIVE_REV=	57473
 
 MAINTAINER=	minskim@NetBSD.org
-COMMENT=	Various LaTeX packages by Martin Schroeder
+HOMEPAGE=	https://ctan.org/pkg/ms
+COMMENT=	Various LaTeX packages by Martin Schroder
 LICENSE=	lppl-1.3c
 
 DEPENDS+=	tex-footmisc-[0-9]*:../../print/tex-footmisc

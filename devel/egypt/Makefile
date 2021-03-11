@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.2 2018/08/22 09:43:30 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2020/08/31 18:07:19 wiz Exp $
 
 DISTNAME=	egypt-1.10
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	${HOMEPAGE}download/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gson.org/egypt/
+HOMEPAGE=	https://www.gson.org/egypt/
 COMMENT=	Simple tool for creating call graphs of C programs
 LICENSE=	${PERL5_LICENSE}
 

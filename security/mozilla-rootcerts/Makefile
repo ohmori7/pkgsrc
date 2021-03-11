@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.33 2019/05/12 19:19:27 maya Exp $
+# $NetBSD: Makefile,v 1.42 2021/01/11 22:50:37 wiz Exp $
 
 DISTNAME=	mozilla-rootcerts-1.0.${CERTDATA_DATE}
 CATEGORIES=	security
-MASTER_SITES=	-https://hg.mozilla.org/mozilla-central/raw-file/f84b1b428d4298326511fbdb527c0029e5cdf638/security/nss/lib/ckfw/builtins/certdata.txt
-DISTFILES=	${CERTDATA}
+MASTER_SITES=	-https://hg.mozilla.org/mozilla-central/raw-file/bc61343b5d6809a99d3ca2daf25708f069b042c2/security/nss/lib/ckfw/builtins/certdata.txt
 EXTRACT_SUFX=	# empty
+DISTFILES=	${CERTDATA}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://hg.mozilla.org/mozilla-central/log/tip/security/nss/lib/ckfw/builtins/certdata.txt
@@ -14,7 +14,7 @@ LICENSE=	mpl-2.0
 USE_TOOLS=	awk:run echo:run expr:run ln:run ls:run openssl:run rm:run mkdir:run
 
 # This must be kept in sync with security/mozilla-rootcerts-openssl
-CERTDATA_DATE=	20190306
+CERTDATA_DATE=	20201204
 CERTDATA=	certdata-${CERTDATA_DATE}.txt
 
 WRKSRC=		${WRKDIR}
@@ -39,25 +39,26 @@ SUBST_CLASSES=		paths
 SUBST_MESSAGE.paths=	Replacing hard-coded paths.
 SUBST_STAGE.paths=	post-configure
 SUBST_FILES.paths=	${CERT_SCRIPT}
-SUBST_VARS.paths=	AWK DATADIR ECHO EXPR LN LS MKDIR PREFIX SSLDIR RM
+SUBST_VARS.paths=	AWK DATADIR ECHO EXPR LN LS MKDIR PREFIX RM SH SSLDIR
 SUBST_SED.paths=	-e 's,@OPENSSL@,${TOOLS_PATH.openssl},g'
 
-INSTALLATION_DIRS=	sbin ${DATADIR}
+INSTALLATION_DIRS=	sbin ${DATADIR} share/doc/${PKGBASE}
 
 do-extract:
 	${CP} ${FILESDIR}/${CERT_SCRIPT} ${WRKSRC}
-	${CP} ${DISTDIR}/${CERTDATA} ${WRKSRC}
+	${CP} ${DISTDIR}/${CERTDATA} ${WRKSRC}/certdata.txt
 
 do-build:
 	${MKDIR} ${WRKSRC}/certs
 	cd ${WRKSRC}/certs && \
-	${SH} ${WRKSRC}/${CERT_SCRIPT} -f ${WRKSRC}/${CERTDATA} extract
+	${SH} ${WRKSRC}/${CERT_SCRIPT} -f ${WRKSRC}/certdata.txt extract
 	${LS} -rt ${WRKSRC}/certs/*.pem | ${XARGS} ${CAT} >${WRKSRC}/cacert.pem
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/${CERT_SCRIPT} \
 		${DESTDIR}${PREFIX}/sbin/mozilla-rootcerts
-	${INSTALL_DATA} ${WRKSRC}/${CERTDATA} ${DESTDIR}${DATADIR}/certdata.txt
+	${INSTALL_DATA} ${WRKSRC}/certdata.txt ${DESTDIR}${DATADIR}/certdata.txt
 	${INSTALL_DATA} ${WRKSRC}/cacert.pem ${DESTDIR}${DATADIR}/cacert.pem
+	${INSTALL_DATA} files/gnupg2 ${DESTDIR}/${PREFIX}/share/doc/${PKGBASE}
 
 .include "../../mk/bsd.pkg.mk"

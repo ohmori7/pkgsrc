@@ -1,23 +1,23 @@
-# $NetBSD: Makefile,v 1.34 2018/05/07 11:26:30 wiz Exp $
+# $NetBSD: Makefile,v 1.40 2020/03/08 16:48:12 wiz Exp $
 
-DISTNAME=	dbus-python-1.2.8
+DISTNAME=	dbus-python-1.2.16
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/-python//}
+PKGREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	http://dbus.freedesktop.org/releases/dbus-python/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.freedesktop.org/Software/dbus
+HOMEPAGE=	https://www.freedesktop.org/Software/dbus
 COMMENT=	Python bindings for the D-BUS message bus system
 LICENSE=	mit
 
-USE_TOOLS+=	pkg-config gmake
-GNU_CONFIGURE=	yes
-CONFIGURE_ARGS+= --disable-html-docs --disable-api-docs
+USE_TOOLS+=		pkg-config gmake
+GNU_CONFIGURE=		yes
 
 PY_PATCHPLIST=			YES
 
 # py-expat is only needed at runtime
-DEPENDS+= ${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
+DEPENDS+=	${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 
 BUILDLINK_TRANSFORM.SunOS+=	rm:-std=c9x
 

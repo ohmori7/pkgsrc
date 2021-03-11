@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2018/07/18 00:06:24 joerg Exp $
+# $NetBSD: Makefile,v 1.29 2020/03/08 16:51:30 wiz Exp $
 #
 
 DISTNAME=		glclock-6.0b6.0
-PKGREVISION=		4
+PKGREVISION=		5
 CATEGORIES=		x11 graphics time
 MASTER_SITES=		http://www.daionet.gr.jp/~masa/archives/
 
@@ -31,5 +31,9 @@ do-install:
 #			mwclock woodclock;do \
 #	${INSTALL_SCRIPT} ${WRKSRC}/$$i ${PREFIX}/bin; done
 
-.include "../../graphics/Mesa/buildlink3.mk"
+.include "../../graphics/MesaLib/buildlink3.mk"
+.include "../../graphics/freeglut/buildlink3.mk"
+.include "../../graphics/glu/buildlink3.mk"
+.include "../../x11/libXmu/buildlink3.mk"
+.include "../../x11/libXt/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

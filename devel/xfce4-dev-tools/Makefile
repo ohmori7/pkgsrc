@@ -1,18 +1,17 @@
-# $NetBSD: Makefile,v 1.38 2018/11/14 22:21:21 kleink Exp $
+# $NetBSD: Makefile,v 1.46 2020/08/31 18:09:22 wiz Exp $
 
-PKGREVISION= 10
+PKGREVISION= 4
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
-DISTNAME=	xfce4-dev-tools-${XFCE4_VERSION}
+VERSION=	4.14.0
+DISTNAME=	xfce4-dev-tools-${VERSION}
 CATEGORIES=	devel
+MASTER_SITES=	http://archive.xfce.org/src/xfce/xfce4-dev-tools/${VERSION:R}/
 
 HOMEPAGE=	http://users.xfce.org/~benny/projects/xfce4-dev-tools/
 COMMENT=	Xfce development tools
 
 GNU_CONFIGURE=	yes
-
-USE_TOOLS+=	bash:run
-REPLACE_BASH+=	scripts/xdt-commit
 
 MAKE_DIRS+=	${PREFIX}/share/xfce4
 

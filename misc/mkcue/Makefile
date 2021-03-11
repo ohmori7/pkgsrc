@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.3 2012/10/08 09:57:30 asau Exp $
+# $NetBSD: Makefile,v 1.5 2020/01/26 17:31:44 rillig Exp $
 #
 
 DISTNAME=	mkcue_1.orig
@@ -7,7 +7,7 @@ CATEGORIES=	misc
 MASTER_SITES=	${MASTER_SITE_DEBIAN:=pool/main/m/mkcue/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://packages.debian.org/source/stable/mkcue
+HOMEPAGE=	https://packages.debian.org/source/stable/mkcue
 COMMENT=	Generates a CUE sheet from a CD
 LICENSE=	gnu-lgpl-v2
 
@@ -17,7 +17,7 @@ USE_LANGUAGES=	c c++
 USE_TOOLS+=	gmake
 MAKE_FILE=	GNUmakefile
 
-INSTALLATION_DIRS= bin
+INSTALLATION_DIRS=	bin
 
 post-extract:
 	${CP} ${FILESDIR}/mb_dragonfly.cpp ${WRKSRC}/osdep

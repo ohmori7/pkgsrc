@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2012/10/23 19:51:14 asau Exp $
+# $NetBSD: Makefile,v 1.5 2020/03/20 11:58:22 nia Exp $
 
 DISTNAME=		neb-wipe-src-1.0
 PKGNAME=		neb-wipe-1.0
@@ -13,7 +13,7 @@ COMMENT=		Secure disk partition eraser
 NO_CONFIGURE=		yes
 
 ONLY_FOR_PLATFORM=	NetBSD-*-* OpenBSD-*-*
-LICENSE=     		original-bsd
+LICENSE=		original-bsd
 
 WRKSRC=			${WRKDIR}
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1

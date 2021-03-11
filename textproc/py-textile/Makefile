@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.18 2019/05/21 12:53:47 adam Exp $
+# $NetBSD: Makefile,v 1.20 2020/05/17 21:38:47 adam Exp $
 
-DISTNAME=	textile-3.0.3
+DISTNAME=	textile-3.0.4
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	textproc python
 MASTER_SITES=	${MASTER_SITE_PYPI:=t/textile/}
@@ -13,7 +13,6 @@ LICENSE=	modified-bsd
 DEPENDS+=	${PYPKGPREFIX}-html5lib>=0.999999999:../../textproc/py-html5lib
 DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
 BUILD_DEPENDS+=	${PYPKGPREFIX}-test-runner-[0-9]*:../../devel/py-test-runner
-TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-cov-[0-9]*:../../devel/py-test-cov
 
 USE_LANGUAGES=	# none

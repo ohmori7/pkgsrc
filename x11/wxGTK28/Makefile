@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.52 2018/11/14 22:22:51 kleink Exp $
+# $NetBSD: Makefile,v 1.59 2020/11/05 09:09:29 ryoon Exp $
 #
 
 .include "../../x11/wxGTK28/Makefile.common"
 
 PKGNAME=		${DISTNAME:S/wxGTK/wxGTK28/}
-PKGREVISION=		17
+PKGREVISION=		23
 COMMENT=		GTK-based implementation of the wxWidgets GUI library
 
 BUILD_TARGET=	all
@@ -14,6 +14,9 @@ INSTALLATION_DIRS+=	${DOCDIR}
 INSTALLATION_DIRS+=	bin
 
 REPLACE_SH=		wx-config.in wx-config-inplace.in
+
+# We patch configure
+CHECK_PORTABILITY_SKIP+=	configure.in
 
 post-configure:
 	echo 'install_qadll: install_xmldll' >> ${WRKSRC}/build-unicode/Makefile

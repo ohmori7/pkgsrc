@@ -166,7 +166,7 @@ On failure, the callback should invoke
 '''archive_set_error'''() 
 to register an error code and message and 
 return 
-'''ARCHIVE_FATAL.''' 
+'''ARCHIVE_FATAL'''. 
 == RETURN VALUES == 
 These functions return 
 '''ARCHIVE_OK''' 
@@ -180,11 +180,11 @@ and
 functions. 
 == SEE ALSO == 
 [[ManPageBsdtar1]], 
-[[ManPageibarchive3]], 
 [[ManPagerchiveead3]], 
 [[ManPagerchiveeadata3]], 
 [[ManPagerchiveeadilter3]], 
 [[ManPagerchiveeadormat3]], 
 [[ManPagerchiveeadetptions3]], 
 [[ManPagerchivetil3]], 
+[[ManPageibarchive3]], 
 [[ManPageTar5]] 

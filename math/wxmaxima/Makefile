@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.11 2018/11/14 22:22:00 kleink Exp $
+# $NetBSD: Makefile,v 1.18 2020/11/05 09:08:38 ryoon Exp $
 
 DISTNAME=	wxmaxima-17.10.1
-PKGREVISION=	5
+PKGREVISION=	11
 CATEGORIES=	math
 MASTER_SITES=	${MASTER_SITE_GITHUB:=andrejv/}
 GITHUB_TAG=	Version-${PKGVERSION_NOREV}
 
 MAINTAINER=	helgoman@users.sourceforge.net
-HOMEPAGE=	http://andrejv.github.io/wxmaxima/
+HOMEPAGE=	https://andrejv.github.io/wxmaxima/
 COMMENT=	Graphical UI for maxima
 LICENSE=	gnu-gpl-v2
 

@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.35 2019/04/03 00:32:53 ryoon Exp $
+# $NetBSD: Makefile,v 1.55 2021/02/07 06:30:30 ryoon Exp $
 
-DISTNAME=		bibletime-2.10.1
-PKGREVISION=		36
+DISTNAME=		bibletime-3.0
+PKGREVISION=		3
 CATEGORIES=		misc
-MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=bibletime/}
+MASTER_SITES=		${MASTER_SITE_GITHUB:=bibletime/}
+GITHUB_RELEASE=		v${PKGVERSION_NOREV}
 EXTRACT_SUFX=		.tar.xz
 EXTRACT_USING=		bsdtar
 
@@ -13,20 +14,22 @@ COMMENT=		Bible study program based on SWORD and QT
 LICENSE=		gnu-gpl-v2
 
 USE_CMAKE=		yes
-USE_LANGUAGES=		c c++
+USE_LANGUAGES=		c c++11
 USE_TOOLS+=		pkg-config
 
-SUBST_CLASSES+=		docdir
-SUBST_FILES.docdir=	${WRKSRC}/cmake/BTDocumentation.cmake
-SUBST_FILES.docdir+=	${WRKSRC}/src/util/directory.cpp
-SUBST_STAGE.docdir=	pre-configure
-SUBST_SED.docdir=	-e 's,bibletime/docs,doc/bibletime,g'
+DEPENDS+=		dejavu-ttf-[0-9]*:../../fonts/dejavu-ttf
+TOOL_DEPENDS+=		po4a-[0-9]*:../../textproc/po4a
+TOOL_DEPENDS+=		libxslt-[0-9]*:../../textproc/libxslt
 
-DEPENDS+=	dejavu-ttf-[0-9]*:../../fonts/dejavu-ttf
+CMAKE_ARGS+=		-DBUILD_HANDBOOK_PDF=OFF
+CMAKE_ARGS+=		-DBUILD_HOWTO_PDF=OFF
+CMAKE_ARGS+=		-DBT_DOCBOOK_XSL_HTML_CHUNK_XSL:PATH="${PREFIX}/share/xsl/docbook/html/chunk.xsl"
+CMAKE_ARGS+=		-DBT_RUNTIME_DOCDIR="${PREFIX}/share/doc/bibletime"
 
-.include "options.mk"
-
+.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../misc/sword/buildlink3.mk"
-.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/libclucene/buildlink3.mk"
+.include "../../x11/qt5-qtdeclarative/buildlink3.mk"
+.include "../../x11/qt5-qtsvg/buildlink3.mk"
+.include "../../x11/qt5-qttools/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

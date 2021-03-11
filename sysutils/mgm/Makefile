@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.22 2018/08/22 09:46:36 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2020/08/31 18:11:29 wiz Exp $
 
 DISTNAME=	mgm-1.1
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	sysutils
 MASTER_SITES=	http://www.xiph.org/mgm/
 EXTRACT_SUFX=	.tgz

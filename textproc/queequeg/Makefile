@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2019/04/26 13:14:18 maya Exp $
+# $NetBSD: Makefile,v 1.17 2020/12/04 20:45:45 nia Exp $
 
 DISTNAME=	queequeg-0.91
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=queequeg/}
 
@@ -15,7 +15,7 @@ BUILD_DEPENDS+=	WordNet-[0-9]*:../../textproc/WordNet
 
 USE_LANGUAGES=	# none
 PY_PATCHPLIST=	yes
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-cdb
+PYTHON_VERSIONS_ACCEPTED= 27 # py-cdb
 
 SUBST_CLASSES+=			fix-python
 SUBST_STAGE.fix-python=		pre-configure

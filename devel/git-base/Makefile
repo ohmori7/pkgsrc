@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.63 2019/02/26 11:36:59 adam Exp $
+# $NetBSD: Makefile,v 1.84 2020/10/31 21:10:01 adam Exp $
 
 .include "../../devel/git/Makefile.common"
 
@@ -15,7 +15,7 @@ DEPENDS+=	p5-Net-SMTP-SSL>=1.01:../../mail/p5-Net-SMTP-SSL
 DEPENDS+=	p5-Authen-SASL>=1.0:../../security/p5-Authen-SASL
 
 USE_LANGUAGES=		c99
-USE_TOOLS+=		perl:run sh:run msgfmt
+USE_TOOLS+=		perl:run sh:run msgfmt bash:test
 
 REPLACE_PERL+=		*.perl */*.perl */*/*.perl
 REPLACE_PERL+=		contrib/hooks/update-paranoid
@@ -75,12 +75,17 @@ MESSAGE_SUBST+=		GIT_TEMPLATE_INSTDIR=${GIT_TEMPLATE_INSTDIR}
 
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "SunOS" || ${OPSYS} == "OSF1" || ${OPSYS} == "HPUX" || ${OPSYS} == "QNX" || ${OPSYS} == "UnixWare"
 SUBST_CLASSES+=		fix-cd-P
-SUBST_FILES.fix-cd-P=	git-sh-setup.sh
-SUBST_FILES.fix-cd-P+=	t/test-lib.sh
+SUBST_FILES.fix-cd-P=	t/test-lib.sh
 SUBST_MESSAGE.fix-cd-P=	Fixing cd arguments.
 SUBST_STAGE.fix-cd-P=	pre-build
 SUBST_SED.fix-cd-P=	-e "s/cd -P/cd/g"
 .endif
+
+SUBST_CLASSES+=			test-shell
+SUBST_FILES.test-shell=		t/Makefile
+SUBST_MESSAGE.test-shell=	Use bash as TEST_SHELL_PATH
+SUBST_STAGE.test-shell=		pre-build
+SUBST_SED.test-shell=		-e '/^TEST_SHELL_PATH/ s;$$(SHELL_PATH);${TOOLS_BASH};'
 
 LDFLAGS.SunOS+=		-lintl -lnsl
 
@@ -105,6 +110,7 @@ post-install:
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
+BUILDLINK_API_DEPENDS.pcre2?=	pcre2>=10.34
 .include "../../devel/pcre2/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../lang/perl5/buildlink3.mk"

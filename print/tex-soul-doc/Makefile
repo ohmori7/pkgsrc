@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.2 2016/01/26 11:15:18 markd Exp $
+# $NetBSD: Makefile,v 1.4 2021/02/15 02:04:10 markd Exp $
 
 DISTNAME=	soul.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-2.4
-TEXLIVE_REV=	15878
+PKGNAME=	tex-${DISTNAME:S/./-/}-2.4.56495
+TEXLIVE_REV=	56495
 
-MAINTAINER=	minskim@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/soul
 COMMENT=	Documentation for tex-soul
 LICENSE=	lppl-1.3c
 

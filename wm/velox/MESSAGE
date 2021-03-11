@@ -1,0 +1,18 @@
+===========================================================================
+$NetBSD: MESSAGE,v 1.3 2020/02/24 14:07:28 nia Exp $
+
+To edit the configuration file, copy it into place:
+
+$ cp ${PREFIX}/share/examples/velox/velox.conf ~/.velox.conf
+
+To launch velox, use swc-launch:
+
+$ mkdir /tmp/$(whoami)-runtime
+$ export XDG_RUNTIME_DIR=/tmp/$(whoami)-runtime
+$ chmod 7700 $XDG_RUNTIME_DIR
+$ swc-launch velox
+
+You may find information in this repository useful:
+https://github.com/niacat/pkgsrc-wayland
+
+===========================================================================

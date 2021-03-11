@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.31 2017/06/20 00:34:21 tez Exp $
+# $NetBSD: Makefile,v 1.34 2020/03/20 11:58:00 nia Exp $
 
-DISTNAME=	tnef-1.4.15
+DISTNAME=	tnef-1.4.18
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_GITHUB:=verdammelt/}
 

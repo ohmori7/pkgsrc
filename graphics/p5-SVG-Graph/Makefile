@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.7 2018/08/22 09:45:16 wiz Exp $
+# $NetBSD: Makefile,v 1.11 2020/09/08 13:16:41 wiz Exp $
 
 DISTNAME=	SVG-Graph-0.04
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	graphics
-MASTER_SITES=	http://search.cpan.org/CPAN/authors/id/C/CJ/CJFIELDS/
+MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/C/CJ/CJFIELDS/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/SVG-Graph
+HOMEPAGE=	https://metacpan.org/release/SVG-Graph
 COMMENT=	Visualize your data in Scalable Vector Graphics (SVG) format
 LICENSE=	artistic-2.0
 

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.7 2019/05/12 11:39:20 markd Exp $
+# $NetBSD: Makefile,v 1.12 2021/02/13 11:08:30 markd Exp $
 
 DISTNAME=	lwarp
-PKGNAME=	tex-${DISTNAME}-0.71
-TEXLIVE_REV=	50914
+PKGNAME=	tex-${DISTNAME}-0.894
+TEXLIVE_REV=	57217
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/lwarp
+HOMEPAGE=	https://ctan.org/pkg/lwarp
 COMMENT=	Converts LaTeX to HTML
 LICENSE=	lppl-1.3c
 

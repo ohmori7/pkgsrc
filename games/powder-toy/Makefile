@@ -1,19 +1,19 @@
-# $NetBSD: Makefile,v 1.2 2019/04/19 09:28:45 nia Exp $
+# $NetBSD: Makefile,v 1.7 2020/12/03 14:37:19 nia Exp $
 
-DISTNAME=	powder-toy-94.1
-PKGREVISION=	1
+DISTNAME=	powder-toy-95.0
 CATEGORIES=	games
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ThePowderToy/}
 GITHUB_PROJECT=	The-Powder-Toy
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
-MAINTAINER=	nia@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://powdertoy.co.uk/
 COMMENT=	Desktop version of the 'falling sand' physics sandbox
 LICENSE=	gnu-gpl-v3
 
 USE_TOOLS+=	pkg-config
-USE_LANGUAGES=	c c++11
+USE_LANGUAGES=	c c++
+GCC_REQD+=	4.8
 
 SCONS_ARGS+=	${_MAKE_JOBS}
 SCONS_ARGS+=	--output=powder-toy
@@ -59,6 +59,8 @@ do-install:
 .include "../../devel/scons/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../www/curl/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

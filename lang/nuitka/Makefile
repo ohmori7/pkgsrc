@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.4 2019/04/25 07:33:03 maya Exp $
+# $NetBSD: Makefile,v 1.6 2020/01/26 17:31:30 rillig Exp $
 
 DISTNAME=	Nuitka-0.5.0.1
 PKGNAME=	${DISTNAME:C/N/n/}
@@ -7,9 +7,12 @@ CATEGORIES=	lang
 MASTER_SITES=	http://nuitka.net/releases/
 
 MAINTAINER=	agc@NetBSD.org
-HOMEPAGE=	http://www.nuitka.net/pages/overview.html
+HOMEPAGE=	https://www.nuitka.net/pages/overview.html
 COMMENT=	Python to C++ compiler
 LICENSE=	apache-2.0
+
+# included scons is not ready for python 3.x
+PYTHON_VERSIONS_ACCEPTED=	27
 
 REPLACE_PYTHON+=	misc/check-release
 REPLACE_PYTHON+=	misc/check-with-pylint

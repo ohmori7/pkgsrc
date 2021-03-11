@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.9 2015/11/03 20:56:55 agc Exp $
+$NetBSD: distinfo,v 1.12 2020/06/09 11:56:08 markd Exp $
 
-SHA1 (khangman-4.14.3.tar.xz) = ba20a874322f2bf180be205918499d5ee8aed179
-RMD160 (khangman-4.14.3.tar.xz) = 1a6fda737d5f729989b30e9aa680fb503e971ad5
-SHA512 (khangman-4.14.3.tar.xz) = 46d99a3f26e559ebe272e1f342e964a64f007e1d0e4383b74f561f29409b55b554d4804e6bca150995ac0bf2c24c9c915caa7c27582ef680729975683a3fc0a8
-Size (khangman-4.14.3.tar.xz) = 3945696 bytes
+SHA1 (khangman-20.04.1.tar.xz) = d526d05a13eaaaf4149037c89196924def9150e1
+RMD160 (khangman-20.04.1.tar.xz) = edc6ac2123b18d149bb61afa9a7aee23cc08f5a2
+SHA512 (khangman-20.04.1.tar.xz) = f7bff33094c866e0d11c2c855f49f816dc99b0af0dbd09698a3b61c352379218eb1767c0ead252ed6b48c99e4f216d712203915c41a96a4fcc3d9795f557ce2f
+Size (khangman-20.04.1.tar.xz) = 7110768 bytes

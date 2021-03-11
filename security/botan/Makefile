@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.51 2019/04/26 14:12:44 maya Exp $
+# $NetBSD: Makefile,v 1.53 2019/11/04 21:12:51 rillig Exp $
 
 DISTNAME=	Botan-1.10.17
 PKGNAME=	${DISTNAME:tl}
@@ -15,8 +15,8 @@ LICENSE=	2-clause-bsd
 HAS_CONFIGURE=		yes
 USE_LANGUAGES=		c++03
 
-PYTHON_FOR_BUILD_ONLY=	yes
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 1.8.14; 1.10 is supposedly better
+PYTHON_FOR_BUILD_ONLY=		yes
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 1.8.14; 1.10 is supposedly better
 
 CONFIG_SHELL=		${PYTHONBIN}
 CONFIGURE_SCRIPT=	./configure.py
@@ -32,12 +32,12 @@ PLIST_VARS+=	x86 x86_64 i386
 
 .if ${MACHINE_ARCH} == "x86_64"
 CONFIGURE_ARGS+=	--cpu=amd64
-PLIST.x86_64=	yes
-PLIST.x86=	yes
+PLIST.x86_64=		yes
+PLIST.x86=		yes
 .elif ${MACHINE_ARCH} == "i386"
 CONFIGURE_ARGS+=	--cpu=i386
-PLIST.i386=	yes
-PLIST.x86=	yes
+PLIST.i386=		yes
+PLIST.x86=		yes
 .elif ${MACHINE_ARCH} == "powerpc"
 CONFIGURE_ARGS+=	--cpu=ppc
 .elif ${MACHINE_ARCH} == "powerpc64"

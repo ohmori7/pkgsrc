@@ -1,7 +1,8 @@
-$NetBSD: distinfo,v 1.2 2019/06/09 15:52:50 wiz Exp $
+$NetBSD: distinfo,v 1.6 2020/11/29 01:40:56 mef Exp $
 
-SHA1 (cantata-2.3.3.tar.bz2) = 19a235897c556f7fcc39be51842491ccb163d135
-RMD160 (cantata-2.3.3.tar.bz2) = f42da1ae832f27e32b622f47f69e9ba27ca5dde4
-SHA512 (cantata-2.3.3.tar.bz2) = 8314930c9e16a5811f607f131ce7134daa0c6de81c5f87d45967c076895540b388b89b3f2cbd82950f6defb1087e61923c1719670f19b4ed3c074f05fe8577c6
-Size (cantata-2.3.3.tar.bz2) = 2445139 bytes
-SHA1 (patch-3rdparty_solid-lite_CMakeLists.txt) = 73feadd49ea8c50f63d7c18e8a14e0796fac618c
+SHA1 (cantata-2.4.2/cantata-2.4.2.tar.bz2) = 1fc0fd90b5f7fb2e23fa17f83567b2bc382e5860
+RMD160 (cantata-2.4.2/cantata-2.4.2.tar.bz2) = 41b9e8df749df18d1b2d4fb3af0f0b2dedf31b37
+SHA512 (cantata-2.4.2/cantata-2.4.2.tar.bz2) = c2459a53d86e12df7e6a8f7c19880f1c353c13893401a0906ec730c34ccbf1ef070c226b55c4e772e9a54a94e7cf3a2f96b0e9223ff20057045c888c4f91d87b
+Size (cantata-2.4.2/cantata-2.4.2.tar.bz2) = 2498460 bytes
+SHA1 (patch-CMakeLists.txt) = 44a81fa0361ea4d1cb52b1701e296a8eb3aaec61
+SHA1 (patch-playlists_dynamicplaylists.cpp) = 4b2767658696d7d9d3f1a838310ca36fd3b554b9

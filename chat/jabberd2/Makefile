@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.127 2019/04/03 00:32:27 ryoon Exp $
+# $NetBSD: Makefile,v 1.135 2020/11/05 09:07:33 ryoon Exp $
 
 DISTNAME=	jabberd-2.7.0
-PKGREVISION=	2
+PKGREVISION=	8
 CATEGORIES=	chat
 MASTER_SITES=	${MASTER_SITE_GITHUB:=jabberd2/jabberd2/releases/download/${DISTNAME}/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	adam@NetBSD.org
-HOMEPAGE=	http://jabberd2.org/
+HOMEPAGE=	https://jabberd2.org/
 COMMENT=	XMPP (Jabber) instant messaging server
 LICENSE=	gnu-gpl-v2
 
@@ -47,8 +47,6 @@ BUILD_DEFS+=		JABBERD_LOGDIR JABBERD_PIDDIR JABBERD_DBDIR
 
 PKG_SYSCONFSUBDIR=	jabberd
 RCD_SCRIPTS=		jabberd c2s sm router s2s
-JABBERD_USER?=		jabberd
-JABBERD_GROUP?=		jabberd
 FILES_SUBST+=		JABBERD_USER=${JABBERD_USER}
 FILES_SUBST+=		JABBERD_GROUP=${JABBERD_GROUP}
 FILES_SUBST+=		JABBERD_PIDDIR=${JABBERD_PIDDIR}

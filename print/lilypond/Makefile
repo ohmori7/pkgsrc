@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.123 2019/04/26 14:12:44 maya Exp $
+# $NetBSD: Makefile,v 1.132 2020/12/04 20:45:38 nia Exp $
 
 DISTNAME=	lilypond-2.18.2
-PKGREVISION=	15
+PKGREVISION=	22
 CATEGORIES=	print
 MASTER_SITES=	http://download.linuxaudio.org/lilypond/sources/v2.18/
 
@@ -53,9 +53,9 @@ CONFIGURE_ARGS+=	--disable-optimising
 CONFIGURE_ARGS+=	--with-ncsb-dir=${PREFIX}/share/fonts/urw
 CONFIGURE_ENV+=		PYTHON=${PYTHONBIN:Q}
 
-REPLACE_PYTHON+= scripts/build/yyout2grammar.py
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 2.18.0
-PLIST_SUBST+=	PKGVERSION=${PKGVERSION:S/nb${PKGREVISION}//}
+REPLACE_PYTHON+=		scripts/build/yyout2grammar.py
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 2.18.0
+PLIST_SUBST+=			PKGVERSION=${PKGVERSION:S/nb${PKGREVISION}//}
 
 # needs FlexLexer.h
 # make sure we use the same version for that file and the flex binary

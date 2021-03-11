@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.58 2019/01/21 03:31:05 youri Exp $
+# $NetBSD: Makefile,v 1.63 2020/08/31 18:11:28 wiz Exp $
 
 DISTNAME=		libgtop-2.28.4
-PKGREVISION=		14
+PKGREVISION=		18
 CATEGORIES=		sysutils gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/libgtop/2.28/}
 EXTRACT_SUFX=		.tar.bz2
@@ -49,31 +49,31 @@ CPPFLAGS.NetBSD+=	-D_KMEMUSER
 .include "../../mk/bsd.prefs.mk"
 
 INSTALL_MAKE_FLAGS+=	libgtop_postinstall=true
-PLIST_VARS+=	server suid.h
+PLIST_VARS+=		server suid.h
 .if ${OPSYS} == "AIX"
-PLIST.server=	yes
-PLIST.suid.h=	yes
-SPECIAL_PERMS=	bin/libgtop_server2 ${REAL_ROOT_USER} system 2755
+PLIST.server=		yes
+PLIST.suid.h=		yes
+SPECIAL_PERMS=		bin/libgtop_server2 ${REAL_ROOT_USER} system 2755
 .elif ${OPSYS} == "DragonFly" || \
       ${OPSYS} == "FreeBSD" || ${OPSYS} == "NetBSD" || \
       ${OPSYS} == "OpenBSD"
-PLIST.server=	yes
-PLIST.suid.h=	yes
-SPECIAL_PERMS=	bin/libgtop_server2 ${REAL_ROOT_USER} kmem 2755
+PLIST.server=		yes
+PLIST.suid.h=		yes
+SPECIAL_PERMS=		bin/libgtop_server2 ${REAL_ROOT_USER} kmem 2755
 .elif ${OPSYS} == "Linux"
-#PLIST.server=	no
-#PLIST.suid.h=	no
+#PLIST.server=		no
+#PLIST.suid.h=		no
 .elif ${OPSYS} == "SunOS"
-PLIST.server=	yes
-SPECIAL_PERMS=	bin/libgtop_server2 ${REAL_ROOT_USER} sys 2755
+PLIST.server=		yes
+SPECIAL_PERMS=		bin/libgtop_server2 ${REAL_ROOT_USER} sys 2755
 .elif ${OPSYS} == "Darwin"
-PLIST.server=	yes
+PLIST.server=		yes
 .else
-PLIST.server=	yes
-PLIST.suid.h=	yes
+PLIST.server=		yes
+PLIST.suid.h=		yes
 .endif
 
-PLIST_VARS+=    glibtop_private.h
+PLIST_VARS+=	glibtop_private.h
 .if ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly"
 PLIST.glibtop_private.h= yes
 .endif

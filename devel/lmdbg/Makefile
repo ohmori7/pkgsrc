@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.17 2017/08/16 20:21:08 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2021/01/02 20:22:35 cheusov Exp $
 #
 
-DISTNAME=	lmdbg-1.2.1
+DISTNAME=	lmdbg-1.3.0
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=lmdbg/}
 MASTER_SITES+=	http://mova.org/~cheusov/pub/lmdbg/
@@ -21,7 +21,7 @@ BROKEN_ON_PLATFORM=	Darwin-*-*
 
 TEST_TARGET=		test
 
-REPLACE_SH=		scripts/lmdbg*.in tests/test.sh
+REPLACE_SH=		scripts/lmdbg*.in test/test.sh
 
 REPLACE_INTERPRETER+=	runawk
 REPLACE.runawk.old=	.*runawk

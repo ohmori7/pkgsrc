@@ -1,10 +1,14 @@
-# $NetBSD: options.mk,v 1.8 2014/04/12 06:45:31 wiz Exp $
+# $NetBSD: options.mk,v 1.10 2019/09/15 22:15:02 maya Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.easytag
-PKG_SUPPORTED_OPTIONS=	flac ogg opus speex wavpack
-PKG_SUGGESTED_OPTIONS=	flac ogg opus speex wavpack
+PKG_SUPPORTED_OPTIONS=	doc flac manual ogg opus speex wavpack
+PKG_SUGGESTED_OPTIONS=	doc flac manual ogg opus speex wavpack
 
 .include "../../mk/bsd.options.mk"
+
+.if !empty(PKG_OPTIONS:Mdoc)
+DEPENDS+=		yelp-[0-9]*:../../misc/yelp3
+.endif
 
 .if !empty(PKG_OPTIONS:Mflac)
 .  include "../../audio/flac/buildlink3.mk"
@@ -12,6 +16,16 @@ PKG_SUGGESTED_OPTIONS=	flac ogg opus speex wavpack
 CONFIGURE_ARGS+=	--enable-flac
 .else
 CONFIGURE_ARGS+=	--disable-flac
+.endif
+
+.if !empty(PKG_OPTIONS:Mmanual)
+BUILD_DEPENDS+=		libxslt-[0-9]*:../../textproc/libxslt
+BUILD_DEPENDS+=		docbook-xsl-[0-9]*:../../textproc/docbook-xsl
+CONFIGURE_ARGS+=	--with-xml-catalog=${PKG_SYSCONFDIR}/xml/catalog
+CONFIGURE_ARGS+=	--enable-man
+PLIST.man=		yes
+.else
+CONFIGURE_ARGS+=	--disable-man
 .endif
 
 .if !empty(PKG_OPTIONS:Mogg)

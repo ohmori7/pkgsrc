@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.40 2019/04/29 16:09:05 hauke Exp $
+# $NetBSD: Makefile,v 1.52 2021/03/07 13:21:57 taca Exp $
 
-DISTNAME=	cacti-1.2.3
-PKGREVISION=	1
+DISTNAME=	cacti-1.2.11
+PKGREVISION=	4
 CATEGORIES=	net
 MASTER_SITES=	https://www.cacti.net/downloads/
 
@@ -15,7 +15,6 @@ USE_TOOLS+=		pax
 NO_BUILD=		yes
 
 #DEPENDS+=		${PHP_PKG_PREFIX}-gd-[0-9]*:../../graphics/php-gd
-DEPENDS+=		${PHP_PKG_PREFIX}-json-[0-9]*:../../textproc/php-json
 DEPENDS+=		${PHP_PKG_PREFIX}-zlib-[0-9]*:../../archivers/php-zlib
 DEPENDS+=		${PHP_PKG_PREFIX}-mbstring-[0-9]*:../../converters/php-mbstring
 DEPENDS+=		${PHP_PKG_PREFIX}-pdo_mysql-[0-9]*:../../databases/php-pdo_mysql
@@ -28,16 +27,16 @@ DEPENDS+=		${PHP_PKG_PREFIX}-gettext-[0-9]*:../../devel/php-gettext
 DEPENDS+=		${APACHE_PKG_PREFIX}-${PHP_PKG_PREFIX}-[0-9]*:../../www/ap-php
 
 .include "../../mk/bsd.prefs.mk"
-.include "../../lang/php/phpversion.mk"
+.include "../../lang/php/json.mk"
 .include "../../mk/apache.mk"
 
-PKG_USERS=		${CACTI_USER}:${CACTI_GROUP}
-PKG_GROUPS=		${CACTI_GROUP}
+PKG_USERS=			${CACTI_USER}:${CACTI_GROUP}
+PKG_GROUPS=			${CACTI_GROUP}
 PKG_GECOS.${CACTI_USER}=	Cacti user
-PKG_HOME.${CACTI_USER}=	${CACTIDIR}
+PKG_HOME.${CACTI_USER}=		${CACTIDIR}
 PKG_SHELL.${CACTI_USER}=	${SH}
-PKG_USERS_VARS+=	CACTI_USER
-PKG_GROUPS_VARS+=	CACTI_GROUP
+PKG_USERS_VARS+=		CACTI_USER
+PKG_GROUPS_VARS+=		CACTI_GROUP
 
 BUILD_DEFS+=		PKG_SYSCONFBASE VARBASE APACHE_GROUP
 PKG_SYSCONFSUBDIR?=	httpd
@@ -51,7 +50,8 @@ CACTI_RRADIR?=		${VARBASE}/db/cacti-rra
 REPLACE_INTERPRETER+=	php
 REPLACE.php.old=	.*php[^ ]*
 REPLACE.php.new=	${PREFIX}/bin/php
-REPLACE_FILES.php=	cli/*.php
+REPLACE_FILES.php=	include/vendor/cldr-to-gettext-plural-rules/bin/export-plural-rules
+
 
 REPLACE_PERL+=		scripts/*.pl
 
@@ -79,13 +79,8 @@ SUBST_VARS.paths+=	PKG_PHP_MAJOR_VERS SH
 
 SUBST_CLASSES+=		perl-xml
 SUBST_STAGE.perl-xml=	pre-configure
-SUBST_FILES.perl-xml=	resource/script_queries/*.xml
+SUBST_FILES.perl-xml=	resource/script_queries/unix_disk.xml
 SUBST_SED.perl-xml=	-e 's,>perl,>${PERL5},'
-
-SUBST_CLASSES+=		docs
-SUBST_STAGE.docs=	pre-configure
-SUBST_FILES.docs=	docs/*.html
-SUBST_SED.docs=		-e 's,/var/www/html/cacti,${CACTIDIR},g'
 
 OWN_DIRS_PERMS+=	${CACTI_LOGDIR} ${CACTI_USER} ${APACHE_GROUP} 775
 OWN_DIRS_PERMS+=	${CACTIDIR}/cache ${CACTI_USER} ${APACHE_GROUP} 775
@@ -107,7 +102,7 @@ INSTALLATION_DIRS=	bin
 INSTALLATION_DIRS+=	share/examples/cacti
 INSTALLATION_DIRS+=	share/cacti
 
-PLIST_VARS+=	localmemory
+PLIST_VARS+=		localmemory
 .if ${OPSYS} == "FreeBSD" || ${OPSYS} == "Linux" || \
     ${OPSYS} == "NetBSD" || ${OPSYS} == "SunOS"
 PLIST.localmemory=	yes

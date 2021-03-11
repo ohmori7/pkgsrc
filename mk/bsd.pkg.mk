@@ -1,4 +1,4 @@
-#	$NetBSD: bsd.pkg.mk,v 1.2031 2018/05/28 20:37:47 rillig Exp $
+#	$NetBSD: bsd.pkg.mk,v 1.2039 2020/05/10 06:52:49 rillig Exp $
 #
 # This file is in the public domain.
 #
@@ -154,7 +154,7 @@ ${_var_}+=	${${_var_}.*}
 
 CPPFLAGS+=	${CPP_PRECOMP_FLAGS}
 
-# To sanitise environment set PKGSRC_SETENV=${SETENV} -i
+# To sanitize the environment, set PKGSRC_SETENV=${SETENV} -i.
 # This will however cause build failures (e.g. "www/firefox"). Settings
 # like "ALLOW_VULNERABLE_PACKAGES" will also not be correctly passed
 # to dependence builds.
@@ -208,8 +208,8 @@ _BUILD_DEFS+=		PKGINFODIR
 _BUILD_DEFS+=		PKGMANDIR
 _BUILD_DEFS+=		_USE_DESTDIR
 
-# Store the result in the +BUILD_INFO file so we can query for the build
-# options using "pkg_info -Q PKG_OPTIONS <pkg>".
+# Store the result in the +BUILD_INFO file so mk/pkg-build-options.mk
+# can query for the build options using "pkg_info -Q PKG_OPTIONS <pkg>".
 #
 .if defined(PKG_SUPPORTED_OPTIONS) && defined(PKG_OPTIONS)
 _BUILD_DEFS+=            PKG_OPTIONS
@@ -222,16 +222,16 @@ _BUILD_DEFS+=            PKG_OPTIONS
 _BUILD_DEFS+=            MULTI
 .endif
 
-# ZERO_FILESIZE_P exits with a successful return code if the given file
+# _ZERO_FILESIZE_P exits with a successful return code if the given file
 #	has zero length.
-# NONZERO_FILESIZE_P exits with a successful return code if the given file
+# _NONZERO_FILESIZE_P exits with a successful return code if the given file
 #	has nonzero length.
 #
 _ZERO_FILESIZE_P=	${AWK} 'END { exit (NR > 0) ? 1 : 0; }'
 _NONZERO_FILESIZE_P=	${AWK} 'END { exit (NR > 0) ? 0 : 1; }'
 
 # Automatically increase process limit where necessary for building.
-_ULIMIT_CMD=		${UNLIMIT_RESOURCES:@_lim_@${ULIMIT_CMD_${_lim_}};@}
+_ULIMIT_CMD=		${UNLIMIT_RESOURCES:@_lim_@${ULIMIT_CMD_${_lim_}:U\:};@}
 
 _NULL_COOKIE=		${WRKDIR}/.null
 
@@ -343,6 +343,7 @@ DO_NADA?=		${TRUE}
 
 # the FAIL command executes its arguments and then exits with a non-zero
 # status.
+# Example: ${FAIL} ${ERROR_MSG} "This is unexpected."
 FAIL?=			${SH} ${PKGSRCDIR}/mk/scripts/fail
 
 #
@@ -391,7 +392,7 @@ USE_TOOLS+=	expr
 .endif
 
 # Locking
-.include "internal/locking.mk"
+.include "misc/locking.mk"
 
 # Tools
 .include "tools/bsd.tools.mk"
@@ -442,8 +443,10 @@ _PATH_ORIG:=		${PATH}
 MAKEFLAGS+=		_PATH_ORIG=${_PATH_ORIG:Q}
 .endif
 
-_PATH_COMPONENTS=	${PREPEND_PATH:[-1..1]} ${_PATH_ORIG:C,:, ,}
-PATH=	${_PATH_COMPONENTS:ts:}
+_PATH_COMPONENTS= \
+	${PREPEND_PATH:[-1..1]} \
+	${_PATH_ORIG:S, ,__space_in_path__,gW:S,:, ,g}
+PATH=	${_PATH_COMPONENTS:ts::S,__space_in_path__, ,g}
 
 ################################################################
 # Many ways to disable a package.
@@ -477,11 +480,12 @@ PKG_SKIP_REASON+= "${PKGNAME} may not be placed in source form on a CDROM:" \
 PKG_SKIP_REASON+= "${PKGNAME} is restricted:" \
 	 "    "${RESTRICTED:Q}
 .  endif
-.  if defined(USE_X11) && (${X11_TYPE} == "native") && !exists(${X11BASE})
+.  if defined(USE_X11) && (${USE_X11} != "weak") && (${X11_TYPE} == "native") && !exists(${X11BASE})
 PKG_FAIL_REASON+= "${PKGNAME} uses X11, but ${X11BASE} not found"
 .  endif
-.  if defined(BROKEN)
-PKG_FAIL_REASON+= "${PKGNAME} is marked as broken:" ${BROKEN:Q}
+.  if ${BROKEN:U:M*}
+PKG_FAIL_REASON+=	"${PKGNAME} is marked as broken:"
+PKG_FAIL_REASON+=	${BROKEN}
 .  endif
 
 .include "license.mk"
@@ -573,7 +577,7 @@ all: ${_PKGSRC_BUILD_TARGETS}
 .endif
 
 .PHONY: makedirs
-makedirs: ${WRKDIR} ${FAKEHOMEDIR}
+makedirs: ${WRKDIR} ${FAKEHOMEDIR} _check-wrkdir-canonical
 
 ${WRKDIR}:
 .if !defined(KEEP_WRKDIR)
@@ -583,9 +587,23 @@ ${WRKDIR}:
 .endif
 	${RUN} umask 077 && ${MKDIR} ${WRKDIR}
 
+# If the WRKDIR is not canonical (such as when it contains a symlink),
+# various packages such as databases/mysql57-client will not find their
+# include files. See also checkarg_sane_absolute_path in bootstrap/bootstrap.
+.PHONY: _check-wrkdir-canonical
+_check-wrkdir-canonical: ${WRKDIR}
+	${RUN} cd ${WRKDIR}; d=`exec pwd`; ${TEST} "$$d" = ${WRKDIR}	\
+	|| ${FAIL_MSG} "[bsd.pkg.mk] The path to WRKDIR ${WRKDIR} must be canonical ($$d)."
+
 # Create a symlink from ${WRKDIR} to the package directory if
 # CREATE_WRKDIR_SYMLINK is "yes".
 #
+# This symlink is not used by pkgsrc and is only created for convenience.
+# Most other pkgsrc pathnames must not contain symlinks, to prevent
+# spurious build failures (see checkarg_sane_absolute_path in
+# bootstrap/bootstrap).
+#
+# Keywords: work wrkdir symlink
 CREATE_WRKDIR_SYMLINK?=	no
 
 .if defined(WRKOBJDIR) && !empty(CREATE_WRKDIR_SYMLINK:M[Yy][Ee][Ss])

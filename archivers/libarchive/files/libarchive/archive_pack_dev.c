@@ -1,4 +1,4 @@
-/*	$NetBSD: archive_pack_dev.c,v 1.5 2019/04/10 08:24:05 adam Exp $	*/
+/*	$NetBSD: archive_pack_dev.c,v 1.8 2020/05/26 09:16:42 nia Exp $	*/
 
 /*-
  * Copyright (c) 1998, 2001 The NetBSD Foundation, Inc.
@@ -37,7 +37,7 @@
 #include <sys/cdefs.h>
 #endif
 #if !defined(lint)
-__RCSID("$NetBSD: archive_pack_dev.c,v 1.5 2019/04/10 08:24:05 adam Exp $");
+__RCSID("$NetBSD: archive_pack_dev.c,v 1.8 2020/05/26 09:16:42 nia Exp $");
 #endif /* not lint */
 
 #ifdef HAVE_LIMITS_H
@@ -57,8 +57,12 @@ __RCSID("$NetBSD: archive_pack_dev.c,v 1.5 2019/04/10 08:24:05 adam Exp $");
 #ifdef HAVE_SYS_STAT_H
 #include <sys/stat.h>
 #endif
-#ifdef HAVE_SYS_SYSMACROS_H
+#if MAJOR_IN_MKDEV
+#include <sys/mkdev.h>
+#define HAVE_MAJOR
+#elif MAJOR_IN_SYSMACROS
 #include <sys/sysmacros.h>
+#define HAVE_MAJOR
 #endif
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>

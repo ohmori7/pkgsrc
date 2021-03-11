@@ -1,21 +1,21 @@
-# $NetBSD: Makefile,v 1.40 2017/01/19 18:52:18 agc Exp $
+# $NetBSD: Makefile,v 1.43 2020/05/03 15:08:29 rillig Exp $
 
 DISTNAME=	ast54unx
 PKGNAME=	astrolog-5.40
-PKGREVISION=     1
+PKGREVISION=	1
 CATEGORIES=	misc
 MASTER_SITES=	http://www.astrolog.org/ftp/ephem/
 MASTER_SITES+=	http://www.astrolog.org/ftp/
 DISTFILES=	${DISTNAME}.shr ${EPHEM}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.astrolog.org/
+HOMEPAGE=	https://www.astrolog.org/
 COMMENT=	Astrology program for X11 and alpha-numeric terminals
 LICENSE=	astrolog-license
 
-RESTRICTED=	Do not sell or profit from this software in any way
-NO_SRC_ON_CDROM=${RESTRICTED}
-NO_BIN_ON_CDROM=${RESTRICTED}
+RESTRICTED=		Do not sell or profit from this software in any way
+NO_SRC_ON_CDROM=	${RESTRICTED}
+NO_BIN_ON_CDROM=	${RESTRICTED}
 
 WRKSRC=		${WRKDIR}
 EPHEM=		LRZ5_24 CHI_24 CPJV_24
@@ -23,6 +23,9 @@ EXTRACT_ONLY=	${DISTNAME}.shr
 
 DIST_SUBDIR=	astrolog
 BUILD_TARGET=	astrolog
+
+# 1 in xscreen.c, 1 in charts.c, both harmless.
+BUILDLINK_TRANSFORM+=	rm:-Werror=char-subscripts
 
 INSTALLATION_DIRS=	bin
 

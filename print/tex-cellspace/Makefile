@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2019/05/11 23:06:15 markd Exp $
+# $NetBSD: Makefile,v 1.6 2020/01/18 23:33:45 rillig Exp $
 
 DISTNAME=	cellspace
 PKGNAME=	tex-${DISTNAME}-1.8.1
 TEXLIVE_REV=	50374
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/cellspace
+HOMEPAGE=	https://ctan.org/pkg/cellspace
 COMMENT=	Ensure minimal spacing of table cells
 LICENSE=	lppl-1.3c
 
@@ -14,5 +14,6 @@ DEPENDS+=	tex-latex>=2009:../../print/tex-latex
 DEPENDS+=	tex-latex-bin>=2009nb1:../../print/tex-latex-bin
 DEPENDS+=	tex-tools>=2010:../../print/tex-tools
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

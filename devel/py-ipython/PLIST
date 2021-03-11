@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.11 2019/02/19 08:29:56 adam Exp $
+@comment $NetBSD: PLIST,v 1.13 2019/12/02 11:45:46 adam Exp $
 bin/iptest-${PYVERSSUFFIX}
 bin/ipython-${PYVERSSUFFIX}
 ${PYSITELIB}/${EGG_FILE}
@@ -11,6 +11,9 @@ ${PYSITELIB}/IPython/__main__.pyo
 ${PYSITELIB}/IPython/config.py
 ${PYSITELIB}/IPython/config.pyc
 ${PYSITELIB}/IPython/config.pyo
+${PYSITELIB}/IPython/conftest.py
+${PYSITELIB}/IPython/conftest.pyc
+${PYSITELIB}/IPython/conftest.pyo
 ${PYSITELIB}/IPython/consoleapp.py
 ${PYSITELIB}/IPython/consoleapp.pyc
 ${PYSITELIB}/IPython/consoleapp.pyo
@@ -597,6 +600,9 @@ ${PYSITELIB}/IPython/terminal/prompts.pyo
 ${PYSITELIB}/IPython/terminal/pt_inputhooks/__init__.py
 ${PYSITELIB}/IPython/terminal/pt_inputhooks/__init__.pyc
 ${PYSITELIB}/IPython/terminal/pt_inputhooks/__init__.pyo
+${PYSITELIB}/IPython/terminal/pt_inputhooks/asyncio.py
+${PYSITELIB}/IPython/terminal/pt_inputhooks/asyncio.pyc
+${PYSITELIB}/IPython/terminal/pt_inputhooks/asyncio.pyo
 ${PYSITELIB}/IPython/terminal/pt_inputhooks/glut.py
 ${PYSITELIB}/IPython/terminal/pt_inputhooks/glut.pyc
 ${PYSITELIB}/IPython/terminal/pt_inputhooks/glut.pyo

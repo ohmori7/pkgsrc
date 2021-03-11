@@ -1,21 +1,25 @@
-# $NetBSD: options.mk,v 1.31 2019/01/22 13:19:44 wiz Exp $
+# $NetBSD: options.mk,v 1.35 2020/06/22 06:24:15 wiz Exp $
 
 # Global and legacy options
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.mutt
+PKG_OPTIONS_VAR=		PKG_OPTIONS.mutt
 PKG_OPTIONS_REQUIRED_GROUPS=	display
 PKG_OPTIONS_OPTIONAL_GROUPS=	ssl
 PKG_OPTIONS_GROUP.display=	curses wide-curses slang
-PKG_OPTIONS_GROUP.ssl=	gnutls openssl
-PKG_SUPPORTED_OPTIONS=	debug gpgme idn smime sasl
+PKG_OPTIONS_GROUP.ssl=		gnutls openssl
+PKG_SUPPORTED_OPTIONS=		debug gpgme idn smime sasl
 # TODO: add kyoto cabinet and lmdb backend options for header cache
-PKG_SUPPORTED_OPTIONS+=	mutt-hcache mutt-compressed-mbox tokyocabinet mutt-smtp
-PKG_SUPPORTED_OPTIONS+=	gssapi
-PKG_SUGGESTED_OPTIONS=	curses gpgme mutt-hcache mutt-smtp smime openssl
-PKG_SUGGESTED_OPTIONS+= gssapi mutt-compressed-mbox
+PKG_SUPPORTED_OPTIONS+=		mutt-hcache mutt-compressed-mbox tokyocabinet mutt-smtp
+PKG_SUPPORTED_OPTIONS+=		gssapi
+PKG_SUGGESTED_OPTIONS=		curses gpgme mutt-hcache mutt-smtp smime openssl
+PKG_SUGGESTED_OPTIONS+=		gssapi mutt-compressed-mbox sasl
 # remove after 2019Q1
 PKG_OPTIONS_LEGACY_OPTS+=	ncurses:curses ncursesw:wide-curses
 PKG_OPTIONS_LEGACY_OPTS+=	ssl:openssl
+
+# Must be at the top; some other buildlink files indirectly
+# include bdb.buildlink3.mk.
+BDB_ACCEPTED=		db4 db5
 
 .include "../../mk/bsd.options.mk"
 
@@ -33,7 +37,7 @@ CONFIGURE_ARGS+=	--with-gss=${KRB5BASE}
 .if !empty(PKG_OPTIONS:Mcurses) || !empty(PKG_OPTIONS:Mwide-curses)
 .  include "../../mk/curses.buildlink3.mk"
 CONFIGURE_ARGS+=	--with-curses=${BUILDLINK_PREFIX.curses}
-.  if !empty(CURSES_TYPE:Mcurses)
+.  if ${CURSES_TYPE:U} == curses
 OPSYSVARS+=			BUILDLINK_PASSTHRU_DIRS
 BUILDLINK_PASSTHRU_DIRS.SunOS+=	/usr/xpg4
 CONFIGURE_ARGS.SunOS+=		--with-curses=/usr/xpg4
@@ -85,9 +89,9 @@ PLIST_VARS+=		smime
 .if !empty(PKG_OPTIONS:Msmime)
 USE_TOOLS+=		perl:run
 REPLACE_PERL+=		*.pl */*.pl
-.if empty(PKG_OPTIONS:Mopenssl) && empty(PKG_OPTIONS:Mgnutls)
+.  if empty(PKG_OPTIONS:Mopenssl) && empty(PKG_OPTIONS:Mgnutls)
 PKG_FAIL_REASON+=	"The smime option requires the openssl or gnutls options."
-.endif
+.  endif
 CONFIGURE_ARGS+=	--enable-smime
 PLIST.smime=		yes
 .else
@@ -99,15 +103,14 @@ CONFIGURE_ARGS+=	--disable-smime
 ###
 .if !empty(PKG_OPTIONS:Mmutt-hcache)
 .  if !empty(PKG_OPTIONS:Mtokyocabinet)
-.  include "../../databases/tokyocabinet/buildlink3.mk"
+.    include "../../databases/tokyocabinet/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-hcache
 CONFIGURE_ARGS+=	--enable-tokyocabinet
 CONFIGURE_ARGS+=	--without-gdbm
 CONFIGURE_ARGS+=	--without-bdb
 .  else
-BDB_ACCEPTED=		db4 db5
 BUILDLINK_TRANSFORM+=	l:db:${BDB_TYPE}
-.  include "../../mk/bdb.buildlink3.mk"
+.    include "../../mk/bdb.buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-hcache
 CONFIGURE_ARGS+=	--without-gdbm
 # BDB_INCLUDE_DIR_ and BDB_LIB_DIR don't have to be particularly accurate
@@ -153,7 +156,7 @@ CONFIGURE_ARGS+=	--with-idn=no
 ###
 .if !empty(PKG_OPTIONS:Mdebug)
 CONFIGURE_ARGS+=	--enable-debug
-CFLAGS+= -g
+CFLAGS+=		-g
 .endif
 
 ###

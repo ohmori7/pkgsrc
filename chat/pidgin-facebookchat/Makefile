@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.36 2019/05/05 22:49:46 ryoon Exp $
+# $NetBSD: Makefile,v 1.40 2020/11/05 09:07:35 ryoon Exp $
 
 DISTNAME=	pidgin-facebookchat-source-1.69
 PKGNAME=	${DISTNAME:S/-source-/-/}
-PKGREVISION=	17
+PKGREVISION=	20
 CATEGORIES=	chat
 MASTER_SITES=	http://pidgin-facebookchat.googlecode.com/files/
 EXTRACT_SUFX=	.tar.bz2
@@ -16,7 +16,7 @@ DEPENDS+=	pidgin>=2.7.9:../../chat/pidgin
 
 WRKSRC=		${WRKDIR}/${PKGBASE}
 
-SUBST_CLASSES+=	paths
+SUBST_CLASSES+=		paths
 SUBST_STAGE.paths=	pre-configure
 SUBST_MESSAGE.paths=	Fixing absolute paths.
 SUBST_FILES.paths=	Makefile

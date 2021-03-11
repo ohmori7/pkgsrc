@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:47:17 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/08/31 18:12:23 wiz Exp $
 
 DISTNAME=	DateTime-Format-SQLite-0.11
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	time perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DateTime/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/DateTime-Format-SQLite/
+HOMEPAGE=	https://metacpan.org/release/DateTime-Format-SQLite
 COMMENT=	Parse and format SQLite dates and times
 LICENSE=	${PERL5_LICENSE}
 

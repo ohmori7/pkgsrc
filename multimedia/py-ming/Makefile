@@ -1,5 +1,6 @@
-# $NetBSD: Makefile,v 1.31 2019/04/26 13:14:06 maya Exp $
+# $NetBSD: Makefile,v 1.34 2020/06/05 12:49:13 jperkin Exp $
 
+PKGREVISION= 1
 .include "../../multimedia/ming/Makefile.common"
 
 PKGNAME=		${PYPKGPREFIX}-${DISTNAME:S/_/./g}
@@ -14,7 +15,7 @@ PY_PATCHPLIST=		yes
 PYSETUPSUBDIR=		py_ext
 EGG_NAME=		${DISTNAME:S/ming/mingc/:S/_/./g}
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37
+PYTHON_VERSIONS_ACCEPTED=	27
 
 pre-configure:
 	cd ${WRKSRC}/py_ext; \

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.68 2019/06/17 09:49:08 he Exp $
+# $NetBSD: Makefile,v 1.81 2021/02/09 08:32:17 he Exp $
 
-DISTNAME=	unbound-1.9.2
+DISTNAME=	unbound-1.13.1
 CATEGORIES=	net
 MASTER_SITES=	http://www.nlnetlabs.nl/downloads/unbound/
 
@@ -38,31 +38,31 @@ CHECK_BUILTIN.openssl=	no
 
 PLIST_VARS+=		sha2 gost
 .if defined(USE_BUILTIN.openssl) && !empty(USE_BUILTIN.openssl:M[yY][eE][sS])
-PLIST_VARS.gost!=       \
-        if ${PKG_ADMIN} pmatch 'openssl>=1.0.0' ${BUILTIN_PKG.openssl}; then \
-                ${ECHO} "yes";                                          \
-        else                                                            \
-                ${ECHO} "no";                                           \
-        fi
-PLIST_VARS.sha2!=       \
-        if ${PKG_ADMIN} pmatch 'openssl>=0.9.8' ${BUILTIN_PKG.openssl}; then \
-                ${ECHO} "yes";                                          \
-        else                                                            \
-                ${ECHO} "no";                                           \
-        fi
+PLIST_VARS.gost!=	\
+	if ${PKG_ADMIN} pmatch 'openssl>=1.0.0' ${BUILTIN_PKG.openssl}; then \
+		${ECHO} "yes";                                          \
+	else                                                            \
+		${ECHO} "no";                                           \
+	fi
+PLIST_VARS.sha2!=	\
+	if ${PKG_ADMIN} pmatch 'openssl>=0.9.8' ${BUILTIN_PKG.openssl}; then \
+		${ECHO} "yes";                                          \
+	else                                                            \
+		${ECHO} "no";                                           \
+	fi
 .else
-PLIST_VARS.gost!=       \
-        if ${PKG_INFO} -qe 'openssl>=1.0.0'; then                       \
-                ${ECHO} yes;                                            \
-        else                                                            \
-                ${ECHO} no;                                             \
-        fi
-PLIST_VARS.sha2!=       \
-        if ${PKG_INFO} -qe 'openssl>=0.9.8'; then                       \
-                ${ECHO} yes;                                            \
-        else                                                            \
-                ${ECHO} no;                                             \
-        fi
+PLIST_VARS.gost!=	\
+	if ${PKG_INFO} -qe 'openssl>=1.0.0'; then                       \
+		${ECHO} yes;                                            \
+	else                                                            \
+		${ECHO} no;                                             \
+	fi
+PLIST_VARS.sha2!=	\
+	if ${PKG_INFO} -qe 'openssl>=0.9.8'; then                       \
+		${ECHO} yes;                                            \
+	else                                                            \
+		${ECHO} no;                                             \
+	fi
 .endif
 .if ${PLIST_VARS.gost} == "yes"
 CONFIGURE_ARGS+=	--enable-gost
@@ -75,19 +75,13 @@ CONFIGURE_ARGS+=	--enable-sha2
 CONFIGURE_ARGS+=	--disable-sha2
 .endif
 
-SUBST_CLASSES+=		paths
-SUBST_STAGE.paths=	post-configure
-SUBST_MESSAGE.paths=	Fixing path names
-SUBST_FILES.paths=	doc/example.conf doc/*.5 doc/*.8
-SUBST_SED.paths=	-e "s|/usr/local|${PREFIX}|"
-
 INSTALL_MAKE_FLAGS+=	\
-    configfile=${PREFIX}/share/examples/unbound/unbound.conf
+	configfile=${PREFIX}/share/examples/unbound/unbound.conf
 
 PKG_SYSCONFSUBDIR=	unbound
 
 CONF_FILES+=	share/examples/unbound/unbound.conf \
-	${PKG_SYSCONFDIR}/unbound.conf
+		${PKG_SYSCONFDIR}/unbound.conf
 
 RCD_SCRIPTS=	unbound
 SMF_METHODS=	unbound

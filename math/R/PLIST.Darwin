@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST.Darwin,v 1.7 2017/12/11 12:28:09 jperkin Exp $
+@comment $NetBSD: PLIST.Darwin,v 1.9 2020/07/17 11:46:09 jperkin Exp $
 @comment 
 @comment The configure script has explicit check for darwin and sets
 @comment   --with-internal-tzcode=yes
@@ -187,6 +187,7 @@ lib/R/share/zoneinfo/America/Noronha
 lib/R/share/zoneinfo/America/North_Dakota/Beulah
 lib/R/share/zoneinfo/America/North_Dakota/Center
 lib/R/share/zoneinfo/America/North_Dakota/New_Salem
+lib/R/share/zoneinfo/America/Nuuk
 lib/R/share/zoneinfo/America/Ojinaga
 lib/R/share/zoneinfo/America/Panama
 lib/R/share/zoneinfo/America/Pangnirtung
@@ -313,6 +314,7 @@ lib/R/share/zoneinfo/Asia/Phnom_Penh
 lib/R/share/zoneinfo/Asia/Pontianak
 lib/R/share/zoneinfo/Asia/Pyongyang
 lib/R/share/zoneinfo/Asia/Qatar
+lib/R/share/zoneinfo/Asia/Qostanay
 lib/R/share/zoneinfo/Asia/Qyzylorda
 lib/R/share/zoneinfo/Asia/Rangoon
 lib/R/share/zoneinfo/Asia/Riyadh

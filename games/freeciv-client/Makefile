@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.97 2019/04/03 00:32:43 ryoon Exp $
+# $NetBSD: Makefile,v 1.113 2020/08/17 20:18:43 leot Exp $
 
 PKGNAME=	${DISTNAME:S/-/-client-/}
-PKGREVISION=	24
+PKGREVISION=	3
 COMMENT=	Freeciv client
 
 DEPENDS+=	freeciv-share>=${FC_VERS}:../../games/freeciv-share
@@ -20,6 +20,7 @@ SUBST_SED.themesonly+=		-e 's|SUBDIRS = icons.*|SUBDIRS = themes|'
 SUBST_SED.themesonly+=		-e 's|^	isotrident trident|DONT_SUBDIRS =|'
 SUBST_SED.themesonly+=		-e 's|install-data-am: install-data-local|install-data-am: \# install-data-local|'
 SUBST_MESSAGE.themesonly=	Suppressing installation of non-gui-relevant data
+SUBST_NOOP_OK.themesonly=	yes
 
 SUBST_CLASSES+=			themesonly2
 SUBST_STAGE.themesonly2=	post-configure
@@ -27,13 +28,18 @@ SUBST_FILES.themesonly2=	data/Makefile
 SUBST_SED.themesonly2+=		-e 's|SUBDIRS = icons.*|SUBDIRS = themes|'
 SUBST_SED.themesonly2+=		-e 's|^	isotrident trident|DONT_SUBDIRS =|'
 SUBST_MESSAGE.themesonly2=	Suppressing installation of non-gui-relevant data
+SUBST_NOOP_OK.themesonly2=	yes
 
-
-.include "../../games/freeciv-share/Makefile.common"
+# conflicts with freeciv-share
+post-install:
+	${RM} -rf ${DESTDIR}${PREFIX}/share/pixmaps
+.for file in Freeciv freeciv.rc-2.0 *.tilespec *.musicspec *.soundspec *.serv *.txt *.xml
+	${RM} -f ${DESTDIR}${PREFIX}/share/freeciv/${file}
+.endfor
 
 .include "options.mk"
-
-.include "../../audio/esound/buildlink3.mk"
+.include "../../audio/SDL_mixer/buildlink3.mk"
+.include "../../games/freeciv-share/Makefile.common"
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"

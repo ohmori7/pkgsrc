@@ -1,0 +1,159 @@
+$NetBSD: patch-configure,v 1.6 2020/06/19 13:44:28 taca Exp $
+
+* More support for OpenSSL 1.1; not only check SSL_Library_init() but
+  also check OPENSSL_init_ssl().
+* Fix syntax error by accidental new line.
+* Utilize <stdlib.h> on BSD.
+* Do not override CFLAGS/CXXFLAGS except linux.
+
+--- configure.orig	2020-06-09 07:15:48.000000000 +0000
++++ configure
+@@ -23226,10 +23226,12 @@ do
+ done
+ 
+   # GLIBC 2.30 deprecates sysctl.h. Test with the same flags that (may) break includes later.
+-  CFLAGS=$SQUID_CFLAGS
+-  CXXFLAGS=$SQUID_CXXFLAGS
+   case "$squid_host_os" in
+-    linux|solaris|freebsd|openbsd|netbsd|cygwin)
++    linux)
++      CFLAGS=$SQUID_CFLAGS
++      CXXFLAGS=$SQUID_CXXFLAGS
++      ;;
++    solaris|freebsd|openbsd|netbsd|cygwin)
+       ${TRUE}
+       ;;
+     mingw)
+@@ -23269,6 +23271,7 @@ done
+ do :
+   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
+ ac_fn_cxx_check_header_compile "$LINENO" "$ac_header" "$as_ac_Header" "
++#include <stdio.h>
+ #include <sys/types.h>
+ #include <sys/socket.h>
+ 
+@@ -24105,7 +24108,51 @@ if test "x$ac_cv_lib_ssl_SSL_CTX_new" = 
+   LIBOPENSSL_LIBS="-lssl $LIBOPENSSL_LIBS"
+ else
+ 
+-      as_fn_error $? "library 'ssl' is required for OpenSSL" "$LINENO" 5
++      { $as_echo "$as_me:${as_lineno-$LINENO}: checking for OPENSSL_init_ssl in -lssl" >&5
++$as_echo_n "checking for OPENSSL_init_ssl in -lssl... " >&6; }
++if ${ac_cv_lib_ssl_OPENSSL_init_ssl+:} false; then :
++  $as_echo_n "(cached) " >&6
++else
++  ac_check_lib_save_LIBS=$LIBS
++LIBS="-lssl $LIBOPENSSL_LIBS $LIBS"
++cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++
++/* Override any GCC internal prototype to avoid an error.
++   Use char because int might match the return type of a GCC
++   builtin and then its argument prototype would still apply.  */
++#ifdef __cplusplus
++extern "C"
++#endif
++char OPENSSL_init_ssl ();
++int
++main ()
++{
++return OPENSSL_init_ssl ();
++  ;
++  return 0;
++}
++_ACEOF
++if ac_fn_cxx_try_link "$LINENO"; then :
++  ac_cv_lib_ssl_OPENSSL_init_ssl=yes
++else
++  ac_cv_lib_ssl_OPENSSL_init_ssl=no
++fi
++rm -f core conftest.err conftest.$ac_objext \
++    conftest$ac_exeext conftest.$ac_ext
++LIBS=$ac_check_lib_save_LIBS
++fi
++{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ssl_OPENSSL_init_ssl" >&5
++$as_echo "$ac_cv_lib_ssl_OPENSSL_init_ssl" >&6; }
++if test "x$ac_cv_lib_ssl_OPENSSL_init_ssl" = xyes; then :
++  LIBOPENSSL_LIBS="-lssl $LIBOPENSSL_LIBS"
++else
++
++	as_fn_error $? "library 'ssl' is required for OpenSSL" "$LINENO" 5
++
++fi
++
++
+ 
+ fi
+ 
+@@ -24208,7 +24255,51 @@ if test "x$ac_cv_lib_ssl_SSL_CTX_new" = 
+   LIBOPENSSL_LIBS="-lssl $LIBOPENSSL_LIBS"
+ else
+ 
+-      as_fn_error $? "library 'ssl' is required for OpenSSL" "$LINENO" 5
++      { $as_echo "$as_me:${as_lineno-$LINENO}: checking for OPENSSL_init_ssl in -lssl" >&5
++$as_echo_n "checking for OPENSSL_init_ssl in -lssl... " >&6; }
++if ${ac_cv_lib_ssl_OPENSSL_init_ssl+:} false; then :
++  $as_echo_n "(cached) " >&6
++else
++  ac_check_lib_save_LIBS=$LIBS
++LIBS="-lssl $LIBOPENSSL_LIBS $LIBS"
++cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++
++/* Override any GCC internal prototype to avoid an error.
++   Use char because int might match the return type of a GCC
++   builtin and then its argument prototype would still apply.  */
++#ifdef __cplusplus
++extern "C"
++#endif
++char OPENSSL_init_ssl ();
++int
++main ()
++{
++return OPENSSL_init_ssl ();
++  ;
++  return 0;
++}
++_ACEOF
++if ac_fn_cxx_try_link "$LINENO"; then :
++  ac_cv_lib_ssl_OPENSSL_init_ssl=yes
++else
++  ac_cv_lib_ssl_OPENSSL_init_ssl=no
++fi
++rm -f core conftest.err conftest.$ac_objext \
++    conftest$ac_exeext conftest.$ac_ext
++LIBS=$ac_check_lib_save_LIBS
++fi
++{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_ssl_OPENSSL_init_ssl" >&5
++$as_echo "$ac_cv_lib_ssl_OPENSSL_init_ssl" >&6; }
++if test "x$ac_cv_lib_ssl_OPENSSL_init_ssl" = xyes; then :
++  LIBOPENSSL_LIBS="-lssl $LIBOPENSSL_LIBS"
++else
++
++	as_fn_error $? "library 'ssl' is required for OpenSSL" "$LINENO" 5
++
++fi
++
++
+ 
+ fi
+ 
+@@ -39571,6 +39662,8 @@ else
+ # ifdef _MSC_VER
+ #  include <malloc.h>
+ #  define alloca _alloca
++# elif defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__) || defined(__OpenBSD__)
++#   include <stdlib.h>
+ # else
+ #  ifdef HAVE_ALLOCA_H
+ #   include <alloca.h>
+@@ -42313,6 +42406,9 @@ ac_fn_cxx_check_header_compile "$LINENO"
+ #if USE_SOLARIS_IPFILTER_MINOR_T_HACK
+ #define minor_t fubar
+ #endif
++#if HAVE_SYS_PARAM_H
++#include <sys/param.h>
++#endif
+ #if HAVE_SYS_TYPES_H
+ #include <sys/types.h>
+ #endif

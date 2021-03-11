@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.28 2018/08/22 09:46:52 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2020/08/31 18:11:51 wiz Exp $
 #
 
 DISTNAME=	PDF-111
 PKGNAME=	p5-PDF-1.11
-PKGREVISION=	12
+PKGREVISION=	14
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=PDF/}
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.geocities.com/CapeCanaveral/Hangar/4794/
+HOMEPAGE=	https://metacpan.org/pod/PDF
 COMMENT=	Perl5 module for pdf document manipulation
 
 WRKSRC=			${WRKDIR}/PDF

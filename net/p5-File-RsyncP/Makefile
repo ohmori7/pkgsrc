@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.5 2018/08/22 09:45:56 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2020/08/31 18:10:38 wiz Exp $
 
 DISTNAME=	File-RsyncP-0.74
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/C/CB/CBARRATT/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/File-RsyncP/
+HOMEPAGE=	https://metacpan.org/release/File-RsyncP
 COMMENT=	Perl Rsync client
 LICENSE=	gnu-gpl-v3
 

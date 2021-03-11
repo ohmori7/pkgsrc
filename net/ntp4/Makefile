@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.100 2019/03/25 17:19:59 tnn Exp $
+# $NetBSD: Makefile,v 1.106 2020/08/31 18:10:37 wiz Exp $
 #
 
-DISTNAME=	ntp-4.2.8p13
-PKGNAME=	${DISTNAME:S/-dev-/-/}
+DISTNAME=	ntp-4.2.8p15
+PKGREVISION=	1
 CATEGORIES=	net time
 MASTER_SITES=	http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/
 
@@ -16,9 +16,9 @@ GNU_CONFIGURE=	YES
 USE_LIBTOOL=	YES
 USE_TOOLS+=	pax perl:run
 
-CONFIGURE_ARGS+=--sysconfdir=${PKG_SYSCONFDIR}
-CONFIGURE_ARGS+=--with-locfile=loc/pkgsrc
-CONFIGURE_ENV+=	  PATH_PERL=${PERL5}
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
+CONFIGURE_ARGS+=	--with-locfile=loc/pkgsrc
+CONFIGURE_ENV+=		PATH_PERL=${PERL5}
 
 OVERRIDE_DIRDEPTH=	4
 
@@ -41,7 +41,7 @@ post-install:
 .include "../../mk/bsd.prefs.mk"
 .include "options.mk"
 
-PLIST_VARS+=	ntpsnmpd ntptime tickadj timetrim
+PLIST_VARS+=	ntptime tickadj timetrim
 
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD" || ${OPSYS} == "DragonFly" || ${OPSYS} == "Linux" || ${OPSYS} == "SunOS"
 PLIST.ntptime=		yes

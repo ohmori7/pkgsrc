@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.6 2019/05/03 10:54:38 adam Exp $
+@comment $NetBSD: PLIST,v 1.11 2020/12/14 05:58:24 adam Exp $
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
 ${PYSITELIB}/${EGG_INFODIR}/dependency_links.txt
@@ -132,9 +132,9 @@ ${PYSITELIB}/ipykernel/serialize.pyo
 ${PYSITELIB}/ipykernel/tests/__init__.py
 ${PYSITELIB}/ipykernel/tests/__init__.pyc
 ${PYSITELIB}/ipykernel/tests/__init__.pyo
-${PYSITELIB}/ipykernel/tests/_asyncio.py
-${PYSITELIB}/ipykernel/tests/_asyncio.pyc
-${PYSITELIB}/ipykernel/tests/_asyncio.pyo
+${PYSITELIB}/ipykernel/tests/_asyncio_utils.py
+${PYSITELIB}/ipykernel/tests/_asyncio_utils.pyc
+${PYSITELIB}/ipykernel/tests/_asyncio_utils.pyo
 ${PYSITELIB}/ipykernel/tests/test_async.py
 ${PYSITELIB}/ipykernel/tests/test_async.pyc
 ${PYSITELIB}/ipykernel/tests/test_async.pyo
@@ -147,6 +147,9 @@ ${PYSITELIB}/ipykernel/tests/test_embed_kernel.pyo
 ${PYSITELIB}/ipykernel/tests/test_eventloop.py
 ${PYSITELIB}/ipykernel/tests/test_eventloop.pyc
 ${PYSITELIB}/ipykernel/tests/test_eventloop.pyo
+${PYSITELIB}/ipykernel/tests/test_heartbeat.py
+${PYSITELIB}/ipykernel/tests/test_heartbeat.pyc
+${PYSITELIB}/ipykernel/tests/test_heartbeat.pyo
 ${PYSITELIB}/ipykernel/tests/test_io.py
 ${PYSITELIB}/ipykernel/tests/test_io.pyc
 ${PYSITELIB}/ipykernel/tests/test_io.pyo
@@ -177,6 +180,9 @@ ${PYSITELIB}/ipykernel/tests/test_zmq_shell.pyo
 ${PYSITELIB}/ipykernel/tests/utils.py
 ${PYSITELIB}/ipykernel/tests/utils.pyc
 ${PYSITELIB}/ipykernel/tests/utils.pyo
+${PYSITELIB}/ipykernel/trio_runner.py
+${PYSITELIB}/ipykernel/trio_runner.pyc
+${PYSITELIB}/ipykernel/trio_runner.pyo
 ${PYSITELIB}/ipykernel/zmqshell.py
 ${PYSITELIB}/ipykernel/zmqshell.pyc
 ${PYSITELIB}/ipykernel/zmqshell.pyo

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.11 2018/12/13 19:52:09 adam Exp $
+# $NetBSD: Makefile,v 1.17 2021/01/01 08:24:49 ryoon Exp $
 
 DISTNAME=		vowpal_wabbit-8.2.0
-PKGREVISION=		9
+PKGREVISION=		14
 CATEGORIES=		math
 MASTER_SITES=		${MASTER_SITE_GITHUB:=JohnLangford/}
 
 MAINTAINER=		cheusov@NetBSD.org
-HOMEPAGE=		http://hunch.net/~vw/
+HOMEPAGE=		https://hunch.net/~vw/
 COMMENT=		Vowpal Wabbit is a machine learning system
 LICENSE=		gnu-lgpl-v2
 

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.21 2018/12/09 21:05:33 adam Exp $
+# $NetBSD: Makefile,v 1.25 2020/03/20 11:58:04 nia Exp $
 #
 
 DISTNAME=	libmpeg3-1.8-src
 PKGNAME=	${DISTNAME:S/-src//}
+PKGREVISION=	1
 CATEGORIES=	devel audio graphics multimedia
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=heroines/}
 EXTRACT_SUFX=	.tar.bz2
@@ -14,9 +15,9 @@ COMMENT=	MPEG decoding library and tools
 .include "../../mk/bsd.prefs.mk"
 
 .if (${MACHINE_ARCH} == "i386" && ${OPSYS} != "Darwin")
-MAKE_ENV+=	USE_MMX=1
-MAKE_ENV+=	USE_CSS=1
-BUILD_DEPENDS+=	nasm-[0-9]*:../../devel/nasm
+MAKE_ENV+=		USE_MMX=1
+MAKE_ENV+=		USE_CSS=1
+BUILD_DEPENDS+=		nasm-[0-9]*:../../devel/nasm
 .else
 MAKE_ENV.DragonFly+=	USE_MMX=0
 MAKE_ENV.DragonFly+=	USE_CSS=0
@@ -24,7 +25,7 @@ MAKE_ENV.DragonFly+=	USE_CSS=0
 
 NO_CONFIGURE=	yes
 USE_TOOLS+=	gmake
-WRKSRC= 	${WRKDIR}/${PKGNAME_NOREV}
+WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
 
 PTHREAD_AUTO_VARS=	yes
 PTHREAD_OPTS+=		require
@@ -42,7 +43,7 @@ VINSTHDRS=	idct.h mpeg3video.h slice.h
 INSTBINS=	mpeg3cat mpeg3peek mpeg3toc mpeg3dump
 
 INSTALLATION_DIRS=	bin include/mpeg3/audio include/mpeg3/video lib \
-			share/doc/html/libmpeg3
+			share/doc/libmpeg3
 
 do-install:
 	for f in ${INSTBINS}; do \
@@ -61,7 +62,7 @@ do-install:
 	done
 	${INSTALL_LIB} ${WRKSRC}/work/libmpeg3.a ${DESTDIR}${PREFIX}/lib
 	${INSTALL_DATA} ${WRKSRC}/docs/index.html \
-		${DESTDIR}${PREFIX}/share/doc/html/libmpeg3
+		${DESTDIR}${PREFIX}/share/doc/libmpeg3
 
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

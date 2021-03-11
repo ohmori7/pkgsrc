@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.30 2018/09/25 12:16:36 jperkin Exp $
+@comment $NetBSD: PLIST,v 1.34 2020/04/08 12:25:51 adam Exp $
 bin/dhcpclient
 bin/map_unit
 bin/rad_counter
@@ -15,6 +15,7 @@ bin/radzap
 bin/rlm_ippool_tool
 bin/smbencrypt
 include/freeradius/attributes.h
+include/freeradius/autoconf.h
 include/freeradius/base64.h
 include/freeradius/build.h
 include/freeradius/conf.h
@@ -39,6 +40,7 @@ include/freeradius/radiusd.h
 include/freeradius/radpaths.h
 include/freeradius/radutmp.h
 include/freeradius/realms.h
+include/freeradius/regex.h
 include/freeradius/rfc2865.h
 include/freeradius/rfc2866.h
 include/freeradius/rfc2867.h
@@ -71,9 +73,13 @@ include/freeradius/rfc7155.h
 include/freeradius/rfc7268.h
 include/freeradius/rfc7499.h
 include/freeradius/rfc7930.h
+include/freeradius/rfc8045.h
+include/freeradius/rfc8559.h
 include/freeradius/sha1.h
 include/freeradius/stats.h
 include/freeradius/sysutmp.h
+include/freeradius/tcp.h
+include/freeradius/threads.h
 include/freeradius/tls.h
 include/freeradius/token.h
 include/freeradius/udpfromto.h
@@ -378,6 +384,7 @@ share/examples/freeradius/mods-available/passwd
 share/examples/freeradius/mods-available/perl
 share/examples/freeradius/mods-available/preprocess
 share/examples/freeradius/mods-available/python
+share/examples/freeradius/mods-available/python3
 share/examples/freeradius/mods-available/radutmp
 share/examples/freeradius/mods-available/realm
 share/examples/freeradius/mods-available/redis
@@ -434,32 +441,45 @@ share/examples/freeradius/mods-config/sql/ippool-dhcp/oracle/queries.conf
 share/examples/freeradius/mods-config/sql/ippool-dhcp/oracle/schema.sql
 share/examples/freeradius/mods-config/sql/ippool-dhcp/sqlite/queries.conf
 share/examples/freeradius/mods-config/sql/ippool-dhcp/sqlite/schema.sql
+share/examples/freeradius/mods-config/sql/ippool/mongo/queries.conf
+share/examples/freeradius/mods-config/sql/ippool/mssql/procedure.sql
+share/examples/freeradius/mods-config/sql/ippool/mssql/queries.conf
+share/examples/freeradius/mods-config/sql/ippool/mssql/schema.sql
+share/examples/freeradius/mods-config/sql/ippool/mysql/procedure.sql
 share/examples/freeradius/mods-config/sql/ippool/mysql/queries.conf
 share/examples/freeradius/mods-config/sql/ippool/mysql/schema.sql
-share/examples/freeradius/mods-config/sql/ippool/oracle/procedures.sql
+share/examples/freeradius/mods-config/sql/ippool/oracle/procedure.sql
 share/examples/freeradius/mods-config/sql/ippool/oracle/queries.conf
 share/examples/freeradius/mods-config/sql/ippool/oracle/schema.sql
+share/examples/freeradius/mods-config/sql/ippool/postgresql/procedure.sql
 share/examples/freeradius/mods-config/sql/ippool/postgresql/queries.conf
 share/examples/freeradius/mods-config/sql/ippool/postgresql/schema.sql
 share/examples/freeradius/mods-config/sql/ippool/sqlite/queries.conf
 share/examples/freeradius/mods-config/sql/ippool/sqlite/schema.sql
+share/examples/freeradius/mods-config/sql/main/mongo/queries.conf
+share/examples/freeradius/mods-config/sql/main/mssql/process-radacct.sql
 share/examples/freeradius/mods-config/sql/main/mssql/queries.conf
 share/examples/freeradius/mods-config/sql/main/mssql/schema.sql
 share/examples/freeradius/mods-config/sql/main/mysql/extras/wimax/queries.conf
 share/examples/freeradius/mods-config/sql/main/mysql/extras/wimax/schema.sql
+share/examples/freeradius/mods-config/sql/main/mysql/process-radacct.sql
 share/examples/freeradius/mods-config/sql/main/mysql/queries.conf
 share/examples/freeradius/mods-config/sql/main/mysql/schema.sql
 share/examples/freeradius/mods-config/sql/main/mysql/setup.sql
 share/examples/freeradius/mods-config/sql/main/ndb/README
 share/examples/freeradius/mods-config/sql/main/ndb/schema.sql
 share/examples/freeradius/mods-config/sql/main/ndb/setup.sql
+share/examples/freeradius/mods-config/sql/main/oracle/process-radacct.sql
 share/examples/freeradius/mods-config/sql/main/oracle/queries.conf
 share/examples/freeradius/mods-config/sql/main/oracle/schema.sql
 share/examples/freeradius/mods-config/sql/main/postgresql/extras/cisco_h323_db_schema.sql
 share/examples/freeradius/mods-config/sql/main/postgresql/extras/voip-postpaid.conf
+share/examples/freeradius/mods-config/sql/main/postgresql/process-radacct.sql
 share/examples/freeradius/mods-config/sql/main/postgresql/queries.conf
 share/examples/freeradius/mods-config/sql/main/postgresql/schema.sql
 share/examples/freeradius/mods-config/sql/main/postgresql/setup.sql
+share/examples/freeradius/mods-config/sql/main/sqlite/process-radacct-refresh.sh
+share/examples/freeradius/mods-config/sql/main/sqlite/process-radacct-schema.sql
 share/examples/freeradius/mods-config/sql/main/sqlite/queries.conf
 share/examples/freeradius/mods-config/sql/main/sqlite/schema.sql
 share/examples/freeradius/mods-config/sql/moonshot-targeted-ids/mysql/queries.conf
@@ -511,6 +531,7 @@ share/examples/freeradius/policy.d/eap
 share/examples/freeradius/policy.d/filter
 share/examples/freeradius/policy.d/moonshot-targeted-ids
 share/examples/freeradius/policy.d/operator-name
+share/examples/freeradius/policy.d/rfc7542
 share/examples/freeradius/proxy.conf
 share/examples/freeradius/radiusd.conf
 share/examples/freeradius/sites-available/README
@@ -521,6 +542,7 @@ share/examples/freeradius/sites-available/challenge
 share/examples/freeradius/sites-available/channel_bindings
 share/examples/freeradius/sites-available/check-eap-tls
 share/examples/freeradius/sites-available/coa
+share/examples/freeradius/sites-available/coa-relay
 share/examples/freeradius/sites-available/control-socket
 share/examples/freeradius/sites-available/copy-acct-to-home-server
 share/examples/freeradius/sites-available/decoupled-accounting
@@ -574,6 +596,7 @@ share/freeradius/dictionary.audiocodes
 share/freeradius/dictionary.avaya
 share/freeradius/dictionary.azaire
 share/freeradius/dictionary.bay
+share/freeradius/dictionary.bigswitch
 share/freeradius/dictionary.bintec
 share/freeradius/dictionary.bluecoat
 share/freeradius/dictionary.boingo
@@ -617,6 +640,7 @@ share/freeradius/dictionary.erx
 share/freeradius/dictionary.extreme
 share/freeradius/dictionary.f5
 share/freeradius/dictionary.fdxtended
+share/freeradius/dictionary.force10
 share/freeradius/dictionary.fortinet
 share/freeradius/dictionary.foundry
 share/freeradius/dictionary.freedhcp
@@ -632,6 +656,7 @@ share/freeradius/dictionary.hp
 share/freeradius/dictionary.huawei
 share/freeradius/dictionary.iana
 share/freeradius/dictionary.iea
+share/freeradius/dictionary.infinera
 share/freeradius/dictionary.infoblox
 share/freeradius/dictionary.infonet
 share/freeradius/dictionary.ipunplugged
@@ -658,6 +683,7 @@ share/freeradius/dictionary.motorola
 share/freeradius/dictionary.motorola.illegal
 share/freeradius/dictionary.motorola.wimax
 share/freeradius/dictionary.navini
+share/freeradius/dictionary.net
 share/freeradius/dictionary.netscreen
 share/freeradius/dictionary.networkphysics
 share/freeradius/dictionary.nexans
@@ -671,12 +697,15 @@ share/freeradius/dictionary.packeteer
 share/freeradius/dictionary.paloalto
 share/freeradius/dictionary.patton
 share/freeradius/dictionary.perle
+share/freeradius/dictionary.pfsense
+share/freeradius/dictionary.pica8
 share/freeradius/dictionary.propel
 share/freeradius/dictionary.prosoft
 share/freeradius/dictionary.proxim
 share/freeradius/dictionary.purewave
 share/freeradius/dictionary.quiconnect
 share/freeradius/dictionary.quintum
+share/freeradius/dictionary.rcntec
 share/freeradius/dictionary.redcreek
 share/freeradius/dictionary.rfc2865
 share/freeradius/dictionary.rfc2866
@@ -710,6 +739,8 @@ share/freeradius/dictionary.rfc7155
 share/freeradius/dictionary.rfc7268
 share/freeradius/dictionary.rfc7499
 share/freeradius/dictionary.rfc7930
+share/freeradius/dictionary.rfc8045
+share/freeradius/dictionary.rfc8559
 share/freeradius/dictionary.riverbed
 share/freeradius/dictionary.riverstone
 share/freeradius/dictionary.roaringpenguin
@@ -735,6 +766,7 @@ share/freeradius/dictionary.telkom
 share/freeradius/dictionary.terena
 share/freeradius/dictionary.trapeze
 share/freeradius/dictionary.travelping
+share/freeradius/dictionary.tripplite
 share/freeradius/dictionary.tropos
 share/freeradius/dictionary.ukerna
 share/freeradius/dictionary.unix
@@ -742,6 +774,8 @@ share/freeradius/dictionary.usr
 share/freeradius/dictionary.usr.illegal
 share/freeradius/dictionary.utstarcom
 share/freeradius/dictionary.valemount
+share/freeradius/dictionary.vasexperts
+share/freeradius/dictionary.verizon
 share/freeradius/dictionary.versanet
 share/freeradius/dictionary.vqp
 share/freeradius/dictionary.walabi

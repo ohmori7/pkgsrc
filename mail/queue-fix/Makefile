@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2019/05/23 19:23:07 rillig Exp $
+# $NetBSD: Makefile,v 1.13 2020/11/19 09:35:40 schmonz Exp $
 #
 
 DISTNAME=		queue-fix-1.4
@@ -12,7 +12,7 @@ COMMENT=		Check and repair the qmail queue structure
 
 INSTALLATION_DIRS=	bin
 
-DJB_RESTRICTED=		NO
+SUBST_CLASSES+=		djberrno
 
 SUBST_CLASSES+=		groups
 SUBST_STAGE.groups=	do-configure

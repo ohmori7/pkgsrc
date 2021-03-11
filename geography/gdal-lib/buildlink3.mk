@@ -1,12 +1,12 @@
-# $NetBSD: buildlink3.mk,v 1.51 2018/12/13 19:51:34 adam Exp $
+# $NetBSD: buildlink3.mk,v 1.67 2021/03/01 19:23:07 gdt Exp $
 
 BUILDLINK_TREE+=	gdal-lib
 
 .if !defined(GDAL_LIB_BUILDLINK3_MK)
 GDAL_LIB_BUILDLINK3_MK:=
 
-BUILDLINK_API_DEPENDS.gdal-lib+=	gdal-lib>=1.6.1
-BUILDLINK_ABI_DEPENDS.gdal-lib+=	gdal-lib>=2.2.4nb8
+BUILDLINK_API_DEPENDS.gdal-lib+=	gdal-lib>=3.0.0
+BUILDLINK_ABI_DEPENDS.gdal-lib+=	gdal-lib>=3.2.1
 BUILDLINK_PKGSRCDIR.gdal-lib?=		../../geography/gdal-lib
 
 pkgbase := gdal-lib
@@ -20,12 +20,12 @@ pkgbase := gdal-lib
 .include "../../mk/mysql.buildlink3.mk"
 .endif
 
+.include "../../databases/sqlite3/buildlink3.mk"
 .include "../../devel/netcdf/buildlink3.mk"
 .include "../../devel/pcre/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../geography/geos/buildlink3.mk"
 .include "../../geography/proj/buildlink3.mk"
-.include "../../graphics/jasper/buildlink3.mk"
 .include "../../graphics/giflib/buildlink3.mk"
 .include "../../graphics/libwebp/buildlink3.mk"
 .include "../../graphics/openjpeg/buildlink3.mk"

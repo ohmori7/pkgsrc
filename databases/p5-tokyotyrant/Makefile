@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.32 2018/08/22 09:43:22 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2020/08/31 18:07:09 wiz Exp $
 #
 
 DISTNAME=	tokyotyrant-perl-1.16
 PKGNAME=	p5-${DISTNAME:S/-perl-/-/}
-PKGREVISION=	11
+PKGREVISION=	13
 CATEGORIES=	databases perl5
 MASTER_SITES=	${HOMEPAGE:S/perldoc/perlpkg/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://fallabs.com/tokyotyrant/perldoc/
+HOMEPAGE=	https://fallabs.com/tokyotyrant/perldoc/
 COMMENT=	Pure Perl Interface of Tokyo Tyrant
 LICENSE=	gnu-lgpl-v2.1
 

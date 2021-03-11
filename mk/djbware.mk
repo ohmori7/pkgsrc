@@ -1,4 +1,4 @@
-# $NetBSD: djbware.mk,v 1.26 2017/09/28 16:15:49 schmonz Exp $
+# $NetBSD: djbware.mk,v 1.32 2020/11/19 09:16:38 schmonz Exp $
 #
 # Makefile fragment for packages with djb-style build machinery
 #
@@ -8,24 +8,10 @@
 # * typical values for conf-* files
 # * replace inline definitions of errno with "#include <errno.h>"
 #
-# TODO:
-# * centralize handling of third-party manpages
-# * centralize MASTER_SITES and SITES_foo
-# * centralize compiler hack for arm{,32}
-# * common install script for compatibility with default conf-home pathnames
-# * PKG_OPTIONS (default):
-#     djbware-errno-hack (off)
-#     djbware-pathname-compat (on)
-#     inet6 (off)
-#     pam (off)
-# * set RESTRICTED automatically iff patches or other mods are applied
-# * be unrestricted by default for bulk builds
-#
 
 .if !defined(DJBWARE_MK)
 DJBWARE_MK=		# defined
 
-DJB_RESTRICTED?=	YES
 DJB_MAKE_TARGETS?=	YES
 DJB_BUILD_TARGETS?=	# empty
 DJB_INSTALL_TARGETS?=	# empty
@@ -40,12 +26,11 @@ DJB_CONFIG_PREFIX?=	${PREFIX}
 DJB_CONFIG_HOME?=	conf-home
 DJB_CONFIG_CMDS?=	${DO_NADA}
 
-.if !empty(DJB_RESTRICTED:M[yY][eE][sS])
-LICENSE=		djb-nonlicense
-
-RESTRICTED=		modified source and binaries may not be distributed
-NO_BIN_ON_CDROM=	${RESTRICTED}
-NO_BIN_ON_FTP=		${RESTRICTED}
+.if defined(LICENSE) && ${LICENSE} == "djb-nonlicense"
+# Nonlicensed packages that install totally unmodified may want to opt out
+RESTRICTED?=		modified source and binaries may not be distributed
+NO_BIN_ON_CDROM?=	${RESTRICTED}
+NO_BIN_ON_FTP?=		${RESTRICTED}
 .endif
 
 .if !empty(DJB_MAKE_TARGETS:M[yY][eE][sS])
@@ -82,26 +67,10 @@ do-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} package/compile ${DJB_BUILD_ARGS}
 .endif
 
-PKG_SUPPORTED_OPTIONS+=	djbware-errno-hack
-PKG_SUGGESTED_OPTIONS+=	djbware-errno-hack
-
-.include "bsd.fast.prefs.mk"
-
-.if exists(${PKGDIR}/options.mk)
-. include "${PKGDIR}/options.mk"
-.else
-# Note: This expression is the same as ${PKGBASE}, but the latter is
-# not defined yet, so we cannot use it here.
-PKG_OPTIONS_VAR=	PKG_OPTIONS.${PKGNAME:C/-[0-9].*//}
-.include "bsd.options.mk"
-.endif
-
-.if !empty(PKG_OPTIONS:Mdjbware-errno-hack)
-SUBST_CLASSES+=		djbware
-SUBST_STAGE.djbware=	do-configure
-SUBST_FILES.djbware+=	error.h
-SUBST_SED.djbware=	-e 's|^extern\ int\ errno\;|\#include \<errno.h\>|'
-SUBST_MESSAGE.djbware=	Correcting definition of errno.
-.endif
+# Set SUBST_CLASSES+=djberrno for packages that need this fix
+SUBST_STAGE.djberrno=	do-configure
+SUBST_FILES.djberrno?=	error.h
+SUBST_SED.djberrno=	-e 's|^extern\ int\ errno\;|\#include \<errno.h\>|'
+SUBST_MESSAGE.djberrno=	Correcting definition of errno.
 
 .endif	# DJBWARE_MK

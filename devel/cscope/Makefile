@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.58 2018/07/04 13:40:13 jperkin Exp $
+# $NetBSD: Makefile,v 1.62 2021/01/03 00:42:55 wiz Exp $
 
-DISTNAME=	cscope-15.8a
-PKGREVISION=	2
+DISTNAME=	cscope-15.9
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=cscope/}
 
@@ -13,7 +12,6 @@ LICENSE=	original-bsd
 GNU_CONFIGURE=		YES
 USE_TOOLS+=		byacc lex:run
 
-CONFIGURE_ARGS+=	--with-flex --with-yacc
 INSTALLATION_DIRS+=	share/emacs/site-lisp
 
 SUBST_CLASSES+=		path

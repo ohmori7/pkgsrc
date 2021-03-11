@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.40 2019/05/23 19:23:14 rillig Exp $
+# $NetBSD: Makefile,v 1.45 2021/02/19 23:59:25 markd Exp $
 
 DISTNAME=	musixtex
-PKGNAME=	tex-${DISTNAME}-1.29
-TEXLIVE_REV=	48353
+PKGNAME=	tex-${DISTNAME}-1.31
+TEXLIVE_REV=	57353
 
 MAINTAINER=	dgriffi@cs.csubak.edu
-HOMEPAGE=	http://ctan.org/pkg/musixtex
+HOMEPAGE=	https://ctan.org/pkg/musixtex
 COMMENT=	TeX macros for sophisticated music typesetting
 LICENSE=	gnu-gpl-v2
 
@@ -14,12 +14,6 @@ DEPENDS+=	tex-musixtex-fonts-[0-9]*:../../fonts/tex-musixtex-fonts
 DEPENDS+=	tex-pdftex-[0-9]*:../../print/tex-pdftex
 
 USE_TOOLS+=	gs:run
-
-SUBST_CLASSES+=		paths
-SUBST_MESSAGE.paths=	Setting paths to commands.
-SUBST_STAGE.paths=	pre-configure
-SUBST_FILES.paths=	bin/musixtex
-SUBST_VARS.paths=	LOCALBASE
 
 REPLACE_TEXLUA=		bin/musixflx bin/musixtex
 

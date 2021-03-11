@@ -1,9 +1,8 @@
-$NetBSD: distinfo,v 1.18 2019/05/27 17:04:04 nia Exp $
+$NetBSD: distinfo,v 1.20 2020/01/01 21:16:12 adam Exp $
 
-SHA1 (libepoxy-1.4.3.tar.gz) = 4a375660b9928c29a52c4dbe2220c0813617f390
-RMD160 (libepoxy-1.4.3.tar.gz) = 2b1d083ce8e17e2885099c08fc745b7b7ae5d630
-SHA512 (libepoxy-1.4.3.tar.gz) = 41c7a4eea66c89346b0ec71407b2d22bf645ed0ef81ebad560370903f138ed48abb6bc6bcc88c75a3a05497acc6720397db828d61301599c05040263a9f4f7f0
-Size (libepoxy-1.4.3.tar.gz) = 310823 bytes
-SHA1 (patch-configure.ac) = a21e1369028abbb34bd0add634d89747c587d610
+SHA1 (libepoxy-1.5.4.tar.xz) = d08d805b3307005e2197741012f9f4bc9739cd31
+RMD160 (libepoxy-1.5.4.tar.xz) = 3ae1a3a59ecc1f273a0b2712626819ad4ee26844
+SHA512 (libepoxy-1.5.4.tar.xz) = 7bde6fe7164aaa88b6e476dafb13391c551c530267936a1456e242d2bf648117f319788ba089100b3f773444098a894db6d27326b47dc4ae26db4766308d7510
+Size (libepoxy-1.5.4.tar.xz) = 227180 bytes
 SHA1 (patch-registry_egl.xml) = 37923cc2be65ab2dead9af8ff062702ab5d63392
-SHA1 (patch-src_dispatch__common.c) = 83f4dff2d2573bf6677bd9726f2a740c0ec0b5ea
+SHA1 (patch-src_dispatch__common.c) = bfc147f2b0d7eebb567ab08517382246a30ee799

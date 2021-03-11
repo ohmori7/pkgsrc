@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.8 2019/01/26 22:48:26 markd Exp $
+# $NetBSD: Makefile,v 1.11 2020/05/10 04:32:00 markd Exp $
 
 DISTNAME=	hyphen-estonian
-PKGNAME=	tex-${DISTNAME}-2018
-TEXLIVE_REV=	49078
+PKGNAME=	tex-${DISTNAME}-2019.51186
+PKGREVISION=	1
+TEXLIVE_REV=	51186
 
 MAINTAINER=	minskim@NetBSD.org
 COMMENT=	Hyphenation patterns for Estonian
@@ -22,5 +23,6 @@ TEX_HYPHEN_LUA+=	['estonian']={ \
 			  hyphenation='', \
 			},
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.48 2018/08/22 09:46:11 wiz Exp $
+# $NetBSD: Makefile,v 1.50 2020/08/31 18:10:59 wiz Exp $
 
 PKGNAME=	port2pkg-1.15
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	pkgtools
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

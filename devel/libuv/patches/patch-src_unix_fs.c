@@ -1,10 +1,10 @@
-$NetBSD: patch-src_unix_fs.c,v 1.1 2017/03/22 01:45:08 taca Exp $
+$NetBSD: patch-src_unix_fs.c,v 1.5 2020/07/29 10:20:56 wiz Exp $
 
-* Fix portability on NetBSD.
+Fix portability on NetBSD.
 
---- src/unix/fs.c.orig	2017-02-01 00:38:56.000000000 +0000
+--- src/unix/fs.c.orig	2019-10-19 21:32:27.000000000 +0000
 +++ src/unix/fs.c
-@@ -778,7 +778,7 @@ static void uv__to_stat(struct stat* src
+@@ -1138,7 +1138,7 @@ static void uv__to_stat(struct stat* src
    dst->st_blksize = src->st_blksize;
    dst->st_blocks = src->st_blocks;
  
@@ -13,7 +13,7 @@ $NetBSD: patch-src_unix_fs.c,v 1.1 2017/03/22 01:45:08 taca Exp $
    dst->st_atim.tv_sec = src->st_atimespec.tv_sec;
    dst->st_atim.tv_nsec = src->st_atimespec.tv_nsec;
    dst->st_mtim.tv_sec = src->st_mtimespec.tv_sec;
-@@ -804,7 +804,6 @@ static void uv__to_stat(struct stat* src
+@@ -1164,7 +1164,6 @@ static void uv__to_stat(struct stat* src
      defined(__DragonFly__)   || \
      defined(__FreeBSD__)     || \
      defined(__OpenBSD__)     || \
@@ -21,7 +21,7 @@ $NetBSD: patch-src_unix_fs.c,v 1.1 2017/03/22 01:45:08 taca Exp $
      defined(_GNU_SOURCE)     || \
      defined(_BSD_SOURCE)     || \
      defined(_SVID_SOURCE)    || \
-@@ -816,8 +815,7 @@ static void uv__to_stat(struct stat* src
+@@ -1176,8 +1175,7 @@ static void uv__to_stat(struct stat* src
    dst->st_mtim.tv_nsec = src->st_mtim.tv_nsec;
    dst->st_ctim.tv_sec = src->st_ctim.tv_sec;
    dst->st_ctim.tv_nsec = src->st_ctim.tv_nsec;

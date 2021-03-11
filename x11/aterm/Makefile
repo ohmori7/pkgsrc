@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.56 2018/11/30 17:25:05 nia Exp $
+# $NetBSD: Makefile,v 1.61 2020/08/17 20:20:23 leot Exp $
 #
 
 DISTNAME=	aterm-1.0.1
+PKGREVISION=	4
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=aterm/}
 EXTRACT_SUFX=	.tar.bz2
@@ -16,21 +17,21 @@ LICENSE=	gnu-gpl-v2
 GNU_CONFIGURE=	YES
 MAKE_JOBS_SAFE=	no
 
-CONFIGURE_ARGS+=--enable-background-image \
-		--enable-transparency \
-		--enable-fading \
-		--enable-graphics \
-		--with-xpm \
-		--with-xpm-includes=${BUILDLINK_PREFIX.libXpm}/include \
-		--with-xpm-library=${BUILDLINK_PREFIX.libXpm}/lib \
-		--with-jpeg \
-		--with-jpeg-includes=${JPEGBASE}/include \
-		--with-jpeg-library=${JPEGBASE}/lib \
-		--with-png \
-		--with-png-library=${BUILDLINK_PREFIX.png}/lib \
-		--with-png-includes=${BUILDLINK_PREFIX.png}/include \
-		--enable-utmp \
-		--enable-wtmp
+CONFIGURE_ARGS+=	--enable-background-image \
+			--enable-transparency \
+			--enable-fading \
+			--enable-graphics \
+			--with-xpm \
+			--with-xpm-includes=${BUILDLINK_PREFIX.libXpm}/include \
+			--with-xpm-library=${BUILDLINK_PREFIX.libXpm}/lib \
+			--with-jpeg \
+			--with-jpeg-includes=${JPEGBASE}/include \
+			--with-jpeg-library=${JPEGBASE}/lib \
+			--with-png \
+			--with-png-library=${BUILDLINK_PREFIX.png}/lib \
+			--with-png-includes=${BUILDLINK_PREFIX.png}/include \
+			--enable-utmp \
+			--enable-wtmp
 
 .include "options.mk"
 

@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.49 2019/03/24 07:33:58 adam Exp $
+# $NetBSD: Makefile,v 1.63 2021/03/05 08:57:19 nia Exp $
 
-DISTNAME=	help2man-1.47.10
+DISTNAME=	help2man-1.48.2
 CATEGORIES=	converters
 MASTER_SITES=	${MASTER_SITE_GNU:=help2man/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	arved@arved.at
-HOMEPAGE=	http://www.gnu.org/software/help2man/
+HOMEPAGE=	https://www.gnu.org/software/help2man/
 COMMENT=	Generate simple manual pages from program output
 LICENSE=	gnu-gpl-v3
 
@@ -41,6 +41,7 @@ SOEXT=			so
 
 SUBST_CLASSES+=		soext
 SUBST_MESSAGE.soext=	Fixing shared library suffix
+SUBST_NOOP_OK.soext=	yes
 SUBST_STAGE.soext=	pre-configure
 SUBST_FILES.soext=	bindtextdomain.c
 SUBST_FILES.soext+=	Makefile.in

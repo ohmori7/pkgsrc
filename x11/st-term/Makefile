@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.9 2019/02/09 12:14:59 leot Exp $
+# $NetBSD: Makefile,v 1.13 2021/02/25 15:20:28 pin Exp $
 
-DISTNAME=	st-0.8.2
+DISTNAME=	st-0.8.4
 PKGNAME=	${DISTNAME:S/-/-term-/}
+PKGREVISION=	1
 CATEGORIES=	x11
 MASTER_SITES=	https://dl.suckless.org/st/
 
@@ -11,6 +12,8 @@ COMMENT=	Simple terminal implementation for X
 LICENSE=	mit
 
 MAKE_JOBS_SAFE=	no
+
+CONFLICTS=      xst-[0-9]*
 
 USE_TOOLS+=	pkg-config
 

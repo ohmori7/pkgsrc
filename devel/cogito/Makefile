@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.22 2018/08/22 09:43:28 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2020/08/31 18:07:17 wiz Exp $
 
 DISTNAME=		cogito-0.18.2
-PKGREVISION=		10
+PKGREVISION=		12
 CATEGORIES=		devel
 MASTER_SITES=		http://www.kernel.org/pub/software/scm/cogito/
 EXTRACT_SUFX=		.tar.bz2
@@ -36,7 +36,7 @@ REPLACE_PERL+=		cg-Xfollowrenames
 # that grep accept -q and xargs accept -0
 .if ${OPSYS} == "SunOS"
 
-DEPENDS+=	findutils>=4.1:../../sysutils/findutils
+DEPENDS+=		findutils>=4.1:../../sysutils/findutils
 TOOLS_PLATFORM.xargs=	${LOCALBASE}/bin/gxargs
 
 .endif

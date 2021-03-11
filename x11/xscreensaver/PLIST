@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.47 2018/09/02 20:12:03 wiz Exp $
+@comment $NetBSD: PLIST,v 1.51 2020/04/05 17:30:36 gutteridge Exp $
 bin/xscreensaver
 bin/xscreensaver-command
 bin/xscreensaver-getimage
@@ -115,6 +115,7 @@ libexec/xscreensaver/config/ripples.xml
 libexec/xscreensaver/config/rocks.xml
 libexec/xscreensaver/config/rorschach.xml
 libexec/xscreensaver/config/rotzoomer.xml
+libexec/xscreensaver/config/scooter.xml
 libexec/xscreensaver/config/shadebobs.xml
 libexec/xscreensaver/config/sierpinski.xml
 libexec/xscreensaver/config/slidescreen.xml
@@ -216,6 +217,7 @@ libexec/xscreensaver/ripples
 libexec/xscreensaver/rocks
 libexec/xscreensaver/rorschach
 libexec/xscreensaver/rotzoomer
+libexec/xscreensaver/scooter
 libexec/xscreensaver/shadebobs
 libexec/xscreensaver/sierpinski
 libexec/xscreensaver/slidescreen
@@ -250,6 +252,7 @@ man/man1/xscreensaver-command.1
 man/man1/xscreensaver-getimage-file.1
 man/man1/xscreensaver-getimage-video.1
 man/man1/xscreensaver-getimage.1
+man/man1/xscreensaver-systemd.1
 man/man1/xscreensaver-text.1
 man/man1/xscreensaver.1
 man/man6/abstractile.6
@@ -340,6 +343,7 @@ man/man6/ripples.6
 man/man6/rocks.6
 man/man6/rorschach.6
 man/man6/rotzoomer.6
+man/man6/scooter.6
 man/man6/shadebobs.6
 man/man6/sierpinski.6
 man/man6/slidescreen.6

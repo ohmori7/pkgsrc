@@ -1,4 +1,4 @@
-# $NetBSD: platform.mk,v 1.5 2019/05/23 19:23:03 rillig Exp $
+# $NetBSD: platform.mk,v 1.8 2020/05/04 04:53:53 rillig Exp $
 #
 
 #
@@ -25,6 +25,7 @@ SUBST_STAGE.conf=	pre-install
 SUBST_FILES.conf=	lib/rubygems/config_file.rb
 SUBST_VARS.conf=	PKG_SYSCONFDIR
 SUBST_MESSAGE.conf=	Fixing configuration files.
+SUBST_NOOP_OK.conf=	yes # not needed for ruby-base>=2.6
 
 #
 # Don't reference pkgsrc's INSTALL macro since Ruby expect it could
@@ -32,7 +33,7 @@ SUBST_MESSAGE.conf=	Fixing configuration files.
 #
 CONFIGURE_ENV+=	INSTALL="${INSTALL} ${COPY}" \
 		INSTALL_DATA= INSTALL_PROGRAM= INSTALL_SCRIPT=
-CONFIGURE_ENV+= ac_cv_prog_PKG_CONFIG=""
+CONFIGURE_ENV+=	ac_cv_prog_PKG_CONFIG=""
 
 #
 # prevent unwanted mkdir recorded in rbconfig.rb
@@ -90,7 +91,7 @@ CONFIGURE_ARGS+=	--disable-dtrace
 #
 # dtrace support can cause problems with miniruby on arm.
 #
-.if !empty(MACHINE_PLATFORM:MNetBSD-*-*arm*)
+.if !empty(MACHINE_PLATFORM:MNetBSD-*-*arm*) || !empty(MACHINE_PLATFORM:MNetBSD-*-aarch64*)
 CONFIGURE_ARGS+=	--disable-dtrace
 .endif
 

@@ -2,7 +2,7 @@ package pkglint
 
 import "fmt"
 
-func parseShellProgram(line Line, program string) (*MkShList, error) {
+func parseShellProgram(line *Line, program string) (*MkShList, error) {
 	if trace.Tracing {
 		defer trace.Call(program)()
 	}
@@ -11,12 +11,12 @@ func parseShellProgram(line Line, program string) (*MkShList, error) {
 	lexer := NewShellLexer(tokens, rest)
 	parser := shyyParserImpl{}
 
-	succeeded := parser.Parse(lexer)
+	zeroMeansSuccess := parser.Parse(lexer)
 
 	switch {
-	case succeeded == 0 && lexer.error == "":
+	case zeroMeansSuccess == 0 && lexer.error == "":
 		return lexer.result, nil
-	case succeeded == 0 && rest != "":
+	case zeroMeansSuccess == 0:
 		return nil, fmt.Errorf("splitIntoShellTokens couldn't parse %q", rest)
 	default:
 		return nil, &ParseError{append([]string{lexer.current}, lexer.remaining...)}
@@ -66,8 +66,6 @@ type ShellLexer struct {
 
 func NewShellLexer(tokens []string, rest string) *ShellLexer {
 	return &ShellLexer{
-		current:        "",
-		ioRedirect:     "",
 		remaining:      tokens,
 		atCommandStart: true,
 		error:          rest}
@@ -80,6 +78,10 @@ func (lex *ShellLexer) Lex(lval *shyySymType) (ttype int) {
 
 	if trace.Tracing {
 		defer func() {
+			if ttype == 0 {
+				trace.Stepf("lex EOF because of a comment")
+				return
+			}
 			tname := shyyTokname(shyyTok2[ttype-shyyPrivate])
 			switch ttype {
 			case tkWORD, tkASSIGNMENT_WORD:
@@ -236,13 +238,32 @@ func (lex *ShellLexer) Lex(lval *shyySymType) (ttype int) {
 		lex.atCommandStart = false
 	case lex.atCommandStart && matches(token, `^[A-Za-z_]\w*=`):
 		ttype = tkASSIGNMENT_WORD
-		p := NewShTokenizer(dummyLine, token, false) // Just for converting the string to a ShToken
+		p := NewShTokenizer(nil, token)
 		lval.Word = p.ShToken()
+	case hasPrefix(token, "#"):
+		// This doesn't work for multiline shell programs.
+		// Since pkglint only processes single lines, that's ok.
+		return 0
 	default:
 		ttype = tkWORD
-		p := NewShTokenizer(dummyLine, token, false) // Just for converting the string to a ShToken
+		p := NewShTokenizer(nil, token)
 		lval.Word = p.ShToken()
 		lex.atCommandStart = false
+
+		// Inside of a case statement, ${PATTERNS:@p@ (${p}) continue ;; @} expands to
+		// a list of case-items, and after this list a new command starts.
+		// This is necessary to return a following "esac" as tkESAC instead of a
+		// simple word.
+		if lex.sinceCase >= 0 && len(lval.Word.Atoms) == 1 {
+			if varUse := lval.Word.Atoms[0].VarUse(); varUse != nil {
+				if len(varUse.modifiers) > 0 {
+					lastModifier := varUse.modifiers[len(varUse.modifiers)-1]
+					if lastModifier.HasPrefix("@") || lastModifier.HasPrefix("=") {
+						lex.atCommandStart = true
+					}
+				}
+			}
+		}
 	}
 
 	return ttype

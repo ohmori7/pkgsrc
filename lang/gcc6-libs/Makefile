@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.10 2018/11/28 16:05:54 abs Exp $
+# $NetBSD: Makefile,v 1.15 2021/02/13 15:56:16 maya Exp $
 
 GCC_PKGNAME=	gcc6
 .include	"../../lang/${GCC_PKGNAME}/version.mk"
@@ -9,14 +9,14 @@ PKGNAME=	${GCC_PKGNAME}-libs-${GCC6_DIST_VERSION}
 ## The PKGREVISION of this package needs to be at least 1 more than the
 ## PKGREVISION of the lang/gcc6 package so that with the dependence pattern
 ## '{gcc6,gcc6-libs}>=6.1.*' pkg_add will choose gcc6-libs over gcc6.
-PKGREVISION=	3
+PKGREVISION=	7
 
 CATEGORIES=	lang
 MASTER_SITES=	# empty
 DISTFILES=	# empty
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://gcc.gnu.org/
+HOMEPAGE=	https://gcc.gnu.org/
 COMMENT=	The GNU Compiler Collection (GCC) support shared libraries
 LICENSE=	gnu-gpl-v2 AND gnu-gpl-v3 AND gnu-lgpl-v2 AND gnu-lgpl-v3
 
@@ -44,10 +44,10 @@ SHLIB_EXT=	so
 
 LIBRARY_FILES=	${WRKDIR}/lib_files
 
-GENERATE_PLIST+= ${SED} -e 's,^,${LIBGCC_SUBPREFIX}/${GCC_TARGET_MACHINE}/,' \
-			${LIBRARY_FILES};
-GENERATE_PLIST+= ${GREP} -q 'lib/' ${LIBRARY_FILES} || \
-	   ${ECHO} '@pkgdir ${LIBGCC_SUBPREFIX}/${GCC_TARGET_MACHINE}/lib' ;
+GENERATE_PLIST+=	${SED} -e 's,^,${LIBGCC_SUBPREFIX}/${GCC_TARGET_MACHINE}/,' \
+			       ${LIBRARY_FILES};
+GENERATE_PLIST+=	${GREP} -q 'lib/' ${LIBRARY_FILES} || \
+			${ECHO} '@pkgdir ${LIBGCC_SUBPREFIX}/${GCC_TARGET_MACHINE}/lib' ;
 
 ${LIBRARY_FILES}:
 	${PKG_INFO} -qL '${GCC_PKGNAME}-${GCC6_DIST_VERSION}*' |		\

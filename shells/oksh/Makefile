@@ -1,17 +1,18 @@
-# $NetBSD: Makefile,v 1.1 2018/11/09 22:15:12 maya Exp $
+# $NetBSD: Makefile,v 1.7 2020/11/29 19:31:43 schmonz Exp $
 
-DISTNAME=	oksh-20181009
+DISTNAME=	oksh-6.8.1
 CATEGORIES=	shells
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ibara/}
-GITHUB_TAG=	${PKGVERSION_NOREV}
+GITHUB_TAG=	${DISTNAME}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/ibara/oksh/
 COMMENT=	Portable OpenBSD ksh(1)
 LICENSE=	original-bsd
 
-WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
+WRKSRC=		${WRKDIR}/oksh-${PKGNAME_NOREV}
 
 GNU_CONFIGURE=		yes
+PKG_SHELL=		${PREFIX}/bin/oksh
 
 .include "../../mk/bsd.pkg.mk"

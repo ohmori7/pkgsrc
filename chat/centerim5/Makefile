@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.5 2019/05/05 22:49:45 ryoon Exp $
+# $NetBSD: Makefile,v 1.11 2020/12/04 20:45:01 nia Exp $
 
 DISTNAME=	centerim5-5.0.1
-PKGREVISION=	2
+PKGREVISION=	6
 CATEGORIES=	chat
 MASTER_SITES=	http://www.centerim.org/download/cim5/
 
-MAINTAINER=	nia@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://centerim.org/
 COMMENT=	Text-mode multi-protocol instant messaging client using libpurple
 LICENSE=	gnu-gpl-v2
@@ -27,6 +27,9 @@ SUBST_STAGE.equals=	pre-configure
 SUBST_MESSAGE.equals=	Use portable = instead of ==.
 SUBST_FILES.equals+=	configure.ac
 SUBST_SED.equals=	-e 's,== True,= True,g'
+
+post-extract:
+	rm ${WRKSRC}/version
 
 pre-configure:
 	cd ${WRKSRC} && ./bootstrap

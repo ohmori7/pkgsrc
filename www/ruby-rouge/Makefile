@@ -1,12 +1,14 @@
-# $NetBSD: Makefile,v 1.5 2018/09/23 16:57:00 taca Exp $
+# $NetBSD: Makefile,v 1.19 2020/12/10 10:25:50 fcambus Exp $
 
-DISTNAME=	rouge-3.2.1
+DISTNAME=	rouge-3.26.0
 CATEGORIES=	www
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://rouge.jneen.net/
 COMMENT=	Pure-ruby colorizer based on pygments
 LICENSE=	mit
+
+USE_LANGUAGES=	# none
 
 RUBYGEM_OPTIONS+=	--format-executable
 

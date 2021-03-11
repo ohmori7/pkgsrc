@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.4 2019/05/14 10:16:51 markd Exp $
+# $NetBSD: Makefile,v 1.8 2021/02/21 05:59:35 markd Exp $
 
 DISTNAME=	ptex-fontmaps.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-20190506.0
-TEXLIVE_REV=	51023
+PKGNAME=	tex-${DISTNAME:S/./-/}-20201227.0
+TEXLIVE_REV=	57239
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/ptex-fontmaps
+HOMEPAGE=	https://ctan.org/pkg/ptex-fontmaps
 COMMENT=	Documentation for tex-ptex-fontmaps
-LICENSE=	gnu-gpl-v3 AND public-domain
+LICENSE=	public-domain AND gnu-gpl-v3
 
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

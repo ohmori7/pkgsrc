@@ -1,17 +1,22 @@
-# $NetBSD: Makefile,v 1.25 2019/04/25 07:32:46 maya Exp $
+# $NetBSD: Makefile,v 1.44 2021/02/07 06:30:18 ryoon Exp $
 
-DISTNAME=	kcachegrind-16.12.0
+DISTNAME=	kcachegrind-${KAPPSVER}
 PKGREVISION=	8
 CATEGORIES=	devel
+
+HOMEPAGE=	https://kde.org/applications/development/kcachegrind/
 COMMENT=	Visualization of Performance Profiling Data
-MASTER_SITES=	${MASTER_SITE_KDE:=applications/16.12.0/src/}
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+.include "../../meta-pkgs/kde/applications.mk"
 
-REPLACE_PERL+= \
-	converters/dprof2calltree \
-	converters/memprof2calltree \
-	converters/op2calltree
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
+
+USE_TOOLS+=	msgmerge perl:run
+
+REPLACE_PERL+=	converters/dprof2calltree
+REPLACE_PERL+=	converters/memprof2calltree
+REPLACE_PERL+=	converters/op2calltree
 
 # REPLACE_PHP+= converters/pprof2calltree
 SUBST_CLASSES+=		php
@@ -20,17 +25,14 @@ SUBST_STAGE.php=	post-configure
 SUBST_FILES.php=	converters/pprof2calltree
 SUBST_SED.php=		-e 's,/usr/bin/env php,${PREFIX}/bin/php,'
 
-REPLACE_PYTHON+= \
-	converters/hotshot2calltree.cmake
-
-.include "../../meta-pkgs/kde4/kde4.mk"
+REPLACE_PYTHON+=	converters/hotshot2calltree.cmake
 
 .include "../../lang/php/phpversion.mk"
 .include "${PHPPKGSRCDIR}/buildlink3.mk"
 
+.include "../../devel/kio/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/python/application.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

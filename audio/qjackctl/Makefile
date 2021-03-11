@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.53 2019/04/03 00:32:26 ryoon Exp $
+# $NetBSD: Makefile,v 1.69 2021/02/07 06:30:15 ryoon Exp $
 #
 
 DISTNAME=	qjackctl-0.4.2
-PKGREVISION=	19
+PKGREVISION=	31
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=qjackctl/}
 EXTRACT_USING=	bsdtar
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://qjackctl.sourceforge.net/
+HOMEPAGE=	https://qjackctl.sourceforge.io/
 COMMENT=	JACK Audio Connection Kit Qt GUI
 LICENSE=	gnu-gpl-v2
 
@@ -22,9 +22,14 @@ USE_TOOLS+=	gmake
 CONFIGURE_ARGS+=	--without-alsa
 .endif
 
-.include "options.mk"
+CONFIGURE_ARGS+=	--with-qt5=${QTDIR}
 
 .include "../../audio/jack/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
+.include "../../x11/qt5-qttools/buildlink3.mk"
+.if ${OPSYS} != "Darwin"
+.  include "../../x11/qt5-qtx11extras/buildlink3.mk"
+.endif
 .include "../../mk/bsd.pkg.mk"

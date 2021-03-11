@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.20 2018/08/22 09:46:40 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2020/08/31 18:11:35 wiz Exp $
 
-DISTNAME=	rsnapshot-1.3.1
-PKGREVISION=	7
+DISTNAME=	rsnapshot-1.4.3
+PKGREVISION=	1
 CATEGORIES=	net
-MASTER_SITES=	http://www.rsnapshot.org/downloads/
+MASTER_SITES=	https://rsnapshot.org/downloads/
 
-MAINTAINER=	kim@tac.nyc.ny.us
-HOMEPAGE=	http://www.rsnapshot.org/
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://rsnapshot.org/
 COMMENT=	Filesystem snapshot utility
 LICENSE=	gnu-gpl-v2
 
@@ -36,7 +36,7 @@ do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/rsnapshot-diff ${DESTDIR}${PREFIX}/bin
 	${INSTALL_MAN} ${WRKSRC}/rsnapshot-diff.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 	${INSTALL_DATA} ${WRKSRC}/rsnapshot.conf.default ${DESTDIR}${EGDIR}
-	${INSTALL_DATA} ${WRKSRC}/INSTALL ${DESTDIR}${DOCDIR}
-	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/INSTALL.md ${DESTDIR}${DOCDIR}
+	${INSTALL_DATA} ${WRKSRC}/README.md ${DESTDIR}${DOCDIR}
 
 .include "../../mk/bsd.pkg.mk"

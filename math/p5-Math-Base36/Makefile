@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:45:37 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:10:12 wiz Exp $
 #
 
 DISTNAME=	Math-Base36-0.14
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	math perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Math/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Math-Base36/
+HOMEPAGE=	https://metacpan.org/release/Math-Base36
 COMMENT=	Perl 5 module to encode and decode base36 strings
 LICENSE=	${PERL5_LICENSE}
 

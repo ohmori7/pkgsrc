@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.7 2019/05/06 05:24:01 taca Exp $
+# $NetBSD: Makefile,v 1.9 2021/03/07 15:05:59 taca Exp $
 
-DISTNAME=	getopt-1.5.0
+DISTNAME=	getopt-1.6.0
 CATEGORIES=	devel
 
 MAINTAINER=	pkgsrc-users@NetBSD.org

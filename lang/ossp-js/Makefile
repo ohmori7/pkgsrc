@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.16 2018/08/22 09:45:21 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2020/08/31 18:09:52 wiz Exp $
 #
 
 DISTNAME=	js-1.6.20070208
 PKGNAME=	ossp-${DISTNAME}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	lang
 MASTER_SITES=	ftp://ftp.ossp.org/pkg/lib/js/
 
@@ -34,8 +34,8 @@ CONFIGURE_ARGS+=	--without-perl
 REPLACE_SH=		js-config.sh.in
 
 REPLACE_INTERPRETER+=	js
-REPLACE.js.old=	./js
-REPLACE.js.new=	${PREFIX}/bin/js
+REPLACE.js.old=		./js
+REPLACE.js.new=		${PREFIX}/bin/js
 REPLACE_FILES.js=	jslint.js jspack.js
 
 .include "libm.mk"

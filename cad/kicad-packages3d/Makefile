@@ -1,18 +1,19 @@
-# $NetBSD: Makefile,v 1.1 2019/06/14 15:59:33 bouyer Exp $
+# $NetBSD: Makefile,v 1.5 2021/02/21 18:56:36 bouyer Exp $
 #
 
-V=		5.1.2
-DISTNAME=	kicad-packages3d-${V}
+V=		5.1.9
+DISTNAME=	kicad-packages3D-${V}
+PKGNAME=	kicad-packages3d-${V}
 CATEGORIES=	cad
-MASTER_SITES=	${MASTER_SITE_GITHUB:=KiCad/}
-GITHUB_TAG=	${PKGVERSION_NOREV}
-EXTRACT_USING=	bsdtar
+MASTER_SITES=	https://gitlab.com/kicad/libraries/kicad-packages3D/-/archive/${V}/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://kicad-pcb.org/
+HOMEPAGE=	https://kicad-pcb.org/
 COMMENT=	3D models for rendering and the MCAD software
 LICENSE=	cc-by-sa-v4.0
 WRKSRC=		${WRKDIR}/kicad-packages3D-${V}
+
+UNLIMIT_RESOURCES=	cputime
 
 USE_CMAKE=	yes
 

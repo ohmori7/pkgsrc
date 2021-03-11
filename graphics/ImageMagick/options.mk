@@ -1,11 +1,19 @@
-# $NetBSD: options.mk,v 1.19 2018/12/03 16:22:15 jperkin Exp $
+# $NetBSD: options.mk,v 1.23 2021/02/26 12:48:29 nia Exp $
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.ImageMagick
-PKG_SUPPORTED_OPTIONS=	x11 jp2 djvu openexr wmf liblqr
-PKG_SUGGESTED_OPTIONS=	x11 jp2 liblqr
+PKG_OPTIONS_VAR=		PKG_OPTIONS.ImageMagick
+PKG_SUPPORTED_OPTIONS=		doc x11 jp2 djvu openexr wmf liblqr heif
+PKG_SUGGESTED_OPTIONS=		doc x11 jp2 liblqr heif
 PKG_OPTIONS_LEGACY_OPTS+=	jasper:jp2
 
 .include "../../mk/bsd.options.mk"
+
+PLIST_SRC+=		PLIST
+
+.if !empty(PKG_OPTIONS:Mdoc)
+PLIST_SRC+=		PLIST.doc
+.else
+CONFIGURE_ARGS+=	--disable-docs
+.endif
 
 .if !empty(PKG_OPTIONS:Mx11)
 .include "../../x11/libX11/buildlink3.mk"
@@ -48,4 +56,11 @@ CONFIGURE_ARGS+=	--without-openexr
 CONFIGURE_ARGS+=	--with-wmf
 .else
 CONFIGURE_ARGS+=	--without-wmf
+.endif
+
+.if !empty(PKG_OPTIONS:Mheif)
+.include "../../graphics/libheif/buildlink3.mk"
+CONFIGURE_ARGS+=	--with-heic
+.else
+CONFIGURE_ARGS+=	--without-heic
 .endif

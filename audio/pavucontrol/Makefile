@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.61 2018/11/29 11:21:48 prlw1 Exp $
+# $NetBSD: Makefile,v 1.75 2021/02/07 06:30:15 ryoon Exp $
 #
 
-DISTNAME=	pavucontrol-3.0
-PKGREVISION=	16
+DISTNAME=	pavucontrol-4.0
+PKGREVISION=	10
 CATEGORIES=	audio
 MASTER_SITES=	http://freedesktop.org/software/pulseaudio/pavucontrol/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://freedesktop.org/software/pulseaudio/pavucontrol/
+HOMEPAGE=	https://freedesktop.org/software/pulseaudio/pavucontrol/
 COMMENT=	Volume control tool ("mixer") for the PulseAudio sound server
 LICENSE=	gnu-gpl-v2
 

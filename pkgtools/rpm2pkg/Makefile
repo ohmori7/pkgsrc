@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.69 2018/10/29 14:41:56 abs Exp $
+# $NetBSD: Makefile,v 1.71 2020/01/26 17:32:00 rillig Exp $
 
-PKGNAME=	rpm2pkg-3.2.3
+PKGNAME=	rpm2pkg-3.3.0
 CATEGORIES=	pkgtools
 NO_CHECKSUM=	yes
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.pkgsrc.org/
+HOMEPAGE=	https://www.pkgsrc.org/
 COMMENT=	Convert RPM archives to NetBSD packages
 LICENSE=	modified-bsd
 
@@ -45,5 +45,6 @@ do-install:
 
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../archivers/xz/buildlink3.mk"
+.include "../../archivers/zstd/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

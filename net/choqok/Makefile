@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.42 2018/12/13 19:52:15 adam Exp $
+# $NetBSD: Makefile,v 1.57 2021/01/01 08:24:53 ryoon Exp $
 #
 
 DISTNAME=	choqok-1.5
-PKGREVISION=	12
+PKGREVISION=	26
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=choqok/}Choqok/
 EXTRACT_SUFX=	.tar.xz
@@ -18,7 +18,7 @@ MAKE_JOBS_SAFE=	no
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	perl msgfmt pkg-config
 
-BUILD_DEPENDS+=         automoc4>=0.9.87:../../devel/automoc4
+BUILD_DEPENDS+=	automoc4>=0.9.87:../../devel/automoc4
 DEPENDS=	qca2-ossl-[0-9]*:../../security/qca2-ossl
 
 .include "../../meta-pkgs/kde4/kde4.mk"

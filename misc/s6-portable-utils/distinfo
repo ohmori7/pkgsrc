@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2021/01/11 18:19:03 schmonz Exp $
+
+SHA1 (s6-portable-utils-2.2.3.1.tar.gz) = 8a4f6dc28639c89cdf37cd69fc244881ce03ad9e
+RMD160 (s6-portable-utils-2.2.3.1.tar.gz) = 104c30d1565f83bde54ccb9782211617f3a91fb4
+SHA512 (s6-portable-utils-2.2.3.1.tar.gz) = 76c464b90b5c67f87bec053cadb5dac1b5928df7f373b7a0b6700e8ab684fb8c5354788720e216f1fb9e332a0a5dec92618aee3e0f6ff578c8aa42f2aa787549
+Size (s6-portable-utils-2.2.3.1.tar.gz) = 49264 bytes

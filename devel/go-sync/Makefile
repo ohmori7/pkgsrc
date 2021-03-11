@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.9 2019/05/27 15:18:27 bsiegert Exp $
+# $NetBSD: Makefile,v 1.26 2021/01/23 14:23:02 bsiegert Exp $
 
 DISTNAME=	sync-0.0.20190422
 PKGNAME=	go-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	17
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=golang/}
 GITHUB_PROJECT=	${PKGBASE:S/go-//}
 GITHUB_TAG=	112230192c580c3556b8cee6403af37a4fc5f28c
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://golang.org/
+HOMEPAGE=	https://golang.org/
 COMMENT=	Concurrency primitives for Go
 LICENSE=	modified-bsd
 

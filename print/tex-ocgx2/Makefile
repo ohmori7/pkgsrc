@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2019/01/29 09:32:37 markd Exp $
+# $NetBSD: Makefile,v 1.8 2021/02/20 10:36:35 markd Exp $
 
 DISTNAME=	ocgx2
-PKGNAME=	tex-${DISTNAME}-0.40
-TEXLIVE_REV=	49580
+PKGNAME=	tex-${DISTNAME}-0.50
+TEXLIVE_REV=	57531
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/ocgx2
+HOMEPAGE=	https://ctan.org/pkg/ocgx2
 COMMENT=	Drop-in replacement for 'ocgx' and 'ocg-p'
 LICENSE=	lppl-1.3c
 

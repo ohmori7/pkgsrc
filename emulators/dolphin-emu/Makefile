@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2019/06/13 19:44:35 nia Exp $
+# $NetBSD: Makefile,v 1.26 2021/02/07 06:30:20 ryoon Exp $
 
 DISTNAME=	dolphin-emu-5.0
-PKGREVISION=	3
+PKGREVISION=	20
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_GITHUB:=dolphin-emu/}
 GITHUB_PROJECT=	dolphin
@@ -12,10 +12,12 @@ HOMEPAGE=	https://dolphin-emu.org/
 COMMENT=	Nintendo GameCube and Wii emulator
 LICENSE=	gnu-gpl-v2
 
-EXTRACT_USING=	bsdtar
 USE_TOOLS+=	msgfmt msgmerge pkg-config
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
+
+# std::make_unique
+GCC_REQD+=	4.9
 
 # Since SFML is not available in pkgsrc, make sure the included version
 # is always used.
@@ -25,18 +27,20 @@ CMAKE_ARGS+=	-DPKGMANDIR=${PKGMANDIR}
 
 .include "../../mk/bsd.prefs.mk"
 
+# Claims to only support little endian architectures.
 ONLY_FOR_PLATFORM=	${LITTLEENDIANPLATFORMS}
+
+# No support in the code.
 BROKEN_ON_PLATFORM+=	SunOS-*-*
 
-.if ${MACHINE_ARCH} != "x86_64" && ${MACHINE_ARCH} != "aarch64"
+.if ${MACHINE_ARCH} != "x86_64"
 CMAKE_ARGS+=		-DENABLE_GENERIC=1
 .endif
 
 # "Couldn't find libevdev and/or libudev.  Can't build evdev controller backend."
 CMAKE_ARGS.Linux+=	-DENABLE_EVDEV=0
 
-BUILDLINK_TRANSFORM+=	rm:-ldl
-
+# JIT
 NOT_PAX_MPROTECT_SAFE+=	bin/dolphin-emu
 NOT_PAX_MPROTECT_SAFE+=	bin/dolphin-emu-nogui
 
@@ -59,5 +63,6 @@ NOT_PAX_MPROTECT_SAFE+=	bin/dolphin-emu-nogui
 .endif
 .include "../../x11/wxGTK30/buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"
+BUILDLINK_TRANSFORM+=	opt:-ldl:${BUILDLINK_LDADD.dl:Q}
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

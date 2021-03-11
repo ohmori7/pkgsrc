@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.31 2018/08/22 09:46:55 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2020/08/31 18:11:54 wiz Exp $
 
 DISTNAME=		Regexp-Common-2017060201
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		1
+PKGREVISION=		3
 CATEGORIES=		textproc perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Regexp/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Regexp-Common/
+HOMEPAGE=		https://metacpan.org/release/Regexp-Common
 COMMENT=		Provide commonly requested regular expressions
 LICENSE=		mit OR modified-bsd OR artistic OR artistic-2.0
 

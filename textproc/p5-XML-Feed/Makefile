@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.29 2019/04/07 08:00:26 wen Exp $
+# $NetBSD: Makefile,v 1.33 2021/03/09 12:28:21 wen Exp $
 
-DISTNAME=		XML-Feed-0.59
+DISTNAME=		XML-Feed-0.61
 PKGNAME=		p5-${DISTNAME}
 CATEGORIES=		textproc perl5
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=XML/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/XML-Feed/
+HOMEPAGE=		https://metacpan.org/release/XML-Feed
 COMMENT=		Perl syndication feed parser for both RSS and Atom feeds
 LICENSE=		gnu-gpl-v2 # OR artistic
 

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.11 2019/05/11 06:57:24 markd Exp $
+# $NetBSD: Makefile,v 1.14 2020/05/10 04:31:59 markd Exp $
 
 DISTNAME=	hyphen-coptic
-PKGNAME=	tex-${DISTNAME}-2019
-TEXLIVE_REV=	50792
+PKGNAME=	tex-${DISTNAME}-2019.51186
+PKGREVISION=	1
+TEXLIVE_REV=	51186
 
 MAINTAINER=	minskim@NetBSD.org
 COMMENT=	Hyphenation patterns for Coptic
@@ -22,5 +23,6 @@ TEX_HYPHEN_LUA+=	['coptic']={ \
 			  hyphenation='', \
 			},
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

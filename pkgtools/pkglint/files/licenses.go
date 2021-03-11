@@ -3,13 +3,13 @@ package pkglint
 import "netbsd.org/pkglint/licenses"
 
 type LicenseChecker struct {
-	MkLines MkLines
-	MkLine  MkLine
+	MkLines *MkLines
+	MkLine  *MkLine
 }
 
 func (lc *LicenseChecker) Check(value string, op MkOperator) {
-	expanded := resolveVariableRefs(lc.MkLines, value) // For ${PERL5_LICENSE}
-	cond := licenses.Parse(ifelseStr(op == opAssignAppend, "append-placeholder ", "") + expanded)
+	expanded := resolveVariableRefs(value, lc.MkLines, nil) // For ${PERL5_LICENSE}
+	cond := licenses.Parse(condStr(op == opAssignAppend, "append-placeholder ", "") + expanded)
 
 	if cond == nil {
 		if op == opAssign {
@@ -24,34 +24,34 @@ func (lc *LicenseChecker) Check(value string, op MkOperator) {
 }
 
 func (lc *LicenseChecker) checkName(license string) {
-	licenseFile := ""
-	if G.Pkg != nil {
-		if mkline := G.Pkg.vars.FirstDefinition("LICENSE_FILE"); mkline != nil {
-			licenseFile = G.Pkg.File(mkline.ResolveVarsInRelativePath(mkline.Value()))
+	licenseFile := NewCurrPath("")
+	pkg := lc.MkLines.pkg
+	if pkg != nil {
+		if mkline := pkg.vars.FirstDefinition("LICENSE_FILE"); mkline != nil {
+			value := mkline.Value()
+			if NewPath(value).IsAbs() {
+				mkline.Errorf("LICENSE_FILE must not be an absolute path.")
+			} else {
+				rel := NewPackagePathString(value)
+				relResolved := mkline.ResolveVarsInRelativePath(rel, lc.MkLines.pkg)
+				licenseFile = pkg.File(relResolved)
+			}
 		}
 	}
-	if licenseFile == "" {
-		licenseFile = G.Pkgsrc.File("licenses/" + license)
+	if licenseFile.IsEmpty() {
+		licenseFile = G.Pkgsrc.File("licenses").JoinNoClean(NewRelPathString(license))
 		G.InterPackage.UseLicense(license)
 	}
 
-	if !fileExists(licenseFile) {
-		lc.MkLine.Warnf("License file %s does not exist.", cleanpath(licenseFile))
-	}
-
-	switch license {
-	case "fee-based-commercial-use",
-		"no-commercial-use",
-		"no-profit",
-		"no-redistribution",
-		"shareware":
-		lc.MkLine.Errorf("License %q must not be used.", license)
+	if !licenseFile.IsFile() {
+		lc.MkLine.Errorf("License file %s does not exist.",
+			lc.MkLine.Rel(licenseFile))
 		lc.MkLine.Explain(
-			"Instead of using these deprecated licenses, extract the actual",
-			"license from the package into the pkgsrc/licenses/ directory",
-			"and define LICENSE to that filename.",
+			sprintf("Run %q to see which licenses the package uses.",
+				bmake("guess-license")),
 			"",
-			seeGuide("Handling licenses", "handling-licenses"))
+			sprintf("For more information about licenses, %s.",
+				seeGuide("Handling licenses", "handling-licenses")))
 	}
 }
 

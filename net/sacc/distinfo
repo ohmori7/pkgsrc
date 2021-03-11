@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.1 2018/02/26 16:52:21 leot Exp $
+$NetBSD: distinfo,v 1.4 2021/01/06 14:26:03 leot Exp $
 
-SHA1 (sacc-v1.00.tgz) = 8a5fadb5f86a41daddfcedd84b170a6303f9c0ff
-RMD160 (sacc-v1.00.tgz) = 98e8df8c4a864aacba11633a9b57ace70113b590
-SHA512 (sacc-v1.00.tgz) = 9bc45264246f1b3fbc54b621963d8eeec6dd45b3c0e3a329e0755189b69fdafd385689f75bc2ec2ff85960d96cf7bba9816e6dc1aa43c5750d093719806dc2c2
-Size (sacc-v1.00.tgz) = 11164 bytes
+SHA1 (sacc-1.03.tgz) = 54af897ace692d0159a044fe7987602af76bd1ee
+RMD160 (sacc-1.03.tgz) = 6bc0b2fb764265e4a5ec2b0e8e8e4b49f4f52d00
+SHA512 (sacc-1.03.tgz) = bce8c0181336fb4f34259bf80b86f974d4534d7e397af5851097cad4345a58262b1d10807b4ed074422b1e16da23185261fac17770f5cbbe6b9839ee3c2e131c
+Size (sacc-1.03.tgz) = 12183 bytes

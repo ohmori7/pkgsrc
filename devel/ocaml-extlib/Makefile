@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.18 2019/05/15 09:01:03 jaapb Exp $
+# $NetBSD: Makefile,v 1.22 2021/03/08 20:36:53 jaapb Exp $
 
-VERSION=	1.7.6
-PKGREVISION=	1
+VERSION=	1.7.8
 GITHUB_PROJECT=	ocaml-extlib
 DISTNAME=	${GITHUB_PROJECT}-${VERSION}
 CATEGORIES=	devel

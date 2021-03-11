@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.35 2019/04/03 00:33:09 ryoon Exp $
+# $NetBSD: Makefile,v 1.47 2021/02/07 06:30:39 ryoon Exp $
 
 DISTNAME=	fet-5.25.0
-PKGREVISION=	27
+PKGREVISION=	38
 CATEGORIES=	time
 MASTER_SITES=	https://lalescu.ro/liviu/fet/download/
 EXTRACT_SUFX=	.tar.bz2
@@ -13,10 +13,10 @@ LICENSE=	gnu-gpl-v2
 
 .include "../../mk/bsd.prefs.mk"
 
-USE_LANGUAGES=	c c++
-USE_LIBTOOL=	yes
-USE_TOOLS+=	bsdtar
-EXTRACT_USING=	bsdtar
+USE_LANGUAGES=		c c++
+USE_LIBTOOL=		yes
+USE_TOOLS+=		bsdtar
+EXTRACT_USING=		bsdtar
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 share/doc/fet
 
 # conflicts with import.h in package itself

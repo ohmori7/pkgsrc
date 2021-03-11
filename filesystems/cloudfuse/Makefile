@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.17 2018/12/13 19:51:50 adam Exp $
+# $NetBSD: Makefile,v 1.28 2020/11/05 09:08:04 ryoon Exp $
 
 DISTNAME=	1003a82
 PKGNAME=	cloudfuse-20120124
-PKGREVISION=	13
+PKGREVISION=	23
 CATEGORIES=	filesystems
 MASTER_SITES=	https://github.com/redbo/cloudfuse/tarball/
 DIST_SUBDIR=	cloudfuse
@@ -14,9 +14,9 @@ EXTRACT_SUFX=
 EXTRACT_CMD=	${TAR} -xzf ${DISTDIR}/${DIST_SUBDIR}/${DISTNAME}${EXTRACT_SUFX}
 LICENSE=	mit
 
-GNU_CONFIGURE=	yes
-USE_TOOLS+=	pkg-config tar
-INSTALLATION_DIRS= share/doc
+GNU_CONFIGURE=		yes
+USE_TOOLS+=		pkg-config tar
+INSTALLATION_DIRS=	share/doc
 
 WRKSRC=		${WRKDIR}/redbo-cloudfuse-${DISTNAME}
 

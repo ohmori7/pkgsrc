@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.9 2019/05/13 20:38:11 adam Exp $
+@comment $NetBSD: PLIST,v 1.17 2021/02/15 18:58:37 adam Exp $
 man/man1/clusterdb.1
 man/man1/createdb.1
 man/man1/createuser.1
@@ -458,6 +458,7 @@ share/doc/postgresql/html/datetime-config-files.html
 share/doc/postgresql/html/datetime-input-rules.html
 share/doc/postgresql/html/datetime-invalid-input.html
 share/doc/postgresql/html/datetime-keywords.html
+share/doc/postgresql/html/datetime-posix-timezone-specs.html
 share/doc/postgresql/html/datetime-units-history.html
 share/doc/postgresql/html/dblink.html
 share/doc/postgresql/html/ddl-alter.html
@@ -909,6 +910,13 @@ share/doc/postgresql/html/regress-tap.html
 share/doc/postgresql/html/regress-variant.html
 share/doc/postgresql/html/regress.html
 share/doc/postgresql/html/release-10-1.html
+share/doc/postgresql/html/release-10-10.html
+share/doc/postgresql/html/release-10-11.html
+share/doc/postgresql/html/release-10-12.html
+share/doc/postgresql/html/release-10-13.html
+share/doc/postgresql/html/release-10-14.html
+share/doc/postgresql/html/release-10-15.html
+share/doc/postgresql/html/release-10-16.html
 share/doc/postgresql/html/release-10-2.html
 share/doc/postgresql/html/release-10-3.html
 share/doc/postgresql/html/release-10-4.html
@@ -916,6 +924,7 @@ share/doc/postgresql/html/release-10-5.html
 share/doc/postgresql/html/release-10-6.html
 share/doc/postgresql/html/release-10-7.html
 share/doc/postgresql/html/release-10-8.html
+share/doc/postgresql/html/release-10-9.html
 share/doc/postgresql/html/release-10.html
 share/doc/postgresql/html/release-prior.html
 share/doc/postgresql/html/release.html
@@ -1329,6 +1338,7 @@ share/doc/postgresql/html/xfunc-sql.html
 share/doc/postgresql/html/xfunc-volatility.html
 share/doc/postgresql/html/xfunc.html
 share/doc/postgresql/html/xindex.html
+share/doc/postgresql/html/xml-limits-conformance.html
 share/doc/postgresql/html/xml2.html
 share/doc/postgresql/html/xoper-optimization.html
 share/doc/postgresql/html/xoper.html

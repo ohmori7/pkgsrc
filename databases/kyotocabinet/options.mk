@@ -1,18 +1,17 @@
-# $NetBSD: options.mk,v 1.1 2014/11/21 11:29:52 obache Exp $
+# $NetBSD: options.mk,v 1.3 2020/05/31 15:20:22 rillig Exp $
 #
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.kyotocabinet
-PKG_SUPPORTED_OPTIONS=	zlib
+PKG_OPTIONS_VAR=		PKG_OPTIONS.kyotocabinet
+PKG_SUPPORTED_OPTIONS=		zlib
 PKG_OPTIONS_OPTIONAL_GROUPS=	codec
 PKG_OPTIONS_GROUP.codec=	lzma lzo
-PKG_SUGGESTED_OPTIONS=	zlib
+PKG_SUGGESTED_OPTIONS=		zlib
 
 .include "../../mk/bsd.options.mk"
 
 .if !empty(PKG_OPTIONS:Mzlib)
 .include "../../devel/zlib/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-zlib
-CONFIGURE_ARGS+=	--with-zlib=${BUILDLINK_PREFIX.zlib}
 .else
 CONFIGURE_ARGS+=	--disable-zlib
 .endif

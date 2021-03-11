@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:44:13 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2020/09/07 07:00:05 wiz Exp $
 #
 
-DISTNAME=	Log-Handler-0.88
+DISTNAME=	Log-Handler-0.90
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Log/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Log-Handler/
+HOMEPAGE=	https://metacpan.org/release/Log-Handler
 COMMENT=	Log messages to several outputs
 LICENSE=	${PERL5_LICENSE}
 

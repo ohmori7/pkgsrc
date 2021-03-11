@@ -1,9 +1,11 @@
-# $NetBSD: Makefile,v 1.132 2019/04/03 00:33:04 ryoon Exp $
+# $NetBSD: Makefile,v 1.144 2020/11/05 09:07:06 ryoon Exp $
 
 DISTNAME=	heimdal-1.5.3
-PKGREVISION=	20
+PKGREVISION=	27
 CATEGORIES=	security
-MASTER_SITES=	http://www.h5l.org/dist/src/
+# Original distfile is unavailable on Github
+#GITHUB_TAG=	${DISTNAME}
+#MASTER_SITES=	${MASTER_SITE_GITHUB:=heimdal/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.h5l.org/
@@ -16,25 +18,33 @@ CONFLICTS+=	openafs-[0-9]*
 CONFLICTS+=	gss-[0-9]*
 CONFLICTS+=	kth-krb4-[0-9]*
 
-MAKE_JOBS_SAFE=	no
-
 USE_LIBTOOL=		yes
 USE_TOOLS+=		bison flex:run
 PKGCONFIG_OVERRIDE+=	tools/heimdal-gssapi.pc.in
 MAKE_ENV+=		INSTALL_CATPAGES=no
 
-.include "../../mk/bsd.prefs.mk"
+# heimdal-1.5.3 on NetBSD 8.1 fails with:
+# cc [...] -c hxtool.c
+# In file included from hxtool.c:34:0:
+# hx_locl.h:66:23: fatal error: ocsp_asn1.h: No such file or directory 
+#
+# https://mail-index.netbsd.org/pkgsrc-users/2020/02/20/msg030473.html
+MAKE_JOBS_SAFE=		no
+
 .include "options.mk"
 
 HEIMDAL_HDB_DIR=	${VARBASE}/heimdal
 
 GNU_CONFIGURE=		yes
+GNU_CONFIGURE_STRICT=	no # has multiple configure scripts
 CONFIGURE_ARGS+=	--enable-kcm
 CONFIGURE_ARGS+=	--enable-pthread-support
 CONFIGURE_ARGS+=	--includedir=${PREFIX}/include/krb5
 CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR}
 CONFIGURE_ARGS+=	--with-hdbdir=${HEIMDAL_HDB_DIR}
-CONFIGURE_ARGS+=	--with-openssl=${SSLBASE:Q}
+# not compatible to openssl 1.1
+# TODO: re-enable when updating from 1.5.3, also in buildlink3.mk
+CONFIGURE_ARGS+=	--without-openssl
 CONFIGURE_ARGS+=	--with-sqlite3=${BUILDLINK_PREFIX.sqlite3}
 CONFIGURE_ARGS+=	--without-x
 CONFIGURE_ARGS+=	${ABI:D--with-mips-abi=${ABI}}
@@ -97,32 +107,17 @@ pre-build:
 	${TOUCH} ${WRKSRC}/po/localefiles
 
 .include "../../databases/sqlite3/buildlink3.mk"
-.include "../../security/openssl/buildlink3.mk"
-CHECK_BUILTIN.openssl:=	yes
-.include "../../security/openssl/builtin.mk"
-CHECK_BUILTIN.openssl:=no
-.if ${MACHINE_PLATFORM:MNetBSD-[1-3]*} != "" || \
-    (${OPSYS} == "SunOS" && !empty(USE_BUILTIN.openssl:Myes) &&	\
-		!empty(BUILTIN_LIB_FOUND.crypto:M[Nn][Oo]))
 PLIST.hcrypto=		yes
-.endif
 
 # Linux does not have include/vis.h and expected include/glob.h.
 .if ${OPSYS} == "Linux"
-PLIST.vis=	yes
-PLIST.glob=	yes
+PLIST.vis=		yes
+PLIST.glob=		yes
 # Without this I get undefined references to pthread_getspecific
 PTHREAD_AUTO_VARS=	yes
-.if !empty(USE_BUILTIN.openssl:Myes) && \
-	empty(BUILTIN_VERSION.openssl:M1.0*)
-PLIST.hcrypto=		yes
-.endif
 .endif
 
 .if ${OPSYS} == "MirBSD"
-.if !empty(USE_BUILTIN.openssl:Myes)
-PLIST.hcrypto=		yes
-.endif
 PLIST.vis=		yes
 # all of the tools need to link against pthread, force it.
 PTHREAD_AUTO_VARS=	yes

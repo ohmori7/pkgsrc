@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.26 2017/06/01 13:30:24 jlam Exp $
+# $NetBSD: Makefile,v 1.29 2020/07/02 10:26:18 nia Exp $
 #
 
 DISTNAME=	tokyocabinet-lua-1.10
 PKGNAME=	${LUA_PKGPREFIX}-${DISTNAME:S/-lua-/-/}
 PKGREVISION=	2
-CATEGORIES=	databases
+CATEGORIES=	databases lua
 MASTER_SITES=	${HOMEPAGE:S/luadoc/luapkg/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://fallabs.com/tokyocabinet/luadoc/
+HOMEPAGE=	https://fallabs.com/tokyocabinet/luadoc/
 COMMENT=	Lua binding of Tokyo Cabinet
 LICENSE=	gnu-lgpl-v2.1
 
@@ -28,11 +28,11 @@ MAKE_ENV+=	INCLUDEDIR=${BUILDLINK_PREFIX.tokyocabinet}/include
 .include "../../mk/bsd.prefs.mk"
 
 .if ${SHLIB_TYPE} == "dylib"
-SOEXT= 		dylib
+SOEXT=		dylib
 .else
-SOEXT= 		so
+SOEXT=		so
 .endif
-PLIST_SUBST+= 	SOEXT=${SOEXT}
+PLIST_SUBST+=	SOEXT=${SOEXT}
 
 post-extract:
 	${CHMOD} -R go-w ${WRKSRC}

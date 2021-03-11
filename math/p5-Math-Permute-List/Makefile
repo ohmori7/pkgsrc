@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.10 2018/08/22 09:45:38 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2020/08/31 18:10:15 wiz Exp $
 
 DISTNAME=	Math-Permute-List-1.007
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	math perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Math/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Math-Permute-List/
+HOMEPAGE=	https://metacpan.org/release/Math-Permute-List
 COMMENT=	Permute a list
 LICENSE=	${PERL5_LICENSE}
 

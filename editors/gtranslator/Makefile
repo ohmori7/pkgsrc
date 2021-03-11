@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.76 2019/05/20 11:24:29 wiz Exp $
+# $NetBSD: Makefile,v 1.84 2020/12/04 20:45:15 nia Exp $
 
 DISTNAME=	gtranslator-3.32.1
+PKGREVISION=	7
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtranslator/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -34,6 +35,6 @@ REPLACE_PYTHON+=	build-aux/meson/meson_post_install.py
 .include "../../sysutils/gsettings-desktop-schemas/buildlink3.mk"
 
 .include "../../mk/pthread.buildlink3.mk"
-.include "../../devel/py-meson/build.mk"
+.include "../../devel/meson/build.mk"
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.9 2019/05/09 13:57:50 ryoon Exp $
+# $NetBSD: Makefile,v 1.29 2021/01/01 08:24:55 ryoon Exp $
 
 DISTNAME=	dspdfviewer-1.15.1
-PKGREVISION=	8
+PKGREVISION=	26
 CATEGORIES=	print
 MASTER_SITES=	${MASTER_SITE_GITHUB:=dannyedel/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	fox@NetBSD.org
-HOMEPAGE=	http://dspdfviewer.danny-edel.de/
+HOMEPAGE=	https://dspdfviewer.danny-edel.de/
 COMMENT=	Dual-Screen PDF Viewer for latex-beamer
 LICENSE=	gnu-gpl-v2
 
@@ -21,11 +21,7 @@ CONFIGURE_DIRS=		build
 CMAKE_ARG_PATH=		..
 BUILD_MAKE_FLAGS+=	VERBOSE=1
 
-.include "../../mk/bsd.prefs.mk"
-
-.if ${OPSYS} == "FreeBSD"
-CFLAGS+=		-Wno-error=undefined-func-template
-.endif
+BUILDLINK_TRANSFORM+=	rm:-Werror
 
 pre-configure:
 	mkdir -p ${WRKSRC}/build

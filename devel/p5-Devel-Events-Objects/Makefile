@@ -1,16 +1,15 @@
-# $NetBSD: Makefile,v 1.14 2018/08/22 09:43:54 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/09/04 13:45:14 wiz Exp $
 
 DISTNAME=	Devel-Events-Objects-0.05
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	12
+PKGREVISION=	14
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Devel/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Devel-Events-Objects/
+HOMEPAGE=	https://metacpan.org/release/Devel-Events-Objects
 COMMENT=	Perl 5 module providing object tracking support for Devel::Events
 
-BUILD_DEPENDS+=	p5-Test-Simple>=1.001010:../../devel/p5-Test-Simple
 DEPENDS+=	p5-Devel-Events>=0.03:../../devel/p5-Devel-Events
 DEPENDS+=	p5-Task-Weaken-[0-9]*:../../devel/p5-Task-Weaken
 DEPENDS+=	p5-Tie-RefHash-Weak>=0.07:../../devel/p5-Tie-RefHash-Weak

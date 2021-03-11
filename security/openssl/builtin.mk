@@ -1,9 +1,9 @@
-# $NetBSD: builtin.mk,v 1.43 2015/03/26 08:05:02 dholland Exp $
+# $NetBSD: builtin.mk,v 1.47 2021/03/01 23:28:54 gdt Exp $
 
 BUILTIN_PKG:=	openssl
 
-BUILTIN_FIND_LIBS:=		crypto des ssl
-BUILTIN_FIND_HEADERS_VAR:=	H_OPENSSLCONF H_OPENSSLV
+BUILTIN_FIND_LIBS:=			crypto ssl
+BUILTIN_FIND_HEADERS_VAR:=		H_OPENSSLCONF H_OPENSSLV
 BUILTIN_FIND_HEADERS.H_OPENSSLCONF=	openssl/opensslconf.h
 BUILTIN_FIND_HEADERS.H_OPENSSLV=	openssl/opensslv.h
 
@@ -19,7 +19,7 @@ IS_BUILTIN.openssl=	no
 IS_BUILTIN.openssl=	yes
 .  endif
 .endif
-MAKEVARS+=	IS_BUILTIN.openssl
+MAKEVARS+=		IS_BUILTIN.openssl
 
 ###
 ### If there is a built-in implementation, then set BUILTIN_PKG.<pkg> to
@@ -48,7 +48,7 @@ BUILTIN_VERSION.openssl!=						\
 			} else if (i > 26) {				\
 				patchlevel = "a";			\
 			} else {					\
-				patchlevel = substr(alpha,i,1);			\
+				patchlevel = substr(alpha,i,1);		\
 			}						\
 			printf "%s%s%s%s\n",				\
 				major, minor, teeny, patchlevel;	\
@@ -57,8 +57,8 @@ BUILTIN_VERSION.openssl!=						\
 	' ${H_OPENSSLV}
 BUILTIN_PKG.openssl=	openssl-${BUILTIN_VERSION.openssl}
 .endif
-MAKEVARS+=	BUILTIN_PKG.openssl
-MAKEVARS+=	BUILTIN_VERSION.openssl
+MAKEVARS+=		BUILTIN_PKG.openssl
+MAKEVARS+=		BUILTIN_VERSION.openssl
 
 .if !defined(BUILTIN_OPENSSL_HAS_THREADS) && \
     !empty(IS_BUILTIN.openssl:M[yY][eE][sS]) && \
@@ -78,16 +78,16 @@ MAKEVARS+=	BUILTIN_OPENSSL_HAS_THREADS
 ###
 .if !defined(USE_BUILTIN.openssl)
 .  if ${PREFER.openssl} == "pkgsrc"
-USE_BUILTIN.openssl=	no
+USE_BUILTIN.openssl=		no
 .  else
-USE_BUILTIN.openssl=	${IS_BUILTIN.openssl}
+USE_BUILTIN.openssl=		${IS_BUILTIN.openssl}
 .    if defined(BUILTIN_PKG.openssl) && \
         !empty(IS_BUILTIN.openssl:M[yY][eE][sS])
-USE_BUILTIN.openssl=	yes
+USE_BUILTIN.openssl=		yes
 ### take care builtin check case, BUILDLINK_API_DEPENDS may not be defined yet.
-CHECK_BUILTIN.openssl?=	no
+CHECK_BUILTIN.openssl?=		no
 .      if !empty(CHECK_BUILTIN.openssl:M[yY][eE][sS])
-BUILDLINK_API_DEPENDS.openssl?=	openssl>=1.0.1c
+BUILDLINK_API_DEPENDS.openssl?=	openssl>=1.1.1
 .      endif
 .      for dep_ in ${BUILDLINK_API_DEPENDS.openssl}
 .        if !empty(USE_BUILTIN.openssl:M[yY][eE][sS])
@@ -104,12 +104,12 @@ USE_BUILTIN.openssl!=							\
 	defined(USE_FEATURES.openssl)
 .      if !empty(USE_FEATURES.openssl:Mthreads) && \
 	  !empty(BUILTIN_OPENSSL_HAS_THREADS:M[nN][oO])
-USE_BUILTIN.openssl=	no
+USE_BUILTIN.openssl=		no
 .      endif
 .    endif
 .  endif  # PREFER.openssl
 .endif
-MAKEVARS+=	USE_BUILTIN.openssl
+MAKEVARS+=			USE_BUILTIN.openssl
 
 ###
 ### The section below only applies if we are not including this file
@@ -133,81 +133,19 @@ BUILDLINK_PREFIX.openssl=	/boot/common
 .    endif
 .  endif
 
-# By default, we don't bother with the old DES API.
-USE_OLD_DES_API?=	no
-.  if !empty(USE_OLD_DES_API:M[yY][eE][sS])
-#
-# If we're using the old DES API, then check to see if the old DES
-# code was factored out into a separate library and header files and
-# no longer a part of libcrypto.
-#
-.    if !empty(USE_BUILTIN.openssl:M[yY][eE][sS])
-.      if exists(${BUILDLINK_PREFIX.openssl}/include/des.h) && \
-          !empty(BUILTIN_LIB_FOUND.des:M[yY][eE][sS])
-BUILDLINK_TRANSFORM+=	l:crypto:des:crypto
-WRAPPER_REORDER_CMDS+=	reorder:l:des:crypto
-.      endif
-.    endif
-
-# The idea is to avoid the need to patch source files for packages that
-# use OpenSSL for DES support by ensuring that including <openssl/des.h>
-# will always present the old DES API.
-#
-# (1) If des_old.h exists, then we're using OpenSSL>=0.9.7, and
-#     <openssl/des.h> already does the right thing.
-#
-# (2) If des_old.h doesn't exist, then one of two things is happening:
-#     (a) If <openssl/des.h> is old and (only) supports the old DES API,
-#         then <openssl/des.h> does the right thing.
-#     (b) If it's NetBSD's Special(TM) one that stripped out the old DES
-#         support into a separate library and header (-ldes, <des.h>),
-#         then we create a new header <openssl/des.h> that includes the
-#         system one and <des.h>, and we create an <openssl/des_old.h>
-#         that just includes <des.h>.
-#
-BUILDLINK_TARGETS+=	buildlink-openssl-des-h
-.    if !target(buildlink-openssl-des-h)
-.PHONY: buildlink-openssl-des-h
-buildlink-openssl-des-h:
-	${RUN}								\
-	bl_odes_h="${BUILDLINK_DIR}/include/openssl/des.h";		\
-	bl_odes_old_h="${BUILDLINK_DIR}/include/openssl/des_old.h";	\
-	odes_h="${BUILDLINK_PREFIX.openssl}/include/openssl/des.h";	\
-	odes_old_h="${BUILDLINK_PREFIX.openssl}/include/openssl/des_old.h"; \
-	des_h="${BUILDLINK_PREFIX.openssl}/include/des.h";		\
-	if ${TEST} -f "$$odes_old_h"; then				\
-		${ECHO_BUILDLINK_MSG} "<openssl/des.h> supports old DES API."; \
-		exit 0;							\
-	elif ${GREP} -q "des_cblock" "$$odes_h" 2>/dev/null; then	\
-		${ECHO_BUILDLINK_MSG} "<openssl/des.h> supports old DES API."; \
-		exit 0;							\
-	elif ${TEST} -f "$$des_h" -a -f "$$odes_h"; then		\
-		${ECHO_BUILDLINK_MSG} "Creating $$bl_odes_h";		\
-		${RM} -f $$bl_odes_h;					\
-		${MKDIR} `${DIRNAME} $$bl_odes_h`;			\
-		( ${ECHO} "/* Created by openssl/builtin.mk:${.TARGET} */"; \
-		  ${ECHO} "#include \"$$odes_h\"";			\
-		  ${ECHO} "#include \"$$des_h\"";			\
-		) > $$bl_odes_h;					\
-		${ECHO_BUILDLINK_MSG} "Creating $$bl_odes_old_h";	\
-		${RM} -f $$bl_odes_old_h;				\
-		${MKDIR} `${DIRNAME} $$bl_odes_old_h`;			\
-		( ${ECHO} "/* Created by openssl/builtin.mk:${.TARGET} */"; \
-		  ${ECHO} "#include \"$$des_h\"";			\
-		) > $$bl_odes_old_h;					\
-		exit 0;							\
-	else								\
-		${ECHO} "Unable to find headers for old DES API.";	\
-		exit 1;							\
-	fi
-.    endif
-.  endif  # USE_OLD_DES_API == yes
-
 .  if defined(PKG_SYSCONFDIR.openssl)
 SSLDIR=	${PKG_SYSCONFDIR.openssl}
 .  elif !empty(USE_BUILTIN.openssl:M[yY][eE][sS])
 .    if ${OPSYS} == "NetBSD"
 SSLDIR=	/etc/openssl
+.    elif ${OPSYS} == "Linux"
+.      if exists(/etc/pki/tls)
+# Some distributions have moved to /etc/pki/tls, with incomplete
+# symlinks from /etc/ssl.  Prefer the new location if it exists
+SSLDIR=	/etc/pki/tls 
+.      else
+SSLDIR=	/etc/ssl 		# standard location
+.      endif
 .    elif ${OPSYS} == "Haiku"
 .      if exists(/boot/system/data/ssl)
 SSLDIR=	/boot/system/data/ssl
@@ -222,9 +160,16 @@ SSLDIR=	${PKG_SYSCONFBASEDIR}/openssl
 .  endif
 
 SSLCERTS=	${SSLDIR}/certs
+# Some systems use CA bundles instead of files and hashed symlinks.
+# Continue to define SSLCERTS because it's unclear if that's the
+# directory that has one file per cert, or the directory that contains
+# trust anchor config in some fortm.
+.  if exists(${SSLDIR}/certs/ca-bundle.crt)
+SSLCERTBUNDLE=  ${SSLDIR}/certs/ca-bundle.crt
+.  endif
 SSLKEYS=	${SSLDIR}/private
 
-BUILD_DEFS+=	SSLDIR SSLCERTS SSLKEYS
+BUILD_DEFS+=	SSLDIR SSLCERTS SSLCERTBUNDLE SSLKEYS
 
 # create pc files for builtin version; other versions assumed to contain them
 # If we are using the builtin version, check whether it has a *.pc

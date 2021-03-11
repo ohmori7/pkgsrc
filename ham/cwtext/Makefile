@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.23 2019/04/25 07:33:00 maya Exp $
+# $NetBSD: Makefile,v 1.27 2020/12/04 20:45:23 nia Exp $
 
 DISTNAME=	cwtext-0.96
-PKGREVISION=	3
+PKGREVISION=	4
 CATEGORIES=	ham
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=cwtext/}
 
@@ -12,6 +12,9 @@ COMMENT=	Morse Code Generator
 MAKE_FILE=	makefile
 USE_TOOLS+=	gmake
 BUILD_TARGET=	ALL
+
+# harmless; the only call is properly guarded
+BUILDLINK_TRANSFORM+=	rm:-Werror=char-subscripts
 
 INSTALLATION_DIRS=	bin
 INSTALLATION_DIRS+=	share/doc/${PKGBASE}

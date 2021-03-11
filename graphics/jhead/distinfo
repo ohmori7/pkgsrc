@@ -1,7 +1,7 @@
-$NetBSD: distinfo,v 1.20 2017/07/12 12:21:56 wiz Exp $
+$NetBSD: distinfo,v 1.22 2020/11/26 16:35:17 nia Exp $
 
-SHA1 (jhead-3.00.tar.gz) = 6bd3faa38cc884b5370e8e8f15bc10cbb706ec7a
-RMD160 (jhead-3.00.tar.gz) = 34bcaed29b3907edb16b5cc9099776ac5fc2c937
-SHA512 (jhead-3.00.tar.gz) = daedfe7ea6be051f769e9a1e0946ea0fa741f387bbc5ba55eec394fb3f37b18a66aa8826190c790eb50a5b9d445ee0d5a28a08d181db3be469686b0675540fbe
-Size (jhead-3.00.tar.gz) = 69151 bytes
-SHA1 (patch-makefile) = 63d91d3382ec61bc82a7492572c89439171f1c95
+SHA1 (jhead-3.04.tar.gz) = 914ee3944d582bf3b3df8b208fffba6b8b07d2f3
+RMD160 (jhead-3.04.tar.gz) = 3e5558e2ab6b9f5a7eb3c089928fce45b8d884b5
+SHA512 (jhead-3.04.tar.gz) = d783b02059ebcb01845d346e7c48bdc9d9f12fb7b0fd47bf8aff0a85a03f3523fbc536ddab0912f1c56ddb315b6cf31f16d4c7a4f81112d9a4c76a4a57ec1aed
+Size (jhead-3.04.tar.gz) = 67754 bytes
+SHA1 (patch-makefile) = 48407ae7fc9aa3c0594dec09dd9abc70dfb79efb

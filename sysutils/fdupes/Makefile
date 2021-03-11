@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.4 2016/04/01 11:12:27 jperkin Exp $
+# $NetBSD: Makefile,v 1.8 2020/11/26 16:07:11 nia Exp $
 
-DISTNAME=	fdupes-1.51
+DISTNAME=	fdupes-2.1.2
 CATEGORIES=	sysutils
-MASTER_SITES=	http://fdupes.googlecode.com/files/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=adrianlopezroche/}
+GITHUB_RELEASE=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	ef@math.uni-bonn.de
 HOMEPAGE=	http://netdial.caribe.net/~adrian2/fdupes.html
@@ -10,10 +11,7 @@ COMMENT=	Program for identifying or deleting duplicate files
 LICENSE=	mit
 
 USE_LANGUAGES=	c
-NO_CONFIGURE=	yes
+GNU_CONFIGURE=	yes
 
-MAKE_FLAGS=	INSTALLDIR=${PREFIX}/bin
-
-INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
-
+.include "../../devel/pcre2/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

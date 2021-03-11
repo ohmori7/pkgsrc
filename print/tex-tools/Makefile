@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.13 2019/01/30 07:10:26 markd Exp $
+# $NetBSD: Makefile,v 1.17 2021/02/13 05:41:37 markd Exp $
 
 DISTNAME=	tools
-PKGNAME=	tex-${DISTNAME}-2018.49619
-TEXLIVE_REV=	49619
+PKGNAME=	tex-${DISTNAME}-2020.56514
+TEXLIVE_REV=	56514
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/latex-tools
+HOMEPAGE=	https://ctan.org/pkg/latex-tools
 COMMENT=	The LaTeX standard tools bundle
 LICENSE=	lppl-1.3c
 

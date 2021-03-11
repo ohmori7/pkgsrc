@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.3 2019/01/29 19:36:00 markd Exp $
+# $NetBSD: Makefile,v 1.6 2020/05/03 11:57:36 markd Exp $
 
 DISTNAME=	schwalbe-chess.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-2.3
-TEXLIVE_REV=	49602
+PKGNAME=	tex-${DISTNAME:S/./-/}-2.7
+TEXLIVE_REV=	53305
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/schwalbe-chess
+HOMEPAGE=	https://ctan.org/pkg/schwalbe-chess
 COMMENT=	Documentation for tex-schwalbe-chess
 LICENSE=	lppl-1.2
 

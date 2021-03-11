@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.5 2018/08/22 09:47:05 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2020/08/31 18:12:08 wiz Exp $
 
 DISTNAME=	XML-Compile-SOAP12-3.06
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/M/MA/MARKOV/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/XML-Compile-SOAP12/
+HOMEPAGE=	https://metacpan.org/release/XML-Compile-SOAP12
 COMMENT=	SOAP 1.2 implementation for perl
 LICENSE=	${PERL5_LICENSE}
 

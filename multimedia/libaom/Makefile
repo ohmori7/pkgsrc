@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.6 2019/06/07 17:54:07 rjs Exp $
+# $NetBSD: Makefile,v 1.10 2020/12/23 15:03:09 gdt Exp $
 
 PKGNAME=	libaom-1.0.0
-PKGREVISION=	1
+PKGREVISION=	3
 DISTNAME=	aom-d14c5bb4f336ef1842046089849dee4a301fbbf0
 CATEGORIES=	multimedia
 #MASTER_SITES=	-https://aomedia.googlesource.com/aom/+archive/d14c5bb4f336ef1842046089849dee4a301fbbf0.tar.gz
@@ -38,7 +38,8 @@ CMAKE_ARGS+=	-DENABLE_WERROR:BOOL=OFF
 .include "../../mk/bsd.prefs.mk"
 
 .if !empty(MACHINE_PLATFORM:MNetBSD-*-*arm*) \
-  || !empty(MACHINE_PLATFORM:MNetBSD-*-aarch64)
+  || !empty(MACHINE_PLATFORM:MNetBSD-*-aarch64) \
+  || !empty(MACHINE_PLATFORM:MDarwin-*-aarch64)
 CMAKE_ARGS+=	-DCONFIG_RUNTIME_CPU_DETECT=0
 .endif
 

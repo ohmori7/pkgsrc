@@ -1,4 +1,4 @@
-# $NetBSD: Darwin.mk,v 1.94 2019/05/14 10:49:37 leot Exp $
+# $NetBSD: Darwin.mk,v 1.102 2021/02/02 15:47:54 jperkin Exp $
 #
 # Variable definitions for the Darwin operating system.
 
@@ -13,17 +13,20 @@
 #		10.1.x	5.x.y
 # Jaguar	10.2.x	6.x.y
 # Panther	10.3.x	7.x.y
-# Tiger		10.4.x	8.x.y	2.x (gcc 4.0, 4.0.1 from 2.2)
-# Leopard	10.5.x	9.x.y	3.x (gcc 4.0.1, 4.0.1 and 4.2.1 from 3.1)
+# Tiger		10.4.x	8.x.y	2.x  (gcc 4.0, 4.0.1 from 2.2)
+# Leopard	10.5.x	9.x.y	3.x  (gcc 4.0.1, 4.0.1 and 4.2.1 from 3.1)
 # Snow Leopard	10.6.x	10.x.y	3.2+ (gcc 4.0.1 and 4.2.1)
-# Lion		10.7.x	11.x.y	4.1 (llvm gcc 4.2.1)
-# Mountain Lion	10.8.x	12.x.y	4.5 (llvm gcc 4.2.1)
-# Mavericks	10.9.x	13.x.y	6 (llvm clang 6.0)
-# Yosemite	10.10.x	14.x.y	6 (llvm clang 6.0)
-# El Capitan	10.11.x	15.x.y	7 (llvm clang 7.0)
-# Sierra	10.12.x	16.x.y	8.3 (llvm clang 8.0)
-# High Sierra	10.13.x	17.x.y	9.3 (llvm clang 9.0)
+# Lion		10.7.x	11.x.y	4.1  (llvm gcc 4.2.1)
+# Mountain Lion	10.8.x	12.x.y	4.5  (llvm gcc 4.2.1)
+# Mavericks	10.9.x	13.x.y	6    (llvm clang 6.0)
+# Yosemite	10.10.x	14.x.y	6    (llvm clang 6.0)
+# El Capitan	10.11.x	15.x.y	7    (llvm clang 7.0)
+# Sierra	10.12.x	16.x.y	8.3  (llvm clang 8.0)
+# High Sierra	10.13.x	17.x.y	9.3  (llvm clang 9.0)
 # Mojave	10.14.x	18.x.y	10.2 (llvm clang 10.0)
+# Catalina	10.15.x 19.x.y
+# Big Sur	11.0*   20.0    12.0 (llvm clang 12.0)
+#  *) 11.0 on ARM, 10.16 on Intel Macs, for now
 
 # Tiger (and earlier) use Xfree 4.4.0 (and earlier)
 .if empty(MACHINE_PLATFORM:MDarwin-[0-8].*-*)
@@ -82,11 +85,10 @@ _USER_DEPENDS=		user-darwin>=20130712:../../sysutils/user_darwin
 _OPSYS_EMULDIR.darwin=	# empty
 
 _OPSYS_SYSTEM_RPATH?=	/usr/lib
-_OPSYS_LIB_DIRS?=	/usr/lib
 
 .if !defined(OSX_VERSION)
 OSX_VERSION!=		sw_vers -productVersion
-.  if ${OSX_VERSION:R:R} != ${OSX_VERSION:R}
+.  if "${OSX_VERSION:R:R}" != "${OSX_VERSION:R}"
 OSX_VERSION:=		${OSX_VERSION:R}
 .  endif
 MAKEFLAGS+=		OSX_VERSION=${OSX_VERSION:Q}
@@ -103,7 +105,15 @@ MAKEFLAGS+=		OSX_VERSION=${OSX_VERSION:Q}
 _OPSYS_INCLUDE_DIRS?=	/usr/include
 .elif exists(/usr/bin/xcrun)
 .  if !defined(OSX_SDK_PATH)
-OSX_SDK_PATH!=	/usr/bin/xcrun --sdk macosx${OSX_VERSION} --show-sdk-path 2>/dev/null || echo /nonexistent
+#
+# Apple do not always keep the SDK version in step with the OS version.  When
+# that happens add a mapping below, but only within the same OS release major.
+#
+OSX_SDK_MAP.11.2=	11.1
+#
+OSX_SDK_PATH!=	/usr/bin/xcrun \
+		    --sdk macosx${OSX_SDK_MAP.${OSX_VERSION}:U${OSX_VERSION}} \
+		    --show-sdk-path 2>/dev/null || echo /nonexistent
 OSX_TOLERATE_SDK_SKEW?=	no
 .    if ${OSX_SDK_PATH} == "/nonexistent" && !empty(OSX_TOLERATE_SDK_SKEW:M[Yy][Ee][Ss])
 OSX_SDK_PATH!=	/usr/bin/xcrun --sdk macosx --show-sdk-path 2>/dev/null || echo /nonexistent
@@ -115,6 +125,22 @@ _OPSYS_INCLUDE_DIRS?=	${OSX_SDK_PATH}/usr/include
 .  else
 PKG_FAIL_REASON+=	"No suitable Xcode SDK or Command Line Tools installed."
 .  endif
+.endif
+
+#
+# Newer macOS releases remove library files from the file system.  The only way
+# to test them is via dlopen(), which is obviously impractical for many things.
+#
+# The DARWIN_NO_SYSTEM_LIBS define turns off anything that can't reasonably
+# support this.  We also need to set _OPSYS_LIB_DIRS for find-libs.mk to look
+# in the SDK directory.  It may be that this can be set for all versions, but
+# for now keep the legacy behaviour and limit it to Big Sur onwards only.
+#
+.if ${OS_VERSION:R} >= 20
+DARWIN_NO_SYSTEM_LIBS=	# defined
+_OPSYS_LIB_DIRS?=	${OSX_SDK_PATH}/usr/lib
+.else
+_OPSYS_LIB_DIRS?=	/usr/lib
 .endif
 
 .if ${OS_VERSION:R} >= 6
@@ -156,6 +182,7 @@ BUILDLINK_TRANSFORM+=	rm:-Wl,-O2
 BUILDLINK_TRANSFORM+=	rm:-Wl,-Bdynamic
 BUILDLINK_TRANSFORM+=	rm:-Wl,-Bsymbolic
 BUILDLINK_TRANSFORM+=	rm:-Wl,-export-dynamic
+BUILDLINK_TRANSFORM+=	rm:-Wl,-no_warn_inits 
 BUILDLINK_TRANSFORM+=	rm:-Wl,-warn-common
 BUILDLINK_TRANSFORM+=	rm:-Wl,--as-needed
 BUILDLINK_TRANSFORM+=	rm:-Wl,--no-as-needed
@@ -213,4 +240,10 @@ CONFIGURE_ENV+=		gl_cv_func_getcwd_abort_bug=no
      !empty(OS_VERSION:M1[4-9].*)) && \
     exists(/bin/ksh)
 WRAPPER_BIN_SH?=	/bin/ksh
+.endif
+
+# strnlen(3) wasn't included until Lion, pull it in from libnbcompat on prior
+# releases.
+.if ${OS_VERSION:R} < 11
+_OPSYS_MISSING_FEATURES+= 	strnlen
 .endif

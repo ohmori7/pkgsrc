@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.39 2019/04/03 00:32:43 ryoon Exp $
+# $NetBSD: Makefile,v 1.50 2020/11/05 09:08:14 ryoon Exp $
 
 VERSION=	1.5.1
 DISTNAME=	solarus-${VERSION}-src
 PKGNAME=	${DISTNAME:S/-src//1}
-PKGREVISION=	17
+PKGREVISION=	27
 CATEGORIES=	games
 MASTER_SITES=	http://www.solarus-games.org/downloads/solarus/
 
@@ -12,22 +12,18 @@ HOMEPAGE=	http://www.solarus-games.org/solarus/
 COMMENT=	Open-source Zelda-like 2D game engine licensed under GPL
 LICENSE=	gnu-gpl-v3
 
+TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
+
 WRKSRC=		${WRKDIR}/solarus-${VERSION}
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
 
-.include "../../mk/bsd.prefs.mk"
-
 GCC_REQD+=	4.8
 LDFLAGS.SunOS+=	-lsocket -lnsl
 
-.include "../../x11/qt5-qttools/buildlink3.mk"
+.include "options.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../devel/physfs/buildlink3.mk"
-.include "../../lang/LuaJIT2/buildlink3.mk"
-LUA_VERSIONS_ACCEPTED=		51
-BUILDLINK_API_DEPENDS.lua51+=	lua51>=5.1.5
-.include "../../lang/lua/buildlink3.mk"
 .include "../../audio/libmodplug/buildlink3.mk"
 .include "../../multimedia/libogg/buildlink3.mk"
 .include "../../audio/libvorbis/buildlink3.mk"

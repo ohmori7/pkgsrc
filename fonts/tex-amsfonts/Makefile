@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.10 2017/09/06 16:27:19 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2020/05/10 04:31:36 markd Exp $
 
 DISTNAME=	amsfonts
 PKGNAME=	tex-${DISTNAME}-3.04
+PKGREVISION=	1
 TEXLIVE_REV=	29208
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/amsfonts
+HOMEPAGE=	https://ctan.org/pkg/amsfonts
 COMMENT=	TeX fonts from the American Mathematical Society
 LICENSE=	ofl-v1.1
 
@@ -19,5 +20,6 @@ TEX_MIXEDMAP_FILES+=	cyrillic.map
 TEX_MIXEDMAP_FILES+=	latxfont.map
 TEX_MIXEDMAP_FILES+=	symbols.map
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.23 2019/04/25 07:33:01 maya Exp $
+# $NetBSD: Makefile,v 1.26 2020/12/04 20:45:24 nia Exp $
 
 DISTNAME=	ibus-table-1.9.2
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	inputmethod
 MASTER_SITES=	https://github.com/kaio/ibus-table/releases/download/${PKGVERSION_NOREV}/
 
@@ -24,7 +24,7 @@ SUBST_STAGE.prefix=	pre-configure
 SUBST_FILES.prefix=	engine/tabcreatedb.py
 SUBST_SED.prefix=	-e 's|/usr/share|${PREFIX}/share|g'
 
-REPLACE_PYTHON+=	engine/tabcreatedb.py
+REPLACE_PYTHON+=		engine/tabcreatedb.py
 PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 .include "../../lang/python/application.mk"

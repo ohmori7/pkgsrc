@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.18 2018/08/22 09:46:27 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2020/08/31 18:11:19 wiz Exp $
 #
 
 DISTNAME=		Net-DNS-SEC-Maint-Key-0.013
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		11
+PKGREVISION=		13
 CATEGORIES=		security net perl5
 #MASTER_SITES=		https://www.ripe.net/disi/dnssec_maint_tool/
 

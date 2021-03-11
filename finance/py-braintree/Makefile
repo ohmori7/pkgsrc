@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.19 2019/05/22 20:56:09 adam Exp $
+# $NetBSD: Makefile,v 1.31 2021/01/26 06:22:51 adam Exp $
 
-DISTNAME=	braintree-3.54.0
+DISTNAME=	braintree-4.6.0
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	finance python
 MASTER_SITES=	${MASTER_SITE_PYPI:=b/braintree/}
@@ -13,6 +13,8 @@ LICENSE=	mit
 DEPENDS+=	${PYPKGPREFIX}-requests>=0.11.1:../../devel/py-requests
 
 USE_LANGUAGES=	# none
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

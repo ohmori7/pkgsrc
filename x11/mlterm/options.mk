@@ -1,27 +1,39 @@
-# $NetBSD: options.mk,v 1.16 2019/04/05 12:14:58 tsutsui Exp $
+# $NetBSD: options.mk,v 1.20 2020/06/21 17:53:01 tsutsui Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.mlterm
-PKG_SUPPORTED_OPTIONS=	cairo canna fcitx fribidi gdk_pixbuf2 ibus libind m17nlib mlterm-fb otl scim skk uim utmp wnn4 xft2
-PKG_SUGGESTED_OPTIONS=	cairo fribidi gdk_pixbuf2 m17nlib otl utmp xft2
+PKG_SUPPORTED_OPTIONS=	cairo canna fcitx fribidi gdk_pixbuf2 ibus libind m17nlib mlterm-fb otl scim skk uim wnn4 xft2
+PKG_SUGGESTED_OPTIONS=	cairo fribidi gdk_pixbuf2 m17nlib otl xft2
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD" || ${OPSYS} == "Linux"
 PKG_SUGGESTED_OPTIONS+=	mlterm-fb
 .endif
 
 .include "../../mk/bsd.options.mk"
 
-PLIST_VARS+=		bidi cairo canna fb fcitx ibus ind m17nlib otl scim skk uim wnn xft2
+PLIST_VARS+=		bidi cairo canna fb fbfiles fcitx ibus ind m17nlib otl scim skk uim wscons wnn x68kgrf xft2
 
 .if !empty(PKG_OPTIONS:Mmlterm-fb)
+.  if ${OPSYS} == "NetBSD"
+.    if ${MACHINE_ARCH} == "m68k"
+CONFIGURE_ARGS+=	--with-gui=xlib,wscons,x68kgrf
+SPECIAL_PERMS+=		${PREFIX:Q}/bin/mlterm-x68kgrf ${SETUID_ROOT_PERMS}
+PLIST.x68kgrf=		yes
+.    else	# NetBSD && !m68k
+CONFIGURE_ARGS+=	--with-gui=xlib,wscons
+.    endif
+SPECIAL_PERMS+=		${PREFIX:Q}/bin/mlterm-wscons ${SETUID_ROOT_PERMS}
+PLIST.wscons=		yes
+.  else		# !NetBSD (i.e. FreeBSD or Linux)
 CONFIGURE_ARGS+=	--with-gui=xlib,fb
-PLIST.fb=		yes
 SPECIAL_PERMS+=		${PREFIX:Q}/bin/mlterm-fb ${SETUID_ROOT_PERMS}
+PLIST.fb=		yes
+.  endif
 CONF_FILES+=		${EGDIR}/font-fb ${PKG_SYSCONFDIR}/font-fb
+PLIST.fbfiles=		yes
 .endif
 
 .if !empty(PKG_OPTIONS:Mcairo)
 .include "../../graphics/cairo/buildlink3.mk"
 PLIST.cairo=		yes
-.else
 .endif
 
 .if !empty(PKG_OPTIONS:Mcanna)
@@ -113,13 +125,6 @@ LICENSE+=		AND gnu-lgpl-v2
 CONFIGURE_ARGS+=	--disable-uim
 .endif
 
-.if !empty(PKG_OPTIONS:Mutmp)
-CONFIGURE_ARGS+=	--enable-utmp
-SPECIAL_PERMS+=		bin/mlterm ${REAL_ROOT_USER} utmp 2755
-.else
-CONFIGURE_ARGS+=	--disable-utmp
-.endif
-
 .if !empty(PKG_OPTIONS:Mwnn4)
 .include "../../inputmethod/ja-freewnn-lib/buildlink3.mk"
 CONFIGURE_ARGS+=	--enable-wnn
@@ -138,10 +143,10 @@ CONFIGURE_ARGS+=	--disable-fontconfig
 
 .if !empty(PKG_OPTIONS:Mcairo) && !empty(PKG_OPTIONS:Mxft2)
 CONFIGURE_ARGS+=	--with-type-engines=xcore,xft,cairo
-.if !empty(PKG_OPTIONS:Mmlterm-fb)
+.  if !empty(PKG_OPTIONS:Mmlterm-fb)
 # --enable-anti-alias is also required for mlterm-fb
 CONFIGURE_ARGS+=	--enable-anti-alias
-.endif
+.  endif
 .elif !empty(PKG_OPTIONS:Mcairo)
 CONFIGURE_ARGS+=	--with-type-engines=xcore,cairo
 .elif !empty(PKG_OPTIONS:Mxft2)

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.31 2015/01/06 11:27:15 ryoon Exp $
+# $NetBSD: Makefile,v 1.33 2020/01/26 17:31:43 rillig Exp $
 #
 
 DISTNAME=	FD-3.01b
@@ -7,7 +7,7 @@ CATEGORIES=	misc shells
 MASTER_SITES=	http://hp.vector.co.jp/authors/VA012337/soft/fd/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://hp.vector.co.jp/authors/VA012337/soft/fd/
+HOMEPAGE=	https://hp.vector.co.jp/authors/VA012337/soft/fd/
 COMMENT=	File and directory management tool
 
 MAKE_FLAGS+=	CONFDIR=${PKG_SYSCONFDIR}
@@ -24,7 +24,7 @@ DATADIR=	${PREFIX}/share/fd
 DOCDIR=		${PREFIX}/share/doc/fd
 EXAMPLESDIR=	${PREFIX}/share/examples/fd
 
-CFLAGS+=	-DUSEMANLANG -DUSEDATADIR
+CFLAGS+=		-DUSEMANLANG -DUSEDATADIR
 DESTDIR_VARNAME=	BUILD
 
 DOCS=		FAQ LICENSES HISTORY README TECHKNOW ToAdmin

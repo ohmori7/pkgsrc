@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.12 2019/03/21 11:55:24 jaapb Exp $
+# $NetBSD: Makefile,v 1.14 2021/03/08 08:13:01 jaapb Exp $
 
 DISTNAME=	ocamlbuild-0.14.0
+PKGREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ocaml/}
 
@@ -15,7 +16,7 @@ USE_LANGUAGES=	# none
 USE_TOOLS+=	gmake
 
 OCAML_USE_FINDLIB=	yes
-INSTALL_TARGET=	findlib-install
+INSTALL_TARGET=		findlib-install
 
 MAKE_ENV=	CHECK_IF_PREINSTALLED=false OCAMLBUILD_BINDIR=${PREFIX}/bin \
 		OCAMLBUILD_LIBDIR=${PREFIX}/${OCAML_SITELIBDIR}

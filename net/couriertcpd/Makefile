@@ -1,22 +1,20 @@
-# $NetBSD: Makefile,v 1.28 2018/04/17 22:29:44 wiz Exp $
+# $NetBSD: Makefile,v 1.32 2020/05/21 19:21:17 rillig Exp $
 
 DISTNAME=	courier-${COURIER_VERSION}
 PKGNAME=	${DISTNAME:S/-/tcpd-/}
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=courier/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Courier TCP socket and TLS servers
-HOMEPAGE=	http://www.courier-mta.org/
+HOMEPAGE=	https://www.courier-mta.org/
 
 CONFLICTS=	courier-imap<4.1.1
 
-USE_TOOLS+=		gmake
+USE_TOOLS+=		gmake pkg-config
 USE_LANGUAGES=		c c++
-
-.include "options.mk"
 
 .include "../../mail/courier-mta/Makefile.common"
 
@@ -54,12 +52,5 @@ do-install:
 		${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/couriertcpd.1
 	${INSTALL_DATA} ${WRKSRC}/tcpd/couriertcpd.html			\
 		${DESTDIR}${DOCDIR}/couriertcpd.html
-
-	${INSTALL_PROGRAM} ${WRKSRC}/tcpd/couriertls			\
-		${DESTDIR}${PREFIX}/bin/couriertls
-	${INSTALL_MAN} ${WRKSRC}/tcpd/couriertls.1			\
-		${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/couriertls.1
-	${INSTALL_DATA} ${WRKSRC}/tcpd/couriertls.html			\
-		${DESTDIR}${DOCDIR}/couriertls.html
 
 .include "../../mk/bsd.pkg.mk"

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.18 2018/08/22 09:47:54 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2020/08/31 18:13:11 wiz Exp $
 
-DISTNAME=	Test-WWW-Mechanize-Catalyst-0.60
+DISTNAME=	Test-WWW-Mechanize-Catalyst-0.62
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	1
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Test/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Test-WWW-Mechanize-Catalyst/
+HOMEPAGE=	https://metacpan.org/release/Test-WWW-Mechanize-Catalyst
 COMMENT=	Test::WWW::Mechanize for Catalyst
 LICENSE=	${PERL5_LICENSE}
 
@@ -20,12 +20,13 @@ DEPENDS+=	p5-WWW-Mechanize>=1.54:../../www/p5-WWW-Mechanize
 DEPENDS+=	p5-libwww>=5.816:../../www/p5-libwww
 DEPENDS+=	p5-namespace-clean>=0.09:../../devel/p5-namespace-clean
 
-BUILD_DEPENDS+=	p5-Catalyst-Plugin-Session-[0-9]*:../../www/p5-Catalyst-Plugin-Session
-BUILD_DEPENDS+=	p5-Catalyst-Plugin-Session-State-Cookie-[0-9]*:../../www/p5-Catalyst-Plugin-Session-State-Cookie
-BUILD_DEPENDS+=	p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
+TEST_DEPENDS+=	p5-Catalyst-Plugin-Session-[0-9]*:../../www/p5-Catalyst-Plugin-Session
+TEST_DEPENDS+=	p5-Catalyst-Plugin-Session-State-Cookie-[0-9]*:../../www/p5-Catalyst-Plugin-Session-State-Cookie
+TEST_DEPENDS+=	p5-Test-Exception-[0-9]*:../../devel/p5-Test-Exception
+TEST_DEPENDS+=	p5-Test-utf8-[0-9]*:../../devel/p5-Test-utf8
 
 USE_LANGUAGES=	# empty
-PERL5_PACKLIST= auto/Test/WWW/Mechanize/Catalyst/.packlist
+PERL5_PACKLIST=	auto/Test/WWW/Mechanize/Catalyst/.packlist
 
 MAKE_ENV+=	PERL_USE_UNSAFE_INC=1
 

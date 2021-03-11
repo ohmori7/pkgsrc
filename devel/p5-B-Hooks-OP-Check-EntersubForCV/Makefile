@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.14 2018/08/22 09:43:38 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:07:30 wiz Exp $
 
 DISTNAME=	B-Hooks-OP-Check-EntersubForCV-0.10
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=B/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/B-Hooks-OP-Check-EntersubForCV/
+HOMEPAGE=	https://metacpan.org/release/B-Hooks-OP-Check-EntersubForCV
 COMMENT=	Invoke callbacks on construction of entersub OPs for certain CVs
 LICENSE=	${PERL5_LICENSE}
 

@@ -1,20 +1,21 @@
-# $NetBSD: Makefile,v 1.10 2019/04/26 13:14:18 maya Exp $
+# $NetBSD: Makefile,v 1.16 2021/02/08 14:32:16 adam Exp $
 
-DISTNAME=	GooCalendar-0.1
+DISTNAME=	GooCalendar-0.7.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:tl}
-CATEGORIES=	python time
-MASTER_SITES=	http://goocalendar.googlecode.com/files/
+CATEGORIES=	time python
+MASTER_SITES=	${MASTER_SITE_PYPI:=G/GooCalendar/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://goocalendar.tryton.org/
+HOMEPAGE=	https://pypi.org/project/GooCalendar/
 COMMENT=	Calendar widget using GooCanvas
 LICENSE=	gnu-gpl-v2
 
-DEPENDS+=	${PYPKGPREFIX}-goocanvas-[0-9]*:../../graphics/py-goocanvas
+DEPENDS+=	${PYPKGPREFIX}-gobject3>=3.20:../../devel/py-gobject3
 
 USE_LANGUAGES=	# none
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-gtk2 via py-goocanvas
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
+.include "../../graphics/goocanvas2/buildlink3.mk"
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

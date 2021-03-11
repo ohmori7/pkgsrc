@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.20 2019/04/16 11:33:18 ryoon Exp $
+# $NetBSD: Makefile,v 1.24 2020/04/17 11:05:44 ryoon Exp $
 #
 
-DISTNAME=	OmegaT_4.1.5_04_Beta_Without_JRE
+DISTNAME=	OmegaT_5.2.0_Beta_Without_JRE
 PKGNAME=	${DISTNAME:S/OmegaT_/OmegaT-/:S/_Without_JRE//:S/_Beta//:S/_/./g}
-PKGREVISION=	1
 CATEGORIES=	editors
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=omegat/}
 EXTRACT_SUFX=	.zip
@@ -15,7 +14,7 @@ LICENSE=	gnu-gpl-v2
 
 USE_LANGUAGES=	# none
 USE_JAVA=	yes
-USE_JAVA2=	yes
+USE_JAVA2=	8
 
 NO_BUILD=	yes
 

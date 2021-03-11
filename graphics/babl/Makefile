@@ -1,31 +1,44 @@
-# $NetBSD: Makefile,v 1.25 2019/06/18 14:24:02 ryoon Exp $
+# $NetBSD: Makefile,v 1.38 2021/01/12 18:06:58 jperkin Exp $
 
-DISTNAME=	babl-0.1.66
+DISTNAME=	babl-0.1.82
 CATEGORIES=	graphics
-MASTER_SITES=	http://download.gimp.org/pub/babl/0.1/
-EXTRACT_SUFX=	.tar.bz2
+MASTER_SITES=	https://download.gimp.org/pub/babl/0.1/
+EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://gegl.org/babl/
 COMMENT=	Dynamic pixel conversion library
 LICENSE=	gnu-gpl-v3
 
-WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
+USE_TOOLS+=	pkg-config
+USE_LANGUAGES=	c99
 
-# NOTE: to build documentation (which requires additional dependencies)
-#	define BUILD_DOCS in MAKE_ENV.
+MESON_ARGS+=	-Dwith-docs=false
+MESON_ARGS+=	-Denable-gir=false
 
-USE_LIBTOOL=		yes
-USE_TOOLS+=		pkg-config gmake
-GNU_CONFIGURE=		yes
 PKGCONFIG_OVERRIDE+=	babl.pc.in
 
-# XXX Clang does not handle assembler, yet
-#.include "../../mk/compiler.mk"
-#.if !empty(PKGSRC_COMPILER:Mclang)
-#CONFIGURE_ARGS+=	--disable-sse
-#.endif
+PYTHON_FOR_BUILD_ONLY=	tool
 
+.include "../../mk/bsd.prefs.mk"
+
+PLIST_VARS+=		Darwin not_Darwin
+.if ${OPSYS} == "Darwin"
+PLIST.Darwin=		yes
+PLIST_SUBST+=		SOEXT="dylib"
+.else
+PLIST.not_Darwin=	yes
+PLIST_SUBST+=		SOEXT="so"
+.endif
+
+# Apply removals to post-wrapper transformed arguments.
+BUILDLINK_TRANSFORM.Darwin+=	rm:-Wl,--version-script
+BUILDLINK_TRANSFORM.Darwin+=	rm:-Wl,babl.map
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,--version-script
+BUILDLINK_TRANSFORM.SunOS+=	rm:-Wl,babl.map
+
+.include "../../devel/meson/build.mk"
+.include "../../devel/glib2/buildlink3.mk"
 .include "../../graphics/lcms2/buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"

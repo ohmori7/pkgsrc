@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.23 2018/07/04 13:40:32 jperkin Exp $
+# $NetBSD: Makefile,v 1.28 2020/09/21 03:03:55 khorben Exp $
 
-DISTNAME=	pkg-1.9.99.4
-PKGREVISION=	1
+DISTNAME=	pkg-1.10.99.7
 CATEGORIES=	pkgtools
 MASTER_SITES=	http://files.etoilebsd.net/pkg/
 EXTRACT_SUFX=	.tar.xz
@@ -16,6 +15,7 @@ GNU_CONFIGURE=	yes
 USE_CWRAPPERS=	no
 USE_LANGUAGES=	c
 
+LDFLAGS+=	-pthread
 CPPFLAGS+=	-D_LOCALBASE="\"${PREFIX}\""
 CPPFLAGS+=	-DPORTSDIR="\"${PKG.portsdir}\""
 CPPFLAGS+=	-DDEFAULT_VULNXML_URL="\"http://muscles.dragonflybsd.org/pkgsrc-vuxml/vuln.xml.bz2\""
@@ -125,7 +125,6 @@ post-patch:
 .endif
 
 post-install:
-	${RM} ${DESTDIR}${PREFIX}/sbin/pkg2ng
 	${RM} -rf ${DESTDIR}${EGDIR}/periodic
 	${MV} ${DESTDIR}${PREFIX}/etc/bash_completion.d \
 		${DESTDIR}${EGDIR}/
@@ -149,4 +148,5 @@ BUILDLINK_TRANSFORM+=	rm:-Wl,--enable-new-dtags
 .if ${OPSYS} != "FreeBSD" && ${OPSYS} != "DragonFly" && ${OPSYS} != "NetBSD"
 .include "../../archivers/libarchive/buildlink3.mk"
 .endif
+.include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

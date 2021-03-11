@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.10 2018/01/02 09:24:08 fhajny Exp $
+# $NetBSD: Makefile,v 1.12 2021/03/05 10:33:14 nia Exp $
 
-DISTNAME=	pigz-2.4
+DISTNAME=	pigz-2.6
 CATEGORIES=	archivers
-MASTER_SITES=	http://zlib.net/pigz/
+MASTER_SITES=	https://zlib.net/pigz/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://zlib.net/pigz/
+HOMEPAGE=	https://zlib.net/pigz/
 COMMENT=	Parallel implementation of gzip
 LICENSE=	modified-bsd
 

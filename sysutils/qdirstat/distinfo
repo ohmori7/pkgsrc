@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.2 2018/11/17 20:02:41 bsiegert Exp $
+$NetBSD: distinfo,v 1.5 2020/09/20 11:10:44 markd Exp $
 
-SHA1 (qdirstat-1.5.tar.gz) = ecae0055791038f4add1ee8b256bc27070c1dc16
-RMD160 (qdirstat-1.5.tar.gz) = 877e3320867200422dd920d09ec8a6f45a30e43b
-SHA512 (qdirstat-1.5.tar.gz) = 7cafce3a085c4a9c4dc1ce1814d8bed9e0dbb9416b03dc49681b070c15cb114dfcf269c8f293671cc29b4e54c37d22b9ebff013902b147ce45592982d3ba8cbe
-Size (qdirstat-1.5.tar.gz) = 4546980 bytes
+SHA1 (qdirstat-1.7.tar.gz) = 998b645ad631811cb08cc86f5f800cb2d0f6a006
+RMD160 (qdirstat-1.7.tar.gz) = 01bf14e5e0f0e6382dff1550f285bb3255219235
+SHA512 (qdirstat-1.7.tar.gz) = 9af03c110663eab0df48f69f7d949421feebfdca1299205d25a216587cf2c9e472cbe99ad98f3cd6c783be2b02e0308cdbc2f5549bf662b3061ff5e059317b01
+Size (qdirstat-1.7.tar.gz) = 8057173 bytes

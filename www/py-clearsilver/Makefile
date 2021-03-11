@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.26 2019/04/26 14:12:48 maya Exp $
+# $NetBSD: Makefile,v 1.29 2020/08/31 18:13:15 wiz Exp $
 
 PKGNAME=			${PYPKGPREFIX}-${DISTNAME}
-PKGREVISION=			2
+PKGREVISION=			4
 
 .include "../../www/clearsilver/Makefile.common"
 
@@ -14,7 +14,7 @@ CFLAGS+=			-fPIC
 INSTALL_DIRS=			python
 
 PY_PATCHPLIST=			YES
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.10.5
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.10.5
 
 .include "../../lang/python/extension.mk"
 .include "../../mk/bsd.pkg.mk"

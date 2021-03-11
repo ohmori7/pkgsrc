@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.24 2019/02/24 16:18:52 taca Exp $
+# $NetBSD: Makefile,v 1.26 2020/03/20 17:45:36 taca Exp $
 
-DISTNAME=	sass-3.7.3
+DISTNAME=	sass-3.7.4
 CATEGORIES=	www
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://sass-lang.com/
+HOMEPAGE=	https://sass-lang.com/
 COMMENT=	Powerful, but elegant CSS compiler that makes CSS fun again
 LICENSE=	mit
 

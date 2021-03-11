@@ -1,10 +1,11 @@
-@comment $NetBSD: PLIST,v 1.6 2019/05/09 09:28:22 adam Exp $
+@comment $NetBSD: PLIST,v 1.8 2020/03/01 11:18:59 markd Exp $
 bin/pdfattach
 bin/pdfdetach
 bin/pdffonts
 bin/pdfimages
 bin/pdfinfo
 bin/pdfseparate
+bin/pdfsig
 bin/pdftocairo
 bin/pdftohtml
 bin/pdftoppm
@@ -17,6 +18,7 @@ man/man1/pdffonts.1
 man/man1/pdfimages.1
 man/man1/pdfinfo.1
 man/man1/pdfseparate.1
+man/man1/pdfsig.1
 man/man1/pdftocairo.1
 man/man1/pdftohtml.1
 man/man1/pdftoppm.1

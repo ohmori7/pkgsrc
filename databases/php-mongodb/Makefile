@@ -1,16 +1,15 @@
-# $NetBSD: Makefile,v 1.5 2019/04/03 00:32:31 ryoon Exp $
+# $NetBSD: Makefile,v 1.11 2021/03/07 13:21:57 taca Exp $
 
 MODNAME=	mongodb
-PECL_VERSION=	1.5.3
+PECL_VERSION=	1.9.0
 CATEGORIES+=	databases
 
 MAINTAINER=	bartosz.kuzma@gmail.com
 HOMEPAGE=	http://docs.mongodb.org/ecosystem/drivers/php/
 COMMENT=	MongoDB database driver
-PKGREVISION=	1
 LICENSE=	apache-2.0
 
-DEPENDS+=	${PHP_PKG_PREFIX}-json>=5.3.0:../../textproc/php-json
+PHP_VERSIONS_INCOMPATIBLE=	56
 
 USE_TOOLS+=		pkg-config
 CONFIGURE_ARGS+=	--with-libbson
@@ -20,5 +19,6 @@ CONFIGURE_ARGS+=	--with-openssl-dir=${BUILDLINK_PREFIX.openssl}
 .include "../../security/openssl/buildlink3.mk"
 .include "../../databases/mongo-c-driver/buildlink3.mk"
 .include "../../devel/snappy/buildlink3.mk"
+.include "../../lang/php/json.mk"
 .include "../../lang/php/ext.mk"
 .include "../../mk/bsd.pkg.mk"

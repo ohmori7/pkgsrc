@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.14 2018/03/12 11:16:21 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/17 20:18:31 leot Exp $
 
 DISTNAME=		vtcl-1.6.0
-PKGREVISION=		9
+PKGREVISION=		10
 CATEGORIES=		devel
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=vtcl/}
 
@@ -10,8 +10,8 @@ HOMEPAGE=		http://vtcl.sourceforge.net/
 COMMENT=		Visual Tcl/Tk application development environment
 
 USE_TOOLS+=	pax wish:run
-HAS_CONFIGURE=		yes
-NO_BUILD=		yes
+HAS_CONFIGURE=	yes
+NO_BUILD=	yes
 
 VTCLDIR=		${PREFIX}/lib/vtcl
 VTCLDOCDIR=		${PREFIX}/share/doc/vtcl

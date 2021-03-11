@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.46 2019/04/03 00:32:41 ryoon Exp $
+# $NetBSD: Makefile,v 1.56 2020/11/05 09:08:03 ryoon Exp $
 
 DISTNAME=		ckmame-1.0
-PKGREVISION=		1
+PKGREVISION=		10
 CATEGORIES=		emulators
 MASTER_SITES=		https://www.nih.at/ckmame/
 EXTRACT_SUFX=		.tar.xz
@@ -15,7 +15,7 @@ USE_TOOLS+=		pkg-config perl:test
 USE_CMAKE=		yes
 TEST_TARGET=		check
 
-BUILDLINK_API_DEPENDS.libzip+=  libzip>=1.0
+BUILDLINK_API_DEPENDS.libzip+=	libzip>=1.0
 
 .include "../../archivers/libzip/buildlink3.mk"
 .include "../../databases/sqlite3/buildlink3.mk"

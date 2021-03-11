@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.31 2018/08/22 09:45:07 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2020/08/31 18:09:31 wiz Exp $
 #
 
 DISTNAME=	Font-TTF-1.06
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Font/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~mhosken/Font-TTF/
+HOMEPAGE=	https://metacpan.org/release/MHOSKEN/Font-TTF-1.05
 COMMENT=	Perl module for TrueType font hacking
 LICENSE=	artistic-2.0
 

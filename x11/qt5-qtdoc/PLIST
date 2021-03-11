@@ -1,4 +1,25 @@
-@comment $NetBSD: PLIST,v 1.10 2019/03/26 11:14:17 adam Exp $
+@comment $NetBSD: PLIST,v 1.16 2020/11/21 11:22:32 adam Exp $
+qt5/doc/qtcmake.qch
+qt5/doc/qtcmake/cmake-command-reference.html
+qt5/doc/qtcmake/cmake-get-started.html
+qt5/doc/qtcmake/cmake-manual.html
+qt5/doc/qtcmake/cmake-variable-reference.html
+qt5/doc/qtcmake/images/arrow_bc.png
+qt5/doc/qtcmake/images/bgrContent.png
+qt5/doc/qtcmake/images/btn_next.png
+qt5/doc/qtcmake/images/btn_prev.png
+qt5/doc/qtcmake/images/bullet_dn.png
+qt5/doc/qtcmake/images/bullet_sq.png
+qt5/doc/qtcmake/images/home.png
+qt5/doc/qtcmake/images/ico_note.png
+qt5/doc/qtcmake/images/ico_note_attention.png
+qt5/doc/qtcmake/images/ico_out.png
+qt5/doc/qtcmake/images/logo.png
+qt5/doc/qtcmake/qtcmake.index
+qt5/doc/qtcmake/qtcmake.qhp
+qt5/doc/qtcmake/qtcmake.qhp.sha1
+qt5/doc/qtcmake/style/offline-simple.css
+qt5/doc/qtcmake/style/offline.css
 qt5/doc/qtdoc.qch
 qt5/doc/qtdoc/accelerators.html
 qt5/doc/qtdoc/accessibility.html
@@ -10,6 +31,7 @@ qt5/doc/qtdoc/activeqt-testcon.html
 qt5/doc/qtdoc/activeqt.html
 qt5/doc/qtdoc/all-examples.html
 qt5/doc/qtdoc/android-3rdparty-libs.html
+qt5/doc/qtdoc/android-building.html
 qt5/doc/qtdoc/android-getting-started.html
 qt5/doc/qtdoc/android-openssl-support.html
 qt5/doc/qtdoc/android-platform-notes.html
@@ -25,8 +47,8 @@ qt5/doc/qtdoc/bughowto.html
 qt5/doc/qtdoc/build-sources.html
 qt5/doc/qtdoc/classes.html
 qt5/doc/qtdoc/classesandfunctions.html
-qt5/doc/qtdoc/cmake-manual.html
 qt5/doc/qtdoc/commerciallicense.html
+qt5/doc/qtdoc/configure-linux-device.html
 qt5/doc/qtdoc/configure-options.html
 qt5/doc/qtdoc/debug.html
 qt5/doc/qtdoc/demos-manifest.xml
@@ -158,6 +180,7 @@ qt5/doc/qtdoc/images/thread-examples.png
 qt5/doc/qtdoc/images/threadsandobjects.png
 qt5/doc/qtdoc/images/threadvisual-example.png
 qt5/doc/qtdoc/images/tool-examples.png
+@pkgdir qt5/doc/qtdoc/images/used-in-examples
 qt5/doc/qtdoc/images/used-in-examples/demos/calqlatr/content/images/paper-edge-left.png
 qt5/doc/qtdoc/images/used-in-examples/demos/calqlatr/content/images/paper-edge-right.png
 qt5/doc/qtdoc/images/used-in-examples/demos/calqlatr/content/images/paper-grip.png
@@ -305,8 +328,12 @@ qt5/doc/qtdoc/images/used-in-examples/demos/tweetsearch/content/resources/icon-c
 qt5/doc/qtdoc/images/used-in-examples/demos/tweetsearch/content/resources/icon-loading.png
 qt5/doc/qtdoc/images/used-in-examples/demos/tweetsearch/content/resources/icon-refresh.png
 qt5/doc/qtdoc/images/used-in-examples/demos/tweetsearch/content/resources/icon-search.png
+qt5/doc/qtdoc/images/wayland-multi-process.png
+qt5/doc/qtdoc/images/wayland-single-process-develop.png
+qt5/doc/qtdoc/images/wayland-single-process-eglfs.png
 qt5/doc/qtdoc/images/xml-examples.png
 qt5/doc/qtdoc/index.html
+qt5/doc/qtdoc/inputs-linux-device.html
 qt5/doc/qtdoc/integrity-building-monolith.html
 qt5/doc/qtdoc/integrity-building-qt-for-imx6quad-board.html
 qt5/doc/qtdoc/integrity-building-u-boot-image.html
@@ -345,6 +372,9 @@ qt5/doc/qtdoc/newclasses51.html
 qt5/doc/qtdoc/newclasses510.html
 qt5/doc/qtdoc/newclasses511.html
 qt5/doc/qtdoc/newclasses512.html
+qt5/doc/qtdoc/newclasses513.html
+qt5/doc/qtdoc/newclasses514.html
+qt5/doc/qtdoc/newclasses515.html
 qt5/doc/qtdoc/newclasses52.html
 qt5/doc/qtdoc/newclasses53.html
 qt5/doc/qtdoc/newclasses54.html
@@ -355,7 +385,6 @@ qt5/doc/qtdoc/newclasses58.html
 qt5/doc/qtdoc/newclasses59.html
 qt5/doc/qtdoc/obsoleteclasses.html
 qt5/doc/qtdoc/obsoleteqmltypes.html
-qt5/doc/qtdoc/opensourcelicense.html
 qt5/doc/qtdoc/overviews-main.html
 qt5/doc/qtdoc/overviews.html
 qt5/doc/qtdoc/plugins-howto.html
@@ -568,11 +597,13 @@ qt5/doc/qtdoc/qtquickcontrols-texteditor-action.html
 qt5/doc/qtdoc/qtquickcontrols-texteditor-logic.html
 qt5/doc/qtdoc/qtquickcontrols-texteditor-ui.html
 qt5/doc/qtdoc/qtquickcontrols-texteditor.html
+qt5/doc/qtdoc/qtwebassembly-platform-notes.html
 qt5/doc/qtdoc/qundo.html
 qt5/doc/qtdoc/rcc.html
 qt5/doc/qtdoc/reference-overview.html
 qt5/doc/qtdoc/restoring-geometry.html
 qt5/doc/qtdoc/scalability.html
+@pkgdir qt5/doc/qtdoc/scripts
 qt5/doc/qtdoc/session.html
 qt5/doc/qtdoc/sharedlibrary.html
 qt5/doc/qtdoc/signalsandslots-syntaxes.html
@@ -608,12 +639,16 @@ qt5/doc/qtdoc/unicode.html
 qt5/doc/qtdoc/unix-signals.html
 qt5/doc/qtdoc/vxworks.html
 qt5/doc/qtdoc/wasm.html
+qt5/doc/qtdoc/wayland-and-qt.html
 qt5/doc/qtdoc/webgl.html
 qt5/doc/qtdoc/whatsnew50.html
 qt5/doc/qtdoc/whatsnew51.html
 qt5/doc/qtdoc/whatsnew510.html
 qt5/doc/qtdoc/whatsnew511.html
 qt5/doc/qtdoc/whatsnew512.html
+qt5/doc/qtdoc/whatsnew513.html
+qt5/doc/qtdoc/whatsnew514.html
+qt5/doc/qtdoc/whatsnew515.html
 qt5/doc/qtdoc/whatsnew52.html
 qt5/doc/qtdoc/whatsnew53.html
 qt5/doc/qtdoc/whatsnew54.html
@@ -630,5 +665,3 @@ qt5/doc/qtdoc/windows-requirements.html
 qt5/doc/qtdoc/windows.html
 qt5/doc/qtdoc/winrt-support.html
 qt5/doc/qtdoc/xml-examples.html
-@pkgdir qt5/doc/qtdoc/scripts
-@pkgdir qt5/doc/qtdoc/images/used-in-examples

@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2019/12/31 12:08:15 mef Exp $
+
+SHA1 (R/later_1.0.0.tar.gz) = 45f36af207886b717d433b75a63a55a4ad008c91
+RMD160 (R/later_1.0.0.tar.gz) = b65412221208a1b520def238dd0ae3914258f55b
+SHA512 (R/later_1.0.0.tar.gz) = 44f2575cc51511e81880e0903923e9dbebc4cc93a37becb06637371bd6ef3780619b9c29a5e5c4141ce314b985092d32fba240fa619a323529f265412bb73937
+Size (R/later_1.0.0.tar.gz) = 56563 bytes

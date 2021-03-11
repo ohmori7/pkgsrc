@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.23 2019/05/23 19:23:14 rillig Exp $
+# $NetBSD: Makefile,v 1.29 2020/11/19 09:35:40 schmonz Exp $
 #
 
 DISTNAME=		cvm-0.97
-PKGREVISION=		1
+PKGREVISION=		2
 CATEGORIES=		security
 MASTER_SITES=		${HOMEPAGE}
 
 MAINTAINER=		schmonz@NetBSD.org
-HOMEPAGE=		http://untroubled.org/cvm/
+HOMEPAGE=		https://untroubled.org/cvm/
 COMMENT=		Credential Validation Modules
 LICENSE=		gnu-gpl-v2
 
@@ -15,7 +15,6 @@ MAKE_JOBS_SAFE=		no
 
 DEPENDS+=		daemontools-[0-9]*:../../sysutils/daemontools
 
-DJB_RESTRICTED=		NO
 DJB_MAKE_TARGETS=	NO
 INSTALL_ENV+=		install_prefix=${DESTDIR:Q}
 
@@ -47,9 +46,9 @@ DJB_CONFIG_CMDS=							\
 .include "../../mk/bsd.prefs.mk"
 
 .if ${SHLIB_TYPE} == "dylib"
-CVM_LIB_EXT=dylib
+CVM_LIB_EXT=	dylib
 .else
-CVM_LIB_EXT=so
+CVM_LIB_EXT=	so
 .endif
 
 LDFLAGS.SunOS+=	-lsocket -lnsl

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.13 2019/05/15 11:42:54 markd Exp $
+# $NetBSD: Makefile,v 1.16 2021/02/14 22:35:06 markd Exp $
 
 DISTNAME=	collection-langgerman
-PKGNAME=	texlive-${DISTNAME}-2019pre1
+PKGNAME=	texlive-${DISTNAME}-2020pre1
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	48599
+TEXLIVE_REV=	55706
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.tug.org/texlive/
+HOMEPAGE=	https://www.tug.org/texlive/
 COMMENT=	German TeX packages
 
 DEPENDS+=	texlive-collection-basic>=2014:../../meta-pkgs/texlive-collection-basic
@@ -20,12 +20,10 @@ DEPENDS+=	tex-bibleref-german-[0-9]*:../../print/tex-bibleref-german
 DEPENDS+=	tex-dehyph-[0-9]*:../../print/tex-dehyph
 DEPENDS+=	tex-dehyph-exptl-[0-9]*:../../print/tex-dehyph-exptl
 DEPENDS+=	tex-dhua-[0-9]*:../../print/tex-dhua
-# einfuehrung is documentation only
-# einfuehrung2 is documentation only
+# dtk-bibliography is documentation only
 # etdipa is documentation only
 # etoolbox-de is documentation only
 # fifinddo-info is documentation only
-# geometry-de is documentation only
 DEPENDS+=	tex-german-[0-9]*:../../print/tex-german
 DEPENDS+=	tex-germbib-[0-9]*:../../print/tex-germbib
 DEPENDS+=	tex-germkorr-[0-9]*:../../print/tex-germkorr
@@ -34,17 +32,14 @@ DEPENDS+=	tex-hyphen-german-[0-9]*:../../print/tex-hyphen-german
 # koma-script-examples is documentation only
 # l2picfaq is documentation only
 # l2tabu is documentation only
-# latex-bib-ex is documentation only
-# latex-bib2-ex is documentation only
-# latex-referenz is documentation only
-# latex-tabellen is documentation only
 # latexcheat-de is documentation only
 # lshort-german is documentation only
 # lualatex-doc-de is documentation only
 # microtype-de is documentation only
 DEPENDS+=	tex-milog-[0-9]*:../../print/tex-milog
-# presentations is documentation only
+# depend quran-de
 DEPENDS+=	tex-r_und_s-[0-9]*:../../print/tex-r_und_s
+# depend schulmathematik
 # templates-fenn is documentation only
 # templates-sommer is documentation only
 # depend termcal-de

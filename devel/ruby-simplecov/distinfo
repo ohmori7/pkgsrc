@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.17 2018/03/17 14:15:10 taca Exp $
+$NetBSD: distinfo,v 1.22 2021/01/11 13:14:29 taca Exp $
 
-SHA1 (simplecov-0.16.1.gem) = e44923ea70b22f3f2770d61090248c6692be3499
-RMD160 (simplecov-0.16.1.gem) = 96a95647f933d8d153f8bc56520132389f1bc424
-SHA512 (simplecov-0.16.1.gem) = b30d2fc8978d0570e2df1dda6611c143ee3b51999c72dcd52e483d2422e54c2b1c538e4afbacfc5b9a37d2d200ffd295f1bfbdf3100439393fb48f74d672d5ef
-Size (simplecov-0.16.1.gem) = 38912 bytes
+SHA1 (simplecov-0.21.2.gem) = 27c00e022edc07eed242a44fc486374e9ef7b172
+RMD160 (simplecov-0.21.2.gem) = 8dc584ceb15b2f44e68605d99673b8aea24993f4
+SHA512 (simplecov-0.21.2.gem) = 8b25f9b1b79ea180b78bcad27eeabd06f310c6674c681d17899e02144dcac6cb9c53befb70d622d907026cdcaac686be1122ca008d3d6b07139ee809daa8f7ff
+Size (simplecov-0.21.2.gem) = 47104 bytes

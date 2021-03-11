@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.17 2018/08/22 09:45:29 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2020/08/31 18:10:01 wiz Exp $
 
 DISTNAME=	Email-Stuff-2.105
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	mail perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Email/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Email-Stuff/
+HOMEPAGE=	https://metacpan.org/release/Email-Stuff
 COMMENT=	More casual approach to creating and sending emails
 LICENSE=	${PERL5_LICENSE}
 

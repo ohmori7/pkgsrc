@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.63 2017/05/30 15:47:51 taca Exp $
+# $NetBSD: Makefile,v 1.67 2021/02/14 14:41:18 taca Exp $
 
 DISTNAME=	# empty
 PKGNAME=	ruby-${RUBY_VERSION}
+PKGREVISION=	1
 CATEGORIES=	lang ruby
 MASTER_SITES=	# empty
 DISTFILES=	# empty
 
 MAINTAINER=	taca@NetBSD.org
-HOMEPAGE=	http://www.ruby-lang.org/en/
+HOMEPAGE=	https://www.ruby-lang.org/en/
 COMMENT=	Wrapper package for Ruby programming language
 
 CONFLICTS=	pkg_alternatives-[0-9]*
@@ -17,9 +18,17 @@ NO_BUILD=	yes
 
 .include "../../lang/ruby/rubyversion.mk"
 
-DEPENDS+= ${RUBY_BASE}>=${RUBY_VERSION}:${RUBY_SRCDIR}
+DEPENDS+=	${RUBY_BASE}>=${RUBY_VERSION}:${RUBY_SRCDIR}
 
-RUBY_COMMANDS=	erb gem irb rake ruby testrb
+.if ${RUBY_VER} == "25"
+RUBY_COMMANDS=	erb gem irb rake rdoc ri ruby
+.elif ${RUBY_VER} == "26"
+RUBY_COMMANDS=	bundle bundler erb gem irb rake rdoc ri ruby
+.elif ${RUBY_VER} == "27"
+RUBY_COMMANDS=	bundle bundler erb gem irb racc rake racc2y rdoc ri ruby y2racc
+.elif ${RUBY_VER} == "30"
+RUBY_COMMANDS=	bundle bundler erb gem irb racc rake rbs rdoc ri ruby typeprof
+.endif
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 CHECK_INTERPRETER_SKIP=	bin/* ${PKGMANDIR}/man1/ruby.1

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.16 2018/08/22 09:44:04 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2020/08/31 18:08:05 wiz Exp $
 
-DISTNAME=	Filesys-Notify-Simple-0.13
+DISTNAME=	Filesys-Notify-Simple-0.14
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Filesys/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Filesys-Notify-Simple/
+HOMEPAGE=	https://metacpan.org/release/Filesys-Notify-Simple
 COMMENT=	Perl5 module providing a simple and dumb file system watcher
 LICENSE=	${PERL5_LICENSE}
 

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.16 2019/05/15 09:13:03 adam Exp $
+# $NetBSD: Makefile,v 1.18 2020/05/16 17:13:40 adam Exp $
 
-DISTNAME=	isort-4.3.20
+DISTNAME=	isort-4.3.21
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	devel python
 MASTER_SITES=	${MASTER_SITE_PYPI:=i/isort/}
@@ -11,7 +11,8 @@ COMMENT=	Python utility / library to sort imports
 LICENSE=	mit
 
 DEPENDS+=	${PYPKGPREFIX}-lama-[0-9]*:../../devel/py-lama
-TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
+
+PYTHON_VERSIONED_DEPENDENCIES=	test:test
 
 .include "../../lang/python/pyversion.mk"
 .if ${_PYTHON_VERSION} == 27
@@ -29,4 +30,5 @@ do-test:
 	cd ${WRKSRC} && pytest-${PYVERSSUFFIX} test_isort.py
 
 .include "../../lang/python/egg.mk"
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/bsd.pkg.mk"

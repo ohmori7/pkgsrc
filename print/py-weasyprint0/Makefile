@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.2 2019/04/26 13:14:11 maya Exp $
+# $NetBSD: Makefile,v 1.5 2020/01/26 17:32:01 rillig Exp $
 
 DISTNAME=	WeasyPrint-0.42.3
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:tl}
@@ -6,7 +6,7 @@ CATEGORIES=	print python
 MASTER_SITES=	${MASTER_SITE_PYPI:=W/WeasyPrint/}
 
 MAINTAINER=	kleink@NetBSD.org
-HOMEPAGE=	http://weasyprint.org/
+HOMEPAGE=	https://weasyprint.org/
 COMMENT=	Converts HTML/CSS documents to PDF (Python 2.x version)
 LICENSE=	modified-bsd
 
@@ -24,7 +24,7 @@ TEST_DEPENDS+=	${PYPKGPREFIX}-test-flake8-[0-9]*:../../devel/py-test-flake8
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-isort-[0-9]*:../../devel/py-test-isort
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-runner-[0-9]*:../../devel/py-test-runner
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37
+PYTHON_VERSIONS_ACCEPTED=	27
 
 USE_LANGUAGES=	# none
 

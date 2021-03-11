@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.2 2017/06/20 21:01:17 markd Exp $
+# $NetBSD: Makefile,v 1.7 2021/02/20 00:03:52 markd Exp $
 
 DISTNAME=	baskervaldx
-PKGNAME=	tex-${DISTNAME}-1.072
-TEXLIVE_REV=	43461
+PKGNAME=	tex-${DISTNAME}-1.076
+TEXLIVE_REV=	57080
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/baskervaldx
+HOMEPAGE=	https://ctan.org/pkg/baskervaldx
 COMMENT=	Extension and modification of BaskervaldADF with LaTeX support
-LICENSE=	gnu-gpl-v2
+LICENSE=	gnu-gpl-v2 AND lppl-1.3c
 
-TEX_MAP_FILES+=	baskervaldx.map
+TEX_MAP_FILES+=	Baskervaldx.map
 
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

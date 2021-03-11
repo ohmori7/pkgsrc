@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:45:58 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/08/31 18:10:41 wiz Exp $
 #
 
 DISTNAME=		Net-Bonjour-0.96
 PKGNAME=		p5-${DISTNAME}
-PKGREVISION=		9
+PKGREVISION=		11
 CATEGORIES=		net
 MASTER_SITES=		${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://search.cpan.org/dist/Net-Bonjour/
+HOMEPAGE=		https://metacpan.org/release/Net-Bonjour
 COMMENT=		Module for DNS service discovery (Apple's Bonjour/Rendezvous)
 LICENSE=		${PERL5_LICENSE}
 

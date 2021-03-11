@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2019/01/26 11:06:19 markd Exp $
+# $NetBSD: Makefile,v 1.7 2020/04/27 02:08:15 markd Exp $
 
 DISTNAME=	tikzmark
-PKGNAME=	tex-${DISTNAME}-1.6
-TEXLIVE_REV=	48929
+PKGNAME=	tex-${DISTNAME}-1.8
+TEXLIVE_REV=	52293
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/tikzmark
+HOMEPAGE=	https://ctan.org/pkg/tikzmark
 COMMENT=	Use TikZ's method of remembering a position on a page
 LICENSE=	lppl-1.3c
 

@@ -1,10 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2016/12/15 23:52:43 joerg Exp $
+# $NetBSD: Makefile,v 1.6 2020/11/25 20:34:37 nia Exp $
 #
 
 .include "Makefile.common"
 
 PKGNAME=	${DISTNAME:S/.src//}
-PKGREVISION=	1
 COMMENT=	Tron clone in 3D with advanced gameplay and multiplayer
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
@@ -22,7 +21,10 @@ INSTALL_MAKE_FLAGS+=	sysconfdir=${EGDIR}
 MAKE_DIRS+=	${PKG_SYSCONFDIR}/examples
 MAKE_DIRS+=	${PKG_SYSCONFDIR}/examples/cvs_test
 
-.for f in aiplayers.cfg default.cfg master.srv rc.config settings.cfg settings_authentication.cfg settings_dedicated.cfg settings_visual.cfg subcultures.srv
+.for f in aiplayers.cfg keys_cursor.cfg keys_cursor_single.cfg \
+    keys_twohand.cfg keys_wasd.cfg keys_x.cfg keys_zqsd.cfg default.cfg \
+    master.srv rc.config settings.cfg settings_authentication.cfg \
+    settings_dedicated.cfg settings_visual.cfg subcultures.srv
 CONF_FILES+=	${EGDIR}/armagetronad/${f} ${PKG_SYSCONFDIR}/${f}
 .endfor
 

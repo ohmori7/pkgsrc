@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.49 2017/01/04 22:34:47 roy Exp $
+# $NetBSD: Makefile,v 1.52 2020/12/23 16:28:47 mlelstv Exp $
 
 DISTNAME=	nn-6.7.3
 PKGREVISION=	5
@@ -16,6 +16,12 @@ TOOL_DEPENDS+=	tradcpp-[0-9]*:../../devel/tradcpp
 
 CPPFLAGS.IRIX+=	-DHAVE_TERMIO_H
 
+# decode.c: In function 'decode_line':
+# decode.c:132:22: error: array subscript has type 'char' [-Werror=char-subscripts]
+#      if ((blen = trtbl[buf[0]]) < 0) {
+# Maybe fix this later.
+BUILDLINK_TRANSFORM+=	rm:-Werror=char-subscripts
+
 OPSYSVARS+=	SFILE
 SFILE.SunOS=	s-sunos5.h
 SFILE.Linux=	s-linux.h
@@ -24,11 +30,13 @@ SFILE.*=	s-netbsd.h
 .include "../../mk/bsd.prefs.mk"
 
 .if ${MACHINE_ARCH} == "i386"
-MFILE=		m-i80386.h
+MFILE=	m-i80386.h
 .elif ${MACHINE_ARCH} == "mipseb"
-MFILE=         m-mipsel.h
+MFILE=	m-mipsel.h
+.elif ${MACHINE_ARCH} == "aarch64"
+MFILE=	m-arm.h
 .else
-MFILE=		m-${MACHINE_ARCH}.h
+MFILE=	m-${MACHINE_ARCH}.h
 .endif
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 ${PKGMANDIR}/man8

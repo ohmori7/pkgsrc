@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.4 2016/05/03 11:37:39 prlw1 Exp $
+# $NetBSD: options.mk,v 1.7 2019/10/10 12:43:28 wiz Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.libsoup
 PKG_SUPPORTED_OPTIONS=	gssapi
@@ -8,8 +8,8 @@ PKG_SUGGESTED_OPTIONS=
 
 .if !empty(PKG_OPTIONS:Mgssapi)
 .  include "../../mk/krb5.buildlink3.mk"
-CONFIGURE_ARGS+=	--with-gssapi
-CONFIGURE_ARGS+=	--with-krb5-config=${KRB5_CONFIG}
+MESON_ARGS+=	-Dgssapi=enabled
+MESON_ARGS+=	-Dkrb5_config=${KRB5_CONFIG}
 .else
-CONFIGURE_ARGS+=	--without-gssapi
+MESON_ARGS+=	-Dgssapi=disabled
 .endif

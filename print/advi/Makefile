@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.122 2019/05/05 22:49:50 ryoon Exp $
+# $NetBSD: Makefile,v 1.135 2021/03/08 08:13:05 jaapb Exp $
 
 DISTNAME=		advi-1.10.2
-PKGREVISION=		38
+PKGREVISION=		51
 CATEGORIES=		print
 MASTER_SITES=		http://gallium.inria.fr/advi/
 
@@ -19,7 +19,7 @@ DEPENDS+=		camlimages>=4.0.0:../../graphics/camlimages
 # tex-pstools, and tex-cyrillic-bin in TeX Live 2013."
 #DEPENDS+=		texlive-tetex>=2010:../../print/texlive-tetex
 DEPENDS+=		tex-fontinst>=1.933:../../fonts/tex-fontinst
-DEPENDS+=		tex-pstools>=1.68:../../graphics/tex-pstools
+DEPENDS+=		tex-texlive-scripts-extra-[0-9]*:../../print/tex-texlive-scripts-extra
 DEPENDS+=		tex-cyrillic-bin>=2013:../../print/tex-cyrillic-bin
 DEPENDS+=		hevea-[0-9]*:../../textproc/hevea
 BUILD_DEPENDS+=		vera-ttf-[0-9]*:../../fonts/vera-ttf
@@ -38,7 +38,7 @@ SUBST_FILES.gs=		src/config.ml.in
 SUBST_SED.gs=		-e 's,@GS@,gs,'
 SUBST_MESSAGE.gs=	Fixing hard-coded path to gs
 
-INSTALLATION_DIRS=	share/doc/advi share/doc/html/advi
+INSTALLATION_DIRS=	share/doc/advi
 
 post-extract:
 	${CP} ${WRKSRC}/tex/*.eps ${WRKSRC}/doc
@@ -51,8 +51,7 @@ post-install:
 	cd ${WRKSRC}/doc.orig && ${INSTALL_DATA} *.dvi \
 		${DESTDIR}${PREFIX}/share/doc/advi
 	cd ${WRKSRC}/doc && ${INSTALL_DATA} *.html *.gif \
-		${DESTDIR}${PREFIX}/share/doc/html/advi
-	cd ${DESTDIR}${PREFIX}/share/doc/html/advi && ${LN} -sf ../../advi/manual.* .
+		${DESTDIR}${PREFIX}/share/doc/advi
 
 .include "../../print/kpathsea/texmf.mk"
 .include "../../lang/ocaml/buildlink3.mk"

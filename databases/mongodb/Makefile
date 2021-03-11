@@ -1,37 +1,42 @@
-# $NetBSD: Makefile,v 1.35 2019/04/25 07:32:41 maya Exp $
+# $NetBSD: Makefile,v 1.63 2021/02/01 09:38:10 adam Exp $
 
-DISTNAME=	mongodb-src-r4.0.6
+DISTNAME=	mongodb-src-r4.2.12
 PKGNAME=	${DISTNAME:S/src-r//}
-PKGREVISION=	2
 CATEGORIES=	databases
 MASTER_SITES=	http://fastdl.mongodb.org/src/
 
-MAINTAINER=	bartosz.kuzma@gmail.com
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.mongodb.com/
 COMMENT=	NoSQL distributed document-oriented database
-LICENSE=	gnu-agpl-v3 # Client and tools licensed under apache-2.0
+LICENSE=	server-side-public-license # Client and tools licensed under apache-2.0
 
 # MongoDB 3.4 onwards explicitly does not support 32-bit x86 platforms
 NOT_FOR_PLATFORM+=	*-*-i386
 
 EXTRACT_USING=	bsdtar
 
-BUILD_DEPENDS+=	${PYPKGPREFIX}-cheetah-[0-9]*:../../devel/py-cheetah
-BUILD_DEPENDS+=	${PYPKGPREFIX}-typing-[0-9]*:../../devel/py-typing
+BUILD_DEPENDS+=	${PYPKGPREFIX}-cheetah-[0-9]*:../../devel/py-cheetah3
+BUILD_DEPENDS+=	${PYPKGPREFIX}-psutil-[0-9]*:../../sysutils/py-psutil
 BUILD_DEPENDS+=	${PYPKGPREFIX}-regex-[0-9]*:../../textproc/py-regex
 BUILD_DEPENDS+=	${PYPKGPREFIX}-yaml-[0-9]*:../../textproc/py-yaml
 
 NO_CONFIGURE=	yes
-USE_LANGUAGES=	c c++
+# https://github.com/mongodb/mongo/blob/master/docs/building.md
+USE_LANGUAGES=	c99 c++17
+# Note that USE_LANGUAGES should contain c11, per SConstruct, but
+# pkgsrc does not yet support that.
+GCC_REQD+=	8
+
 USE_TOOLS+=	pkg-config
 
 SCONS_ARGS=	${_MAKE_JOBS}
+SCONS_ARGS+=	--dbg=off # on: argument parsing problem
 SCONS_ARGS+=	--disable-warnings-as-errors
 SCONS_ARGS+=	--release
-SCONS_ARGS+=	--runtime-hardening=off # does not produce executables
+SCONS_ARGS+=	--runtime-hardening=off # on: does not produce executables
 #SCONS_ARGS+=	--use-system-asio
 SCONS_ARGS+=	--use-system-boost
-#SCONS_ARGS+=	--use-system-icu # fails with >57.1
+SCONS_ARGS+=	--use-system-icu
 SCONS_ARGS+=	--use-system-mongo-c
 SCONS_ARGS+=	--use-system-pcre
 SCONS_ARGS+=	--use-system-snappy
@@ -40,12 +45,12 @@ SCONS_ARGS+=	--use-system-tcmalloc
 #SCONS_ARGS+=	--use-system-wiredtiger
 SCONS_ARGS+=	--use-system-yaml
 SCONS_ARGS+=	--use-system-zlib
+SCONS_ARGS+=	--use-system-zstd
 
-PYTHON_VERSIONS_ACCEPTED=	27
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 .include "../../mk/bsd.prefs.mk"
 
-GCC_REQD+=	5.3.0
 CPPFLAGS+=	-fno-jump-tables  # XXX: still needed?
 INCL_PATH+=	${BUILDLINK_PREFIX.mongo-c-driver}/include/libbson-1.0
 INCL_PATH+=	${BUILDLINK_PREFIX.mongo-c-driver}/include/libmongoc-1.0
@@ -88,7 +93,6 @@ SUBST_CLASSES+=		path
 SUBST_STAGE.path=	pre-build
 SUBST_MESSAGE.path=	Replacing database paths.
 SUBST_FILES.path=	debian/mongo.1 debian/mongod.1
-SUBST_FILES.path+=	src/mongo/db/mongod_options.cpp
 SUBST_FILES.path+=	src/mongo/db/storage/storage_options.cpp
 SUBST_SED.path=		-e 's,/data/db,${MONGODB_DBPATH},g'
 SUBST_SED.path+=	-e 's,/data/configdb,${MONGODB_CONFIGDBPATH},g'
@@ -98,8 +102,8 @@ SUBST_CLASSES+=		varbase
 SUBST_STAGE.varbase=	pre-build
 SUBST_MESSAGE.varbase=	Changing /var to ${VARBASE}.
 SUBST_FILES.varbase=	debian/mongod.conf
-SUBST_SED.varbase=	-e 's,/var/lib,${VARBASE},g'
-SUBST_SED.varbase+=	-e 's,/var/log,${VARBASE},g'
+SUBST_SED.varbase=	-e 's,/var/lib/mongodb,${VARBASE}/mongodb,g'
+SUBST_SED.varbase+=	-e 's,/var/log/mongodb,${VARBASE}/mongodb,g'
 
 SUBST_CLASSES+=		python
 SUBST_STAGE.python=	pre-build
@@ -119,10 +123,10 @@ CONF_FILES+=		share/examples/mongodb/mongod.conf \
 # Copy system specific files for NetBSD and DragonFly
 post-extract:
 	${CHMOD} -R g-w ${WRKSRC}
-	${CP} -R ${WRKSRC}/src/third_party/mozjs-45/platform/x86_64/freebsd \
-		${WRKSRC}/src/third_party/mozjs-45/platform/x86_64/dragonfly
-	${CP} -R ${WRKSRC}/src/third_party/mozjs-45/platform/x86_64/openbsd \
-		${WRKSRC}/src/third_party/mozjs-45/platform/x86_64/netbsd
+	${CP} -R ${WRKSRC}/src/third_party/mozjs-60/platform/x86_64/freebsd \
+		${WRKSRC}/src/third_party/mozjs-60/platform/x86_64/dragonfly
+	${CP} -R ${WRKSRC}/src/third_party/mozjs-60/platform/x86_64/freebsd \
+		${WRKSRC}/src/third_party/mozjs-60/platform/x86_64/netbsd
 	${CP} ${WRKSRC}/src/mongo/db/ftdc/ftdc_system_stats_openbsd.cpp \
 		${WRKSRC}/src/mongo/db/ftdc/ftdc_system_stats_netbsd.cpp
 	${CP} ${WRKSRC}/src/mongo/db/ftdc/ftdc_system_stats_freebsd.cpp \
@@ -152,11 +156,11 @@ do-install:
 	--prefix=${DESTDIR}${PREFIX} install
 
 post-install:
-	${INSTALL_DATA} ${WRKSRC}/README ${DESTDIR}${PREFIX}/share/doc/mongodb
 	${INSTALL_MAN} ${WRKSRC}/debian/*.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 	${INSTALL_DATA} ${WRKSRC}/debian/mongod.conf \
 		${DESTDIR}${PREFIX}/share/examples/mongodb
 
+.include "../../archivers/zstd/buildlink3.mk"
 .include "../../databases/mongo-c-driver/buildlink3.mk"
 .include "../../databases/sqlite3/buildlink3.mk"
 #.include "../../databases/wiredtiger/buildlink3.mk"
@@ -170,7 +174,7 @@ post-install:
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../lang/python/pyversion.mk"
 .include "../../net/libpcap/buildlink3.mk"
-#.include "../../textproc/icu/buildlink3.mk"
+.include "../../textproc/icu/buildlink3.mk"
 .include "../../textproc/yaml-cpp/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:47:03 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:12:05 wiz Exp $
 #
 
 DISTNAME=	Text-Unaccent-1.08
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Text/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Text-Unaccent/
+HOMEPAGE=	https://metacpan.org/release/Text-Unaccent
 COMMENT=	Perl5 module that removes accents from a string
 
 PERL5_PACKLIST=		auto/Text/Unaccent/.packlist

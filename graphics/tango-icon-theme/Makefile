@@ -1,19 +1,19 @@
-# $NetBSD: Makefile,v 1.34 2019/03/18 16:17:48 gdt Exp $
+# $NetBSD: Makefile,v 1.45 2020/12/04 04:55:59 riastradh Exp $
 
 DISTNAME=	tango-icon-theme-0.8.90
-PKGREVISION=	31
+PKGREVISION=	40
 CATEGORIES=	graphics
 MASTER_SITES=	http://tango.freedesktop.org/releases/
 
 MAINTAINER=	dieter.NetBSD@pandora.be
-HOMEPAGE=	http://tango.freedesktop.org/Tango_Desktop_Project
+HOMEPAGE=	https://tango.freedesktop.org/Tango_Desktop_Project
 COMMENT=	Tango desktop project icon theme
 LICENSE=	public-domain
 
 GNU_CONFIGURE=	yes
 USE_TOOLS+=	gmake intltool pkg-config msgfmt
 
-BUILDLINK_DEPMETHOD.ImageMagick=	build
+BUILDLINK_DEPMETHOD.ImageMagick=		build
 BUILDLINK_API_DEPENDS.icon-naming-utils+=	icon-naming-utils>=0.8.90
 
 

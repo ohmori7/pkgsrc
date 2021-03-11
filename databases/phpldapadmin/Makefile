@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.39 2015/11/29 11:25:53 taca Exp $
+# $NetBSD: Makefile,v 1.46 2021/03/07 13:08:47 taca Exp $
 
 DISTNAME=	phpldapadmin-${VERSION}
-PKGREVISION=	1
+PKGNAME=	${PHP_PKG_PREFIX}-${DISTNAME}
 CATEGORIES=	databases www
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=phpldapadmin/}
 EXTRACT_SUFX=	.tgz
@@ -14,8 +14,6 @@ LICENSE=	gnu-gpl-v2
 .include "../../mk/bsd.prefs.mk"
 .include "../../lang/php/phpversion.mk"
 
-REPLACE_SH=	tools/po/make*
-
 DEPENDS+=	${PHP_PKG_PREFIX}-ldap>=4.1.2:../../databases/php-ldap
 DEPENDS+=	${PHP_PKG_PREFIX}-gettext>=4.1.2:../../devel/php-gettext
 
@@ -24,7 +22,7 @@ USE_TOOLS+=	pax
 VERSION=	1.2.3
 NO_BUILD=	YES
 
-CONF_FILES+=  ${PREFIX}/share/examples/phpldapadmin/config.php.example \
+CONF_FILES+=	${PREFIX}/share/examples/phpldapadmin/config.php.example \
 		${PREFIX}/share/phpldapadmin/config/config.php
 CONF_FILES+=	${PREFIX}/share/examples/phpldapadmin/phpldapadmin.conf \
 		${PKG_SYSCONFDIR}/phpldapadmin.conf

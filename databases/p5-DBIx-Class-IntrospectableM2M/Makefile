@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:43:17 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:07:02 wiz Exp $
 
 DISTNAME=	DBIx-Class-IntrospectableM2M-0.001002
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DBIx/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/perldoc?DBIx::Class::IntrospectableM2M
+HOMEPAGE=	https://metacpan.org/pod/DBIx::Class::IntrospectableM2M
 COMMENT=	Introspect many-to-many shortcuts
 
 USE_LANGUAGES=	# empty

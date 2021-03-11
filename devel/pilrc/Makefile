@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.35 2018/01/07 21:31:10 rillig Exp $
+# $NetBSD: Makefile,v 1.38 2020/03/20 11:57:30 nia Exp $
 #
 
 DISTNAME=	pilrc-3.2
@@ -11,8 +11,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://pilrc.sourceforge.net/
 COMMENT=	Generate resources for PalmOS applications from textual description
 
-GNU_CONFIGURE=	YES
-CONFIGURE_SCRIPT=unix/configure
+GNU_CONFIGURE=		YES
+CONFIGURE_SCRIPT=	unix/configure
 
 .include "../../mk/bsd.prefs.mk"
 

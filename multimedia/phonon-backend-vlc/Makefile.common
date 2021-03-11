@@ -1,15 +1,15 @@
-# $NetBSD: Makefile.common,v 1.5 2018/06/21 00:34:18 markd Exp $
+# $NetBSD: Makefile.common,v 1.7 2019/11/03 17:12:03 rillig Exp $
 
 CATEGORIES=	multimedia
-MASTER_SITES=	${MASTER_SITE_KDE:=phonon/phonon-backend-vlc/0.10.1/}
+MASTER_SITES=	${MASTER_SITE_KDE:=phonon/phonon-backend-vlc/0.10.3/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	markd@NetBSD.org
 HOMEPAGE=	https://phonon.kde.org/
 LICENSE=	gnu-lgpl-v2.1
 
-PATCHDIR=       ${.CURDIR}/../../multimedia/phonon-backend-vlc/patches
-DISTINFO_FILE=  ${.CURDIR}/../../multimedia/phonon-backend-vlc/distinfo
+PATCHDIR=	${.CURDIR}/../../multimedia/phonon-backend-vlc/patches
+DISTINFO_FILE=	${.CURDIR}/../../multimedia/phonon-backend-vlc/distinfo
 
 USE_TOOLS+=	pkg-config
 USE_LANGUAGES=	c c++
@@ -17,10 +17,10 @@ USE_CMAKE=	yes
 CMAKE_ARG_PATH=	..
 CONFIGURE_DIRS=	_build
 
-WRKSRC=		${WRKDIR}/phonon-vlc-0.10.1
+WRKSRC=		${WRKDIR}/phonon-vlc-0.10.3
 
 pre-configure:
 	${LN} -sf ${QTDIR}/bin/qmake ${BUILDLINK_DIR}/bin/
 	${MKDIR} ${WRKSRC}/_build
 
-.include "../../multimedia/vlc2/buildlink3.mk"
+.include "../../multimedia/vlc/buildlink3.mk"

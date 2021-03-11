@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.17 2019/03/04 12:08:09 adam Exp $
+# $NetBSD: Makefile,v 1.21 2020/08/07 06:57:09 adam Exp $
 
-DISTNAME=	relatorio-0.8.1
+DISTNAME=	relatorio-0.9.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	textproc python
 MASTER_SITES=	${MASTER_SITE_PYPI:=r/relatorio/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://relatorio.tryton.org/
+HOMEPAGE=	https://relatorio.tryton.org/
 COMMENT=	Templating library able to output odt and pdf files
 LICENSE=	gnu-gpl-v3
 

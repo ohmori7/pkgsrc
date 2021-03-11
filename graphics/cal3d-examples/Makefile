@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.23 2018/01/14 14:58:38 rillig Exp $
+# $NetBSD: Makefile,v 1.27 2021/01/30 09:27:51 mef Exp $
 #
 
-PKGNAME=		cal3d-examples-${CAL3D_VERSION}
-PKGREVISION=	3
+PKGNAME=	cal3d-examples-${CAL3D_VERSION}
 
 .include "../../graphics/cal3d/Makefile.common"
 
@@ -47,5 +46,9 @@ post-install:
 	cd ${WRKDATADIR} && pax -rw -pp -s ',.*\.orig$$,,' [a-z]* ${DATADIR}
 
 .include "../../graphics/cal3d/buildlink3.mk"
-.include "../../graphics/Mesa/buildlink3.mk"
+.include "../../graphics/MesaLib/buildlink3.mk"
+.include "../../graphics/freeglut/buildlink3.mk"
+CONFIGURE_ARGS+=	--with-glut=${BUILDLINK_PREFIX.freeglut}
+.include "../../graphics/glu/buildlink3.mk"
+.include "../../x11/libXmu/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

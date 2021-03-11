@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2018/09/26 05:04:09 ryoon Exp $
+# $NetBSD: Makefile,v 1.29 2020/08/31 18:11:06 wiz Exp $
 #
 
 DISTNAME=	apg-2.3.0b
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	security
 #MASTER_SITES=	http://www.adel.nursat.kz/apg/download/
 
@@ -16,10 +16,10 @@ MAKE_ENV+=	FLAGS=${CFLAGS:M*:Q} INSTALL_PREFIX=${DESTDIR:Q}${PREFIX:Q}
 USE_TOOLS+=	perl:run
 REPLACE_PERL=	perl/apgcli.pl
 
-OPSYSVARS+=	APG_CS_CLIBS
+OPSYSVARS+=		APG_CS_CLIBS
 APG_CS_CLIBS.Linux+=	-lnsl
 APG_CS_CLIBS.SunOS+=	-lnsl -lsocket
-MAKE_ENV+=	APG_CS_CLIBS=${APG_CS_CLIBS:Q}
+MAKE_ENV+=		APG_CS_CLIBS=${APG_CS_CLIBS:Q}
 
 INSTALLATION_DIRS+=	bin sbin ${PKGMANDIR}/man1 ${PKGMANDIR}/man8
 

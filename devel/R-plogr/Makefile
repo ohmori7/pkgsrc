@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2018/04/17 15:22:38 minskim Exp $
+# $NetBSD: Makefile,v 1.3 2019/08/08 19:53:40 brook Exp $
 
-DISTNAME=	plogr_0.2.0
+R_PKGNAME=	plogr
+R_PKGVER=	0.2.0
 CATEGORIES=	devel
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	https://github.com/krlmlr/plogr\#readme
-COMMENT=	The 'plog' C++ Logging Library
+COMMENT=	The 'plog' C++ logging library
 LICENSE=	mit
 
 USE_LANGUAGES=	# none

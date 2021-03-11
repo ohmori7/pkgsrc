@@ -1,4 +1,4 @@
-# $NetBSD: options.mk,v 1.12 2016/06/20 17:19:56 sevan Exp $
+# $NetBSD: options.mk,v 1.15 2020/09/01 22:56:54 js Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.perl
 PKG_OPTIONS_REQUIRED_GROUPS=	perlbits
@@ -20,6 +20,11 @@ PERL5_BUILD_THREADS_SUPPORT=	${DLOPEN_REQUIRE_PTHREADS}
 ### Perl cannot be compiled with threading support ATM.
 ###
 .if !empty(MACHINE_PLATFORM:MHaiku-*-*)
+PERL5_BUILD_THREADS_SUPPORT=	no
+.endif
+
+# miniperl fails with locking errors during build on QNX.
+.if ${OPSYS} == "QNX"
 PERL5_BUILD_THREADS_SUPPORT=	no
 .endif
 
@@ -89,7 +94,7 @@ CONFIGURE_ARGS+=	-Duse64bitall
 CONFIGURE_ARGS+=	-Uuse64bitall -Uusemorebits -Uuse64bitint
 .else
 .  if ${OBJECT_FMT} == "XCOFF"
-BROKEN=		XCOFF targets need the path specified where libperl.a resides.\
-Please choose on of 64bitint 64bitmore 64bitall or 64bitnone to allow this.
+BROKEN=			"XCOFF targets need the path specified where libperl.a resides."
+BROKEN+=		"Please choose on of 64bitint 64bitmore 64bitall or 64bitnone to allow this."
 .  endif
 .endif

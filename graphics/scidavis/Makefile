@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.33 2019/04/25 07:32:59 maya Exp $
+# $NetBSD: Makefile,v 1.40 2020/12/04 20:45:23 nia Exp $
 #
 
 DISTNAME=	scidavis-0.2.4
-PKGREVISION=	25
+PKGREVISION=	29
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=scidavis/}
 EXTRACT_SUFX=	.tar.bz2
@@ -11,8 +11,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://scidavis.sourceforge.net/
 COMMENT=	Data analysis and visualization package
 
-USE_LANGUAGES=	c c++
-INSTALL_MAKE_FLAGS+= INSTALL_ROOT=${DESTDIR}
+USE_LANGUAGES=		c c++
+INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR}
 
 do-configure:
 	cd ${WRKSRC} && env ${CONFIGURE_ENV} ${QTDIR}/bin/qmake

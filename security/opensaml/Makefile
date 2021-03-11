@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.30 2019/01/24 16:46:21 perseant Exp $
+# $NetBSD: Makefile,v 1.40 2021/01/01 08:24:56 ryoon Exp $
 
-DISTNAME=	opensaml-2.5.5
-PKGREVISION=	8
+DISTNAME=	opensaml-3.1.0
+PKGREVISION=	
+PKGREVISION=	1
 CATEGORIES=	security
-MASTER_SITES=	http://www.shibboleth.net/downloads/c++-opensaml/${PKGVERSION_NOREV}/
+MASTER_SITES=	http://shibboleth.net/downloads/c++-opensaml/${PKGVERSION_NOREV}/
 
 MAINTAINER=	pettai@NetBSD.org
 HOMEPAGE=	http://www.opensaml.org/
@@ -14,6 +15,7 @@ USE_LANGUAGES=		c c++11
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--disable-doxygen-doc
+USE_TOOLS+=		pkg-config
 
 .include "../../devel/boost-libs/buildlink3.mk"
 .include "../../devel/libidn/buildlink3.mk"

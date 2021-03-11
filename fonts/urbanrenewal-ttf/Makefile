@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2019/04/04 10:30:03 maya Exp $
+# $NetBSD: Makefile,v 1.7 2020/11/06 18:04:27 maya Exp $
 #
 
 DISTNAME=	urbanrenewal
@@ -10,7 +10,7 @@ MASTER_SITES=	http://www.kreativekorp.com/swdownload/fonts/urban/
 EXTRACT_SUFX=	.zip
 
 MAINTAINER=	christtrekker@users.sourceforge.net
-HOMEPAGE=	http://www.kreativekorp.com/software/fonts/urbanrenewal.shtml
+HOMEPAGE=	https://www.kreativekorp.com/software/fonts/urbanrenewal.shtml
 COMMENT=	Insanely great TT versions of the city-named fonts of Mac OS Classic
 LICENSE=	kreativekorp-free-license
 
@@ -25,6 +25,9 @@ INSTALLATION_DIRS+=	share/doc/${PKGBASE}
 .if ${OPSYS} == "FreeBSD"
 TOOLS_PLATFORM.unzip=	# empty
 .endif
+
+NO_CONFIGURE=	yes
+NO_BUILD=	yes
 
 do-install:
 	${INSTALL_DATA} ${WRKSRC}/*.pdf ${DESTDIR}${PREFIX}/share/doc/${PKGBASE}

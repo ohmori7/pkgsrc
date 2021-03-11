@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.18 2018/03/12 11:17:24 wiz Exp $
+# $NetBSD: Makefile,v 1.21 2020/08/17 20:19:52 leot Exp $
 
 DISTNAME=	vnstat-1.14
-PKGREVISION=	5
+PKGREVISION=	6
 CATEGORIES=	net
 MASTER_SITES=	http://humdi.net/vnstat/
-#DISTFILES=${DISTNAME}.tar.gz
+#DISTFILES=	${DISTNAME}.tar.gz
 
 MAINTAINER=	sborrill@NetBSD.org
-HOMEPAGE=	http://humdi.net/vnstat/
+HOMEPAGE=	https://humdi.net/vnstat/
 COMMENT=	Small network traffic monitor
 LICENSE=	gnu-gpl-v2
 
@@ -32,7 +32,7 @@ SUBST_FILES.fix-etcpath+=	man/vnstat.1 man/vnstatd.1
 SUBST_FILES.fix-etcpath+=	man/vnstati.1
 SUBST_SED.fix-etcpath=		-e 's,/etc/,${PKG_SYSCONFDIR}/,g'
 
-CONF_FILES= ${VNSTAT_EGDIR}/vnstat.conf ${VNSTAT_CONFIG}
+CONF_FILES=	${VNSTAT_EGDIR}/vnstat.conf ${VNSTAT_CONFIG}
 
 RCD_SCRIPTS=	vnstatd
 

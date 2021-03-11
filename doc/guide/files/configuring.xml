@@ -1,4 +1,4 @@
-<!-- $NetBSD: configuring.xml,v 1.55 2019/04/19 13:43:27 leot Exp $ -->
+<!-- $NetBSD: configuring.xml,v 1.57 2021/02/06 15:21:49 dbj Exp $ -->
 
 <chapter id="configuring">
   <title>Configuring pkgsrc</title>
@@ -123,7 +123,7 @@ spelling mistakes) takes place.</para>
     <title>Variables affecting the installation process</title>
 
     <itemizedlist>
-	    <listitem><para><varname>PKGSRC_KEEP_BIN_PKGSRC</varname>:
+	    <listitem><para><varname>PKGSRC_KEEP_BIN_PKGS</varname>:
                 By default, binary packages of built packages are
                 preserved in <filename>${PACKAGES}/All</filename>. Setting
 		this variable to "no" prevents this.</para>
@@ -295,9 +295,8 @@ uid=1000(myusername) gid=100(users) groups=100(users),0(wheel)
       <varlistentry>
 	<term><varname>PKGSRC_FORTRAN</varname>:</term>
 	<listitem>
-	  <para>Specifies the fortran compiler to use.
-	  The default is <varname>g95</varname>, and
-	  <varname>gfortran</varname> is an alternative.</para>
+	  <para>Specifies the Fortran compiler to use.
+	  The default is <varname>gfortran</varname>.</para>
 	</listitem>
       </varlistentry>
 

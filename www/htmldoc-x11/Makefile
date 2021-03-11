@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.20 2016/12/30 12:54:21 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2021/02/01 09:35:11 fcambus Exp $
 
 PKGNAME=	htmldoc-x11-${VERSION}
-PKGREVISION=	2
 
-CONFIGURE_ARGS+=	--with-gui --with-x
+CONFIGURE_ARGS+=	--with-gui
 
-.include "../../x11/fltk/buildlink3.mk"
+# FLTK version 1.4 is supported too
+.include "../../x11/fltk13/buildlink3.mk"
 .include "../../x11/libXpm/buildlink3.mk"
 .include "../../www/htmldoc/Makefile.common"
 .include "../../mk/bsd.pkg.mk"

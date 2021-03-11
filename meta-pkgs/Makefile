@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.102 2019/05/18 08:37:10 wiz Exp $
+# $NetBSD: Makefile,v 1.111 2021/03/07 14:04:03 taca Exp $
 #
 
 COMMENT=	Collections of other packages
@@ -12,15 +12,16 @@ SUBDIR+=	courier
 SUBDIR+=	deforaos-desktop
 SUBDIR+=	fxtv-capture
 SUBDIR+=	gimp-docs
+SUBDIR+=	gnome3
 SUBDIR+=	gnuradio
 SUBDIR+=	gnustep
 SUBDIR+=	gstreamer0.10-plugins
-#SUBDIR+=	kde	# currently just Makefile fragments
 SUBDIR+=	kde-telepathy
 SUBDIR+=	kde4
 SUBDIR+=	kf5
 SUBDIR+=	libdbusmenu
 SUBDIR+=	lxde
+SUBDIR+=	lxqt
 SUBDIR+=	matchbox
 SUBDIR+=	mate
 SUBDIR+=	modular-xorg
@@ -35,15 +36,16 @@ SUBDIR+=	netbsd-doc
 SUBDIR+=	netbsd-doc-print
 SUBDIR+=	netbsd-www
 SUBDIR+=	php56-extensions
-SUBDIR+=	php71-extensions
-SUBDIR+=	php72-extensions
 SUBDIR+=	php73-extensions
+SUBDIR+=	php74-extensions
+SUBDIR+=	php80-extensions
 SUBDIR+=	pkg_developer
 SUBDIR+=	pkgsrc-guide-tools
 SUBDIR+=	pulseaudio-tools
 SUBDIR+=	py-tryton-platform
 SUBDIR+=	qmail-server
-SUBDIR+=	ruby-gnome2
+SUBDIR+=	rime-data
+SUBDIR+=	ruby-gnome
 SUBDIR+=	ruby-redmine-plugins
 SUBDIR+=	ruby-redmine-themes
 SUBDIR+=	ruby-shoulda

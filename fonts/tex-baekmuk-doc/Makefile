@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2017/07/27 11:00:38 markd Exp $
+# $NetBSD: Makefile,v 1.4 2021/02/21 05:39:29 markd Exp $
 
 DISTNAME=	baekmuk.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-2.2
-TEXLIVE_REV=	42106
+PKGNAME=	tex-${DISTNAME:S/./-/}-2.2.1
+TEXLIVE_REV=	56915
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/baekmuk
+HOMEPAGE=	https://ctan.org/pkg/baekmuk
 COMMENT=	Documentation for tex-baekmuk
 #LICENSE=	other-free
 

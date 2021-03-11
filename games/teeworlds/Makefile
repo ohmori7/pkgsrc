@@ -1,41 +1,49 @@
-# $NetBSD: Makefile,v 1.10 2019/04/26 13:13:59 maya Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/18 17:57:59 leot Exp $
 
-DISTNAME=	teeworlds-0.6.3-src
+DISTNAME=	teeworlds-0.7.5-src
 PKGNAME=	${DISTNAME:S/-src//}
 PKGREVISION=	1
 CATEGORIES=	games
-MASTER_SITES=	http://downloads.teeworlds.com/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=teeworlds/}
+GITHUB_RELEASE=	${PKGVERSION_NOREV}
 
-MAINTAINER=	fstd.lkml@gmail.com
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://www.teeworlds.com/
 COMMENT=	Fast-paced retro multiplayer shooter
 LICENSE=	zlib AND 2-clause-bsd AND modified-bsd AND cc-by-sa-v3.0
 
 USE_LANGUAGES=	c c++03
+USE_CMAKE=	yes
+USE_TOOLS+=	pkg-config
 
-BUILD_DEPENDS+=	bam>=0.4.0:../../devel/bam
+CMAKE_ARGS+=	-Wno-dev
 
-AUTO_MKDIRS=	yes
+TOOL_DEPENDS+=	icoutils-[0-9]*:../../graphics/icoutils
 
-CPIO=	cpio
+LDFLAGS.SunOS+=	-lsocket -lnsl
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # hardcoded to 2.7 in a patch
+INSTALLATION_DIRS+=	share/appdata
+INSTALLATION_DIRS+=	share/applications
+INSTALLATION_DIRS+=	share/pixmaps
 
-do-configure:
-	set -e; cd ${WRKSRC}; bam config
+PYTHON_FOR_BUILD_ONLY=	tool
 
-do-build:
-	set -e; cd ${WRKSRC}; bam server_release client_release
+post-build:
+	${PREFIX}/bin/icotool -x -i 1 ${WRKSRC}/other/icons/teeworlds.ico -o ${WRKDIR}/teeworlds.png
 
-do-install:
-	${INSTALL_GAME} ${WRKSRC}/teeworlds ${DESTDIR}${PREFIX}/bin/teeworlds
-	${INSTALL_GAME} ${WRKSRC}/teeworlds_srv ${DESTDIR}${PREFIX}/bin/teeworlds_srv
-	cd ${WRKSRC} && ${FIND} data | \
-		${CPIO} -p ${DESTDIR}${PREFIX}/share/teeworlds
-	cd ${DESTDIR}${PREFIX} && \
-	${FIND} share/teeworlds -type f -print >${WRKDIR}/PLIST
+post-install:
+	${INSTALL_DATA} ${WRKSRC}/other/teeworlds.desktop ${DESTDIR}${PREFIX}/share/applications
+	${INSTALL_DATA} ${WRKSRC}/other/teeworlds.appdata.xml ${DESTDIR}${PREFIX}/share/appdata
+	${INSTALL_DATA} ${WRKDIR}/teeworlds.png ${DESTDIR}${PREFIX}/share/pixmaps
 
-.include "../../devel/SDL/buildlink3.mk"
-.include "../../lang/python/application.mk"
+.include "../../audio/wavpack/buildlink3.mk"
+.include "../../devel/SDL2/buildlink3.mk"
+.include "../../devel/zlib/buildlink3.mk"
 .include "../../graphics/freetype2/buildlink3.mk"
+.include "../../graphics/glu/buildlink3.mk"
+.include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../lang/python/tool.mk"
+.include "../../security/openssl/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/buildlink3.mk"
+.include "../../mk/pthread.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

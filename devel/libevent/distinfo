@@ -1,11 +1,8 @@
-$NetBSD: distinfo,v 1.37 2017/09/26 17:57:36 gson Exp $
+$NetBSD: distinfo,v 1.39 2020/07/06 10:08:58 adam Exp $
 
-SHA1 (libevent-2.1.8-stable.tar.gz) = 2a1b8bb7a262d3fd0ed6a080a20991a6eed675ec
-RMD160 (libevent-2.1.8-stable.tar.gz) = 6c7ce8cb51279f9b6b8d8897192db6a2da3d6797
-SHA512 (libevent-2.1.8-stable.tar.gz) = a2fd3dd111e73634e4aeb1b29d06e420b15c024d7b47778883b5f8a4ff320b5057a8164c6d50b53bd196c79d572ce2639fe6265e03a93304b09c22b41e4c2a17
-Size (libevent-2.1.8-stable.tar.gz) = 1026485 bytes
+SHA1 (libevent-2.1.12-stable.tar.gz) = cd55656a9b5bed630b08f05495230affb7996b21
+RMD160 (libevent-2.1.12-stable.tar.gz) = 1fdb4e00ee9fc1be5e91f61ccaa63dd847e9b341
+SHA512 (libevent-2.1.12-stable.tar.gz) = 88d8944cd75cbe78bc4e56a6741ca67c017a3686d5349100f1c74f8a68ac0b6410ce64dff160be4a4ba0696ee29540dfed59aaf3c9a02f0c164b00307fcfe84f
+Size (libevent-2.1.12-stable.tar.gz) = 1100847 bytes
 SHA1 (patch-Makefile.in) = 09c7524eb8657e1f76232db97273806a8c900219
-SHA1 (patch-evutil__rand.c) = 2b51e719d25181e03b5afb7df0bf443f1d62a8f1
-SHA1 (patch-http.c) = f878714bf4d894d0026580bbed2a93927543eae8
-SHA1 (patch-signal.c) = 1058566e7a6e0ffb709fbd2a3440cac86e188657
-SHA1 (patch-test_bench__cascade.c) = 58bd32fe0cddc468fda57386283b5298b28ef93e
+SHA1 (patch-signal.c) = 868f5f217afd030407a6c8be2d3fbecd58dc7999

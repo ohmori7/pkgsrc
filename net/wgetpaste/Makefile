@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.3 2014/12/13 14:27:35 mef Exp $
+# $NetBSD: Makefile,v 1.5 2020/01/26 17:31:58 rillig Exp $
 
-DISTNAME=	wgetpaste-2.25
+DISTNAME=	wgetpaste-2.29
 CATEGORIES=	net www
 MASTER_SITES=	http://wgetpaste.zlin.dk/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://wgetpaste.zlin.dk/
+HOMEPAGE=	https://wgetpaste.zlin.dk/
 COMMENT=	Command line utility to upload to pastebin sites
-LICENSE=	public-domain
+LICENSE=	mit
 
 DEPENDS+=	wget>=1.13.4:../../net/wget
 

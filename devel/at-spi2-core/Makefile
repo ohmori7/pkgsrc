@@ -1,53 +1,51 @@
-# $NetBSD: Makefile,v 1.27 2017/12/04 16:36:24 maya Exp $
+# $NetBSD: Makefile,v 1.38 2020/10/01 11:45:46 prlw1 Exp $
 
-DISTNAME=	at-spi2-core-2.26.2
-PKGREVISION=	1
+DISTNAME=	at-spi2-core-2.38.0
 CATEGORIES=	devel gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/at-spi2-core/${PKGVERSION_NOREV:R}/}
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	prlw1@cam.ac.uk
-HOMEPAGE=	http://www.linuxfoundation.org/collaborate/workgroups/accessibility/atk/at-spi/at-spi_on_d-bus
+HOMEPAGE=	https://www.linuxfoundation.org/collaborate/workgroups/accessibility/atk/at-spi/at-spi_on_d-bus
 COMMENT=	Assistive Technology Service Provider Interface Core
-LICENSE=	gnu-lgpl-v2
+LICENSE=	gnu-lgpl-v2.1
 
-USE_LIBTOOL=		yes
-USE_PKGLOCALEDIR=	yes
-USE_TOOLS+=		gmake intltool msgfmt pkg-config
-GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--localstatedir=${VARBASE}
-CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFBASE}
+USE_TOOLS+=		msgfmt pkg-config
 
-PKGCONFIG_OVERRIDE+=	atspi-2.pc.in
+PKGCONFIG_OVERRIDE=		output/meson-private/atspi-2.pc
+PKGCONFIG_OVERRIDE_STAGE=	pre-install
+MAKE_ENV+=			LD_LIBRARY_PATH=${WRKSRC}/output/atspi
 
-CHECK_PORTABILITY_SKIP+=	config/test-driver
+BUILD_DEFS+=		PKG_SYSCONFBASE
 
-BUILD_DEFS+=		VARBASE PKG_SYSCONFBASE
-
-EGDIR=			${PREFIX}/share/examples/at-spi2-core
-PKG_SYSCONFSUBDIR=	at-spi2
-busconfigdir=		${PKG_SYSCONFDIR}
+EGDIR=			${PREFIX}/share/examples/${PKGBASE}
+busconfigdir=		${PKG_SYSCONFDIR}/at-spi2
 eg_busconfigdir=	${EGDIR}/at-spi2
 default_sessiondir=	${PKG_SYSCONFBASE}/xdg/autostart
 eg_default_sessiondir=	${EGDIR}/xdg/autostart
 
-INSTALL_MAKE_FLAGS+=	sysconfdir=${EGDIR}
-
 SUBST_CLASSES+=		eg
-SUBST_SED.eg+=		-e 's,defaults,examples/${PKGBASE},g'
-SUBST_FILES.eg+=	bus/Makefile.in
-SUBST_STAGE.eg= 	pre-configure
+SUBST_SED.eg+=		-e 's,defaults,examples/${PKGBASE},'
+SUBST_FILES.eg+=	bus/meson.build
+SUBST_STAGE.eg=		pre-configure
 SUBST_MESSAGE.eg=	Fixing path to examples directory.
 
 CONF_FILES=	${eg_busconfigdir}/accessibility.conf \
 			${busconfigdir}/accessibility.conf
 CONF_FILES+=	${eg_default_sessiondir}/at-spi-dbus-bus.desktop \
 			${default_sessiondir}/at-spi-dbus-bus.desktop
-MAKE_DIRS+=	${default_sessiondir}
+MAKE_DIRS+=	${busconfigdir} ${default_sessiondir}
+
+post-install:
+	${INSTALL_DATA_DIR} ${DESTDIR}${eg_default_sessiondir}
+	${MV} ${DESTDIR}${PKG_SYSCONFDIR}/xdg/autostart/at-spi-dbus-bus.desktop \
+	      ${DESTDIR}${eg_default_sessiondir}/at-spi-dbus-bus.desktop
 
 .include "../../devel/glib2/buildlink3.mk"
 .include "../../devel/gobject-introspection/buildlink3.mk"
 .include "../../sysutils/dbus/buildlink3.mk"
 .include "../../x11/libXi/buildlink3.mk"
 .include "../../x11/libXtst/buildlink3.mk"
+
+.include "../../devel/meson/build.mk"
 .include "../../mk/bsd.pkg.mk"

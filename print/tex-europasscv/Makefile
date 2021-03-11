@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.5 2019/01/30 08:24:32 markd Exp $
+# $NetBSD: Makefile,v 1.9 2020/12/01 22:47:05 nikita Exp $
 
 DISTNAME=	europasscv
-PKGNAME=	tex-${DISTNAME}-2018.49703
-TEXLIVE_REV=	49703
+PKGNAME=	tex-${DISTNAME}-2020.10.31.56829
+TEXLIVE_REV=	56829
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/europasscv
+HOMEPAGE=	https://ctan.org/pkg/europasscv
 COMMENT=	Unofficial class for the new version of the Europass curriculum vitae
 LICENSE=	lppl-1.3c
 
@@ -22,6 +22,8 @@ DEPENDS+=	tex-totpages-[0-9]*:../../print/tex-totpages
 DEPENDS+=	tex-tools-[0-9]*:../../print/tex-tools
 DEPENDS+=	tex-url-[0-9]*:../../print/tex-url
 DEPENDS+=	tex-xcolor-[0-9]*:../../print/tex-xcolor
+DEPENDS+=	tex-xifthen-[0-9}]*:../../devel/tex-xifthen
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

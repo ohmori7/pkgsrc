@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.13 2019/05/27 15:18:22 bsiegert Exp $
+# $NetBSD: Makefile,v 1.30 2021/01/23 14:22:56 bsiegert Exp $
 
 DISTNAME=	gitmap-0.0.20170613
 PKGNAME=	go-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	26
 MASTER_SITES=	${MASTER_SITE_GITHUB:=bep/}
 CATEGORIES=	devel
 GITHUB_TAG=	de8030ebafb76c6e84d50ee6d143382637c00598
-GITHUB_PROJECT= ${PKGBASE:S/^go-//}
+GITHUB_PROJECT=	${PKGBASE:S/^go-//}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/bep/gitmap/

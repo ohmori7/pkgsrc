@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2018/01/08 09:04:50 manu Exp $
+# $NetBSD: Makefile,v 1.6 2020/05/25 05:54:06 rillig Exp $
 
 DISTNAME=	mod_upload-0.8
 PKGNAME=	${APACHE_PKG_PREFIX}-${DISTNAME:S/mod_//}
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	https://ftp.espci.fr/pub/mod_upload/
 
@@ -10,16 +11,17 @@ HOMEPAGE=	https://ftp.espci.fr/pub/mod_upload/
 COMMENT=	High performance file upload helper for PHP
 LICENSE=	gnu-gpl-v2
 
-APACHE_MODULE_NAME=     ${DISTNAME:C/-.*//}.la
+APACHE_MODULE_NAME=	${DISTNAME:C/-.*//}.la
 
 GNU_CONFIGURE=		yes
+GNU_CONFIGURE_APXS2=	no
 CONFIGURE_ARGS+=	--with-apxs=${APXS}
 CONFIGURE_ARGS+=	--with-php-config=${BUILDLINK_PREFIX.php}/bin/php-config
 USE_LIBTOOL=		yes
 
-DOC_DIR=                share/doc/${DISTNAME:C/-.*//}
-INSTALLATION_DIRS+=     lib/httpd ${DOC_DIR}
-PLIST_SUBST+=           DOC_DIR=${DOC_DIR}
+DOC_DIR=		share/doc/${DISTNAME:C/-.*//}
+INSTALLATION_DIRS+=	lib/httpd ${DOC_DIR}
+PLIST_SUBST+=		DOC_DIR=${DOC_DIR}
 
 do-build:
 	cd ${WRKSRC} && ${MAKE}

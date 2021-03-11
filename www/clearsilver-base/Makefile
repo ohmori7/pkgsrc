@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.7 2018/08/22 09:47:23 wiz Exp $
+# $NetBSD: Makefile,v 1.9 2020/08/31 18:12:32 wiz Exp $
 
 PKGNAME=		${CLEARSILVER_BASE}
-PKGREVISION=		1
+PKGREVISION=		3
 
 .include "../../www/clearsilver/Makefile.common"
 

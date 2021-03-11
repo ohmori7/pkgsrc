@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.2 2020/02/29 15:31:40 adam Exp $
+
+SHA1 (sphinxcontrib-serializinghtml-1.1.4.tar.gz) = 7d782d9f8fef0a5663fc7732d72847e711f0f18b
+RMD160 (sphinxcontrib-serializinghtml-1.1.4.tar.gz) = dd488b8c61eb1af8c4badba5c7082c990318d29d
+SHA512 (sphinxcontrib-serializinghtml-1.1.4.tar.gz) = d132f75f1e0491167cd6d0f5b3697ac0fc1b16e63fd3dcd480b961e332b521932e405679a695522a4aeb56f57949eb9b1ed7635e9807dd059ae44a6384bdc6d0
+Size (sphinxcontrib-serializinghtml-1.1.4.tar.gz) = 18647 bytes

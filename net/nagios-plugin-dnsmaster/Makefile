@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2018/12/03 02:29:20 manu Exp $
+# $NetBSD: Makefile,v 1.3 2020/01/26 17:31:51 rillig Exp $
 #
 
 DISTNAME=	check_dnsmaster-0.1
@@ -8,11 +8,11 @@ MASTER_SITES=	http://ftp.espci.fr/pub/nagios-local/
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ftp.espci.fr/pub/nagios-local/
+HOMEPAGE=	https://ftp.espci.fr/pub/nagios-local/
 COMMENT=	Domain NS record monitoring plugin for Nagios
 LICENSE=	modified-bsd
 
-INSTALLATION_DIRS+= libexec/nagios
+INSTALLATION_DIRS+=	libexec/nagios
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKSRC}/check_dnsmaster \

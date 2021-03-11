@@ -1,18 +1,14 @@
-# $NetBSD: Makefile,v 1.1 2019/06/09 09:41:35 wen Exp $
-
-CATEGORIES=	devel
-
-MAINTAINER=	wen@NetBSD.org
-HOMEPAGE=	https://github.com/brodieG/fansi
-COMMENT=	ANSI Control Sequence Aware String Functions
-LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3
+# $NetBSD: Makefile,v 1.3 2019/08/08 19:53:39 brook Exp $
 
 R_PKGNAME=	fansi
 R_PKGVER=	0.4.0
+CATEGORIES=	devel
+
+MAINTAINER=	wen@NetBSD.org
+COMMENT=	ANSI control sequence aware string functions
+LICENSE=	gnu-gpl-v2 OR gnu-gpl-v3
 
 USE_LANGUAGES=	c
-
-BUILDLINK_API_DEPENDS.R+=	R>=3.1.0
 
 .include "../../math/R/Makefile.extension"
 .include "../../mk/bsd.pkg.mk"

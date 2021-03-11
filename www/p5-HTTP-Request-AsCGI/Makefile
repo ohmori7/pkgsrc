@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.14 2018/08/22 09:47:43 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:12:56 wiz Exp $
 
 DISTNAME=	HTTP-Request-AsCGI-1.2
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=HTTP/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/HTTP-Request-AsCGI/
+HOMEPAGE=	https://metacpan.org/release/HTTP-Request-AsCGI
 COMMENT=	Setup a CGI enviroment from a HTTP::Request
 LICENSE=	${PERL5_LICENSE}
 

@@ -1,12 +1,8 @@
-# $NetBSD: options.mk,v 1.19 2018/05/11 13:47:35 wiz Exp $
+# $NetBSD: options.mk,v 1.22 2020/01/15 14:24:03 wiz Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.modular-xorg-server
-PKG_SUPPORTED_OPTIONS=	inet6 debug dtrace
-PKG_SUGGESTED_OPTIONS=	inet6
-.if ${X11_TYPE} == "modular"
-PKG_SUPPORTED_OPTIONS+=	dri
-PKG_SUGGESTED_OPTIONS+=	dri
-.endif
+PKG_SUPPORTED_OPTIONS=	inet6 dri debug dtrace
+PKG_SUGGESTED_OPTIONS=	inet6 dri
 
 .include "../../mk/bsd.options.mk"
 

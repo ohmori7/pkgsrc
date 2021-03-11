@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.3 2018/11/12 16:10:17 jaapb Exp $
+# $NetBSD: Makefile,v 1.5 2021/03/08 08:12:46 jaapb Exp $
 
 GITHUB_PROJECT=	macaque
 DISTNAME=	${GITHUB_PROJECT}-0.7.4
 PKGNAME=	ocaml-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	3
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ocsigen/}
 
@@ -12,8 +12,8 @@ HOMEPAGE=	https://github.com/ocsigen/macaque/
 COMMENT=	Language for SQL queries in OCaml
 LICENSE=	gnu-lgpl-v2.1
 
-HAS_CONFIGURE=	yes
-USE_LANGUAGES=	c
+HAS_CONFIGURE=		yes
+USE_LANGUAGES=		c
 OCAML_USE_FINDLIB=	yes
 OCAML_USE_OASIS_DYNRUN=	yes
 

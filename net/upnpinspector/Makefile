@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.16 2019/04/26 13:14:10 maya Exp $
+# $NetBSD: Makefile,v 1.19 2020/12/04 20:45:36 nia Exp $
 
 DISTNAME=	UPnP-Inspector-0.2.2
-PKGREVISION=	4
+PKGREVISION=	5
 CATEGORIES=	net
 #MASTER_SITES=	http://coherence.beebits.net/download/
 
@@ -15,7 +15,7 @@ DEPENDS+=	${PYPKGPREFIX}-gtk2-[0-9]*:../../x11/py-gtk2
 
 USE_LANGUAGES=	# none
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-gtk2
+PYTHON_VERSIONS_ACCEPTED=	27 # py-gtk2
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

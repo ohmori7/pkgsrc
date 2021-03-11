@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.20 2018/08/22 09:45:58 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2020/08/31 18:10:40 wiz Exp $
 
 DISTNAME=	Net-Amazon-0.62
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	net perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Net-Amazon/
+HOMEPAGE=	https://metacpan.org/release/Net-Amazon
 COMMENT=	Framework for accessing amazon.com via SOAP and XML/HTTP
 LICENSE=	${PERL5_LICENSE}
 
@@ -17,7 +17,7 @@ DEPENDS+=	p5-XML-Simple>=2.08:../../textproc/p5-XML-Simple
 DEPENDS+=	p5-Log-Log4perl>=0.30:../../devel/p5-Log-Log4perl
 #DEPENDS+=	{perl>=5.007.003,p5-Time-HiRes>=1}:../../time/p5-Time-HiRes
 
-PERL5_PACKLIST= auto/Net/Amazon/.packlist
+PERL5_PACKLIST=	auto/Net/Amazon/.packlist
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.64 2019/04/25 07:32:57 maya Exp $
+# $NetBSD: Makefile,v 1.71 2020/08/17 20:18:55 leot Exp $
 
 DISTNAME=	cinepaint-1.0-4
 PKGNAME=	cinepaint-1.0.4
-PKGREVISION=	1
+PKGREVISION=	7
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=cinepaint/}
 
@@ -13,11 +13,10 @@ LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2 AND mit AND modified-bsd
 
 MAKE_JOBS_SAFE=		no
 
-USE_LANGUAGES=		c c++03
+USE_LANGUAGES=		c c++11
 USE_LIBTOOL=		yes
 USE_TOOLS+=		pkg-config msgfmt gmake
 GNU_CONFIGURE=		yes
-CONFIGURE_ARGS+=	--enable-gtk2
 CONFIGURE_ARGS+=	--without-python
 
 PKGCONFIG_OVERRIDE=	cinepaint-gtk.pc.in

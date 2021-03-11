@@ -1,28 +1,52 @@
-# $NetBSD: options.mk,v 1.17 2019/05/31 15:55:11 nia Exp $
+# $NetBSD: options.mk,v 1.27 2020/12/19 12:17:29 nia Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.mpv
 
-.include "../../multimedia/libva/available.mk"
-.include "../../multimedia/libvdpau/available.mk"
 
-PKG_SUPPORTED_OPTIONS=	alsa ass bluray caca lua pulseaudio rpi sdl2 v4l2
-PKG_SUGGESTED_OPTIONS=	ass bluray lua sdl2
-PKG_SUGGESTED_OPTIONS.Linux+=	alsa
+PKG_OPTIONS_OPTIONAL_GROUPS=	gl
+PKG_OPTIONS_GROUP.gl=		opengl rpi
 
-.if ${VAAPI_AVAILABLE} == "yes"
-PKG_SUPPORTED_OPTIONS+=	vaapi
-PKG_SUGGESTED_OPTIONS+=	vaapi
+# audio outputs
+PKG_SUPPORTED_OPTIONS+=		alsa jack openal pulseaudio
+# video outputs
+PKG_SUPPORTED_OPTIONS+=		caca libdrm x11
+# audio/video outputs
+PKG_SUPPORTED_OPTIONS+=		sdl2
+# misc
+PKG_SUPPORTED_OPTIONS+=		bluray lua
+
+PKG_SUGGESTED_OPTIONS=		bluray lua sdl2
+PKG_SUGGESTED_OPTIONS.Linux+=	alsa pulseaudio
+
+.include "../../mk/bsd.fast.prefs.mk"
+
+.if ${OPSYS} != "Darwin"
+PKG_SUGGESTED_OPTIONS+=		opengl libdrm x11
 .endif
 
+.include "../../multimedia/libva/available.mk"
+
+.if ${VAAPI_AVAILABLE} == "yes"
+PKG_SUPPORTED_OPTIONS+=		vaapi
+PKG_SUGGESTED_OPTIONS+=		vaapi
+.endif
+
+.include "../../multimedia/libvdpau/available.mk"
+
 .if ${VDPAU_AVAILABLE} == "yes"
-PKG_SUPPORTED_OPTIONS+=	vdpau
-PKG_SUGGESTED_OPTIONS+=	vdpau
+PKG_SUPPORTED_OPTIONS+=		vdpau
+PKG_SUGGESTED_OPTIONS+=		vdpau
+.endif
+
+.if ${OPSYS} == "Linux"
+PKG_SUPPORTED_OPTIONS+=		wayland
+PKG_SUGGESTED_OPTIONS+=		wayland
 .endif
 
 .include "../../mk/bsd.options.mk"
 
 ###
-### alsa support
+### alsa support (audio output)
 ###
 .if !empty(PKG_OPTIONS:Malsa)
 WAF_CONFIGURE_ARGS+=	--enable-alsa
@@ -56,14 +80,35 @@ WAF_CONFIGURE_ARGS+=	--disable-caca
 ###
 .if !empty(PKG_OPTIONS:Mlua)
 WAF_CONFIGURE_ARGS+=	--enable-lua
-LUA_VERSIONS_INCOMPATIBLE=	53
+LUA_VERSIONS_ACCEPTED=	52 51
 .include "../../lang/lua/buildlink3.mk"
 .else
 WAF_CONFIGURE_ARGS+=	--disable-lua
 .endif
 
 ###
-### Pulseaudio support (audio output)
+### JACK support (audio output)
+###
+.if !empty(PKG_OPTIONS:Mjack)
+WAF_CONFIGURE_ARGS+=	--enable-jack
+.include "../../audio/jack/buildlink3.mk"
+.else
+WAF_CONFIGURE_ARGS+=	--disable-jack
+.endif
+
+
+###
+### OpenAL support (audio output)
+###
+.if !empty(PKG_OPTIONS:Mopenal)
+WAF_CONFIGURE_ARGS+=	--enable-openal
+.include "../../audio/openal-soft/buildlink3.mk"
+.else
+WAF_CONFIGURE_ARGS+=	--disable-openal
+.endif
+
+###
+### PulseAudio support (audio output)
 ###
 .if !empty(PKG_OPTIONS:Mpulseaudio)
 WAF_CONFIGURE_ARGS+=	--enable-pulse
@@ -80,25 +125,6 @@ WAF_CONFIGURE_ARGS+=	--enable-sdl2
 .include "../../devel/SDL2/buildlink3.mk"
 .else
 WAF_CONFIGURE_ARGS+=	--disable-sdl2
-.endif
-
-###
-### libASS support
-###
-.if !empty(PKG_OPTIONS:Mass)
-WAF_CONFIGURE_ARGS+=	--enable-libass
-.include "../../multimedia/libass/buildlink3.mk"
-.else
-WAF_CONFIGURE_ARGS+=	--disable-libass
-.endif
-
-###
-### V4L2 support
-###
-.if !empty(PKG_OPTIONS:Mv4l2)
-WAF_CONFIGURE_ARGS+=	--enable-libv4l2
-.else
-WAF_CONFIGURE_ARGS+=	--disable-libv4l2
 .endif
 
 ###
@@ -122,9 +148,21 @@ WAF_CONFIGURE_ARGS+=	--disable-vdpau
 .endif
 
 ###
-### Raspberry Pi support
+### libdrm support (video output)
 ###
-.if !empty(PKG_OPTIONS:Mrpi)
+.if !empty(PKG_OPTIONS:Mlibdrm)
+WAF_CONFIGURE_ARGS+=	--enable-drm
+.include "../../x11/libdrm/buildlink3.mk"
+.else
+WAF_CONFIGURE_ARGS+=	--disable-drm
+.endif
+
+###
+### OpenGL support (video output)
+###
+.if !empty(PKG_OPTIONS:Mopengl)
+.include "../../graphics/MesaLib/buildlink3.mk"
+.elif !empty(PKG_OPTIONS:Mrpi)
 BUILD_DEPENDS+=		raspberrypi-userland>=20170109:../../misc/raspberrypi-userland
 CFLAGS+=		"-L${PREFIX}/lib"
 SUBST_CLASSES+=		vc
@@ -132,4 +170,30 @@ SUBST_STAGE.vc=		pre-configure
 SUBST_MESSAGE.vc=	Fixing path to VideoCore libraries.
 SUBST_FILES.vc=		waftools/checks/custom.py
 SUBST_SED.vc+=		-e 's;opt/vc;${PREFIX};g'
+.endif
+
+###
+### Wayland support (video output)
+###
+.if !empty(PKG_OPTIONS:Mwayland)
+WAF_CONFIGURE_ARGS+=	--enable-wayland
+.include "../../devel/wayland/buildlink3.mk"
+.include "../../devel/wayland-protocols/buildlink3.mk"
+.include "../../x11/libxkbcommon/buildlink3.mk"
+.else
+WAF_CONFIGURE_ARGS+=	--disable-wayland
+.endif
+
+###
+### X11 support (video output)
+###
+.if !empty(PKG_OPTIONS:Mx11)
+WAF_CONFIGURE_ARGS+=	--enable-x11
+.include "../../x11/libXinerama/buildlink3.mk"
+.include "../../x11/libXrandr/buildlink3.mk"
+.include "../../x11/libXScrnSaver/buildlink3.mk"
+.include "../../x11/libXv/buildlink3.mk"
+.include "../../x11/libXxf86vm/buildlink3.mk"
+.else
+WAF_CONFIGURE_ARGS+=	--disable-x11
 .endif

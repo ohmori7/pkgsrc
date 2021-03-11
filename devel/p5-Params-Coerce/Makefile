@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:44:29 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/08/31 18:08:39 wiz Exp $
 #
 
 DISTNAME=	Params-Coerce-0.14
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	10
+PKGREVISION=	12
 CATEGORIES=	devel perl5 net
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Params/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Params-Coerce/
+HOMEPAGE=	https://metacpan.org/release/Params-Coerce
 COMMENT=	Perl 5 module allowing classes to do coercion of parameters
 
 USE_LANGUAGES=	# empty

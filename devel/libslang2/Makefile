@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.20 2018/03/22 08:14:51 adam Exp $
+# $NetBSD: Makefile,v 1.22 2020/01/26 17:30:59 rillig Exp $
 #
 
 DISTNAME=	slang-2.2.4
@@ -10,7 +10,7 @@ MASTER_SITES+=	ftp://ftp.ntua.gr/pub/lang/slang/slang/v2.2/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.jedsoft.org/slang/
+HOMEPAGE=	https://www.jedsoft.org/slang/
 COMMENT=	Routines for rapid alpha-numeric terminal applications development
 LICENSE=	gnu-gpl-v2
 
@@ -25,9 +25,9 @@ CONFIGURE_ARGS+=	--with-iconv=${BUILDLINK_PREFIX.iconv}
 CONFIGURE_ARGS+=	--without-x
 CONFIGURE_ARGS+=	--with-z=${BUILDLINK_PREFIX.zlib}
 
-DLOPEN_REQUIRE_PTHREADS=no
+DLOPEN_REQUIRE_PTHREADS=	no
 
-EGDIR=			${PREFIX}/share/examples/libslang2
+EGDIR=		${PREFIX}/share/examples/libslang2
 CONF_FILES+=	${EGDIR}/slsh.rc ${PKG_SYSCONFDIR}/slsh.rc
 
 INSTALL_MAKE_FLAGS+=	DEST_SLSH_CONF_DIR=${DESTDIR}/${EGDIR}

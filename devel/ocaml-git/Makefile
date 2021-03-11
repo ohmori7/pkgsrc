@@ -1,20 +1,23 @@
-# $NetBSD: Makefile,v 1.1 2019/03/19 14:28:52 jaapb Exp $
+# $NetBSD: Makefile,v 1.5 2021/03/08 08:12:52 jaapb Exp $
 
 GITHUB_PROJECT=	ocaml-git
 DISTNAME=	${GITHUB_PROJECT}-2.0.0
+PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=mirage/}
 
-MAINTAINER= jaapb@NetBSD.org
+MAINTAINER=	jaapb@NetBSD.org
 HOMEPAGE=	https://github.com/mirage/ocaml-git/
 COMMENT=	Pure-language git bindings for OCaml
 LICENSE=	isc
 
 USE_LANGUAGES=	# none
 
-OCAML_USE_DUNE=	yes
+OCAML_USE_DUNE=		yes
 DUNE_BUILD_PACKAGES=	git
+OPAM_INSTALL_FILES=	git
 
+.include "options.mk"
 .include "../../archivers/ocaml-decompress/buildlink3.mk"
 .include "../../devel/ocaml-astring/buildlink3.mk"
 .include "../../devel/ocaml-angstrom/buildlink3.mk"
@@ -32,6 +35,7 @@ DUNE_BUILD_PACKAGES=	git
 .include "../../devel/ocaml-ocplib-endian/buildlink3.mk"
 .include "../../devel/ocaml-rresult/buildlink3.mk"
 .include "../../devel/ocamlgraph/buildlink3.mk"
+.include "../../www/ocaml-cohttp/buildlink3.mk"
 .include "../../www/ocaml-uri/buildlink3.mk"
 .include "../../mk/ocaml.mk"
 .include "../../mk/bsd.pkg.mk"

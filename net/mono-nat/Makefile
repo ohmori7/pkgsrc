@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.27 2019/04/03 00:33:00 ryoon Exp $
+# $NetBSD: Makefile,v 1.30 2020/11/05 09:07:05 ryoon Exp $
 
 DISTNAME=	mono-nat-1.0.2
-PKGREVISION=	22
+PKGREVISION=	25
 CATEGORIES=	net
 MASTER_SITES=	http://projects.qnetp.net/attachments/download/22/
 

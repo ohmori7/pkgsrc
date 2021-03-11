@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.77 2019/04/28 12:46:31 maya Exp $
+# $NetBSD: Makefile,v 1.105 2020/11/29 22:33:21 dbj Exp $
 
 DISTNAME=	qtbase-everywhere-src-${QTVERSION}
 PKGNAME=	qt5-qtbase-${QTVERSION}
@@ -14,7 +14,6 @@ CONFIGURE_ARGS+=	-L "${PREFIX}/lib"
 CONFIGURE_ARGS+=	-opensource -confirm-license
 CONFIGURE_ARGS+=	-sysconfdir "${PKG_SYSCONFDIR}/xdg"
 CONFIGURE_ARGS+=	-accessibility
-CONFIGURE_ARGS+=	-dbus-linked
 CONFIGURE_ARGS+=	-icu
 CONFIGURE_ARGS+=	-libproxy
 CONFIGURE_ARGS+=	-openssl-linked
@@ -31,6 +30,7 @@ CONFIGURE_ARGS+=	-no-sql-sqlite2
 CONFIGURE_ARGS+=	-no-sql-tds
 CONFIGURE_ARGS+=	-no-strip
 CONFIGURE_ARGS+=	-no-tslib
+CONFIGURE_ARGS+=	-no-vulkan
 CONFIGURE_ARGS+=	-no-use-gold-linker
 CONFIGURE_ARGS+=	-pkg-config
 CONFIGURE_ARGS+=	-release
@@ -68,40 +68,47 @@ PLIST_VARS+=		egl
 .if ${OPSYS} == "SunOS"
 .  if !empty(PKGSRC_COMPILER:Mgcc) || !empty(PKGSRC_COMPILER:Mclang)
 .    if ${ABI:U} == "64"
-CONFIGURE_ARGS+=	-platform solaris-g++-64
+CONFIGURE_ARGS+=		-platform solaris-g++-64
 .    else
-CONFIGURE_ARGS+=	-platform solaris-g++
+CONFIGURE_ARGS+=		-platform solaris-g++
 .    endif
 .  else
 .    if ${ABI:U} == "64"
-CONFIGURE_ARGS+=	-platform solaris-cc-64
+CONFIGURE_ARGS+=		-platform solaris-cc-64
 .    else
-CONFIGURE_ARGS+=	-platform solaris-cc
+CONFIGURE_ARGS+=		-platform solaris-cc
 .    endif
 .  endif
-NETWORK_LIBS=		-lsocket -lnsl
+NETWORK_LIBS=			-lsocket -lnsl
 .elif ${OPSYS} == "Interix"
-CONFIGURE_ARGS+=	-platform interix-g++
-CFLAGS+=		-I/usr/local/include/bind
-LDFLAGS+=		-L/usr/local/lib/bind -lbind
-BUILDLINK_PASSTHRU_DIRS+=/usr/local/include/bind /usr/local/lib/bind
-SYS_LIBS=		-lbind -ldb -ldl
+CONFIGURE_ARGS+=		-platform interix-g++
+CFLAGS+=			-I/usr/local/include/bind
+LDFLAGS+=			-L/usr/local/lib/bind -lbind
+BUILDLINK_PASSTHRU_DIRS+=	/usr/local/include/bind /usr/local/lib/bind
+SYS_LIBS=			-lbind -ldb -ldl
 .elif ${OPSYS} == "DragonFly"
-CONFIGURE_ARGS+=	-platform freebsd-g++
-LDFLAGS+=		-lexecinfo
+CONFIGURE_ARGS+=		-platform freebsd-g++
+LDFLAGS+=			-lexecinfo
 .elif ${OPSYS} == "Darwin"
-CONFIGURE_ARGS+=	-platform macx-clang
-CONFIGURE_ARGS+=	-no-framework
+CONFIGURE_ARGS+=		-platform macx-clang
+CONFIGURE_ARGS+=		-no-framework
+# pkgsrc has a patch to avoid using SDK, but the configure
+# logic gets confused if it can't find the header files
+# so give it a direct path to them if they aren't installed
+# in /usr/include
+.  if !exists(/usr/include)
+CONFIGURE_ARGS+=	-I "$$(xcrun --show-sdk-path)"/usr/include
+.  endif
 .  if exists(/usr/lib/libresolv.dylib)
-LDFLAGS+=		-lresolv
+LDFLAGS+=			-lresolv
 .  endif
 .elif ${OPSYS} == "Linux"
-LDFLAGS+=		-ldl
+LDFLAGS+=			-ldl
 .elif ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD"
 .  if exists(/usr/lib/libexecinfo.so)
-LDFLAGS+=		-lexecinfo
+LDFLAGS+=			-lexecinfo
 .  endif
-LDFLAGS.FreeBSD+=	-lutil
+LDFLAGS.FreeBSD+=		-lutil
 .endif
 
 REPLACE_PERL+=		bin/fixqt4headers.pl
@@ -117,16 +124,16 @@ BUILD_TARGET=		sub-src
 INSTALLATION_DIRS=	${QTPREFIX}/bin lib/pkgconfig
 INSTALL_ENV+=		INSTALL_ROOT=${DESTDIR}
 
-CHECK_INTERPRETER_SKIP+=qt5/examples/widgets/tools/echoplugin/echoplugin.pro
-CHECK_INTERPRETER_SKIP+=qt5/examples/widgets/tools/echoplugin/plugin/plugin.pro
-CHECK_INTERPRETER_SKIP+=qt5/examples/widgets/tools/plugandpaint/plugandpaint.pro
-CHECK_INTERPRETER_SKIP+=qt5/examples/widgets/tools/plugandpaintplugins/basictools/basictools.pro
-CHECK_INTERPRETER_SKIP+=qt5/examples/widgets/tools/plugandpaintplugins/extrafilters/extrafilters.pro
-CHECK_INTERPRETER_SKIP+=qt5/examples/widgets/tools/styleplugin/plugin/plugin.pro
-CHECK_INTERPRETER_SKIP+=qt5/mkspecs/features/data/mac/objc_namespace.sh
-CHECK_INTERPRETER_SKIP+=qt5/mkspecs/features/uikit/device_destinations.sh
-CHECK_INTERPRETER_SKIP+=qt5/mkspecs/features/uikit/devices.py
-CHECK_INTERPRETER_SKIP+=qt5/mkspecs/macx-ios-clang/rename_main.sh
+CHECK_INTERPRETER_SKIP+=	qt5/examples/widgets/tools/echoplugin/echoplugin.pro
+CHECK_INTERPRETER_SKIP+=	qt5/examples/widgets/tools/echoplugin/plugin/plugin.pro
+CHECK_INTERPRETER_SKIP+=	qt5/examples/widgets/tools/plugandpaint/plugandpaint.pro
+CHECK_INTERPRETER_SKIP+=	qt5/examples/widgets/tools/plugandpaintplugins/basictools/basictools.pro
+CHECK_INTERPRETER_SKIP+=	qt5/examples/widgets/tools/plugandpaintplugins/extrafilters/extrafilters.pro
+CHECK_INTERPRETER_SKIP+=	qt5/examples/widgets/tools/styleplugin/plugin/plugin.pro
+CHECK_INTERPRETER_SKIP+=	qt5/mkspecs/features/data/mac/objc_namespace.sh
+CHECK_INTERPRETER_SKIP+=	qt5/mkspecs/features/uikit/device_destinations.sh
+CHECK_INTERPRETER_SKIP+=	qt5/mkspecs/features/uikit/devices.py
+CHECK_INTERPRETER_SKIP+=	qt5/mkspecs/macx-ios-clang/rename_main.sh
 
 SUBST_CLASSES+=		opt
 SUBST_STAGE.opt=	pre-configure
@@ -143,12 +150,12 @@ SUBST_CLASSES+=		path
 SUBST_STAGE.path=	pre-configure
 SUBST_MESSAGE.path=	Add to default XDG path.
 SUBST_FILES.path=	src/corelib/io/qstandardpaths_unix.cpp
-SUBST_VARS.path=	LOCALBASE
+SUBST_VARS.path=	PREFIX
 
 BROKEN_FILES=		qt5/mkspecs/modules/qt_lib_bootstrap_private.pri
 BROKEN_FILES1=		qt5/mkspecs/qmodule.pri
 
-PC_FILES=		Qt5Concurrent.pc Qt5Core.pc Qt5DBus.pc \
+PC_FILES=		Qt5Concurrent.pc Qt5Core.pc \
 			Qt5Gui.pc Qt5Network.pc Qt5OpenGL.pc \
 			Qt5OpenGLExtensions.pc \
 			Qt5PrintSupport.pc Qt5Sql.pc Qt5Test.pc \
@@ -166,7 +173,7 @@ COMPILER+=	clang llvm
 .endif
 
 pre-configure:
-	${SED}  -e 's:@LOCALBASE@:${LOCALBASE}:g' \
+	${SED}  -e 's:@PREFIX@:${PREFIX}:g' \
 		-e 's:@X11BASE@:${X11BASE}:g' \
 		-e 's:@COMPILER@:${COMPILER:Q}:g' \
 		-e 's:@CC@:${CC:Q}:g' \
@@ -184,20 +191,22 @@ pre-configure:
 		-e 's:@PTHREAD_LDFLAGS@:${PTHREAD_LDFLAGS:Q}:g' \
 		-e 's:@PTHREAD_LIBS@:${PTHREAD_LIBS:Q}:g' \
 		-e 's:@COMPILER_RPATH_FLAG@:${COMPILER_RPATH_FLAG}:g' \
-		-e 's:@QMAKE_RANLIB@:${QMAKE_RANLIB:Q}:g' \
+		-e 's:@QMAKE_RANLIB@:${RANLIB}:g' \
 		-e 's:@QMAKE_EXTRA@:${QMAKE_EXTRA:Q}:g' \
 		${FILESDIR}/${QMAKE_CONF} > ${WRKSRC}/qmake.conf
-		for dir in ${WRKSRC}/mkspecs/*; do \
+	for dir in ${WRKSRC}/mkspecs/*; do \
 			cp ${WRKSRC}/qmake.conf $${dir}; \
 			rm -f $${dir}/*.orig; \
 		done
 	${RM} -f ${WRKSRC}/mkspecs/features/mac/default_pre.prf
 	${RM} -f ${WRKSRC}/mkspecs/features/mac/default_post.prf
 
+.include "options.mk"
+
 post-install:
 .for i in ${PC_FILES}
 	cd ${DESTDIR}${PREFIX}/lib/pkgconfig && \
-	ln -f -s ${QTPREFIX}/lib/pkgconfig/${i} ${i}
+	${LN} -f -s ${QTPREFIX}/lib/pkgconfig/${i} ${i}
 .endfor
 	cd ${WRKSRC} && env ${MAKE_ENV} ${INSTALL_ENV} \
 		${MAKE_PROGRAM} install_mkspecs
@@ -213,6 +222,7 @@ post-install:
 	${MV} -f ${DESTDIR}${PREFIX}/${BROKEN_FILES1}.1 \
 		${DESTDIR}${PREFIX}/${BROKEN_FILES1}
 
+.include "../../archivers/zstd/buildlink3.mk"
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../databases/sqlite3/buildlink3.mk"
 .include "../../devel/gettext-lib/buildlink3.mk"
@@ -223,9 +233,6 @@ post-install:
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
-# Use lib/dbus-1.0/include/dbus/dbus-arch-deps.h from sysutils/dbus
-USE_DBUS-ARCH-DEPS_H=	yes
-.include "../../sysutils/dbus/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"
 .include "../../www/libproxy/buildlink3.mk"
 .if ${OPSYS} != "Darwin"
@@ -234,6 +241,7 @@ USE_DBUS-ARCH-DEPS_H=	yes
 .  if !empty(MESALIB_SUPPORTS_EGL:Myes)
 PLIST.egl=	yes
 .  endif
+BUILDLINK_API_DEPENDS.libxcb+=	libxcb>=1.11
 .include "../../x11/libxcb/buildlink3.mk"
 .include "../../x11/xcb-util/buildlink3.mk"
 .include "../../x11/xcb-util-image/buildlink3.mk"

@@ -1,17 +1,18 @@
-# $NetBSD: Makefile,v 1.25 2019/01/27 10:07:19 wen Exp $
+# $NetBSD: Makefile,v 1.29 2020/08/31 18:07:25 wiz Exp $
 
-DISTNAME=	Algorithm-Dependency-1.111
+DISTNAME=	Algorithm-Dependency-1.112
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Algorithm/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Algorithm-Dependency/
+HOMEPAGE=	https://metacpan.org/release/Algorithm-Dependency
 COMMENT=	Algorithmic framework for implementing dependency tree
 LICENSE=	${PERL5_LICENSE}
 
-BUILD_DEPENDS+=	p5-Test-ClassAPI>=0.6:../../devel/p5-Test-ClassAPI
 DEPENDS+=	p5-Params-Util>=0.31:../../devel/p5-Params-Util
+TEST_DEPENDS+=	p5-Test-ClassAPI>=0.6:../../devel/p5-Test-ClassAPI
 
 PERL5_PACKLIST=		auto/Algorithm/Dependency/.packlist
 

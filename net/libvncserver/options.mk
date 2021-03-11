@@ -1,8 +1,8 @@
-# $NetBSD: options.mk,v 1.3 2019/02/20 12:21:34 ryoon Exp $
+# $NetBSD: options.mk,v 1.5 2020/12/18 23:25:59 nia Exp $
 
-PKG_OPTIONS_VAR=	PKG_OPTIONS.libVNCServer
-PKG_SUPPORTED_OPTIONS=	gnutls inet6 libgcrypt openssl sasl
-PKG_SUGGESTED_OPTIONS=	gnutls inet6 libgcrypt
+PKG_OPTIONS_VAR=		PKG_OPTIONS.libVNCServer
+PKG_SUPPORTED_OPTIONS=		inet6 libgcrypt sasl
+PKG_SUGGESTED_OPTIONS=		gnutls inet6 libgcrypt
 PKG_OPTIONS_OPTIONAL_GROUPS+=	ssl
 PKG_OPTIONS_GROUP.ssl=		gnutls openssl
 

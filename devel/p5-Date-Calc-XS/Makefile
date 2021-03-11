@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:43:52 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:07:49 wiz Exp $
 
 DISTNAME=	Date-Calc-XS-6.4
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Date/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Date-Calc-XS/
+HOMEPAGE=	https://metacpan.org/release/Date-Calc-XS
 COMMENT=	XS wrapper and C library plug-in for Date::Calc
 LICENSE=	${PERL5_LICENSE} OR gnu-lgpl-v2
 

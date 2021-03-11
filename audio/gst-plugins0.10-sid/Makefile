@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.11 2012/09/15 10:03:38 obache Exp $
+# $NetBSD: Makefile,v 1.14 2020/11/05 09:07:27 ryoon Exp $
 #
 
 GST_PLUGINS0.10_NAME=	sid
 GST_PLUGINS0.10_DIRS=	ext/sidplay
 GST_PLUGINS0.10_FLAGS=	sidplay
-PKGREVISION=		2
+PKGREVISION=		5
 
 USE_LANGUAGES=	c c++
 

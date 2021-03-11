@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.40 2019/05/21 11:56:43 jperkin Exp $
+# $NetBSD: Makefile,v 1.49 2021/02/28 17:12:55 taca Exp $
 
-DISTNAME=	bulk-large-20190318
+DISTNAME=	bulk-large-20200228
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
 DISTFILES=	# empty
@@ -13,8 +13,6 @@ META_PACKAGE=	yes
 RESTRICTED=		Just for test build purpose
 NO_BIN_ON_CDROM=	${RESTRICTED}
 NO_BIN_ON_FTP=		${RESTRICTED}
-
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-gtk2
 
 #
 # Note: the primary purpose of this package is to build the most
@@ -34,36 +32,31 @@ PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-gtk2
 # 1. Packages used by a lot of other packages
 #
 BUILD_DEPENDS+=	taglib-[0-9]*:../../audio/taglib
-BUILD_DEPENDS+=	GConf-[0-9]*:../../devel/GConf
 BUILD_DEPENDS+=	gmp-[0-9]*:../../devel/gmp
 BUILD_DEPENDS+=	heirloom-libcommon-[0-9]*:../../devel/heirloom-libcommon
 BUILD_DEPENDS+=	libgetopt-[0-9]*:../../devel/libgetopt
 BUILD_DEPENDS+=	ocaml-[0-9]*:../../lang/ocaml
-BUILD_DEPENDS+=	gst-plugins0.10-base-[0-9]*:../../multimedia/gst-plugins0.10-base
-BUILD_DEPENDS+=	gstreamer0.10-[0-9]*:../../multimedia/gstreamer0.10
+BUILD_DEPENDS+=	gst-plugins1-base-[0-9]*:../../multimedia/gst-plugins1-base
+BUILD_DEPENDS+=	gstreamer1-[0-9]*:../../multimedia/gstreamer1
 BUILD_DEPENDS+=	libsoup-[0-9]*:../../net/libsoup
 BUILD_DEPENDS+=	dbus-[0-9]*:../../sysutils/dbus
 BUILD_DEPENDS+=	dbus-glib-[0-9]*:../../sysutils/dbus-glib
 BUILD_DEPENDS+=	aspell-[0-9]*:../../textproc/aspell
-BUILD_DEPENDS+=	kdelibs4-[0-9]*:../../x11/kdelibs4
-BUILD_DEPENDS+=	${PYPKGPREFIX}-gtk2-[0-9]*:../../x11/py-gtk2
-BUILD_DEPENDS+=	qt4-libs-[0-9]*:../../x11/qt4-libs
-BUILD_DEPENDS+=	qt4-tools-[0-9]*:../../x11/qt4-tools
+BUILD_DEPENDS+=	${PYPKGPREFIX}-gobject3-[0-9]*:../../devel/py-gobject3
+BUILD_DEPENDS+=	qt5-qtbase-[0-9]*:../../x11/qt5-qtbase
+BUILD_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
 
 #
 # 2. Applications
 #
-BUILD_DEPENDS+=	konversation>=1.4:../../chat/konversation
-BUILD_DEPENDS+=	asterisk>=11:../../comms/asterisk
+BUILD_DEPENDS+=	quassel-[0-9]*:../../chat/quassel
+BUILD_DEPENDS+=	asterisk>=16:../../comms/asterisk16
 BUILD_DEPENDS+=	avr-gcc-[0-9]*:../../cross/avr-gcc
 BUILD_DEPENDS+=	avr-libc-[0-9]*:../../cross/avr-libc
 BUILD_DEPENDS+=	avr-gdb-[0-9]*:../../cross/avr-gdb
-BUILD_DEPENDS+=	mysql-client>=5.5<5.6:../../databases/mysql55-client
-BUILD_DEPENDS+=	mysql-server>=5.5<5.6:../../databases/mysql55-server
-BUILD_DEPENDS+=	mysql-client>=5.6:../../databases/mysql56-client
-BUILD_DEPENDS+=	mysql-server>=5.6:../../databases/mysql56-server
-BUILD_DEPENDS+=	postgresql94-[0-9]*:../../databases/postgresql94
-BUILD_DEPENDS+=	valgrind-[0-9]*:../../devel/valgrind
+BUILD_DEPENDS+=	mysql-client>=5.7:../../databases/mysql57-client
+BUILD_DEPENDS+=	mysql-server>=5.7:../../databases/mysql57-server
+BUILD_DEPENDS+=	postgresql95-[0-9]*:../../databases/postgresql95
 BUILD_DEPENDS+=	abiword-[0-9]*:../../editors/abiword
 BUILD_DEPENDS+=	emacs25>=25<26:../../editors/emacs25
 BUILD_DEPENDS+=	emacs-packages-[0-9]*:../../editors/emacs-packages
@@ -83,19 +76,17 @@ BUILD_DEPENDS+=	thunderbird-l10n-[0-9]*:../../mail/thunderbird-l10n
 BUILD_DEPENDS+=	R-[0-9]*:../../math/R
 BUILD_DEPENDS+=	octave-[0-9]*:../../math/octave
 BUILD_DEPENDS+=	zyGrib-[0-9]*:../../misc/zyGrib
-BUILD_DEPENDS+=	mplayer-[0-9]*:../../multimedia/mplayer
-BUILD_DEPENDS+=	xine-ui-[0-9]*:../../multimedia/xine-ui
-BUILD_DEPENDS+=	gstreamer0.10-plugins-[0-9]*:../../meta-pkgs/gstreamer0.10-plugins
-BUILD_DEPENDS+=	cups>=1.5<2.0:../../print/cups15
-BUILD_DEPENDS+=	evince>=2<3:../../print/evince
+BUILD_DEPENDS+=	mpv-[0-9]*:../../multimedia/mpv
+BUILD_DEPENDS+=	cups-[0-9]*:../../print/cups
+BUILD_DEPENDS+=	atril-[0-9]*:../../print/atril
 BUILD_DEPENDS+=	lilypond-[0-9]*:../../print/lilypond
 BUILD_DEPENDS+=	mit-krb5-appl-[0-9]*:../../security/mit-krb5-appl
 BUILD_DEPENDS+=	FlightCrew-[0-9]*:../../textproc/FlightCrew
 BUILD_DEPENDS+=	clearsilver-[0-9]*:../../www/clearsilver
 BUILD_DEPENDS+=	mediawiki-[0-9]*:../../www/mediawiki
-BUILD_DEPENDS+=	${RUBY_PKGPREFIX}-rails42>=4.2:../../www/ruby-rails42
-BUILD_DEPENDS+=	${RUBY_PKGPREFIX}-rails51>=5.1.6.1:../../www/ruby-rails51
-BUILD_DEPENDS+=	${RUBY_PKGPREFIX}-rails52>=5.2.2:../../www/ruby-rails52
+BUILD_DEPENDS+=	${RUBY_PKGPREFIX}-rails52>=5.2.4.5:../../www/ruby-rails52
+BUILD_DEPENDS+=	${RUBY_PKGPREFIX}-rails60>=6.0.3.5:../../www/ruby-rails60
+BUILD_DEPENDS+=	${RUBY_PKGPREFIX}-rails61>=6.1.3:../../www/ruby-rails61
 
 #
 # 3. Libraries
@@ -120,8 +111,7 @@ BUILD_DEPENDS+=	texlive-collection-latex-doc-[0-9]*:../../meta-pkgs/texlive-coll
 #
 BUILD_DEPENDS+=	deforaos-desktop-[0-9]*:../../meta-pkgs/deforaos-desktop
 BUILD_DEPENDS+=	gnustep-[0-9]*:../../meta-pkgs/gnustep
-BUILD_DEPENDS+=	kde4-[0-9]*:../../meta-pkgs/kde4
-BUILD_DEPENDS+=	matchbox-[0-9]*:../../meta-pkgs/matchbox
+BUILD_DEPENDS+=	mate-[0-9]*:../../meta-pkgs/mate
 BUILD_DEPENDS+=	windowmaker-desktop-[0-9]*:../../meta-pkgs/windowmaker-desktop
 BUILD_DEPENDS+=	xfce4-[0-9]*:../../meta-pkgs/xfce4
 BUILD_DEPENDS+=	xfce4-extras-[0-9]*:../../meta-pkgs/xfce4-extras

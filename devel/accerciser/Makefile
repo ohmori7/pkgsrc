@@ -1,35 +1,44 @@
-# $NetBSD: Makefile,v 1.31 2019/04/26 14:12:34 maya Exp $
+# $NetBSD: Makefile,v 1.41 2020/12/04 20:45:06 nia Exp $
 
-DISTNAME=	accerciser-1.12.1
-PKGREVISION=	4
-CATEGORIES=	misc
-MASTER_SITES=	${MASTER_SITE_GNOME:=sources/accerciser/1.12/}
-EXTRACT_SUFX=	.tar.bz2
+DISTNAME=	accerciser-3.38.0
+PKGREVISION=	1
+CATEGORIES=	devel gnome
+MASTER_SITES=	${MASTER_SITE_GNOME:=sources/accerciser/${PKGVERSION_NOREV:R}/}
+EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://www.gnome.org/
+MAINTAINER=	prlw1@cam.ac.uk
+HOMEPAGE=	https://live.gnome.org/Accerciser/
 COMMENT=	Interactive Python accessibility explorer for the GNOME desktop
 LICENSE=	modified-bsd
 
-DEPENDS+=	${PYPKGPREFIX}-gnome2-desktop-[0-9]*:../../x11/py-gnome2-desktop
-DEPENDS+=	${PYPKGPREFIX}-gtk2>=2.8:../../x11/py-gtk2
-DEPENDS+=	${PYPKGPREFIX}-at-spi>=1.23.4:../../devel/py-at-spi
-DEPENDS+=	${PYPKGPREFIX}-ipython<0.11:../../devel/py-ipython010
+PREV_PKGPATH=	devel/accerciser3
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # py-ORBit via py-gnome2, py-ipython, py-gtk2
-
-USE_TOOLS+=		gmake intltool msgfmt pkg-config
+USE_TOOLS+=		gmake msgfmt pkg-config
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
 PY_PATCHPLIST=		yes
 REPLACE_PYTHON=		plugins/ipython_view.py
 REPLACE_PYTHON+=	src/accerciser.in
 
-.include "../../devel/GConf/schemas.mk"
+TOOL_DEPENDS+=		gettext-tools>=0.19.8:../../devel/gettext-tools
+_TOOLS_USE_PKGSRC.msgfmt= yes
+BUILD_DEPENDS+=		yelp-tools-[0-9]*:../../textproc/yelp-tools
+
+DEPENDS+=	libwnck3-[0-9]*:../../devel/libwnck3
+DEPENDS+=	${PYPKGPREFIX}-at-spi2-[0-9]*:../../devel/py-at-spi2
+DEPENDS+=	${PYPKGPREFIX}-gobject3-[0-9]*:../../devel/py-gobject3
+DEPENDS+=	${PYPKGPREFIX}-ipython>=1.2.1:../../devel/py-ipython
+DEPENDS+=	${PYPKGPREFIX}-Xlib-[0-9]*:../../x11/py-Xlib
+
+# dependencies to keep package's configure script happy:
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
+.include "../../x11/gtk3/buildlink3.mk"
+.include "../../devel/at-spi2-core/buildlink3.mk"
+.include "../../devel/glib2/schemas.mk"
+.include "../../devel/py-gobject3-common/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../lang/python/application.mk"
 .include "../../lang/python/extension.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../textproc/gnome-doc-utils/buildlink3.mk"
-.include "../../mk/omf-scrollkeeper.mk"
 .include "../../mk/bsd.pkg.mk"

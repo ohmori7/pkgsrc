@@ -1,7 +1,6 @@
-# $NetBSD: Makefile,v 1.69 2019/04/25 07:33:21 maya Exp $
+# $NetBSD: Makefile,v 1.73 2020/08/18 05:26:08 tnn Exp $
 
-DISTNAME=	salt-2019.2.0
-PKGREVISION=	1
+DISTNAME=	salt-2019.2.2
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_PYPI:=s/salt/}
 
@@ -20,6 +19,9 @@ DEPENDS+=	${PYPKGPREFIX}-psutil-[0-9]*:../../sysutils/py-psutil
 # zeromq transport requirements
 DEPENDS+=	${PYPKGPREFIX}-cryptodome-[0-9]*:../../security/py-cryptodome
 DEPENDS+=	${PYPKGPREFIX}-zmq>=2.2.0:../../net/py-zmq
+
+# Some modules are still not (as of 2019.2.0) 3.x compatible.
+PYTHON_VERSIONS_ACCEPTED=	27
 
 .include "../../lang/python/pyversion.mk"
 .if ${_PYTHON_VERSION} == 27
@@ -72,9 +74,12 @@ SUBST_SED.fix-path+=	-e 's,/opt/local/etc,${PKG_SYSCONFBASEDIR},g'
 SUBST_SED.fix-path+=	-e 's,/var/run,${VARBASE}/run,g'
 SUBST_SED.fix-path+=	-e 's,/var/cache,${VARBASE}/cache,g'
 SUBST_SED.fix-path+=	-e 's,/var/log,${VARBASE}/log,g'
+SUBST_NOOP_OK.fix-path=	yes
 
 # Contains hardcoded paths to find installed libraries.
 CHECK_WRKREF_SKIP+=	*/salt/utils/rsax931.py
+
+CHECK_PORTABILITY_SKIP+=	pkg/*/* pkg/*/*/*
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/conf/master ${DESTDIR}${EGDIR}/

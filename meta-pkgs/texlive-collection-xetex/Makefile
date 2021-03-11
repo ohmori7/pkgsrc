@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.11 2019/05/15 11:42:55 markd Exp $
+# $NetBSD: Makefile,v 1.14 2021/02/14 23:11:54 markd Exp $
 
 DISTNAME=	collection-xetex
-PKGNAME=	texlive-${DISTNAME}-2019pre1
+PKGNAME=	texlive-${DISTNAME}-2020pre1
 CATEGORIES=	meta-pkgs
 MASTER_SITES=	# empty
-TEXLIVE_REV=	49732
+TEXLIVE_REV=	55209
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.tug.org/texlive/
+HOMEPAGE=	https://www.tug.org/texlive/
 COMMENT=	XeTeX and packages
 
 DEPENDS+=	texlive-collection-basic-[0-9]*:../../meta-pkgs/texlive-collection-basic
@@ -17,8 +17,8 @@ DEPENDS+=	texlive-collection-basic-[0-9]*:../../meta-pkgs/texlive-collection-bas
 # depend bidi-atbegshi
 # depend bidicontour
 # depend bidipagegrid
-# depend bidishadowtext
 # depend bidipresentation
+# depend bidishadowtext
 # depend businesscard-qrcode
 # depend cqubeamer
 # depend fixlatvian
@@ -30,8 +30,6 @@ DEPENDS+=	texlive-collection-basic-[0-9]*:../../meta-pkgs/texlive-collection-bas
 # depend philokalia
 DEPENDS+=	tex-polyglossia-[0-9]*:../../print/tex-polyglossia
 # depend ptext
-# depend quran
-# depend quran-de
 DEPENDS+=	tex-realscripts-[0-9]*:../../print/tex-realscripts
 # depend simple-resume-cv
 # depend simple-thesis-dissertation
@@ -45,6 +43,7 @@ DEPENDS+=	tex-realscripts-[0-9]*:../../print/tex-realscripts
 # depend xecolor
 # depend xecyr
 # depend xeindex
+# depend xelatex-dev
 # depend xesearch
 # depend xespotcolor
 DEPENDS+=	tex-xetex-[0-9]*:../../print/tex-xetex

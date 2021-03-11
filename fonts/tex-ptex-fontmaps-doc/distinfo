@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.4 2019/05/14 10:16:51 markd Exp $
+$NetBSD: distinfo,v 1.6 2021/02/21 05:59:35 markd Exp $
 
-SHA1 (tex-ptex-fontmaps-51023/ptex-fontmaps.doc.tar.xz) = f1cba932212aababaa8af1ee56c6cd7306d4863b
-RMD160 (tex-ptex-fontmaps-51023/ptex-fontmaps.doc.tar.xz) = 394507cb70899303c0dccb2146a9b7db3548e69a
-SHA512 (tex-ptex-fontmaps-51023/ptex-fontmaps.doc.tar.xz) = c5e0f4b4ac9c657b83c27ced5bf3d4eccf993db6518fbb750e8a0b91752b40193a947a3ac2c53a82270be2f8ea736711b5a60e59f29c424bb3ca612038be8972
-Size (tex-ptex-fontmaps-51023/ptex-fontmaps.doc.tar.xz) = 4524 bytes
+SHA1 (ptex-fontmaps.doc.r57239.tar.xz) = ad9a2ef842e23d5442aea40bcc8c325091f236c6
+RMD160 (ptex-fontmaps.doc.r57239.tar.xz) = d11161067045d98483359c8fb6fa482c97c99ed6
+SHA512 (ptex-fontmaps.doc.r57239.tar.xz) = 42e7f0eeab1000b2c49d714c40405e008cc7b08648bdac1bac8f5459bc64eb3fd6fb526fabbbc2c7774a1b12abd37396e389e7c90351eba92a5aeef53ac3e558
+Size (ptex-fontmaps.doc.r57239.tar.xz) = 156728 bytes

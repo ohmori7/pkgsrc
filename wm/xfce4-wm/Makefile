@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.68 2019/05/23 02:13:24 gutteridge Exp $
+# $NetBSD: Makefile,v 1.84 2021/01/19 02:46:19 gutteridge Exp $
 
 .include "../../meta-pkgs/xfce4/Makefile.common"
 
-VERSION=	4.13.2
+VERSION=	4.14.6
 DISTNAME=	xfwm4-${VERSION}
 PKGNAME=	xfce4-wm-${VERSION}
 CATEGORIES=	wm
-MASTER_SITES+=	http://archive.xfce.org/src/xfce/xfwm4/${VERSION:R}/
+MASTER_SITES+=	https://archive.xfce.org/src/xfce/xfwm4/${VERSION:R}/
 
-HOMEPAGE=	http://docs.xfce.org/xfce/xfwm4/start
-COMMENT=	XFCE window manager
+HOMEPAGE=	https://docs.xfce.org/xfce/xfwm4/start
+COMMENT=	Xfce window manager
 
 .include "../../devel/libwnck3/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"

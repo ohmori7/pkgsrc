@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.12 2014/12/13 14:22:05 mef Exp $
+# $NetBSD: Makefile,v 1.15 2020/03/20 11:58:12 nia Exp $
 #
 
 DISTNAME=		whoson-2.05
@@ -17,8 +17,8 @@ GNU_CONFIGURE=		yes
 WHOSOND_CHROOT?=	${VARBASE}/chroot/whosond
 CONFIGURE_ARGS+=	--with-config="${PKG_SYSCONFDIR}/whoson.conf"
 
-RCD_SCRIPTS=		whosond
-OWN_DIRS+=		${WHOSOND_CHROOT}
+RCD_SCRIPTS=	whosond
+OWN_DIRS+=	${WHOSOND_CHROOT}
 EXDIR=		${PREFIX}/share/examples/whoson
 CONF_FILES=	${EXDIR}/whoson.conf ${PKG_SYSCONFDIR}/whoson.conf
 

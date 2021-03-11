@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.254 2019/05/05 07:58:38 adam Exp $
+# $NetBSD: Makefile,v 1.268 2021/01/25 09:33:19 wiz Exp $
 
 .include "license.mk"
 .include "Makefile.common"
@@ -7,84 +7,13 @@ COMMENT=	Practical Extraction and Report Language
 
 CONFLICTS+=	perl-base-[0-9]* perl-thread-[0-9]*
 
-# CONFLICTS packages older than CORE modules version.
-# based on 'corelist -v ${PKGVERSION}'
-# update based on 'corelist -diff ${PREV_PKGVERSION} ${PKGVERSION}'
-CONFLICTS+=	p5-Archive-Tar<1.96
-CONFLICTS+=	p5-Attribute-Handlers<0.96
-CONFLICTS+=	p5-AutoLoader<5.74
-CONFLICTS+=	p5-CGI<3.65
-#		older for www/p5-CGI-Fast
-CONFLICTS+=	p5-CPAN<2.0500			# 2.05
-CONFLICTS+=	p5-CPAN-Meta<2.140640
-CONFLICTS+=	p5-CPAN-Meta-Requirements<2.125
-CONFLICTS+=	p5-CPAN-Meta-YAML<0.012
-CONFLICTS+=	p5-Compress-Raw-Bzip2<2.064
-CONFLICTS+=	p5-Compress-Raw-Zlib<2.064
-CONFLICTS+=	p5-DB_File<1.831
-CONFLICTS+=	p5-Devel-PPPort<3.21
-CONFLICTS+=	p5-Digest<1.17
-CONFLICTS+=	p5-Digest-MD5<2.53
-CONFLICTS+=	p5-Digest-SHA<5.88
-CONFLICTS+=	p5-Encode<2.60
-CONFLICTS+=	p5-ExtUtils-CBuilder<0.28.02.16	# 0.280216
-CONFLICTS+=	p5-ExtUtils-Command<1.18
-CONFLICTS+=	p5-ExtUtils-Embed<1.32
-CONFLICTS+=	p5-ExtUtils-Install<1.67
-CONFLICTS+=	p5-ExtUtils-MakeMaker<6.98
-CONFLICTS+=	p5-ExtUtils-Manifest<1.63
-CONFLICTS+=	p5-ExtUtils-ParseXS<3.24
-CONFLICTS+=	p5-File-Path<2.09
-CONFLICTS+=	p5-File-Temp<0.23.04	# 0.2304
-CONFLICTS+=	p5-Getopt-Long<2.42
-CONFLICTS+=	p5-HTTP-Tiny<0.043
-CONFLICTS+=	p5-I18N-LangTags<0.40
-CONFLICTS+=	p5-IO<1.3100			# 1.31
-CONFLICTS+=	p5-IO-Compress<2.064		# IO::Compress::*, Compress::*
-CONFLICTS+=	p5-IO-Zlib<1.10
-CONFLICTS+=	p5-IPC-Cmd<0.92
-CONFLICTS+=	p5-IPC-SysV<2.04
-CONFLICTS+=	p5-JSON-PP<2.27203
-CONFLICTS+=	p5-Locale-Codes<3.30
-CONFLICTS+=	p5-Locale-Maketext<1.25
-CONFLICTS+=	p5-Locale-Maketext-Simple<0.21
-CONFLICTS+=	p5-MIME-Base64<3.14
-CONFLICTS+=	p5-Math-Complex<1.59
-CONFLICTS+=	p5-Memoize<1.03
-CONFLICTS+=	p5-Module-Build<0.42050		# 0.4205
-CONFLICTS+=	p5-Module-CoreList<3.10
-CONFLICTS+=	p5-Module-Load<0.32
-CONFLICTS+=	p5-NEXT<0.65
-CONFLICTS+=	p5-Package-Constants<0.04
-CONFLICTS+=	p5-Parse-CPAN-Meta<1.4414
-CONFLICTS+=	p5-Pod-Escapes<1.06
-CONFLICTS+=	p5-Pod-Parser<1.62
-CONFLICTS+=	p5-Pod-Simple<3.28
-CONFLICTS+=	p5-Pod-Usage<1.63
-CONFLICTS+=	p5-Storable<2.49
-CONFLICTS+=	p5-Sys-Syslog<0.33
-CONFLICTS+=	p5-Term-ANSIColor<4.02
-CONFLICTS+=	p5-Term-Cap<1.15
-CONFLICTS+=	p5-Term-ReadLine<1.14
-#			older for sysutils/shelldap
-CONFLICTS+=	p5-Test-Harness<3.30
-CONFLICTS+=	p5-Test-Simple<1.001002
-CONFLICTS+=	p5-Text-Tabs+Wrap<2013.0523	# Text::Tabs + Text::Wrap
-CONFLICTS+=	p5-Tie-File<1.00
-CONFLICTS+=	p5-Tie-RefHash<1.39
-CONFLICTS+=	p5-Time-HiRes<1.9726
-CONFLICTS+=	p5-Time-Local<1.23.00		# 1.2300
-CONFLICTS+=	p5-Time-Piece<1.27
-CONFLICTS+=	p5-Unicode-Collate<1.04
-CONFLICTS+=	p5-Unicode-Normalize<1.17
-CONFLICTS+=	p5-XSLoader<0.16
-CONFLICTS+=	p5-autodie<2.23
-CONFLICTS+=	p5-constant<1.31
-CONFLICTS+=	p5-experimental<0.007
-CONFLICTS+=	p5-parent<0.228
-CONFLICTS+=	p5-version<0.9908
+# when updating perl, you can remove packages that are included
+# in perl core, see
+# corelist -diff ${PREV_PKGVERSION} ${PKGVERSION}
 
 SUPERSEDES+=	p5-Tie-File<=0.99
+SUPERSEDES+=	p5-Time-HiRes-[0-9]*
+SUPERSEDES+=	p5-DB_File-[0-9]*
 SUPERSEDES+=	p5-Memoize<=1.03
 SUPERSEDES+=	p5-I18N-LangTags<=0.39
 SUPERSEDES+=	p5-Locale-Maketext<=1.23
@@ -120,6 +49,7 @@ CONFIGURE_SCRIPT=	./Configure
 CONFIGURE_ARGS+=	-sde
 CONFIGURE_ARGS+=	-Dldflags=${LDFLAGS:Q}
 MAKE_ENV+=		LC_ALL="C"
+LDFLAGS.QNX+=		-lm
 
 .if ${OPSYS} == "SunOS"
 USE_TOOLS+=	bash
@@ -130,7 +60,7 @@ TEST_TARGET=		test
 
 # Policy.sh generation
 # (see comments in files/Policy.sh)
-SUBST_CLASSES+=	policysh
+SUBST_CLASSES+=		policysh
 SUBST_STAGE.policysh=	pre-configure
 SUBST_FILES.policysh=	Policy.sh
 SUBST_VARS.policysh+=	MACHINE_ARCH
@@ -185,7 +115,7 @@ CONFIGURE_ARGS+=	-Duseshrplib
 USE_TOOLS+=		hostname ln rm sed test
 SUBST_VARS.policysh+=	TOOLS_HOSTNAME_CMD
 SUBST_VARS.policysh+=	TOOLS_LN
-TOOLS_ALIASES.sed+=	${TOOLS_SED:T}
+TOOLS_ALIASES.sed=	${TOOLS_SED:T}
 SUBST_VARS.policysh+=	TOOLS_SED
 SUBST_VARS.policysh+=	TOOLS_SH
 SUBST_VARS.policysh+=	TOOLS_TEST
@@ -239,7 +169,7 @@ SUBST_VARS.policysh+=	SYSLIBPATH
 .include "../../mk/dlopen.buildlink3.mk"
 .include "options.mk"
 
-.if !empty(MACHINE_PLATFORM:MMirBSD)
+.if ${MACHINE_PLATFORM} == "MirBSD"
 SUBST_CLASSES+=			mirbsd-paths
 SUBST_STAGE.mirbsd-paths=	pre-configure
 SUBST_FILES.mirbsd-paths=	hints/mirbsd.sh
@@ -256,15 +186,7 @@ REPLACE_PERL+=		ext/ExtUtils-Miniperl/lib/ExtUtils/Miniperl.pm
 REPLACE_PERL+=		ext/File-DosGlob/lib/File/DosGlob.pm
 REPLACE_PERL+=		lib/unicore/mktables
 
-# And replace a perl interpreter during the pre-install stage
-# I think this may be a bootstrap script, so can't use REPLACE_PERL
-# because that is acted upon already in the pre-configure stage
-SUBST_CLASSES+=		miniperl
-SUBST_STAGE.miniperl=	pre-install
-SUBST_FILES.miniperl=	lib/ExtUtils/xsubpp
-SUBST_SED.miniperl=	-e "1s:\#!./miniperl:\#!${PERL5}:"
-
-.if ${PKGSRC_COMPILER} == "xlc"
+.if ${PKGSRC_COMPILER:Mxlc}
 SUBST_CLASSES+=		cpprun
 SUBST_STAGE.cpprun=	pre-install
 SUBST_FILES.cpprun=	lib/Config_heavy.pl
@@ -281,17 +203,11 @@ SUBST_SED.cpprun=	-e "s/cpprun=''/cpprun='cc -E'/"
 #
 SUBST_CLASSES+=		dirmode
 SUBST_STAGE.dirmode=	pre-configure
-SUBST_FILES.dirmode=	installhtml install_lib.pl
+SUBST_FILES.dirmode=	install_lib.pl
 SUBST_SED.dirmode=	-e "s/755/${PKGDIRMODE}/g;/umask(/d"
 
 post-extract:
-	cp ${FILESDIR}/Policy.sh ${WRKSRC}/Policy.sh
-	cp ${FILESDIR}/cpan-DB_File-hints-netbsd.pl \
-		${WRKSRC}/cpan/DB_File/hints/netbsd.pl
-	cp ${FILESDIR}/cpan-DB_File-hints-openbsd.pl \
-		${WRKSRC}/cpan/DB_File/hints/openbsd.pl
-	cp ${FILESDIR}/cpan-DB_File-hints-minix.pl \
-		${WRKSRC}/cpan/DB_File/hints/minix.pl
+	${CP} ${FILESDIR}/Policy.sh ${WRKSRC}/Policy.sh
 
 pre-configure:
 	${FIND} ${WRKSRC} -name "*.orig" -type f -exec rm -f {} \;
@@ -310,8 +226,8 @@ PERL5_PACKLIST_DESTDIR=	no
 FILES_SUBST+=		PERL5_COMMENT=\#
 FILES_SUBST+=		PERL5_PACKLIST=
 
+.PHONY: perl5-post-install
 post-install: perl5-post-install
-
 perl5-post-install:
 	${RUN}if ${TEST} -x ${DESTDIR}${PREFIX}/bin/a2p; then		\
 		strip ${DESTDIR}${PREFIX}/bin/a2p;			\

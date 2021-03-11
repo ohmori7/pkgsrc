@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.103 2019/05/09 13:57:48 ryoon Exp $
+# $NetBSD: Makefile,v 1.119 2021/02/07 06:30:19 ryoon Exp $
 
-DISTNAME=	texmaker-4.5
-PKGREVISION=	46
+DISTNAME=	texmaker-5.0.4
+PKGREVISION=	2
 CATEGORIES=	editors
 MASTER_SITES=	http://www.xm1math.net/texmaker/
 EXTRACT_SUFX=	.tar.bz2
 EXTRACT_USING=	bsdtar
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.xm1math.net/texmaker/
+HOMEPAGE=	https://www.xm1math.net/texmaker/
 COMMENT=	LaTeX editor and front end
 LICENSE=	gnu-gpl-v2
 
@@ -20,10 +20,23 @@ INSTALL_MAKE_FLAGS+=	INSTALL_ROOT=${DESTDIR}
 
 do-configure:
 	cd ${WRKSRC} && env ${CONFIGURE_ENV} \
-	${QTDIR}/bin/qmake PREFIX=${PREFIX} texmaker.pro DESKTOPDIR=${PREFIX}/share/applications ICONDIR=${PREFIX}/share/pixmaps
+	${QTDIR}/bin/qmake PREFIX=${PREFIX} texmaker.pro \
+		DESKTOPDIR=${PREFIX}/share/applications \
+		ICONDIR=${PREFIX}/share/pixmaps \
+		METAINFODIR=${PREFIX}/share/appdata
 
-.include "options.mk"
+pre-configure:
+	${CP} ${FILESDIR}/fxge_pkgsrcfonts.inc ${WRKSRC}/pdfium/core/fxge
+	${CP} ${FILESDIR}/fxge_x11fonts.inc ${WRKSRC}/pdfium/core/fxge
+	${CP} ${FILESDIR}/fgas_stdfontmgr_pkgsrcfonts.inc \
+		${WRKSRC}/pdfium/xfa/fgas/font
+	${CP} ${FILESDIR}/fgas_stdfontmgr_x11fonts.inc \
+		${WRKSRC}/pdfium/xfa/fgas/font
 
-.include "../../print/poppler-includes/buildlink3.mk"
+.include "../../graphics/png/buildlink3.mk"
+.include "../../graphics/freetype2/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../textproc/hunspell/buildlink3.mk"
+.include "../../mk/jpeg.buildlink3.mk"
+.include "../../x11/qt5-qtscript/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

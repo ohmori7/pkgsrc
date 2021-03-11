@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.21 2017/09/04 18:00:57 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2020/11/19 09:35:40 schmonz Exp $
 #
 
 DISTNAME=		safecat-1.13
@@ -12,7 +12,6 @@ COMMENT=		Write data safely to a maildir
 
 MAKE_JOBS_SAFE=		no
 
-DJB_RESTRICTED=		NO
 DJB_BUILD_TARGETS+=	install instcheck
 DJB_CONFIG_HOME=	conf-root
 

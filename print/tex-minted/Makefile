@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.8 2019/04/25 07:33:15 maya Exp $
+# $NetBSD: Makefile,v 1.10 2020/01/18 23:34:31 rillig Exp $
 
 DISTNAME=	minted
 PKGNAME=	tex-${DISTNAME}-2.5
@@ -6,7 +6,7 @@ PKGREVISION=	1
 TEXLIVE_REV=	44855
 
 MAINTAINER=	markd@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/minted
+HOMEPAGE=	https://ctan.org/pkg/minted
 COMMENT=	Highlighted source code for LaTeX
 LICENSE=	lppl-1.3c
 
@@ -19,6 +19,7 @@ DEPENDS+=	tex-oberdiek-[0-9]*:../../print/tex-oberdiek
 DEPENDS+=	tex-xstring-[0-9]*:../../print/tex-xstring
 DEPENDS+=	${PYPKGPREFIX}-pygments-[0-9]*:../../textproc/py-pygments
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../lang/python/pyversion.mk"
 .include "../../mk/bsd.pkg.mk"

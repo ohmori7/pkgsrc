@@ -1,15 +1,13 @@
-# $NetBSD: Makefile,v 1.34 2018/08/22 09:47:20 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.38 2020/09/07 17:56:19 wiz Exp $
 
-DISTNAME=	TimeDate-2.30
+DISTNAME=	TimeDate-2.33
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	5
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Date/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Perl5 TimeDate distribution
-HOMEPAGE=	http://search.cpan.org/dist/TimeDate/
+HOMEPAGE=	https://metacpan.org/release/TimeDate
 LICENSE=	${PERL5_LICENSE}
 
 USE_LANGUAGES=		# empty

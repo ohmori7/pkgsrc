@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.1 2019/02/03 13:42:36 taca Exp $
+# $NetBSD: Makefile,v 1.4 2020/01/26 17:31:32 rillig Exp $
 #
 
 DISTNAME=	# empty
@@ -8,16 +8,15 @@ MASTER_SITES=	# empty
 DISTFILES=	# empty
 
 MAINTAINER=	taca@NetBSD.org
-HOMEPAGE=	http://www.ruby-lang.org/en/
+HOMEPAGE=	https://www.ruby-lang.org/en/
 COMMENT=	Ruby programming language ${RUBY_VERSION} meta package
-LICENSE=	2-clause-bsd OR ruby-license
 
 META_PACKAGE=		yes
 
-DEPENDS+= ${RUBY_BASE}>=${RUBY_VERSION}:${RUBY_SRCDIR}
-DEPENDS+= ${RUBY_NAME}-gdbm>=${RUBY_VERSION}:../../databases/ruby-gdbm
-DEPENDS+= ${RUBY_NAME}-fiddle>=${RUBY_VERSION}:../../devel/ruby-fiddle
-DEPENDS+= ${RUBY_NAME}-readline>=${RUBY_VERSION}:../../devel/ruby-readline
+DEPENDS+=	${RUBY_BASE}>=${RUBY_VERSION}:${RUBY_SRCDIR}
+DEPENDS+=	${RUBY_NAME}-gdbm>=${RUBY_VERSION}:../../databases/ruby-gdbm
+DEPENDS+=	${RUBY_NAME}-fiddle>=${RUBY_VERSION}:../../devel/ruby-fiddle
+DEPENDS+=	${RUBY_NAME}-readline>=${RUBY_VERSION}:../../devel/ruby-readline
 
 RUBY_VERSIONS_ACCEPTED=	26
 

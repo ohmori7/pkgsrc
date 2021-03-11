@@ -1,5 +1,6 @@
-# $NetBSD: Makefile,v 1.6 2018/09/21 00:59:53 jym Exp $
+# $NetBSD: Makefile,v 1.9 2021/02/11 10:05:13 wiz Exp $
 
+PKGREVISION= 2
 .include "../../sysutils/ups-nut/Makefile.common"
 
 PKGNAME=		${DISTNAME:S/nut/ups-nut-snmp/}
@@ -12,6 +13,7 @@ BUILD_DEFS+=		NUT_STATEDIR
 INSTALLATION_DIRS+=	${PREFIX}/libexec/nut
 INSTALLATION_DIRS+=	${PREFIX}/${PKGMANDIR}/man8
 
+TOOLS_BROKEN+=		perl
 CONFIGURE_ARGS+=	--with-snmp --with-drvpath=${NUT_DRVDIR:Q}
 
 do-install:

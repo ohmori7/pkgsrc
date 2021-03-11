@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:44:06 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/08/31 18:08:09 wiz Exp $
 #
 
 DISTNAME=	Hash-Flatten-1.19
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Hash/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Hash-Flatten/
+HOMEPAGE=	https://metacpan.org/release/Hash-Flatten
 COMMENT=	Perl 5 module to flatten/unflatten complex data hashes
 LICENSE=	gnu-gpl-v2
 

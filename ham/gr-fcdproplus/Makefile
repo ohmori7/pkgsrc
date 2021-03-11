@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.13 2019/04/25 07:33:00 maya Exp $
+# $NetBSD: Makefile,v 1.19 2021/01/01 08:24:48 ryoon Exp $
 
 DISTNAME=		gr-fcdproplus_3.7.11.orig
 PKGNAME=		${DISTNAME:S/_/-/S/.orig//}
-PKGREVISION=		11
+PKGREVISION=		16
 CATEGORIES=		ham
 MASTER_SITES+=		${MASTER_SITE_DEBIAN:=pool/main/g/gr-fcdproplus/}
 EXTRACT_SUFX=		.tar.xz
@@ -25,6 +25,9 @@ CMAKE_ARGS+=		-DGNURADIO_RUNTIME_INCLUDE_DIRS=${PREFIX}/include
 PLIST_SUBST+=		PYSITELIB=${PYSITELIB}
 
 CFLAGS+=		-I${PREFIX}/include/libusb-1.0
+
+# Old-style print use via cmake
+PYTHON_VERSIONS_ACCEPTED=	27
 
 .include	"../../devel/boost-headers/buildlink3.mk"
 .include	"../../devel/boost-libs/buildlink3.mk"

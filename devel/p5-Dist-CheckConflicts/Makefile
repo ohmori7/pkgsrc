@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:43:56 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/08/31 18:07:55 wiz Exp $
 
 DISTNAME=	Dist-CheckConflicts-0.11
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Dist/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Dist-CheckConflicts/
+HOMEPAGE=	https://metacpan.org/release/Dist-CheckConflicts
 COMMENT=	Perl 5 module to declare version conflicts for your dist
 LICENSE=	${PERL5_LICENSE}
 

@@ -1,20 +1,20 @@
-# $NetBSD: Makefile,v 1.9 2018/11/27 14:29:27 bsiegert Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/17 20:20:12 leot Exp $
 
-DISTNAME=       artha-1.0.3
-PKGREVISION=    8
-CATEGORIES=     textproc
-MASTER_SITES=   ${MASTER_SITE_SOURCEFORGE:=artha/}
-EXTRACT_SUFX=   .tar.bz2
+DISTNAME=	artha-1.0.3
+PKGREVISION=	12
+CATEGORIES=	textproc
+MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=artha/}
+EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=     pkgsrc-users@NetBSD.org
-HOMEPAGE=       http://artha.sourceforge.net/
-COMMENT=        Open Source WordNet-based thesaurus
-LICENSE=        gnu-gpl-v2
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://artha.sourceforge.net/
+COMMENT=	Open Source WordNet-based thesaurus
+LICENSE=	gnu-gpl-v2
 
-GNU_CONFIGURE=  yes
-USE_LIBTOOL=    yes
-USE_TOOLS+=     autoconf automake gmake pkg-config
-USE_LANGUAGES=  c
+GNU_CONFIGURE=	yes
+USE_LIBTOOL=	yes
+USE_TOOLS+=	autoconf automake gmake pkg-config
+USE_LANGUAGES=	c
 
 .include "options.mk"
 

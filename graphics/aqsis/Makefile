@@ -1,19 +1,21 @@
-# $NetBSD: Makefile,v 1.76 2019/04/25 07:32:57 maya Exp $
+# $NetBSD: Makefile,v 1.89 2021/01/01 08:24:44 ryoon Exp $
 #
 
 DISTNAME=		aqsis-1.8.1
-PKGREVISION=		35
+PKGREVISION=		45
 CATEGORIES=		graphics
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=aqsis/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.aqsis.org/
+HOMEPAGE=		https://www.aqsis.org/
 COMMENT=		Renderman clone
 LICENSE=		gnu-gpl-v2 AND gnu-lgpl-v2.1 AND modified-bsd
 
 USE_CMAKE=		yes
 USE_LANGUAGES=		c c++
 USE_TOOLS+=		pkg-config flex bison
+
+BROKEN=			"Not valid C++11 code, but dependencies require C++11"
 
 LDFLAGS.SunOS=		-lsocket -lnsl
 

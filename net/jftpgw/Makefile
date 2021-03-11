@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.15 2018/12/09 21:05:33 adam Exp $
+# $NetBSD: Makefile,v 1.17 2020/04/27 04:47:32 rillig Exp $
 
-DISTNAME=	    jftpgw-0.13.5
-CATEGORIES=	    net
-MASTER_SITES=	    http://www.mcknight.de/jftpgw/
+DISTNAME=	jftpgw-0.13.5
+CATEGORIES=	net
+MASTER_SITES=	http://www.mcknight.de/jftpgw/
 
-MAINTAINER=	    pkgsrc-users@NetBSD.org
-HOMEPAGE=	    http://www.mcknight.de/jftpgw/
-COMMENT=	    FTP gateway/proxy
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	http://www.mcknight.de/jftpgw/
+COMMENT=	FTP gateway/proxy
 
 GNU_CONFIGURE=		yes
 
@@ -17,14 +17,6 @@ CONFIGURE_ARGS+=	--enable-sftp
 RCD_SCRIPTS=		jftpgw
 EGDIR=			${PREFIX}/share/examples/jftpgw
 CONF_FILES=		${EGDIR}/jftpgw.conf ${PKG_SYSCONFDIR}/jftpgw.conf
-
-SUBST_CLASSES+=		log
-SUBST_STAGE.log=	pre-configure
-SUBST_FILES.log=	active.c bindport.c cache.c cmds.c config.c \
-			ftpread.c fw_auth_cmds.c jftpgw.c log.c log.h \
-			login.c openport.c passive.c states.c std_cmds.c \
-			util.c
-SUBST_SED.log=		-e "s,\([[:space:]]\)\(log(\),\1x\2,"
 
 SUBST_CLASSES+=		config
 SUBST_STAGE.config=	post-build

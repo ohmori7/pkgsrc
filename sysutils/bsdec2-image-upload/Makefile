@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.2 2019/05/22 08:58:39 jmcneill Exp $
+# $NetBSD: Makefile,v 1.4 2020/01/18 21:50:52 jperkin Exp $
 
 GITHUB_PROJECT=	bsdec2-image-upload
 DISTNAME=	1.2.2
 PKGNAME=	${GITHUB_PROJECT}-${DISTNAME}
+PKGREVISION=	1
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_GITHUB:=cperciva/}
 DIST_SUBDIR=	${GITHUB_PROJECT}
@@ -22,6 +23,9 @@ CFLAGS+=	-DCERTFILE=\"${PREFIX}/share/mozilla-rootcerts/cacert.pem\"
 CFLAGS+=	-Wno-error=pointer-sign \
 		-Wno-error=maybe-uninitialized \
 		-Wno-error=discarded-qualifiers
+.elif !empty(PKGSRC_COMPILER:Mclang)
+CFLAGS+=	-Wno-unknown-warning-option -Wno-pointer-sign \
+		-Wno-incompatible-pointer-types-discards-qualifiers
 .endif
 
 INSTALLATION_DIRS+=	bin

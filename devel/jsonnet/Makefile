@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.4 2018/06/21 20:55:29 seb Exp $
+# $NetBSD: Makefile,v 1.6 2020/01/26 17:30:58 rillig Exp $
 
-DISTNAME=	jsonnet-0.10.0
+DISTNAME=	jsonnet-0.13.0
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=google/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://jsonnet.org/
+HOMEPAGE=	https://jsonnet.org/
 COMMENT=	Domain specific configuration language
 LICENSE=	apache-2.0
 
@@ -37,5 +37,6 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/include/libjsonnet.h ${DESTDIR}${PREFIX}/include
 	${INSTALL_DATA} ${WRKSRC}/include/libjsonnet++.h ${DESTDIR}${PREFIX}/include
 	${INSTALL_PROGRAM} ${WRKSRC}/jsonnet ${DESTDIR}${PREFIX}/bin
+	${INSTALL_PROGRAM} ${WRKSRC}/jsonnetfmt ${DESTDIR}${PREFIX}/bin
 
 .include "../../mk/bsd.pkg.mk"

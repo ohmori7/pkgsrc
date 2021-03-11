@@ -1,12 +1,14 @@
-# $NetBSD: Makefile,v 1.22 2019/05/29 17:36:43 adam Exp $
+# $NetBSD: Makefile,v 1.27 2021/02/17 14:20:35 wiz Exp $
 
-DISTNAME=	glew-2.1.0
+DISTNAME=	glew-2.2.0
+PKGREVISION=	1
 CATEGORIES=	graphics
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=glew/}
+MASTER_SITES=	${MASTER_SITE_GITHUB:=nigels-com/}
+GITHUB_RELEASE=	${DISTNAME}
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://glew.sourceforge.net/
+HOMEPAGE=	https://github.com/nigels-com/glew
 COMMENT=	OpenGL Extension Wrangler Library
 LICENSE=	modified-bsd AND mit
 
@@ -25,6 +27,7 @@ MAKE_ENV.SunOS+=	SYSTEM=solaris-gcc
 
 .if ${OPSYS} != "Darwin"
 .include "../../graphics/MesaLib/buildlink3.mk"
+.include "../../graphics/glu/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXi/buildlink3.mk"
 .include "../../x11/libXmu/buildlink3.mk"

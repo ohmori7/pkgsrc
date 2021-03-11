@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.6 2018/03/14 15:52:57 taca Exp $
+$NetBSD: distinfo,v 1.8 2021/01/14 14:49:30 taca Exp $
 
-SHA1 (plist-3.4.0.gem) = 0362160bd4bc2d8553df3ae7b52c420cb695dc70
-RMD160 (plist-3.4.0.gem) = 485169a72e7117f6c1ef5e76782f1915a852a504
-SHA512 (plist-3.4.0.gem) = 98d0ea26ddfd0c152e43d87a4a036dc91f14dba4d250e362c24caaa8bffc46aecfc6a1247610d027e3b5204266c38f71014ae0785459b16dd9be399cab4ee604
-Size (plist-3.4.0.gem) = 14336 bytes
+SHA1 (plist-3.6.0.gem) = d29d90ac69a177da5dd7984ae7197110a4268b15
+RMD160 (plist-3.6.0.gem) = a2cb0935dbb4d7ca06da0c4288e78e1889321ebc
+SHA512 (plist-3.6.0.gem) = d8fe47f4a79b0e2b74e83053ca584c768544a0e8f38755663e2150fc49b2429746254195a50ea7c01711173585dbe9bd572438bf2bac035bfb29c13cadc898a7
+Size (plist-3.6.0.gem) = 9216 bytes

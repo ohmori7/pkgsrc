@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.6 2018/11/25 15:10:06 adam Exp $
+# $NetBSD: Makefile,v 1.16 2021/01/11 13:56:09 adam Exp $
 
-DISTNAME=	graphviz-0.10.1
+DISTNAME=	graphviz-0.16
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	graphics python
 MASTER_SITES=	${MASTER_SITE_PYPI:=g/graphviz/}
@@ -12,14 +12,13 @@ COMMENT=	Create and render graph descriptions in DOT language
 LICENSE=	mit
 
 DEPENDS+=	graphviz-[0-9]*:../../graphics/graphviz
-TEST_DEPENDS+=	${PYPKGPREFIX}-test>=3.4:../../devel/py-test
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-cov-[0-9]*:../../devel/py-test-cov
 TEST_DEPENDS+=	${PYPKGPREFIX}-test-mock>=1.8:../../devel/py-test-mock
+TEST_DEPENDS+=	${PYPKGPREFIX}-test-runner-[0-9]*:../../devel/py-test-runner
 
 USE_LANGUAGES=	# none
 
-do-test:
-	cd ${WRKSRC}/tests && pytest-${PYVERSSUFFIX}
+PYSETUPTESTTARGET=	pytest
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

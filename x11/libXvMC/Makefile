@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.15 2019/03/17 08:36:09 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/01/18 23:35:53 rillig Exp $
 
-DISTNAME=		libXvMC-1.0.11
+DISTNAME=		libXvMC-1.0.12
 CATEGORIES=		x11
 MASTER_SITES=		${MASTER_SITE_XORG:=lib/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		joerg@NetBSD.org
-HOMEPAGE=		http://xorg.freedesktop.org/
+HOMEPAGE=		https://xorg.freedesktop.org/
 COMMENT=		XVideo Motion Compensation Library
 LICENSE=		mit
 
@@ -15,6 +15,7 @@ USE_TOOLS+=		pkg-config
 GNU_CONFIGURE=		yes
 
 PKGCONFIG_OVERRIDE+=	xvmc.pc.in
+PKGCONFIG_OVERRIDE+=	xvmc-wrapper.pc.in
 
 CONFIGURE_ARGS.NetBSD+=	--disable-malloc0returnsnull
 

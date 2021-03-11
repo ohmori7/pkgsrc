@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:45:07 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:09:31 wiz Exp $
 
-DISTNAME=	Font-FreeType-0.12
+DISTNAME=	Font-FreeType-0.16
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	perl5 fonts graphics
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Font/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Font-FreeType/
+HOMEPAGE=	https://metacpan.org/release/Font-FreeType
 COMMENT=	Read font files and render glyphs from Perl using FreeType2
 LICENSE=	${PERL5_LICENSE}
 

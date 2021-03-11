@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.73 2018/12/13 19:52:08 adam Exp $
+# $NetBSD: Makefile,v 1.82 2020/05/22 10:56:19 adam Exp $
 
 DISTNAME=	milter-greylist-4.4.3
-PKGREVISION=	11
+PKGREVISION=	19
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.espci.fr/pub/milter-greylist/
 EXTRACT_SUFX=	.tgz
@@ -36,15 +36,15 @@ INSTALLATION_DIRS+=	share/examples/milter-greylist
 
 OWN_DIRS_PERMS+=	${VARBASE}/milter-greylist ${MILTER_USER} ${MILTER_GROUP} 0755
 
-SUBST_CLASSES+=         paths
-SUBST_STAGE.paths=      pre-configure
-SUBST_FILES.paths=      greylist.conf greylist2.conf
-SUBST_SED.paths+=       -e "s|/var/run|${VARBASE}/run|g"
-SUBST_SED.paths+=       -e "s|/var/milter-greylist|${VARBASE}/milter-greylist|g"
-SUBST_MESSAGE.paths=    Fixing paths in conf examples.
+SUBST_CLASSES+=		paths
+SUBST_STAGE.paths=	pre-configure
+SUBST_FILES.paths=	greylist.conf greylist2.conf
+SUBST_SED.paths+=	-e "s|/var/run|${VARBASE}/run|g"
+SUBST_SED.paths+=	-e "s|/var/milter-greylist|${VARBASE}/milter-greylist|g"
+SUBST_MESSAGE.paths=	Fixing paths in conf examples.
 
-EGDIR=                  ${PREFIX}/share/examples/milter-greylist
-CONF_FILES=             ${EGDIR}/greylist.conf ${PKG_SYSCONFDIR}/greylist.conf
+EGDIR=			${PREFIX}/share/examples/milter-greylist
+CONF_FILES=		${EGDIR}/greylist.conf ${PKG_SYSCONFDIR}/greylist.conf
 
 
 post-install:

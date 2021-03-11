@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.26 2018/08/22 09:46:33 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2020/08/31 18:11:27 wiz Exp $
 #
 
 DISTNAME=		dmesg2gif-1.3
-PKGREVISION=		9
+PKGREVISION=		11
 CATEGORIES=		sysutils
 MASTER_SITES=		# empty
 DISTFILES=		# empty

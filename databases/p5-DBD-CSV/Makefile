@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.53 2018/10/31 11:45:10 wen Exp $
 
-DISTNAME=	DBD-CSV-0.54
+# $NetBSD: Makefile,v 1.58 2021/02/11 00:03:40 wen Exp $
+
+DISTNAME=	DBD-CSV-0.58
 PKGNAME=	p5-${DISTNAME}
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DBD/}
 EXTRACT_SUFX=	.tgz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/DBD-CSV/
+HOMEPAGE=	https://metacpan.org/release/DBD-CSV
 COMMENT=	Access CSV files via DBI
 LICENSE=	${PERL5_LICENSE}
 

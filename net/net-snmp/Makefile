@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.125 2019/01/08 19:18:55 adam Exp $
+# $NetBSD: Makefile,v 1.135 2020/11/06 08:52:40 wiz Exp $
 
+PKGREVISION= 2
 .include "Makefile.common"
 CATEGORIES=	net
-PKGREVISION=	11
 
 MAINTAINER=	adam@NetBSD.org
 COMMENT=	Extensible SNMP implementation
@@ -32,6 +32,8 @@ CFLAGS+=		-Dnetbsd1
 .  endif
 CFLAGS+=		-DSOL_IP=IPPROTO_IP
 .endif
+
+LDFLAGS.SunOS+=		-lkvm
 
 .if (${OPSYS} == "NetBSD") || !exists(/usr/bin/lpstat)
 CONFIGURE_ENV+=		ac_cv_path_LPSTAT_PATH=no
@@ -104,6 +106,7 @@ CFLAGS.Darwin+=		-framework IOKit
 REQD_DIRS=	${PREFIX}/share/snmp
 RCD_SCRIPTS=	snmpd snmptrapd
 SMF_NAME=	snmp
+SMF_INSTANCES=	default snmptrapd
 
 USE_TOOLS+=		sh:run
 REPLACE_INTERPRETER+=	bash
@@ -118,11 +121,12 @@ post-extract:
 	cp ${FILESDIR}/cpu_dragonfly.c ${WRKSRC}/agent/mibgroup/hardware/cpu/cpu_nlist.c
 # XXX make it build on OS X 10.10; remove on the next update
 .elif ${OPSYS} == "Darwin"
-	ln -s ${WRKSRC}/include/net-snmp/system/darwin13.h ${WRKSRC}/include/net-snmp/system/darwin14.h
-	ln -s ${WRKSRC}/include/net-snmp/system/darwin13.h ${WRKSRC}/include/net-snmp/system/darwin15.h
-	ln -s ${WRKSRC}/include/net-snmp/system/darwin13.h ${WRKSRC}/include/net-snmp/system/darwin16.h
-	ln -s ${WRKSRC}/include/net-snmp/system/darwin13.h ${WRKSRC}/include/net-snmp/system/darwin17.h
-	ln -s ${WRKSRC}/include/net-snmp/system/darwin13.h ${WRKSRC}/include/net-snmp/system/darwin18.h
+	${LN} -s ${WRKSRC}/include/net-snmp/system/darwin13.h ${WRKSRC}/include/net-snmp/system/darwin14.h
+	${LN} -s ${WRKSRC}/include/net-snmp/system/darwin13.h ${WRKSRC}/include/net-snmp/system/darwin15.h
+	${LN} -s ${WRKSRC}/include/net-snmp/system/darwin13.h ${WRKSRC}/include/net-snmp/system/darwin16.h
+	${LN} -s ${WRKSRC}/include/net-snmp/system/darwin13.h ${WRKSRC}/include/net-snmp/system/darwin17.h
+	${LN} -s ${WRKSRC}/include/net-snmp/system/darwin13.h ${WRKSRC}/include/net-snmp/system/darwin18.h
+	${LN} -s ${WRKSRC}/include/net-snmp/system/darwin13.h ${WRKSRC}/include/net-snmp/system/darwin19.h
 .endif
 
 post-wrapper:
@@ -137,5 +141,8 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/agent/snmp_perl.pl \
 		${DESTDIR}${PREFIX}/share/snmp/
 
+.include "../../mk/curses.buildlink3.mk"
+.include "../../devel/pcre/buildlink3.mk"
+.include "../../net/libpcap/buildlink3.mk"
 .include "../../security/tcp_wrappers/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

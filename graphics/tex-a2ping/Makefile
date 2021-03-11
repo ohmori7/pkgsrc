@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:45:17 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:09:45 wiz Exp $
 
 DISTNAME=	a2ping
-PKGNAME=	tex-${DISTNAME}-2.83p
+PKGNAME=	tex-${DISTNAME}-2.84p
 PKGREVISION=	1
-TEXLIVE_REV=	46893
+TEXLIVE_REV=	52964
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/a2ping
+HOMEPAGE=	https://ctan.org/pkg/a2ping
 COMMENT=	Advanced PS, PDF, EPS converter
 LICENSE=	gnu-gpl-v2
 

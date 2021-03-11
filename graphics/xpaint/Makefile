@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.77 2019/05/23 19:23:02 rillig Exp $
+# $NetBSD: Makefile,v 1.80 2020/03/20 11:57:53 nia Exp $
 
 DISTNAME=	xpaint-2.7.8.1
 PKGREVISION=	11
@@ -11,8 +11,8 @@ HOMEPAGE=	http://sf-xpaint.sourceforge.net/
 COMMENT=	Simple paint program
 
 USE_IMAKE=	yes
-MAKE_ENV+=		XMKMF=${XMKMF:Q}
-MAKE_JOBS_SAFE=		NO
+MAKE_ENV+=	XMKMF=${XMKMF:Q}
+MAKE_JOBS_SAFE=	NO
 
 SUBST_CLASSES+=		foo
 SUBST_STAGE.foo=	pre-configure

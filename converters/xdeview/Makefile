@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.46 2018/03/12 11:16:13 wiz Exp $
+# $NetBSD: Makefile,v 1.48 2020/08/17 20:18:20 leot Exp $
 
 DISTNAME=	uudeview-0.5.20
 PKGNAME=	xdeview-0.5.20
-PKGREVISION=	8
+PKGREVISION=	9
 CATEGORIES=	converters
 MASTER_SITES=	http://www.fpx.de/fp/Software/UUDeview/download/
 
@@ -10,10 +10,10 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.fpx.de/fp/Software/UUDeview/
 COMMENT=	X11 program for uu/xx/Base64/BinHex de-/encoding
 
-GNU_CONFIGURE=	yes
+GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-tcl=${LOCALBASE:Q}
 CONFIGURE_ARGS+=	--enable-tk=${LOCALBASE:Q}
-LDFLAGS+=	-s -lX11
+LDFLAGS+=		-s -lX11
 
 BUILD_TARGET=	xdeview
 INSTALL_TARGET=	install-tcl

@@ -8,3 +8,7 @@ windows.
 Firefox also offers excellent bookmark and history management, and it
 can be extended by developers using industry standards such as XML,
 CSS, JavaScript, C++, etc. Many extensions are available.
+
+This package provides Firefox 52 ESR. It is now unsupported and is
+provided only for platforms where the Rust toolchain required in
+newer Firefox versions is problematic.

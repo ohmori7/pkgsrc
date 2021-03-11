@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.47 2019/01/02 15:35:12 tnn Exp $
+# $NetBSD: Makefile,v 1.55 2020/11/05 09:09:28 ryoon Exp $
 
-DISTNAME=		tint2-v16.6.1
+DISTNAME=		tint2-v16.7
 PKGNAME=		${DISTNAME:S/-v/-/}
+PKGREVISION=		5
 CATEGORIES=		x11
-MASTER_SITES=		https://gitlab.com/o9000/tint2/-/archive/v16.6.1/
+MASTER_SITES=		https://gitlab.com/o9000/tint2/-/archive/v${PKGVERSION_NOREV}/
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		fernandotcl@gmail.com
@@ -14,7 +15,7 @@ LICENSE=		gnu-gpl-v2
 USE_LANGUAGES=		c c++ # XXX CMake. pkg does not really need c++
 USE_CMAKE=		yes
 USE_LIBTOOL=		yes
-USE_TOOLS+=		pkg-config
+USE_TOOLS+=		msgfmt msgmerge pkg-config
 
 INSTALLATION_DIRS=	share/examples/tint2
 OWN_DIRS=		${PKG_SYSCONFDIR}/xdg/tint2

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2018/08/22 09:46:31 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:11:24 wiz Exp $
 #
 
 DISTNAME=	cdrkit-1.1.9
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	sysutils
 MASTER_SITES=	http://cdrkit.org/releases/
 

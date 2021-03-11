@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.3 2016/09/15 14:32:40 wiz Exp $
+# $NetBSD: buildlink3.mk,v 1.5 2020/03/08 16:42:27 bsiegert Exp $
 
 BUILDLINK_TREE+=	guile20
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	guile20
 GUILE20_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.guile20+=	guile20>=2.0
-BUILDLINK_ABI_DEPENDS.guile20?=	guile20>=2.0.12nb1
+BUILDLINK_ABI_DEPENDS.guile20?=	guile20>=2.0.14nb3
 BUILDLINK_PKGSRCDIR.guile20?=	../../lang/guile20
 
 #BUILDLINK_PASSTHRU_DIRS=		${LOCALBASE}/guile/2.0
@@ -14,7 +14,7 @@ BUILDLINK_PKGSRCDIR.guile20?=	../../lang/guile20
 #BUILDLINK_FNAME_TRANSFORM.guile20+=	-e s,guile/2.0/bin,bin,
 #BUILDLINK_FNAME_TRANSFORM.guile20+=	-e s,guile/2.0/lib/pkgconfig,lib/pkgconfig,
 #
-#GUILE20_SUBDIR=				guile/2.0
+#GUILE20_SUBDIR=			guile/2.0
 
 .include "../../devel/gmp/buildlink3.mk"
 .include "../../devel/libffi/buildlink3.mk"

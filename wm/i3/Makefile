@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.28 2019/03/14 11:07:17 wiz Exp $
+# $NetBSD: Makefile,v 1.41 2020/10/31 13:55:17 wiz Exp $
 
-DISTNAME=	i3-4.16.1
+DISTNAME=	i3-4.18.3
 CATEGORIES=	wm
 MASTER_SITES=	https://i3wm.org/downloads/
 EXTRACT_SUFX=	.tar.bz2
@@ -14,7 +14,7 @@ GNU_CONFIGURE=	yes
 USE_TOOLS+=	gmake bison lex yacc pkg-config perl:run
 USE_LANGUAGES=	c99
 
-CONFIGURE_ARGS+=--disable-builddir
+CONFIGURE_ARGS+=	--disable-builddir
 
 LDFLAGS.SunOS+=	-lgen -liconv -lsocket
 

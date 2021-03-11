@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.11 2018/08/22 09:46:38 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/08/31 18:11:32 wiz Exp $
 
 DISTNAME=	Mac-AppleScript-0.04
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	sysutils perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Mac/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Mac-AppleScript/
+HOMEPAGE=	https://metacpan.org/release/Mac-AppleScript
 COMMENT=	Perl 5 module to execute applescript commands on OS X
 
 ONLY_FOR_PLATFORM=	Darwin-*-*
@@ -17,7 +17,7 @@ ONLY_FOR_PLATFORM=	Darwin-*-*
 # upstream's Makefile.PL's OTHERFLAGS
 LDFLAGS+=	-framework AppleScriptKit -framework Carbon
 
-PERL5_PACKLIST= auto/Mac/AppleScript/.packlist
+PERL5_PACKLIST=	auto/Mac/AppleScript/.packlist
 
 .include "../../lang/perl5/module.mk"
 .include "../../mk/bsd.pkg.mk"

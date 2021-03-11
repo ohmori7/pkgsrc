@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2018/12/21 12:35:38 leot Exp $
+# $NetBSD: Makefile,v 1.6 2020/05/16 20:01:56 nikita Exp $
 
-DISTNAME=	chicken-5.0.0
+DISTNAME=	chicken-5.2.0
 CATEGORIES=	lang
 MASTER_SITES=	http://code.call-cc.org/releases/${PKGVERSION_NOREV}/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.call-cc.org/
+HOMEPAGE=	https://www.call-cc.org/
 COMMENT=	Scheme to C compiler, handling R5RS
 LICENSE=	modified-bsd
 
@@ -15,7 +15,11 @@ USE_LIBTOOL=		yes
 USE_TOOLS+=		gmake
 UNLIMIT_RESOURCES=	datasize
 
-OWN_DIRS=		${PREFIX}/lib/chicken ${PREFIX}/lib/chicken/9
+BUILD_DEFS+=		CHICKEN_BINARY_VERSION
+CHICKEN_BINARY_VERSION=	11
+
+OWN_DIRS+=	${PREFIX}/lib/chicken
+OWN_DIRS+=	${PREFIX}/lib/chicken/${CHICKEN_BINARY_VERSION}
 
 BUILD_TARGET=		all
 
@@ -23,17 +27,17 @@ BUILD_TARGET=		all
 
 # PLATFORM detection:
 .if !empty(OPSYS:M*BSD) || ${OPSYS} == "DragonFly"
-PLATFORM=	bsd
+PLATFORM=		bsd
 .elif ${OPSYS} == "Linux"
-PLATFORM=	linux
+PLATFORM=		linux
 .elif ${OPSYS} == "Darwin"
-PLATFORM=	macosx
+PLATFORM=		macosx
 .elif ${OPSYS} == "SunOS"
-PLATFORM=	solaris
+PLATFORM=		solaris
 .elif ${OPSYS} == "Haiku"
-PLATFORM=	haiku
+PLATFORM=		haiku
 .else
-#PLATFORM+=	${OPSYS} == "Interix"
+#PLATFORM+=		${OPSYS} == "Interix"
 # possible choices left: aix android cross-linux-mingw cygwin hurd mingw
 #                        mingw-msys
 PKG_SKIP_REASON+=	"${OPSYS} is not supported"
@@ -51,5 +55,9 @@ MAKE_FLAGS+=	DOCDIR=${PREFIX:Q}/share/doc/${PKGNAME_NOREV}
 MAKE_FLAGS+=	INSTALL_PROGRAM=${INSTALL:Q}
 
 TEST_TARGET=	check
+
+PLIST_SUBST+=		CHICKEN_BINARY_VERSION=${CHICKEN_BINARY_VERSION:Q}
+PRINT_PLIST_AWK+=	{ sub("/${CHICKEN_BINARY_VERSION}/", "/$${CHICKEN_BINARY_VERSION}/") }
+PRINT_PLIST_AWK+=	{ sub(".so.${CHICKEN_BINARY_VERSION}$$", ".so.$${CHICKEN_BINARY_VERSION}") }
 
 .include "../../mk/bsd.pkg.mk"

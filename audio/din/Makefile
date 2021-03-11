@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.5 2019/05/11 13:18:48 fox Exp $
+# $NetBSD: Makefile,v 1.26 2021/01/01 08:24:33 ryoon Exp $
 
-DISTNAME=	din-42
+DISTNAME=	din-49.1
+PKGREVISION=	1
 CATEGORIES=	audio
 MASTER_SITES=	https://archive.org/download/dinisnoise_source_code/
 
@@ -13,7 +14,8 @@ USE_LANGUAGES=	c c++
 USE_TOOLS+=	autoreconf pkg-config gmake
 GNU_CONFIGURE=	yes
 
-LDFLAGS+=	-ltcl -lSDL -lGL -lpthread
+LIBS+=		-ltcl -lSDL -lGL -lpthread
+LIBS.Darwin+=	-lSDLmain
 
 .include "options.mk"
 

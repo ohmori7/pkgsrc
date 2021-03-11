@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.22 2019/05/23 19:23:15 rillig Exp $
+# $NetBSD: Makefile,v 1.25 2020/12/04 20:45:39 nia Exp $
 
 DISTNAME=	prelude-correlator-0.9.0-beta8
 PKGNAME=	prelude-correlator-${DISTNAME:S/-beta/beta/:C/.*-//}
-PKGREVISION=	6
+PKGREVISION=	7
 CATEGORIES=	security
 MASTER_SITES=	http://www.prelude-ids.com/download/releases/prelude-correlator/
 
@@ -12,14 +12,14 @@ COMMENT=	Intrusion event correlation engine
 
 BUILD_DEFS+=		VARBASE
 
-RCD_SCRIPTS=		preludecorrelator
+RCD_SCRIPTS=			preludecorrelator
 PRELUDE_CORRELATOR_PID_DIR=	${VARBASE}/run/prelude-correlator
-PRELUDE_USER?=		_prelude
-PRELUDE_GROUP?=		_prelude
-PRELUDE_HOME?=		${VARBASE}/db/prelude-correlator
-INSTALLATION_DIRS=	sbin
-OWN_DIRS=		${PKG_SYSCONFDIR}/prelude-correlator
-EGDIR=			${PREFIX}/share/examples
+PRELUDE_USER?=			_prelude
+PRELUDE_GROUP?=			_prelude
+PRELUDE_HOME?=			${VARBASE}/db/prelude-correlator
+INSTALLATION_DIRS=		sbin
+OWN_DIRS=			${PKG_SYSCONFDIR}/prelude-correlator
+EGDIR=				${PREFIX}/share/examples
 
 PKG_GROUPS_VARS+=	PRELUDE_GROUP
 PKG_USERS_VARS+=	PRELUDE_USER
@@ -50,7 +50,7 @@ REQD_DIRS+=		${PRELUDE_HOME}
 REQD_DIRS_PERMS+=	${PRELUDE_HOME} ${PRELUDE_USER} ${PRELUDE_GROUP} 0700
 
 REPLACE_PYTHON=		PreludeCorrelator/main.py
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.9.0beta8
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.9.0beta8
 EGG_NAME=		prelude_correlator-0.9.0b8
 
 pre-patch:

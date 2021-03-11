@@ -1,18 +1,18 @@
-# $NetBSD: Makefile,v 1.21 2018/08/22 09:47:51 wiz Exp $
+# $NetBSD: Makefile,v 1.25 2020/08/31 18:13:07 wiz Exp $
 
 DISTNAME=	Pod-POM-Web-1.23
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Pod/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Pod-POM-Web/
+HOMEPAGE=	https://metacpan.org/release/Pod-POM-Web
 COMMENT=	Perl 5 module providing a HTML Perldoc server
 LICENSE=	${PERL5_LICENSE}
 
 USE_LANGUAGES=		# empty
-PERL5_PACKLIST= 	auto/Pod/POM/Web/.packlist
+PERL5_PACKLIST=		auto/Pod/POM/Web/.packlist
 PERL5_MODULE_TYPE=	Module::Build
 
 DEPENDS+=	p5-Alien-GvaScript>=1.21:../../www/p5-Alien-GvaScript
@@ -24,8 +24,8 @@ DEPENDS+=	p5-URI-[0-9]*:../../www/p5-URI
 DEPENDS+=	p5-libwww-[0-9]*:../../www/p5-libwww
 
 # recommends
-DEPENDS+=       p5-AnnoCPAN-Perldoc-[0-9]*:../../devel/p5-AnnoCPAN-Perldoc
-DEPENDS+=       p5-PPI-HTML-[0-9]*:../../textproc/p5-PPI-HTML
+DEPENDS+=	p5-AnnoCPAN-Perldoc-[0-9]*:../../devel/p5-AnnoCPAN-Perldoc
+DEPENDS+=	p5-PPI-HTML-[0-9]*:../../textproc/p5-PPI-HTML
 DEPENDS+=	p5-Search-Indexer>=0.75:../../textproc/p5-Search-Indexer
 
 .include "../../lang/perl5/module.mk"

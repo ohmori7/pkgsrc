@@ -1,11 +1,13 @@
-# $NetBSD: Makefile,v 1.1 2019/03/12 17:47:09 jaapb Exp $
+# $NetBSD: Makefile,v 1.4 2021/03/08 08:12:54 jaapb Exp $
 
 GITHUB_PROJECT=	optint
 GITHUB_TAG=	v${PKGVERSION_NOREV}
-DISTNAME=	${GITHUB_PROJECT}-0.0.2
+VER=		0.0.4
+DISTNAME=	${GITHUB_PROJECT}-${VER}
 PKGNAME=	ocaml-${DISTNAME}
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=mirage/}
+PKGREVISION=	2
 
 MAINTAINER=	jaapb@NetBSD.org
 HOMEPAGE=	https://github.com/mirage/optint/
@@ -14,7 +16,7 @@ LICENSE=	mit
 
 OCAML_USE_DUNE=	yes
 
-WRKSRC=		${WRKDIR}/optint-0.0.2
+WRKSRC=		${WRKDIR}/optint-${VER}
 USE_LANGUAGES=	# none
 
 .include "../../mk/ocaml.mk"

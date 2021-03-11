@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.62 2019/04/26 13:14:15 maya Exp $
+# $NetBSD: Makefile,v 1.79 2020/12/04 20:45:42 nia Exp $
 
 DISTNAME=		libvirt-1.2.9
-PKGREVISION=		27
+PKGREVISION=		40
 CATEGORIES=		sysutils
 MASTER_SITES=		http://libvirt.org/sources/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://libvirt.org/
+HOMEPAGE=		https://libvirt.org/
 COMMENT=		Virtualisation toolkit for host operating systems
 LICENSE=		gnu-lgpl-v2
 
@@ -19,7 +19,9 @@ USE_LIBTOOL=		yes
 
 BUILD_DEFS+=		VARBASE
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-xml
+PYTHON_VERSIONS_ACCEPTED=	27 # py-xml
+
+CHECK_PORTABILITY_SKIP+=	docs/news.html.in
 
 PY_PATCHPLIST=		yes
 REPLACE_PYTHON+=	docs/apibuild.py

@@ -1,12 +1,13 @@
-# $NetBSD: options.mk,v 1.13 2019/05/14 01:39:30 gdt Exp $
+# $NetBSD: options.mk,v 1.19 2020/09/12 00:19:28 gdt Exp $
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.qgis
 PKG_SUPPORTED_OPTIONS=	python
-# Don't enable python by default because it is not
-# supported by gdal-lib and as a result we get a
-# warning when qgis is launched.
-# XXX fix gdal-lib and reenable this.
-PKG_SUGGESTED_OPTIONS+= python
+# \todo After 2020Q2, drop python option (making it on).  Python
+# within qgis is so huge that it is hard to imagine someone wanting to
+# build qgis without python, and the cost of that theoretical person
+# putting up with a few more bits is smaller than the maintenance pain
+# of having an option.
+PKG_SUGGESTED_OPTIONS+=	python
 
 .include "../../mk/bsd.options.mk"
 
@@ -19,11 +20,10 @@ CMAKE_ARGS+=		-DWITH_BINDINGS:BOOL=TRUE
 CMAKE_ARGS+=		-DSIP_BINARY_PATH:PATH=${BUILDLINK_PREFIX.py-sip}/bin
 CMAKE_ARGS+=		-DWITH_INTERNAL_MARKUPSAFE=FALSE
 PLIST_SRC+=             ${PKGDIR}/PLIST.python
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # Documentation implies 27 is supported, 3x not.
 .include "../../lang/python/application.mk"
 .include "../../math/py-numpy/buildlink3.mk"
-.include "../../x11/py-qt4/buildlink3.mk"
-.include "../../x11/py-qt4-qscintilla/buildlink3.mk"
+.include "../../x11/py-qt5/buildlink3.mk"
+.include "../../x11/py-qt5-qscintilla/buildlink3.mk"
 .include "../../x11/py-sip/buildlink3.mk"
 DEPENDS+=	${PYPKGPREFIX}-requests-[0-9]*:../../devel/py-requests
 DEPENDS+=	${PYPKGPREFIX}-psycopg2-[0-9]*:../../databases/py-psycopg2

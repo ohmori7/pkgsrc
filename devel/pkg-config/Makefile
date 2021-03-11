@@ -1,14 +1,15 @@
-# $NetBSD: Makefile,v 1.37 2017/05/05 01:19:35 mef Exp $
+# $NetBSD: Makefile,v 1.40 2020/05/21 15:30:48 rillig Exp $
 
 DISTNAME=	pkg-config-0.29.2
 CATEGORIES=	devel
 MASTER_SITES=	http://pkgconfig.freedesktop.org/releases/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://pkgconfig.freedesktop.org/
+HOMEPAGE=	https://pkgconfig.freedesktop.org/
 COMMENT=	System for managing library compile/link flags
 LICENSE=	gnu-gpl-v2
 
+TOOLS_BROKEN+=		perl
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--with-internal-glib
@@ -24,10 +25,10 @@ CONFLICTS=		pkgconfig-[0-9]*
 CONFIGURE_ARGS.IRIX+=	--cache-file=/dev/null
 
 .if ${OPSYS} == "NetBSD"
-.if ${MACHINE_ARCH} == "i386" && !empty(OS_VERSION:M[12345].*)
+.  if ${MACHINE_ARCH} == "i386" && !empty(OS_VERSION:M[12345].*)
 # Built-in GLib wants __sync_bool_compare_and_swap_4
 CFLAGS+=		-march=i486
-.endif
+.  endif
 post-configure:
 	cd ${WRKSRC}/glib; \
 	${GREP} -v HAVE_DTRACE config.h >config.h.new; \
@@ -42,7 +43,7 @@ CONFIGURE_ENV+=		glib_cv_value_AF_INET6=yes
 CONFIGURE_ARGS.SunOS+=	--disable-dtrace
 CFLAGS.SunOS+=		-DENABLE_NLS # required due to __EXTENSIONS__
 
-CONFIGURE_ARGS+=	${CONFIGURE_ARGS.${ICONV_TYPE}-iconv}
+CONFIGURE_ARGS+=		${CONFIGURE_ARGS.${ICONV_TYPE}-iconv}
 CONFIGURE_ARGS.gnu-iconv=	--with-libiconv=gnu
 
 PKGCONFIG_EXTRA_PATHS=	# empty

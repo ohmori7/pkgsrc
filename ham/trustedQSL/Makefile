@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.37 2019/05/13 00:21:34 gdt Exp $
+# $NetBSD: Makefile,v 1.52 2020/08/31 18:09:47 wiz Exp $
 
-DISTNAME=		tqsl-2.4.2
-PKGREVISION=		1
+DISTNAME=		tqsl-2.5.1
+PKGREVISION=		5
 CATEGORIES=		ham
-MASTER_SITES=		https://sourceforge.net/projects/trustedqsl/files/TrustedQSL/v${PKGVERSION_NOREV}/
+MASTER_SITES=		http://www.arrl.org/files/file/LoTW%20Instructions/
 
 MAINTAINER=		makoto@ki.nu
-HOMEPAGE=		https://sourceforge.net/projects/trustedqsl/
+HOMEPAGE=		http://www.arrl.org/quick-start-tqsl
 COMMENT=		TrustedQSL, uploading QSL Data to LoTW of ARRL
 LICENSE=		arrl-license
 
@@ -26,12 +26,13 @@ USE_CMAKE=		yes
 # cause (aside from having two pixman versions installed) is ad hoc -L
 # usage in Makefile.am, without matching -R.
 
+# Filed upstream by email 20200314.
 # remove the string $(LIB_SUFFIX), tested with NetBSD at least
-SUBST_CLASSES+=		lib-suffix
-SUBST_MESSAGE.lib-suffix= Removing $$(LIB_SUFFIX) from src/CMakeLists.txt
-SUBST_STAGE.lib-suffix= pre-configure
-SUBST_FILES.lib-suffix= src/CMakeLists.txt
-SUBST_SED.lib-suffix= 	-e s/\$$\(LIB_SUFFIX\)//
+SUBST_CLASSES+=			lib-suffix
+SUBST_MESSAGE.lib-suffix=	Removing $$(LIB_SUFFIX) from src/CMakeLists.txt
+SUBST_STAGE.lib-suffix=		pre-configure
+SUBST_FILES.lib-suffix=		src/CMakeLists.txt
+SUBST_SED.lib-suffix=		-e s/\$${\LIB_SUFFIX\}//
 
 do-configure:
 	(cd ${WRKSRC} ; \
@@ -49,12 +50,15 @@ post-install:
 	(cd ${WRKSRC} ;\
 	${INSTALL_DATA} LICENSE.txt ${DESTDIR}${PREFIX}/share/TrustedQSL/ \
 	)
-	# Conflicting PLIST with wxGTK28-2.8.12nb8:
-	${RM} -f ${DESTDIR}${PREFIX}/share/locale/*/LC_MESSAGES/wxstd.mo
+
+# \todo Perhaps change to lmdb, and (unlikely) consider an option.
+.include "../../databases/db5/buildlink3.mk"
+#.include "../../databases/lmdb/buildlink3.mk"
 
 .include "../../textproc/expat/buildlink3.mk"
-.include "../../databases/db5/buildlink3.mk"
-.include "../../mk/wxGTK.mk"
+.include "../../security/openssl/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
-
+# Upstream uses wxGTK28 on Windows because it has accessibility patches, but
+# 30 is newer.
+.include "../../x11/wxGTK30/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

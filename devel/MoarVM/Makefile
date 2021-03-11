@@ -1,16 +1,16 @@
-# $NetBSD: Makefile,v 1.10 2019/02/16 19:32:12 bsiegert Exp $
+# $NetBSD: Makefile,v 1.25 2021/01/09 07:27:56 mef Exp $
 
-DISTNAME=	MoarVM-2018.12
+DISTNAME=	MoarVM-2020.12
 CATEGORIES=	devel perl6
 MASTER_SITES=	http://www.moarvm.org/releases/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.moarvm.org/
+HOMEPAGE=	https://www.moarvm.org/
 COMMENT=	Virtual machine for Rakudo Perl 6
 LICENSE=	artistic-2.0
 
-USE_TOOLS+=	perl gmake
-USE_LANGUAGES=	c c++
+USE_TOOLS+=		perl gmake
+USE_LANGUAGES=		c c++
 NOT_PAX_MPROTECT_SAFE=	bin/moar
 
 HAS_CONFIGURE=		yes
@@ -23,6 +23,10 @@ CONFIGURE_ARGS=		--prefix=${PREFIX:Q} \
 			--has-libffi \
 			--has-libuv \
 			--has-libtommath
+
+# skip portability check for release target
+# The [[ is only used for producing a release.
+CHECK_PORTABILITY_SKIP+=	build/Makefile.in
 
 .include "../../mk/bsd.prefs.mk"
 

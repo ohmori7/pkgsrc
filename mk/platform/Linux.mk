@@ -1,4 +1,4 @@
-# $NetBSD: Linux.mk,v 1.80 2019/01/24 18:40:56 tnn Exp $
+# $NetBSD: Linux.mk,v 1.84 2020/12/13 16:26:12 nia Exp $
 #
 # Variable definitions for the Linux operating system.
 
@@ -96,6 +96,10 @@ _OPSYS_PREFER.libexecinfo?=	native
 _OPSYS_PREFER.libinotify?=	native
 _OPSYS_PREFER.sysexits?=	native
 
+# We probably want the native library for these
+_OPSYS_PREFER.dl?=		native
+_OPSYS_PREFER.pthread?=		native
+
 .if exists(/usr/include/netinet6) || exists(/usr/include/linux/in6.h)
 _OPSYS_HAS_INET6=	yes	# IPv6 is standard
 .else
@@ -167,12 +171,14 @@ _WRAP_EXTRA_ARGS.LD+=	-m elf_i386
 CWRAPPERS_APPEND.ld+=	-m elf_i386
 .endif
 
+.for _glibc_path in ${_OPSYS_LIB_DIRS}
+.  if exists(${_glibc_path}/libc.so.6)
 ## Use _CMD so the command only gets run when needed!
-.if exists(/lib${LIBABISUFFIX}/libc.so.6)
-_GLIBC_VERSION_CMD=	/lib${LIBABISUFFIX}/libc.so.6 --version | \
-				sed -ne's/^GNU C.*version \(.*\),.*$$/\1/p'
+_GLIBC_VERSION_CMD=	${_glibc_path}/libc.so.6 --version | \
+				sed -ne's/^GNU C.*version \(.*\)[,.].*$$/\1/p'
 GLIBC_VERSION=		${_GLIBC_VERSION_CMD:sh}
-.endif
+.  endif
+.endfor
 
 # If this is defined pass it to the make process. 
 .if defined(NOGCCERROR)

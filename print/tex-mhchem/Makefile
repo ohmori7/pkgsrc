@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.9 2019/01/24 11:28:33 markd Exp $
+# $NetBSD: Makefile,v 1.11 2020/01/18 23:34:30 rillig Exp $
 
 DISTNAME=	mhchem
 PKGNAME=	tex-${DISTNAME}-4.08
 TEXLIVE_REV=	48088
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/mhchem
+HOMEPAGE=	https://ctan.org/pkg/mhchem
 COMMENT=	Typeset chemical formulae/equations and Risk and Safety phrases
 LICENSE=	lppl-1.3c
 
@@ -17,5 +17,6 @@ DEPENDS+=	tex-oberdiek>=2009nb2:../../print/tex-oberdiek
 DEPENDS+=	tex-pgf>=2.00nb1:../../print/tex-pgf
 DEPENDS+=	tex-tools>=2010:../../print/tex-tools
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

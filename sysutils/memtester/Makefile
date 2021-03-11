@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.24 2014/10/09 14:06:58 wiz Exp $
+# $NetBSD: Makefile,v 1.29 2020/11/19 09:35:43 schmonz Exp $
 #
 
-DISTNAME=		memtester-4.3.0
+DISTNAME=		memtester-4.5.0
 CATEGORIES=		sysutils
 MASTER_SITES=		${HOMEPAGE}old-versions/
 
@@ -10,9 +10,6 @@ HOMEPAGE=		http://pyropus.ca/software/memtester/
 COMMENT=		Utility for testing the memory subsystem for faults
 LICENSE=		gnu-gpl-v2
 
-NOT_FOR_PLATFORM=	Interix-*-* # no m[un]lock(2), so not useful anyway
-
-DJB_RESTRICTED=		NO
 DJB_MAKE_TARGETS=	NO
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man8 share/doc/memtester

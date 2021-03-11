@@ -1,18 +1,31 @@
-# $NetBSD: Makefile,v 1.1 2018/03/15 02:24:18 khorben Exp $
+# $NetBSD: Makefile,v 1.5 2020/09/28 22:56:38 khorben Exp $
 
-DISTNAME=	claripy-7.8.2.21
+.include "../../devel/py-angr/version.mk"
+
+DISTNAME=	claripy-${ANGR_VERSION}
 PKGNAME=	${PYPKGPREFIX}-${EGG_NAME}
 CATEGORIES=	math
 MASTER_SITES=	${MASTER_SITE_GITHUB:=angr/}
 GITHUB_PROJECT=	claripy
-GITHUB_TAG=	74a79e034f87369d26846cb7751276b191319e59
+GITHUB_TAG=	v${ANGR_VERSION}
 
 MAINTAINER=	khorben@defora.org
 HOMEPAGE=	https://github.com/angr/claripy/
 COMMENT=	Abstraction layer for constraint solvers
 LICENSE=	2-clause-bsd
 
-PYTHON_VERSIONS_ACCEPTED=	27
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
+DEPENDS+=	${PYPKGPREFIX}-cachetools>=0:../../devel/py-cachetools
+DEPENDS+=	${PYPKGPREFIX}-decorator>=0:../../devel/py-decorator
+DEPENDS+=	${PYPKGPREFIX}-future>=0:../../devel/py-future
+DEPENDS+=	${PYPKGPREFIX}-smt>=0:../../math/py-smt
+DEPENDS+=	${PYPKGPREFIX}-z3solver>=0:../../math/py-z3solver
+
+do-test:
+	${RUN} cd ${WRKSRC}/tests && \
+	${SETENV} ${TEST_ENV} \
+	${PYTHONBIN} -m unittest discover
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

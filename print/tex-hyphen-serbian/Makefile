@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.9 2019/05/11 06:57:27 markd Exp $
+# $NetBSD: Makefile,v 1.12 2020/05/10 04:32:04 markd Exp $
 
 DISTNAME=	hyphen-serbian
-PKGNAME=	tex-${DISTNAME}-1.0a.2019
-TEXLIVE_REV=	50792
+PKGNAME=	tex-${DISTNAME}-1.0a.2019.51186
+PKGREVISION=	1
+TEXLIVE_REV=	51186
 
 MAINTAINER=	minskim@NetBSD.org
 COMMENT=	Hyphenation patterns for Serbian Cyrillic
@@ -32,5 +33,6 @@ TEX_HYPHEN_LUA+=	['serbianc']={ \
 			  hyphenation='hyph-sr-latn.hyp.txt,hyph-sh-cyrl.hyp.txt', \
 			},
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

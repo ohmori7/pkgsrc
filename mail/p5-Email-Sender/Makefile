@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.31 2018/08/22 09:45:29 wiz Exp $
+# $NetBSD: Makefile,v 1.35 2020/09/07 11:30:48 wiz Exp $
 
-DISTNAME=	Email-Sender-1.300031
+DISTNAME=	Email-Sender-1.300034
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
 CATEGORIES=	mail perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Email/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Email-Sender/
+HOMEPAGE=	https://metacpan.org/release/Email-Sender
 COMMENT=	Email::Sender - a library for sending email
 LICENSE=	${PERL5_LICENSE}
 

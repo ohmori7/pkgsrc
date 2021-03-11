@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.16 2019/05/23 02:41:54 gutteridge Exp $
+$NetBSD: distinfo,v 1.19 2019/08/17 19:13:19 gutteridge Exp $
 
-SHA1 (xfce4-appfinder-4.13.3.tar.bz2) = 5cc78a60846f48d5e31d41e034f9d5dbca408a1b
-RMD160 (xfce4-appfinder-4.13.3.tar.bz2) = d61f81782401b25ecb213538e5c895d133fc86d1
-SHA512 (xfce4-appfinder-4.13.3.tar.bz2) = 47f69e8daf6f963b8130c0380f2201cdb2d02212cfb8b5c05fedbebb78222d3bd35db0fd422418cf3f9d1f2b90e66ee4d143bed57881f5673aefca8bc58e059a
-Size (xfce4-appfinder-4.13.3.tar.bz2) = 511606 bytes
+SHA1 (xfce4-appfinder-4.14.0.tar.bz2) = d0ceed5c05b6e411d1538d9727c818a52f441cf2
+RMD160 (xfce4-appfinder-4.14.0.tar.bz2) = 553bbcfdefd88f24b0524235f61e495a2b1300e1
+SHA512 (xfce4-appfinder-4.14.0.tar.bz2) = 94c7266fc7c738107f1674ea3d705aa4168d9f2ecada97dc3e97c85c3857bd37a2e6517028fb51dd4663eaba4bf758927879c7fdbff83df79f8648c61944402c
+Size (xfce4-appfinder-4.14.0.tar.bz2) = 519705 bytes

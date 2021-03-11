@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.52 2018/07/06 15:06:45 ryoon Exp $
+# $NetBSD: Makefile,v 1.59 2021/02/07 06:30:16 ryoon Exp $
 
-DISTNAME=	xmp-4.0.10
-PKGREVISION=	6
+DISTNAME=	xmp-4.1.0
+PKGREVISION=	4
 CATEGORIES=	audio
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=xmp/}
 
@@ -20,7 +20,20 @@ CONF_FILES+=	${EGDIR}/xmp.conf ${PKG_SYSCONFDIR}/xmp/xmp.conf
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1 ${EGDIR}
 INSTALL_MAKE_FLAGS+=	INSTALL=${INSTALL:Q}
 
-.include "options.mk"
+.include "../../mk/bsd.prefs.mk"
+.include "../../mk/oss.buildlink3.mk"
 
+# NetBSD and Solaris have their own drivers.
+.if ${OPSYS} != "NetBSD" && \
+    ${OPSYS} != "SunOS" && \
+    ${OSS_TYPE} != "none"
+LIBS+=		${LIBOSSAUDIO}
+CPPFLAGS+=	-DDEVOSSAUDIO="\"${DEVOSSAUDIO}\""
+CPPFLAGS+=	-DDEVOSSSOUND="\"${DEVOSSSOUND}\""
+.else
+CONFIGURE_ARGS+=	--disable-oss
+.endif
+
+.include "options.mk"
 .include "../../audio/libxmp/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

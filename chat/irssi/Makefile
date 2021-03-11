@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.92 2019/02/18 16:30:26 schmonz Exp $
+# $NetBSD: Makefile,v 1.100 2020/08/31 18:06:41 wiz Exp $
 
 DISTNAME=		${IRSSI_DISTNAME}
+PKGREVISION=		5
 CATEGORIES=		chat
 EXTRACT_SUFX=		${IRSSI_EXTRACT_SUFX}
 

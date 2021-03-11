@@ -1,8 +1,9 @@
-@comment $NetBSD: PLIST,v 1.2 2019/01/29 14:23:07 jaapb Exp $
+@comment $NetBSD: PLIST,v 1.4 2020/12/11 09:49:37 jaapb Exp $
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/.eliomignore
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/.eliomreserve
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/.eliomverbatim
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/.gitignore
+${OCAML_SITELIB}/eliom/templates/os.pgocaml/.ocamlformat
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/.ocp-indent
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/Makefile
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/Makefile.PROJECT_NAME
@@ -36,6 +37,7 @@ ${OCAML_SITELIB}/eliom/templates/os.pgocaml/PROJECT_NAME_services.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/PROJECT_NAME_services.eliomi
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/PROJECT_NAME_settings.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/README.md
+${OCAML_SITELIB}/eliom/templates/os.pgocaml/assets!PROJECT_NAME_Demo_i18n.tsv
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/assets!PROJECT_NAME_i18n.tsv
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/assets!images!icon.png
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo.eliom
@@ -51,12 +53,14 @@ ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_pagetransition.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_pgocaml.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_pgocaml_db.ml
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_popup.eliom
+${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_pulltorefresh.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_react.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_ref.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_rpc.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_spinner.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_timepicker.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_tips.eliom
+${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_tongue.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_tools.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/demo_users.eliom
 ${OCAML_SITELIB}/eliom/templates/os.pgocaml/mobile!.chcpignore
@@ -129,7 +133,7 @@ ${OCAML_SITELIB}/ocsigen-start/client/os_user_proxy.cmi
 ${OCAML_SITELIB}/ocsigen-start/client/os_user_proxy.cmo
 ${OCAML_SITELIB}/ocsigen-start/client/os_user_view.cmi
 ${OCAML_SITELIB}/ocsigen-start/client/os_user_view.cmo
-${OCAML_SITELIB}/ocsigen-start/server/ocsigen-start.server.cma
+${PLIST.ocaml-opt}${OCAML_SITELIB}/ocsigen-start/server/ocsigen-start.server.cma
 ${PLIST.ocaml-opt}${OCAML_SITELIB}/ocsigen-start/server/ocsigen-start.server.cmxa
 ${PLIST.ocaml-opt}${OCAML_SITELIB}/ocsigen-start/server/ocsigen-start.server.cmxs
 ${OCAML_SITELIB}/ocsigen-start/server/os_comet.cmi

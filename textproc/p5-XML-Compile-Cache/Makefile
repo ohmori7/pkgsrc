@@ -1,23 +1,23 @@
-# $NetBSD: Makefile,v 1.4 2018/08/22 09:47:05 wiz Exp $
+# $NetBSD: Makefile,v 1.8 2020/08/31 18:12:08 wiz Exp $
 
 DISTNAME=	XML-Compile-Cache-1.06
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/M/MA/MARKOV/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/XML-Compile-Cache/
+HOMEPAGE=	https://metacpan.org/release/XML-Compile-Cache
 COMMENT=	Perl module for caching compilation based XML processing
 LICENSE=	${PERL5_LICENSE}
 
-DEPENDS+=	p5-XML-LibXML-Simple-[0-9]*:../../textproc/p5-XML-LibXML-Simple
-DEPENDS+=	p5-Log-Report-[0-9]*:../../devel/p5-Log-Report
-#DEPENDS+=	p5-Log-Report-Optional-[0-9]*:../../devel/p5-Log-Report-Optional
-DEPENDS+=	p5-XML-Compile-[0-9]*:../../textproc/p5-XML-Compile
-#DEPENDS+=	p5-Devel-GlobalDestruction-[0-9]*:../../devel/p5-Devel-GlobalDestruction
+DEPENDS+=		p5-XML-LibXML-Simple-[0-9]*:../../textproc/p5-XML-LibXML-Simple
+DEPENDS+=		p5-Log-Report-[0-9]*:../../devel/p5-Log-Report
+#DEPENDS+=		p5-Log-Report-Optional-[0-9]*:../../devel/p5-Log-Report-Optional
+DEPENDS+=		p5-XML-Compile-[0-9]*:../../textproc/p5-XML-Compile
+#DEPENDS+=		p5-Devel-GlobalDestruction-[0-9]*:../../devel/p5-Devel-GlobalDestruction
 # TEST_DEPENDS
-BUILD_DEPENDS+=	p5-XML-Compile-Tester-[0-9]*:../../textproc/p5-XML-Compile-Tester
+BUILD_DEPENDS+=		p5-XML-Compile-Tester-[0-9]*:../../textproc/p5-XML-Compile-Tester
 #BUILD_DEPENDS+=	p5-Test-Deep-[0-9]*:../../devel/p5-Test-Deep
 
 PERL5_PACKLIST=	auto/XML/Compile/Cache/.packlist

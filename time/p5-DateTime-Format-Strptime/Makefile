@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.34 2019/04/07 12:26:04 wen Exp $
+# $NetBSD: Makefile,v 1.38 2020/09/07 17:44:42 wiz Exp $
 
-DISTNAME=	DateTime-Format-Strptime-1.76
+DISTNAME=	DateTime-Format-Strptime-1.77
 PKGNAME=	p5-${DISTNAME}00
 CATEGORIES=	time perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DateTime/}
 
 MAINTAINER=	abs@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/DateTime-Format-Strptime/
+HOMEPAGE=	https://metacpan.org/release/DateTime-Format-Strptime
 COMMENT=	Perl 5 module to parse and format strp and strf time patterns
 LICENSE=	artistic-2.0
 

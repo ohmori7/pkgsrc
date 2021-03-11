@@ -1,8 +1,7 @@
-$NetBSD: distinfo,v 1.9 2015/11/03 01:12:41 agc Exp $
+$NetBSD: distinfo,v 1.12 2020/12/10 13:37:05 nia Exp $
 
-SHA1 (milkytracker-0.90.86.tar.bz2) = 620bc1f81894f526d9e806189c5f7f17c3b57b97
-RMD160 (milkytracker-0.90.86.tar.bz2) = 09a4913d737362c42d16a4bcfc1de69e1d1bdbd4
-SHA512 (milkytracker-0.90.86.tar.bz2) = 8142f0b438e478571db25960d1b31f1d8c7e68feea96bdd238d1b1c1744105d929f18c990a301af6bebfc2d517bad687232410477ced6d8c4bfec8053cfcad8e
-Size (milkytracker-0.90.86.tar.bz2) = 2202256 bytes
-SHA1 (patch-src_compression_zziplib_generic_fseeko.cpp) = 002754ec91a5d3b986fabe9266cc8999ac148c82
-SHA1 (patch-src_tracker_TrackerStartup.cpp) = 389ef435b0cd7c67bec81c5e2e450590d7224dca
+SHA1 (milkytracker-1.03.00.tar.gz) = 4940c150ae8b988ab9c82ca07fc069bda1b77b09
+RMD160 (milkytracker-1.03.00.tar.gz) = fe2f74b2019a67941139e42df37b77bb3ffee0f9
+SHA512 (milkytracker-1.03.00.tar.gz) = d5489994d9c5d24552073afcbd787c20720096dd81d640356fc13b2e2b8a49713b798066d54f2b589f3819c14279142e295e4d6317ed325537069faad47abbe6
+Size (milkytracker-1.03.00.tar.gz) = 3705395 bytes
+SHA1 (patch-docs_CMakeLists.txt) = 096dc06a4f898665a00d409cfb124925df9f93f6

@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.2 2019/04/25 07:32:37 maya Exp $
+# $NetBSD: Makefile,v 1.5 2020/12/04 20:45:00 nia Exp $
 
 DISTNAME=	stacks-2.2
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	biology
 MASTER_SITES=	http://catchenlab.life.illinois.edu/stacks/source/
 

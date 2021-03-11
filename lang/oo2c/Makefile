@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.36 2018/08/22 09:45:21 wiz Exp $
+# $NetBSD: Makefile,v 1.42 2020/08/31 18:09:51 wiz Exp $
 
 DISTNAME=		oo2c_${BITS}-2.0.11
 PKGNAME=		oo2c-2.0.11
-PKGREVISION=		16
+PKGREVISION=		19
 CATEGORIES=		lang
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=ooc/}
 EXTRACT_SUFX=		.tar.bz2
@@ -36,15 +36,15 @@ SUBST_SED.pkg-unwrap=	-e 's,${WRAPPER_DIR},${LOCALBASE},g'
 
 .include "../../mk/bsd.prefs.mk"
 
-BITS=32
+BITS=	32
 .for PLAT in ${LP64PLATFORMS}
 .  if !empty(MACHINE_PLATFORM:M${PLAT})
-BITS=64
+BITS=	64
 .  endif
 .endfor
 
 post-install:
-	${LN} -sf ${PREFIX}/lib/oo2c/oocdoc/html ${DESTDIR}${PREFIX}/share/doc/html/oo2c
+	${LN} -sf ${PREFIX}/lib/oo2c/oocdoc/html ${DESTDIR}${PREFIX}/share/doc/oo2c
 	${LN} -sf ${PREFIX}/lib/oo2c/emacs ${DESTDIR}${PREFIX}/share/emacs/site-lisp/oo2c
 
 .include "../../devel/boehm-gc/buildlink3.mk"

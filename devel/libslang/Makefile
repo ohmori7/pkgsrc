@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.72 2017/01/19 18:52:06 agc Exp $
+# $NetBSD: Makefile,v 1.74 2020/01/26 17:30:59 rillig Exp $
 #
 
 DISTNAME=	slang-1.4.9
@@ -10,7 +10,7 @@ MASTER_SITES+=	ftp://ftp.ntua.gr/pub/lang/slang/slang/v1.4/
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.s-lang.org/
+HOMEPAGE=	https://www.s-lang.org/
 COMMENT=	Routines for rapid alpha-numeric terminal applications development
 
 MAKE_JOBS_SAFE=		no
@@ -18,7 +18,7 @@ MAKE_JOBS_SAFE=		no
 USE_TOOLS+=		gmake
 USE_LIBTOOL=		yes
 GNU_CONFIGURE=		yes
-DLOPEN_REQUIRE_PTHREADS=no
+DLOPEN_REQUIRE_PTHREADS= no
 
 .include "../../mk/termcap.buildlink3.mk"
 

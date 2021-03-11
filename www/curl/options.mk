@@ -1,8 +1,8 @@
-# $NetBSD: options.mk,v 1.17 2019/05/22 08:56:25 leot Exp $
+# $NetBSD: options.mk,v 1.19 2020/08/24 20:03:12 leot Exp $
 
 PKG_OPTIONS_VAR=		PKG_OPTIONS.curl
 PKG_SUPPORTED_OPTIONS=		inet6 libssh2 gssapi ldap rtmp idn http2
-PKG_SUGGESTED_OPTIONS=		inet6 idn
+PKG_SUGGESTED_OPTIONS=		http2 inet6 idn
 PKG_OPTIONS_LEGACY_OPTS=	libidn:idn
 
 # Kerberos is built in - no additional dependency
@@ -56,6 +56,7 @@ CONFIGURE_ARGS+=	--without-libidn2
 .if !empty(PKG_OPTIONS:Mhttp2)
 USE_TOOLS+=		pkg-config
 CONFIGURE_ARGS+=	--with-nghttp2=${BUILDLINK_PREFIX.nghttp2}
+TEST_DEPENDS+=		nghttp2-tools-[0-9]*:../../www/nghttp2-tools
 .include "../../www/nghttp2/buildlink3.mk"
 .else
 CONFIGURE_ARGS+=	--without-nghttp2

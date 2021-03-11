@@ -1,26 +1,23 @@
-# $NetBSD: Makefile,v 1.70 2018/12/13 19:51:58 adam Exp $
+# $NetBSD: Makefile,v 1.93 2021/03/01 19:23:07 gdt Exp $
 
-DISTNAME=	merkaartor-0.17.2
-PKGREVISION=	43
+DISTNAME=	merkaartor-0.18.4
+PKGREVISION=	5
 CATEGORIES=	geography
-MASTER_SITES=	http://merkaartor.be/attachments/download/253/
-EXTRACT_SUFX=	.tar.bz2
+MASTER_SITES=	${MASTER_SITE_GITHUB:=openstreetmap/}
+GITHUB_PROJECT=	merkaartor
+GITHUB_TAG=	${PKGVERSION_NOREV}
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
+MAINTAINER=	gdt@NetBSD.org
 HOMEPAGE=	http://www.merkaartor.be/
-COMMENT=	Merkaartor is an OpenStreetMap mapping program
+COMMENT=	OpenStreetMap mapping program
+LICENSE=	gnu-gpl-v2
 
 USE_LANGUAGES=		c c++11
+# gcc 5 complains about -Wno-register.  Require new enough rather than patching.
+GCC_REQD=		6
 USE_LIBTOOL=		yes
 QMAKE=			${QTDIR}/bin/qmake
-CONFIGURE_ARGS=		PREFIX=${PREFIX} NODEBUG=1 OSMARENDER=1 PROJ=1 GDAL=1 \
-			GEOIMAGE=1 GPSDLIB=1 RELEASE=1
-
-SUBST_CLASSES+=			installtarget
-SUBST_MESSAGE.installtarget=	Fixing wrong install target
-SUBST_STAGE.installtarget=	post-configure
-SUBST_FILES.installtarget=	${WRKSRC}/src/Makefile
-SUBST_SED.installtarget=	-e 's:--mode=install cp "$$(QMAKE_TARGET)":--mode=install cp "$$(TARGET)":'
+CONFIGURE_ARGS=		PREFIX=${PREFIX} NODEBUG=1 RELEASE=1
 
 INSTALL_ENV+=	INSTALL_ROOT=${DESTDIR}
 
@@ -31,6 +28,7 @@ do-configure:
 		${QMAKE} ${CONFIGURE_ARGS} Merkaartor.pro && \
 		${MAKE} qmake
 
+.include "../../archivers/quazip/buildlink3.mk"
 .include "../../devel/boost-headers/buildlink3.mk"
 .include "../../geography/gdal-lib/buildlink3.mk"
 .include "../../geography/gpsd/buildlink3.mk"
@@ -39,8 +37,16 @@ do-configure:
 .include "../../graphics/tiff/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"
 .include "../../textproc/libxslt/buildlink3.mk"
-.include "../../x11/qt4-libs/buildlink3.mk"
-.include "../../x11/qt4-tools/buildlink3.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
+.include "../../x11/qt5-qttools/buildlink3.mk"
+.include "../../x11/qt5-qtxmlpatterns/buildlink3.mk"
+.include "../../x11/qt5-qtsvg/buildlink3.mk"
+.include "../../x11/qt5-qtimageformats/buildlink3.mk"
+.include "../../x11/qt5-qtwebkit/buildlink3.mk"
+.include "../../x11/qt5-qtconnectivity/buildlink3.mk"
+.include "../../x11/qt5-qtquickcontrols/buildlink3.mk"
+.include "../../x11/qt5-qtdeclarative/buildlink3.mk"
+.include "../../x11/qt5-qtserialport/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

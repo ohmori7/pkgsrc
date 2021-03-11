@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.2 2018/05/12 03:27:18 markd Exp $
+# $NetBSD: Makefile,v 1.4 2019/12/06 19:30:10 markd Exp $
 
 DISTNAME=	lato.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-3.0
-TEXLIVE_REV=	45576
+PKGNAME=	tex-${DISTNAME:S/./-/}-3.3
+TEXLIVE_REV=	51462
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/lato
+HOMEPAGE=	https://ctan.org/pkg/lato
 COMMENT=	Documentation for tex-lato
-LICENSE=	lppl-1.3c
+LICENSE=	ofl-v1.1 AND lppl-1.3c
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.25 2018/02/13 12:50:40 ryoon Exp $
+# $NetBSD: Makefile,v 1.27 2020/03/12 20:50:30 rillig Exp $
 
 .include "../../archivers/libarchive/Makefile.common"
 .include "../../mk/bsd.prefs.mk"
@@ -8,7 +8,7 @@ COMMENT=	Fast multi-format tape archiver
 
 # Explicitly do not depend on libtool as this can be used
 # as bootstrap dependency.
-#USE_LIBTOOL=	yes
+#USE_LIBTOOL=		yes
 CONFIGURE_ARGS+=	--enable-bsdtar=static
 CONFIGURE_ARGS+=	--disable-bsdcpio
 CONFIGURE_ARGS+=	--disable-shared
@@ -24,17 +24,17 @@ CHECK_BUILTIN.openssl:=	yes
 CHECK_BUILTIN.openssl:=	no
 
 .if empty(USE_BUILTIN.bzip2:M[yY][eE][sS])
-CPPFLAGS+=	-I${WRKDIR}/bzip2
-LDFLAGS+=	-L${WRKDIR}/bzip2
+CPPFLAGS+=		-I${WRKDIR}/bzip2
+LDFLAGS+=		-L${WRKDIR}/bzip2
 .endif
 .if empty(USE_BUILTIN.zlib:M[yY][eE][sS])
-CPPFLAGS+=	-I${WRKDIR}/zlib
-LDFLAGS+=	-L${WRKDIR}/zlib
+CPPFLAGS+=		-I${WRKDIR}/zlib
+LDFLAGS+=		-L${WRKDIR}/zlib
 .endif
 .if empty(USE_BUILTIN.openssl:M[yY][eE][sS])
 CONFIGURE_ARGS+=	--without-openssl
 .else
-LDFLAGS+=	-lcrypto
+LDFLAGS+=		-lcrypto
 .endif
 .if empty(USE_BUILTIN.xz:M[yY][eE][sS])
 CONFIGURE_ARGS+=	--without-lzma
@@ -45,6 +45,9 @@ FILESDIR.libarchive?=	${.CURDIR}/../../archivers/libarchive/files
 FILESDIR.zlib?=		${.CURDIR}/../../devel/zlib/files
 
 INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
+
+CHECK_PERMS=		no # avoid circular dependency
+CHECK_PORTABILITY=	no # avoid circular dependency
 
 .include "../../mk/bsd.prefs.mk"
 .if ${OS_VARIANT} == "SCOOSR5"

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.19 2019/04/28 15:22:24 rillig Exp $
+# $NetBSD: Makefile,v 1.21 2020/06/20 05:31:10 rillig Exp $
 
 WEB_PREFIX?=		${.CURDIR}/../htdocs
 DBX_XML_CATALOG?=	${SGML_PREFIX}/docbook/4.5/catalog.xml
@@ -15,7 +15,6 @@ SRCS+=	bulk.xml
 SRCS+=	creating.xml
 SRCS+=	components.xml
 SRCS+=	configuring.xml
-SRCS+=	debug.xml
 SRCS+=	devfaq.xml
 SRCS+=	editing.xml
 SRCS+=	examples.xml
@@ -59,5 +58,6 @@ all:	# doing this as depends doesn't work
 
 netbsd.pdf: pdf
 netbsd.txt: ascii
+netbsd.epub: epub
 
 .include "${WEB_PREFIX}/share/mk/doc.docbook.mk"

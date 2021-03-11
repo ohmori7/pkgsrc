@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.16 2018/08/22 09:43:07 wiz Exp $
+# $NetBSD: Makefile,v 1.19 2020/08/31 18:06:49 wiz Exp $
 
 DISTNAME=	MIME-Base32-1.303
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	converters perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MIME/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/MIME-Base32/
+HOMEPAGE=	https://metacpan.org/release/MIME-Base32
 COMMENT=	Perl5 module for Base32 encoding
 LICENSE=	${PERL5_LICENSE}
 

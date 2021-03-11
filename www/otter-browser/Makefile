@@ -1,17 +1,20 @@
-# $NetBSD: Makefile,v 1.29 2019/05/16 23:22:14 gutteridge Exp $
+# $NetBSD: Makefile,v 1.43 2021/02/07 06:30:40 ryoon Exp $
 
-DISTNAME=	otter-browser-1.0.01
+DISTNAME=	otter-browser-1.0.02
+PKGREVISION=	1
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=OtterBrowser/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://otter-browser.org/
+HOMEPAGE=	https://otter-browser.org/
 COMMENT=	Project aiming to recreate classic Opera (12.x) UI using Qt5
 LICENSE=	gnu-gpl-v3
 
 USE_CMAKE=	yes
 USE_LANGUAGES=	c c++
+
+CMAKE_ARGS+=	-DENABLE_QTWEBENGINE=OFF
 
 NOT_PAX_MPROTECT_SAFE+=	bin/otter-browser
 
@@ -26,7 +29,6 @@ SUBST_SED.fix-paths=		-e 's,"/usr/local,"${PREFIX},g'
 .include "../../textproc/hunspell/buildlink3.mk"
 .include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../x11/qt5-qtmultimedia/buildlink3.mk"
-.include "../../x11/qt5-qtscript/buildlink3.mk"
 .include "../../x11/qt5-qtwebkit/buildlink3.mk"
 .include "../../x11/qt5-qtsvg/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

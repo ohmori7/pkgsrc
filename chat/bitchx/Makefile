@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.60 2019/05/23 19:22:56 rillig Exp $
+# $NetBSD: Makefile,v 1.63 2020/04/23 19:49:27 rillig Exp $
 
 DISTNAME=	bitchx-1.2.1
-PKGREVISION=	1
+PKGREVISION=	4
 CATEGORIES=	chat
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=bitchx/}
 
@@ -22,7 +22,12 @@ CFLAGS.Darwin+=	-DBIND_8_COMPAT
 SUBST_CLASSES+=		manpage
 SUBST_STAGE.manpage=	pre-configure
 SUBST_FILES.manpage+=	doc/BitchX.1
-SUBST_VARS.manpage=	PREFIX
+SUBST_SED.manpage=	-e 's,/usr/local,${PREFIX},g'
+
+SUBST_CLASSES+=		ssl
+SUBST_STAGE.ssl=	pre-configure
+SUBST_FILES.ssl+=	configure
+SUBST_SED.ssl=		-e 's|SSLeay|ERR_get_error|'
 
 .include "../../archivers/bzip2/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"

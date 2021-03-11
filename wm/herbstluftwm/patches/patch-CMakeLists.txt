@@ -1,0 +1,15 @@
+$NetBSD: patch-CMakeLists.txt,v 1.2 2020/05/17 14:56:42 nia Exp $
+
+Set the correct MANDIR.
+
+--- CMakeLists.txt.orig	2020-05-04 17:24:08.000000000 +0000
++++ CMakeLists.txt
+@@ -26,7 +26,7 @@ set(CMAKE_INSTALL_SYSCONF_PREFIX "/etc" 
+ set(CONFIGDIR "${CMAKE_INSTALL_SYSCONF_PREFIX}/xdg/herbstluftwm")
+ set(BINDIR bin)
+ set(DATADIR share)
+-set(MANDIR ${DATADIR}/man)
++set(MANDIR ${DESTDIR}${CMAKE_INSTALL_MANDIR})
+ set(DOCDIR ${DATADIR}/doc/herbstluftwm)
+ set(LICENSEDIR ${DOCDIR}
+     CACHE PATH "Install path for license file")

@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.27 2019/04/25 21:17:14 markd Exp $
+# $NetBSD: Makefile,v 1.42 2021/02/07 06:30:41 ryoon Exp $
 
 DISTNAME=	kdesignerplugin-${KF5VER}
+PKGREVISION=	6
 CATEGORIES=	x11
 
 HOMEPAGE=	https://community.kde.org/Frameworks
@@ -8,6 +9,7 @@ COMMENT=	Integration of Frameworks widgets in Qt Designer/Creator
 LICENSE=	gnu-lgpl-v2.1
 
 .include "../../meta-pkgs/kde/kf5.mk"
+MASTER_SITES=	${MASTER_SITE_KDE:=frameworks/${KF5VER:R}/portingAids/}
 
 BUILD_DEPENDS+=	kdoctools>=${KF5VER}:../../devel/kdoctools
 

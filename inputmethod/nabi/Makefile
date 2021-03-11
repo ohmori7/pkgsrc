@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.58 2018/11/14 22:21:52 kleink Exp $
+# $NetBSD: Makefile,v 1.63 2020/08/17 20:19:17 leot Exp $
 #
 
 DISTNAME=		nabi-0.99.9
-PKGREVISION=		21
+PKGREVISION=		25
 CATEGORIES=		korean inputmethod
 MASTER_SITES=		http://kldp.net/frs/download.php/5926/
 
 MAINTAINER=		minskim@NetBSD.org
-HOMEPAGE=		http://kldp.net/projects/nabi/
+HOMEPAGE=		https://kldp.net/projects/nabi/
 COMMENT=		X Input Method for Korean
 LICENSE=		gnu-gpl-v2 # or later
 

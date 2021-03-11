@@ -1,16 +1,23 @@
-$NetBSD: patch-src_egl_drivers_dri2_platform__drm.c,v 1.2 2016/01/05 13:02:57 tnn Exp $
+$NetBSD: patch-src_egl_drivers_dri2_platform__drm.c,v 1.5 2020/01/21 14:41:26 nia Exp $
 
-netbsd-5 build fix
+Revert: https://cgit.freedesktop.org/mesa/mesa/commit/?id=621b0fa8922ade0a8122b868177308e65e6d3595
 
---- src/egl/drivers/dri2/platform_drm.c.orig	2015-12-09 16:10:13.000000000 +0000
+This causes symbol referencing errors:
+"ld: /usr/pkg/lib/libEGL.so.1: undefined reference to `gbm_format_get_name'"
+
+TODO: Talk to upstream and investigate why.
+
+--- src/egl/drivers/dri2/platform_drm.c.orig	2019-12-04 22:10:12.000000000 +0000
 +++ src/egl/drivers/dri2/platform_drm.c
-@@ -626,7 +626,9 @@ dri2_initialize_drm(_EGLDriver *drv, _EG
-       if (gbm == NULL)
-          goto cleanup;
-    } else {
-+#ifdef F_DUPFD_CLOEXEC
-       fd = fcntl(gbm_device_get_fd(gbm), F_DUPFD_CLOEXEC, 3);
-+#endif
-       if (fd < 0)
-          goto cleanup;
+@@ -649,9 +649,8 @@ drm_add_configs_for_visuals(_EGLDriver *
+ 
+    for (unsigned i = 0; i < ARRAY_SIZE(format_count); i++) {
+       if (!format_count[i]) {
+-         struct gbm_format_name_desc desc;
+-         _eglLog(_EGL_DEBUG, "No DRI config supports native format %s",
+-                 gbm_format_get_name(visuals[i].gbm_format, &desc));
++         _eglLog(_EGL_DEBUG, "No DRI config supports native format 0x%x",
++                 visuals[i].gbm_format);
+       }
     }
+ 

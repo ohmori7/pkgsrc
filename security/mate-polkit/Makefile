@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.16 2019/04/25 07:33:16 maya Exp $
+# $NetBSD: Makefile,v 1.24 2020/12/04 04:56:12 riastradh Exp $
 
-PKGREVISION= 1
+PKGREVISION= 3
 .include "../../meta-pkgs/mate/Makefile.common"
 
-DISTNAME=	mate-polkit-${VERSION}
+DISTNAME=	mate-polkit-${VERSION:R}.0
 CATEGORIES=	security
 
 COMMENT=	MATE desktop environment Authentication Agent for PolicyKit

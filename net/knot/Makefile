@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.45 2019/06/13 23:47:05 ryoon Exp $
+# $NetBSD: Makefile,v 1.61 2021/02/27 18:55:31 ryoon Exp $
 
-DISTNAME=	knot-2.8.2
+DISTNAME=	knot-3.0.4
 CATEGORIES=	net
 MASTER_SITES=	https://secure.nic.cz/files/knot-dns/
 EXTRACT_SUFX=	.tar.xz
@@ -26,13 +26,11 @@ CONFIGURE_ARGS.NetBSD+=	--enable-recvmmsg=no
 .include "../../mk/bsd.prefs.mk"
 
 .if ${MACHINE_ARCH} == "i386" 
-CFLAGS += -march=i586 
+CFLAGS +=	-march=i586 
 .endif 
 
 USE_LIBTOOL=	yes
 USE_TOOLS+=	bison flex gmake pkg-config
-
-REPLACE_PYTHON=		src/utils/pykeymgr/pykeymgr.in
 
 .include "../../lang/python/extension.mk"
 .include "../../lang/python/application.mk"
@@ -60,6 +58,7 @@ CONF_FILES+=	${EGDIR}/example.com.zone \
 INSTALLATION_DIRS=	${EGDIR}
 OWN_DIRS+=		${VARBASE}/knot
 
+.include "../../databases/lmdb/buildlink3.mk"
 .include "../../devel/userspace-rcu/buildlink3.mk"
 .include "../../security/gnutls/buildlink3.mk"
 .include "../../textproc/jansson/buildlink3.mk"

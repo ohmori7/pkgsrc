@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.210 2019/05/25 12:36:59 kamil Exp $
+# $NetBSD: Makefile,v 1.266 2021/03/06 21:50:34 leot Exp $
 
-DISTNAME=	qemu-4.0.0
-PKGREVISION=	5
+DISTNAME=	qemu-5.2.0
+PKGREVISION=	2
 CATEGORIES=	emulators
 MASTER_SITES=	https://download.qemu.org/
 EXTRACT_SUFX=	.tar.xz
@@ -11,32 +11,34 @@ HOMEPAGE=	http://www.qemu-project.org/
 COMMENT=	CPU emulator using dynamic translation
 LICENSE=	gnu-gpl-v2 AND gnu-lgpl-v2.1 AND mit AND modified-bsd
 
+BUILD_DEPENDS+=	ninja-build-[0-9]*:../../devel/ninja-build
+
 USE_CURSES=		resize_term wide
 USE_LANGUAGES+=		c c++
 USE_TOOLS+=		bison flex gmake makeinfo perl:build pod2man pkg-config
-FAKE_NCURSES=		yes
 UNLIMIT_RESOURCES=	datasize
 HAS_CONFIGURE=		yes
 
-TOOL_DEPENDS+=		${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
+GMAKE_REQD=		4.1 # needed for docs
 
-SUBST_CLASSES+=			prefix
-SUBST_STAGE.prefix=		pre-configure
-SUBST_MESSAGE.prefix=		Setting PREFIX
-SUBST_FILES.prefix+=		configure
-SUBST_VARS.prefix+=		PREFIX
+PYTHON_VERSIONED_DEPENDENCIES=	sphinx:tool
 
 SUBST_CLASSES+=			sphinx-build
 SUBST_STAGE.sphinx-build=	pre-configure
 SUBST_MESSAGE.sphinx-build=	Fix hardcoded sphinx-build
-SUBST_FILES.sphinx-build+=	Makefile configure
+SUBST_FILES.sphinx-build+=	configure
+SUBST_FILES.sphinx-build+=	docs/meson.build
 SUBST_FILES.sphinx-build+=	roms/skiboot/doc/Makefile
 SUBST_FILES.sphinx-build+=	roms/u-boot/Documentation/Makefile
-SUBST_SED.sphinx-build+=	-e 's/sphinx-build/sphinx-build${PYVERSSUFFIX}/g'
+SUBST_SED.sphinx-build+=	-e 's/sphinx-build/sphinx-build-${PYVERSSUFFIX}/g'
 
 .include "options.mk"
 
 .include "../../mk/bsd.prefs.mk"
+
+DISTFILES=		${DEFAULT_DISTFILES}
+DISTFILES+=		palcode-clipper
+SITES.palcode-clipper=	http://ftp.NetBSD.org/pub/NetBSD/arch/alpha/qemu/
 
 CONFIGURE_ARGS+=	--prefix=${PREFIX}
 CONFIGURE_ARGS+=	--interp-prefix=${PREFIX}/share/qemu
@@ -47,7 +49,6 @@ CONFIGURE_ARGS+=	--mandir=${PREFIX}/${PKGMANDIR}
 CONFIGURE_ARGS+=	--enable-curses
 CONFIGURE_ARGS+=	--enable-docs
 CONFIGURE_ARGS+=	--enable-jemalloc
-CONFIGURE_ARGS+=	--disable-opengl
 CONFIGURE_ENV+=		mansuffix=/${PKGMANDIR}
 
 .if defined(PKGSRC_USE_SSP)
@@ -62,7 +63,6 @@ NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-arm
 NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-cris
 NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-hppa
 NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-i386
-NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-lm32
 NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-m68k
 NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-microblaze
 NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-microblazeel
@@ -83,14 +83,11 @@ NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-sh4eb
 NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-sparc
 NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-sparc64
 NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-tricore
-NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-unicore32
 NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-x86_64
 NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-xtensa
 NOT_PAX_MPROTECT_SAFE+=	bin/qemu-system-xtensaeb
 
 PKG_SYSCONFSUBDIR=	qemu
-
-REPLACE_PERL+=		scripts/texi2pod.pl
 
 INSTALLATION_DIRS=	${PKGMANDIR}/man1 share/doc/qemu
 
@@ -108,39 +105,68 @@ UE_ARCHS+=		tilegx
 UE_ARCHS+=		x86_64 xtensa xtensaeb
 
 .if ${OPSYS} == "NetBSD"
-USER_EMUL=		i386 x86_64 sparc sparc64
-PLIST.nbd=		yes
+PLIST.nbd=			yes
+.  if !exists(/usr/include/machine/trap.h)
+CONFIGURE_ARGS+=		--disable-bsd-user
+.  else
+USER_EMUL=			i386 x86_64 sparc sparc64
+.  endif
 .elif !empty(OPSYS:M*BSD) || ${OPSYS} == "DragonFly"
-USER_EMUL=		i386 x86_64 sparc sparc64
-PLIST.nbd=		yes
+USER_EMUL=			i386 x86_64 sparc sparc64
+PLIST.nbd=			yes
 .elif ${OPSYS} == "Darwin"
 USER_EMUL=
-CONFIGURE_ARGS+=	--disable-bsd-user
-PLIST.nbd=		yes
+CONFIGURE_ARGS+=		--disable-bsd-user
+PLIST.nbd=			yes
 .elif ${OPSYS} == "Linux"
-USER_EMUL=		${UE_ARCHS}
-PLIST.bridge-helper=	yes
-PLIST.nbd=		yes
-PLIST.ivshmem=		yes
-PLIST.pr-helper=	yes
+USER_EMUL=			${UE_ARCHS}
+PLIST.bridge-helper=		yes
+PLIST.nbd=			yes
+PLIST.ivshmem=			yes
+PLIST.pr-helper=		yes
 .elif !empty(MACHINE_PLATFORM:MSunOS-5.11-*)
-PLIST.nbd=		yes
-CONFIGURE_ARGS+=	--disable-coroutine-pool
+PLIST.ivshmem=			yes
+PLIST.nbd=			yes
+CONFIGURE_ARGS+=		--disable-coroutine-pool
 .endif
 
-PLIST_VARS+=		${UE_ARCHS} bridge-helper ivshmem nbd pr-helper
+PLIST_VARS+=		${UE_ARCHS} bridge-helper ivshmem keymap nbd pr-helper
 .for pvar in ${USER_EMUL}
 PLIST.${pvar}=		yes
 .endfor
 
+# different versions of Sphinx generate different static files
+PLIST_SRC=	PLIST ${WRKDIR}/PLIST.STATIC
+
 TEST_TARGET=		check
+
+post-extract:
+	cp ${WRKDIR}/palcode-clipper ${WRKSRC}/pc-bios/palcode-clipper
+	cp ${FILESDIR}/hw-mips-mipssim_virtio.c ${WRKSRC}/hw/mips/mipssim_virtio.c
+
+do-build:
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+		ninja -j ${_MAKE_JOBS_N:U1} -C build
+
+do-install:
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${INSTALL_ENV} \
+		ninja -j ${_MAKE_JOBS_N:U1} -C build install
+
+# Some dependencies aren't correct and this tries to be re-made on install,
+# failing due to configure bugs.
+post-build:
+	${TOUCH} ${WRKSRC}/config-host.mak
 
 post-install:
 	${INSTALL_DATA} ${FILESDIR}/Makefile.multinode-NetBSD \
 		${DESTDIR}${PREFIX}/share/doc/qemu/
-	${RM} ${DESTDIR}${PREFIX}/share/doc/qemu/interop/.buildinfo
+	${RM} -f ${DESTDIR}${PREFIX}/share/doc/qemu/interop/.buildinfo
+	${RM} -f ${DESTDIR}${PREFIX}/share/doc/qemu/specs/.buildinfo
+	${RM} -f ${WRKDIR}/PLIST.STATIC
+	cd ${DESTDIR}${PREFIX} && \
+	${FIND} share/doc/qemu -path '*/_static/*' -type f -print > ${WRKDIR}/PLIST.STATIC
 
-# On Darwin, qemu uses Cocoa and CoreAudio
+# On Darwin, qemu uses CoreAudio
 .if ${OPSYS} != "Darwin"
 .include "../../mk/oss.buildlink3.mk"
 .endif
@@ -152,6 +178,7 @@ post-install:
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../lang/python/extension.mk"
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../security/libgcrypt/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
 .include "../../x11/pixman/buildlink3.mk"

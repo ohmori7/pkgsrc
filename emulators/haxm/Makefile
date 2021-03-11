@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.13 2019/05/24 10:59:14 kamil Exp $
+# $NetBSD: Makefile,v 1.17 2021/02/05 16:18:51 kamil Exp $
 
-DISTNAME=	haxm-7.5.1
+DISTNAME=	haxm-7.5.6
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_GITHUB:=intel/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -31,9 +31,7 @@ PKG_FAIL_REASON+=	"BSDSRCDIR/sys specifies non-existing directory ${BSDSRCDIR}/s
 
 .include "../../mk/compiler.mk"
 
-.if !empty(PKGSRC_COMPILER:Mclang)
 CFLAGS+=	-Wno-error=address-of-packed-member
-.endif
 
 KMOD=		haxm.kmod
 KMODULEDIR=	stand/${MACHINE}/${OS_VERSION}/modules/haxm

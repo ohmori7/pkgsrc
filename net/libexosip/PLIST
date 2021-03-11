@@ -1,10 +1,10 @@
-@comment $NetBSD: PLIST,v 1.1 2013/07/16 02:12:26 rodent Exp $
+@comment $NetBSD: PLIST,v 1.3 2020/12/06 23:40:21 schwarz Exp $
+bin/sip_monitor
 bin/sip_reg
 include/eXosip2/eX_call.h
 include/eXosip2/eX_message.h
 include/eXosip2/eX_options.h
 include/eXosip2/eX_publish.h
-include/eXosip2/eX_refer.h
 include/eXosip2/eX_register.h
 include/eXosip2/eX_setup.h
 include/eXosip2/eX_subscribe.h

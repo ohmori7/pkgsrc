@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.13 2019/05/27 15:18:29 bsiegert Exp $
+# $NetBSD: Makefile,v 1.30 2021/01/23 14:23:08 bsiegert Exp $
 
 DISTNAME=	obfs4proxy-0.0.8
-PKGREVISION=	4
+PKGREVISION=	20
 CATEGORIES=	net security
 MASTER_SITES=	https://people.torproject.org/~yawning/releases/obfs4proxy/
 EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=	alnsn@NetBSD.org
+MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://people.torproject.org/~yawning/releases/obfs4proxy/
 COMMENT=	Look-like nothing obfuscation protocol
 LICENSE=	modified-bsd

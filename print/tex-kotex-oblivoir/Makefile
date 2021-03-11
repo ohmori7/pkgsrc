@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.5 2017/06/21 08:28:41 markd Exp $
+# $NetBSD: Makefile,v 1.8 2020/05/03 11:57:31 markd Exp $
 
 DISTNAME=	kotex-oblivoir
-PKGNAME=	tex-${DISTNAME}-2.1.8
-TEXLIVE_REV=	43130
+PKGNAME=	tex-${DISTNAME}-2.2.1
+TEXLIVE_REV=	54519
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/kotex-oblivoir
+HOMEPAGE=	https://ctan.org/pkg/kotex-oblivoir
 COMMENT=	LaTeX document class for typesetting Korean documents
 LICENSE=	lppl-1.3c
 

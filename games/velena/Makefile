@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2015/01/04 03:07:51 dholland Exp $
+# $NetBSD: Makefile,v 1.17 2020/04/25 21:49:38 rillig Exp $
 #
 
 DISTNAME=	veleng10
@@ -33,7 +33,7 @@ SUBST_SED.path=		-e 's,"white_ob.cn4","${PREFIX}/share/velena/white_ob.cn4",'
 
 SUBST_CLASSES+=		ansi-c
 SUBST_STAGE.ansi-c=	pre-configure
-SUBST_FILES.ansi-c=	*.c *.h
+SUBST_FILES.ansi-c=	*.c
 SUBST_SED.ansi-c=	-e 's,<malloc\.h>,<stdlib.h>,'
 
 SUBST_CLASSES+=		cflags
@@ -49,10 +49,10 @@ SUBST_SED.cflags=	-e s,^CFLAGS.*,,
 # Try for example "c170", which works with -m32 and fails without.
 #
 .for P in ${LP64PLATFORMS}
-.if ${MACHINE_PLATFORM:M${P}}
+.  if ${MACHINE_PLATFORM:M${P}}
 CFLAGS+=		-m32
 LDFLAGS+=		-m32
-.endif
+.  endif
 .endfor
 
 do-install:

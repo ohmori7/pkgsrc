@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:44:39 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:08:52 wiz Exp $
 
 DISTNAME=	Sub-Exporter-GlobExporter-0.005
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Sub/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Sub-Exporter-GlobExporter/
+HOMEPAGE=	https://metacpan.org/release/Sub-Exporter-GlobExporter
 COMMENT=	Perl 5 module to export shared globs with Sub::Exporter collectors
 LICENSE=	${PERL5_LICENSE}
 

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.10 2018/08/22 09:46:16 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2020/08/31 18:11:05 wiz Exp $
 
 DISTNAME=	pkfix
 PKGNAME=	tex-${DISTNAME}-1.7
-PKGREVISION=	3
+PKGREVISION=	5
 TEXLIVE_REV=	26032
 
 MAINTAINER=	minskim@NetBSD.org
@@ -29,6 +29,7 @@ INSTALLATION_DIRS+=	bin
 
 TEX_TEXMF_DIRS=	none
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 
 post-extract:

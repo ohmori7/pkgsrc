@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.9 2018/08/22 09:47:35 wiz Exp $
+# $NetBSD: Makefile,v 1.12 2020/08/31 18:12:47 wiz Exp $
 
 DISTNAME=	CatalystX-CRUD-Controller-REST-0.005
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=CatalystX/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/CatalystX-CRUD-Controller-REST/
+HOMEPAGE=	https://metacpan.org/release/CatalystX-CRUD-Controller-REST
 COMMENT=	Catalyst::Controller::REST with CRUD
 LICENSE=	${PERL5_LICENSE}
 

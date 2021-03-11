@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.96 2019/04/25 07:32:42 maya Exp $
+# $NetBSD: Makefile,v 1.103 2020/12/04 20:45:05 nia Exp $
 
-PKGREVISION= 2
+PKGREVISION= 8
 .include "../../devel/GConf/Makefile.common"
 
 CONFIGURE_ARGS+=	--disable-gtk
@@ -15,7 +15,7 @@ OWN_DIRS+=	${PKG_SYSCONFDIR}/gconf.xml.system
 EGDIR=		${PREFIX}/share/examples/GConf
 CONF_FILES=	${EGDIR}/path ${PKG_SYSCONFDIR}/2/path
 
-REPLACE_PYTHON=	gsettings/gsettings-schema-convert
+REPLACE_PYTHON=		gsettings/gsettings-schema-convert
 INSTALLATION_DIRS=	share/gconf/schemas
 
 BUILDLINK_ABI_DEPENDS.dbus-glib+=	dbus-glib>=0.74

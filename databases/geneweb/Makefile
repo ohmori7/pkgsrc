@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.53 2018/11/12 16:10:17 jaapb Exp $
+# $NetBSD: Makefile,v 1.55 2021/03/08 08:12:46 jaapb Exp $
 #
 
 DISTNAME=	geneweb-5.01
-PKGREVISION=	17
+PKGREVISION=	18
 CATEGORIES=	databases
 EXTRACT_SUFX=	.tgz
 MASTER_SITES=	ftp://ftp.inria.fr/INRIA/Projects/cristal/geneweb/Src/
@@ -37,7 +37,7 @@ CONFLICTS+=	coreutils-[0-9]*
 # Stripped OCAML binaries don't seem to work any more.
 # Installing unstripped binaries until this is fixed.
 # (not checked in 5.01)
-INSTALL_PROGRAM= ${INSTALL} ${COPY} -o ${BINOWN} -g ${BINGRP} -m ${BINMODE}
+INSTALL_PROGRAM=	${INSTALL} ${COPY} -o ${BINOWN} -g ${BINGRP} -m ${BINMODE}
 
 INSTALLATION_DIRS=	bin libexec sbin share/examples/geneweb \
 			share/doc/geneweb share/geneweb/etc \

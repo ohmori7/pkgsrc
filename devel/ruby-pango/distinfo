@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.4 2020/05/02 18:05:04 tsutsui Exp $
+
+SHA1 (pango-3.4.2.gem) = 4cf05a4889ccc1c553207e72b5e40d626cd526b8
+RMD160 (pango-3.4.2.gem) = 0a447a7581cc23bb46bccb2ff10eb65c95403c8f
+SHA512 (pango-3.4.2.gem) = 2a8c7ad80895f3919bdd6536d7421183594ac6fd7cdcbdc83d1d7e69509b0ea29c16d34f1947c25de000994a89135a0844ee2078b6bc645fa392c4582909b00d
+Size (pango-3.4.2.gem) = 28160 bytes

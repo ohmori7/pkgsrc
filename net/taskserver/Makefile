@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.2 2018/09/06 10:55:42 triaxx Exp $
+# $NetBSD: Makefile,v 1.6 2020/05/22 10:56:31 adam Exp $
 
 DISTNAME=	taskd-1.1.0
 PKGNAME=	${DISTNAME:S/taskd/taskserver/}
-PKGREVISION=	2
+PKGREVISION=	5
 CATEGORIES=	net
 MASTER_SITES=	https://taskwarrior.org/download/
 
@@ -42,7 +42,7 @@ INSTALLATION_DIRS+=	${EGDIR}/pki
 
 BUILD_DEFS+=	TASKD_USER TASKD_GROUP TASKD_DATA VARBASE
 
-REPLACE_SH=	src/taskdctl
+REPLACE_SH=		src/taskdctl
 SUBST_CLASSES+=		abspath
 SUBST_STAGE.abspath=	post-configure
 SUBST_MESSAGE.abspath=	Set absolute paths.

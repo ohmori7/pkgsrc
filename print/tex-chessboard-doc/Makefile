@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2015/05/06 08:43:30 wiz Exp $
+# $NetBSD: Makefile,v 1.4 2021/02/14 21:55:12 markd Exp $
 
 DISTNAME=	chessboard.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-1.7
-TEXLIVE_REV=	33801
+PKGNAME=	tex-${DISTNAME:S/./-/}-1.9
+TEXLIVE_REV=	56833
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/chessboard
+HOMEPAGE=	https://ctan.org/pkg/chessboard
 COMMENT=	Documentation for tex-chessboard
 LICENSE=	lppl-1.3c
 

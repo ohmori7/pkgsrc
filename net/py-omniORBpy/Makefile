@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2019/04/26 13:14:10 maya Exp $
+# $NetBSD: Makefile,v 1.19 2020/03/20 11:58:10 nia Exp $
 
 DISTNAME=	omniORBpy-3.5
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
@@ -17,8 +17,8 @@ USE_TOOLS+=	gmake
 USE_LANGUAGES+=	c c++
 MAKE_FILE=	GNUmakefile
 
-PYTHON_SELF_CONFLICT=	yes
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # omniORB
+PYTHON_SELF_CONFLICT=		yes
+PYTHON_VERSIONS_ACCEPTED=	27 # omniORB
 
 .include "../../lang/python/application.mk"
 .include "../../net/omniORB/buildlink3.mk"

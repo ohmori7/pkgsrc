@@ -2,49 +2,46 @@ package pkglint
 
 import (
 	"netbsd.org/pkglint/regex"
-	"path"
 )
 
-type Lines = *LinesImpl
-
-type LinesImpl struct {
-	FileName string
-	BaseName string
-	Lines    []Line
+type Lines struct {
+	Filename CurrPath
+	BaseName RelPath
+	Lines    []*Line
 }
 
-func NewLines(filename string, lines []Line) Lines {
-	return &LinesImpl{filename, path.Base(filename), lines}
+func NewLines(filename CurrPath, lines []*Line) *Lines {
+	return &Lines{filename, filename.Base(), lines}
 }
 
-func (ls *LinesImpl) Len() int { return len(ls.Lines) }
+func (ls *Lines) Len() int { return len(ls.Lines) }
 
-func (ls *LinesImpl) LastLine() Line { return ls.Lines[ls.Len()-1] }
+func (ls *Lines) LastLine() *Line { return ls.Lines[ls.Len()-1] }
 
-func (ls *LinesImpl) EOFLine() Line { return NewLineMulti(ls.FileName, -1, -1, "", nil) }
+func (ls *Lines) EOFLine() *Line { return NewLineMulti(ls.Filename, -1, "", nil) }
 
-func (ls *LinesImpl) Errorf(format string, args ...interface{}) {
-	NewLineWhole(ls.FileName).Errorf(format, args...)
-}
+// Whole returns a virtual line that can be used for issuing diagnostics
+// and explanations, but not for text replacements.
+func (ls *Lines) Whole() *Line { return NewLineWhole(ls.Filename) }
 
-func (ls *LinesImpl) Warnf(format string, args ...interface{}) {
-	NewLineWhole(ls.FileName).Warnf(format, args...)
-}
-
-func (ls *LinesImpl) SaveAutofixChanges() bool {
+func (ls *Lines) SaveAutofixChanges() bool {
 	return SaveAutofixChanges(ls)
 }
 
-// CheckRcsID returns true if the expected RCS Id was found.
-func (ls *LinesImpl) CheckRcsID(index int, prefixRe regex.Pattern, suggestedPrefix string) bool {
+// CheckCvsID returns true if the expected CVS Id was found.
+func (ls *Lines) CheckCvsID(index int, prefixRe regex.Pattern, suggestedPrefix string) bool {
 	if trace.Tracing {
 		defer trace.Call(prefixRe, suggestedPrefix)()
 	}
 
 	line := ls.Lines[index]
-	if m, expanded := match1(line.Text, `^`+prefixRe+`\$`+`NetBSD(:[^\$]+)?\$$`); m {
+	if m, expanded := line.IsCvsID(prefixRe); m {
 
-		if G.Testing && G.Wip && expanded != "" {
+		// This check is considered experimental because it produces a few
+		// thousand notes and doesn't really affect the functionality of
+		// the packages. The worst thing that might happen is that a file
+		// looks older than it really is.
+		if G.Experimental && G.Wip && expanded {
 			fix := line.Autofix()
 			fix.Notef("Expected exactly %q.", suggestedPrefix+"$"+"NetBSD$")
 			fix.Explain(
@@ -61,7 +58,7 @@ func (ls *LinesImpl) CheckRcsID(index int, prefixRe regex.Pattern, suggestedPref
 				"",
 				"To preserve the history of the CVS Id, should that ever be needed,",
 				"remove the leading $.")
-			fix.ReplaceRegex(`.*`, suggestedPrefix+"$"+"NetBSD$", 1)
+			fix.Replace(line.Text, suggestedPrefix+"$"+"NetBSD$")
 			fix.Apply()
 		}
 
@@ -74,7 +71,7 @@ func (ls *LinesImpl) CheckRcsID(index int, prefixRe regex.Pattern, suggestedPref
 		"Most files in pkgsrc contain the CVS Id, so that their current",
 		"version can be traced back later from a binary package.",
 		"This is to ensure reproducible builds, for example for finding bugs.")
-	fix.InsertBefore(suggestedPrefix + "$" + "NetBSD$")
+	fix.InsertAbove(suggestedPrefix + "$" + "NetBSD$")
 	fix.Apply()
 
 	return false

@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.57 2019/04/26 14:12:40 maya Exp $
+# $NetBSD: Makefile,v 1.59 2020/01/26 17:31:23 rillig Exp $
 
 DISTNAME=	Imaging-1.1.7
 PKGNAME=	${PYPKGPREFIX}-imaging-1.1.7
@@ -7,7 +7,7 @@ CATEGORIES=	graphics python
 MASTER_SITES=	http://effbot.org/media/downloads/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.pythonware.com/products/pil/
+HOMEPAGE=	https://www.pythonware.com/products/pil/
 COMMENT=	PIL, the Python Imaging Library
 
 DIST_SUBDIR=	python
@@ -22,7 +22,7 @@ SUBST_SED.fix-path+=	-e 's,FREETYPE_ROOT = None,FREETYPE_ROOT = libinclude("${BU
 
 INSTALLATION_DIRS=	${PYINC}/PIL
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 1.1.7, use Pillow instead
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 1.1.7, use Pillow instead
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/libImaging/ImPlatform.h ${DESTDIR}${PREFIX}/${PYINC}/PIL

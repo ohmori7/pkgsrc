@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.54 2018/07/04 13:40:07 jperkin Exp $
+# $NetBSD: Makefile,v 1.57 2020/03/23 11:50:22 ryoon Exp $
 
 DISTNAME=	dar-2.4.13
 PKGREVISION=	1
@@ -35,7 +35,7 @@ REPLACE_BASH+=			doc/samples/*.bash doc/samples/*.sh doc/samples/*.duc
 ## Our threading check here is the same as the one used in devel/perl5.
 #
 CHECK_BUILTIN.pthread:=yes
-.  include "../../mk/pthread.builtin.mk"
+.include "../../mk/pthread.builtin.mk"
 CHECK_BUILTIN.pthread:=no
 
 ## XXX I'm following the USE_FEATURES semantics used in security/openssl.
@@ -93,8 +93,9 @@ CPPFLAGS.SunOS+=	-D__EXTENSIONS__
 
 .include "../../mk/bsd.fast.prefs.mk"
 
-## Build a static binary with threads is currently broken with glibc.
-.if ${OPSYS} == "Linux" && !empty(PKG_OPTIONS:Mthreads)
+# Building a static binary with threads is currently broken with glibc.
+# Building a static binary is not supported on macOS.
+.if (${OPSYS} == "Linux" && !empty(PKG_OPTIONS:Mthreads)) || ${OPSYS} == "Darwin"
 SUBST_CLASSES+=		static
 SUBST_STAGE.static=	pre-configure
 SUBST_MESSAGE.static=	Changing -all-static to -static
@@ -103,7 +104,7 @@ SUBST_SED.static=	-e 's,-all-static,-static,g'
 .endif
 
 .if ${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD"
-BUILDLINK_TRANSFORM=	l:execinfo:execinfo:elf
+BUILDLINK_TRANSFORM+=	l:execinfo:execinfo:elf
 .endif
 
 .include "../../archivers/bzip2/buildlink3.mk"

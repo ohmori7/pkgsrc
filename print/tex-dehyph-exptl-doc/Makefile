@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.7 2019/05/12 03:44:29 markd Exp $
+# $NetBSD: Makefile,v 1.10 2020/05/01 04:51:44 markd Exp $
 
 DISTNAME=	dehyph-exptl.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-0.6
-TEXLIVE_REV=	50772
+PKGNAME=	tex-${DISTNAME:S/./-/}-0.6.54512
+TEXLIVE_REV=	54512
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/dehyph-exptl
+HOMEPAGE=	https://ctan.org/pkg/dehyph-exptl
 COMMENT=	Documentation for tex-dehyph-exptl
 LICENSE=	mit AND lppl-1.3c
 

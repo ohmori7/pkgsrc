@@ -1,16 +1,22 @@
-# $NetBSD: Makefile,v 1.11 2014/01/25 10:30:31 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/12/19 16:56:34 prlw1 Exp $
 
-DISTNAME=	python-xlib-0.14
-PKGNAME=	${PYPKGPREFIX}-Xlib-0.14
+DISTNAME=	python-xlib-0.29
+PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/python-x/X/}
 CATEGORIES=	x11
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=python-xlib/}
+MASTER_SITES=	${MASTER_SITE_GITHUB:=python-xlib/}
+GITHUB_PROJECT=	python-xlib
+GITHUB_RELEASE=	${PKGVERSION_NOREV}
+EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	ccatrian@eml.cc
-HOMEPAGE=	http://python-xlib.sourceforge.net/
-COMMENT=	Functional X client library for Python
-LICENSE=	gnu-gpl-v2
+MAINTAINER=	prlw1@cam.ac.uk
+HOMEPAGE=	https://github.com/python-xlib/python-xlib/
+COMMENT=	XLib in pure Python
+LICENSE=	gnu-lgpl-v2.1
 
-EGG_NAME=	python_xlib-0.12
+USE_LANGUAGES=	# none
 
-.include "../../lang/python/distutils.mk"
+DEPENDS+=	${PYPKGPREFIX}-setuptools_scm-[0-9]*:../../devel/py-setuptools_scm
+DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
+
+.include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

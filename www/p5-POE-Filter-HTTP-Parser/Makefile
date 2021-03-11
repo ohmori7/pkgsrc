@@ -1,18 +1,18 @@
-# $NetBSD: Makefile,v 1.14 2018/08/22 09:47:49 wiz Exp $
+# $NetBSD: Makefile,v 1.18 2020/08/31 18:13:04 wiz Exp $
 
 DISTNAME=	POE-Filter-HTTP-Parser-1.08
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=POE/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/POE-Filter-HTTP-Parser/
+HOMEPAGE=	https://metacpan.org/release/POE-Filter-HTTP-Parser
 COMMENT=	HTTP POE filter for HTTP clients or servers
 LICENSE=	${PERL5_LICENSE}
 
 USE_LANGUAGES=	# empty
-PERL5_PACKLIST= auto/POE/Filter/HTTP/Parser/.packlist
+PERL5_PACKLIST=	auto/POE/Filter/HTTP/Parser/.packlist
 
 BUILD_DEPENDS+=	p5-Test-POE-Client-TCP>=0.1:../../devel/p5-Test-POE-Client-TCP
 BUILD_DEPENDS+=	p5-Test-POE-Server-TCP>=0.16:../../devel/p5-Test-POE-Server-TCP

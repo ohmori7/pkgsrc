@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.29 2019/04/03 00:33:17 ryoon Exp $
+# $NetBSD: buildlink3.mk,v 1.42 2021/02/02 12:00:13 ryoon Exp $
 
 BUILDLINK_TREE+=	qt5-qtbase
 
@@ -6,7 +6,7 @@ BUILDLINK_TREE+=	qt5-qtbase
 QT5_QTBASE_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.qt5-qtbase+=	qt5-qtbase>=5.9.1
-BUILDLINK_ABI_DEPENDS.qt5-qtbase+=	qt5-qtbase>=5.12.2nb2
+BUILDLINK_ABI_DEPENDS.qt5-qtbase+=	qt5-qtbase>=5.15.1nb1
 BUILDLINK_PKGSRCDIR.qt5-qtbase?=	../../x11/qt5-qtbase
 
 BUILDLINK_INCDIRS.qt5-qtbase+=	qt5/include
@@ -19,9 +19,17 @@ CMAKE_PREFIX_PATH+=	${QTDIR}
 CONFIGURE_ENV+=	QTDIR=${QTDIR}
 MAKE_ENV+=	QTDIR=${QTDIR}
 
+CONFIGURE_ENV+=	MOC="${QTDIR}/bin/moc"
+MAKE_ENV+=	MOC="${QTDIR}/bin/moc"
+
 PTHREAD_OPTS+=	require
 
-.include "../../mk/bsd.fast.prefs.mk"
+pkgbase := qt5-qtbase
+.include "../../mk/pkg-build-options.mk"
+
+.if ${PKG_BUILD_OPTIONS.qt5-qtbase:Mdbus}
+.include "../../sysutils/dbus/buildlink3.mk"
+.endif
 
 .include "../../converters/libiconv/buildlink3.mk"
 .include "../../databases/sqlite3/buildlink3.mk"
@@ -33,7 +41,6 @@ PTHREAD_OPTS+=	require
 .include "../../graphics/freetype2/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
-.include "../../sysutils/dbus/buildlink3.mk"
 .include "../../textproc/icu/buildlink3.mk"
 .include "../../www/libproxy/buildlink3.mk"
 .include "../../mk/jpeg.buildlink3.mk"

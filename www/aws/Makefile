@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.27 2019/04/25 07:33:26 maya Exp $
+# $NetBSD: Makefile,v 1.36 2020/05/22 10:56:44 adam Exp $
 
 DISTNAME=	aws-${AWS_VERSION}
-PKGREVISION=	13
+PKGREVISION=	17
 CATEGORIES=	www
 MASTER_SITES=	http://downloads.dragonlace.net/src/
 EXTRACT_SUFX=	.tar.bz2
@@ -11,9 +11,11 @@ HOMEPAGE=	http://libre.adacore.com/libre/tools/aws/
 COMMENT=	Adacore Ada Web Server and framework
 LICENSE=	gnu-gpl-v2
 
+BROKEN=		"sh: ../xoscons: not found"
+
 AWS_VERSION=		3.1.0.0
 USE_TOOLS+=		gmake makeinfo sed awk
-USE_LANGUAGES=  	c ada c++ fortran
+USE_LANGUAGES=		c ada c++ fortran
 
 # Note: c++ and fortran aren't used, but gprconfig probes for them.
 # When that happens, pkgsrc wrapper emits a warning message which causes
@@ -24,8 +26,8 @@ USE_LANGUAGES=  	c ada c++ fortran
 
 MY_MAKE_ENV+=		ADA_PROJECT_PATH=${PREFIX}/lib/gnat
 MY_MAKE_ENV+=		AWK=awk
-MY_MAKE_ENV+=		PATH=${PREFIX}/gcc5-aux/bin:${PATH}
-MY_CONF_ENV+=		PATH=${PREFIX}/gcc5-aux/bin:${PATH}
+MY_MAKE_ENV+=		PATH=${PREFIX}/gcc5-aux/bin:${PATH:Q}
+MY_CONF_ENV+=		PATH=${PREFIX}/gcc5-aux/bin:${PATH:Q}
 CONFIGURE_ARGS+=	LPATH=${BUILDLINK_PREFIX.openssl}/lib
 CONFIGURE_ARGS+=	ZPATH=${BUILDLINK_PREFIX.zlib}/lib
 
@@ -35,19 +37,18 @@ CONFIGURE_ARGS+=	ZPATH=${BUILDLINK_PREFIX.zlib}/lib
 #      it doesn't support the concept of DESTDIR.
 # "-Wl,-R" adds a second rpath string.
 # -Wl,-rpath is a better choice, but synonym -Wl,-R works on all BSD and SunOS
-SUBST_CLASSES+= 	rpath
+SUBST_CLASSES+=		rpath
 SUBST_STAGE.rpath=	pre-configure
 SUBST_MESSAGE.rpath=	Adjust rpaths of shared libraries
-SUBST_FILES.rpath=	src/src.gpr include/include.gpr \
-			demos/test_ldap/test_ldap.gpr tools/tools.gpr
-SUBST_SED.rpath=	-e "s,@ADDITIONAL_RPATH@,${ADDITIONAL_RPATH}," \
-			-e "s,@PREFIX@,${PREFIX},g" \
-			-e "s,@RFLAG@,${LINKER_RPATH_FLAG},g" \
-			-e "s,@SSL_RPATH@,${BUILDLINK_PREFIX.openssl}/lib,g"
+SUBST_FILES.rpath=	src/src.gpr include/include.gpr
+SUBST_FILES.rpath+=	demos/test_ldap/test_ldap.gpr tools/tools.gpr
+SUBST_VARS.rpath=	ADDITIONAL_RPATH PREFIX
+SUBST_SED.rpath+=	-e s,@RFLAG@,${LINKER_RPATH_FLAG},g
+SUBST_SED.rpath+=	-e "s,@SSL_RPATH@,${BUILDLINK_PREFIX.openssl}/lib,g"
 ADDITIONAL_RPATH=	${PREFIX}/lib:${PREFIX}/lib/aws/relocatable
 
-GENERATE_PLIST=  cd ${DESTDIR}${PREFIX};
-GENERATE_PLIST+= ${FIND} * -type f | ${SORT};
+GENERATE_PLIST=		cd ${DESTDIR}${PREFIX};
+GENERATE_PLIST+=	${FIND} * -type f | ${SORT};
 
 do-configure:
 	cd ${WRKSRC} && ${SETENV} ${MY_CONF_ENV} \

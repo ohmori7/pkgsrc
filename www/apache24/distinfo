@@ -1,17 +1,18 @@
-$NetBSD: distinfo,v 1.40 2019/04/02 07:25:38 adam Exp $
+$NetBSD: distinfo,v 1.44 2020/08/09 15:01:55 taca Exp $
 
-SHA1 (httpd-2.4.39.tar.bz2) = 75695bb7bb589c308755bf496de8b34522133865
-RMD160 (httpd-2.4.39.tar.bz2) = 4ab6b73efdb326bd34e352ac34fd337f3fb5f60e
-SHA512 (httpd-2.4.39.tar.bz2) = 9742202040b3dc6344b301540f54b2d3f8e36898410d24206a7f8dcecb1bea7d7230fabc7256752724558af249facf64bffe2cf678b8f7cccb64076737abfda7
-Size (httpd-2.4.39.tar.bz2) = 7030539 bytes
+SHA1 (httpd-2.4.46.tar.bz2) = 1b7cd10ff3a2a07a576d77e34f0204d95fa4aceb
+RMD160 (httpd-2.4.46.tar.bz2) = 8e5365222be2b53bed955f6f658fc4b6cc6c60a2
+SHA512 (httpd-2.4.46.tar.bz2) = 5936784bb662e9d8a4f7fe38b70c043b468114d931cd10ea831bfe74461ea5856b64f88f42c567ab791fc8907640a99884ba4b6a600f86d661781812735b6f13
+Size (httpd-2.4.46.tar.bz2) = 7187805 bytes
 SHA1 (patch-aa) = 9a66685f1d2e4710ab464beda98cbaad632aebf9
 SHA1 (patch-ab) = a3edcc20b7654e0446c7d442cda1510b23e5d324
 SHA1 (patch-ac) = 9f86d845df30316d22bce677a4b176f51007ba0d
 SHA1 (patch-ad) = 4ba4a9c812951f533fa316e5dbf17eaab5494157
 SHA1 (patch-ae) = 5bd3bf54e792bf8a2916d7e1b49b1702b02c6903
 SHA1 (patch-ag) = 50c7f0fab1cb90ac573f1c47f2d37f9c2a6247e1
-SHA1 (patch-ai) = 867ac81fd14b1bd6af048ec57390d915956e9568
+SHA1 (patch-ai) = d3870e46e41adc97c3fce86f9ffd224502ad6b0c
 SHA1 (patch-al) = 02d9ade5aac4270182063d5ad413970c832ee911
 SHA1 (patch-am) = acdf7198ae8b4353cfc70c8015a0f09de036b777
 SHA1 (patch-aw) = 43cd64df886853ef7b75b91ed20183f329fcc9df
 SHA1 (patch-include_ap__config.h) = 1d056e2d4db80ec97aaf755b6dd6aff69ed2cd96
+SHA1 (patch-modules_filters_mod_substitute.c) = 730af0342b78de04fe51b7dcc3ed057b2b0c3a54

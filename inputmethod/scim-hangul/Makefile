@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.34 2018/11/14 22:21:53 kleink Exp $
+# $NetBSD: Makefile,v 1.39 2020/08/17 20:19:18 leot Exp $
 #
 
 DISTNAME=		scim-hangul-0.4.0
-PKGREVISION=		20
+PKGREVISION=		24
 CATEGORIES=		inputmethod korean
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=scim/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.scim-im.org/
+HOMEPAGE=		https://github.com/scim-im/scim
 COMMENT=		SCIM IMEngine module for inputing korean scripts
 LICENSE=		gnu-gpl-v2
 

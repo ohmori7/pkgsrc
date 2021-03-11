@@ -1,23 +1,28 @@
-# $NetBSD: Makefile,v 1.79 2019/05/27 11:19:22 tnn Exp $
+# $NetBSD: Makefile,v 1.95 2020/11/05 09:08:14 ryoon Exp $
 
-DISTNAME=	openttd-1.9.1-source
+DISTNAME=	openttd-1.10.3-source
 PKGNAME=	${DISTNAME:S/-source//}
-CATEGORIES=	games x11
+PKGREVISION=	1
+CATEGORIES=	games
 MASTER_SITES=	https://proxy.binaries.openttd.org/openttd-releases/${PKGVERSION_NOREV}/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.openttd.org/
+HOMEPAGE=	https://www.openttd.org/
 COMMENT=	Open source clone of Transport Tycoon Deluxe
 LICENSE=	gnu-gpl-v2
 
-WRKSRC=			${WRKDIR}/${PKGNAME_NOREV}
-USE_LANGUAGES=		c c++0x
-USE_TOOLS+=		gmake pkg-config
-BUILD_DEFS+=		VARBASE
-BUILD_TARGET=		bundle
+WRKSRC=		${WRKDIR}/${PKGNAME_NOREV}
+HAS_CONFIGURE=	yes
+USE_LANGUAGES=	c c++
+USE_TOOLS+=	gmake pkg-config
+BUILD_DEFS+=	VARBASE
+BUILD_TARGET=	bundle
 
-HAS_CONFIGURE=		yes
+# C++11
+GCC_REQD+=	4.8
+
+CONFIGURE_ARGS+=	--os=UNIX
 CONFIGURE_ARGS+=	--prefix-dir=${PREFIX}
 CONFIGURE_ARGS+=	--binary-dir=bin
 CONFIGURE_ARGS+=	--data-dir=share/openttd
@@ -28,12 +33,10 @@ CONFIGURE_ARGS+=	--man-dir=${PKGMANDIR}/man6
 CONFIGURE_ARGS+=	--menu-dir=share/applications
 CONFIGURE_ARGS+=	--personal-dir=.openttd
 CONFIGURE_ARGS+=	--shared-dir=${VARBASE}/games/openttd
-CONFIGURE_ARGS+=	--with-iconv=${BUILDLINK_PREFIX.iconv}
-CONFIGURE_ARGS+=	--with-lzo2=${BUILDLINK_PREFIX.lzo}/lib
+
+CONFIGURE_ARGS+=	--without-allegro
 
 .include "../../mk/bsd.prefs.mk"
-
-CONFIGURE_ARGS.DragonFly+=	--os=FREEBSD
 
 .if ${OPSYS} == "Darwin"
 CONFIGURE_ARGS+=	--disable-cocoa-quickdraw
@@ -41,8 +44,15 @@ CONFIGURE_ARGS+=	--with-cocoa
 CONFIGURE_ARGS+=	--without-application-bundle
 CONFIGURE_ARGS+=	--without-osx-sysroot
 .else
-.include "../../devel/SDL/buildlink3.mk"
+CONFIGURE_ARGS+=	--with-sdl=sdl2
+.include "../../devel/SDL2/buildlink3.mk"
+.include "../../x11/libxdg-basedir/buildlink3.mk"
+BUILDLINK_API_DEPENDS.libxdg-basedir+=	libxdg-basedir>=1.2.0
 .endif
+
+MAKE_FLAGS.NetBSD+=	MD5SUM="/usr/bin/cksum -n -a md5"
+
+BUILDLINK_TRANSFORM+=	opt:-std=c++11:-std=gnu++11 # alloca
 
 .include "../../archivers/lzo/buildlink3.mk"
 .include "../../archivers/xz/buildlink3.mk"

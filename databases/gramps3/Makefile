@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.72 2019/04/26 14:12:33 maya Exp $
+# $NetBSD: Makefile,v 1.82 2020/12/04 20:45:04 nia Exp $
 
-DISTNAME=		gramps-3.4.4
-PKGREVISION=		14
+DISTNAME=		gramps-3.4.9
+PKGREVISION=		6
 CATEGORIES=		databases
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gramps/}
 
@@ -16,7 +16,7 @@ USE_TOOLS+=		msgfmt pkg-config intltool msgconv
 USE_PKGLOCALEDIR=	yes
 GNU_CONFIGURE=		yes
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # py-ORBit via py-gnome2, py-gtk2
+PYTHON_VERSIONS_ACCEPTED=	27 # py-ORBit via py-gnome2, py-gtk2
 
 REPLACE_PYTHON=		src/DateHandler/_Date_fr.py
 REPLACE_PYTHON+=	src/plugins/quickview/Reporef.py
@@ -38,7 +38,7 @@ DEPENDS+=	librsvg-[0-9]*:../../graphics/librsvg
 .include "../../databases/py-bsddb3/buildlink3.mk"
 .include "../../graphics/gnome-icon-theme/buildlink3.mk"
 .include "../../lang/python/application.mk"
-BUILDLINK_API_DEPENDS.pygtk2+=	${PYPKGPREFIX}-gtk2>=2.10
+BUILDLINK_API_DEPENDS.pygtk2+=	${PYPKGPREFIX}-gtk2>=2.24.0nb30
 .include "../../x11/py-gtk2/buildlink3.mk"
 .include "../../x11/py-gnome2/buildlink3.mk"
 .include "../../databases/shared-mime-info/mimedb.mk"

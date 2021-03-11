@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.29 2019/01/22 22:07:33 christos Exp $
+# $NetBSD: Makefile,v 1.32 2020/08/31 18:11:36 wiz Exp $
 #
 
 DISTNAME=		strace-4.5.15
-PKGREVISION=		12
+PKGREVISION=		14
 CATEGORIES=		sysutils
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=strace/}
 EXTRACT_SUFX=		.tar.bz2
@@ -31,7 +31,10 @@ pre-configure:
 .endif
 
 .if ${OPSYS} == "NetBSD"
-MAKE_ENV+=	NETBSD_SRCDIR=${BSD_SRCDIR:Q}
+MAKE_ENV+=	NETBSD_SRCDIR=${BSDSRCDIR:Q}
+.if !exists(${BSDSRCDIR:Q}/sys/kern/syscalls.master)
+PKG_FAIL_REASON+=	"Please place kernel sources in ${BSDSRCDIR:Q}/sys or set BSDSRCDIR"
+.endif
 pre-configure:
 	${CP} -f ${WRKSRC}/syscalls.pl ${WRKSRC}/netbsd
 

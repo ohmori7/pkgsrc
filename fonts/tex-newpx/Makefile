@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.7 2019/01/29 05:57:38 markd Exp $
+# $NetBSD: Makefile,v 1.12 2021/02/20 00:27:36 markd Exp $
 
 DISTNAME=	newpx
-PKGNAME=	tex-${DISTNAME}-1.33
-TEXLIVE_REV=	49438
+PKGNAME=	tex-${DISTNAME}-1.414
+TEXLIVE_REV=	56845
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/newpx
+HOMEPAGE=	https://ctan.org/pkg/newpx
 COMMENT=	Alternative uses of the PX fonts, with improved metrics
 LICENSE=	lppl-1.3c
 

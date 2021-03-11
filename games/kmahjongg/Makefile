@@ -1,18 +1,22 @@
-# $NetBSD: Makefile,v 1.28 2018/12/13 19:51:54 adam Exp $
+# $NetBSD: Makefile,v 1.44 2021/02/07 06:30:23 ryoon Exp $
 
-DISTNAME=	kmahjongg-${_KDE_VERSION}
-PKGREVISION=	12
+DISTNAME=	kmahjongg-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	games
-COMMENT=	a tile matching game for one or two players
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+HOMEPAGE=	https://kde.org/applications/games/kmahjongg/
+COMMENT=	Tile matching game for one or two players
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+.include "../../meta-pkgs/kde/applications.mk"
+
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
+
+USE_TOOLS+=	msgmerge
 
 .include "../../games/libkdegames/buildlink3.mk"
 .include "../../games/libkmahjongg/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

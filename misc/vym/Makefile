@@ -1,25 +1,29 @@
-# $NetBSD: Makefile,v 1.39 2018/08/22 09:45:47 wiz Exp $
+# $NetBSD: Makefile,v 1.55 2021/02/07 06:30:32 ryoon Exp $
 #
 
-DISTNAME=		vym-2.2.4
-PKGREVISION=		15
+DISTNAME=		vym-2.7.1
+PKGREVISION=		11
 CATEGORIES=		misc
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=vym/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.insilmaril.de/vym/
+HOMEPAGE=		https://www.insilmaril.de/vym/
 COMMENT=		Generate and manipulate maps which show your thoughts
 LICENSE=		gnu-gpl-v2
+
+EXTRACT_USING=		bsdtar
 
 DEPENDS+=		xdg-utils-[0-9]*:../../misc/xdg-utils
 
 USE_LANGUAGES=		c++
 USE_TOOLS+=		perl:run bash:run
 
-REPLACE_PERL+=		scripts/exportvym scripts/niceXML
-REPLACE_BASH+=		scripts/release-mac scripts/update-bookmarks \
-			scripts/makedist-vym scripts/vivym
+REPLACE_BASH+=		scripts/makedist-vym scripts/vivym
+REPLACE_BASH+=		scripts/getbinaries scripts/screencast
+
+REPLACE_RUBY+=		scripts/jigger
+REPLACE_RUBY+=		scripts/make-qrc.rb
 
 CHECK_INTERPRETER_SKIP=	share/vym/scripts/bugger \
 			share/vym/scripts/vym-addmail.rb
@@ -42,8 +46,9 @@ do-configure:
 		DATADIR=${PREFIX}/share \
 		DOCDIR=${PREFIX}/doc/vym vym.pro
 
-.include "../../x11/qt4-qdbus/buildlink3.mk"
-.include "../../x11/qt4-libs/buildlink3.mk"
-.include "../../x11/qt4-tools/buildlink3.mk"
-
+.include "../../lang/ruby/buildlink3.mk"
+.include "../../lang/ruby/replace.mk"
+.include "../../x11/qt5-qtbase/buildlink3.mk"
+.include "../../x11/qt5-qtscript/buildlink3.mk"
+.include "../../x11/qt5-qtsvg/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

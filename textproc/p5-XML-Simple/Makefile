@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.38 2018/08/22 09:47:09 wiz Exp $
+# $NetBSD: Makefile,v 1.41 2020/08/31 18:12:13 wiz Exp $
 
 DISTNAME=	XML-Simple-2.25
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=XML/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/XML-Simple/
+HOMEPAGE=	https://metacpan.org/release/XML-Simple
 COMMENT=	Easy Perl API to read/write XML
 LICENSE=	${PERL5_LICENSE}
 

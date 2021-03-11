@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.27 2018/08/22 09:44:22 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2020/08/31 18:08:29 wiz Exp $
 #
 
 DISTNAME=	MooseX-Declare-0.43
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	3
+PKGREVISION=	5
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MooseX/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/MooseX-Declare/
+HOMEPAGE=	https://metacpan.org/release/MooseX-Declare
 COMMENT=	Perl 5 module providing declarative syntax for Moose
 LICENSE=	${PERL5_LICENSE}
 
@@ -25,7 +25,7 @@ BUILD_DEPENDS+=	p5-Class-Tiny-[0-9]*:../../devel/p5-Class-Tiny
 BUILD_DEPENDS+=	p5-Test-Fatal-[0-9]*:../../devel/p5-Test-Fatal
 BUILD_DEPENDS+=	p5-Test-CheckDeps>=0.007:../../devel/p5-Test-CheckDeps
 
-USE_LANGUAGES=	# empty
+USE_LANGUAGES=		# empty
 PERL5_MODULE_TYPE=	Module::Build::Tiny
 PERL5_PACKLIST=		auto/MooseX/Declare/.packlist
 

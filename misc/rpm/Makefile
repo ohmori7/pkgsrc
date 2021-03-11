@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.95 2019/05/05 22:49:49 ryoon Exp $
+# $NetBSD: Makefile,v 1.99 2020/08/31 18:10:25 wiz Exp $
 
 DISTNAME=	rpm-4.13.0.1
-PKGREVISION=	3
+PKGREVISION=	6
 CATEGORIES=	misc
 MASTER_SITES=	http://ftp.rpm.org/releases/rpm-4.13.x/
 EXTRACT_SUFX=	.tar.bz2
@@ -69,12 +69,6 @@ FILES_SUBST+=		RPMDIR=${RPMDIR}
 BROKEN_GETTEXT_DETECTION=	yes
 
 CHECK_PORTABILITY_SKIP=	tests/rpmtests
-
-SUBST_CLASSES+=		mkd
-SUBST_STAGE.mkd=	post-build
-SUBST_MESSAGE.mkd=	Fixing workdir tools references in macros file.
-SUBST_FILES.mkd=	macros
-SUBST_SED.mkd=		-e 's,${TOOLS_CMD.mkdir},${TOOLS_PATH.mkdir},'
 
 # __progname without 'extern' segfaults on some platforms (e.g. Darwin)
 SUBST_CLASSES+=		progname

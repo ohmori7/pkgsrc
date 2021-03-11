@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2019/02/01 16:54:12 ryoon Exp $
+# $NetBSD: Makefile,v 1.17 2021/02/07 06:30:29 ryoon Exp $
 
 DISTNAME=	thunderbird-${TB_VER}.source
 PKGNAME=	thunderbird${TB_VER:C/\..*$//}-${TB_VER}
-PKGREVISION=	3
+PKGREVISION=	15
 TB_VER=		52.9.1
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_MOZILLA:=thunderbird/releases/${TB_VER}/source/}
@@ -24,6 +24,8 @@ CONFIG_SUB_OVERRIDE+=	ldap/sdks/c-sdk/config/autoconf/config.sub
 CONFIGURE_ARGS+=	--enable-application=mail
 # Disable WebRTC support for Thunderbird unconditionally.
 CONFIGURE_ARGS+=	--disable-webrtc
+CONFIGURE_ARGS+=	--disable-dbus
+CONFIGURE_ARGS+=	--disable-gnomeui
 
 NOT_PAX_MPROTECT_SAFE+=	lib/${PKGBASE}/thunderbird
 NOT_PAX_MPROTECT_SAFE+=	lib/${PKGBASE}/thunderbird-bin
@@ -34,10 +36,10 @@ LDFLAGS+=		${COMPILER_RPATH_FLAG}${PREFIX}/lib/${PKGBASE}
 
 .include "../../mk/bsd.prefs.mk"
 
-#SUBST_CLASSES+=			ext-compat
-#SUBST_STAGE.ext-compat=		pre-configure
+#SUBST_CLASSES+=		ext-compat
+#SUBST_STAGE.ext-compat=	pre-configure
 #SUBST_MESSAGE.ext-compat=	Fixing extension compatibility
-#SUBST_FILES.ext-compat=		mailnews/extensions/enigmail/package/install.rdf
+#SUBST_FILES.ext-compat=	mailnews/extensions/enigmail/package/install.rdf
 #SUBST_FILES.ext-compat+=	calendar/*/install.rdf
 #SUBST_FILES.ext-compat+=	calendar/*/*/install.rdf
 #SUBST_SED.ext-compat=		-e 's,\(<em:maxVersion>\).*<,\19.0<,g'
@@ -48,7 +50,7 @@ SUBST_MESSAGE.sys-dic=	Reference to system hunspell dictionaries.
 SUBST_FILES.sys-dic=	mozilla/extensions/spellcheck/hunspell/glue/mozHunspell.cpp
 SUBST_VARS.sys-dic=	LOCALBASE
 
-CHECK_WRKREF_SKIP+=lib/${PKGBASE}/chrome/toolkit/content/global/buildconfig.html
+CHECK_WRKREF_SKIP+=	lib/${PKGBASE}/chrome/toolkit/content/global/buildconfig.html
 
 post-extract:
 	mv ${WRKSRC}/mozilla/gfx/ycbcr/yuv_row_arm.s \
@@ -63,7 +65,7 @@ pre-configure:
 
 do-build:
 # XXX for some reason it doesn't work unless -j is explicitly specified
-	cd ${WRKSRC}/${OBJDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} -j${MAKE_JOBS:U1}
+	${RUN} ${_ULIMIT_CMD} cd ${WRKSRC}/${OBJDIR} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} -j${MAKE_JOBS:U1}
 
 MOZILLA=	${PKGBASE}
 MOZILLA_NAME=	${PKGBASE}

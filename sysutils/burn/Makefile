@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.38 2019/04/03 00:33:06 ryoon Exp $
+# $NetBSD: Makefile,v 1.44 2020/11/05 09:09:06 ryoon Exp $
 #
 
 DISTNAME=	burn-0.4.1
-PKGREVISION=	18
+PKGREVISION=	21
 CATEGORIES=	sysutils gnustep
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=gsburn/}
 
@@ -24,7 +24,7 @@ MAKE_JOBS_SAFE=	no
 MAKE_ENV+=	ADDITIONAL_CPPFLAGS=-D_POSIX_SOURCE
 MAKE_ENV+=	ADDITIONAL_LDFLAGS=-lutil
 
-FIX_GNUSTEP_INSTALLATION_DIR=	yes
+FIX_GNUSTEP_INSTALLATION_DIR=		yes
 SUBST_FILES.gnustep_installation_dir+=	Bundles/CDparanoia/GNUmakefile
 SUBST_FILES.gnustep_installation_dir+=	Bundles/CDrecord/GNUmakefile
 SUBST_FILES.gnustep_installation_dir+=	Bundles/MkIsoFs/GNUmakefile

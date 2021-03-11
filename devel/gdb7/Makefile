@@ -1,34 +1,37 @@
-# $NetBSD: Makefile,v 1.3 2019/04/25 07:32:45 maya Exp $
+# $NetBSD: Makefile,v 1.11 2020/12/04 20:45:09 nia Exp $
 
 DISTNAME=	gdb-7.11
-PKGREVISION=	5
+PKGREVISION=	8
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNU:=gdb/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnu.org/software/gdb/gdb.html
+HOMEPAGE=	https://www.gnu.org/software/gdb/gdb.html
 COMMENT=	Symbolic debugger for multiple language frontends
 LICENSE=	gnu-gpl-v3
 
 BROKEN_GETTEXT_DETECTION=	yes
-GNU_CONFIGURE=		YES
-USE_PKGLOCALEDIR=	YES
-USE_LIBTOOL=		YES
-USE_TOOLS+=		gmake msgfmt makeinfo perl:build
+GNU_CONFIGURE=			YES
+GNU_CONFIGURE_STRICT=		no # has sub-configures
+USE_PKGLOCALEDIR=		YES
+USE_LIBTOOL=			YES
+USE_TOOLS+=			gmake msgfmt makeinfo perl:build bash
 REPLACE_LOCALEDIR_PATTERNS+=	Make-in
-INSTALL_TARGET=		install install-info
-TEST_TARGET=		check
-INFO_FILES=		yes
-CONFIGURE_ENV+=		CONFIG_LDFLAGS=${LDFLAGS:M*:Q}
+INSTALL_TARGET=			install install-info
+TEST_TARGET=			check
+INFO_FILES=			yes
+CONFIGURE_ENV+=			CONFIG_LDFLAGS=${LDFLAGS:M*:Q}
 
 # In gdb/configure, depcomp is parsed with sed.
 SUBST_CLASSES+=			fix-depcomp
-SUBST_STAGE.fix-depcomp+=	pre-configure
-SUBST_MESSAGE.fix-depcomp+=	Read depcomp directly
+SUBST_STAGE.fix-depcomp=	pre-configure
+SUBST_MESSAGE.fix-depcomp=	Read depcomp directly
 SUBST_FILES.fix-depcomp+=	gdb/configure
 SUBST_SED.fix-depcomp+=		-e 's,< ./depcomp,${_OVERRIDE_PATH.depcomp},'
 
 AUTO_MKDIRS=		yes
+
+REPLACE_BASH+=		sim/testsuite/sim/bfin/run-tests.sh
 
 .include "options.mk"
 
@@ -50,7 +53,7 @@ TARGET_STR=		${MACHINE_ARCH}--dragonfly
 BUILD_DEFS+=		${TARGET_STR}
 ## Remove "-pc" string, without this, getting following message:
 ##	   *** Gdb does not support native target i386-pc-dragonfly"
-CONFIGURE_ARGS+=		--target=${TARGET_STR}
+CONFIGURE_ARGS+=	--target=${TARGET_STR}
 TEST_ENV=		DEJAGNU=${WRKDIR}/../files/dragonfly-default.exp
 .endif
 

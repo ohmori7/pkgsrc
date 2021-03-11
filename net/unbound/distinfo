@@ -1,7 +1,8 @@
-$NetBSD: distinfo,v 1.51 2019/06/17 09:49:08 he Exp $
+$NetBSD: distinfo,v 1.62 2021/02/09 08:32:17 he Exp $
 
-SHA1 (unbound-1.9.2.tar.gz) = 9a7ac3163df57a26b1cfb89844993d95fabee359
-RMD160 (unbound-1.9.2.tar.gz) = 63411e761d70b5ce7c5e939dceebd8e7d4818c94
-SHA512 (unbound-1.9.2.tar.gz) = 118f0e53ee2d5cfb53ce1f792ca680cc01b5825bf81575e36bd3b24f3bdbe14e6631401bf1bf85eb2ac2a3fa0ee2ee3eb6a28b245d06d48d9975ce4cc260f764
-Size (unbound-1.9.2.tar.gz) = 5676395 bytes
-SHA1 (patch-configure) = eabd0c478e92ebe37adf143849389e0e792dc77f
+SHA1 (unbound-1.13.1.tar.gz) = 561522b06943f6d1c33bd78132db1f7020fc4fd1
+RMD160 (unbound-1.13.1.tar.gz) = b6877d52a1de3407b59a004716736e1847f555a1
+SHA512 (unbound-1.13.1.tar.gz) = f4d26dca28dbcc33a5e65a55147fa01077c331292e88b6a87798cb6c3d4edb0515015d131fd893c92b74d22d9998a640f0adce404e6192d61ebe69a6a599287c
+Size (unbound-1.13.1.tar.gz) = 5976957 bytes
+SHA1 (patch-configure) = a949bdb26b37950c0301946af4521c9d0e984cf9
+SHA1 (patch-services_listen__dnsport.c) = 11c5b3af93f07da5e1375babea91725055baa08a

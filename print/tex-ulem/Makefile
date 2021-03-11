@@ -1,10 +1,11 @@
-# $NetBSD: Makefile,v 1.4 2013/12/02 19:29:04 minskim Exp $
+# $NetBSD: Makefile,v 1.6 2020/05/05 12:01:06 markd Exp $
 
 DISTNAME=	ulem
-PKGNAME=	tex-${DISTNAME}-2013
-TEXLIVE_REV=	26785
+PKGNAME=	tex-${DISTNAME}-2020
+TEXLIVE_REV=	53365
 
 MAINTAINER=	minskim@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/ulem
 COMMENT=	Package for underlining
 
 CONFLICTS+=	tex-ltxmisc<2009

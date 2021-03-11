@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.196 2019/06/08 19:53:26 leot Exp $
+# $NetBSD: Makefile,v 1.253 2021/03/06 04:19:35 ryoon Exp $
 
-VERREL=		6.2.4
+VERREL=		7.1.1
 VERRC=		2
 VER=		${VERREL}.${VERRC}
 DISTNAME=	libreoffice-${VER}
@@ -13,29 +13,43 @@ HOMEPAGE=	https://www.libreoffice.org/
 COMMENT=	Office productivity suite from The Document Foundation
 LICENSE=	gnu-lgpl-v3
 
-USE_LANGUAGES=	c gnu++11
+UNLIMIT_RESOURCES+=	cputime
+
+USE_LANGUAGES=	c gnu++17
+
+# Do not use alloca(3) in libc at least on NetBSD.
+BUILDLINK_TRANSFORM+=	opt:-std=c++17:-std=gnu++17
+BUILDLINK_TRANSFORM+=	opt:-std=c++1z:-std=gnu++1z
+BUILDLINK_TRANSFORM+=	opt:-std=c++2a:-std=gnu++2a
 
 SUBST_CLASSES+=			use-bash
 SUBST_STAGE.use-bash=		pre-configure
 SUBST_MESSAGE.use-bash=		Using bash for configure script
 SUBST_FILES.use-bash+=		autogen.sh
-SUBST_FILES.use-bash+=		configure.ac
 SUBST_VARS.use-bash+=		BASH
 SUBST_VARS.use-bash+=		PREFIX
 
-.include "../../mk/bsd.prefs.mk"
+SUBST_CLASSES+=			font-path
+SUBST_STAGE.font-path=		pre-configure
+SUBST_MESSAGE.font-path=	Use pkgsrc fonts for PDF import
+SUBST_FILES.font-path+=		external/pdfium/pkgsrc.patch.1
+SUBST_VARS.font-path+=		X11BASE
 
-.if !empty(MACHINE_PLATFORM:MNetBSD*)
+GCC_REQD+=	7
+
+BUILD_TARGET=	build
+
+.include "../../mk/bsd.prefs.mk"
+.if ${OPSYS} == "NetBSD"
 pre-build:
 	cd ${WRKSRC} && ${BUILD_MAKE_CMD} Executable_gengal && ${TOOLS_PLATFORM.paxctl} +m instdir/program/gengal.bin
 .endif
 
-GCC_REQD+=	4.6
-PYTHON_VERSIONS_INCOMPATIBLE=	27 37
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 CHECK_SHLIBS_SUPPORTED=	no
 # configure will be regenerated.
-CHECK_PORTABILITY_SKIP=configure
+CHECK_PORTABILITY_SKIP=	configure
 
 NOT_PAX_MPROTECT_SAFE+=	${PKGNAME_NOREV}/lib/libreoffice/program/soffice.bin
 
@@ -59,8 +73,8 @@ MORE_DISTFILES= \
 	liberation-fonts-ttf-2.00.4.tar.gz \
 	907d6e99f241876695c19ff3db0b8923-source-code-pro-2.030R-ro-1.050R-it.tar.gz \
 	edc4d741888bc0d38e32dbaa17149596-source-sans-pro-2.010R-ro-1.065R-it.tar.gz \
-	source-serif-font-2.007R.tar.gz \
-	xmlsec1-1.2.27.tar.gz \
+	source-serif-pro-3.000R.tar.gz \
+	xmlsec1-1.2.30.tar.gz \
 	3404ab6b1792ae5f16bbd603bd1e1d03-libformula-1.1.7.zip \
 	35c94d2df8893241173de1d16b6034c0-swingExSrc.zip \
 	39bb3fcea1514f1369fcfc87542390fd-sacjava-1.3.zip \
@@ -85,7 +99,7 @@ MORE_DISTFILES= \
 	368f114c078f94214a308a74c7e991bc-crosextrafonts-20130214.tar.gz \
 	language-subtag-registry-2018-04-23.tar.bz2 \
 	libeot-0.01.tar.bz2 \
-	postgresql-9.2.24.tar.bz2 \
+	postgresql-13.1.tar.bz2 \
 	graphite2-minimal-1.3.10.tgz \
 	1725634df4bb3dcb1b2c91a6175f8789-GentiumBasic_1102.zip \
 	EmojiOneColor-SVGinOT-1.3.tar.gz \
@@ -99,20 +113,23 @@ MORE_DISTFILES= \
 	Scheherazade-2.100.zip \
 	lxml-4.1.1.tgz \
 	Amiri-0.111.zip \
-	ReemKufi-0.7.zip
+	ReemKufi-0.7.zip \
+	pdfium-4306.tar.bz2 \
+	dtoa-20180411.tgz \
+	skia-m88-59bafeeaa7de9eb753e3778c414e01dcf013dcd8.tar.xz
 
 .for md in ${MORE_DISTFILES}
 DISTFILES+=		${md}
 SITES.${md}=		https://dev-www.libreoffice.org/src/
 .endfor
 
-MORE_DISTFILES2+=		49a64f3bcf20a7909ba2751349231d6652ded9cd2840e961b5164d09de3ffa63-opens___.ttf
-SITES.49a64f3bcf20a7909ba2751349231d6652ded9cd2840e961b5164d09de3ffa63-opens___.ttf=	https://dev-www.libreoffice.org/extern/
+MORE_DISTFILES2+=	f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf
+SITES.f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf=	https://dev-www.libreoffice.org/extern/
 
 .include "../../graphics/librsvg/available.mk"
 .if ${LIBRSVG_TYPE} == "c" || make(distinfo) || make(mdi)
-MORE_DISTFILES2+=		harfbuzz-2.4.0.tar.bz2
-SITES.harfbuzz-2.4.0.tar.bz2=	https://www.freedesktop.org/software/harfbuzz/release/
+MORE_DISTFILES2+=		harfbuzz-2.6.4.tar.xz
+SITES.harfbuzz-2.6.4.tar.xz=	https://www.freedesktop.org/software/harfbuzz/release/
 .endif
 
 .for md2 in ${MORE_DISTFILES2}
@@ -121,10 +138,8 @@ DISTFILES+=		${md2}
 
 .include "options.mk"
 
-.include "../../mk/bsd.prefs.mk"
-
 # tar: Invalid header, starting valid header search.
-EXTRACT_USING=		gtar
+EXTRACT_USING=		bsdtar
 
 WRKSRC=		${WRKDIR}/${LO_BOOTSTRAP}
 
@@ -135,7 +150,7 @@ DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
 # is a no-go with normal pkgsrc wrappers.
 # dmake is slowly beeing removed from the LibreOffice build process
 # and this option will hopefully become unneeded in the future
-WRAPPER_SKIP_TRANSFORM=yes
+WRAPPER_SKIP_TRANSFORM=	yes
 
 LDFLAGS+=		-lboost_system
 
@@ -166,7 +181,6 @@ CONFIGURE_ARGS+=	--with-parallelism=1
 
 CONFIGURE_ARGS+=	--prefix=${PREFIX}/${PKGNAME_NOREV}
 CONFIGURE_ARGS+=	--disable-ccache
-CONFIGURE_ARGS+=	--enable-dbus
 CONFIGURE_ARGS+=	--disable-epm
 CONFIGURE_ARGS+=	--disable-fetch-external
 CONFIGURE_ARGS+=	--disable-firebird-sdbc
@@ -174,10 +188,11 @@ CONFIGURE_ARGS+=	--disable-odk
 CONFIGURE_ARGS+=	--disable-sdremote-bluetooth
 # Enabling GIO causes error. losessioninstall.component not found.
 CONFIGURE_ARGS+=	--disable-gio
-CONFIGURE_ARGS+=	--disable-pdfium
+# Use PDFium instead of poppler for PDF import since 6.3.2.2nb1
+CONFIGURE_ARGS+=	--enable-pdfium --disable-poppler
+#CONFIGURE_ARGS+=	--disable-pdfium --disable-poppler --disable-pdfimport
 CONFIGURE_ARGS+=	--enable-gstreamer-1-0
 CONFIGURE_ARGS+=	--enable-python=system
-#CONFIGURE_ARGS+=	--enable-release-build
 CONFIGURE_ARGS+=	--enable-ext-wiki-publisher
 CONFIGURE_ARGS+=	--enable-ext-nlpsolver
 CONFIGURE_ARGS+=	--with-system-gpgmepp
@@ -229,8 +244,8 @@ LO_PROGRAMS+=		lofromtemplate loimpress lomath loweb lowriter
 LO_DESKTOP_FILES=	calc.desktop draw.desktop impress.desktop math.desktop \
 			startcenter.desktop writer.desktop
 
-#OBJDIR=			pkgsrcbuild
-#CONFIGURE_DIRS=		${OBJDIR}
+#OBJDIR=		pkgsrcbuild
+#CONFIGURE_DIRS=	${OBJDIR}
 CONFIGURE_SCRIPT=	${WRKSRC}/autogen.sh
 
 #LD_LIBRARY_PATH+=	${WRKSRC}/instdir/sdk/lib:${WRKSRC}/instdir/ure/lib:${WRKSRC}/instdir/program
@@ -266,7 +281,7 @@ pre-configure: provide-python3
 .PHONY: provide-python3
 provide-python3:
 	# install phase uses python3 command
-	${LN} -s ${PYTHONBIN} "${BUILDLINK_DIR}/bin/python3"
+	[ -h "${BUILDLINK_DIR}/bin/python3" ] || ${LN} -s ${PYTHONBIN} "${BUILDLINK_DIR}/bin/python3"
 
 do-install:
 	cd ${WRKSRC} && make DESTDIR="${DESTDIR}" PREFIXDIR="${PREFIX}" distro-pack-install
@@ -276,10 +291,10 @@ do-install:
 		${MKDIR} ${d}
 .endfor
 
-UNO_PATH=${PREFIX}/${PKGNAME}/lib/libreoffice/program
+UNO_PATH=	${PREFIX}/${PKGNAME}/lib/libreoffice/program
 
-BUILD_DEFS+=   UNO_PATH
-BUILD_DEFS+=   PYTHONBIN
+BUILD_DEFS+=	UNO_PATH
+BUILD_DEFS+=	PYTHONBIN
 
 post-install:
 .for f in ${LO_PROGRAMS}
@@ -312,7 +327,6 @@ BUILDLINK_API_DEPENDS.libetonyek+=	libetonyek>=0.1.2
 .include "../../converters/orcus/buildlink3.mk"
 .include "../../databases/db4/buildlink3.mk"
 .include "../../databases/mysql57-client/buildlink3.mk"
-.include "../../databases/openldap-client/buildlink3.mk"
 .include "../../databases/shared-mime-info/buildlink3.mk"
 .include "../../databases/unixodbc/buildlink3.mk"
 .include "../../devel/apr-util/buildlink3.mk"
@@ -326,10 +340,12 @@ BUILDLINK_API_DEPENDS.libetonyek+=	libetonyek>=0.1.2
 .include "../../devel/nss/buildlink3.mk"
 .include "../../devel/zlib/buildlink3.mk"
 .include "../../fonts/fontconfig/buildlink3.mk"
-# hardbuzz with graphite2 support is required.
+# harfbuzz with graphite2 support is required.
 .if ${LIBRSVG_TYPE} == "rust"
 #BUILDLINK_API_DEPENDS.harfbuzz+=	harfbuzz>=1.4.2
 .include "../../fonts/harfbuzz/buildlink3.mk"
+.include "../../fonts/harfbuzz-icu/buildlink3.mk"
+.include "../../graphics/box2d/buildlink3.mk"
 .include "../../graphics/graphite2/buildlink3.mk"
 .endif
 # Requires JCS_EXT_BGRA
@@ -344,26 +360,27 @@ BUILDLINK_API_DEPENDS.libetonyek+=	libetonyek>=0.1.2
 .include "../../graphics/libepoxy/buildlink3.mk"
 .include "../../graphics/librsvg/buildlink3.mk"
 .include "../../graphics/png/buildlink3.mk"
+.include "../../graphics/qr-code-generator/buildlink3.mk"
 #.include "../../graphics/sane-backends/buildlink3.mk"
 #.include "../../graphics/vigra/buildlink3.mk"
 .include "../../lang/python/application.mk"
+# workaround for dtoa.h conflict with python and dtoa:
+# Do not pass -I${PREFIX}/include/python?.? to CPPFLAGS/CFLAGS/CXXFLAGS always.
+BUILDLINK_INCDIRS.${PYPKGPREFIX:S/py/python/}=	# empty
 .include "../../lang/python/tool.mk"
 .include "../../math/coinmp/buildlink3.mk"
+BUILDLINK_API_DEPENDS.libnumbertext+=	libnumbertext>=1.0.6
 .include "../../math/libnumbertext/buildlink3.mk"
 .include "../../math/lp_solve/buildlink3.mk"
 .include "../../multimedia/gstreamer1/buildlink3.mk"
 .include "../../multimedia/gst-plugins1-base/buildlink3.mk"
 .include "../../net/libcmis/buildlink3.mk"
 .include "../../net/mDNSResponder/buildlink3.mk"
-.if !empty(PKG_OPTIONS:Mcups)
-.include "../../print/cups-base/buildlink3.mk"
-.endif
-.include "../../print/poppler-cpp/buildlink3.mk"
-.include "../../print/poppler-includes/buildlink3.mk"
+# Use PDFium instead of poppler for PDF import since 6.3.2.2nb1
+#.include "../../print/poppler-cpp/buildlink3.mk"
+#.include "../../print/poppler-includes/buildlink3.mk"
 .include "../../security/gpgme/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
-.include "../../sysutils/dbus/buildlink3.mk"
-.include "../../sysutils/dbus-glib/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../textproc/expat/buildlink3.mk"
 .include "../../textproc/hunspell/buildlink3.mk"
@@ -382,7 +399,7 @@ BUILDLINK_API_DEPENDS.libodfgen+=       libodfgen>=0.1.4
 .include "../../www/curl/buildlink3.mk"
 .include "../../www/neon/buildlink3.mk"
 .include "../../www/serf/buildlink3.mk"
-.include "../../x11/gtk2/buildlink3.mk"
+.include "../../x11/gtk3/buildlink3.mk"
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXcursor/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
@@ -397,5 +414,5 @@ BUILDLINK_API_DEPENDS.libodfgen+=       libodfgen>=0.1.4
 .include "../../mk/pthread.buildlink3.mk"
 .include "../../graphics/gnome-icon-theme/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
-
+.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

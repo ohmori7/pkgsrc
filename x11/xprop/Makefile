@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.13 2019/03/10 08:12:36 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/11/20 08:09:58 wiz Exp $
 
-DISTNAME=	xprop-1.2.4
+DISTNAME=	xprop-1.2.5
 CATEGORIES=	x11
 MASTER_SITES=	${MASTER_SITE_XORG:=app/}
 EXTRACT_SUFX=	.tar.bz2
 
 MAINTAINER=	joerg@NetBSD.org
-HOMEPAGE=	http://xorg.freedesktop.org/
+HOMEPAGE=	https://xorg.freedesktop.org/
 COMMENT=	Property displayer for X
 
 GNU_CONFIGURE=	yes

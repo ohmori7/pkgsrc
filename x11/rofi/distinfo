@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.2 2019/03/13 19:33:27 wiz Exp $
+$NetBSD: distinfo,v 1.4 2020/11/24 17:22:00 nia Exp $
 
-SHA1 (rofi-1.5.2.tar.gz) = 5cb3dc30e1b984918aec1e865876cb7a285c4e76
-RMD160 (rofi-1.5.2.tar.gz) = 70669eb11bcdc05219e1b6fcc892622c211f8f20
-SHA512 (rofi-1.5.2.tar.gz) = 1206d8edb23bf4e0cc8d68f5b5c7fe3dce2205e8438349e19a4d08b7ca1af0fa66377dc94541d4fe0179cb50c3bbd90a796c5a9897032d5084f2835fa725d7ed
-Size (rofi-1.5.2.tar.gz) = 527142 bytes
+SHA1 (rofi-1.6.1.tar.xz) = eacdba58bab2d4d24696baf2cb5277f1e67cd30a
+RMD160 (rofi-1.6.1.tar.xz) = 0dcc774313346422b5c91d008b305fd908f94b1f
+SHA512 (rofi-1.6.1.tar.xz) = c9794a7e4921e58ecc5fc7096218203f548efe2a49ffa6971accc12e9172248bda856ad06f8c11ada9abb62b9a43c7fffce1c1be9a3fe1365c94561b170a8b73
+Size (rofi-1.6.1.tar.xz) = 404372 bytes

@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.9 2019/05/11 06:57:27 markd Exp $
+# $NetBSD: Makefile,v 1.12 2020/05/10 04:32:04 markd Exp $
 
 DISTNAME=	hyphen-slovak
-PKGNAME=	tex-${DISTNAME}-2019
-TEXLIVE_REV=	50792
+PKGNAME=	tex-${DISTNAME}-2019.51186
+PKGREVISION=	1
+TEXLIVE_REV=	51186
 
 MAINTAINER=	minskim@NetBSD.org
 COMMENT=	Hyphenation patterns for Slovak
@@ -22,5 +23,6 @@ TEX_HYPHEN_LUA+=	['slovak']={ \
 			  hyphenation='hyph-sk.hyp.txt', \
 			},
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

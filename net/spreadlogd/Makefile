@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.24 2018/08/22 09:46:07 wiz Exp $
+# $NetBSD: Makefile,v 1.28 2020/08/31 18:10:53 wiz Exp $
 #
 
 DISTNAME=	spreadlogd
 PKGNAME=	spreadlogd-2.0.0
-PKGREVISION=	21
+PKGREVISION=	24
 CATEGORIES=	net
 MASTER_SITES=	http://www.backhand.org/mod_log_spread/
 DIST_SUBDIR=	${PKGNAME_NOREV}
@@ -33,7 +33,7 @@ INSTALLATION_DIRS+=	${EXAMPLEDIR}
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/spreadlogd.conf ${DESTDIR}${EXAMPLEDIR}/spreadlogd.conf.sample
 
-BUILDLINK_API_DEPENDS.libevent+=libevent>=1.0c
+BUILDLINK_API_DEPENDS.libevent+=	libevent>=1.0c
 
 .include "../../net/spread/buildlink3.mk"
 .include "../../devel/libevent/buildlink3.mk"

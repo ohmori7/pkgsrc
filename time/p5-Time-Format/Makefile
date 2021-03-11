@@ -1,14 +1,12 @@
-# $NetBSD: Makefile,v 1.17 2018/08/22 09:47:19 wiz Exp $
-#
+# $NetBSD: Makefile,v 1.22 2020/09/07 17:55:20 wiz Exp $
 
-DISTNAME=	Time-Format-1.12
+DISTNAME=	Time-Format-1.16
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
 CATEGORIES=	time
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Time/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Time-Format/
+HOMEPAGE=	https://metacpan.org/release/Time-Format
 COMMENT=	Easy-to-use date/time formatting
 
 DEPENDS+=	p5-Date-Manip-[0-9]*:../../devel/p5-Date-Manip

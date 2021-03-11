@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.32 2018/08/22 09:46:50 wiz Exp $
+# $NetBSD: Makefile,v 1.36 2020/08/31 18:11:48 wiz Exp $
 
-DISTNAME=	Lingua-EN-Inflect-1.903
+DISTNAME=	Lingua-EN-Inflect-1.904
 PKGNAME=	p5-${DISTNAME}
 PKGREVISION=	1
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Lingua/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Lingua-EN-Inflect/
+HOMEPAGE=	https://metacpan.org/release/Lingua-EN-Inflect
 COMMENT=	Perl module for inflection of english words and a/an selection
 LICENSE=	${PERL5_LICENSE}
 

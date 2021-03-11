@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.14 2019/04/25 07:33:19 maya Exp $
+# $NetBSD: Makefile,v 1.21 2020/08/24 04:41:41 gutteridge Exp $
 
-PKGREVISION= 1
+PKGREVISION= 2
 .include "../../meta-pkgs/mate/Makefile.common"
 
-DISTNAME=	mate-notification-daemon-${VERSION}
+DISTNAME=	mate-notification-daemon-${VERSION:R}.0
 CATEGORIES=	sysutils
 
 COMMENT=	Notification daemon for MATE desktop

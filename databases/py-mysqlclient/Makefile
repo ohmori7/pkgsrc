@@ -1,19 +1,22 @@
-# $NetBSD: Makefile,v 1.2 2018/07/05 18:40:55 wiedi Exp $
+# $NetBSD: Makefile,v 1.6 2020/05/16 09:03:22 adam Exp $
 
-DISTNAME=	mysqlclient-python-1.3.13
-PKGNAME=	${PYPKGPREFIX}-${DISTNAME:S/python-//}
-CATEGORIES=	databases
-MASTER_SITES=	${MASTER_SITE_GITHUB:=PyMySQL/}
-GITHUB_PROJECT=	mysqlclient-python
-GITHUB_TAG=	${PKGVERSION_NOREV}
+DISTNAME=	mysqlclient-1.4.6
+PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
+CATEGORIES=	databases python
+MASTER_SITES=	${MASTER_SITE_PYPI:=m/mysqlclient/}
 
 MAINTAINER=	wiedi@frubar.net
-HOMEPAGE=	https://github.com/PyMySQL/mysqlclient-python/
+HOMEPAGE=	https://github.com/PyMySQL/mysqlclient-python
 COMMENT=	MySQL database connector for Python
 LICENSE=	gnu-gpl-v2
 
-EGG_NAME=	mysqlclient-${PKGVERSION_NOREV}
+PYTHON_VERSIONED_DEPENDENCIES=	test:test
+
+# testing requires a running MySQL server
+do-test:
+	cd ${WRKSRC} && pytest-${PYVERSSUFFIX} tests
 
 .include "../../lang/python/egg.mk"
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../mk/mysql.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

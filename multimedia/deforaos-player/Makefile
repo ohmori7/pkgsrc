@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.21 2018/11/14 22:22:04 kleink Exp $
+# $NetBSD: Makefile,v 1.29 2020/08/17 20:17:37 leot Exp $
 
-DISTNAME=	Player-0.1.6
-PKGNAME=	deforaos-player-0.1.6
-PKGREVISION=	11
+DISTNAME=	Player-0.2.0
+PKGNAME=	deforaos-player-0.2.0
+PKGREVISION=	3
 CATEGORIES=	multimedia
-MASTER_SITES=	https://www.defora.org/os/download/download/4297/
+MASTER_SITES=	https://ftp.defora.org/pub/DeforaOS/Apps/Desktop/src/Player/
 
 MAINTAINER=	khorben@defora.org
 HOMEPAGE=	https://www.defora.org/
@@ -18,7 +18,9 @@ USE_TOOLS+=	xgettext
 BUILD_DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
 BUILD_DEPENDS+=	docbook-xsl-[0-9]*:../../textproc/docbook-xsl
 
-DEPENDS+=	mplayer-[0-9]*:../../multimedia/mplayer
+DEPENDS+=	mpv-[0-9]*:../../multimedia/mpv
+
+CFLAGS+=	-fPIC
 
 MAKE_FLAGS+=	DESTDIR=${DESTDIR}
 MAKE_FLAGS+=	PREFIX=${PREFIX}
@@ -27,10 +29,13 @@ AUTO_MKDIRS=	yes
 
 .include "../../mk/bsd.prefs.mk"
 
-.if ${PKGMANDIR} != "share/man"
 post-install:
+.if ${PKGMANDIR} != "share/man"
+	${MV} ${DESTDIR}${PREFIX}/share/man/html1/player.html ${DESTDIR}${PREFIX}/${PKGMANDIR}/html1/player.html
+	${MV} ${DESTDIR}${PREFIX}/share/man/html1/playerctl.html ${DESTDIR}${PREFIX}/${PKGMANDIR}/html1/playerctl.html
 	${MV} ${DESTDIR}${PREFIX}/share/man/man1/player.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/player.1
 	${MV} ${DESTDIR}${PREFIX}/share/man/man1/playerctl.1 ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/playerctl.1
+	${RMDIR} ${DESTDIR}${PREFIX}/share/man/html1
 	${RMDIR} ${DESTDIR}${PREFIX}/share/man/man1
 	${RMDIR} ${DESTDIR}${PREFIX}/share/man
 .endif

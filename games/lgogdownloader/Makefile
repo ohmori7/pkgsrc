@@ -1,30 +1,29 @@
-# $NetBSD: Makefile,v 1.38 2019/05/27 15:11:07 wiz Exp $
+# $NetBSD: Makefile,v 1.52 2021/01/01 08:24:43 ryoon Exp $
 
-DISTNAME=	lgogdownloader-3.5
+DISTNAME=	lgogdownloader-3.7
+PKGREVISION=	2
 CATEGORIES=	games
-MASTER_SITES=	http://sites.google.com/site/gogdownloader/
+MASTER_SITES=	${MASTER_SITE_GITHUB:=Sude-/}
+GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/Sude-/lgogdownloader
 COMMENT=	Download games from GOG
 LICENSE=	public-domain # actually, dwtfywtpl
 
-BUILD_DEPENDS+=	help2man-[0-9]*:../../converters/help2man
+TOOL_DEPENDS+=	help2man-[0-9]*:../../converters/help2man
 
 USE_LANGUAGES=	c c++
 USE_CMAKE=	yes
 USE_TOOLS+=	pkg-config
-CMAKE_ARGS+=	-DPC_JSONCPP_FOUND:BOOL=1
-CMAKE_ARGS+=	-DPC_JSONCPP_INCLUDEDIRS:PATH=${BUILDLINK_PREFIX.jsoncpp}/include/json
-CMAKE_ARGS+=	-DPC_JSONCPP_LIBRARY_DIRS:PATH=${BUILDLINK_PREFIX.jsoncpp}/lib
-# for man page
-CMAKE_ARGS+=	-DINSTALL_SHARE_DIR:PATH=${PREFIX}
+
+CMAKE_ARGS+=	-DJSONCPP_INCLUDE_DIR=${BUILDLINK_DIR}/include/json
 
 .include "../../devel/boost-libs/buildlink3.mk"
-.include "../../security/liboauth/buildlink3.mk"
 .include "../../textproc/tinyxml2/buildlink3.mk"
 .include "../../www/htmlcxx/buildlink3.mk"
 .include "../../www/curl/buildlink3.mk"
 .include "../../misc/rhash/buildlink3.mk"
 .include "../../textproc/jsoncpp/buildlink3.mk"
+.include "../../mk/atomic64.mk"
 .include "../../mk/bsd.pkg.mk"

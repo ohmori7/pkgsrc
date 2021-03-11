@@ -1,14 +1,16 @@
-# $NetBSD: Makefile,v 1.1 2018/04/15 00:35:05 minskim Exp $
+# $NetBSD: Makefile,v 1.3 2019/08/08 19:53:38 brook Exp $
 
-DISTNAME=	blob_1.1.1
+R_PKGNAME=	blob
+R_PKGVER=	1.2.0
 CATEGORIES=	devel
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	https://github.com/tidyverse/blob
-COMMENT=	Simple S3 Class for Representing Vectors of Binary Data ('BLOBS')
+COMMENT=	Simple S3 class for representing vectors of binary data ('BLOBS')
 LICENSE=	gnu-gpl-v3
 
-DEPENDS+=	R-prettyunits-[0-9]*:../../math/R-prettyunits
+DEPENDS+=	R-rlang>=0.4.0:../../devel/R-rlang
+DEPENDS+=	R-prettyunits>=1.0.2:../../math/R-prettyunits
+DEPENDS+=	R-vctrs>=0.2.0:../../math/R-vctrs
 
 USE_LANGUAGES=	# none
 

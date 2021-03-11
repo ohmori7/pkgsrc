@@ -1,20 +1,21 @@
-# $NetBSD: Makefile,v 1.9 2019/01/03 12:30:26 wen Exp $
+# $NetBSD: Makefile,v 1.13 2020/08/31 18:08:31 wiz Exp $
 #
 
 DISTNAME=	MooseX-Role-Tempdir-0.101
 PKGNAME=	p5-${DISTNAME}
+PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=MooseX/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~iamb/MooseX-Role-Tempdir/
+HOMEPAGE=	https://metacpan.org/release/MooseX-Role-Tempdir
 COMMENT=	(Perl Module)  Moose role to provide temporary directories
 LICENSE=	${PERL5_LICENSE}
 
 # for make test
 BUILD_DEPENDS+=	p5-MooseX-Role-Parameterized-[0-9]*:../../devel/p5-MooseX-Role-Parameterized
-BUILD_DEPENDS+= p5-namespace-autoclean-[0-9]*:../../devel/p5-namespace-autoclean
-BUILD_DEPENDS+= p5-Package-DeprecationManager-[0-9]*:../../devel/p5-Package-DeprecationManager
+BUILD_DEPENDS+=	p5-namespace-autoclean-[0-9]*:../../devel/p5-namespace-autoclean
+BUILD_DEPENDS+=	p5-Package-DeprecationManager-[0-9]*:../../devel/p5-Package-DeprecationManager
 
 PERL5_PACKLIST=	auto/MooseX/Role/Tempdir/.packlist
 USE_LANGUAGES=	# none

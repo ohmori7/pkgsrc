@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.1 2018/10/22 14:39:55 schmonz Exp $
+# $NetBSD: Makefile,v 1.4 2020/09/08 13:16:41 wiz Exp $
 
 DISTNAME=		Graph-Easy-0.76
 PKGNAME=		p5-${DISTNAME}
+PKGREVISION=		2
 CATEGORIES=		graphics perl5
-MASTER_SITES=		https://cpan.metacpan.org/authors/id/S/SH/SHLOMIF/
+MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/S/SH/SHLOMIF/}
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
 HOMEPAGE=		https://metacpan.org/release/Graph-Easy

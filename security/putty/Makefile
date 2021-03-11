@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.56 2019/04/01 12:10:43 ryoon Exp $
+# $NetBSD: Makefile,v 1.67 2020/11/30 14:15:09 schmonz Exp $
 #
 
-DISTNAME=	putty-0.71
+DISTNAME=	putty-0.74
+PKGREVISION=	2
 CATEGORIES=	security
 MASTER_SITES=	http://the.earth.li/~sgtatham/putty/${PKGVERSION_NOREV}/
 
@@ -20,10 +21,6 @@ INSTALLATION_DIRS=	bin ${PKGMANDIR}/man1
 
 .include "options.mk"
 
-.if empty(OPSYS:MLinux)
-CFLAGS+=	-DHAVE_NO_SETRESUID
-.endif
-
 .if !empty(OPSYS:M*BSD) || ${OPSYS} == "DragonFly" || ${OPSYS} == "Darwin"
 CFLAGS+=	-DOMIT_UTMP
 .endif
@@ -36,6 +33,10 @@ CFLAGS+=	-DBSD_PTYS
 
 LDFLAGS.SunOS+=	-lsocket -lnsl
 CFLAGS.SunOS+=	-DBSD_COMP
+CFLAGS.Darwin+=	-DHAVE_FUTIMES -DHAVE_NO_SETRESUID
+CFLAGS.NetBSD+=	-DHAVE_FUTIMES -DHAVE_NO_SETRESUID
+CFLAGS.Linux+=	-DHAVE_FUTIMES -DHAVE_NO_SETRESUID
+LDFLAGS.Linux+=	-ldl
 
 .include "../../x11/gtk3/buildlink3.mk"
 .include "../../mk/dlopen.buildlink3.mk"

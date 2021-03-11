@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.17 2018/08/22 09:42:59 wiz Exp $
+# $NetBSD: Makefile,v 1.22 2020/11/05 09:07:31 ryoon Exp $
 #
 
 DISTNAME=		gromacs-4.5.5
-PKGREVISION=		7
+PKGREVISION=		11
 CATEGORIES=		biology
 MASTER_SITES=		ftp://ftp.gromacs.org/pub/gromacs/
 
@@ -28,7 +28,7 @@ CONFIGURE_ARGS+=	--disable-gcc41-check
 USE_TOOLS+=		perl:run
 REPLACE_PERL=		scripts/demux.pl scripts/xplor2gmx.pl
 
-CHECK_INTERPRETER_SKIP+= share/gromacs/tutor/gmxdemo/demo
+CHECK_INTERPRETER_SKIP+=	share/gromacs/tutor/gmxdemo/demo
 
 .include "../../mk/bsd.prefs.mk"
 

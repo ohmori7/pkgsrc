@@ -1,17 +1,33 @@
-# $NetBSD: Makefile,v 1.28 2018/12/13 19:51:54 adam Exp $
+# $NetBSD: Makefile,v 1.45 2021/02/07 06:30:23 ryoon Exp $
 
-DISTNAME=	kigo-${_KDE_VERSION}
-PKGREVISION=	12
+DISTNAME=	kigo-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	games
-COMMENT=	an open-source implementation of the popular Go game
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+HOMEPAGE=	https://kde.org/applications/games/kigo/
+COMMENT=	Open-source implementation of the popular Go game
+LICENSE=	gnu-gpl-v2 AND gnu-fdl-v1.2
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+.include "../../meta-pkgs/kde/applications.mk"
+
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
+
+USE_TOOLS+=	msgmerge
+
+SUBST_CLASSES+=		xdg
+SUBST_STAGE.xdg=	pre-configure
+SUBST_MESSAGE.xdg=	Install via examples dir.
+SUBST_FILES.xdg=	src/CMakeLists.txt
+SUBST_SED.xdg=		-e 's:{KDE_INSTALL_CONFDIR}:{KDE_INSTALL_XDG_EX_DIR}:'
+
+MAKE_DIRS+=	${PKG_SYSCONFDIR}/xdg
+CONF_FILES+=	${PREFIX}/share/examples/kde-xdg/kigo.knsrc \
+		${PKG_SYSCONFDIR}/xdg/kigo.knsrc
+CONF_FILES+=	${PREFIX}/share/examples/kde-xdg/kigo-games.knsrc \
+		${PKG_SYSCONFDIR}/xdg/kigo-games.knsrc
 
 .include "../../games/libkdegames/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

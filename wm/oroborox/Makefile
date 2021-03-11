@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.57 2019/04/25 07:33:26 maya Exp $
+# $NetBSD: Makefile,v 1.63 2020/12/04 20:45:47 nia Exp $
 #
 
 DISTNAME=	OroboROX-0.9.8
 PKGNAME=	oroborox-0.9.8
-PKGREVISION=	35
+PKGREVISION=	40
 CATEGORIES=	wm
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=rox/}
 EXTRACT_SUFX=	.tar.bz2
@@ -23,7 +23,7 @@ USE_TOOLS+=		autoconf pax pkg-config
 GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-xft --with-platform=${PLATFORM:Q}
 
-REPLACE_PYTHON=	Configure/OroboScheme/AppRun
+REPLACE_PYTHON=		Configure/OroboScheme/AppRun
 REPLACE_PYTHON+=	Configure/OroboScheme/AppInfo.py
 REPLACE_PYTHON+=	Configure/OroboScheme/Schemer.py
 REPLACE_PYTHON+=	Configure/Windows/AppRun

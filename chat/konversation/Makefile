@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.94 2019/04/25 07:32:38 maya Exp $
+# $NetBSD: Makefile,v 1.110 2021/01/01 08:24:34 ryoon Exp $
 #
 
 DISTNAME=	konversation-1.5.1
-PKGREVISION=	17
+PKGREVISION=	32
 CATEGORIES=	chat kde
 MASTER_SITES=	${MASTER_SITE_KDE:=konversation/1.5.1/src/}
 EXTRACT_SUFX=	.tar.xz
@@ -12,7 +12,7 @@ HOMEPAGE=	https://konversation.kde.org/
 COMMENT=	KDE IRC Client
 LICENSE=	gnu-gpl-v2
 
-BUILD_DEPENDS+= automoc4>=0.9.87:../../devel/automoc4
+BUILD_DEPENDS+=	automoc4>=0.9.87:../../devel/automoc4
 
 USE_TOOLS+=	perl msgfmt
 USE_LANGUAGES=	c c++

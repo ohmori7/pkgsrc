@@ -1,5 +1,6 @@
-# $NetBSD: Makefile,v 1.86 2018/08/22 09:46:06 wiz Exp $
+# $NetBSD: Makefile,v 1.91 2020/08/31 18:10:52 wiz Exp $
 
+#PKGREVISION= 2
 PKGREVISION= 1
 .include "../../net/proftpd/Makefile.common"
 
@@ -54,7 +55,7 @@ INSTALLATION_DIRS+=	share/doc/proftpd
 INSTALLATION_DIRS+=	share/examples/proftpd
 
 post-install:
-.for i in NEWS README README.IPv6 README.LDAP README.PAM README.capabilities \
+.for i in NEWS README.md README.IPv6 README.LDAP README.PAM README.capabilities \
           README.classes README.controls README.facl README.modules
 	${INSTALL_DATA} ${WRKSRC}/${i} ${DESTDIR}${PREFIX}/share/doc/proftpd
 .endfor

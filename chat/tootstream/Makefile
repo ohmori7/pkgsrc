@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.9 2019/04/26 13:13:45 maya Exp $
+# $NetBSD: Makefile,v 1.12 2020/12/04 20:45:03 nia Exp $
 
-DISTNAME=	tootstream-0.3.6
-PKGREVISION=	2
+DISTNAME=	tootstream-0.3.8.1
+PKGREVISION=	1
 CATEGORIES=	chat www
 MASTER_SITES=	${MASTER_SITE_GITHUB:=magicalraccoon/}
 
@@ -16,13 +16,13 @@ USE_LANGUAGES=	# none
 # incompatible with python 2.
 # strange locale errors on earlier versions of python 3, related
 # to py-click.
-PYTHON_VERSIONS_INCOMPATIBLE+=	27  36
+PYTHON_VERSIONS_INCOMPATIBLE+=	27 36
 
-DEPENDS+=	${PYPKGPREFIX}-click-[0-9]*:../../devel/py-click
-DEPENDS+=	${PYPKGPREFIX}-colored-[0-9]*:../../textproc/py-colored
-DEPENDS+=	${PYPKGPREFIX}-emoji-[0-9]*:../../converters/py-emoji
-DEPENDS+=	${PYPKGPREFIX}-humanize-[0-9]*:../../textproc/py-humanize
-DEPENDS+=	${PYPKGPREFIX}-mastodon-[0-9]*:../../chat/py-mastodon
+DEPENDS+=	${PYPKGPREFIX}-click>=6.7:../../devel/py-click
+DEPENDS+=	${PYPKGPREFIX}-colored>=1.3.93:../../textproc/py-colored
+DEPENDS+=	${PYPKGPREFIX}-emoji>=0.4.5:../../converters/py-emoji
+DEPENDS+=	${PYPKGPREFIX}-humanize>=0.5.1:../../textproc/py-humanize
+DEPENDS+=	${PYPKGPREFIX}-mastodon>=1.5.0:../../chat/py-mastodon
 DEPENDS+=	${PYPKGPREFIX}-readline-[0-9]*:../../devel/py-readline
 
 .include "../../lang/python/egg.mk"

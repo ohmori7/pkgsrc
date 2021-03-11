@@ -1,86 +1,39 @@
-# $NetBSD: Makefile,v 1.24 2019/05/23 19:23:16 rillig Exp $
+# $NetBSD: Makefile,v 1.40 2021/03/09 12:11:40 adam Exp $
 
-DISTNAME=	ansible-1.9.4
-PKGREVISION=	2
-#PKGNAME=   ${PYPKGPREFIX}-${DISTNAME} # XXX: for when package is py3x-ready
-CATEGORIES=	python sysutils
-MASTER_SITES=	http://releases.ansible.com/ansible/
+DISTNAME=	ansible-3.0.0
+CATEGORIES=	sysutils python
+MASTER_SITES=	${MASTER_SITE_PYPI:=a/ansible/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ansible.com/
+HOMEPAGE=	https://www.ansible.com/
 COMMENT=	SSH-based configuration management, deployment, and task execution
 LICENSE=	gnu-gpl-v3
 
-DEPENDS+=	${PYPKGPREFIX}-yaml-[0-9]*:../../textproc/py-yaml
-DEPENDS+=	${PYPKGPREFIX}-paramiko-[0-9]*:../../security/py-paramiko
-DEPENDS+=	${PYPKGPREFIX}-jinja2-[0-9]*:../../textproc/py-jinja2
-DEPENDS+=	${PYPKGPREFIX}-crypto>=2.6:../../security/py-crypto
+PREV_PKGPATH=	sysutils/ansible2
 
-USE_TOOLS+=	gmake
-EGDIR=		${PREFIX}/share/examples/ansible
+DEPENDS+=	ansible-base>=2.10.5:../../sysutils/ansible-base
 
-SUBST_CLASSES+=         prefix
-SUBST_STAGE.prefix=     pre-configure
-SUBST_FILES.prefix+=    docs/man/man1/ansible.1
-SUBST_FILES.prefix+=    docs/man/man1/ansible.1.asciidoc.in
-SUBST_FILES.prefix+=    docs/man/man1/ansible-galaxy.1
-SUBST_FILES.prefix+=    docs/man/man1/ansible-galaxy.1.asciidoc.in
-SUBST_FILES.prefix+=    docs/man/man1/ansible-playbook.1
-SUBST_FILES.prefix+=    docs/man/man1/ansible-playbook.1.asciidoc.in
-SUBST_FILES.prefix+=    examples/ansible.cfg examples/hosts
-SUBST_FILES.prefix+=    lib/ansible/constants.py lib/ansible/callbacks.py
-SUBST_FILES.prefix+=    lib/ansible/modules/core/system/ping.py
-SUBST_FILES.prefix+=    lib/ansible/modules/core/system/setup.py
-SUBST_FILES.prefix+=    lib/ansible/modules/extras/database/misc/riak.py
-SUBST_FILES.prefix+=    lib/ansible/modules/extras/monitoring/nagios.py
-SUBST_FILES.prefix+=    lib/ansible/modules/extras/packaging/os/pkgin.py
-SUBST_FILES.prefix+=    plugins/README.md plugins/inventory/cobbler.py
-SUBST_FILES.prefix+=    plugins/inventory/collins.py
-SUBST_MESSAGE.prefix=   Fixing PREFIX path.
-SUBST_VARS.prefix=	PREFIX
-SUBST_VARS.prefix+=	PKG_SYSCONFBASE
-SUBST_VARS.prefix+=	PKG_SYSCONFDIR
+USE_LANGUAGES=	# none
 
-SUBST_CLASSES+=         pythonbin
-SUBST_STAGE.pythonbin=  pre-configure
-SUBST_FILES.pythonbin=  Makefile
-SUBST_MESSAGE.pythonbin=        Fixing path to PYTHONBIN.
-SUBST_SED.pythonbin=    -e "s,PYTHON=python,PYTHON=${PYTHONBIN},"
+REPLACE_PYTHON+=	ansible_collections/*/*/.azure-pipelines/scripts/*.py
+REPLACE_PYTHON+=	ansible_collections/*/*/tests/*/*.py
+REPLACE_PYTHON+=	ansible_collections/*/*/tests/*/*/*.py
+REPLACE_PYTHON+=	ansible_collections/*/*/tests/*/*/*/*.py
+REPLACE_PYTHON+=	ansible_collections/community/general/tests/integration/targets/django_manage/files/base_test/*/*/*.py
+REPLACE_PYTHON+=	ansible_collections/community/okd/ci/downstream_fragments.py
+REPLACE_PYTHON+=	ansible_collections/ngine_io/cloudstack/scripts/inventory/cloudstack.py
+REPLACE_PYTHON+=	ansible_collections/sensu/sensu_go/fix-pytest-ini.py
 
-PYTHON_VERSIONS_INCOMPATIBLE=    36 37 # py-paramiko
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/*/*/.azure-pipelines/scripts/*.sh
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/*/*/tests/*/*.sh
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/*/*/tests/*/*/*.sh
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/*/*/tests/*/*/*/*.sh
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/netbox/netbox/hacking/*.sh
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/community/vmware/check-ignores-order
+CHECK_INTERPRETER_SKIP+=	${PYSITELIB}/ansible_collections/infinidat/infinibox/bin/*.sh
 
-REPLACE_PYTHON=         lib/ansible/runner/action_plugins/synchronize.py
-REPLACE_PYTHON+=        lib/ansible/utils/module_docs.py
-
-MANPAGES=       ansible-doc.1 ansible-pull.1 ansible-galaxy.1 ansible-vault.1
-MANPAGES+=      ansible-playbook.1 ansible.1
-
-INSTALLATION_DIRS=      bin ${PKGMANDIR}/man1
-INSTALLATION_DIRS+=     ${EGDIR}/playbooks
-INSTALLATION_DIRS+=     share/ansible/roles
-
-CHECK_INTERPRETER_SKIP= share/ansible/*
-
-MAKE_DIRS=		${PREFIX}/share/ansible
-MAKE_DIRS+=		${PREFIX}/share/ansible/ansible_plugins
-MAKE_DIRS+=		${PREFIX}/share/ansible/ansible_plugins/action_plugins
-MAKE_DIRS+=		${PREFIX}/share/ansible/ansible_plugins/callback_plugins
-MAKE_DIRS+=		${PREFIX}/share/ansible/ansible_plugins/connection_plugins
-MAKE_DIRS+=		${PREFIX}/share/ansible/ansible_plugins/lookup_plugins
-MAKE_DIRS+=		${PREFIX}/share/ansible/ansible_plugins/vars_plugins
-MAKE_DIRS+=		${PREFIX}/share/ansible/ansible_plugins/filter_plugins
-
-pre-install:
-	find ${WRKSRC} -name \*.orig -exec rm {} \;
-
-post-install:
-.for f in ${MANPAGES}
-	${INSTALL_MAN} ${WRKSRC}/docs/man/man1/${f} \
-		${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/
-.endfor
-.for f in ansible.cfg hosts
-	${INSTALL_DATA} ${WRKSRC}/examples/${f} ${DESTDIR}/${EGDIR}
-.endfor
+post-extract:
+	${FIND} ${WRKSRC}/ansible_collections -name .DS_Store -delete
 
 .include "../../lang/python/application.mk"
 .include "../../lang/python/egg.mk"

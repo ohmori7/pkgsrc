@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.9 2018/08/22 09:47:42 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2021/01/29 11:55:33 wen Exp $
 
-DISTNAME=	HTTP-Entity-Parser-0.21
+DISTNAME=	HTTP-Entity-Parser-0.25
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	www perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=HTTP/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/HTTP-Entity-Parser/
+HOMEPAGE=	https://metacpan.org/release/HTTP-Entity-Parser
 COMMENT=	PSGI compliant HTTP Entity Parser
 LICENSE=	${PERL5_LICENSE}
 
@@ -17,9 +16,8 @@ DEPENDS+=	p5-HTTP-MultiPartParser>=0:../../www/p5-HTTP-MultiPartParser
 DEPENDS+=	p5-Hash-MultiValue-[0-9]*:../../devel/p5-Hash-MultiValue
 DEPENDS+=	p5-Stream-Buffered-[0-9]*:../../devel/p5-Stream-Buffered
 
-# for make test
-BUILD_DEPENDS+=	p5-JSON-[0-9]*:../../converters/p5-JSON
-BUILD_DEPENDS+=	p5-HTTP-Message-[0-9]*:../../www/p5-HTTP-Message
+TEST_DEPENDS+=	p5-JSON-[0-9]*:../../converters/p5-JSON
+TEST_DEPENDS+=	p5-HTTP-Message-[0-9]*:../../www/p5-HTTP-Message
 
 USE_LANGUAGES=		# empty
 PERL5_PACKLIST=		auto/HTTP/Entity/Parser/.packlist

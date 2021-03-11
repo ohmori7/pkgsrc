@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.14 2019/04/26 13:14:22 maya Exp $
+# $NetBSD: Makefile,v 1.29 2020/08/31 18:13:17 wiz Exp $
 
 DISTNAME=	trafficserver-7.1.2
-PKGREVISION=	5
+PKGREVISION=	15
 CATEGORIES=	www
 MASTER_SITES=	${MASTER_SITE_APACHE:=trafficserver/}
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	fhajny@NetBSD.org
-HOMEPAGE=	http://trafficserver.apache.org/
+MAINTAINER=	pkgsrc-users@NetBSD.org
+HOMEPAGE=	https://trafficserver.apache.org/
 COMMENT=	Fast, scalable and extensible caching proxy server
 LICENSE=	apache-2.0
 
@@ -19,48 +19,48 @@ GNU_CONFIGURE=	yes
 
 # For man pages
 PYTHON_FOR_BUILD_ONLY=		yes
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37
-BUILD_DEPENDS+=			${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx
+PYTHON_VERSIONS_ACCEPTED=	27
+BUILD_DEPENDS+=			${PYPKGPREFIX}-sphinx-[0-9]*:../../textproc/py-sphinx1
 
 .include "../../mk/bsd.prefs.mk"
 
 .include "options.mk"
 
-BODY_FILES+=	access__denied access__proxy_auth_required			\
-		access__ssl_forbidden cache__not_in_cache cache__read_error	\
-		congestion__retryAfter connect__dns_failed			\
-		connect__failed_connect connect__hangup default			\
-		interception__no_host redirect__moved_permanently		\
-		redirect__moved_temporarily request__cycle_detected		\
-		request__invalid_content_length request__no_content_length	\
-		request__no_host request__scheme_unsupported			\
-		request__syntax_error response__bad_response			\
-		response__bad_version timeout__activity	timeout__inactivity	\
+BODY_FILES+=	access__denied access__proxy_auth_required		\
+		access__ssl_forbidden cache__not_in_cache cache__read_error \
+		congestion__retryAfter connect__dns_failed		\
+		connect__failed_connect connect__hangup default		\
+		interception__no_host redirect__moved_permanently	\
+		redirect__moved_temporarily request__cycle_detected	\
+		request__invalid_content_length request__no_content_length \
+		request__no_host request__scheme_unsupported		\
+		request__syntax_error response__bad_response		\
+		response__bad_version timeout__activity	timeout__inactivity \
 		transcoding__unsupported urlrouting__no_mapping
 
-CONFIG_FILES+=	cache cluster congestion hosting ip_allow log_hosts logging	\
-		metrics parent plugin records remap socks splitdns		\
+CONFIG_FILES+=	cache cluster congestion hosting ip_allow log_hosts logging \
+		metrics parent plugin records remap socks splitdns	\
 		ssl_multicert storage vaddrs volume
 
 EGDIR=			share/examples/${PKGBASE}
 
 PKG_SYSCONFSUBDIR=	${PKGBASE}
 PKG_SYSCONFDIR_PERMS+=	${TS_USER} ${TS_GROUP} 0755
-MAKE_DIRS_PERMS+=	${PKG_SYSCONFDIR}/body_factory/default			\
+MAKE_DIRS_PERMS+=	${PKG_SYSCONFDIR}/body_factory/default \
 			${TS_USER} ${TS_GROUP} 0755
-MAKE_DIRS_PERMS+=	${PKG_SYSCONFDIR}/snapshots				\
+MAKE_DIRS_PERMS+=	${PKG_SYSCONFDIR}/snapshots \
 			${TS_USER} ${TS_GROUP} 0755
 OWN_DIRS_PERMS+=	${TS_DIR} ${TS_USER} ${TS_GROUP} 0755
 OWN_DIRS_PERMS+=	${TS_LOGDIR} ${TS_USER} ${TS_GROUP} 0755
 
 .for file in ${BODY_FILES}
-CONF_FILES_PERMS+=	${EGDIR}/body_factory/default/${file:S/__/\#/}		\
-			${PKG_SYSCONFDIR}/body_factory/default/${file:S/__/\#/}	\
+CONF_FILES_PERMS+=	${EGDIR}/body_factory/default/${file:S/__/\#/}	\
+			${PKG_SYSCONFDIR}/body_factory/default/${file:S/__/\#/} \
 			${TS_USER} ${TS_GROUP} 0644
 .endfor
 .for file in ${CONFIG_FILES}
-CONF_FILES_PERMS+=	${EGDIR}/${file}.config.default				\
-			${PKG_SYSCONFDIR}/${file}.config 			\
+CONF_FILES_PERMS+=	${EGDIR}/${file}.config.default			\
+			${PKG_SYSCONFDIR}/${file}.config		\
 			${TS_USER} ${TS_GROUP} 0644
 .endfor
 
@@ -88,7 +88,7 @@ CONFIGURE_ARGS+=	--with-user=${TS_USER}
 
 CONFIGURE_ENV.SunOS+=	ac_cv_func_epoll_ctl=no
 CONFIGURE_ENV.SunOS+=	ac_cv_func_inotify_init=no
-CONFIGURE_ENV+=		SPHINXBUILD=sphinx-build${PYVERSSUFFIX}
+CONFIGURE_ENV+=		SPHINXBUILD=sphinx-build-${PYVERSSUFFIX}
 
 REPLACE_BASH+=		tools/tsxs.in
 REPLACE_PERL+=		tools/tspush

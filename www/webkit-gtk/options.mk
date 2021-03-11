@@ -1,20 +1,24 @@
-# $NetBSD: options.mk,v 1.17 2019/04/20 16:39:13 leot Exp $
+# $NetBSD: options.mk,v 1.21 2020/03/10 18:14:04 leot Exp $
 #
 
 PKG_OPTIONS_VAR=	PKG_OPTIONS.webkit-gtk
-PKG_SUPPORTED_OPTIONS=	debug enchant introspection opengl webkit-jit
+PKG_SUPPORTED_OPTIONS=	debug enchant introspection opengl webkit-jit wayland
 PKG_SUGGESTED_OPTIONS=	enchant introspection opengl
+.include "../../devel/wayland/platform.mk"
+.if ${PLATFORM_SUPPORTS_WAYLAND} == "yes"
+PKG_SUGGESTED_OPTIONS+=	wayland
+.endif
 
 PLIST_VARS=	introspection
 
-.include "../../mk/bsd.prefs.mk"
+.include "../../mk/bsd.fast.prefs.mk"
 
 #
 # Platforms that support the webkit-jit option
 #
 # Please see:
 #  Source/cmake/WebKitFeatures.cmake
-#  Source/WTF/wtf/Platform.h
+#  Source/WTF/wtf/PlatformEnable.h
 #
 WEBKIT_JIT_MACHINE_PLATFORMS+=	Darwin-*-*
 WEBKIT_JIT_MACHINE_PLATFORMS+=	DragonFly-*-*
@@ -78,4 +82,15 @@ BUILDLINK_DEPMETHOD.gobject-introspection+=	build
 CMAKE_ARGS+=	-DENABLE_INTROSPECTION=ON
 .else
 CMAKE_ARGS+=	-DENABLE_INTROSPECTION=OFF
+.endif
+
+#
+# Wayland display server support
+#
+.if !empty(PKG_OPTIONS:Mwayland)
+CMAKE_ARGS+=	-DENABLE_WAYLAND_TARGET=ON
+CMAKE_ARGS+=	-DUSE_WPE_RENDERER=OFF # TODO
+.include "../../devel/wayland/buildlink3.mk"
+.else
+CMAKE_ARGS+=	-DENABLE_WAYLAND_TARGET=OFF
 .endif

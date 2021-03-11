@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.24 2019/03/18 16:17:47 gdt Exp $
+# $NetBSD: Makefile,v 1.33 2020/12/04 04:55:50 riastradh Exp $
 
 DISTNAME=	ghostscript-cidfonts-ryumin-${GS_VERSION}
 DISTFILES=	# empty
-PKGREVISION=	17
+PKGREVISION=	1
 CATEGORIES=	fonts
 
 MAINTAINER=	makoto@ki.nu
@@ -29,9 +29,10 @@ SUBST_VARS=	GCR_INSTALL_TYPE
 .if !empty(GS_CIDFMAP)
 SUBST_CLASSES+=		ttf_path
 SUBST_STAGE.ttf_path=	post-build
-SUBST_MESSAGE.ttf_path=Fixing ttf install directory in cidfmap
+SUBST_MESSAGE.ttf_path=	Fixing ttf install directory in cidfmap
 SUBST_FILES.ttf_path=	${GS_CIDFMAP}
 SUBST_SED.ttf_path=	-e 's|%%PREFIX%%|${PREFIX}|'
+SUBST_NOOP_OK.ttf_path=	yes
 .endif
 
 # To edit %%PREFIX%% in cidfmap before installation by SUBST,
@@ -69,15 +70,15 @@ NO_CONFIGURE=	yes
 
 # Following logic is flaky, for looking at PKG_OPTIONS.gs_type now NOT at build time
 .if   !empty(PKG_BUILD_OPTIONS.ghostscript:Mghostscript-agpl)
-. include	"../../print/ghostscript-agpl/Makefile.common"
-. if empty(PKG_BUILD_OPTIONS.ghostscript-agpl:Mdisable-compile-inits)
+.  include	"../../print/ghostscript-agpl/Makefile.common"
+.  if empty(PKG_BUILD_OPTIONS.ghostscript-agpl:Mdisable-compile-inits)
 PKG_FAIL_REASON+=	'(agpl) You need to set PKG_OPTIONS.ghostscript+= disable-compile-inits, at its compile time.'
-. endif
+.  endif
 .else
-. include	"../../print/ghostscript-gpl/Makefile.common"
-. if empty(PKG_BUILD_OPTIONS.ghostscript-gpl:Mdisable-compile-inits)
+.  include	"../../print/ghostscript-gpl/Makefile.common"
+.  if empty(PKG_BUILD_OPTIONS.ghostscript-gpl:Mdisable-compile-inits)
 PKG_FAIL_REASON+=	'(gpl) You need to set PKG_OPTIONS.ghostscript+= disable-compile-inits, at its compile time.'
-. endif
+.  endif
 .endif
 
 .include "../../mk/bsd.pkg.mk"

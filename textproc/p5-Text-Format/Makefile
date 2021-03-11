@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.27 2018/08/22 09:47:00 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2020/11/08 02:33:04 mef Exp $
 #
 
-DISTNAME=	Text-Format-0.61
+DISTNAME=	Text-Format-0.62
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Text/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Text-Format/
+HOMEPAGE=	https://metacpan.org/release/Text-Format
 COMMENT=	Provide perl5 formatting functions on plain text
 LICENSE=	${PERL5_LICENSE}
 

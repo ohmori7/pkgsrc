@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.2 2019/04/02 13:20:05 nia Exp $
+# $NetBSD: Makefile,v 1.4 2019/10/28 13:45:24 nia Exp $
 
-DISTNAME=	papirus-folders-1.3.1
+DISTNAME=	papirus-folders-1.5.0
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_GITHUB:=PapirusDevelopmentTeam/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}

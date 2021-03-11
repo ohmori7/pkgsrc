@@ -1,5 +1,6 @@
-@comment $NetBSD: PLIST,v 1.2 2018/09/23 18:00:00 taca Exp $
+@comment $NetBSD: PLIST,v 1.4 2021/02/05 15:39:12 taca Exp $
 ${GEM_HOME}/cache/${GEM_NAME}.gem
+${GEM_LIBDIR}/.github/workflows/verify.yml
 ${GEM_LIBDIR}/.gitignore
 ${GEM_LIBDIR}/.rspec
 ${GEM_LIBDIR}/.ruby-version
@@ -32,6 +33,7 @@ ${GEM_LIBDIR}/lib/rex/text/silly.rb
 ${GEM_LIBDIR}/lib/rex/text/table.rb
 ${GEM_LIBDIR}/lib/rex/text/unicode.rb
 ${GEM_LIBDIR}/lib/rex/text/version.rb
+${GEM_LIBDIR}/lib/rex/text/wrapped_table.rb
 ${GEM_LIBDIR}/lib/rex/text/xor.rb
 ${GEM_LIBDIR}/rex-text.gemspec
 ${GEM_HOME}/specifications/${GEM_NAME}.gemspec

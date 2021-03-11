@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.128 2018/08/22 09:45:53 wiz Exp $
+# $NetBSD: Makefile,v 1.137 2020/08/31 18:10:35 wiz Exp $
 
-DISTNAME=	lftp-4.8.4
+DISTNAME=	lftp-4.9.2
 PKGREVISION=	1
 CATEGORIES=	net
 MASTER_SITES=	http://lftp.yar.ru/ftp/
@@ -9,7 +9,7 @@ MASTER_SITES+=	http://lftp.cybermirror.org/
 EXTRACT_SUFX=	.tar.xz
 
 MAINTAINER=	pettai@NetBSD.org
-HOMEPAGE=	http://lftp.yar.ru/
+HOMEPAGE=	https://lftp.tech/
 COMMENT=	Powerful command line file transfer client
 LICENSE=	gnu-gpl-v3
 

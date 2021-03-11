@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.97 2019/06/18 13:30:52 adam Exp $
+# $NetBSD: Makefile,v 1.115 2021/01/24 15:29:26 nia Exp $
 
 .include "Makefile.common"
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	http://www.graphicsmagick.org/
-COMMENT=	X application for displaying and manipulating images
+COMMENT=	Tools and libraries for reading, writing, and manipulating images
 LICENSE=	mit
 
 DEPENDS+=	urw-fonts-[0-9]*:../../fonts/urw-fonts
@@ -17,13 +17,13 @@ GNU_CONFIGURE=		yes
 CONFIGURE_ARGS+=	--enable-shared
 CONFIGURE_ARGS+=	--with-modules=yes
 CONFIGURE_ARGS+=	--with-gs-font-dir=${PREFIX}/share/fonts/urw
-CONFIGURE_ARGS+=	--with-ltdl-include=${BUILDLINK_PREFIX.libltdl}/include
-CONFIGURE_ARGS+=	--with-ltdl-lib=${BUILDLINK_PREFIX.libltdl}/lib
 CONFIGURE_ARGS+=	--without-perl
 
 PKGCONFIG_OVERRIDE+=	magick/GraphicsMagick.pc.in
 PKGCONFIG_OVERRIDE+=	wand/GraphicsMagickWand.pc.in
 PKGCONFIG_OVERRIDE+=	Magick++/lib/GraphicsMagick++.pc.in
+
+CTF_FILES_SKIP+=	lib/libGraphicsMagick.so.*	# CPU limit exceeded
 
 TEST_TARGET=	check
 

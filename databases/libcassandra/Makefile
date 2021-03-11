@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.43 2018/12/13 19:51:44 adam Exp $
+# $NetBSD: Makefile,v 1.53 2021/01/01 08:24:38 ryoon Exp $
 #
 
 DISTNAME=		libcassandra-20101010
-PKGREVISION=		30
+PKGREVISION=		38
 CATEGORIES=		databases
 MASTER_SITES=		ftp://ftp.ancient-solutions.com/pub/bsdprojects/NetBSD/packages/distfiles/
 
@@ -20,11 +20,7 @@ USE_TOOLS+=		perl
 # libthrift is not clean
 BUILDLINK_TRANSFORM+=	rm:-Wundef
 
-.include "../../mk/bsd.prefs.mk"
-
-.if ${OPSYS} != "DragonFly"
 GCC_REQD+=	4.4
-.endif
 
 .include "../../devel/boost-headers/buildlink3.mk"
 .include "../../devel/boost-libs/buildlink3.mk"
@@ -36,7 +32,7 @@ MAKE_ENV+=		AM_DEFAULT_VERBOSITY=1
 
 .include "../../mk/compiler.mk"
 .if !empty(PKGSRC_COMPILER:Mclang)
-CXXFLAGS+=	-Wno-unknown-warning-option
+CXXFLAGS+=	-Wno-unknown-warning-option -Wno-unused-parameter
 CXXFLAGS+=	-Wno-c++11-extensions -Wno-error=unused-local-typedef
 .endif
 

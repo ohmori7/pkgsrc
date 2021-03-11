@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.2 2017/05/07 02:02:10 mef Exp $
+# $NetBSD: Makefile,v 1.4 2020/01/08 13:15:42 nia Exp $
 
-DISTNAME=	screenFetch-3.8.0
+DISTNAME=	screenFetch-3.9.1
 PKGNAME=	${DISTNAME:tl}
 CATEGORIES=	sysutils
 MASTER_SITES=	${MASTER_SITE_GITHUB:=KittyKatt/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	https://github.com/KittyKatt/screenFetch/
+HOMEPAGE=	https://github.com/KittyKatt/screenFetch
 COMMENT=	Fetches system/theme information in terminal for screenshots
 LICENSE=	gnu-gpl-v3
 

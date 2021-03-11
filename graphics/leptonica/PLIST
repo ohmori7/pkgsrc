@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.4 2019/03/22 08:23:04 adam Exp $
+@comment $NetBSD: PLIST,v 1.6 2020/07/29 07:02:21 adam Exp $
 bin/convertfilestopdf
 bin/convertfilestops
 bin/convertformat
@@ -19,6 +19,7 @@ include/leptonica/bmf.h
 include/leptonica/bmfdata.h
 include/leptonica/bmp.h
 include/leptonica/ccbord.h
+include/leptonica/colorfill.h
 include/leptonica/dewarp.h
 include/leptonica/endianness.h
 include/leptonica/environ.h
@@ -40,5 +41,7 @@ include/leptonica/stack.h
 include/leptonica/stringcode.h
 include/leptonica/sudoku.h
 include/leptonica/watershed.h
+lib/cmake/LeptonicaConfig-version.cmake
+lib/cmake/LeptonicaConfig.cmake
 lib/liblept.la
 lib/pkgconfig/lept.pc

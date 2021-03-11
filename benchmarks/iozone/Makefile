@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.58 2018/08/22 09:42:58 wiz Exp $
+# $NetBSD: Makefile,v 1.60 2020/08/31 18:06:38 wiz Exp $
 
 DISTNAME=	iozone3_430
 PKGNAME=	${DISTNAME:S/3_/-3./}
-PKGREVISION=	2
+PKGREVISION=	4
 CATEGORIES=	benchmarks
 MASTER_SITES=	http://www.iozone.org/src/current/
 EXTRACT_SUFX=	.tar

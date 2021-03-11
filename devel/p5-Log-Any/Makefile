@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.30 2018/08/22 09:44:12 wiz Exp $
+# $NetBSD: Makefile,v 1.34 2020/08/31 18:08:17 wiz Exp $
 
-DISTNAME=	Log-Any-1.707
-PKGNAME=	p5-Log-Any-1.70.7
+DISTNAME=	Log-Any-1.708
+# 1.708 -> 1.70.8
+PKGNAME=	p5-${DISTNAME:C/-([0-9])\.([0-9])([0-9])([0-9])/-\1.\2\3.\4/}
 PKGREVISION=	1
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Log/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Log-Any/
+HOMEPAGE=	https://metacpan.org/release/Log-Any
 COMMENT=	Perl5 module to bring loggers and listeners together
 LICENSE=	${PERL5_LICENSE}
 

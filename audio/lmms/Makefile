@@ -1,38 +1,47 @@
-# $NetBSD: Makefile,v 1.53 2019/06/17 07:31:12 nia Exp $
-#
+# $NetBSD: Makefile,v 1.70 2021/02/07 06:30:14 ryoon Exp $
 
-VERSION=		1.2.0
-PKGNAME=		lmms-${VERSION}
-DISTNAME=		lmms_${VERSION}
-EXTRACT_SUFX=		.tar.xz
-CATEGORIES=		audio
-MASTER_SITES=		${MASTER_SITE_GITHUB:=LMMS/}
-GITHUB_RELEASE=		v${VERSION}
+DISTNAME=	lmms_1.2.2
+PKGNAME=	${DISTNAME:S/_/-/1}
+PKGREVISION=	7
+CATEGORIES=	audio
+MASTER_SITES=	${MASTER_SITE_GITHUB:=LMMS/}
+GITHUB_PROJECT=	lmms
+GITHUB_RELEASE=	v${PKGVERSION_NOREV}
+EXTRACT_SUFX=	.tar.xz
 
-MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		https://lmms.io/
-COMMENT=		Cross-platform music production software
-LICENSE=		gnu-gpl-v2
+MAINTAINER=	nia@NetBSD.org
+HOMEPAGE=	https://lmms.io/
+COMMENT=	Cross-platform music production software
+LICENSE=	gnu-gpl-v2
 
-USE_PKGLOCALEDIR=	yes
-USE_LIBTOOL=		yes
-USE_LANGUAGES=		c c++03
-USE_TOOLS+=		gmake perl pkg-config
-USE_CMAKE=		yes
+TOOL_DEPENDS+=	qt5-qttools-[0-9]*:../../x11/qt5-qttools
 
-WRKSRC=		${WRKDIR}/lmms-${VERSION}
+WRKSRC=		${WRKDIR}/lmms
+USE_CMAKE=	yes
+USE_TOOLS+=	pkg-config
+USE_LANGUAGES=	c c++
 
+.include "../../mk/oss.buildlink3.mk"
+
+.if ${OSS_TYPE} != "none"
+LDFLAGS+=	${LIBOSSAUDIO}
+.endif
+
+CMAKE_ARGS+=	-Wno-dev
 CMAKE_ARGS+=	-DWANT_QT5=ON
 CMAKE_ARGS+=	-DWANT_GIG=OFF # requires libgig
 CMAKE_ARGS+=	-DWANT_STK=OFF # requires libstk
 CMAKE_ARGS+=	-DWANT_CARLA=OFF # requires carla
 CMAKE_ARGS+=	-DWANT_SOUNDIO=OFF # requires libsoundio
+CMAKE_ARGS+=	-DWANT_SNDIO=OFF # requires sndio
 CMAKE_ARGS+=	-DWANT_VST_NOWINE=ON
+
+# for libzynaddsubfx.so in plugins/zynaddsubfx/.
+LDFLAGS+=	${COMPILER_RPATH_FLAG}${PREFIX}/lib/lmms
 
 BUILDLINK_TRANSFORM+=	rm:-floop-optimize2 rm:-fgcse-las
 
-# for libzynaddsubfx.so in plugins/zynaddsubfx/.
-LDFLAGS+=		${COMPILER_RPATH_FLAG}${PREFIX}/lib/lmms
+CHECK_PORTABILITY_SKIP+=	cmake/linux/package_linux.sh.in
 
 .include "options.mk"
 .include "../../audio/fluidsynth/buildlink3.mk"
@@ -44,9 +53,11 @@ LDFLAGS+=		${COMPILER_RPATH_FLAG}${PREFIX}/lib/lmms
 .include "../../math/fftwf/buildlink3.mk"
 .include "../../multimedia/libogg/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
+.include "../../x11/fltk13/buildlink3.mk" # used for zynaddsubfx
 .include "../../x11/qt5-qtbase/buildlink3.mk"
-.include "../../x11/qt5-qttools/buildlink3.mk"
-.include "../../x11/qt5-qtx11extras/buildlink3.mk"
+.if ${OPSYS} != "Darwin"
+.  include "../../x11/qt5-qtx11extras/buildlink3.mk"
+.endif
 .include "../../mk/dlopen.buildlink3.mk"
 .include "../../mk/pthread.buildlink3.mk"
 BUILDLINK_TRANSFORM+=	opt:-ldl:${BUILDLINK_LDADD.dl:Q}

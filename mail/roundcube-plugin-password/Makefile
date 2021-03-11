@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.5 2019/04/30 03:58:45 taca Exp $
+# $NetBSD: Makefile,v 1.13 2020/12/28 08:58:10 taca Exp $
 
 PLUGIN=		password
 
@@ -6,13 +6,14 @@ MAINTAINER=	taca@NetBSD.org
 COMMENT=	Password change plugin for roundcube
 LICENSE=	gnu-gpl-v3
 
-PLUGIN=		password
+DEPENDS+=	tcl-expect>=5.32.1:../../lang/tcl-expect
 
 REPLACE_PERL+=		plugins/password/helpers/change_ldap_pass.pl
 REPLACE_PYTHON+=	plugins/password/helpers/chpass-wrapper.py
 
-do-install: plugin-install
+DISTINFO_FILE=	${PKGDIR}/distinfo
 
 .include "../../mail/roundcube/plugins.mk"
+.include "../../lang/perl5/module.mk"
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

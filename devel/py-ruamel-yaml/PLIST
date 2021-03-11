@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.6 2019/05/07 09:29:38 adam Exp $
+@comment $NetBSD: PLIST,v 1.10 2019/12/17 10:11:28 leot Exp $
 ${PYSITELIB}/${EGG_INFODIR}/PKG-INFO
 ${PYSITELIB}/${EGG_INFODIR}/SOURCES.txt
 ${PYSITELIB}/${EGG_INFODIR}/dependency_links.txt
@@ -6,7 +6,6 @@ ${PYSITELIB}/${EGG_INFODIR}/namespace_packages.txt
 ${PYSITELIB}/${EGG_INFODIR}/requires.txt
 ${PYSITELIB}/${EGG_INFODIR}/top_level.txt
 ${PYSITELIB}/${EGG_NAME}-nspkg.pth
-${PYSITELIB}/_ruamel_yaml.so
 ${PYSITELIB}/ruamel/yaml/__init__.py
 ${PYSITELIB}/ruamel/yaml/__init__.pyc
 ${PYSITELIB}/ruamel/yaml/__init__.pyo
@@ -55,6 +54,7 @@ ${PYSITELIB}/ruamel/yaml/nodes.pyo
 ${PYSITELIB}/ruamel/yaml/parser.py
 ${PYSITELIB}/ruamel/yaml/parser.pyc
 ${PYSITELIB}/ruamel/yaml/parser.pyo
+${PYSITELIB}/ruamel/yaml/py.typed
 ${PYSITELIB}/ruamel/yaml/reader.py
 ${PYSITELIB}/ruamel/yaml/reader.pyc
 ${PYSITELIB}/ruamel/yaml/reader.pyo

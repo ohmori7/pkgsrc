@@ -4,26 +4,72 @@ import (
 	"gopkg.in/check.v1"
 )
 
+func (s *Suite) Test_ACLPermissions_Contains(c *check.C) {
+	t := s.Init(c)
+
+	perms := aclpAllRuntime
+
+	t.CheckEquals(perms.Contains(aclpAllRuntime), true)
+	t.CheckEquals(perms.Contains(aclpUse), true)
+	t.CheckEquals(perms.Contains(aclpUseLoadtime), false)
+}
+
+func (s *Suite) Test_ACLPermissions_String(c *check.C) {
+	t := s.Init(c)
+
+	t.CheckEquals(ACLPermissions(0).String(), "none")
+	t.CheckEquals(aclpAll.String(), "set, set-default, append, use-loadtime, use")
+}
+
+func (s *Suite) Test_ACLPermissions_HumanString(c *check.C) {
+	t := s.Init(c)
+
+	// Doesn't happen in practice
+	t.CheckEquals(ACLPermissions(0).HumanString(), "")
+
+	t.CheckEquals(
+		aclpAll.HumanString(),
+		"set, given a default value, appended to, used at load time, or used")
+}
+
+func (s *Suite) Test_Vartype_IsNonemptyIfDefined(c *check.C) {
+	t := s.Init(c)
+
+	t.SetUpVartypes()
+
+	test := func(varname string, isNonempty bool) {
+		vartype := G.Pkgsrc.VariableType(nil, varname)
+
+		t.CheckEquals(vartype.IsNonemptyIfDefined(), isNonempty)
+	}
+
+	test("PKGPATH", true)
+	test("PKGREVISION", true)
+	test("OPSYS", true)
+	test("OS_VERSION", false)
+}
+
 func (s *Suite) Test_Vartype_EffectivePermissions(c *check.C) {
 	t := s.Init(c)
 
 	t.SetUpVartypes()
 
 	if typ := G.Pkgsrc.vartypes.Canon("PREFIX"); c.Check(typ, check.NotNil) {
-		c.Check(typ.basicType.name, equals, "Pathname")
-		c.Check(typ.aclEntries, deepEquals, []ACLEntry{NewACLEntry("*", aclpUse)})
-		c.Check(typ.EffectivePermissions("Makefile"), equals, aclpUse)
-		c.Check(typ.EffectivePermissions("buildlink3.mk"), equals, aclpUse)
+		t.CheckEquals(typ.basicType.name, "Pathname")
+		t.CheckDeepEquals(typ.aclEntries, []ACLEntry{NewACLEntry("*", aclpUse)})
+		t.CheckEquals(typ.EffectivePermissions("Makefile"), aclpUse)
+		t.CheckEquals(typ.EffectivePermissions("buildlink3.mk"), aclpUse)
 	}
 
 	if typ := G.Pkgsrc.vartypes.Canon("EXTRACT_OPTS"); c.Check(typ, check.NotNil) {
-		c.Check(typ.basicType.name, equals, "ShellWord")
-		c.Check(typ.EffectivePermissions("Makefile"), equals, aclpAllWrite|aclpUse)
-		c.Check(typ.EffectivePermissions("options.mk"), equals, aclpAllWrite|aclpUse)
+		t.CheckEquals(typ.basicType.name, "ShellWord")
+		t.CheckEquals(typ.EffectivePermissions("Makefile"), aclpAllWrite|aclpUse)
+		t.CheckEquals(typ.EffectivePermissions("options.mk"), aclpAllWrite|aclpUse)
 	}
 }
 
 func (s *Suite) Test_Vartype_AlternativeFiles(c *check.C) {
+	t := s.Init(c)
 
 	// test generates the files description for the "set" permission.
 	test := func(rules []string, alternatives string) {
@@ -32,7 +78,7 @@ func (s *Suite) Test_Vartype_AlternativeFiles(c *check.C) {
 
 		alternativeFiles := vartype.AlternativeFiles(aclpSet)
 
-		c.Check(alternativeFiles, equals, alternatives)
+		t.CheckEquals(alternativeFiles, alternatives)
 	}
 
 	// rules parses the given permission rules.
@@ -62,7 +108,7 @@ func (s *Suite) Test_Vartype_AlternativeFiles(c *check.C) {
 	test(
 		rules(
 			"buildlink3.mk: set",
-			"special:b*.mk: set, append",
+			"special:*3.mk: set, append",
 			"*.mk: set",
 			"Makefile: set, append",
 			"Makefile.*: set"),
@@ -72,7 +118,7 @@ func (s *Suite) Test_Vartype_AlternativeFiles(c *check.C) {
 	test(
 		rules(
 			"buildlink3.mk: set",
-			"special:b*.mk: set, append",
+			"special:*3.mk: set, append",
 			"*.mk: set",
 			"Makefile: set, append",
 			"Makefile.*: set",
@@ -90,7 +136,6 @@ func (s *Suite) Test_Vartype_AlternativeFiles(c *check.C) {
 		rules(
 			"buildlink3.mk: none",
 			"*: set"),
-		// TODO: should be "buildlink3.mk only".
 		"*, but not buildlink3.mk")
 
 	// If there are both positive and negative cases, preserve all the
@@ -99,12 +144,12 @@ func (s *Suite) Test_Vartype_AlternativeFiles(c *check.C) {
 	test(
 		rules(
 			"buildlink3.mk: none",
-			"special:b*.mk: set",
+			"special:*3.mk: set",
 			"*.mk: none",
 			"Makefile: set",
 			"Makefile.*: none",
 			"*: set"),
-		"b*.mk, Makefile or *, but not buildlink3.mk, *.mk or Makefile.*")
+		"*3.mk, Makefile or *, but not buildlink3.mk, *.mk or Makefile.*")
 
 	test(
 		rules(
@@ -112,8 +157,42 @@ func (s *Suite) Test_Vartype_AlternativeFiles(c *check.C) {
 			"builtin.mk: set",
 			"Makefile: none",
 			"*.mk: append"),
-		// TODO: should be "builtin.mk only".
 		"builtin.mk, but not buildlink3.mk, Makefile or *.mk")
+}
+
+func (s *Suite) Test_Vartype_MayBeAppendedTo(c *check.C) {
+	t := s.Init(c)
+
+	t.SetUpVartypes()
+
+	test := func(varname string, isAppendAllowed bool) {
+		vartype := G.Pkgsrc.VariableType(nil, varname)
+
+		t.CheckEquals(vartype.MayBeAppendedTo(), isAppendAllowed)
+	}
+
+	// There are several packages that append a parenthesized addition
+	// to the comment, such as "(command-line version)".
+	test("COMMENT", true)
+
+	// Appending to a list is always ok.
+	test("DEPENDS", true)
+	test("PKG_FAIL_REASON", true)
+
+	// This type is not marked as a list since it does not support
+	// appending a single element, therefore the above rule does not apply.
+	// Whenever something is appended, it must be in pairs of two words.
+	test("CONF_FILES", true)
+
+	// By convention, all variables ending in _AWK contain AWK code.
+	// It is usual to append a single rule to it, such as:
+	//  EXAMPLE_AWK+=   /condition/ { action }
+	test("EXAMPLE_AWK", true)
+
+	// This is another variable where the appended things should always
+	// come in pairs. A typical example is:
+	//  SUBST_SED.id+=  -e s,from,to,
+	test("SUBST_SED.id", true)
 }
 
 func (s *Suite) Test_Vartype_String(c *check.C) {
@@ -122,51 +201,70 @@ func (s *Suite) Test_Vartype_String(c *check.C) {
 	t.SetUpVartypes()
 
 	vartype := G.Pkgsrc.VariableType(nil, "PKG_DEBUG_LEVEL")
-	t.Check(vartype.String(), equals, "Integer (command-line-provided)")
+	t.CheckEquals(vartype.String(), "Integer (command-line-provided)")
 }
 
-func (s *Suite) Test_BasicType_HasEnum(c *check.C) {
-	vc := enum("start middle end")
-
-	c.Check(vc.HasEnum("start"), equals, true)
-	c.Check(vc.HasEnum("middle"), equals, true)
-	c.Check(vc.HasEnum("end"), equals, true)
-
-	c.Check(vc.HasEnum("star"), equals, false)
-	c.Check(vc.HasEnum("mid"), equals, false)
-	c.Check(vc.HasEnum("nd"), equals, false)
-	c.Check(vc.HasEnum("start middle"), equals, false)
-}
-
-func (s *Suite) Test_ACLPermissions_Contains(c *check.C) {
-	perms := aclpAllRuntime
-
-	c.Check(perms.Contains(aclpAllRuntime), equals, true)
-	c.Check(perms.Contains(aclpUse), equals, true)
-	c.Check(perms.Contains(aclpUseLoadtime), equals, false)
-}
-
-func (s *Suite) Test_ACLPermissions_String(c *check.C) {
-	c.Check(ACLPermissions(0).String(), equals, "none")
-	c.Check(aclpAll.String(), equals, "set, set-default, append, use-loadtime, use")
-}
-
-func (s *Suite) Test_ACLPermissions_HumanString(c *check.C) {
-
-	c.Check(ACLPermissions(0).HumanString(),
-		equals, "") // Doesn't happen in practice
-
-	c.Check(aclpAll.HumanString(),
-		equals, "set, given a default value, appended to, used at load time, or used")
-}
-
-func (s *Suite) Test_Vartype_MayBeAppendedTo(c *check.C) {
+func (s *Suite) Test_BasicType_NeedsQ(c *check.C) {
 	t := s.Init(c)
 
 	t.SetUpVartypes()
 
-	c.Check(G.Pkgsrc.VariableType(nil, "COMMENT").MayBeAppendedTo(), equals, true)
-	c.Check(G.Pkgsrc.VariableType(nil, "DEPENDS").MayBeAppendedTo(), equals, true)
-	c.Check(G.Pkgsrc.VariableType(nil, "PKG_FAIL_REASON").MayBeAppendedTo(), equals, true)
-	c.Check(G.Pkgsrc.VariableType(nil, "CONF_FILES").MayBeAppendedTo(), equals, true)
+	test := func(varname string, isAppendAllowed bool) {
+		vartype := G.Pkgsrc.VariableType(nil, varname)
+
+		t.CheckEquals(vartype.basicType.NeedsQ(), isAppendAllowed)
+	}
+
+	test("BUILDLINK_DEPMETHOD.pkgbase", false)
+	test("CATEGORIES", false)
+	test("EXTRACT_SUFX", false)
+	test("EMUL_PLATFORM", false)
+	test("BINMODE", false)
+
+	// Typically safe, seldom used in practice.
+	test("DISTFILES", false)
+
+	test("SUBST_CLASSES", false)
+	test("PLIST_VARS", false)
+
+	test("MAKE_JOBS", false) // XXX: What if MAKE_JOBS is undefined?
+	test("PKGREVISION", false)
+
+	// A specific platform does not have special characters.
+	// The patterns for such platforms typically do, such as
+	// x86_64-*-*.
+	test("MACHINE_GNU_PLATFORM", false)
+
+	// A specific platform does not have special characters.
+	// The patterns for such platforms typically do, such as
+	// NetBSD-*-*.
+	test("MACHINE_PLATFORM", false)
+
+	test("PERL5_PACKLIST", false)
+	test("PKG_OPTIONS_VAR", false)
+	test("PYTHON_VERSIONED_DEPENDENCIES", false)
+	test("SUBST_STAGE.id", false)
+	test("IS_BUILTIN.pkgbase", false)
+
+	test("COMMENT", true)
+	test("PKG_FAIL_REASON", true)
+	test("SUBST_MESSAGE.id", true)
+	test("CC", true)
+
+	test("TOOLS_NOOP", false)
+}
+
+func (s *Suite) Test_BasicType_HasEnum(c *check.C) {
+	t := s.Init(c)
+
+	vc := enum("start middle end")
+
+	t.CheckEquals(vc.HasEnum("start"), true)
+	t.CheckEquals(vc.HasEnum("middle"), true)
+	t.CheckEquals(vc.HasEnum("end"), true)
+
+	t.CheckEquals(vc.HasEnum("star"), false)
+	t.CheckEquals(vc.HasEnum("mid"), false)
+	t.CheckEquals(vc.HasEnum("nd"), false)
+	t.CheckEquals(vc.HasEnum("start middle"), false)
 }

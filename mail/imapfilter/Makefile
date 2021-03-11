@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.46 2017/02/25 00:24:11 mef Exp $
+# $NetBSD: Makefile,v 1.48 2020/11/26 20:17:56 nia Exp $
 
-DISTNAME=	imapfilter-2.6.10
+DISTNAME=	imapfilter-2.7.4
 CATEGORIES=	mail
 MASTER_SITES=	${MASTER_SITE_GITHUB:=lefcha/}
 GITHUB_TAG=	v${PKGVERSION_NOREV}
@@ -11,6 +11,7 @@ COMMENT=	Mail filtering utility for the IMAP
 LICENSE=	mit
 
 LDFLAGS.SunOS+=		-lsocket -lnsl
+LIBS.Linux+=		-ldl
 INSTALLATION_DIRS=	share/examples/imapfilter
 
 post-install:
@@ -19,7 +20,7 @@ post-install:
 		${DESTDIR}${PREFIX}/share/examples/imapfilter
 .endfor
 
-.include "../../devel/pcre/buildlink3.mk"
+.include "../../devel/pcre2/buildlink3.mk"
 .include "../../lang/lua/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

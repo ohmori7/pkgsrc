@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.16 2012/10/02 21:25:48 asau Exp $
+# $NetBSD: Makefile,v 1.18 2020/01/26 17:30:53 rillig Exp $
 #
 
-DISTNAME=		pxtools-0.0.20
+DISTNAME=	pxtools-0.0.20
 PKGREVISION=	3
-CATEGORIES=		databases
-MASTER_SITES=		http://jan.kneschke.de/projects/pxtools/download/
+CATEGORIES=	databases
+MASTER_SITES=	http://jan.kneschke.de/projects/pxtools/download/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://jan.kneschke.de/projects/pxtools/
+HOMEPAGE=		https://jan.kneschke.de/projects/pxtools/
 COMMENT=		Paradox database export/info utilities
 
 USE_PKGLOCALEDIR=	YES

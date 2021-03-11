@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.7 2019/04/26 13:14:05 maya Exp $
+# $NetBSD: Makefile,v 1.11 2020/12/08 10:56:13 jperkin Exp $
 #
 DISTNAME=	# empty
 PKGNAME=	${PYPKGPREFIX}-tryton-platform-${TRYTON_BASEVER}
@@ -13,6 +13,8 @@ MAINTAINER=	pkgsrc-users@NetBSD.org
 COMMENT=	Install complete tryton client/server platform
 
 META_PACKAGE=	yes
+
+PYTHON_VERSIONS_ACCEPTED=	27 # some dependencies only for python-2.7 as of 20200313
 
 .include "../../lang/python/pyversion.mk"
 
@@ -111,7 +113,7 @@ DEPENDS+=	${PYPKGPREFIX}-trytond-stock-lot>=${TRYTON_BASEVER}:../../misc/py-tryt
 DEPENDS+=	${PYPKGPREFIX}-trytond-stock-lot-sled>=${TRYTON_BASEVER}:../../misc/py-trytond-stock-lot-sled
 DEPENDS+=	${PYPKGPREFIX}-trytond-stock-package>=${TRYTON_BASEVER}:../../misc/py-trytond-stock-package
 DEPENDS+=	${PYPKGPREFIX}-trytond-stock-package-shipping>=${TRYTON_BASEVER}:../../misc/py-trytond-stock-package-shipping
-DEPENDS+=	${PYPKGPREFIX}-trytond-stock-package-shipping-dpd>=${TRYTON_BASEVER}:../../misc/py-trytond-stock-package-shipping-dpd
+#DEPENDS+=	${PYPKGPREFIX}-trytond-stock-package-shipping-dpd>=${TRYTON_BASEVER}:../../misc/py-trytond-stock-package-shipping-dpd
 DEPENDS+=	${PYPKGPREFIX}-trytond-stock-package-shipping-ups>=${TRYTON_BASEVER}:../../misc/py-trytond-stock-package-shipping-ups
 DEPENDS+=	${PYPKGPREFIX}-trytond-stock-product-location>=${TRYTON_BASEVER}:../../misc/py-trytond-stock-product-location
 DEPENDS+=	${PYPKGPREFIX}-trytond-stock-split>=${TRYTON_BASEVER}:../../misc/py-trytond-stock-split
@@ -126,6 +128,6 @@ DEPENDS+=	${PYPKGPREFIX}-trytond-timesheet>=${TRYTON_BASEVER}:../../time/py-tryt
 DEPENDS+=	${PYPKGPREFIX}-trytond-web-user>=${TRYTON_BASEVER}:../../www/py-trytond-web-user
 DEPENDS+=	${PYPKGPREFIX}-trytond-webdav>=${TRYTON_BASEVER}:../../www/py-trytond-webdav
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-simplesoap via py-stdnum and py-trytond-bank
+PYTHON_VERSIONS_ACCEPTED=	27 # py-simplesoap via py-stdnum and py-trytond-bank
 
 .include "../../mk/bsd.pkg.mk"

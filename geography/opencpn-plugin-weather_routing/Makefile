@@ -1,10 +1,10 @@
-# $NetBSD: Makefile,v 1.21 2018/11/14 22:21:34 kleink Exp $
+# $NetBSD: Makefile,v 1.26 2020/08/17 20:18:54 leot Exp $
 #
 
 VERSION=	20180827
 DISTNAME=	weather_routing_pi-${VERSION}
 PKGNAME=	opencpn-plugin-weather_routing-${VERSION}
-PKGREVISION=	2
+PKGREVISION=	6
 CATEGORIES=	geography
 MASTER_SITES=	${MASTER_SITE_GITHUB:=seandepagnier/}
 GITHUB_PROJECT=	weather_routing_pi
@@ -26,7 +26,7 @@ CMAKE_MODULE_PATH_OVERRIDE = \
 		cmake/PluginLocalization.cmake \
 		cmake/PluginPackage.cmake
 
-SUBST_CLASSES+=	isnan
+SUBST_CLASSES+=		isnan
 SUBST_STAGE.isnan=	pre-configure
 SUBST_MESSAGE.isnan=	replace wxIsNaN with std::isnan
 SUBST_FILES.isnan=	src/BoatDialog.cpp \

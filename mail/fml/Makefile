@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.17 2019/02/03 14:09:27 taca Exp $
+# $NetBSD: Makefile,v 1.21 2020/08/31 18:09:56 wiz Exp $
 #
 
 DISTNAME=	fml-7.99.1
+PKGREVISION=	2
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.fml.org/pub/fml8/
 
@@ -42,8 +43,7 @@ CONF_FILES+=		${EGDIR}/${f} ${PKG_SYSCONFDIR}/${f}
 .endfor
 OWN_DIRS_PERMS+=	${FMLDIR} ${FML_USER} ${FML_GROUP} 0755
 
-CONFIGURE_ARGS+=	--with-sysconfdir=${PKG_SYSCONFDIR} \
-			--with-mlspooldir=${FMLDIR} \
+CONFIGURE_ARGS+=	--with-mlspooldir=${FMLDIR} \
 			--with-default-domain=example.net \
 			--with-default-hostname=mail \
 			--with-fml-owner=${FML_USER} \
@@ -58,7 +58,7 @@ PRINT_PLIST_AWK+=	/share\/examples\/fml/ \
 			/${FML_STAMP}/ \
 			{ gsub(/${FML_STAMP}/, "$${FML_STAMP}"); }
 
-CHECK_INTERPRETER_SKIP+= lib/fml/${FML_STAMP}/* \
+CHECK_INTERPRETER_SKIP+=	lib/fml/${FML_STAMP}/* \
 			libexec/fml/${FML_STAMP}/loader.in
 
 SUBST_CLASSES+=		fixpaths

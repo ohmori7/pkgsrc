@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.3 2018/03/28 01:51:16 khorben Exp $
+# $NetBSD: Makefile,v 1.7 2020/09/28 22:56:38 khorben Exp $
 
-DISTNAME=	pyvex-7.8.2.21
+.include "../../devel/py-angr/version.mk"
+
+DISTNAME=	pyvex-${ANGR_VERSION}
 PKGNAME=	${PYPKGPREFIX}-${EGG_NAME}
-PKGREVISION=	2
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GITHUB:=angr/}
 GITHUB_PROJECT=	pyvex
-GITHUB_TAG=	29e88cbd20d628421a903e3dfec0027dd01be233
+GITHUB_TAG=	v${ANGR_VERSION}
 
 MAINTAINER=	khorben@defora.org
 HOMEPAGE=	https://github.com/angr/pyvex/
@@ -15,9 +16,22 @@ LICENSE=	2-clause-bsd
 
 USE_TOOLS+=	gmake
 
-DEPENDS+=	${PYPKGPREFIX}-archinfo-[0-9]*:../../devel/py-archinfo
+DEPENDS+=	${PYPKGPREFIX}-ailment>=${ANGR_VERSION}:../../devel/py-ailment
+DEPENDS+=	${PYPKGPREFIX}-archinfo>=${ANGR_VERSION}:../../devel/py-archinfo
+DEPENDS+=	${PYPKGPREFIX}-bitstring-[0-9]*:../../devel/py-bitstring
+DEPENDS+=	${PYPKGPREFIX}-cffi>=1.0.3:../../devel/py-cffi
+DEPENDS+=	${PYPKGPREFIX}-cparser-[0-9]*:../../devel/py-cparser
+DEPENDS+=	${PYPKGPREFIX}-future-[0-9]*:../../devel/py-future
 
-PYTHON_VERSIONS_ACCEPTED=	27
+PYTHON_VERSIONS_INCOMPATIBLE=	27
+
+TEST_DEPENDS+=	${PYPKGPREFIX}-angr>=${ANGR_VERSION}:../../devel/py-angr
+TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
+
+do-test:
+	${RUN} cd ${WRKSRC} && \
+	${SETENV} ${TEST_ENV} \
+	pytest-${PYVERSSUFFIX}
 
 .include "vex-inplace.mk"
 .include "../../devel/libffi/buildlink3.mk"

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.1 2019/06/17 20:57:39 adam Exp $
+# $NetBSD: Makefile,v 1.11 2021/03/07 17:30:22 adam Exp $
 
-DISTNAME=	Flask-JWT-Extended-3.18.2
+DISTNAME=	Flask-JWT-Extended-4.0.2
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:tl}
 CATEGORIES=	www python
 MASTER_SITES=	${MASTER_SITE_PYPI:=F/Flask-JWT-Extended/}
@@ -10,14 +10,15 @@ HOMEPAGE=	https://github.com/vimalloc/flask-jwt-extended
 COMMENT=	Extended JWT integration with Flask
 LICENSE=	mit
 
-DEPENDS+=	${PYPKGPREFIX}-JWT-[0-9]*:../../textproc/py-JWT
-DEPENDS+=	${PYPKGPREFIX}-flask-[0-9]*:../../www/py-flask
-DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
-DEPENDS+=	${PYPKGPREFIX}-cryptography>=2.3:../../security/py-cryptography
+DEPENDS+=	${PYPKGPREFIX}-JWT>=2.0:../../textproc/py-JWT
+DEPENDS+=	${PYPKGPREFIX}-flask>=1.0:../../www/py-flask
+DEPENDS+=	${PYPKGPREFIX}-cryptography>=3.0:../../security/py-cryptography
 DEPENDS+=	${PYPKGPREFIX}-werkzeug>=0.14:../../www/py-werkzeug
-TEST_DEPENDS+=	${PYPKGPREFIX}-test-[0-9]*:../../devel/py-test
+TEST_DEPENDS+=	${PYPKGPREFIX}-test>=0:../../devel/py-test
 
 USE_LANGUAGES=	# none
+
+PYTHON_VERSIONS_INCOMPATIBLE=	27
 
 do-test:
 	cd ${WRKSRC} && pytest-${PYVERSSUFFIX} tests

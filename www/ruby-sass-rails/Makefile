@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.1 2019/02/24 16:03:44 taca Exp $
+# $NetBSD: Makefile,v 1.5 2020/12/28 08:20:48 taca Exp $
 
-DISTNAME=	sass-rails-5.0.7
+DISTNAME=	sass-rails-6.0.0
 PKGNAME=	${RUBY_PKGPREFIX}-${DISTNAME:S/rails-/rails${RUBY_RAILS}-/}
 CATEGORIES=	www
 
@@ -9,14 +9,9 @@ HOMEPAGE=	https://github.com/rails/sass-rails/
 COMMENT=	Sass adapter for the Rails asset pipeline
 LICENSE=	mit
 
-DEPENDS+=	${RUBY_RAILTIES_DEPENDS}
-DEPENDS+=	${RUBY_PKGPREFIX}-sass>=3.1<4:../../www/ruby-sass
-DEPENDS+=	${RUBY_PKGPREFIX}-sprockets-rails>=3<4:../../misc/ruby-sprockets-rails
-DEPENDS+=	${RUBY_PKGPREFIX}-tilt1>=1.3<3:../../textproc/ruby-tilt1
+DEPENDS+=	${RUBY_PKGPREFIX}-sassc-rails>=2.1.1:../../www/ruby-sassc-rails
 
 USE_LANGUAGES=	# none
-
-RUBY_RAILS_ACCEPTED=	42 51
 
 .include "../../lang/ruby/gem.mk"
 .include "../../mk/bsd.pkg.mk"

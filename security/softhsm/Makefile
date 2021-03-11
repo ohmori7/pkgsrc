@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.43 2019/05/23 19:23:16 rillig Exp $
+# $NetBSD: Makefile,v 1.47 2020/11/05 09:07:07 ryoon Exp $
 #
 
 DISTNAME=	softhsm-1.3.7
-PKGREVISION=	14
+PKGREVISION=	17
 CATEGORIES=	security
 MASTER_SITES=	https://www.opendnssec.org/files/source/
 
@@ -22,9 +22,9 @@ CONFIGURE_ARGS+=	--with-botan=${PREFIX}
 
 EGDIR=			${PREFIX}/share/examples/softhsm
 
-SUBST_CLASSES+=         paths
-SUBST_FILES.paths=      ${WRKSRC}/Makefile.in
-SUBST_STAGE.paths=      pre-configure
+SUBST_CLASSES+=		paths
+SUBST_FILES.paths=	${WRKSRC}/Makefile.in
+SUBST_STAGE.paths=	pre-configure
 SUBST_VARS.paths=	EGDIR
 
 CXXFLAGS.NetBSD+=	-D_NETBSD_SOURCE

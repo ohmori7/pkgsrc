@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.12 2018/08/22 09:46:45 wiz Exp $
+# $NetBSD: Makefile,v 1.15 2020/08/31 18:11:41 wiz Exp $
 
 DISTNAME=	Mueller7GPL
 PKGNAME=	dict-mueller7-1.2
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	textproc
 MASTER_SITES=	http://dict.osdn.org.ua/
 MASTER_SITES+=	http://mova.org/~cheusov/pub/dict-mueller/
@@ -17,7 +17,7 @@ DEPENDS+=	dict-server>=1.9.14:../../textproc/dict-server
 
 BUILD_DEPENDS+=	dict-server>=1.10.2:../../textproc/dict-server
 BUILD_DEPENDS+=	p5-Unicode-Map8-[0-9]*:../../converters/p5-Unicode-Map8
-BUILD_DEPENDS+= coreutils-[0-9]*:../../sysutils/coreutils # we need GNU fmt
+BUILD_DEPENDS+=	coreutils-[0-9]*:../../sysutils/coreutils # we need GNU fmt
 
 WRKSRC=		${WRKDIR}/usr/local/share/dict
 

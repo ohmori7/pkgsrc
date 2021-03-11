@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.37 2018/09/13 10:56:42 adam Exp $
+# $NetBSD: Makefile,v 1.41 2021/01/11 10:20:49 adam Exp $
 
 .include "../../devel/git/Makefile.common"
 

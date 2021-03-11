@@ -15,4 +15,5 @@ PostGIS/PostgreSQL includes the following functionality:
 * Support for OGC access functions as defined by the Simple Features
   Specification
 
-This is postgis 2.x, the currently-maintained and recommended version.
+The package is postgis2 for historical reasons; this is currently
+PostGIS 3 and intends to track the most recent stable release.

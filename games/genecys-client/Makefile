@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.51 2018/11/14 22:21:30 kleink Exp $
+# $NetBSD: Makefile,v 1.58 2020/11/05 09:08:08 ryoon Exp $
 #
 
 DISTNAME=		genecys-0.2
 PKGNAME=		genecys-client-0.2
-PKGREVISION=		38
+PKGREVISION=		44
 CATEGORIES=		games
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=genecys/}
 
@@ -15,7 +15,7 @@ LICENSE=		gnu-gpl-v2
 DEPENDS+=		genecys-data>=0.2:../../games/genecys-data
 
 GNU_CONFIGURE=		yes
-#CONFIGURE_DIRS=		${WRKSRC}/common ${WRKSRC}/client
+#CONFIGURE_DIRS=	${WRKSRC}/common ${WRKSRC}/client
 #BUILD_DIRS=		${WRKSRC}/common ${WRKSRC}/client
 LIBS+=			-lm
 CONFIGURE_ARGS+=	--disable-server --disable-metaserver --disable-utils

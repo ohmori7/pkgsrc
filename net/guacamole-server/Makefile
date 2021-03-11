@@ -1,18 +1,19 @@
-# $NetBSD: Makefile,v 1.18 2019/03/20 16:08:48 jperkin Exp $
+# $NetBSD: Makefile,v 1.31 2021/02/07 06:30:35 ryoon Exp $
 
 DISTNAME=	guacamole-server-1.0.0
+PKGREVISION=	11
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_APACHE:=guacamole/${PKGVERSION_NOREV}/source/}
 
 MAINTAINER=	jperkin@joyent.com
-HOMEPAGE=	http://guacamole.incubator.apache.org/
+HOMEPAGE=	https://guacamole.incubator.apache.org/
 COMMENT=	Clientless remote desktop gateway
 LICENSE=	apache-2.0
 
 GNU_CONFIGURE=	yes
 USE_LANGUAGES=	c99
 USE_LIBTOOL=	yes
-USE_TOOLS=	pkg-config
+USE_TOOLS=	perl pkg-config
 
 EGDIR=			${PREFIX}/share/examples/guacamole
 PKG_SYSCONFSUBDIR=	guacamole
@@ -36,6 +37,8 @@ SUBST_CLASSES+=		manpath
 SUBST_STAGE.manpath=	pre-configure
 SUBST_FILES.manpath=	src/guacd/man/guacd.conf.5
 SUBST_SED.manpath=	-e 's,/etc/guacamole,${PKG_SYSCONFDIR},g'
+
+REPLACE_PERL+=		src/protocols/rdp/keymaps/generate.pl
 
 INSTALLATION_DIRS=	share/examples/guacamole
 

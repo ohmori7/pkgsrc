@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.14 2018/08/22 09:43:21 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:07:07 wiz Exp $
 
 DISTNAME=	SQL-ReservedWords-0.8
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=SQL/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/SQL-ReservedWords/
+HOMEPAGE=	https://metacpan.org/release/SQL-ReservedWords
 COMMENT=	Reserved SQL words by standard and vendors
 LICENSE=	${PERL5_LICENSE}
 

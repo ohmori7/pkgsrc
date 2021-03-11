@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.16 2018/12/13 19:52:26 adam Exp $
+# $NetBSD: Makefile,v 1.29 2021/01/01 08:24:58 ryoon Exp $
 
 DISTNAME=		rekonq-2.4.2
-PKGREVISION=		13
+PKGREVISION=		25
 CATEGORIES=		www kde
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=rekonq/2.0/}
 EXTRACT_SUFX=		.tar.xz
@@ -14,6 +14,7 @@ LICENSE=		gnu-gpl-v2
 BUILD_DEPENDS+=	automoc4>=0.9.87:../../devel/automoc4
 
 USE_TOOLS+=		msgfmt
+TOOLS_BROKEN+=		perl
 USE_LANGUAGES=		c c++
 
 CMAKE_ARGS+=		-DCMAKE_DISABLE_FIND_PACKAGE_Soprano=TRUE

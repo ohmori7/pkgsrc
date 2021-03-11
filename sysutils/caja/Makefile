@@ -1,8 +1,9 @@
-# $NetBSD: Makefile,v 1.20 2019/05/08 02:01:45 gutteridge Exp $
+# $NetBSD: Makefile,v 1.30 2020/11/05 09:09:06 ryoon Exp $
 
+PKGREVISION= 4
 .include "../../meta-pkgs/mate/Makefile.common"
 
-DISTNAME=	caja-${VERSION:R}.1
+DISTNAME=	caja-${VERSION}
 CATEGORIES=	sysutils
 
 COMMENT=	File manager for the MATE desktop
@@ -19,6 +20,7 @@ USE_LANGUAGES=		c99
 
 .include "../../x11/mate-desktop/buildlink3.mk"
 .include "../../devel/exempi/buildlink3.mk"
+#.include "../../devel/gettext-tools/buildlink3.mk"
 .include "../../graphics/libexif/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../textproc/libxml2/buildlink3.mk"

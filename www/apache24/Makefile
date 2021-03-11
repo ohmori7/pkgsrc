@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.80 2019/06/07 11:26:20 tm Exp $
+# $NetBSD: Makefile,v 1.96 2020/11/05 09:09:19 ryoon Exp $
 #
 # When updating this package, make sure that no strings like
 # "PR 12345" are in the commit message. Upstream likes
 # to reference their own PRs this way, but this ends up
 # in NetBSD GNATS.
 
-DISTNAME=	httpd-2.4.39
+DISTNAME=	httpd-2.4.46
 PKGNAME=	${DISTNAME:S/httpd/apache/}
 PKGREVISION=	2
 CATEGORIES=	www
@@ -37,7 +37,7 @@ CONFIGURE_ENV+=		ac_cv_path_RSYNC=/nonexistent
 .include "../../mk/compiler.mk"
 
 CFLAGS.SunOS+=	-D__EXTENSIONS__
-.if !empty(CC_VERSION:Mgcc-[6-9]*) || !empty(PKGSRC_COMPILER:Mclang)
+.if !empty(CC_VERSION:Mgcc-[5-9]*) || !empty(PKGSRC_COMPILER:Mclang)
 CFLAGS.SunOS+=	-D_XOPEN_SOURCE=600
 .else
 CFLAGS.SunOS+=	-D_XOPEN_SOURCE -D_XOPEN_SOURCE_EXTENDED=1
@@ -62,7 +62,7 @@ APACHE_MODULES?=	${DFLT_APACHE_MODULES}
 
 # LDAP support
 PLIST_VARS+=		ldap
-.if exists(${LOCALBASE}/lib/apr-util-1/apr_ldap.la)
+.if !empty(PKG_BUILD_OPTIONS.apr-util:Mldap)
 DFLT_APACHE_MODULES+=	ldap authnz_ldap
 PLIST.ldap=		yes
 .endif
@@ -109,7 +109,8 @@ FIX_MAN_PERMS+=		man8/apachectl.8 man1/ab.1 man1/httxt2dbm.1
 SUBST_CLASSES+=		man
 SUBST_STAGE.man=	pre-configure
 SUBST_MESSAGE.man=	Fixing paths in man pages.
-SUBST_FILES.man=	docs/man/*.1 docs/man/*.8
+SUBST_FILES.man=	docs/man/apxs.1 docs/man/htdbm.1 \
+			docs/man/htpasswd.1 docs/man/httpd.8
 SUBST_SED.man=		-e 's,/usr/local/etc/apache,${PKG_SYSCONFDIR},'
 SUBST_SED.man+=		-e 's,/path/to/apache/etc,${PKG_SYSCONFDIR},'
 SUBST_SED.man+=		-e 's,/usr/local/apache2,${PREFIX}/share/httpd/htdocs,'
@@ -122,8 +123,7 @@ SUBST_FILES.paths=	config.layout Makefile.in support/apxs.in
 SUBST_VARS.paths=	PREFIX
 SUBST_VARS.paths+=	VARBASE
 SUBST_SED.paths+=	-e "s|@SYSCONFDIR@|${PKG_SYSCONFDIR}|g"
-SUBST_VARS.paths+=	PAX
-SUBST_SED.paths+=	-e "s|@LOCALBASE@|${PREFIX}|g"
+SUBST_VARS.paths+=	PAX PREFIX
 
 SUBST_CLASSES+=		apr-lt
 SUBST_STAGE.apr-lt=	post-configure
@@ -152,7 +152,7 @@ SUBST_MESSAGE.abs_srcdir=	Fixing abs_srcdir
 SUBST_FILES.abs_srcdir=		${DESTDIR}${PREFIX}/share/httpd/build/config_vars.mk
 SUBST_SED.abs_srcdir=		-e 's|^\(abs_srcdir =\) .*|\1 ${PREFIX}/share/httpd|'
 
-REPLACE_PERL=		docs/cgi-examples/printenv
+#REPLACE_PERL=		docs/cgi-examples/printenv
 
 .include "../../devel/zlib/buildlink3.mk"
 CONFIGURE_ARGS+=	--with-ssl=${BUILDLINK_PREFIX.openssl}
@@ -195,9 +195,9 @@ post-install:
 	${CHOWN} ${MANOWN}:${MANGRP} ${DESTDIR}${PREFIX}/${PKGMANDIR}/${file}
 .endfor
 
-	${CHMOD} -x ${DESTDIR}${PREFIX}/sbin/envvars-std
+	${CHMOD} a-x ${DESTDIR}${PREFIX}/sbin/envvars-std
 .if exists(${DESTDIR}${PREFIX}/sbin/suexec)
-	${CHMOD} -w ${DESTDIR}${PREFIX}/sbin/suexec
+	${CHMOD} a-w ${DESTDIR}${PREFIX}/sbin/suexec
 .endif
 
 .include "../../mk/pthread.buildlink3.mk"

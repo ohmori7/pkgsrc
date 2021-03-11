@@ -1,10 +1,8 @@
-# $NetBSD: Makefile,v 1.86 2018/11/12 14:40:22 jperkin Exp $
+# $NetBSD: Makefile,v 1.92 2020/09/19 13:50:48 taca Exp $
 
-DISTNAME=		apcupsd-3.14.13r2365
-PKGREVISION=		3
+DISTNAME=		apcupsd-3.14.14
 CATEGORIES=		sysutils
-#MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=apcupsd/}
-MASTER_SITES=		${MASTER_SITE_LOCAL}
+MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=apcupsd/}
 
 MAINTAINER=		bouyer@NetBSD.org
 HOMEPAGE=		http://www.apcupsd.org/
@@ -17,9 +15,10 @@ USE_LANGUAGES=		c c++
 GNU_CONFIGURE=		yes
 
 PKG_SYSCONFSUBDIR=	apcupsd
-WRKSRC=			${WRKDIR}/apcupsd
 
 CTF_SUPPORTED=		no # https://smartos.org/bugview/OS-6533
+
+BUILD_DEFS+=		VARBASE
 
 .include "options.mk"
 
@@ -58,16 +57,16 @@ CONFIGURE_ARGS.NetBSD+=	ac_cv_path_SHUTDOWN=/sbin/shutdown
 
 EGDIR=		${PREFIX}/share/examples/apcupsd
 
-CONF_FILES_PERMS+= ${EGDIR}/apcupsd.conf ${PKG_SYSCONFDIR}/apcupsd.conf ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 644
-CONF_FILES_PERMS+= ${EGDIR}/apcupsd.css ${PKG_SYSCONFDIR}/apcupsd.css ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 644
-CONF_FILES_PERMS+= ${EGDIR}/changeme ${PKG_SYSCONFDIR}/changeme ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
-CONF_FILES_PERMS+= ${EGDIR}/commfailure ${PKG_SYSCONFDIR}/commfailure ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
-CONF_FILES_PERMS+= ${EGDIR}/commok ${PKG_SYSCONFDIR}/commok ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
-CONF_FILES_PERMS+= ${EGDIR}/multimon.conf ${PKG_SYSCONFDIR}/multimon.conf  ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
-CONF_FILES_PERMS+= ${EGDIR}/hosts.conf ${PKG_SYSCONFDIR}/hosts.conf  ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
-CONF_FILES_PERMS+= ${EGDIR}/offbattery ${PKG_SYSCONFDIR}/offbattery ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
-CONF_FILES_PERMS+= ${EGDIR}/onbattery ${PKG_SYSCONFDIR}/onbattery ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
-CONF_FILES_PERMS+= ${EGDIR}/apccontrol ${PKG_SYSCONFDIR}/apccontrol ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
+CONF_FILES_PERMS+=	${EGDIR}/apcupsd.conf ${PKG_SYSCONFDIR}/apcupsd.conf ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 644
+CONF_FILES_PERMS+=	${EGDIR}/apcupsd.css ${PKG_SYSCONFDIR}/apcupsd.css ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 644
+CONF_FILES_PERMS+=	${EGDIR}/changeme ${PKG_SYSCONFDIR}/changeme ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
+CONF_FILES_PERMS+=	${EGDIR}/commfailure ${PKG_SYSCONFDIR}/commfailure ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
+CONF_FILES_PERMS+=	${EGDIR}/commok ${PKG_SYSCONFDIR}/commok ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
+CONF_FILES_PERMS+=	${EGDIR}/multimon.conf ${PKG_SYSCONFDIR}/multimon.conf  ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
+CONF_FILES_PERMS+=	${EGDIR}/hosts.conf ${PKG_SYSCONFDIR}/hosts.conf  ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
+CONF_FILES_PERMS+=	${EGDIR}/offbattery ${PKG_SYSCONFDIR}/offbattery ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
+CONF_FILES_PERMS+=	${EGDIR}/onbattery ${PKG_SYSCONFDIR}/onbattery ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
+CONF_FILES_PERMS+=	${EGDIR}/apccontrol ${PKG_SYSCONFDIR}/apccontrol ${REAL_ROOT_USER} ${REAL_ROOT_GROUP} 755
 
 RCD_SCRIPTS=	apcupsd
 
@@ -78,17 +77,15 @@ PLATFORM_SUBDIR.*=		${OPSYS:tl}
 
 RCD_SCRIPT_SRC.apcupsd=	${WRKSRC}/platforms/${PLATFORM_SUBDIR}/apcupsd
 
-EGFILES= ${PLATFORM_SUBDIR}/apccontrol etc/changeme etc/commfailure etc/commok \
-    etc/offbattery etc/onbattery etc/multimon.conf etc/hosts.conf
+EGFILES=	${PLATFORM_SUBDIR}/apccontrol etc/changeme etc/commfailure etc/commok \
+		etc/offbattery etc/onbattery etc/multimon.conf etc/hosts.conf
 
 INSTALLATION_DIRS=	share/examples/apcupsd share/examples/rc.d \
-			share/doc/html/apcupsd share/doc/html/apcupsd/manual
+			share/doc/apcupsd share/doc/apcupsd/manual
 
 SUBST_CLASSES+=		strip
 SUBST_STAGE.strip=	pre-configure
 SUBST_FILES.strip=	autoconf/install-sh autoconf/targets.mak
-SUBST_FILES.strip+=	src/gapcmon/Makefile.in src/cgi/Makefile.in
-SUBST_FILES.strip+=	src/Makefile.in
 SUBST_SED.strip=	-e "s|STRIP|STRIPFLAG|g"
 SUBST_MESSAGE.strip=	Fixing conflicting STRIP variable name
 
@@ -96,8 +93,8 @@ SUBST_MESSAGE.strip=	Fixing conflicting STRIP variable name
 #
 
 HTMLDOCS=	manual.html apcupsd.png charging.png commlost.png \
-	main_configs.png multimon.png onbatt.png online.png status.png \
-	thanks.png wininstall6.png
+		main_configs.png multimon.png onbatt.png online.png \
+		status.png thanks.png wininstall6.png
 
 post-install:
 	${INSTALL_DATA} ${WRKSRC}/platforms/etc/apcupsd.conf \
@@ -110,9 +107,9 @@ post-install:
 .endfor
 .for file in ${HTMLDOCS}
 	${INSTALL_DATA} ${WRKSRC}/doc/manual/${file} \
-		${DESTDIR}${PREFIX}/share/doc/html/apcupsd
+		${DESTDIR}${PREFIX}/share/doc/apcupsd
 .endfor
 
 .include "../../devel/gettext-lib/buildlink3.mk"
-.include "../../devel/libusb/buildlink3.mk"
+.include "../../mk/libusb.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

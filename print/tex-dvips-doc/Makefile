@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.19 2017/06/21 06:13:14 markd Exp $
+# $NetBSD: Makefile,v 1.22 2020/05/01 00:15:13 markd Exp $
 
 DISTNAME=	dvips.doc
-PKGNAME=	tex-${DISTNAME:S/./-/}-2017
-TEXLIVE_REV=	44167
+PKGNAME=	tex-${DISTNAME:S/./-/}-2020
+TEXLIVE_REV=	54279
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/dvips
+HOMEPAGE=	https://ctan.org/pkg/dvips
 COMMENT=	Documentation for tex-dvips
 LICENSE=	gnu-gpl-v2
 

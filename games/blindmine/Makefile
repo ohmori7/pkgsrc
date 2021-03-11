@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.33 2019/04/26 14:12:38 maya Exp $
+# $NetBSD: Makefile,v 1.36 2020/12/04 20:45:18 nia Exp $
 
 DISTNAME=	blindmine-0.3-src
 PKGNAME=	${DISTNAME:S/-src//}
-PKGREVISION=	17
+PKGREVISION=	18
 CATEGORIES=	games python
 MASTER_SITES=	http://kldp.net/frs/download.php/3097/
 EXTRACT_SUFX=	.zip
 
 MAINTAINER=	fox9@netb.co.kr
-HOMEPAGE=	http://blindmine.kldp.net/
+HOMEPAGE=	https://blindmine.kldp.net/
 COMMENT=	Minesweeper clone that you can play with your eyes closed
 
 WRKSRC=		${WRKDIR}/${PKGBASE}
@@ -22,7 +22,7 @@ SUBST_FILES.path=	blindmine.py sdl_ui.py
 SUBST_SED.path=		-e 's,/usr/bin/env python,${PYTHONBIN},g'
 
 PYCOMPILEALL=			${BUILDLINK_PREFIX.${PYPACKAGE}}/${PYLIB}/compileall.py
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 0.3
+PYTHON_VERSIONS_ACCEPTED=	27 # not yet ported as of 0.3
 
 INSTALLATION_DIRS=	bin share/doc/blindmine share/blindmine/data
 

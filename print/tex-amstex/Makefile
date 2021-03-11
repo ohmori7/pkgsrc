@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.3 2019/02/01 21:41:27 markd Exp $
+# $NetBSD: Makefile,v 1.6 2020/05/10 04:31:57 markd Exp $
 
 DISTNAME=	amstex
 PKGNAME=	tex-${DISTNAME}-2.2.49810
+PKGREVISION=	1
 TEXLIVE_REV=	49810
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/amstex
+HOMEPAGE=	https://ctan.org/pkg/amstex
 COMMENT=	American Mathematical Society plain TeX macros
 LICENSE=	lppl-1.3c
 
@@ -15,6 +16,7 @@ INSTALLATION_DIRS=	bin
 
 TEX_FORMATS+=	"amstex pdftex - -translate-file=cp227.tcx *amstex.ini\\n"
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 
 post-install:

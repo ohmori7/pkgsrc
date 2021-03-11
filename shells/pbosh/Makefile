@@ -1,20 +1,21 @@
-# $NetBSD: Makefile,v 1.2 2019/03/19 14:24:46 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/11/25 16:00:09 micha Exp $
 
-DISTNAME=	schily-2019-03-11
-PKGNAME=	pbosh-20190311
+DISTNAME=	schily-2020-11-25
+PKGNAME=	pbosh-20201125
 CATEGORIES=	shells
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=schilytools/}
 EXTRACT_SUFX=	.tar.bz2
 
-MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://schilytools.sourceforge.net/bosh.html
+MAINTAINER=	micha@NetBSD.org
+HOMEPAGE=	https://sourceforge.net/projects/schilytools/
 COMMENT=	The Schily Bourne Shell
 LICENSE=	cddl-1.0
 
 MAKE_JOBS_SAFE=	no
 
-USE_TOOLS+=	tbl
-TOOL_DEPENDS+=	smake-[0-9]*:../../devel/smake
+.include "../../mk/bsd.prefs.mk"
+
+TOOL_DEPENDS+=	smake>=1.3nb11:../../devel/smake
 SMAKE=		MAKEFLAGS= smake
 MAKE_FLAGS+=	DESTDIR=${DESTDIR} INS_BASE=${PREFIX} DEFMANBASE=. MANDIR=${PKGMANDIR}
 # Honor CPPFLAGS, CFLAGS and LDFLAGS
@@ -41,14 +42,19 @@ do-build:
 
 # Process tables in manpage
 post-build:
-	cd ${WRKSRC} && ${TBL} sh/sh.1 >sh/sh.1.tmp;			\
-		${MV} -f sh/sh.1.tmp sh/pbosh.1
+.if !empty(USE_TOOLS:Mtbl)
+	cd ${WRKSRC} && ${TBL} sh/sh.1 >sh/pbosh.1.tmp;			\
+		${MV} -f sh/pbosh.1.tmp sh/pbosh.1
+.else
+	cd ${WRKSRC} && ${MV} -f sh/sh.1 sh/pbosh.1
+.endif
+
 
 do-install:
 	cd ${WRKSRC}/sh &&						\
 		${INSTALL_PROGRAM} ${WRKSRC}/pbosh/OBJ/*/pbosh		\
 			${DESTDIR}${PREFIX}/bin/pbosh;			\
 		${INSTALL_MAN} ${WRKSRC}/sh/pbosh.1 			\
-			${DESTDIR}${PREFIX}/${PKGMANDIR}/man1;		\
+			${DESTDIR}${PREFIX}/${PKGMANDIR}/man1
 
 .include "../../mk/bsd.pkg.mk"

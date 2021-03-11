@@ -1,5 +1,7 @@
-@comment $NetBSD: PLIST,v 1.1.1.1 2010/11/16 16:46:29 drochner Exp $
+@comment $NetBSD: PLIST,v 1.4 2019/11/06 13:52:51 wiz Exp $
 include/gdk-pixbuf-2.0/gdk-pixbuf-xlib/gdk-pixbuf-xlib.h
 include/gdk-pixbuf-2.0/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.h
-lib/libgdk_pixbuf_xlib-2.0.la
+lib/libgdk_pixbuf_xlib-2.0.so
+lib/libgdk_pixbuf_xlib-2.0.so.0
+lib/libgdk_pixbuf_xlib-2.0.so.0.4000.0
 lib/pkgconfig/gdk-pixbuf-xlib-2.0.pc

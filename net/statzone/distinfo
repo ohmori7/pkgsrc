@@ -1,0 +1,6 @@
+$NetBSD: distinfo,v 1.5 2021/02/08 20:38:23 fcambus Exp $
+
+SHA1 (statzone-1.0.5.tar.gz) = 0c6235c0cb4a5a654de02f819d7aa04d361409a6
+RMD160 (statzone-1.0.5.tar.gz) = 2a73cc82921fef6b17393eb671fa93eed5937106
+SHA512 (statzone-1.0.5.tar.gz) = 42c08758a1d0a00df34fb3d2dcce1c312ff86ea71c2fc6214f8f57b1cd62f2c753a0bada418573ab75af9ff0d82d1165b4023dd19b16f8eedbc2e2db04b07704
+Size (statzone-1.0.5.tar.gz) = 19055 bytes

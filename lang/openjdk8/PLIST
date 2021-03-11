@@ -1,4 +1,4 @@
-@comment $NetBSD: PLIST,v 1.9 2018/09/19 18:18:30 abs Exp $
+@comment $NetBSD: PLIST,v 1.13 2020/05/29 10:51:23 abs Exp $
 bin/openjdk8-jar
 bin/openjdk8-java
 bin/openjdk8-javac
@@ -7,6 +7,7 @@ bin/openjdk8-javah
 bin/openjdk8-javap
 bin/openjdk8-jcmd
 bin/openjdk8-jhat
+bin/openjdk8-jmap
 bin/openjdk8-jps
 bin/openjdk8-jstack
 bin/openjdk8-keytool
@@ -20,7 +21,9 @@ java/openjdk8/ASSEMBLY_EXCEPTION
 java/openjdk8/LICENSE
 java/openjdk8/THIRD_PARTY_README
 ${PLIST.x11}java/openjdk8/bin/appletviewer
+java/openjdk8/bin/clhsdb
 java/openjdk8/bin/extcheck
+java/openjdk8/bin/hsdb
 java/openjdk8/bin/idlj
 java/openjdk8/bin/jar
 java/openjdk8/bin/jarsigner
@@ -399,8 +402,8 @@ java/openjdk8/jre/lib/content-types.properties
 java/openjdk8/jre/lib/currency.data
 java/openjdk8/jre/lib/ext/cldrdata.jar
 java/openjdk8/jre/lib/ext/dnsns.jar
-java/openjdk8/jre/lib/ext/localedata.jar
 java/openjdk8/jre/lib/ext/jaccess.jar
+java/openjdk8/jre/lib/ext/localedata.jar
 java/openjdk8/jre/lib/ext/meta-index
 java/openjdk8/jre/lib/ext/nashorn.jar
 java/openjdk8/jre/lib/ext/sunec.jar

@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.13 2018/08/22 09:44:28 wiz Exp $
+# $NetBSD: Makefile,v 1.16 2020/08/31 18:08:37 wiz Exp $
 #
 
 DISTNAME=	PPI-PowerToys-0.14
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=PPI/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/PPI-PowerToys/
+HOMEPAGE=	https://metacpan.org/release/PPI-PowerToys
 COMMENT=	Handy collection of small PPI-based utilities
 LICENSE=	${PERL5_LICENSE}
 

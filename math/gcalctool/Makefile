@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.123 2018/11/14 22:21:59 kleink Exp $
+# $NetBSD: Makefile,v 1.130 2020/11/05 09:08:37 ryoon Exp $
 #
 
 DISTNAME=		gcalctool-5.32.2
-PKGREVISION=		26
+PKGREVISION=		32
 CATEGORIES=		math gnome
 MASTER_SITES=		${MASTER_SITE_GNOME:=sources/gcalctool/5.32/}
 EXTRACT_SUFX=		.tar.bz2
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://live.gnome.org/Gcalctool
+HOMEPAGE=		https://live.gnome.org/Gcalctool
 COMMENT=		Desktop calculator for GNOME
 
 GNU_CONFIGURE=		YES

@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.31 2018/07/18 00:06:13 joerg Exp $
+# $NetBSD: Makefile,v 1.36 2020/08/17 20:17:25 leot Exp $
 
 DISTNAME=	tclcl-src-1.20
 PKGNAME=	tcl-${DISTNAME:S/-src//}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=otcl-tclcl/}
 
@@ -28,8 +28,8 @@ BUILDLINK_DEPMETHOD.libXt?=	build
 .include "../../lang/tcl/Makefile.version"
 .include "../../x11/tk/Makefile.version"
 
-CONFIGURE_ARGS+=--with-tcl-ver=${TCL_VERSION}
-CONFIGURE_ARGS+=--with-tk-ver=${TK_VERSION}
+CONFIGURE_ARGS+=	--with-tcl-ver=${TCL_VERSION}
+CONFIGURE_ARGS+=	--with-tk-ver=${TK_VERSION}
 
 .include "../../lang/tcl/buildlink3.mk"
 .include "../../lang/tcl-otcl/buildlink3.mk"

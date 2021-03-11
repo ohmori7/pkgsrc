@@ -1,15 +1,10 @@
-# $NetBSD: Makefile,v 1.15 2018/12/09 21:05:36 adam Exp $
-#
-
-PKGREVISION=		1
-CATEGORIES=		security net
-#DISTNAME=		racoon2-20100526a
-#MASTER_SITES=		ftp://ftp.racoon2.wide.ad.jp/pub/racoon2/
-#EXTRACT_SUFX=		.tgz
+# $NetBSD: Makefile,v 1.22 2020/10/13 01:47:25 maya Exp $
 
 DISTNAME=		racoon2
 PKGNAME=		racoon2-20180701
-MASTER_SITES= 		${MASTER_SITE_GITHUB:=zoulasc/}
+PKGREVISION=		6
+CATEGORIES=		security net
+MASTER_SITES=		${MASTER_SITE_GITHUB:=zoulasc/}
 GITHUB_PROJECT=		racoon2
 GITHUB_TAG=		b2a193fc9875d1fb89c0a51690745379bc135fcf
 
@@ -22,12 +17,20 @@ INSTALL_UNSTRIPPED=	yes
 USE_TOOLS+=		grep sed flex yacc
 USE_TOOLS+=		gzip:run perl:run	# used by pskgen
 
+BUILDLINK_TRANSFORM+=	rm:-Werror
+
 # @perl_bindir@ will be /usr/pkgsrc/security/racoon2/work/.tools/bin/perl.
 # REPLACE_PERL cannot be used, since @perl_bindir@ does not match its pattern.
 REPLACE_INTERPRETER+=	perl
 REPLACE.perl.old=	@perl_bindir@
 REPLACE.perl.new=	${PERL5}
 REPLACE_FILES.perl=	pskgen/pskgen.in
+
+SUBST_CLASSES+=		destdir
+SUBST_STAGE.destdir=	pre-configure
+SUBST_MESSAGE.destdir=	Respect destdir and PKG_SYSCONFDIR
+SUBST_FILES.destdir=	pskgen/autogen.spmd.pwd.in
+SUBST_SED.destdir=	-e 's,@prefix@/etc/racoon2/,${DESTDIR}${PKG_SYSCONFDIR}/,g'
 
 SUBST_CLASSES+=		cf-path
 SUBST_STAGE.cf-path=	pre-configure
@@ -46,7 +49,7 @@ SUBST_FILES.hk-path=	samples/child-up.in samples/child-down.in \
 			samples/ph1-up.in samples/ph1-down.in
 SUBST_SED.hk-path=	-e 's,cd @prefix@/etc/racoon2/,cd ${PKG_SYSCONFDIR}/,g'
 
-PLIST_SUBST+=		PKG_SYSCONFDIR=${PKG_SYSCONFDIR:Q}
+PLIST_SUBST+=		PKG_SYSCONFDIR=${PKG_SYSCONFDIR}
 
 EGDIR=			${PREFIX}/share/examples/${PKGBASE}
 DOCDIR=			${PREFIX}/share/doc/${PKGBASE}
@@ -70,7 +73,6 @@ RCD_SCRIPT_SRC.iked=	${WRKSRC}/samples/rc.d-iked
 RCD_SCRIPT_SRC.kinkd=	${WRKSRC}/samples/rc.d-kinkd
 RCD_SCRIPT_SRC.spmd=	${WRKSRC}/samples/rc.d-spmd
 RCD_SCRIPT_SRC.racoon2=	${WRKSRC}/samples/rc.d-racoon2
-CONFIGURE_ARGS+=	--disable-startup-scripts
 
 SAMPLE_CONFS=		default.conf racoon2.conf vals.conf \
 			transport_ike.conf tunnel_ike.conf \

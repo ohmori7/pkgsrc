@@ -1,14 +1,12 @@
-# $NetBSD: Makefile,v 1.2 2018/07/28 14:40:43 brook Exp $
-
-CATEGORIES=	devel
-
-MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	https://github.com/r-lib/crayon/
-COMMENT=	Colored terminal output
-LICENSE=	mit
+# $NetBSD: Makefile,v 1.4 2019/08/08 19:53:38 brook Exp $
 
 R_PKGNAME=	crayon
 R_PKGVER=	1.3.4
+CATEGORIES=	devel
+
+MAINTAINER=	minskim@NetBSD.org
+COMMENT=	Colored terminal output
+LICENSE=	mit
 
 USE_LANGUAGES=	# none
 

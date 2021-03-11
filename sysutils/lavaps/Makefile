@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.48 2018/08/22 09:46:35 wiz Exp $
+# $NetBSD: Makefile,v 1.53 2020/08/31 18:11:28 wiz Exp $
 #
 
 DISTNAME=	lavaps-2.7
-PKGREVISION=	13
+PKGREVISION=	16
 CATEGORIES=	sysutils x11
 MASTER_SITES=	http://www.isi.edu/~johnh/SOFTWARE/LAVAPS/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.isi.edu/~johnh/SOFTWARE/LAVAPS/
+HOMEPAGE=	https://www.isi.edu/~johnh/SOFTWARE/LAVAPS/
 COMMENT=	Lava lamp of currently running processes
 
 MAKE_JOBS_SAFE=		no
@@ -15,11 +15,11 @@ MAKE_JOBS_SAFE=		no
 USE_LANGUAGES=	c c++
 USE_TOOLS+=	perl pod2man pod2html
 
-GNU_CONFIGURE=	YES
-CONFIGURE_ARGS+=--with-tcltk \
-		--with-tcl-ver=8.6.1 \
-		--with-tk-ver=8.6.1 \
-		--with-tcltk-lib-suffix-type=nodot
+GNU_CONFIGURE=		YES
+CONFIGURE_ARGS+=	--with-tcltk \
+			--with-tcl-ver=8.6.1 \
+			--with-tk-ver=8.6.1 \
+			--with-tcltk-lib-suffix-type=nodot
 
 # prevents the GConf schema from going into / when building the tcl/tk version
 MAKE_ENV+=	PKGSRC_INSTALL_SCHEMAS=no

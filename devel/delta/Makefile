@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.10 2018/08/22 09:43:29 wiz Exp $
+# $NetBSD: Makefile,v 1.13 2020/08/31 18:07:19 wiz Exp $
 
 DISTNAME=	delta-2006.08.03
-PKGREVISION=	7
+PKGREVISION=	9
 CATEGORIES=	devel
 MASTER_SITES=	http://www.tigris.org/files/documents/3103/33566/
 
@@ -10,9 +10,9 @@ HOMEPAGE=	http://delta.tigris.org/
 COMMENT=	Heuristically minimizes interesting files
 LICENSE=	2-clause-bsd
 
-USE_TOOLS+=	gmake perl:run
-REPLACE_PERL=	delta multidelta
-INSTALLATION_DIRS= bin
+USE_TOOLS+=		gmake perl:run
+REPLACE_PERL=		delta multidelta
+INSTALLATION_DIRS=	bin
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/delta ${DESTDIR}${PREFIX}/bin/delta

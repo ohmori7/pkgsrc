@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.6 2018/08/21 12:10:00 wiz Exp $
+$NetBSD: distinfo,v 1.8 2020/11/08 04:08:09 mef Exp $
 
-SHA1 (Pod-Markdown-3.101.tar.gz) = 8830457f1ce20c5dc24330097d508e9cdbddd265
-RMD160 (Pod-Markdown-3.101.tar.gz) = 69c73377b7a004a62102dd54688327b613661277
-SHA512 (Pod-Markdown-3.101.tar.gz) = d91742e4b38ff5b0797d9615cfe8c5a76153e0c7a0f1572e4d2df47ee746b48fbeadbdc0d5c58f63023a9547bb414bed40f1df7233e957dc1a16d37f0ee51fa1
-Size (Pod-Markdown-3.101.tar.gz) = 59051 bytes
+SHA1 (Pod-Markdown-3.300.tar.gz) = 775eca10bc32f1f01d3da5ef8bf489b6dd73fcdb
+RMD160 (Pod-Markdown-3.300.tar.gz) = f4af4f03a31d8e3c8f3138edb1c1b70be89f738d
+SHA512 (Pod-Markdown-3.300.tar.gz) = 3c4b0d44a94f5542662c45ba03d5fd0852619c9881edf9ca0b006ae05e8a4611ca1b7495dfa32d02fc036e25847146a96b53a4970ae712b5664d328c8d841e88
+Size (Pod-Markdown-3.300.tar.gz) = 59370 bytes

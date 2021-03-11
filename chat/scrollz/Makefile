@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.25 2018/04/17 22:29:35 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2020/05/22 10:55:58 adam Exp $
 
 DISTNAME=	ScrollZ-2.2.3
 PKGNAME=	${DISTNAME:tl}
-PKGREVISION=	5
+PKGREVISION=	9
 CATEGORIES=	chat
 MASTER_SITES=	http://www.scrollz.info/download/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.scrollz.info/
+HOMEPAGE=	https://www.scrollz.info/
 COMMENT=	Advanced IRC client based on ircII client
 LICENSE=	modified-bsd # XXX ?
 
@@ -24,7 +24,7 @@ SUBST_STAGE.mandir=	pre-configure
 .include "options.mk"
 
 post-install:
-		${CHMOD} -x ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/scrollz.1
+	${CHMOD} -x ${DESTDIR}${PREFIX}/${PKGMANDIR}/man1/scrollz.1
 
 .include "../../mk/termcap.buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

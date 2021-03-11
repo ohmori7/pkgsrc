@@ -1,4 +1,4 @@
-# $NetBSD: tools.Linux.mk,v 1.63 2018/11/12 13:34:39 jperkin Exp $
+# $NetBSD: tools.Linux.mk,v 1.65 2020/12/05 13:15:58 js Exp $
 #
 # System-supplied tools for the Linux operating system.
 
@@ -16,7 +16,9 @@ TOOLS_PLATFORM.basename?=	/bin/basename
 .elif exists(/usr/bin/basename)
 TOOLS_PLATFORM.basename?=	/usr/bin/basename
 .endif
+.if exists(/bin/bash)
 TOOLS_PLATFORM.bash?=		/bin/bash
+.endif
 .if exists(/usr/bin/bison)
 TOOLS_PLATFORM.bison?=		/usr/bin/bison
 TOOLS_PLATFORM.bison-yacc?=	/usr/bin/bison -y
@@ -97,7 +99,11 @@ TOOLS_PLATFORM.fgrep?=		/usr/bin/fgrep
 TOOLS_PLATFORM.gfgrep?=		/usr/bin/fgrep
 .endif
 TOOLS_PLATFORM.file?=		/usr/bin/file
+.if exists(/bin/find)
+TOOLS_PLATFORM.find?=		/bin/find
+.else
 TOOLS_PLATFORM.find?=		/usr/bin/find
+.endif
 .if exists(/etc/debian_version)
 .  if exists(/usr/bin/gawk)
 TOOLS_PLATFORM.gawk?=		/usr/bin/gawk

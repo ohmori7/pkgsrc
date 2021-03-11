@@ -1,17 +1,22 @@
-# $NetBSD: Makefile,v 1.62 2018/12/13 19:52:21 adam Exp $
+# $NetBSD: Makefile,v 1.78 2021/02/07 06:30:38 ryoon Exp $
 
-DISTNAME=	kdf-16.04.0
-PKGREVISION=	7
+DISTNAME=	kdf-${KAPPSVER}
+PKGREVISION=	6
 CATEGORIES=	sysutils
+
+HOMEPAGE=	https://kde.org/applications/system/kdiskfree/
 COMMENT=	Show mount points and disk usage under KDE desktop
-MASTER_SITES=	${MASTER_SITE_KDE:=applications/16.04.0/src/}
+LICENSE=	gnu-gpl-v2
 
-.include "../../meta-pkgs/kde4/Makefile.kde4"
+.include "../../meta-pkgs/kde/applications.mk"
 
-.include "../../meta-pkgs/kde4/kde4.mk"
+BUILD_DEPENDS+=	kdoctools>=5.19.0:../../devel/kdoctools
 
+USE_TOOLS+=	msgmerge
+
+.include "../../devel/kcmutils/buildlink3.mk"
+.include "../../devel/kio/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
 .include "../../sysutils/desktop-file-utils/desktopdb.mk"
-.include "../../x11/kdelibs4/buildlink3.mk"
-
+.include "../../x11/qt5-qtbase/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

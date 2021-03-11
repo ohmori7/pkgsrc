@@ -1,19 +1,18 @@
-# $NetBSD: Makefile,v 1.2 2018/07/28 14:40:50 brook Exp $
-
-CATEGORIES=	math
-
-MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://had.co.nz/reshape/
-COMMENT=	Flexibly reshape data
+# $NetBSD: Makefile,v 1.4 2019/08/08 19:53:53 brook Exp $
 
 R_PKGNAME=	reshape2
 R_PKGVER=	1.4.3
+CATEGORIES=	math
+
+MAINTAINER=	minskim@NetBSD.org
+COMMENT=	Flexibly reshape data: a reboot of the reshape package
+LICENSE=	mit
 
 DEPENDS+=	R-plyr>=1.8.1:../../math/R-plyr
-DEPENDS+=	R-stringr-[0-9]*:../../textproc/R-stringr
+DEPENDS+=	R-stringr>=1.4.0:../../textproc/R-stringr
 
 USE_LANGUAGES=	c++
 
-.include "../../devel/R-Rcpp/buildlink3.mk"
 .include "../../math/R/Makefile.extension"
+.include "../../devel/R-Rcpp/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,11 +1,11 @@
-# $NetBSD: Makefile,v 1.1 2015/05/04 12:27:32 markd Exp $
+# $NetBSD: Makefile,v 1.4 2021/02/14 20:15:06 markd Exp $
 
 DISTNAME=	babel-dutch
-PKGNAME=	tex-${DISTNAME}-3.8i
-TEXLIVE_REV=	30263
+PKGNAME=	tex-${DISTNAME}-3.8j
+TEXLIVE_REV=	56827
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/babel-dutch
+HOMEPAGE=	https://ctan.org/pkg/babel-dutch
 COMMENT=	Babel contributed support for Dutch
 LICENSE=	lppl-1.3c
 

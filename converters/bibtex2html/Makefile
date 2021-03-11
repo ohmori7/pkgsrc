@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.52 2018/11/12 16:10:17 jaapb Exp $
+# $NetBSD: Makefile,v 1.56 2021/03/08 08:12:46 jaapb Exp $
 
 DISTNAME=	bibtex2html-1.98
-PKGREVISION=	13
+PKGREVISION=	16
 CATEGORIES=	converters
 MASTER_SITES=	http://www.lri.fr/~filliatr/ftp/bibtex2html/
 
@@ -32,6 +32,8 @@ SUBST_SED.paths=	-e 's,/usr/share,${PREFIX}/share,g'
 
 INSTALLATION_DIRS+=	bin ${PKGMANDIR}/man1
 INSTALLATION_DIRS+=	share/doc/${PKGBASE}
+
+MAKE_ENV+=	ZLIB=-unsafe-string
 
 .include "../../lang/ocaml/buildlink3.mk"
 

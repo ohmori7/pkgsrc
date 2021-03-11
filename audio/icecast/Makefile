@@ -1,11 +1,12 @@
-# $NetBSD: Makefile,v 1.71 2019/02/24 10:38:12 wiz Exp $
+# $NetBSD: Makefile,v 1.83 2020/11/05 09:07:27 ryoon Exp $
 
 DISTNAME=	icecast-2.4.4
+PKGREVISION=	10
 CATEGORIES=	audio
 MASTER_SITES=	http://downloads.xiph.org/releases/icecast/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.icecast.org/
+HOMEPAGE=	https://www.icecast.org/
 COMMENT=	Live streaming audio server
 LICENSE=	gnu-gpl-v2
 
@@ -34,6 +35,9 @@ CONF_FILES=		${EGDIR}/icecast.xml ${PKG_SYSCONFDIR}/icecast.xml
 
 OWN_DIRS_PERMS=		${ICECAST_CHROOTDIR} ${ICECAST_USER} ${ICECAST_GROUP} 770
 OWN_DIRS_PERMS+=	${ICECAST_LOGDIR} ${ICECAST_USER} ${ICECAST_GROUP} 770
+
+# patched in configure
+CHECK_PORTABILITY_SKIP+=	configure.in
 
 pre-configure:
 	${MV} ${WRKSRC}/conf/icecast.xml.in ${WRKSRC}/conf/icecast.fixme

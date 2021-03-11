@@ -1,9 +1,9 @@
-# $NetBSD: Makefile,v 1.73 2018/12/13 19:52:18 adam Exp $
+# $NetBSD: Makefile,v 1.82 2020/05/22 10:56:31 adam Exp $
 
-DISTNAME=	rtorrent-0.9.7
-PKGREVISION=	3
+DISTNAME=	rtorrent-0.9.8
+PKGREVISION=	6
 CATEGORIES=	net
-MASTER_SITES=	http://rtorrent.net/downloads/
+MASTER_SITES=	https://rtorrent.net/downloads/
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://github.com/rakshasa/rtorrent
@@ -40,6 +40,11 @@ CXXFLAGS+=	-fpermissive -fno-strength-reduce -fno-thread-jumps \
 
 .if !empty(CC_VERSION:Mgcc-*) && !empty(MACHINE_ARCH:Mi?86)
 CXXFLAGS+=	-march=i486
+.endif
+
+# for backtrace()
+.if (${OPSYS} == "NetBSD" || ${OPSYS} == "FreeBSD") && exists(/usr/include/execinfo.h)
+LIBS+=		-lexecinfo
 .endif
 
 INSTALLATION_DIRS=	share/examples/rtorrent

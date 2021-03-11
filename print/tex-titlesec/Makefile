@@ -1,12 +1,13 @@
-# $NetBSD: Makefile,v 1.7 2017/09/06 16:49:45 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2020/05/05 12:01:05 markd Exp $
 
 DISTNAME=	titlesec
-PKGNAME=	tex-${DISTNAME}-2.10.2
-TEXLIVE_REV=	40129
+PKGNAME=	tex-${DISTNAME}-2.13
+TEXLIVE_REV=	52413
 
 MAINTAINER=	minskim@NetBSD.org
+HOMEPAGE=	https://ctan.org/pkg/titlesec
 COMMENT=	Select alternative section titles
-LICENSE=	lppl-1.3c
+LICENSE=	mit
 
 DEPENDS+=	tex-graphics-[0-9]*:../../print/tex-graphics
 

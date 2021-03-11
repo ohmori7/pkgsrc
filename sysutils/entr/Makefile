@@ -1,16 +1,14 @@
-# $NetBSD: Makefile,v 1.10 2018/09/14 02:08:28 schmonz Exp $
+# $NetBSD: Makefile,v 1.18 2021/03/04 10:02:02 leot Exp $
 #
 
-DISTNAME=	entr-4.1
+DISTNAME=	entr-4.8
 CATEGORIES=	sysutils
-MASTER_SITES=	http://entrproject.org/code/
+MASTER_SITES=	http://eradman.com/entrproject/code/
 
 MAINTAINER=	leot@NetBSD.org
-HOMEPAGE=	http://entrproject.org/
+HOMEPAGE=	http://eradman.com/entrproject/
 COMMENT=	Run arbitrary commands when files change
 LICENSE=	isc AND 2-clause-bsd
-
-WRKSRC=		${WRKDIR}/eradman-entr-f4e2cbe57708
 
 MAKE_ENV+=	MANPREFIX="${PREFIX}/${PKGMANDIR}"
 
@@ -27,6 +25,11 @@ MAKE_FILE=		Makefile.linux
 NOT_FOR_PLATFORM=	${MACHINE_PLATFORM}
 .endif
 
-TEST_TARGET=	test
+TEST_TARGET=			test
+USE_TOOLS+=			bash:test
+CHECK_PORTABILITY_SKIP+=	system_test.sh
+.if ${PKGSRC_RUN_TEST:tl} == yes
+REPLACE_BASH+=	system_test.sh
+.endif
 
 .include "../../mk/bsd.pkg.mk"

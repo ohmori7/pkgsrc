@@ -1,13 +1,12 @@
-# $NetBSD: Makefile,v 1.18 2016/03/25 21:05:30 joerg Exp $
-#
+# $NetBSD: Makefile,v 1.20 2020/01/18 21:50:56 jperkin Exp $
 
-DISTNAME=		monit-5.8
+DISTNAME=		monit-5.26.0
 PKGREVISION=		1
 CATEGORIES=		sysutils
-MASTER_SITES=		http://mmonit.com/monit/dist/
+MASTER_SITES=		https://mmonit.com/monit/dist/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://mmonit.com/monit/
+HOMEPAGE=		https://mmonit.com/monit/
 COMMENT=		Monitors processes, files, directories and devices
 LICENSE=		gnu-agpl-v3
 
@@ -47,7 +46,6 @@ EG_SUBDIR=		share/examples/monit
 EGDIR=			${PREFIX}/${EG_SUBDIR}
 
 M_DOCFILES=		CHANGES COPYING README
-M_DOCFILES+=		doc/PLATFORMS
 
 SUBST_CLASSES+=		monit
 SUBST_STAGE.monit=	pre-configure
@@ -74,5 +72,6 @@ post-install:
 	${INSTALL_DATA} ${WRKSRC}/monitrc ${DESTDIR}${EGDIR}/monitrc.sample
 
 .include "../../mk/pthread.buildlink3.mk"
+.include "../../devel/zlib/buildlink3.mk"
 .include "../../security/openssl/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

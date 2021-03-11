@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.11 2019/04/26 13:13:47 maya Exp $
+# $NetBSD: Makefile,v 1.14 2020/05/25 05:21:08 rillig Exp $
 
 DISTNAME=	CouchDB-0.9
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME:tl}
@@ -13,7 +13,7 @@ LICENSE=	modified-bsd
 DEPENDS+=	${PYPKGPREFIX}-simplejson>=2.0.9:../../converters/py-simplejson
 DEPENDS+=	${PYPKGPREFIX}-httplib2>=0.5.0:../../www/py-httplib2
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37
+PYTHON_VERSIONS_ACCEPTED=	27
 
 USE_LANGUAGES=	# none
 
@@ -22,8 +22,6 @@ INSTALLATION_DIRS+=	share/doc/py-couchdb
 REPLACE_PYTHON+=	couchdb/http.py couchdb/json.py
 REPLACE_PYTHON+=	couchdb/tests/couch_tests.py couchdb/tools/dump.py
 REPLACE_PYTHON+=	couchdb/tools/load.py couchdb/tools/replicate.py
-REPLACE_PYTHON+=	couchdb/tools/replication_helper.py
-REPLACE_PYTHON+=	couchdb/tools/replication_helper_test.py
 REPLACE_PYTHON+=	couchdb/view.py
 PY_PATCHPLIST=		yes
 

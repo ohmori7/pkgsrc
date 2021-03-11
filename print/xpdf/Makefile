@@ -1,14 +1,13 @@
-# $NetBSD: Makefile,v 1.87 2019/05/23 19:23:14 rillig Exp $
+# $NetBSD: Makefile,v 1.90 2021/01/22 16:27:21 nros Exp $
 
 DISTNAME=	xpdf-3.04
 CATEGORIES=	print
-MASTER_SITES=	ftp://ftp.foolabs.com/pub/xpdf/
-MASTER_SITES+=	${MASTER_SITE_SUNSITE:=apps/graphics/viewers/X/xpdf/}
+MASTER_SITES=	https://dl.xpdfreader.com/old/
 PKGREVISION=	1
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.xpdfreader.com/
-COMMENT=	Display tool for PDF files
+HOMEPAGE=	https://www.xpdfreader.com/
+COMMENT=	Display tool for PDF files (Motif version)
 LICENSE=	gnu-gpl-v2
 
 MAKE_JOBS_SAFE=	no

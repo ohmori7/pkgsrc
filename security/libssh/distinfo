@@ -1,7 +1,10 @@
-$NetBSD: distinfo,v 1.16 2019/03/20 16:00:30 wiz Exp $
+$NetBSD: distinfo,v 1.25 2020/09/13 18:45:36 otis Exp $
 
-SHA1 (libssh-0.8.7.tar.xz) = 29ed6d9517ce270fee993cccb0219bd16a595bcc
-RMD160 (libssh-0.8.7.tar.xz) = b3a2c44cfcecac541b81d083b7ff8bc903313eba
-SHA512 (libssh-0.8.7.tar.xz) = 13c3dccad81d521edf29c8a5e2c5f7fdd90507a0eda652b2b040a0a17bab88860873e089a46e181907ea3f449ca1847b1c84453b1960f456e391eefe5be983c5
-Size (libssh-0.8.7.tar.xz) = 430104 bytes
-SHA1 (patch-CompilerChecks.cmake) = 86de41ab778d25368691c1b0b9ecfa653f24cc5d
+SHA1 (libssh-0.9.5.tar.xz) = cac8772e6bea068e4defea067d4290991d566964
+RMD160 (libssh-0.9.5.tar.xz) = 2ebc61443caa488bacdffe363775129e88c83f8a
+SHA512 (libssh-0.9.5.tar.xz) = 64e692a0bfa7f73585ea7b7b8b1d4c9a7f9be59565bfd4de32ca8cd9db121f87e7ad51f5c80269fbd99545af34dcf1894374ed8a6d6c1ac5f8601c026572ac18
+Size (libssh-0.9.5.tar.xz) = 502876 bytes
+SHA1 (patch-CompilerChecks.cmake) = 77b93572006132c557cb9a57698e8455f7874073
+SHA1 (patch-examples_sshd__direct-tcpip.c) = 62de8625d58dbc03c38b0eb23f6e7f20a46e91de
+SHA1 (patch-tests_CMakeLists.txt) = 61d9e21d612545766b00f577b3d342eb20a0a9a5
+SHA1 (patch-tests_torture.c) = 2c70e9d827f15ec36a62e0d0f5dd98774f24f79e

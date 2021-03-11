@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.50 2018/11/14 22:21:49 kleink Exp $
+# $NetBSD: Makefile,v 1.56 2020/08/17 20:19:13 leot Exp $
 #
 
 DISTNAME=	grig-0.8.1
-PKGREVISION=	7
+PKGREVISION=	11
 CATEGORIES=	ham
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=groundstation/}
 

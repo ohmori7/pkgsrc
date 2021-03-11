@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.22 2013/04/08 11:17:26 rodent Exp $
+# $NetBSD: Makefile,v 1.24 2020/01/18 23:35:59 rillig Exp $
 
 DISTNAME=	xdaemon-1.2
 CATEGORIES=	games x11
@@ -7,7 +7,7 @@ DISTFILES=	Daemon.README ${IMAGES:=_bw.xbm} ${IMAGES:=_color.xpm} \
 		${IMAGES:=_icon.xbm} ${IMAGES:=_mask.xbm}
 
 MAINTAINER=	hubertf@NetBSD.org
-HOMEPAGE=	http://www.NetBSD.org/
+HOMEPAGE=	https://www.NetBSD.org/
 COMMENT=	BSD Daemon sticking on your desktop (like xteddy)
 
 DEPENDS+=	xteddy-1.*:../../x11/xteddy
@@ -29,9 +29,9 @@ do-extract:
 
 do-install:
 .for img in ${IMAGES}
-.for sufx in _bw.xbm _color.xpm _icon.xbm _mask.xbm
+.  for sufx in _bw.xbm _color.xpm _icon.xbm _mask.xbm
 	${INSTALL_DATA} ${DISTDIR}/${DIST_SUBDIR}/${img}${sufx} ${DESTDIR}${PREFIX}/share/xteddy/pixmaps/${img}${sufx}
-.endfor # sufx
+.  endfor # sufx
 	${RM} -f ${DESTDIR}${PREFIX}/bin/${img}
 	${LN} -s xteddy ${DESTDIR}${PREFIX}/bin/${img}
 .endfor # img

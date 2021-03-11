@@ -1,4 +1,4 @@
-# $NetBSD: buildlink3.mk,v 1.73 2019/03/18 16:17:47 gdt Exp $
+# $NetBSD: buildlink3.mk,v 1.84 2020/12/04 04:55:56 riastradh Exp $
 
 BUILDLINK_TREE+=	ImageMagick
 
@@ -6,28 +6,31 @@ BUILDLINK_TREE+=	ImageMagick
 IMAGEMAGICK_BUILDLINK3_MK:=
 
 BUILDLINK_API_DEPENDS.ImageMagick+=	ImageMagick>=5.5.7.11nb1
-BUILDLINK_ABI_DEPENDS.ImageMagick+=	ImageMagick>=7.0.8.29nb1
+BUILDLINK_ABI_DEPENDS.ImageMagick+=	ImageMagick>=7.0.10.44nb1
 BUILDLINK_PKGSRCDIR.ImageMagick?=	../../graphics/ImageMagick
 
 pkgbase := ImageMagick
 .include "../../mk/pkg-build-options.mk"
 
-.if !empty(PKG_BUILD_OPTIONS.ImageMagick:Mdjvu)
+.if ${PKG_BUILD_OPTIONS.ImageMagick:Mheif}
+.include "../../graphics/libheif/buildlink3.mk"
+.endif
+.if ${PKG_BUILD_OPTIONS.ImageMagick:Mdjvu}
 .include "../../graphics/djvulibre-lib/buildlink3.mk"
 .endif
-.if !empty(PKG_BUILD_OPTIONS.ImageMagick:Mjp2)
+.if ${PKG_BUILD_OPTIONS.ImageMagick:Mjp2}
 .include "../../graphics/openjpeg/buildlink3.mk"
 .endif
-.if !empty(PKG_BUILD_OPTIONS.ImageMagick:Mliblqr)
+.if ${PKG_BUILD_OPTIONS.ImageMagick:Mliblqr}
 .include "../../graphics/liblqr/buildlink3.mk"
 .endif
-.if !empty(PKG_BUILD_OPTIONS.ImageMagick:Mopenexr)
+.if ${PKG_BUILD_OPTIONS.ImageMagick:Mopenexr}
 .include "../../graphics/openexr/buildlink3.mk"
 .endif
-.if !empty(PKG_BUILD_OPTIONS.ImageMagick:Mwmf)
+.if ${PKG_BUILD_OPTIONS.ImageMagick:Mwmf}
 .include "../../graphics/libwmf/buildlink3.mk"
 .endif
-.if !empty(PKG_BUILD_OPTIONS.ImageMagick:Mx11)
+.if ${PKG_BUILD_OPTIONS.ImageMagick:Mx11}
 .include "../../x11/libX11/buildlink3.mk"
 .include "../../x11/libXext/buildlink3.mk"
 .include "../../x11/libXt/buildlink3.mk"

@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.28 2018/08/22 09:43:18 wiz Exp $
+# $NetBSD: Makefile,v 1.31 2020/08/31 18:07:03 wiz Exp $
 
 DISTNAME=	DBM-Deep-2.0016
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	databases perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=DBM/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/DBM-Deep/
+HOMEPAGE=	https://metacpan.org/release/DBM-Deep
 COMMENT=	Pure perl multi-level hash/array DBM that supports transactions
 LICENSE=	${PERL5_LICENSE}
 

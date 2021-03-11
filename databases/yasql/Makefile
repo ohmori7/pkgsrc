@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2018/08/22 09:43:26 wiz Exp $
+# $NetBSD: Makefile,v 1.26 2020/08/31 18:07:15 wiz Exp $
 
 DISTNAME=	yasql-1.81
-PKGREVISION=	8
+PKGREVISION=	10
 CATEGORIES=	databases
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=yasql/}
 
@@ -17,7 +17,7 @@ USE_TOOLS+=	perl:run
 GNU_CONFIGURE=	yes
 NO_BUILD=	yes
 
-CONFIGURE_ARGS+=--sysconfdir=${PKG_SYSCONFDIR:Q}
+CONFIGURE_ARGS+=	--sysconfdir=${PKG_SYSCONFDIR:Q}
 
 CONF_FILES+=	${PREFIX}/share/examples/yasql/yasql.conf \
 		${PKG_SYSCONFDIR}/yasql.conf

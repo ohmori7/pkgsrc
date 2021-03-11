@@ -1,9 +1,8 @@
-# $NetBSD: Makefile,v 1.15 2019/05/23 19:23:06 rillig Exp $
-#
+# $NetBSD: Makefile,v 1.22 2020/12/28 21:27:58 wiz Exp $
 
 DISTNAME=		newspipe.1.1.9
 PKGNAME=		${DISTNAME:S/./-/}
-PKGREVISION=		8
+PKGREVISION=		10
 CATEGORIES=		mail
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=newspipe/}
 EXTRACT_SUFX=		.zip
@@ -13,12 +12,14 @@ HOMEPAGE=		http://newspipe.sourceforge.net/
 COMMENT=		Read RSS/Atom feeds as email messages
 
 DEPENDS+=		${PYPKGPREFIX}-expat-[0-9]*:../../textproc/py-expat
-DEPENDS+=		${PYPKGPREFIX}-feedparser-[0-9]*:../../textproc/py-feedparser
-DEPENDS+=		${PYPKGPREFIX}-html2text-[0-9]*:../../textproc/py-html2text
+DEPENDS+=		${PYPKGPREFIX}-feedparser<6.0.0:../../textproc/py-feedparser5
 
 WRKSRC=			${WRKDIR}
 
-NO_BUILD=		yes
+PYTHON_VERSIONED_DEPENDENCIES=	html2text
+PYTHON_VERSIONS_ACCEPTED=	27
+
+NO_BUILD=	yes
 REPLACE_PYTHON=	*.py
 
 SUBST_CLASSES+=		bin
@@ -44,5 +45,6 @@ do-install:
 	${INSTALL_DATA} $${f} ${DESTDIR}${PREFIX}/share/examples/newspipe; \
 	done
 
+.include "../../lang/python/versioned_dependencies.mk"
 .include "../../lang/python/application.mk"
 .include "../../mk/bsd.pkg.mk"

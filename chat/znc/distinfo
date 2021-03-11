@@ -1,8 +1,6 @@
-$NetBSD: distinfo,v 1.4 2019/06/18 10:21:37 nia Exp $
+$NetBSD: distinfo,v 1.9 2020/09/09 11:04:06 ryoon Exp $
 
-SHA1 (znc-1.7.3.tar.gz) = 76c1c32d3ec6fc052b0c3854dbbb8896aecafee5
-RMD160 (znc-1.7.3.tar.gz) = a52f7f8500dc3156dd3387f9450e8558132013d6
-SHA512 (znc-1.7.3.tar.gz) = 4cd63be2cb3bc1e3950f38984b128c6511bd1b9fc01a00d51cfcdc46826c2dedad120d6ed8e30d9c400909e33d39b2b14579fb40ee1e3508b7f3a07eff3a15d8
-Size (znc-1.7.3.tar.gz) = 2084575 bytes
-SHA1 (patch-include_znc_Modules.h) = 57f5d2dcb0021c3c7c0162ccd06ad8698e68022e
-SHA1 (patch-src_Modules.cpp) = adb6f87f4c441cd438110aa58fdb31b481212eff
+SHA1 (znc-1.8.2.tar.gz) = 47c69267412cbc4c7c4b64435c23c11a8ece339b
+RMD160 (znc-1.8.2.tar.gz) = 33d05a35c47e8212d40b9878ec816ae29521a93a
+SHA512 (znc-1.8.2.tar.gz) = e821647b50698c3a82fad039e69943e030bf644d8f8e82afa87c6c11da44761bceecddd510a7a956a1b487b1cca6ee46e8ac8818ea03127f0f1ff8f5d1a1a7f9
+Size (znc-1.8.2.tar.gz) = 2101215 bytes

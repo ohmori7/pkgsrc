@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.2 2018/08/22 09:43:41 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2020/08/31 18:07:35 wiz Exp $
 
 DISTNAME=	Carton-v1.0.34
 PKGNAME=	p5-${DISTNAME:S/-v/-/}
-PKGREVISION=	1
+PKGREVISION=	3
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=../../authors/id/M/MI/MIYAGAWA/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/carton
+HOMEPAGE=	https://metacpan.org/release/carton
 COMMENT=	Perl module dependency manager (aka Bundler for Perl)
 LICENSE=	${PERL5_LICENSE}
 

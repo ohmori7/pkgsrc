@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.1 2019/05/15 09:01:34 markd Exp $
+$NetBSD: distinfo,v 1.3 2021/02/13 11:00:10 markd Exp $
 
-SHA1 (tex-footnotehyper-46431/footnotehyper.doc.tar.xz) = 2d8ff7fa808b6b47be6e72d55c5dad26056ed358
-RMD160 (tex-footnotehyper-46431/footnotehyper.doc.tar.xz) = 394e2e9289859a8494c510d9976f31cd24e41beb
-SHA512 (tex-footnotehyper-46431/footnotehyper.doc.tar.xz) = d380557ece02393115148311e2186c99c6dda4f7ab311e448c3a52111a52a93fc17661bba80a6f62b24a30f7096793e422a93cd0d326336c1153a572b69c8b72
-Size (tex-footnotehyper-46431/footnotehyper.doc.tar.xz) = 58572 bytes
+SHA1 (footnotehyper.doc.r57618.tar.xz) = de8c80bf205c2f10522c42738af542da6ab32153
+RMD160 (footnotehyper.doc.r57618.tar.xz) = 54529b47510f63ffc7c0517f07cfa41afa0474ba
+SHA512 (footnotehyper.doc.r57618.tar.xz) = 6fb3d09ca9c5dfaddedfa2c332634a0b846ffd95f67c1d00346f2d2dab60354a8678315f8987bfd13427909f0d489653f465e03252e84eac13048dbbbde9e6b7
+Size (footnotehyper.doc.r57618.tar.xz) = 78640 bytes

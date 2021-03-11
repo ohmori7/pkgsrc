@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.17 2019/04/26 13:14:01 maya Exp $
+# $NetBSD: Makefile,v 1.20 2020/03/11 20:17:12 wiz Exp $
 
-DISTNAME=	pycha-0.7.0
+DISTNAME=	pycha-0.8.1
 PKGNAME=	${PYPKGPREFIX}-${DISTNAME}
 CATEGORIES=	graphics python
 MASTER_SITES=	${MASTER_SITE_PYPI:=p/pycha/}
@@ -8,15 +8,15 @@ MASTER_SITES=	${MASTER_SITE_PYPI:=p/pycha/}
 MAINTAINER=	pkgsrc-users@NetBSD.org
 HOMEPAGE=	https://bitbucket.org/lgs/pycha/
 COMMENT=	Library for making charts with Python
-LICENSE=      	gnu-lgpl-v3
+LICENSE=	gnu-lgpl-v3
 
-DEPENDS+=	${PYPKGPREFIX}-gtk2-[0-9]*:../../x11/py-gtk2
-DEPENDS+=	${PYPKGPREFIX}-cairo-[0-9]*:../../graphics/py-cairo
+DEPENDS+=	${PYPKGPREFIX}-cairocffi-[0-9]*:../../graphics/py-cairocffi
+DEPENDS+=	${PYPKGPREFIX}-six-[0-9]*:../../lang/py-six
 
 USE_LANGUAGES=	#none
 
-PYTHON_SELF_CONFLICT=	yes
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-gtk2
+post-install:
+	${MV} ${DESTDIR}${PREFIX}/bin/chavier ${DESTDIR}${PREFIX}/bin/chavier-${PYVERSSUFFIX} || ${TRUE}
 
 .include "../../lang/python/egg.mk"
 .include "../../mk/bsd.pkg.mk"

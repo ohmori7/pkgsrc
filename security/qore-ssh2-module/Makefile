@@ -1,9 +1,10 @@
-# $NetBSD: Makefile,v 1.9 2018/06/08 20:02:30 nros Exp $
+# $NetBSD: Makefile,v 1.11 2020/01/18 21:48:24 jperkin Exp $
 
 DISTNAME=	qore-ssh2-module-1.2
+PKGREVISION=	1
 CATEGORIES=	security
-MASTER_SITES=   ${MASTER_SITE_GITHUB:=qorelanguage/}
-EXTRACT_SUFX=   .tar.bz2
+MASTER_SITES=	${MASTER_SITE_GITHUB:=qorelanguage/}
+EXTRACT_SUFX=	.tar.bz2
 GITHUB_RELEASE=	v${PKGVERSION_NOREV}
 GITHUB_PROJECT=	module-ssh2
 
@@ -18,7 +19,7 @@ USE_LANGUAGES=	c c++11
 USE_TOOLS+=	gmake pax
 PTHREAD_OPTS+=	native
 
-CONFIGURE_ARGS+=--with-libsuffix=""
+CONFIGURE_ARGS+=	--with-libsuffix=""
 
 #This is needed in order to comply the with MIT license and binary distribution
 #Install docs

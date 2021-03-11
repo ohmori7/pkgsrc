@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.14 2018/08/22 09:44:30 wiz Exp $
+# $NetBSD: Makefile,v 1.17 2020/08/31 18:08:39 wiz Exp $
 #
 
 DISTNAME=	Parse-CPAN-Packages-2.40
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	devel perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Parse/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Parse-CPAN-Packages/
+HOMEPAGE=	https://metacpan.org/release/Parse-CPAN-Packages
 COMMENT=	Perl 5 module to parse 02packages.details.txt.gz
 LICENSE=	${PERL5_LICENSE}
 

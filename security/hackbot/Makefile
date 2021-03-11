@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.18 2018/08/22 09:46:18 wiz Exp $
+# $NetBSD: Makefile,v 1.20 2020/08/31 18:11:07 wiz Exp $
 
 DISTNAME=		hackbot-2.21
-PKGREVISION=		5
+PKGREVISION=		7
 CATEGORIES=		security net
 MASTER_SITES=		http://hackbot.stream-portal.org/
 EXTRACT_SUFX=		.tgz

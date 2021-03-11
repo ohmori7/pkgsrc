@@ -1,13 +1,13 @@
-# $NetBSD: Makefile,v 1.6 2018/08/22 09:44:17 wiz Exp $
+# $NetBSD: Makefile,v 1.10 2020/08/31 18:08:23 wiz Exp $
 
 DISTNAME=	Module-Install-GithubMeta-0.30
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Module/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/~bingos/Module-Install-GithubMeta/
+HOMEPAGE=	https://metacpan.org/release/Module-Install-GithubMeta
 COMMENT=	Module::Install extension to include GitHub meta info in META.yml
 LICENSE=	${PERL5_LICENSE}
 
@@ -15,7 +15,7 @@ LICENSE=	${PERL5_LICENSE}
 BUILD_DEPENDS+=	p5-Capture-Tiny-[0-9]*:../../devel/p5-Capture-Tiny
 BUILD_DEPENDS+=	p5-Module-Install-[0-9]*:../../devel/p5-Module-Install
 
-USE_LANGUAGES=  # empty
+USE_LANGUAGES=	# empty
 PERL5_PACKLIST=	auto/Module/Install/GithubMeta/.packlist
 
 .include "../../lang/perl5/module.mk"

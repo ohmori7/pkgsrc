@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.29 2019/05/10 15:49:39 mef Exp $
+# $NetBSD: Makefile,v 1.34 2020/12/04 20:45:05 nia Exp $
 
 DISTNAME=	ExmanIDE-0.9.4
-PKGREVISION=	8
+PKGREVISION=	9
 CATEGORIES=	devel
 MASTER_SITES=	http://kldp.net/download.php/715/
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://exmanide.kldp.net/
+HOMEPAGE=	https://exmanide.kldp.net/
 COMMENT=	Integrated development environment for Python
 
 DEPENDS+=	${PYPKGPREFIX}-wxWidgets>=2.6:../../x11/py-wxWidgets
@@ -16,12 +16,12 @@ USE_TOOLS+=	pax
 WRKSRC=		${WRKDIR}/${PKGBASE}
 NO_BUILD=	yes
 
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-wxWidgets
+PYTHON_VERSIONS_ACCEPTED=	27 # py-wxWidgets
 
 SUBST_CLASSES+=		mod
 SUBST_MESSAGE.mod=	Fixing deprecated module names.
 SUBST_STAGE.mod=	pre-configure
-SUBST_FILES.mod=	Profile.py SourceEditor.py StcStyle.py
+SUBST_FILES.mod=	Profile.py SourceEditor.py
 SUBST_SED.mod=		-e 's,wxPython\.lib\.PyCrust,wxPython.py,g'
 SUBST_SED.mod+=		-e 's,wxPython\.py,wx.py,g'
 
@@ -37,7 +37,7 @@ SUBST_STAGE.py2=	pre-configure
 SUBST_FILES.py2=	ExmanIDE.pyw
 SUBST_SED.py2=		-e 's,/usr/bin/env python.*$$,${PYTHONBIN},'
 
-INSTALLATION_DIRS=	 bin share/ExmanIDE
+INSTALLATION_DIRS=	bin share/ExmanIDE
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/ExmanIDE ${DESTDIR}${PREFIX}/bin

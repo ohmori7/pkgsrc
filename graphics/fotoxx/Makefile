@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.62 2018/11/14 22:21:37 kleink Exp $
+# $NetBSD: Makefile,v 1.67 2020/08/17 20:18:58 leot Exp $
 #
 
 DISTNAME=	fotoxx-16.02.1
-PKGREVISION=	8
+PKGREVISION=	12
 CATEGORIES=	graphics
 MASTER_SITES=	http://www.kornelix.com/downloads/tarballs/
 
@@ -16,9 +16,9 @@ BUILD_DEFS+=	PKG_SYSCONFBASE
 PKG_SYSCONFSUBDIR=	xdg/menus
 
 # XXX work around misc/xdg-utils being completely broken
-XDG_CONFIG_DIRS="${DESTDIR}${PKG_SYSCONFBASE}/xdg"
-MAKE_ENV+=	XDG_CONFIG_DIRS="${XDG_CONFIG_DIRS}"
-MAKE_ENV+=	XDG_DATA_DIRS="${DESTDIR}${PREFIX}/share"
+XDG_CONFIG_DIRS=	"${DESTDIR}${PKG_SYSCONFBASE}/xdg"
+MAKE_ENV+=		XDG_CONFIG_DIRS="${XDG_CONFIG_DIRS}"
+MAKE_ENV+=		XDG_DATA_DIRS="${DESTDIR}${PREFIX}/share"
 
 OWN_DIRS+=	${PREFIX}/share/desktop-directories
 

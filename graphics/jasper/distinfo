@@ -1,16 +1,15 @@
-$NetBSD: distinfo,v 1.29 2017/11/23 19:16:28 snj Exp $
+$NetBSD: distinfo,v 1.40 2021/03/05 18:53:56 adam Exp $
 
-SHA1 (jasper-2.0.14.tar.gz) = 32c959d883fdb661c32afd76c94b206638972cb1
-RMD160 (jasper-2.0.14.tar.gz) = 0b2b51b22b7421773255955de6bad27f9b434712
-SHA512 (jasper-2.0.14.tar.gz) = 9e5cffd2e899e37ba08890e2377ddfc3c2fb13d9fe00dea6b4612e4d241a6f4327de6835809b415c41ae4bf44208cf7871c1982ff5fc04ae6bc09fd376b0afc8
-Size (jasper-2.0.14.tar.gz) = 1677951 bytes
-SHA1 (patch-CMakeLists.txt) = 047ea526e4f4d81036043e0d831ef76be1e3b456
-SHA1 (patch-doc_CMakeLists.txt) = 08156df737458cec48ea1965586b9acdbf30753b
-SHA1 (patch-src_libjasper_base_jas__seq.c) = a0208cd0271388ae0fdc2e359da3223a35a7ae14
-SHA1 (patch-src_libjasper_base_jas__stream.c) = 2e9ad538ab2c0191063fef06202949b435b0085e
-SHA1 (patch-src_libjasper_jp2_jp2__cod.c) = bfbe752e105d75fbad71a01080013c7a5a8645d8
-SHA1 (patch-src_libjasper_jp2_jp2__dec.c) = df04d8af9004fb133d4ae1429ecda77197fc3e77
+SHA1 (jasper-2.0.26.tar.gz) = 50c06b171b4f51982509d788fdbee46b67ce0634
+RMD160 (jasper-2.0.26.tar.gz) = c7d1164f42c6c6a5af3d1aa86cbfc735806d8ad7
+SHA512 (jasper-2.0.26.tar.gz) = 083df81674439bac4f328d2a53d9cb58995d624dcb572b83d47bbc4e5c50209cf83eab0ac62cb2576f0518565e54715b883f752a60ac42de930d4918b12a6281
+Size (jasper-2.0.26.tar.gz) = 1365489 bytes
+SHA1 (patch-CMakeLists.txt) = a848a73c9e717e5d6b0a98f3c27d0dcfc1dda8a5
+SHA1 (patch-build_cmake_modules_JasOpenGL.cmake) = 832cf84b0840fe1159d81c8ce92f24971da16838
+SHA1 (patch-src_appl_jiv.c) = 123f1db81a95b4ddd679ccea6f1b2c4887bf574d
+SHA1 (patch-src_libjasper_include_jasper_jas__config.h.in) = a512b563fb34587dab80bdea7f99ea1f1b338d1c
+SHA1 (patch-src_libjasper_jp2_jp2__cod.c) = d27de060384eaa80f5807bbec9be9daab839418e
+SHA1 (patch-src_libjasper_jp2_jp2__dec.c) = 2f340a0b25933873127c321b09600146cf3f765c
 SHA1 (patch-src_libjasper_jp2_jp2__enc.c) = 9a78860496f1d0ce35f94843f6a7d754a5565716
-SHA1 (patch-src_libjasper_jpc_jpc__dec.c) = f76765ff7656af6b44cd4035b26656909abe45f9
 SHA1 (patch-src_libjasper_jpc_jpc__enc.c) = 83068e4f4ec96b7f9816f3dac1f68ef6efde986f
 SHA1 (patch-src_libjasper_pnm_pnm__enc.c) = a2d5d53cd28f653f9e6e302f76c187fba50b1ce2

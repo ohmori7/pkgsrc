@@ -1,6 +1,7 @@
-# $NetBSD: Makefile,v 1.152 2019/01/09 19:09:02 adam Exp $
+# $NetBSD: Makefile,v 1.157 2020/11/05 09:07:10 ryoon Exp $
 
 .include "../../textproc/libxml2/Makefile.common"
+PKGREVISION=	3
 
 COMMENT=	XML parser library from the GNOME project
 LICENSE=	modified-bsd
@@ -35,6 +36,7 @@ SUBST_FILES.cat=	catalog.c xmlcatalog.c
 SUBST_SED.cat=		-e "s,@@SGML_DEFAULT_CATALOG@@,${SGML_DEFAULT_CATALOG},g"
 SUBST_SED.cat+=		-e "s,@@XML_DEFAULT_CATALOG@@,${XML_DEFAULT_CATALOG},g"
 
+BUILDLINK_TRANSFORM.Darwin+=	rm:-Wno-array-bounds
 BUILDLINK_TRANSFORM.SunOS+=	rm:-Werror=format=2
 
 LDFLAGS.SCO_SV+=	-lm

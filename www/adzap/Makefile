@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.73 2018/11/20 09:26:11 maya Exp $
+# $NetBSD: Makefile,v 1.77 2020/08/31 18:12:30 wiz Exp $
 
 DISTNAME=	adzap-20110915
-PKGREVISION=	5
+PKGREVISION=	7
 CATEGORIES=	www perl5
 MASTER_SITES=	http://adzapper.sourceforge.net/
 

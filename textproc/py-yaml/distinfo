@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.11 2019/06/10 07:41:16 adam Exp $
+$NetBSD: distinfo,v 1.16 2021/02/21 15:43:35 adam Exp $
 
-SHA1 (PyYAML-5.1.1.tar.gz) = 44da553cb21326ad3f66b2ff2744ca1ffd6d5e26
-RMD160 (PyYAML-5.1.1.tar.gz) = 3dc259121c49250c9073dc9c4aacbb80cfcaaafd
-SHA512 (PyYAML-5.1.1.tar.gz) = fa47fb2d2903506c55e3651ec130ad5472168e0257eabec8fdf329336f60d9ef36df0f8c4eb7d5ab913f3037120048b02f715aa2215085b3b1ce936cdcff77bf
-Size (PyYAML-5.1.1.tar.gz) = 274442 bytes
+SHA1 (PyYAML-5.4.1.tar.gz) = dfa0009b17652ae1605bf0328fabd983ff238a5c
+RMD160 (PyYAML-5.4.1.tar.gz) = 0f52f8f5ad2d5b516ef15955389da9d8aee1d9d9
+SHA512 (PyYAML-5.4.1.tar.gz) = 359c45d843fd839797572efeab121f17b1947647960dfb062f3618f25f71e1a6bc4bab14a1720b6b67f256089d5d48c452ec5419e3130222765c7ca41db11dad
+Size (PyYAML-5.4.1.tar.gz) = 175147 bytes

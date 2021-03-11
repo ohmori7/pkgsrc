@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.15 2018/11/28 12:04:35 jaapb Exp $
+# $NetBSD: Makefile,v 1.19 2021/03/08 08:13:03 jaapb Exp $
 #
 
 VERSION=	1.7
@@ -6,6 +6,7 @@ GITHUB_PROJECT=	Zarith
 GITHUB_TAG=	release-${VERSION}
 DISTNAME=	${GITHUB_PROJECT}-${VERSION}
 PKGNAME=	ocaml-${DISTNAME:tl}
+PKGREVISION=	3
 CATEGORIES=	math
 MASTER_SITES=	${MASTER_SITE_GITHUB:=ocaml/}
 
@@ -17,9 +18,9 @@ LICENSE=	gnu-lgpl-v2
 # zarith library creation is racy
 MAKE_JOBS_SAFE=	no
 
-HAS_CONFIGURE=	yes
-CONFIGURE_ENV+=	DESTDIR=${DESTDIR}
-USE_TOOLS+=	gmake perl
+HAS_CONFIGURE=		yes
+CONFIGURE_ENV+=		DESTDIR=${DESTDIR}
+USE_TOOLS+=		gmake perl
 INSTALLATION_DIRS+=	${OCAML_SITELIBDIR}/zarith
 
 OCAML_USE_FINDLIB=	yes

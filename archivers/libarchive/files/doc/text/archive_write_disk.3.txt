@@ -4,7 +4,7 @@ NAME
      archive_write_disk_new, archive_write_disk_set_options,
      archive_write_disk_set_skip_file, archive_write_disk_set_group_lookup,
      archive_write_disk_set_standard_lookup,
-     archive_write_disk_set_user_lookup — functions for creating objects on
+     archive_write_disk_set_user_lookup -- functions for creating objects on
      disk
 
 LIBRARY
@@ -39,9 +39,9 @@ DESCRIPTION
      These functions provide a complete API for creating objects on disk from
      struct archive_entry descriptions.  They are most naturally used when
      extracting objects from an archive using the archive_read() interface.
-     The general process is to read struct archive_entry objects from an ar‐
+     The general process is to read struct archive_entry objects from an ar-
      chive, then write those objects to a struct archive object created using
-     the archive_write_disk() family functions.  This interface is deliber‐
+     the archive_write_disk() family functions.  This interface is deliber-
      ately very similar to the archive_write() interface used to write objects
      to a streaming archive.
 
@@ -64,19 +64,19 @@ DESCRIPTION
 		     extended ACLs are ignored.
 	     ARCHIVE_EXTRACT_CLEAR_NOCHANGE_FFLAGS
 		     Before removing a file system object prior to replacing
-		     it, clear platform-specific file flags which might pre‐
+		     it, clear platform-specific file flags which might pre-
 		     vent its removal.
 	     ARCHIVE_EXTRACT_FFLAGS
 		     Attempt to restore file attributes (file flags).  By
 		     default, file attributes are ignored.  See chattr(1)
-		     (Linux) or chflags(1) (FreeBSD, Mac OS X) for more infor‐
+		     (Linux) or chflags(1) (FreeBSD, Mac OS X) for more infor-
 		     mation on file attributes.
 	     ARCHIVE_EXTRACT_MAC_METADATA
-		     Mac OS X specific. Restore metadata using copyfile(3).
+		     Mac OS X specific.  Restore metadata using copyfile(3).
 		     By default, copyfile(3) metadata is ignored.
 	     ARCHIVE_EXTRACT_NO_OVERWRITE
 		     Existing files on disk will not be overwritten.  By
-		     default, existing regular files are truncated and over‐
+		     default, existing regular files are truncated and over-
 		     written; existing directories will have their permissions
 		     updated; other pre-existing objects are unlinked and
 		     recreated from scratch.
@@ -89,30 +89,35 @@ DESCRIPTION
 		     should be restored exactly as specified, without obeying
 		     the current umask.  Note that SUID and SGID bits can only
 		     be restored if the user and group ID of the object on
-		     disk are correct.	If ARCHIVE_EXTRACT_OWNER is not speci‐
+		     disk are correct.	If ARCHIVE_EXTRACT_OWNER is not speci-
 		     fied, then SUID and SGID bits will only be restored if
 		     the default user and group IDs of newly-created objects
 		     on disk happen to match those specified in the archive
 		     entry.  By default, only basic permissions are restored,
 		     and umask is obeyed.
+	     ARCHIVE_EXTRACT_SAFE_WRITES
+		     Extract files atomically, by first creating a unique tem-
+		     porary file and then renaming it to its required destina-
+		     tion name.  This avoids a race where an application might
+		     see a partial file (or no file) during extraction.
 	     ARCHIVE_EXTRACT_SECURE_NOABSOLUTEPATHS
 		     Refuse to extract an absolute path.  The default is to
 		     not refuse such paths.
 	     ARCHIVE_EXTRACT_SECURE_NODOTDOT
-		     Refuse to extract a path that contains a .. element any‐
+		     Refuse to extract a path that contains a .. element any-
 		     where within it.  The default is to not refuse such
 		     paths.  Note that paths ending in .. always cause an
 		     error, regardless of this flag.
 	     ARCHIVE_EXTRACT_SECURE_SYMLINKS
 		     Refuse to extract any object whose final location would
 		     be altered by a symlink on disk.  This is intended to
-		     help guard against a variety of mischief caused by ar‐
+		     help guard against a variety of mischief caused by ar-
 		     chives that (deliberately or otherwise) extract files
 		     outside of the current directory.	The default is not to
 		     perform this check.  If
 	     ARCHIVE_EXTRACT_SPARSE
 		     Scan data for blocks of NUL bytes and try to recreate
-		     them with holes.  This results in sparse files, indepen‐
+		     them with holes.  This results in sparse files, indepen-
 		     dent of whether the archive format supports or uses them.
 		     ARCHIVE_EXTRACT_UNLINK is specified together with this
 		     option, the library will remove any intermediate symlinks
@@ -142,7 +147,7 @@ DESCRIPTION
 	     describe the ownership of the file itself and also appear in ACL
 	     lists.  By default, the library uses the ids and ignores the
 	     names, but this can be overridden by registering user and group
-	     lookup functions.	To register, you must provide a lookup func‐
+	     lookup functions.	To register, you must provide a lookup func-
 	     tion which accepts both a name and id and returns a suitable id.
 	     You may also provide a void * pointer to a private data structure
 	     and a cleanup function for that data.  The cleanup function will
@@ -152,7 +157,7 @@ DESCRIPTION
 	     This convenience function installs a standard set of user and
 	     group lookup functions.  These functions use getpwnam(3) and
 	     getgrnam(3) to convert names to ids, defaulting to the ids if the
-	     names cannot be looked up.  These functions also implement a sim‐
+	     names cannot be looked up.  These functions also implement a sim-
 	     ple memory cache to reduce the number of calls to getpwnam(3) and
 	     getgrnam(3).
      More information about the struct archive object and the overall design
@@ -164,7 +169,7 @@ RETURN VALUES
      non-zero error codes for errors.  Specific error codes include:
      ARCHIVE_RETRY for operations that might succeed if retried, ARCHIVE_WARN
      for unusual conditions that do not prevent further operations, and
-     ARCHIVE_FATAL for serious errors that make remaining operations impossi‐
+     ARCHIVE_FATAL for serious errors that make remaining operations impossi-
      ble.
 
      archive_write_disk_new() returns a pointer to a newly-allocated struct
@@ -178,7 +183,7 @@ ERRORS
      archive_errno() and archive_error_string() functions.
 
 SEE ALSO
-     archive_read(3), archive_write(3), tar(1), libarchive(3)
+     tar(1), archive_read(3), archive_write(3), libarchive(3)
 
 HISTORY
      The libarchive library first appeared in FreeBSD 5.3.  The
@@ -191,13 +196,13 @@ AUTHORS
 BUGS
      Directories are actually extracted in two distinct phases.  Directories
      are created during archive_write_header(), but final permissions are not
-     set until archive_write_close().  This separation is necessary to cor‐
-     rectly handle borderline cases such as a non-writable directory contain‐
+     set until archive_write_close().  This separation is necessary to cor-
+     rectly handle borderline cases such as a non-writable directory contain-
      ing files, but can cause unexpected results.  In particular, directory
      permissions are not fully restored until the archive is closed.  If you
      use chdir(2) to change the current directory between calls to
      archive_read_extract() or before calling archive_read_close(), you may
-     confuse the permission-setting logic with the result that directory per‐
+     confuse the permission-setting logic with the result that directory per-
      missions are restored incorrectly.
 
      The library attempts to create objects with filenames longer than
@@ -223,12 +228,12 @@ BUGS
      only if the user and group of the final object happen to match those
      specified in the entry.
 
-     The “standard” user-id and group-id lookup functions are not the defaults
-     because getgrnam(3) and getpwnam(3) are sometimes too large for particu‐
-     lar applications.	The current design allows the application author to
-     use a more compact implementation when appropriate.
+     The ``standard'' user-id and group-id lookup functions are not the
+     defaults because getgrnam(3) and getpwnam(3) are sometimes too large for
+     particular applications.  The current design allows the application
+     author to use a more compact implementation when appropriate.
 
      There should be a corresponding archive_read_disk interface that walks a
      directory hierarchy and returns archive entry objects.
 
-BSD				 April 3, 2017				   BSD
+BSD			       January 19, 2020 			   BSD

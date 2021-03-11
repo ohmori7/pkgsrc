@@ -1,13 +1,14 @@
-# $NetBSD: Makefile,v 1.2 2015/05/06 09:11:52 wiz Exp $
+# $NetBSD: Makefile,v 1.5 2020/01/18 23:33:46 rillig Exp $
 
 DISTNAME=	chessfss.doc
-PKGNAME=        tex-${DISTNAME:S/./-/}-1.2a
+PKGNAME=	tex-${DISTNAME:S/./-/}-1.2a
 TEXLIVE_REV=	19440
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	http://ctan.org/pkg/chessfss
+HOMEPAGE=	https://ctan.org/pkg/chessfss
 COMMENT=	Documentation for tex-chessfss
 LICENSE=	lppl-1.3c
 
+TEXLIVE_UNVERSIONED=	yes
 .include "../../print/texlive/package.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,10 +1,10 @@
-# $NetBSD: Makefile.version,v 1.16 2018/12/20 17:54:09 adam Exp $
+# $NetBSD: Makefile.version,v 1.27 2021/01/25 12:51:49 adam Exp $
 # used by databases/lmdb/Makefile
 # used by databases/openldap/Makefile
 # used by databases/openldap/Makefile.common
 # used by databases/openldap-docs/Makefile
 
-OPENLDAP_VERSION=	2.4.47
+OPENLDAP_VERSION=	2.4.57
 
 DISTNAME=	openldap-${OPENLDAP_VERSION}
 MASTER_SITES=	ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/
@@ -17,5 +17,5 @@ MASTER_SITES+=	ftp://ftp.linux.pt/pub/mirrors/OpenLDAP/openldap-release/
 MASTER_SITES+=	ftp://sunsite.cnlab-switch.ch/mirror/OpenLDAP/openldap-release/
 EXTRACT_SUFX=	.tgz
 
-HOMEPAGE=	http://www.openldap.org/
+HOMEPAGE=	https://www.openldap.org/
 LICENSE=	modified-bsd

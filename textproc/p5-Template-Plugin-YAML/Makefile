@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.11 2018/08/22 09:46:57 wiz Exp $
+# $NetBSD: Makefile,v 1.14 2020/08/31 18:11:58 wiz Exp $
 #
 
 DISTNAME=	Template-Plugin-YAML-1.23
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	9
+PKGREVISION=	11
 CATEGORIES=	textproc perl5
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Template/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Template-Plugin-YAML/
+HOMEPAGE=	https://metacpan.org/release/Template-Plugin-YAML
 COMMENT=	Plugin interface to YAML
 LICENSE=	${PERL5_LICENSE}
 

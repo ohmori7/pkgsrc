@@ -1,4 +1,4 @@
-# $NetBSD: license.mk,v 1.98 2019/02/10 21:36:54 leot Exp $
+# $NetBSD: license.mk,v 1.108 2021/03/06 04:36:21 ryoon Exp $
 #
 # This file handles everything about the LICENSE variable. It is
 # included automatically by bsd.pkg.mk.
@@ -10,7 +10,7 @@
 # XXX: Some of this content arguably belongs in the pkgsrc guide
 # instead.
 #
-# === User-settable variables ===
+# User-settable variables:
 #
 # ACCEPTABLE_LICENSES
 #
@@ -25,7 +25,7 @@
 #
 #	Default value: ${DEFAULT_ACCEPTABLE_LICENSES}
 #
-# === Package-settable variables ===
+# Package-settable variables:
 #
 # LICENSE
 #
@@ -42,8 +42,7 @@
 #	LICENSE=	(license1 AND license2) OR license3
 #	Parenthesis are required when mixing AND and OR.
 #
-#	Every package should specify its license.  (Prior to early 2009,
-#	Open Source and Free software did not have license tags.)
+#	Every package should specify its license.
 #
 #	Licenses are collected in the licenses/ subdirectory of
 #	pkgsrc.  For open source license, we generally use the same
@@ -114,6 +113,7 @@
 # except that we exclude the AGPL (clearly a Free license), following
 # the decision of the board of TNF.
 DEFAULT_ACCEPTABLE_LICENSES= \
+	afl-3.0 \
 	apache-1.1 apache-2.0 \
 	arphic-public \
 	artistic artistic-2.0 \
@@ -124,6 +124,7 @@ DEFAULT_ACCEPTABLE_LICENSES= \
 	cc0-1.0-universal \
 	cddl-1.0 \
 	cecill-2.1 \
+	cecill-b-v1 \
 	cpl-1.0 \
 	epl-v1.0 \
 	eupl-v1.1 \
@@ -142,9 +143,11 @@ DEFAULT_ACCEPTABLE_LICENSES= \
 	mit \
 	mpl-1.0 mpl-1.1 mpl-2.0 \
 	mplusfont \
+	ms-pl \
+	odbl-v1 \
 	ofl-v1.0 ofl-v1.1 \
 	openssl \
-	original-bsd modified-bsd 2-clause-bsd \
+	original-bsd modified-bsd 2-clause-bsd 0-clause-bsd \
 	osl \
 	paratype \
 	php \
@@ -168,6 +171,8 @@ DEFAULT_ACCEPTABLE_LICENSES= \
 # The following licenses meet the DFSG (but are not formally approved
 # by FSF/OSI) as evidenced by inclusion in Debian main.
 #
+# used in https://sources.debian.org/copyright/license/python-biopython/
+DEFAULT_ACCEPTABLE_LICENSES+=	biopython
 # \todo reference to package
 DEFAULT_ACCEPTABLE_LICENSES+=	happy
 # used in https://sources.debian.org/copyright/license/lsof/
@@ -178,6 +183,9 @@ DEFAULT_ACCEPTABLE_LICENSES+=	purdue
 #
 # derived from BSD
 DEFAULT_ACCEPTABLE_LICENSES+=	info-zip
+# Derived from MIT, with an advertising clause added (and previously
+# included in Debian main as such).
+DEFAULT_ACCEPTABLE_LICENSES+=	enlightenment16
 
 # The following licenses do not currently meet our standards for
 # inclusion.
@@ -210,13 +218,9 @@ SKIP_LICENSE_CHECK?=	no
 _ACCEPTABLE_LICENSE=	skipped
 .else
 _ACCEPTABLE_LICENSE!=	\
-    if test `${PKG_ADMIN} -V` -lt 20090528; then \
-	echo outdated; \
-    else \
 	${PKGSRC_SETENV} PKGSRC_ACCEPTABLE_LICENSES=${ACCEPTABLE_LICENSES:Q} \
 	PKGSRC_DEFAULT_ACCEPTABLE_LICENSES=${DEFAULT_ACCEPTABLE_LICENSES:Q} \
-	${PKG_ADMIN} check-license ${LICENSE:Q} || echo failure; \
-    fi
+	${PKG_ADMIN} check-license ${LICENSE:Q} || echo failure
 .endif
 
 .if ${_ACCEPTABLE_LICENSE} == "no"
@@ -277,7 +281,7 @@ guess-license: .PHONY
 
 	${RUN} \
 	\
-	type ninka > /dev/null 2>&1 || ${FAIL_MSG} "To guess the license, wip/ninka must be installed."; \
+	type ninka > /dev/null 2>&1 || ${FAIL_MSG} "To guess the license, devel/ninka must be installed."; \
 	\
 	${PHASE_MSG} "Guessing licenses for ${PKGNAME}"; \
 	\

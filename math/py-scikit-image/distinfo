@@ -1,6 +1,6 @@
-$NetBSD: distinfo,v 1.3 2019/06/17 15:03:46 adam Exp $
+$NetBSD: distinfo,v 1.5 2021/02/24 20:05:36 markd Exp $
 
-SHA1 (scikit-image-0.15.0.tar.gz) = 8a0f7e1a33078b76c94f95241076eee1a21b2951
-RMD160 (scikit-image-0.15.0.tar.gz) = 2280c06c6e740d6aaf88a810df6c3ea1f9feca1a
-SHA512 (scikit-image-0.15.0.tar.gz) = 9d0be54ddd564c0f28eae979b6f348011f7b38c8811f70ad460330905e706fe145dd6a30b502d15126450148fdbb3f54a271227d46e2d078030054ad00f35bc3
-Size (scikit-image-0.15.0.tar.gz) = 32288867 bytes
+SHA1 (scikit-image-0.18.1.tar.gz) = dbaf80d167379460b197b1e606fc9ec6b9be609f
+RMD160 (scikit-image-0.18.1.tar.gz) = b880d4ca8d86eb7ee7ce8bb9f5aeb8941fb8fee1
+SHA512 (scikit-image-0.18.1.tar.gz) = f2784f13ddaa91e6671b394954b2837f4c0987a85b19e47d3883c89785d9b864760990e7592984188a8a2d902c13ac54ab1836f11e65f5d94ddd574e7d2bd7fc
+Size (scikit-image-0.18.1.tar.gz) = 29663758 bytes

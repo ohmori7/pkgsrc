@@ -1,17 +1,17 @@
-# $NetBSD: Makefile,v 1.30 2018/11/14 22:22:23 kleink Exp $
+# $NetBSD: Makefile,v 1.36 2020/08/17 20:17:43 leot Exp $
 #
 
-DISTNAME=	Browser-0.5.1
-PKGNAME=	deforaos-browser-0.5.1
-PKGREVISION=	7
+DISTNAME=	Browser-0.5.4
+PKGNAME=	deforaos-browser-0.5.4
+PKGREVISION=	1
 CATEGORIES=	sysutils
-MASTER_SITES=	https://www.defora.org/os/download/download/4442/
+MASTER_SITES=	https://ftp.defora.org/pub/DeforaOS/Apps/Desktop/src/Browser/
 
 MAINTAINER=	khorben@defora.org
 HOMEPAGE=	https://www.defora.org/
 COMMENT=	DeforaOS desktop file manager and desktop handler
 
-LICENSE=	modified-bsd
+LICENSE=	2-clause-bsd
 
 USE_TOOLS+=	pkg-config
 USE_TOOLS+=	xgettext
@@ -54,8 +54,11 @@ post-install:
 
 .include "options.mk"
 
+.include "../../databases/shared-mime-info/buildlink3.mk"
 .include "../../graphics/hicolor-icon-theme/buildlink3.mk"
+.include "../../sysutils/desktop-file-utils/desktopdb.mk"
 .include "../../x11/deforaos-libdesktop/buildlink3.mk"
 .include "../../x11/libXrandr/buildlink3.mk"
-.include "../../databases/shared-mime-info/buildlink3.mk"
+BUILDLINK_API_DEPENDS.gtk-doc+=	gtk-doc>=1.20
+.include "../../textproc/gtk-doc/buildlink3.mk"
 .include "../../mk/bsd.pkg.mk"

@@ -1,6 +1,6 @@
-# $NetBSD: Makefile,v 1.58 2019/06/03 12:19:18 fox Exp $
+# $NetBSD: Makefile,v 1.76 2021/01/18 09:45:53 fox Exp $
 
-DISTNAME=	ircd-hybrid-8.2.26
+DISTNAME=	ircd-hybrid-8.2.38
 CATEGORIES=	chat
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ircd-hybrid/}
 EXTRACT_SUFX=	.tgz
@@ -12,8 +12,12 @@ LICENSE=	gnu-gpl-v2
 
 CONFLICTS+=	ircu-[0-9]*
 
+USE_LIBTOOL=	yes
+
 GNU_CONFIGURE=	YES
 BUILD_DEFS+=	VARBASE IRCD_HYBRID_IRC_USER IRCD_HYBRID_IRC_GROUP
+
+LDFLAGS.SunOS+=	-lsocket -lnsl
 
 .include "../../mk/bsd.prefs.mk"
 

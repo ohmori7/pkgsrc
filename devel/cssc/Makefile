@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.35 2017/05/03 08:38:40 jperkin Exp $
+# $NetBSD: Makefile,v 1.37 2020/01/18 23:30:25 rillig Exp $
 #
 
 DISTNAME=	CSSC-1.4.0
@@ -7,16 +7,16 @@ CATEGORIES=	devel scm
 MASTER_SITES=	${MASTER_SITE_GNU:=cssc/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.gnu.org/software/cssc/
+HOMEPAGE=	https://www.gnu.org/software/cssc/
 COMMENT=	GNU workalike for the source code control system SCCS
 LICENSE=	gnu-gpl-v3
 
-USE_LANGUAGES=	c c++11
-GNU_CONFIGURE=	YES
-CONFIGURE_ARGS+=--enable-binary
-CONFIGURE_ENV+=	CONFIG_DIFF_COMMAND=${TOOLS_DIFF:Q}
-USE_TOOLS+=	diff makeinfo
-TEST_TARGET=	check
+USE_LANGUAGES=		c c++11
+GNU_CONFIGURE=		YES
+CONFIGURE_ARGS+=	--enable-binary
+CONFIGURE_ENV+=		CONFIG_DIFF_COMMAND=${TOOLS_DIFF:Q}
+USE_TOOLS+=		diff makeinfo
+TEST_TARGET=		check
 
 TEXINFO_REQD=	4.0
 INFO_FILES=	yes

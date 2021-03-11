@@ -1,15 +1,15 @@
-# $NetBSD: Makefile,v 1.1 2018/04/13 15:26:31 minskim Exp $
+# $NetBSD: Makefile,v 1.3 2019/08/08 19:53:52 brook Exp $
 
-DISTNAME=	prettyunits_1.0.2
+R_PKGNAME=	prettyunits
+R_PKGVER=	1.0.2
 CATEGORIES=	math
 
 MAINTAINER=	minskim@NetBSD.org
-HOMEPAGE=	https://github.com/gaborcsardi/prettyunits
-COMMENT=	Pretty, Human Readable Formatting of Quantities
+COMMENT=	Pretty, human readable formatting of quantities
 LICENSE=	mit
 
-DEPENDS+=	R-assertthat-[0-9]*:../../devel/R-assertthat
-DEPENDS+=	R-magrittr-[0-9]*:../../devel/R-magrittr
+DEPENDS+=	R-assertthat>=0.2.1:../../devel/R-assertthat
+DEPENDS+=	R-magrittr>=1.5:../../devel/R-magrittr
 
 USE_LANGUAGES=	# none
 

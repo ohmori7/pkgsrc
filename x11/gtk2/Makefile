@@ -1,8 +1,7 @@
-# $NetBSD: Makefile,v 1.306 2019/06/04 21:09:09 maya Exp $
+# $NetBSD: Makefile,v 1.320 2021/01/01 15:46:56 nia Exp $
 
-DISTNAME=	gtk+-2.24.32
+DISTNAME=	gtk+-2.24.33
 PKGNAME=	${DISTNAME:S/gtk/gtk2/}
-PKGREVISION=	8
 CATEGORIES=	x11 gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/gtk+/2.24/}
 EXTRACT_SUFX=	.tar.xz
@@ -62,7 +61,7 @@ CONFIGURE_ARGS.Darwin+=	--disable-visibility
 
 CPPFLAGS+=		-DPREFIX="\"${PREFIX}\""
 
-#SUBST_CLASSES+=		pthread
+#SUBST_CLASSES+=	pthread
 #SUBST_STAGE.pthread=	pre-configure
 #SUBST_MESSAGE.pthread=	Fixing pthread flags.
 #SUBST_SED.pthread=	-e 's,__PTHREAD_FLAGS__,${BUILDLINK_LDFLAGS.pthread},g'
@@ -74,7 +73,6 @@ SUBST_MESSAGE.iconcache=	Renaming gtk-icon-cache-update.
 SUBST_SED.iconcache=		-e 's,gtk-update-icon-cache,gtk2-update-icon-cache,g'
 SUBST_FILES.iconcache=		gtk/Makefile.in
 
-PYTHON_VERSIONS_INCOMPATIBLE=	36 37 # not yet ported as of 2.24.22
 REPLACE_PYTHON=	gtk/gtk-builder-convert
 
 # We remove the module databases during post-install since we create them

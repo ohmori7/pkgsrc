@@ -1,14 +1,14 @@
-# $NetBSD: Makefile,v 1.20 2018/08/22 09:46:03 wiz Exp $
+# $NetBSD: Makefile,v 1.23 2020/08/31 18:10:48 wiz Exp $
 #
 
 DISTNAME=	Net-Write-1.10
 PKGNAME=	p5-${DISTNAME}
-PKGREVISION=	4
+PKGREVISION=	6
 CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_PERL_CPAN:=Net/}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://search.cpan.org/dist/Net-Write/
+HOMEPAGE=	https://metacpan.org/release/Net-Write
 COMMENT=	Portable interface to open and send raw data to network
 LICENSE=	artistic
 

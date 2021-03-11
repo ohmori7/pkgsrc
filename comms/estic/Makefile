@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.36 2018/07/18 00:06:11 joerg Exp $
+# $NetBSD: Makefile,v 1.39 2020/05/20 06:09:03 rillig Exp $
 
 DISTNAME=	estic-1.61
 PKGREVISION=	2
@@ -8,9 +8,9 @@ EXTRACT_SUFX=	.zip
 DISTFILES=	${EXTRACT_ONLY} ${ESTICPATCH}
 
 MAINTAINER=	pkgsrc-users@NetBSD.org
-HOMEPAGE=	http://www.von-bassewitz.de/uz/estic/estic.html
+HOMEPAGE=	https://www.von-bassewitz.de/uz/estic/estic.html
 COMMENT=	German language configuration tool for ISTEC 1003/1008 ISDN systems
-LICENSE=		estic-license
+LICENSE=	estic-license
 
 EXTRACT_ONLY=	estic-1.60-sources${EXTRACT_SUFX}
 
@@ -31,6 +31,13 @@ CPPFLAGS+=	-DSOLARIS
 .else
 CPPFLAGS+=	-DFREEBSD
 .endif
+
+# str.cc: In function 'String ShowControls(const String&, unsigned int)':
+# str.cc:1145:57: error: array subscript has type 'char' [-Werror=char-subscripts]
+#                      T += (Style & ccOct)? OctCodes [*Str] : HexCodes [*Str];
+#                                                         ^
+# Maybe fix this later.
+BUILDLINK_TRANSFORM+=	rm:-Werror=char-subscripts
 
 INSTALLATION_DIRS=	bin
 

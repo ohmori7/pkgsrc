@@ -1,12 +1,12 @@
-# $NetBSD: Makefile,v 1.56 2018/11/14 22:21:38 kleink Exp $
+# $NetBSD: Makefile,v 1.64 2020/11/05 09:08:20 ryoon Exp $
 
 DISTNAME=		gimp-color-manager-0.1.0
-PKGREVISION=		48
+PKGREVISION=		55
 CATEGORIES=		graphics
 MASTER_SITES=		ftp://www.virtual-sub.org/
 
 MAINTAINER=		pkgsrc-users@NetBSD.org
-HOMEPAGE=		http://www.khk.net/color/color_manager.html
+HOMEPAGE=		https://www.khk.net/color/color_manager.html
 COMMENT=		Gimp Color Manager plugin
 
 USE_PKGLOCALEDIR=	yes

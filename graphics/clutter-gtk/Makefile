@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.44 2018/11/14 22:21:36 kleink Exp $
+# $NetBSD: Makefile,v 1.49 2020/08/17 20:17:27 leot Exp $
 
-DISTNAME=	clutter-gtk-1.6.0
-PKGREVISION=	9
+DISTNAME=	clutter-gtk-1.8.4
+PKGREVISION=	3
 CATEGORIES=	graphics gnome
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/clutter-gtk/${PKGVERSION:R}/}
 EXTRACT_SUFX=	.tar.xz
@@ -13,7 +13,10 @@ LICENSE=	gnu-lgpl-v2.1
 
 GNU_CONFIGURE=	yes
 USE_LIBTOOL=	yes
+
 USE_TOOLS+=	pkg-config
+USE_TOOLS+=	msgfmt msgmerge xgettext
+
 USE_PKGLOCALEDIR=	yes
 
 PKGCONFIG_OVERRIDE+=	clutter-gtk.pc.in

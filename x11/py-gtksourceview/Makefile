@@ -1,8 +1,8 @@
-# $NetBSD: Makefile,v 1.49 2019/04/26 13:14:24 maya Exp $
+# $NetBSD: Makefile,v 1.57 2020/11/05 09:09:26 ryoon Exp $
 
 DISTNAME=	pygtksourceview-2.10.1
 PKGNAME=	${DISTNAME:S/py/${PYPKGPREFIX}-/}
-PKGREVISION=	26
+PKGREVISION=	32
 CATEGORIES=	x11 python
 MASTER_SITES=	${MASTER_SITE_GNOME:=sources/pygtksourceview/2.10/}
 EXTRACT_SUFX=	.tar.bz2
@@ -14,12 +14,12 @@ LICENSE=	gnu-lgpl-v2
 
 BUILD_DEPENDS+=	libxslt-[0-9]*:../../textproc/libxslt
 
-USE_LIBTOOL=	YES
-PKGCONFIG_OVERRIDE+=	pygtksourceview-2.0.pc.in
-GNU_CONFIGURE=	YES
-USE_TOOLS+=	pkg-config
-PY_PATCHPLIST=	YES
-PYTHON_VERSIONS_INCOMPATIBLE=	 36 37 # py-gtk2
+USE_LIBTOOL=			YES
+PKGCONFIG_OVERRIDE+=		pygtksourceview-2.0.pc.in
+GNU_CONFIGURE=			YES
+USE_TOOLS+=			pkg-config
+PY_PATCHPLIST=			YES
+PYTHON_VERSIONS_ACCEPTED=	27 # py-gtk2
 
 .include "../../lang/python/extension.mk"
 

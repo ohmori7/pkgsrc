@@ -1,7 +1,7 @@
-# $NetBSD: Makefile,v 1.21 2018/08/22 09:45:25 wiz Exp $
+# $NetBSD: Makefile,v 1.24 2020/08/31 18:09:56 wiz Exp $
 
 DISTNAME=	fromto-1.5
-PKGREVISION=	6
+PKGREVISION=	8
 CATEGORIES=	mail
 MASTER_SITES=	ftp://ftp.sra.co.jp/pub/lang/perl/sra-scripts/
 EXTRACT_SUFX=	#empty
@@ -10,7 +10,7 @@ MAINTAINER=	bad@NetBSD.org
 COMMENT=	Sendmail logfile viewer
 LICENSE=	fromto-license
 
-RESTRICTED=	Redistribution allowed for non-commercial purposes only
+RESTRICTED=		Redistribution allowed for non-commercial purposes only
 NO_SRC_ON_CDROM=	${RESTRICTED}
 NO_BIN_ON_CDROM=	${RESTRICTED}
 

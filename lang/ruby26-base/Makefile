@@ -1,7 +1,8 @@
-# $NetBSD: Makefile,v 1.3 2019/03/16 14:39:35 taca Exp $
+# $NetBSD: Makefile,v 1.12 2021/02/14 15:31:02 taca Exp $
 
 DISTNAME=	${RUBY_DISTNAME}
 PKGNAME=	${RUBY_PKGPREFIX}-base-${RUBY_VERSION}
+PKGREVISION=	1
 CATEGORIES=	lang ruby
 MASTER_SITES=	${MASTER_SITE_RUBY}
 
@@ -13,25 +14,25 @@ RUBY_VERSIONS_ACCEPTED=	26
 
 MAKE_JOBS_SAFE=		no
 USE_GCC_RUNTIME=	yes
-USE_LANGUAGES=		c
 USE_TOOLS+=		pax yacc pkg-config
 GNU_CONFIGURE=		yes
 TEST_TARGET=		test
 CONFIGURE_ARGS+=	--enable-shared --enable-install-static-library
 WRKSRC=			${RUBY_WRKSRC}
 
+.include "options.mk"
 .include "../../lang/ruby/platform.mk"
 
 .if !empty(RUBY_SUFFIX)
-CONFIGURE_ARGS+= --program-suffix=${RUBY_SUFFIX}
-CONFIGURE_ARGS+= --with-soname=${RUBY_NAME}
-CONFIGURE_ARGS+= --with-ruby-version=${RUBY_VER_DIR}
-CONFIGURE_ARGS+= --with-ruby-pc="ruby-${RUBY_VERSION}.pc"
+CONFIGURE_ARGS+=	--program-suffix=${RUBY_SUFFIX}
+CONFIGURE_ARGS+=	--with-soname=${RUBY_NAME}
+CONFIGURE_ARGS+=	--with-ruby-version=${RUBY_VER_DIR}
+CONFIGURE_ARGS+=	--with-ruby-pc="ruby-${RUBY_VERSION}.pc"
 .endif
 
 CONFIGURE_ENV.Darwin+=	ac_cv_prog_dsymutil=
 
-DOCS=	BSDL COPYING COPYING.ja ChangeLog LEGAL NEWS README.EXT README.EXT.ja \
+DOCS=		BSDL COPYING COPYING.ja ChangeLog LEGAL NEWS README.EXT README.EXT.ja \
 	README.ja.md README.md doc/ChangeLog-1.8.0 doc/ChangeLog-1.9.3 \
 	doc/ChangeLog-2.0.0 doc/ChangeLog-2.1.0 doc/ChangeLog-2.2.0 \
 	doc/ChangeLog-2.3.0 doc/ChangeLog-2.4.0 doc/ChangeLog-2016 \
@@ -56,8 +57,7 @@ BIGDECIMAL_EXAMPLES=	linear.rb nlsolve.rb pi.rb
 OPENSSL_EXAMPLES=	c_rehash.rb cert2text.rb certstore.rb cipher.rb \
 			crlstore.rb echo_cli.rb echo_svr.rb gen_csr.rb \
 			smime_read.rb smime_write.rb wget.rb
-REPLACE_RUBY=		bin/bundle bin/bin/bundler bin/erb bin/gem bin/irb \
-			bin/rdoc bin/ri libexec/bundle libexec/bundle_ruby \
+REPLACE_RUBY=		libexec/bundle libexec/bundle_ruby \
 			libexec/bundler libexec/irb libexec/rdoc libexec/ri \
 			gems/rake-${RUBY_RAKE_VERSION}/exe/rake \
 			gems/net-telnet-${RUBY_NET_TELNET_VERSION}/bin/console \
@@ -69,6 +69,8 @@ INSTALLATION_DIRS=	bin libexec ${PKGMANDIR}/man1 ${RUBY_DOC}/images \
 			${RUBY_EG}/bigdecimal ${RUBY_EG}/pty
 # ${RUBY_ARCHINC} ${RUBY_ARCHLIB}
 EMPTY_DIRS=		generator/template markup/simple_markup
+
+NOT_PAX_MPROTECT_SAFE+=	bin/${RUBY_NAME}
 
 pre-configure:
 	${RM} -f ${WRKSRC}/ext/gdbm/extconf.rb
